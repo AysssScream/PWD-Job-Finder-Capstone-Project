@@ -1,0 +1,54 @@
+[
+    {
+        "id": 1,
+        "name": "Primary School Graduate"
+    },
+    {
+        "id": 2,
+        "name": "Elementary Graduate"
+    },
+    {
+        "id": 3,
+        "name": "Junior High School Graduate"
+    },
+    {
+        "id": 4,
+        "name": "Senior High School Graduate"
+    },
+    {
+        "id": 5,
+        "name": "Associate's Degree"
+    },
+    {
+        "id": 6,
+        "name": "High School Graduate"
+    },
+    {
+        "id": 7,
+        "name": "College Graduate"
+    },
+    {
+        "id": 8,
+        "name": "Vocational Undergraduate"
+    },
+    {
+        "id": 9,
+        "name": "Vocational Graduate"
+    },
+    {
+        "id": 10,
+        "name": "Bachelor's Degree"
+    },
+    {
+        "id": 11,
+        "name": "Masteral/Post Graduate Level"
+    },
+    {
+        "id": 12,
+        "name": "Masteral/Post Graduate"
+    },
+    {
+        "id": 13,
+        "name": "Doctorate Degree"
+    }
+]

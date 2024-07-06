@@ -1,0 +1,221 @@
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/steps.css">
+
+    </head>
+
+    <div class="py-12">
+        <div class="container mx-auto">
+            <div class="flex justify-center">
+                <div class="w-5/6">
+                    <form action="{{ route('employment') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @if ($errors->any())
+                            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                                role="alert">
+                                <strong class="font-bold">Oops!</strong>
+                                <span class="block sm:inline">There were some errors with your submission:</span>
+                                <ul class="mt-3 list-disc list-inside text-sm">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <br>
+                        @endif
+                        <div class="bg-white shadow-md rounded-lg">
+                            <div class="p-6">
+                                <h3 class="text-2xl font-bold mb-2">Employment Status</h3>
+                                <!-- Adjusted text size to text-2xl -->
+                                <span class="text-xl font-semibold">Step 3:</span>
+                                <!-- Added Step 1 on the hard right -->
+                                {{ __("You're logged in!") }}
+                                <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div>
+                                        @include('layouts.dropdown')
+                                    </div>
+                                    <div>
+                                        <div id="employment-type-options" class="mt-6">
+                                            <label for="employment-type" class="block mb-1">Specify your
+                                                Employment:</label>
+                                            <select id="employment-type" name="employment-type"
+                                                class="w-full p-2 border rounded">
+                                                <option value="" selected disabled>Please select your employment
+                                                    status...
+                                                </option>
+                                                <optgroup label="Employed">
+                                                    <option value="Wage Employment"
+                                                        {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Wage Employment' ? 'selected' : '' }}>
+                                                        Employed -
+                                                        Wage
+                                                        Employment</option>
+                                                    <option value="Self Employed"
+                                                        {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Self Employed' ? 'selected' : '' }}>
+                                                        Employed -
+                                                        Self
+                                                        Employed</option>
+                                                    <option value="Others"
+                                                        {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Others' ? 'selected' : '' }}>
+                                                        Employed -
+                                                        Others
+                                                    </option>
+                                                </optgroup>
+                                                <!-- Unemployed Options -->
+                                                <optgroup label="Unemployed">
+                                                    <option value="Entrant/Fresh Graduate"
+                                                        {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Entrant/Fresh Graduate' ? 'selected' : '' }}>
+                                                        Unemployed - New
+                                                        Unemployed - Entrant/Fresh Graduate</option>
+                                                    <option value="Finished Contract"
+                                                        {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Finished Contract' ? 'selected' : '' }}>
+                                                        Unemployed - Finished Contract</option>
+                                                    <option value="Resigned"
+                                                        {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Resigned' ? 'selected' : '' }}>
+                                                        Unemployed - Resigned</option>
+                                                    <option value="Retired"
+                                                        {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Retired' ? 'selected' : '' }}>
+                                                        Unemployed - Retired
+                                                    </option>
+                                                    <option value="Terminated Due to Calamity"
+                                                        {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Terminated Due to Calamity' ? 'selected' : '' }}>
+                                                        Unemployed - Terminated/Laid off due to calamity</option>
+                                                    <option value="Teminated Local"
+                                                        {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Teminated Local' ? 'selected' : '' }}>
+                                                        Unemployed - Terminated/Laid off (Local)</option>
+                                                    <option value="Terminated Abroad"
+                                                        {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Terminated Abroad' ? 'selected' : '' }}>
+                                                        Unemployed - Terminated/Laid off (abroad)</option>
+                                                    <option value="Other"
+                                                        {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Other' ? 'selected' : '' }}>
+                                                        Unemployed - Others
+                                                    </option>
+                                                </optgroup>
+                                            </select>
+                                            @error('employment-type')
+                                                <div class="text-red-600 mt-1">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
+                                        <div id="job-search-duration " class="mt-6">
+                                            <label for="job-search-duration" class="block mb-1">How long have you been
+                                                looking for a job?</label>
+                                            <div class="flex">
+                                                <input type="number" id="job-search-duration" placeholder="Specify "
+                                                    name="job-search-duration" class="w-5/6 p-2 border rounded mr-2"
+                                                    value="{{ old('job-search-duration', $formData3['job-search-duration'] ?? '') }}">
+                                                <select id="duration-category" name="duration-category"
+                                                    class="p-2 w-1/2 border rounded">
+                                                    <option value="Days"
+                                                        {{ old('duration-category', $formData3['duration-category'] ?? '') === 'Days' ? 'selected' : '' }}>
+                                                        Days</option>
+                                                    <option value="Weeks"
+                                                        {{ old('duration-category', $formData3['duration-category'] ?? '') === 'Weeks' ? 'selected' : '' }}>
+                                                        Weeks</option>
+                                                    <option value="Months"
+                                                        {{ old('duration-category', $formData3['duration-category'] ?? '') === 'Months' ? 'selected' : '' }}>
+                                                        Months</option>
+                                                    <option value="Years"
+                                                        {{ old('duration-category', $formData3['duration-category'] ?? '') === 'Years' ? 'selected' : '' }}>
+                                                        Years</option>
+                                                </select>
+                                            </div>
+                                            @error('job-search-duration')
+                                                <div class="text-red-600 mt-1">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-4 text-right">
+                                    <a href="{{ route('personal') }}"
+                                        class="inline-block py-2 px-4 bg-black text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mr-2">Previous</a>
+
+                                    <button type="submit"
+                                        class="inline-block py-2 px-4 bg-green-600 text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">Save</button>
+                                </div>
+                            </div>
+
+
+                            <script>
+                                function toggleEmploymentOptions() {
+                                    var statusSelect = document.getElementById("employment-status");
+                                    var employmentOptions = document.getElementById("employment-type-options");
+                                    var employmentTypeSelect = document.getElementById("employment-type");
+
+                                    if (statusSelect.value === "employed") {
+                                        employmentOptions.style.display = "block";
+                                        // Clear options
+                                        employmentTypeSelect.innerHTML = "";
+                                        // Add employed options
+                                        var employedOptions = [{
+                                                value: "wage",
+                                                text: "Wage Employment"
+                                            },
+                                            {
+                                                value: "self",
+                                                text: "Self Employed"
+                                            },
+                                            {
+                                                value: "other",
+                                                text: "Others"
+                                            },
+                                        ];
+                                        employedOptions.forEach(function(option) {
+                                            var optionElement = document.createElement("option");
+                                            optionElement.value = option.value;
+                                            optionElement.textContent = option.text;
+                                            employmentTypeSelect.appendChild(optionElement);
+                                        });
+                                    } else if (statusSelect.value === "unemployed") {
+                                        employmentOptions.style.display = "block";
+                                        // Clear options
+                                        employmentTypeSelect.innerHTML = "";
+                                        // Add unemployed options
+                                        var unemployedOptions = [{
+                                                value: "new-entrant",
+                                                text: "New Entrant/Fresh Graduate"
+                                            },
+                                            {
+                                                value: "finished-contract",
+                                                text: "Finished Contract"
+                                            },
+                                            {
+                                                value: "resigned",
+                                                text: "Resigned"
+                                            },
+                                            {
+                                                value: "retired",
+                                                text: "Retired"
+                                            },
+                                            {
+                                                value: "terminated-calamity",
+                                                text: "Terminated/Laid off due to calamity",
+                                            },
+                                            {
+                                                value: "terminated-local",
+                                                text: "Terminated/Laid off (Local)",
+                                            },
+                                            {
+                                                value: "terminated-abroad",
+                                                text: "Terminated/Laid off (abroad)",
+                                            },
+                                            {
+                                                value: "other",
+                                                text: "Others"
+                                            },
+                                        ];
+                                        unemployedOptions.forEach(function(option) {
+                                            var optionElement = document.createElement("option");
+                                            optionElement.value = option.value;
+                                            optionElement.textContent = option.text;
+                                            employmentTypeSelect.appendChild(optionElement);
+                                        });
+                                    } else {
+                                        employmentOptions.style.display = "none";
+                                    }
+                                }
+                            </script>

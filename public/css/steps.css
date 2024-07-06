@@ -1,0 +1,9 @@
+/* styles.css */
+
+.py-12 {
+    font-family: "Poppins", sans-serif;
+    background-image: url("/images/team.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}

@@ -1,0 +1,253 @@
+body {
+    font-family: "Poppins", sans-serif;
+    padding-top: 70px;
+}
+
+.head-section .navbar {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+.head-section .navbar.scrolled {
+    background-color: rgba(
+        255,
+        255,
+        255,
+        0.9
+    ); /* Adjust the alpha value to control the fading effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Reduce the box shadow to make it less pronounced */
+}
+
+.btn-custom-login {
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+}
+
+.btn-custom-login:hover {
+    background-color: white;
+    color: black;
+    border-color: rgb(0, 0, 0);
+}
+
+.btn-custom-signup {
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+}
+
+.btn-custom-signup:hover {
+    background-color: white;
+    color: black;
+    border-color: rgb(0, 0, 0);
+}
+
+.contact-section {
+    background-image: url("/images/contactbg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: white;
+    padding: 100px 0;
+}
+
+.contact-section .lc-block img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 3px;
+}
+
+.contact-section .lc-block h4 {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.contact-section .lc-block p {
+    font-size: 1rem;
+    color: #00aaff;
+}
+
+.contact-section .lc-block a {
+    color: #00aaff;
+    text-decoration: none;
+}
+
+.head-section .navbar {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.head-section .navbar.scrolled {
+    background-color: rgba(
+        255,
+        255,
+        255,
+        0.9
+    ); /* Adjust the alpha value to control the fading effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Reduce the box shadow to make it less pronounced */
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+.navbar-brand:hover {
+    color: #007bff; /* Change this to your desired hover color */
+}
+
+.navbar-nav .nav-link {
+    color: #000; /* Change this to your desired color */
+    font-weight: 500;
+    text-decoration: none; /* Remove default underline */
+    transition: color 0.3s, border-bottom-color 0.3s;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #007bff; /* Change this to your desired hover color */
+    border-bottom: 2px solid #007bff; /* Add underline on hover */
+}
+
+.navbar-nav .nav-item.active .nav-link {
+    color: #fff; /* Change this to your desired active link color */
+    background-color: #007bff; /* Change this to your desired active link background color */
+}
+
+#menu-item-home,
+#menu-item-aboutus,
+#menu-item-contact {
+    padding-left: 20px; /* Adjust the value as needed for your design */
+}
+
+.dark .navbar {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: rgb(31, 41, 55);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.dark #navbartoggler {
+    background-color: white;
+    color: #343a40;
+}
+
+.dark .navbar-brand,
+.dark h2,
+.dark h4,
+.dark p,
+.dark span,
+.dark .d-flex,
+.dark .lc-block .text-dark {
+    color: white !important;
+}
+
+.dark .me-2 .bg-light {
+    background-color: white !important;
+}
+
+.dark .nav-link {
+    color: lightgray;
+}
+
+.dark .nav-link:hover,
+.dark .nav-link.active {
+    color: white;
+}
+
+.dark {
+    background-color: black;
+    color: white;
+}
+
+.dark .bg-light {
+    background-color: rgb(22, 22, 22) !important;
+}
+.dark .btn-custom-login,
+.dark .btn-custom-signup {
+    background-color: white;
+    color: black;
+    border: 1px solid white;
+}
+
+.dark .btn-custom-login,
+.dark .btn-custom-signup {
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+}
+
+.dark .navbar-brand {
+    color: white;
+}
+.dark .btn-custom-login,
+.dark .btn-custom-signup {
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+}
+
+.dark #navbartoggler {
+    background-color: white;
+    color: #343a40;
+}
+
+.dark .btn-custom-login:hover,
+.dark .btn-custom-signup:hover {
+    background-color: #343a40;
+    color: white;
+    border-color: rgb(255, 255, 255);
+}
+
+.dark .navbar-brand {
+    color: white;
+}
+
+.dark .col-lg-4 img {
+    filter: invert(100%);
+}
+
+.dark .text-center .col-lg-4 .lc-block {
+    background-color: rgb(22, 22, 22) !important;
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1),
+        0 6px 6px rgba(255, 255, 255, 0.15) !important;
+}
+.ui-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+}
+
+.ui-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #111111;
+    font-size: 24px;
+    transition: color 0.4s;
+}
+
+input:checked + .slider {
+    color: #2196f3;
+}

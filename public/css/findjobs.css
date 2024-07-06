@@ -1,0 +1,510 @@
+body {
+    font-family: "Poppins", sans-serif;
+    background-image: url("/images/team.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    padding-top: 70px;
+}
+
+#designedheader::after {
+    content: "";
+    position: absolute;
+    background-color: #007bff;
+    width: 85px;
+    height: 4px;
+    bottom: 0px;
+    left: 0px;
+}
+
+#designedheader {
+    font-size: 30px;
+    position: relative;
+    color: #242424;
+    margin: 0;
+    line-height: 1.2;
+    padding: 0px 0 20px;
+}
+#popularbg {
+    background-image: url("/images/bg.png");
+    background-blend-mode: lighten;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    padding-top: 70px;
+}
+
+#faqpage {
+    background-image: url("/images/bg.png");
+    background-color: #fcfbfb70;
+    background-blend-mode: exclusion;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    padding-top: 70px;
+}
+
+.head-section .navbar {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.head-section .navbar.scrolled {
+    background-color: rgba(
+        255,
+        255,
+        255,
+        0.9
+    ); /* Adjust the alpha value to control the fading effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Reduce the box shadow to make it less pronounced */
+}
+
+.dark #navbartoggler {
+    background-color: white;
+    color: #343a40;
+}
+
+.dark .head-section .navbar.scrolled {
+    background-color: rgb(
+        31,
+        41,
+        55,
+        0.9
+    ); /* Adjust the alpha value to control the fading effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Reduce the box shadow to make it less pronounced */
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+.navbar-brand:hover {
+    color: #007bff; /* Change this to your desired hover color */
+}
+
+.navbar-nav .nav-link {
+    color: #000; /* Change this to your desired color */
+    font-weight: 500;
+    text-decoration: none; /* Remove default underline */
+    transition: color 0.3s, border-bottom-color 0.3s;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #007bff; /* Change this to your desired hover color */
+    border-bottom: 2px solid #007bff; /* Add underline on hover */
+}
+
+.navbar-nav .nav-item.active .nav-link {
+    color: #fff; /* Change this to your desired active link color */
+    background-color: #007bff; /* Change this to your desired active link background color */
+}
+
+.btn-custom-login {
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+}
+
+.btn-custom-login:hover {
+    background-color: white;
+    color: black;
+    border-color: rgb(0, 0, 0);
+}
+
+.btn-custom-signup {
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+}
+
+.btn-custom-signup:hover {
+    background-color: white;
+    color: black;
+    border-color: rgb(0, 0, 0);
+}
+
+.btn-black {
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+}
+
+.btn-black:hover {
+    background-color: white;
+    color: black;
+    border-color: black;
+    transition: 0.3s;
+}
+
+.btn-white {
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+}
+
+.btn-white:hover {
+    background-color: white;
+    color: black;
+    border-color: black;
+    transition: 0.3s;
+}
+
+.shadow-effect {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.678);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.shadow-effect:hover {
+    box-shadow: 0 24px 30px rgb(0, 0, 0);
+}
+
+.card-enhanced {
+    background-color: #ffffff;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.23);
+    transition: all 0.3s ease-in-out;
+    border-radius: 8px;
+}
+
+.card-enhanced:hover {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 12px 10px rgba(0, 0, 0, 0.22);
+}
+
+#menu-item-home,
+#menu-item-aboutus,
+#menu-item-contact {
+    padding-left: 20px; /* Adjust the value as needed for your design */
+}
+
+.carousel {
+    margin-bottom: 4rem;
+}
+
+.carousel-caption {
+    bottom: 15rem;
+    z-index: 10;
+}
+
+.carousel-item {
+    height: 55rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-item > video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.dark .navbar {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: rgb(31, 41, 55);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.dark #navbartoggler {
+    background-color: white;
+    color: #343a40;
+}
+
+.dark .navbar-brand,
+.dark h2,
+.dark h4,
+.dark p,
+.dark span,
+.dark .d-flex,
+.dark .lc-block .text-dark {
+    color: white !important;
+}
+
+.dark .me-2 .bg-light {
+    background-color: white !important;
+}
+
+.dark .nav-link {
+    color: lightgray;
+}
+
+.dark .nav-link:hover,
+.dark .nav-link.active {
+    color: white;
+}
+
+.hero-section,
+.faq-section,
+.step-section {
+    background-color: white;
+}
+
+.dark .hero-section,
+.dark .hero-section .card-body,
+.dark .faq-section,
+.dark .step-section {
+    background-color: rgb(31, 41, 55);
+    color: white;
+}
+
+.dark .offer-section {
+    position: relative;
+    padding: 20px;
+    background-color: rgb(31, 41, 55);
+    /*rgb(22, 22, 22);*/
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 8px 36px rgba(0, 0, 0, 0.116), 0 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dark .offer-section .card-enhanced {
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1),
+        0 6px 6px rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease-in-out;
+}
+
+.dark .offer-section .card-enhanced:hover {
+    box-shadow: 0 15px 30px rgba(255, 255, 255, 0.2),
+        0 12px 10px rgba(255, 255, 255, 0.1);
+}
+
+.dark .second-section {
+    background-color: rgb(31, 41, 55);
+    position: relative;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 8px 36px rgba(0, 0, 0, 0.116), 0 4px 4px rgba(0, 0, 0, 0.1);
+}
+.dark .card {
+    background-color: rgb(55 65 81) !important;
+    color: white;
+}
+
+.dark #containerbg {
+    background-color: rgb(31, 41, 55) !important;
+    color: white;
+}
+#containerbg {
+    background-color: white !important;
+    color: white;
+}
+
+.dark {
+    background-color: rgb(15 23 42) !important;
+}
+.dark .single_catagory {
+    background-color: rgb(22, 22, 22) !important;
+    color: white;
+}
+
+.dark .second-section .bg-light,
+.dark .bg-light {
+    background-color: rgb(22, 22, 22) !important;
+    color: white;
+}
+
+.dark .btn-custom-login,
+.dark .btn-custom-signup {
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+}
+
+.dark .btn-custom-login:hover,
+.dark .btn-custom-signup:hover {
+    background-color: #343a40;
+    color: white;
+    border-color: rgb(255, 255, 255);
+}
+
+.dark .col .card {
+    background-color: rgb(31, 41, 55);
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1),
+        0 6px 6px rgba(255, 255, 255, 0.15) !important;
+}
+
+.dark .lc-block .bg-light {
+    background-color: rgb(31, 41, 55) !important;
+}
+
+.dark .fas {
+    color: white !important;
+}
+
+#bgcontainer {
+    background-color: rgb(31, 41, 55) !important;
+}
+
+.dark .faq-section .card {
+    background-color: rgba(255, 255, 255, 0.1);
+    /* Adjust as needed */
+    color: white;
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1),
+        0 6px 6px rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease-in-out;
+}
+
+.dark .step-section p,
+.dark .use p,
+.dark .text-muted {
+    color: rgb(160, 159, 159) !important;
+}
+
+.dark .accordion .lc-block {
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1),
+        0 6px 6px rgba(255, 255, 255, 0.15) !important;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.ui-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+}
+
+.ui-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #111111;
+    font-size: 24px;
+    transition: color 0.4s;
+}
+
+input:checked + .slider {
+    color: #2196f3;
+}
+
+/* Light theme */
+#custom_recency_filter {
+    background-color: #f8f9fa; /* Light gray background */
+    color: #212529; /* Dark text color */
+    border-color: #007bff; /* Primary border color */
+}
+
+#icondropdown {
+    color: #6c757d; /* Icon color */
+}
+
+#custom_recency_filter:hover {
+    background-color: #e9ecef; /* Lighter background on hover */
+}
+
+#custom_recency_filter:focus {
+    box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25); /* Example focus style */
+}
+
+/* Dark theme */
+.dark #custom_recency_filter {
+    background-color: #343a40; /* Dark background */
+    color: #f8f9fa; /* Light text color */
+    border-color: #6c757d; /* Secondary border color */
+}
+
+.dark #icondropdown {
+    color: #adb5bd; /* Icon color in dark mode */
+}
+
+.dark #custom_recency_filter:hover {
+    background-color: #23272b; /* Darker background on hover */
+}
+
+.dark #custom_recency_filter:focus {
+    box-shadow: 0 0 0 0.25rem rgba(108, 117, 125, 0.25); /* Example focus style in dark mode */
+}
+
+/* Default (Light) Theme */
+#label1 {
+    color: #000000; /* Medium gray text color */
+}
+
+/* Dark Theme */
+.dark #label1 {
+    color: #edf2f7; /* Light gray text color */
+}
+
+.dark #job-type {
+    background-color: rgb(15, 23, 42); /* Dark background color */
+    color: white; /* White text color */
+}
+
+.dark #max-salary {
+    background-color: rgb(15, 23, 42); /* Dark background color */
+    color: white; /* White text color */
+}
+
+.dark #min-salary {
+    background-color: rgb(15, 23, 42); /* Dark background color */
+    color: white; /* White text color */
+}
+
+.dark #location {
+    background-color: rgb(15, 23, 42); /* Dark background color */
+    color: white; /* White text color */
+}
+
+.dark #search-dropdown {
+    background-color: rgb(15 23 42);
+    color: white;
+}
+
+.dark #search-dropdown::placeholder {
+    color: rgba(
+        255,
+        255,
+        255,
+        0.5
+    ); /* Lighter shade of white for placeholder text */
+}
+
+.dark #max-salary::placeholder {
+    color: rgba(
+        255,
+        255,
+        255,
+        0.5
+    ); /* Lighter shade of white for placeholder text */
+}
+.dark #min-salary::placeholder {
+    color: rgba(
+        255,
+        255,
+        255,
+        0.5
+    ); /* Lighter shade of white for placeholder text */
+}
+.dark #location::placeholder {
+    color: rgba(
+        255,
+        255,
+        255,
+        0.5
+    ); /* Lighter shade of white for placeholder text */
+}

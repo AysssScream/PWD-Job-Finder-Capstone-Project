@@ -1,0 +1,73 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+* {
+    font-family: "Poppins", sans-serif;
+}
+
+.bg-image {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 6rem; /* Adjust as needed */
+    padding-bottom: 0;
+    background-color: #f3f4f6; /* Fallback color if image fails to load */
+    background-image: url("/images/team.png");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+/* Define the font family */
+body {
+    font-family: "Poppins", sans-serif; /* Use Poppins font */
+}
+
+/* Apply the font to input labels */
+.input-label {
+    font-family: "Poppins", sans-serif;
+}
+
+/* Apply the font to text inputs */
+.text-input {
+    font-family: "Poppins", sans-serif;
+}
+
+/* Apply the font to input errors */
+.input-error {
+    font-family: "Poppins", sans-serif;
+}
+
+#custom-navbar {
+    color: rgb(31, 41, 55);
+    font-weight: 500;
+    justify-content: space-between; /* This will push the last two links to the end */
+    align-items: left; /* Vertically center items */
+}
+
+#custom-navbar.dark {
+    color: #ffffff; /* Dark mode text color */
+}
+
+#custom-navbar a {
+    text-decoration: none;
+    position: relative;
+}
+
+#custom-navbar a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 2px;
+    background-color: transparent;
+    transition: background-color 0.1s ease;
+}
+
+#custom-navbar a:hover::after {
+    background-color: #007bff;
+}
+#custom-navbar a:hover {
+    color: #6ab2ff; /* Blue color when hovered */
+}
