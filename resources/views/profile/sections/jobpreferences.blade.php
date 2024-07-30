@@ -1,72 +1,89 @@
 <h2 class="text-2xl font-bold mb-2">JOB PREFERENCES</h2>
 <hr class="border-bottom border-2 border-primary mb-4">
-<div class="mt-6">
-    <label for="preferredOccupation" class="block mb-1">Preferred
-        Occupation</label>
-    <input type="text" id="preferredOccupation" name="preferredOccupation"
-        class="w-full p-2 border border-dark rounded bg-gray-100 text-black dark:bg-gray-900 dark:text-gray-200 shadow-sm"
-        pattern="[A-Za-z\s]+" title="Please enter alphabetic characters only" placeholder="Ex. Domestic Helper"
-        value="{{ old('preferredOccupation', $jobpreference->preferred_occupation ?? '') }}" />
 
-    @error('preferredOccupation')
-        <div class="text-red-600 mt-1">{{ $message }}</div>
-    @enderror
+<form method="post" action="{{ route('jobpref.updatepreferences') }}" class="mt-6 space-y-6">
+    @csrf
+    @method('patch')
+    <div class="mt-6">
+        <label for="preferredOccupation"
+            class="block mb-1">{{ __('messages.jobpreferences.preferred_occupation') }}</label>
+        <input type="text" id="preferredOccupation" name="preferredOccupation"
+            class="w-full 
+border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm"
+            pattern="[A-Za-z\s]+" title="{{ __('messages.jobpreferences.alphabetic_characters_only') }}"
+            placeholder="Ex. Domestic Helper"
+            aria-label="{{ __('messages.jobpreferences.preferred_occupation') }}  {{ old('preferredOccupation', $jobpreference->preferred_occupation ?? '') }}"
+            value="{{ old('preferredOccupation', $jobpreference->preferred_occupation ?? '') }}" />
 
-</div>
-
-<div class="mt-6 relative">
-    <label for="local-location" class="block mb-1">Preferred Work Location -
-        Local</label>
-    <div class="flex">
-        <input type="text" id="local-location" name="local-location"
-            class="w-full p-2 border border-dark rounded bg-gray-100 text-black dark:bg-gray-900 dark:text-gray-200 shadow-sm"
-            pattern="[A-Za-z\sñ]+" title="Please enter alphabetic characters only" placeholder="Ex. Makati, MM"
-            value="{{ old('local-location', $jobpreference->local_location ?? '') }}"readonly />
-        <button id="editLocationButton" type="button" class="btn btn-primary ml-2">Edit</button>
-    </div>
-    <div id="local-location-suggestions"
-        class="absolute z-10 mt-1 w-full max-h-90 overflow-y-auto bg-gray-200 text-black dark:bg-gray-900 dark:text-gray-200 border rounded shadow-md hidden">
-    </div>
-    <div id="local-location-error" class="text-red-600 mt-1 hidden">Error
-        fetching location data</div>
-
-    <input type="text" id="localLocationHidden" name="localLocation"
-        value="{{ old('local-location', $jobpreference->local_location ?? '') }}" hidden />
-</div>
-
-
-<div class="mt-6 relative">
-    <label for="overseas-location" class="block mb-1">Preferred Work Location -
-        Overseas</label>
-    <div class="flex">
-        <input type="text" id="overseas-location" name="overseas-location"
-            class="w-full p-2 border border-dark rounded bg-gray-200 text-black dark:bg-gray-900 dark:text-gray-200 shadow-sm"
-            pattern="[A-Za-z\s]+" title="Please enter alphabetic characters only" placeholder="Ex. Japan"
-            value="{{ old('overseas-location', $jobpreference->overseas_location ?? '') }}" readonly />
-        <button id="editOverseasButton" class="btn btn-primary ml-2" type="button">Edit</button>
+        @error('preferredOccupation')
+            <div class="text-red-600 mt-1">{{ $message }}</div>
+        @enderror
 
     </div>
-    <div id="overseas-location-suggestions"
-        class="absolute z-10 mt-1 w-full max-h-90 overflow-y-autobg-gray-200 text-black dark:bg-gray-900 dark:text-gray-200  border rounded shadow-md hidden">
+
+
+    <div class="mt-6 relative">
+        <label for="local-location"
+            class="block mb-1">{{ __('messages.jobpreferences.preferred_work_location_local') }}</label>
+        <div class="flex">
+            <input type="text" id="local-location" name="local-location"
+                class="w-full 
+border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm"
+                pattern="[A-Za-z\sñ]+" title="{{ __('messages.jobpreferences.alphabetic_characters_only') }}"
+                placeholder="Ex. Makati, MM"
+                aria-label="T{{ __('messages.jobpreferences.preferred_work_location_local') }} {{ old('local-location', $jobpreference->local_location ?? '') }}"
+                value="{{ old('local-location', $jobpreference->local_location ?? '') }}"readonly />
+            <button id="editLocationButton" type="button" class="btn btn-primary ml-2" aria-label="Edit">Edit</button>
+        </div>
+        <div id="local-location-suggestions"
+            class="absolute z-10 mt-1 w-full max-h-90 overflow-y-auto bg-gray-200 text-black dark:bg-gray-900 dark:text-gray-200 border rounded shadow-md hidden">
+        </div>
+        <div id="local-location-error" class="text-red-600 mt-1 hidden">Error
+            fetching location data</div>
+
+        <input type="text" id="localLocationHidden" name="localLocation"
+            value="{{ old('local-location', $jobpreference->local_location ?? '') }}" hidden />
     </div>
-    <div id="overseas-location-error" class="text-red-600 mt-1 hidden">Error
-        fetching location data</div>
-
-    <input type="text" id="overseaslocationHidden" name="overseasLocation"
-        value="{{ old('overseas-location', $jobpreference->overseas_location ?? '') }}" hidden />
 
 
-    <div class="flex items-center gap-4 ">
-        <x-primary-button class="mt-6">{{ __('Save Changes') }}</x-primary-button>
+    <div class="mt-6 relative">
+        <label for="overseas-location"
+            class="block mb-1">{{ __('messages.jobpreferences.preferred_work_location_overseas') }}</label>
+        <div class="flex">
+            <input type="text" id="overseas-location" name="overseas-location"
+                class="w-full 
+border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm"
+                pattern="[A-Za-z\s]+" title="Please enter alphabetic characters only" placeholder="Ex. Japan"
+                aria-label="{{ __('messages.jobpreferences.preferred_work_location_overseas') }}  {{ old('overseas-location', $jobpreference->overseas_location ?? '') }}"
+                value="{{ old('overseas-location', $jobpreference->overseas_location ?? '') }}" readonly />
+            <button id="editOverseasButton" class="btn btn-primary ml-2" type="button" aria-label="Edit">Edit</button>
 
-        @if (session('status') === 'profile-updated')
-            <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
-                class="text-md font-semibold text-green-400 dark:text-gray-400">
-                {{ __('Saved.') }}
-            </p>
-        @endif
+        </div>
+        <div id="overseas-location-suggestions"
+            class="absolute z-10 mt-1 w-full max-h-90 overflow-y-auto bg-gray-200 text-black dark:bg-gray-900 dark:text-gray-200  border rounded shadow-md hidden">
+        </div>
+        <div id="overseas-location-error" class="text-red-600 mt-1 hidden">Error
+            fetching location data</div>
+
+        <input type="text" id="overseaslocationHidden" name="overseasLocation"
+            value="{{ old('overseas-location', $jobpreference->overseas_location ?? '') }}" hidden />
+
+
+        <div class="flex items-center gap-4 ">
+            <x-primary-button class="mt-6" aria-label="Save Changes">{{ __('Save Changes') }}</x-primary-button>
+
+            @if (session('status') === 'profile-updated')
+                <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
+                    class="text-md font-semibold text-green-400 dark:text-gray-400">
+                    {{ __('Saved.') }}
+                </p>
+            @endif
+        </div>
     </div>
-</div>
+</form>
+
+
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -94,7 +111,7 @@
                     const query = this.value.trim().toLowerCase();
                     const filteredCities = citiesData.filter(city =>
                         city.name.toLowerCase().includes(query)
-                    ).slice(0, 6); // Limit to 10 results
+                    ).slice(0, 4); // Limit to 10 results
 
                     renderSuggestions(filteredCities, query);
                 });
@@ -163,11 +180,28 @@
             });
         }
 
-        // Handle outside click to hide suggestions
+        /* Handle outside click to hide suggestions
         document.addEventListener('click', function(event) {
             if (!document.getElementById('local-location-container').contains(event.target)) {
                 suggestionsContainer.style.display = 'none';
             }
+        });*/
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('click', function(event) {
+                const localLocationContainer = document.getElementById(
+                    'local-location-container');
+                const suggestionsContainer = document.getElementById('suggestionsContainer');
+
+                if (localLocationContainer && suggestionsContainer) {
+                    if (!localLocationContainer.contains(event.target)) {
+                        suggestionsContainer.style.display = 'none';
+                    }
+                } else {
+                    console.error(
+                        'Local location container or suggestions container not found.');
+                }
+            });
         });
     });
     document.addEventListener('DOMContentLoaded', function() {
@@ -244,7 +278,8 @@
                     overseasLocationInput.focus(); // Set focus on input field
                     overseasLocationInput.value = country.country;
                     overseasLocationInput.readOnly = true; // Make input readonly
-                    editOverseasButton.style.display = 'inline-block'; // Show edit button
+                    editOverseasButton.style.display =
+                        'inline-block'; // Show edit button
                     suggestionsContainer.style.display = 'none';
 
                 });

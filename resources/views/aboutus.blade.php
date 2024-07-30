@@ -245,21 +245,24 @@
                         <div class="row">
                             <div class="col-lg-3">
                                 <div class="lc-block mb-4">
-                                    <img class="img-fluid" alt="logo" src="images/logo.png"
+                                    <img class="img-fluid" alt="logo" src="/images/darknavbarlogo.png"
                                         style="max-height:10vh">
                                 </div>
                                 <div class="lc-block small">
                                     <div editable="rich">
                                         <p>AccessiJobs is dedicated to creating inclusive employment opportunities for
-                                            persons with disabilities. Our platform connects talented individuals with
-                                            employers who value diversity and inclusion. Stay updated with our latest
-                                            news and join our community on social media to be a part of the change.
-                                            Follow us on Facebook, Twitter, Instagram, and LinkedIn.</p>
+                                            persons
+                                            with disabilities. Our platform connects talented individuals with employers
+                                            who
+                                            value diversity and inclusion. Stay updated with our latest news and join
+                                            our
+                                            community on social media to be a part of the change. Follow us on Facebook,
+                                            Twitter, Instagram, and LinkedIn.</p>
                                     </div>
                                 </div>
                                 <!-- /lc-block -->
                                 <div class="lc-block py-2">
-                                    <a class="text-decoration-none" href="#">
+                                    <a class="text-decoration-none" href="">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="1em"
                                             height="1em" lc-helper="svg-icon" fill="var(--bs-light)">
                                             <path
@@ -267,7 +270,7 @@
                                             </path>
                                         </svg>
                                     </a>
-                                    <a class="text-decoration-none" href="#">
+                                    <a class="text-decoration-none" href="">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="1em"
                                             height="1em" lc-helper="svg-icon" fill="var(--bs-light)">
                                             <path
@@ -275,7 +278,7 @@
                                             </path>
                                         </svg>
                                     </a>
-                                    <a class="text-decoration-none" href="#">
+                                    <a class="text-decoration-none" href="">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="1em"
                                             height="1em" lc-helper="svg-icon" fill="var(--bs-light)">
                                             <path
@@ -283,7 +286,7 @@
                                             </path>
                                         </svg>
                                     </a>
-                                    <a class="text-decoration-none" href="#">
+                                    <a class="text-decoration-none" href="">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="1em"
                                             height="1em" lc-helper="svg-icon" fill="var(--bs-light)">
                                             <path
@@ -291,7 +294,7 @@
                                             </path>
                                         </svg>
                                     </a>
-                                    <a class="text-decoration-none" href="#">
+                                    <a class="text-decoration-none" href="">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="1em"
                                             height="1em" lc-helper="svg-icon" fill="var(--bs-light)">
                                             <path
@@ -311,12 +314,11 @@
                                 <!-- /lc-block -->
                                 <div class="lc-block small">
                                     <div editable="rich">
-                                        <p>Tutorial</p>
-                                        <p>Resources
-                                            <br>
+                                        <p>Home</p>
+                                        <p>Find Jobs<br>
                                         </p>
-                                        <p>Docs</p>
-                                        <p>Example</p>
+                                        <p>About Us</p>
+                                        <p>FAQ </p>
                                     </div>
                                 </div>
                                 <!-- /lc-block -->
@@ -324,37 +326,38 @@
                             <div class="col-lg-2 offset-lg-1">
                                 <div class="lc-block mb-4">
                                     <div editable="rich">
-                                        <h4>About us</h4>
+                                        <h4>Contact Us</h4>
                                     </div>
                                 </div>
                                 <!-- /lc-block -->
                                 <div class="lc-block small">
                                     <div editable="rich">
-                                        <p>Story</p>
-                                        <p>Work with us</p>
-                                        <p>Blog</p>
-                                        <p>News</p>
+                                        <p></p>
+                                        <p>Ask For Support</p>
+                                        <p><i class="fab fa-facebook" style="margin-right: 8px;"></i> Facebook</p>
+                                        <p><i class="fab fa-instagram" style="margin-right: 8px;"></i> Instagram</p>
+                                        <p><i class="fab fa-twitter" style="margin-right: 8px;"></i> Twitter</p>
                                     </div>
                                 </div>
                                 <!-- /lc-block -->
                             </div>
-                            <div class="col-lg-2 offset-lg-1">
-                                <div class="lc-block mb-4">
-                                    <div editable="rich">
-                                        <h4>Downloads</h4>
-                                    </div>
-                                </div>
-                                <!-- /lc-block -->
-                                <div class="lc-block small">
-                                    <div editable="rich">
-                                        <p>Vertex 1.2</p>
-                                        <p>Templates</p>
-                                        <p>Sounds</p>
-                                        <p>Gradients</p>
-                                    </div>
-                                </div>
-                                <!-- /lc-block -->
+                            {{-- <div class="col-lg-2 offset-lg-1">
+                        <div class="lc-block mb-4">
+                            <div editable="rich">
+                                <h4>Downloads</h4>
                             </div>
+                        </div>
+                        <!-- /lc-block -->
+                        <div class="lc-block small">
+                            <div editable="rich">
+                                <p>Vertex 1.2</p>
+                                <p>Templates</p>
+                                <p>Sounds</p>
+                                <p>Gradients</p>
+                            </div>
+                        </div>
+                        <!-- /lc-block -->
+                    </div> --}}
                         </div>
                     </div>
                     <div class="py-5 container">
@@ -362,7 +365,7 @@
                             <div class="col-6 small">
                                 <div class="lc-block">
                                     <div editable="rich">
-                                        <p>Copyright © ACCESSIJOBS 2024>
+                                        <p>Copyright © ACCESSIJOBS 2024
                                     </div>
                                 </div>
                                 <!-- /lc-block -->
@@ -371,8 +374,8 @@
                                 <div class="lc-block">
                                     <div editable="rich">
                                         <p>
-                                            <a class="text-decoration-none" href="#">License Details</a> -
-                                            <a class="text-decoration-none" href="#">Terms &amp; Conditions</a>
+                                            <a class="text-decoration-none" href="">License Details</a> -
+                                            <a class="text-decoration-none" href="">Terms &amp; Conditions</a>
                                         </p>
                                     </div>
                                 </div>
@@ -382,6 +385,7 @@
                     </div>
                 </section>
             </footer>
+
             <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
             </script>

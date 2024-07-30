@@ -72,17 +72,9 @@
                                 </div>
                                 <hr class="border-t-2 border-gray-400 rounded-full my-4">
 
-                                <span class="text-md font-regular" style="text-align: justify;"><b>Step 2:</b> To fill
-                                    out your personal information accurately, start by selecting your Civil Status.
-                                    Then, enter your Barangay name and if necessary, use the ‘Edit’ button for changes.
-                                    It will automatically the Zip Code and fill up the full Present Address based only
-                                    on the <b>27 available
-                                        barangays in Mandaluyong City </b>, including city and region. Fill in
-                                    your Tax Identification Number (TIN) in. Your Saved Tax Code should appear
-                                    automatically; ensure it’s correct. Choose
-                                    your Religion from the available options. <b> If you're an ofw, kindly fill up the
-                                        two
-                                        fields below. If not, leave it blank. </b></span>
+                                <span class="text-md font-regular" style="text-align: justify;">
+                                    {!! __('messages.personal.instruction') !!}
+                                </span>
                                 <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
 
                                     <div>
@@ -92,29 +84,31 @@
 
                                     <div>
                                         <div class="mt-6">
-                                            <label for="civilStatus" class="block mb-1">Civil Status</label>
+                                            <label for="civilStatus"
+                                                class="block mb-1">{{ __('messages.personal.civil_status') }}</label>
                                             <select id="civilStatus" name="civilStatus"
                                                 class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200">
                                                 <option value="Single"
-                                                    {{ old('civilStatus', $formData2['civilStatus'] ?? '') == 'Single' ? 'selected' : '' }}>
-                                                    Single</option>
+                                                    {{ old('civilStatus', $personal->civilStatus ?? '') == 'Single' ? 'selected' : '' }}>
+                                                    {{ __('messages.personal.single') }}</option>
                                                 <option value="Married"
-                                                    {{ old('civilStatus', $formData2['civilStatus'] ?? '') == 'Married' ? 'selected' : '' }}>
-                                                    Married</option>
+                                                    {{ old('civilStatus', $personal->civilStatus ?? '') == 'Married' ? 'selected' : '' }}>
+                                                    {{ __('messages.personal.married') }}</option>
                                                 <option value="Widowed"
-                                                    {{ old('civilStatus', $formData2['civilStatus'] ?? '') == 'Widowed' ? 'selected' : '' }}>
-                                                    Widowed</option>
+                                                    {{ old('civilStatus', $personal->civilStatus ?? '') == 'Widowed' ? 'selected' : '' }}>
+                                                    {{ __('messages.personal.widowed') }}</option>
                                             </select>
                                             @error('civilStatus')
                                                 <div class="text-red-600 mt-1">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div id="barangay-container" class="mt-6 relative">
-                                            <label for="barangay" class="block mb-1">Barangay</label>
+                                            <label for="barangay"
+                                                class="block mb-1">{{ __('messages.personal.barangay') }}</label>
                                             <div class="flex items-center">
                                                 <input id="barangay" type="text" name="barangay"
                                                     class="w-full p-2 border rounded shadow-sm bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
-                                                    placeholder="Type to search Barangay..."
+                                                    placeholder="{{ __('messages.personal.type_to_search_barangay') }}"
                                                     value="{{ old('barangay', $formData2['barangay'] ?? '') }}"
                                                     readonly>
                                                 <button id="editButton"
@@ -128,7 +122,8 @@
                                         </div>
 
                                         <div class="mt-6">
-                                            <label for="zipcode" class="block mb-1">Zip Code:</label>
+                                            <label for="zipcode"
+                                                class="block mb-1">{{ __('messages.personal.zipcode') }}</label>
                                             <div class="flex items-center mt-4">
                                                 <input type="text" id="zipcode" name="zipcode"
                                                     class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
@@ -144,7 +139,8 @@
 
 
                                         <div class="mt-6">
-                                            <label for="presentAddress" class="block mb-1">Present Address</label>
+                                            <label for="presentAddress"
+                                                class="block mb-1">{{ __('messages.personal.present_address') }}</label>
                                             <input type="text" id="presentAddress" name="presentAddress"
                                                 class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
                                                 placeholder="Ex. Street Name, Building, House. No"
@@ -157,9 +153,8 @@
 
                                         <div class="mt-6">
                                             <div class="mt-6">
-                                                <label for="tin" class="block mb-1">Tax
-                                                    Identification
-                                                    Number (TIN)</label>
+                                                <label for="tin"
+                                                    class="block mb-1">{{ __('messages.personal.saved_tin') }}</label>
                                                 <div class="flex flex-wrap gap-1">
                                                     <!-- Group 1 -->
                                                     <input type="text" id="tin1" name="tin[]"
@@ -227,30 +222,35 @@
 
                                         </div>
                                         <div class="mt-6">
-                                            <label for="religion" class="block mb-1">Religion</label>
+                                            <label for="religion"
+                                                class="block mb-1">{{ __('messages.personal.religion') }}</label>
                                             <select id="religion" name="religion"
                                                 class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200">
                                                 <option value="" disabled>Please select...</option>
                                                 <option value="Roman Catholic"
-                                                    {{ old('religion', $formData2['religion'] ?? '') == 'Roman Catholic' ? 'selected' : '' }}>
-                                                    Roman
-                                                    Catholic</option>
+                                                    {{ old('religion', $personal->religion ?? '') == 'Roman Catholic' ? 'selected' : '' }}>
+                                                    {{ __('messages.personal.roman_catholic') }}
+                                                </option>
                                                 <option value="Iglesia Ni Cristo"
-                                                    {{ old('religion', $formData2['religion'] ?? '') == 'Iglesia Ni Cristo' ? 'selected' : '' }}>
-                                                    Iglesia ni
-                                                    Cristo</option>
+                                                    {{ old('religion', $personal->religion ?? '') == 'Iglesia Ni Cristo' ? 'selected' : '' }}>
+                                                    {{ __('messages.personal.iglesia_ni_cristo') }}
+                                                </option>
                                                 <option value="Islam"
-                                                    {{ old('religion') == 'Islam' ? 'selected' : '' }}>
-                                                    Islam</option>
+                                                    {{ old('religion', $personal->religion ?? '') == 'Islam' ? 'selected' : '' }}>
+                                                    {{ __('messages.personal.islam') }}
+                                                </option>
                                                 <option value="Philippine Independent Church"
-                                                    {{ old('religion', $formData2['religion'] ?? '') == 'Philippine Independent Church' ? 'selected' : '' }}>
-                                                    Philippine Independent Church</option>
-                                                <option value="SeventhDay Adventist Church"
-                                                    {{ old('religion', $formData2['religion'] ?? '') == 'Seventh Day Adventist Church' ? 'selected' : '' }}>
-                                                    Seventh-day Adventist Church</option>
+                                                    {{ old('religion', $personal->religion ?? '') == 'Philippine Independent Church' ? 'selected' : '' }}>
+                                                    {{ __('messages.personal.philippine_independent_church') }}
+                                                </option>
+                                                <option value="Seventh Day Adventist Church"
+                                                    {{ old('religion', $personal->religion ?? '') == 'Seventh Day Adventist Church' ? 'selected' : '' }}>
+                                                    {{ __('messages.personal.seventh_day_adventist_church') }}
+                                                </option>
                                                 <option value="Others"
-                                                    {{ old('religion', $formData2['religion'] ?? '') == 'Others' ? 'selected' : '' }}>
-                                                    Others</option>
+                                                    {{ old('religion', $personal->religion ?? '') == 'Others' ? 'selected' : '' }}>
+                                                    {{ __('messages.personal.others') }}
+                                                </option>
                                             </select>
                                             @error('religion')
                                                 <div class="text-red-600 mt-1">{{ $message }}</div>
@@ -283,7 +283,8 @@
                                         </div>
 
                                         <div class="mt-6">
-                                            <label class="block mb-2 ">4Ps Beneficiary</label>
+                                            <label
+                                                class="block mb-2 ">{{ __('messages.personal.4ps_beneficiary') }}</label>
                                             <div class="flex items-center">
                                                 <input type="radio" id="4ps-yes" name="beneficiary-4ps"
                                                     value="Yes" class="mr-2"
@@ -302,12 +303,13 @@
 
 
                                         <div class="mt-10">
-                                            <label class="block mb-2 font-semibold">Are you a former OFW?</label>
+                                            <label
+                                                class="block mb-2 font-semibold">{{ __('messages.personal.former_ofw') }}</label>
                                             <div class="my-4">
-                                                <p class="mb-2">If "Yes", please provide:</p>
+                                                <p class="mb-2">{{ __('messages.personal.if_yes_provide') }}</p>
                                                 <ul class="list-disc pl-6">
-                                                    <li>Latest Country of Deployment</li>
-                                                    <li>Return Date (YYYY-MM format)</li>
+                                                    <li>{{ __('messages.personal.latest_country_of_deployment') }}</li>
+                                                    <li>{{ __('messages.personal.return_date') }}</li>
                                                 </ul>
                                             </div>
 
@@ -315,8 +317,8 @@
 
 
                                         <div id="ofw-country-details" class="mt-6">
-                                            <label for="ofw-country" class="block mb-1">Latest Country of
-                                                Deployment</label>
+                                            <label for="ofw-country"
+                                                class="block mb-1">{{ __('messages.personal.latest_country_of_deployment') }}</label>
                                             <div class="flex items-center relative">
                                                 <input type="text" id="ofw-country" name="ofw-country"
                                                     class="flex-1 p-2 border rounded shadow-sm bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
@@ -343,8 +345,8 @@
 
                                         <div id="ofw-return-details"
                                             class="mt-6 {{ old('ofw-return') ? '' : 'disabled' }}">
-                                            <label for="ofw-return" class="block mb-1">Month and Year of
-                                                Return to Philippines</label>
+                                            <label for="ofw-return"
+                                                class="block mb-1">{{ __('messages.personal.month_year_return') }}</label>
                                             <input type="month" id="ofw-return" name="ofw-return"
                                                 class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 "
                                                 value="{{ old('ofw-return', $formData2['ofw-return'] ?? '') }}" />

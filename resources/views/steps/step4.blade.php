@@ -66,20 +66,8 @@
                                     </nav>
                                 </div>
                                 <hr class="border-t-2 border-gray-400 rounded-full my-4">
-
                                 <!-- Adjusted text size to text-2xl -->
-                                <span class="text-md font-semibold" style="text-align: justify;">Step 4:</span>
-                                In the <b>'Preferred Occupation' </b> and <b> 'Preferred Work Location' </b> sections of
-                                a job
-                                application form, you indicate your desired job title and where you would like to work.
-                                Then,
-                                specify
-                                your preferred work locations for local and <b> overseas </b> opportunities. In the
-                                local
-                                section, you may only enter locations on the suggestion list if you’re looking to work
-                                in that area. If
-                                you’re open to working abroad, you can list countries or cities in the overseas section,
-                                You can edit these fields if your preferences change.
+                                {!! __('messages.jobpreferences.instruction') !!}
 
                                 <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
                                     <div>
@@ -88,8 +76,8 @@
                                     </div>
                                     <div>
                                         <div class="mt-6">
-                                            <label for="preferredOccupation" class="block mb-1">Preferred
-                                                Occupation</label>
+                                            <label for="preferredOccupation"
+                                                class="block mb-1">{{ __('messages.jobpreferences.preferred_occupation') }}</label>
                                             <input type="text" id="preferredOccupation" name="preferredOccupation"
                                                 class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 "
                                                 pattern="[A-Za-z\s]+" title="Please enter alphabetic characters only"
@@ -103,8 +91,8 @@
                                         </div>
 
                                         <div class="mt-6 relative">
-                                            <label for="local-location" class="block mb-1">Preferred Work Location -
-                                                Local</label>
+                                            <label for="local-location"
+                                                class="block mb-1">{{ __('messages.jobpreferences.preferred_work_location_local') }}</label>
                                             <div class="flex">
                                                 <input type="text" id="local-location" name="local-location"
                                                     class="flex-1 p-2 border rounded shadow-sm bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
@@ -128,8 +116,8 @@
 
 
                                         <div class="mt-6 relative">
-                                            <label for="overseas-location" class="block mb-1">Preferred Work Location -
-                                                Overseas</label>
+                                            <label for="overseas-location"
+                                                class="block mb-1">{{ __('messages.jobpreferences.preferred_work_location_overseas') }}</label>
                                             <div class="flex">
                                                 <input type="text" id="overseas-location" name="overseas-location"
                                                     class="flex-1 p-2 border rounded shadow-sm bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
@@ -265,16 +253,29 @@
                                     });
                                 }
 
-                                // Handle outside click to hide suggestions
+                                /* Handle outside click to hide suggestions
                                 document.addEventListener('click', function(event) {
                                     if (!document.getElementById('local-location-container').contains(event.target)) {
                                         suggestionsContainer.style.display = 'none';
                                     }
+                                });*/
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    document.addEventListener('click', function(event) {
+                                        const localLocationContainer = document.getElementById(
+                                            'local-location-container');
+                                        const suggestionsContainer = document.getElementById('suggestionsContainer');
+
+                                        if (localLocationContainer && suggestionsContainer) {
+                                            if (!localLocationContainer.contains(event.target)) {
+                                                suggestionsContainer.style.display = 'none';
+                                            }
+                                        } else {
+                                            console.error(
+                                                'Local location container or suggestions container not found.');
+                                        }
+                                    });
                                 });
                             });
-
-
-
 
                             //COUNTRIES
 
@@ -352,7 +353,8 @@
                                         suggestionElement.addEventListener('click', function() {
                                             overseasLocationInput.value = country.country;
                                             overseasLocationInput.readOnly = true; // Make input readonly
-                                            editOverseasButton.style.display = 'inline-block'; // Show edit button
+                                            editOverseasButton.style.display =
+                                                'inline-block'; // Show edit button
                                             suggestionsContainer.style.display = 'none';
                                             overseasLocationHidden.value = country.country;
                                         });

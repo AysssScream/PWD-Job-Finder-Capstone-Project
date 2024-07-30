@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\AuditTrail;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\RedirectResponse;
@@ -29,6 +30,14 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         if (Auth::user()->usertype == 'admin') {
+
+            $user = Auth::user();
+            AuditTrail::create([
+                'user_id' => $user->id,
+                'user' => $user->firstname . ' ' . $user->middlename . ' ' . $user->lastname,
+                'action' => 'Logged In',
+                'section' => 'Authentication',
+            ]);
             return redirect(route('admin.dashboard'));
         }
 
@@ -57,12 +66,34 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        Auth::guard('web')->logout();
+        // Check if the user is authenticated
+        if (Auth::check()) {
+            $user = Auth::user();
 
-        $request->session()->invalidate();
+            // Check if the authenticated user is an admin
+            if ($user->usertype === 'admin') { // Adjust this check based on how you identify admins
+                // Record the audit trail entry
+                AuditTrail::create([
+                    'user_id' => $user->id,
+                    'user' => $user->firstname . ' ' . $user->middlename . ' ' . $user->lastname,
+                    'action' => 'Logged Out',
+                    'section' => 'Authentication',
+                ]);
 
-        $request->session()->regenerateToken();
+                // Perform logout
+                Auth::guard('web')->logout();
 
+                // Invalidate the session
+                $request->session()->invalidate();
+
+                // Regenerate the CSRF token
+                $request->session()->regenerateToken();
+            }
+        }
+
+        // Redirect to home page
         return redirect('/');
+
+
     }
 }

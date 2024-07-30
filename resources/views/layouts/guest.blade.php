@@ -25,6 +25,15 @@
             transition: background-color 0.3s ease, color 0.3s ease, opacity 0.3s ease;
         }
 
+        .floating-button {
+            width: 56px;
+            height: 56px;
+            font-size: 24px;
+            line-height: 1;
+            padding: 12px;
+        }
+
+
         /* Adjust the button and icon size */
         #toggleDarkMode {
             width: 56px;
@@ -33,6 +42,23 @@
             line-height: 1;
             padding: 12px;
         }
+
+        /* Add this CSS to your stylesheet or style block */
+        .language-toggle {
+            transition: transform 0.3s ease;
+        }
+
+        .language-toggle:hover {
+            transform: scale(1.1);
+            /* Increase scale on hover for a simple zoom effect */
+        }
+
+        .flag-img {
+            width: 30px;
+            /* Adjust width and height as per your flag image dimensions */
+            height: auto;
+            /* Maintain aspect ratio */
+        }
     </style>
 
     <!-- Scripts -->
@@ -40,6 +66,20 @@
 </head>
 
 <x-loginavbar />
+<a href="{{ route('toggle.language', ['lang' => App::isLocale('en') ? 'fil' : 'en']) }}" id="toggleLanguage"
+    class="bg-green-500 fixed bottom-20 right-4 hover:bg-green-700 text-white font-bold py-2 mt-4 floating-button rounded-full flex items-center justify-center language-toggle">
+    @if (App::isLocale('en'))
+        <img src="{{ asset('images/us.png') }}" alt="USA Flag" class="flag-img">
+        <!-- USA flag image for English -->
+    @else
+        <img src="{{ asset('images/ph.png') }}" alt="Philippines Flag" class="flag-img">
+        <!-- Philippines flag image for Filipino -->
+    @endif
+</a>
+
+
+
+
 
 <body>
     <button id="toggleDarkMode"

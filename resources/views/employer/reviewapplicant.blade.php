@@ -10,6 +10,23 @@
 
     </head>
 
+    @if (Session::has('hireapplicant'))
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                toastr.options = {
+                    "progressBar": true,
+                    "closeButton": true,
+                }
+
+                toastr.success("{{ Session::get('hireapplicant') }}", 'Job Application Status Updated.', {
+                    timeOut: 5000
+                });
+
+            });
+        </script>
+    @endif
 
     <div class="py-12">
         <div class="container mx-auto max-w-7xl px-4 pt-2 mb-2 ">

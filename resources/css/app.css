@@ -8,3 +8,20 @@
     transition-duration: 300ms;
     transition-timing-function: ease-in-out;
 }
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: rgb(3 7 18);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgb(2 132 199);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

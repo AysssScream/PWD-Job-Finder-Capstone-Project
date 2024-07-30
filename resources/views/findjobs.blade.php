@@ -166,138 +166,152 @@
                         </div>
                     </div>
 
-
-
-
-
-                    <div>
-                        <div id="filterContainer"
-                            class="overflow-hidden max-h-0 transition-all duration-500 ease-in-out mt-4 shadow rounded">
-                            <div class="row g-3 p-3 bg-light rounded">
-                                <div class="col-md-6">
-                                    <label for="job-type" class="form-label">Job Type</label>
-                                    <select id="job-type" name="job_type" class="form-control border-secondary"
-                                        id="job-type">
-                                        <option value="">All</option>
-                                        <option value="Full Time">Full-time</option>
-                                        <option value="Part Time">Part-time</option>
-                                        <option value="Contract">Contractual</option>
-                                        <option value="Probationary">Probationary</option>
-                                    </select>
+                    <div class="container">
+                        <div class="row">
+                            <!-- Filters Column -->
+                            <div class="col-sm-12 col-md-12 col-lg-4">
+                                <!-- Filter Container -->
+                                <div id="filterContainer"
+                                    class="overflow-hidden max-h-0 transition-all duration-500 ease-in-out mt-4 shadow rounded">
+                                    <div class="row g-3 p-3 bg-light rounded">
+                                        <!-- Filter Fields -->
+                                        <div class="col-12">
+                                            <label for="job-type" class="form-label">Job Type</label>
+                                            <select id="job-type" name="job_type"
+                                                class="form-control border-secondary">
+                                                <option value="">All</option>
+                                                <option value="Full Time">Full-time</option>
+                                                <option value="Part Time">Part-time</option>
+                                                <option value="Contract">Contractual</option>
+                                                <option value="Probationary">Probationary</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="location" class="form-label">Location</label>
+                                            <input type="text" id="location" name="location"
+                                                class="form-control border-secondary" placeholder="Enter location">
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="min-salary" class="form-label">Minimum Salary</label>
+                                            <input type="number" id="min-salary" name="min_salary"
+                                                class="form-control border-secondary"
+                                                placeholder="Enter minimum salary">
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="max-salary" class="form-label">Maximum Salary</label>
+                                            <input type="number" id="max-salary" name="max_salary"
+                                                class="form-control border-secondary"
+                                                placeholder="Enter maximum salary">
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="location" class="form-label">Location</label>
-                                    <input type="text" id="location" name="location" id="location"
-                                        class="form-control border-secondary" placeholder="Enter location">
+                            </div>
+
+                            <!-- Jobs Column -->
+                            <div class="col-lg-8">
+                                <div class="d-flex justify-content-between align-items-center my-4">
+                                    <h2 class="h4"><i class="bi bi-briefcase mr-2"></i>Available PWD Jobs</h2>
+                                    @php
+                                        $numberOfResults = $jobs->total();
+                                    @endphp
+
+                                    <div class="text-center text-sm-end">
+                                        @if ($numberOfResults > 0)
+                                            <p>{{ $numberOfResults }} Results found</p>
+                                        @else
+                                            <p>No results found</p>
+                                        @endif
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="min-salary" class="form-label">Minimum Salary</label>
-                                    <input type="number" id="min-salary" name="min_salary" id="min-salary"
-                                        class="form-control border-secondary " placeholder="Enter minimum salary">
+
+                                <div class="row g-3">
+                                    @forelse ($jobs as $job)
+                                        <div class="col-12 col-md-6 col-lg-6 d-flex align-items-stretch">
+                                            <div class="card bg-white shadow p-4 border-secondary w-100">
+                                                <div class="d-flex flex-column">
+                                                    <div class="d-flex justify-content-between w-100">
+                                                        @if ($job->company_logo && Storage::exists('public/' . $job->company_logo))
+                                                            <img src="{{ asset('storage/' . $job->company_logo) }}"
+                                                                alt="Company Logo" class="rounded-lg shadow-md"
+                                                                style="width: 90px; height: 90px;">
+                                                        @else
+                                                            <img src="{{ asset('/images/avatar.png') }}"
+                                                                alt="Default Image"
+                                                                style="width: 90px; height: 90px;">
+                                                        @endif
+                                                        <div class="text-left text-sm-center text-md-right ml-3">
+                                                            <h3 class="h5 h6-sm h5-md h4-lg font-semibold">
+                                                                {{ $job->title }}
+                                                            </h3>
+                                                            <p
+                                                                class="text-md text-sm text-sm-md text-lg-lg text-gray-600 dark:text-gray-400 mt-1">
+                                                                {{ $job->company_name }}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <p><strong>Date Posted:</strong>
+                                                    {{ \Carbon\Carbon::parse($job->date_posted)->format('M d, Y') }}
+                                                </p>
+                                                <p><strong>Location:</strong> {{ $job->location }}</p>
+                                                <div class="d-flex justify-content-between mt-2">
+                                                    <div>
+                                                        <p><strong>Educational Level:</strong>
+                                                            {{ $job->educational_level }}</p>
+                                                        <p><strong>Job Type:</strong> {{ $job->job_type }}</p>
+                                                        <p><strong>Salary:</strong>
+                                                            ₱{{ number_format($job->salary, 2) }}</p>
+                                                    </div>
+                                                    <div>
+                                                        <a href="{{ route('jobs.info', ['company_name' => Str::slug($job->company_name), 'id' => $job->id]) }}"
+                                                            class="btn btn-primary">
+                                                            <i class="bi bi-arrow-right"></i>
+                                                            <i class="fas fa-arrow-right"></i>
+                                                            <!-- Font Awesome icon -->
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @empty
+                                        <div class="col-12">
+                                            <p>No jobs found.</p>
+                                        </div>
+                                    @endforelse
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="max-salary" class="form-label">Maximum Salary</label>
-                                    <input type="number" id="max-salary" name="max_salary" id="max-salary"
-                                        class="form-control border-secondary" placeholder="Enter maximum salary">
-                                </div>
+
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
 
 
 
-            <div class="d-flex justify-content-between align-items-center my-4">
-                <h2 class="h4"><i class="bi bi-briefcase mr-2"></i>Available PWD Jobs</h2>
-                @php
-                    $numberOfResults = $jobs->total();
-                @endphp
+                    <div class="mt-4">
+                        <nav class="d-flex justify-content-between">
+                            @if ($jobs->onFirstPage())
+                                <span class="btn btn-secondary disabled">Previous</span>
+                            @else
+                                <a href="{{ $jobs->previousPageUrl() }}" class="btn btn-secondary">Previous</a>
+                            @endif
 
-                <div class="text-center text-sm-end">
-                    @if ($numberOfResults > 0)
-                        <p>{{ $numberOfResults }} Results found</p>
-                    @else
-                        <p>No results found</p>
-                    @endif
-                </div>
-            </div>
-
-            <div class="row g-3">
-                @forelse ($jobs as $job)
-                    <div class="col-12 col-sm-6 col-lg-4">
-                        <div class="card bg-white shadow p-3 border-secondary">
-                            <div class="d-flex mb-3">
-                                @if ($job->company_logo)
-                                    <img src="{{ asset('storage/' . $job->company_logo) }}" alt="Company Logo"
-                                        class="img-fluid rounded shadow me-3" style="width: 96px; height: 96px;">
-                                @else
-                                    <img src="{{ asset('/images/avatar.png') }}" alt="Default Image"
-                                        class="img-fluid rounded me-3" style="width: 96px; height: 96px;">
-                                @endif
-                                <div class="flex-grow-1">
-                                    <h3 class="h5">{{ $job->title }}</h3>
-                                    <p class="mb-1 text-muted">{{ $job->company_name }}</p>
-                                </div>
-                            </div>
-                            <p><strong>Date Posted:</strong>
-                                {{ \Carbon\Carbon::parse($job->date_posted)->format('M d, Y') }}</p>
-                            <p><strong>Location:</strong> {{ $job->location }}</p>
-                            <div class="mt-2">
-                                <p><strong>Job Description:</strong>
-                                    {{ \Illuminate\Support\Str::limit($job->description, 100, '...') }}</p>
-                                <a href="{{ route('jobs.info', ['company_name' => Str::slug($job->company_name), 'id' => $job->id]) }}"
-                                    class="text-primary">Read More...</a>
-                            </div>
-                            <div class="d-flex justify-content-between mt-2">
-                                <div>
-                                    <p><strong>Educational Level:</strong> {{ $job->educational_level }}</p>
-                                    <p><strong>Job Type:</strong> {{ $job->job_type }}</p>
-                                    <p><strong>Salary:</strong> ₱{{ number_format($job->salary, 2) }}</p>
-                                </div>
-                                <div>
-                                    <a href="{{ route('jobs.info', ['company_name' => Str::slug($job->company_name), 'id' => $job->id]) }}"
-                                        class="btn btn-primary">
-                                        <i class="bi bi-arrow-right"></i>
-                                        <i class="fas fa-arrow-right"></i> <!-- Font Awesome icon -->
+                            <div class="d-flex">
+                                @foreach ($jobs->getUrlRange(1, $jobs->lastPage()) as $page => $url)
+                                    <a href="{{ $url }}"
+                                        class="btn {{ $jobs->currentPage() == $page ? 'btn-primary' : 'btn-secondary' }} mx-1">
+                                        {{ $page }}
                                     </a>
-                                </div>
+                                @endforeach
                             </div>
-                        </div>
+
+                            @if ($jobs->hasMorePages())
+                                <a href="{{ $jobs->nextPageUrl() }}" class="btn btn-secondary">Next</a>
+                            @else
+                                <span class="btn btn-secondary disabled">Next</span>
+                            @endif
+                        </nav>
                     </div>
-                @empty
-                    <div class="col-12">
-                        <p>No jobs found.</p>
-                    </div>
-                @endforelse
             </div>
-
-
-            <div class="mt-4">
-                <nav class="d-flex justify-content-between">
-                    @if ($jobs->onFirstPage())
-                        <span class="btn btn-secondary disabled">Previous</span>
-                    @else
-                        <a href="{{ $jobs->previousPageUrl() }}" class="btn btn-secondary">Previous</a>
-                    @endif
-
-                    <div class="d-flex">
-                        @foreach ($jobs->getUrlRange(1, $jobs->lastPage()) as $page => $url)
-                            <a href="{{ $url }}"
-                                class="btn {{ $jobs->currentPage() == $page ? 'btn-primary' : 'btn-secondary' }} mx-1">
-                                {{ $page }}
-                            </a>
-                        @endforeach
-                    </div>
-
-                    @if ($jobs->hasMorePages())
-                        <a href="{{ $jobs->nextPageUrl() }}" class="btn btn-secondary">Next</a>
-                    @else
-                        <span class="btn btn-secondary disabled">Next</span>
-                    @endif
-                </nav>
-            </div>
-        </div>
     </section>
 
 

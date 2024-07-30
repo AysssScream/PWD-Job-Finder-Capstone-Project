@@ -6,13 +6,11 @@
     <title>AccessiJobs | Welcome</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.bunny.net/css?family=Poppins:400,500,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/livecanvas-team/ninjabootstrap/dist/css/bootstrap.min.css"
         media="all">
     <link rel="stylesheet" href="/css/Homepage.css">
     <link href="{{ asset('fontawesome-free-6.5.2-web/css/all.min.css') }}" rel="stylesheet">
-    <link rel="preload" href="{{ asset('/css/Homepage.css') }}" as="style"
-        onload="this.onload=null;this.rel='stylesheet'">
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
     </script>
@@ -37,7 +35,6 @@
                             data-dark="images/darknavbarlogo.png" width="200" height="200"
                             class="align-middle me-1 img-fluid" alt="My Website">
                     </a>
-
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#myNavbar3"
                         aria-controls="myNavbar3" aria-expanded="false" aria-label="Toggle navigation"
                         id="navbartoggler">
@@ -124,6 +121,38 @@
                                     <i class="fas fa-adjust"></i>
                                 </div>
                             </label>
+
+                            <script>
+                                // Function to toggle dark mode
+                                function toggleDarkMode() {
+                                    const themeSwitch = document.getElementById('themeSwitch');
+                                    const darkMode = themeSwitch.checked;
+                                    localStorage.setItem('darkMode', darkMode);
+                                    applyTheme(darkMode);
+                                }
+
+                                // Function to apply the theme
+                                function applyTheme(darkMode) {
+                                    if (darkMode) {
+                                        document.body.classList.add('dark-mode');
+                                        // Add your dark mode styles here
+                                    } else {
+                                        document.body.classList.remove('dark-mode');
+                                        // Remove your dark mode styles here
+                                    }
+                                }
+
+                                // Initialize theme based on local storage
+                                document.addEventListener('DOMContentLoaded', () => {
+                                    const darkMode = JSON.parse(localStorage.getItem('darkMode'));
+                                    const themeSwitch = document.getElementById('themeSwitch');
+                                    if (darkMode !== null) {
+                                        themeSwitch.checked = darkMode;
+                                        applyTheme(darkMode);
+                                    }
+                                    themeSwitch.addEventListener('change', toggleDarkMode);
+                                });
+                            </script>
                         </div>
 
                     </div>
@@ -275,30 +304,35 @@
                 <div class="card border-0 shadow p-5">
                     <div class="row pt-2">
                         <div class="col-md-3 mb-3 mb-sm-3 mb-lg-0">
-                            <input type="text" class="form-control" name="search" id="search"
+                            <label for="search-keywords" class="form-label">Keywords</label>
+                            <input type="text" class="form-control" name="search" id="search-keywords"
                                 placeholder="Keywords">
                         </div>
                         <div class="col-md-3 mb-3 mb-sm-3 mb-lg-0">
-                            <input type="text" class="form-control" name="search" id="search"
+                            <label for="search-location" class="form-label">Location</label>
+                            <input type="text" class="form-control" name="search" id="search-location"
                                 placeholder="Location">
                         </div>
                         <div class="col-md-3 mb-3 mb-sm-3 mb-lg-0">
+                            <label for="category" class="form-label">Category</label>
                             <select name="category" id="category" class="form-control">
                                 <option value="">Select a Category</option>
-                                <option value="">Engineering</option>
-                                <option value="">Accountant</option>
-                                <option value="">Information Technology</option>
-                                <option value="">Fashion designing</option>
+                                <option value="engineering">Engineering</option>
+                                <option value="accountant">Accountant</option>
+                                <option value="it">Information Technology</option>
+                                <option value="fashion">Fashion Designing</option>
                             </select>
                         </div>
-
-                        <div class=" col-md-3 mb-xs-3 mb-sm-3 mb-lg-0">
+                        <div class="col-md-3 mb-3 mb-sm-3 mb-lg-0">
+                            <label for="search-submit" class="form-label d-block">&nbsp;</label>
                             <div class="d-grid gap-2">
-                                <a href="jobs.html" class="btn btn-primary btn-block">Search Job</a>
+                                <a href="jobs.html" class="btn btn-primary btn-block">
+                                    <i class="fas fa-search"></i> Search Job
+                                </a>
                             </div>
-
                         </div>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -1648,7 +1682,8 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="lc-block mb-4">
-                            <img class="img-fluid" alt="logo" src="images/logo.png" style="max-height:10vh">
+                            <img class="img-fluid" alt="logo" src="/images/darknavbarlogo.png"
+                                style="max-height:10vh">
                         </div>
                         <div class="lc-block small">
                             <div editable="rich">
@@ -1714,12 +1749,11 @@
                         <!-- /lc-block -->
                         <div class="lc-block small">
                             <div editable="rich">
-                                <p>Tutorial</p>
-                                <p>Resources
-                                    <br>
+                                <p>Home</p>
+                                <p>Find Jobs<br>
                                 </p>
-                                <p>Docs</p>
-                                <p>Example</p>
+                                <p>About Us</p>
+                                <p>FAQ </p>
                             </div>
                         </div>
                         <!-- /lc-block -->
@@ -1727,21 +1761,22 @@
                     <div class="col-lg-2 offset-lg-1">
                         <div class="lc-block mb-4">
                             <div editable="rich">
-                                <h4>About us</h4>
+                                <h4>Contact Us</h4>
                             </div>
                         </div>
                         <!-- /lc-block -->
                         <div class="lc-block small">
                             <div editable="rich">
-                                <p>Story</p>
-                                <p>Work with us</p>
-                                <p>Blog</p>
-                                <p>News</p>
+                                <p></p>
+                                <p>Ask For Support</p>
+                                <p><i class="fab fa-facebook" style="margin-right: 8px;"></i> Facebook</p>
+                                <p><i class="fab fa-instagram" style="margin-right: 8px;"></i> Instagram</p>
+                                <p><i class="fab fa-twitter" style="margin-right: 8px;"></i> Twitter</p>
                             </div>
                         </div>
                         <!-- /lc-block -->
                     </div>
-                    <div class="col-lg-2 offset-lg-1">
+                    {{-- <div class="col-lg-2 offset-lg-1">
                         <div class="lc-block mb-4">
                             <div editable="rich">
                                 <h4>Downloads</h4>
@@ -1757,7 +1792,7 @@
                             </div>
                         </div>
                         <!-- /lc-block -->
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <div class="py-5 container">
@@ -1765,7 +1800,7 @@
                     <div class="col-6 small">
                         <div class="lc-block">
                             <div editable="rich">
-                                <p>Copyright © ACCESSIJOBS 2024>
+                                <p>Copyright © ACCESSIJOBS 2024
                             </div>
                         </div>
                         <!-- /lc-block -->

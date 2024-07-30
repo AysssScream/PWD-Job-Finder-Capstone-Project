@@ -1,27 +1,29 @@
-<h2 class="text-2xl font-bold mb-2">PERSONAL PROFILE</h2>
+<h2 class="text-2xl font-bold mb-2" aria-label="Personal Profile">PERSONAL PROFILE</h2>
 <hr class="border-bottom border-2 border-primary mb-4">
 <div class="mt-6">
-    <label for="civilStatus" class="block mb-1">Civil Status</label>
-    <select id="civilStatus" name="civilStatus"
-        class="w-full p-2 text-black dark:bg-gray-900 dark:text-gray-200 border border-dark rounded shadow-sm">
+    <label for="civilStatus" class="block mb-1">{{ __('messages.personal.civil_status') }}</label>
+    <select id="civilStatus" name="civilStatus" aria-label="{{ __('messages.personal.civil_status') }}"
+        class="w-full border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm">
         <option value="Single" {{ old('civilStatus', $personal->civilStatus ?? '') == 'Single' ? 'selected' : '' }}>
-            Single</option>
+            {{ __('messages.personal.single') }}</option>
         <option value="Married" {{ old('civilStatus', $personal->civilStatus ?? '') == 'Married' ? 'selected' : '' }}>
-            Married</option>
+            {{ __('messages.personal.married') }}</option>
         <option value="Widowed" {{ old('civilStatus', $personal->civilStatus ?? '') == 'Widowed' ? 'selected' : '' }}>
-            Widowed</option>
+            {{ __('messages.personal.widowed') }}</option>
     </select>
     @error('civilStatus')
         <div class="text-red-600 mt-1">{{ $message }}</div>
     @enderror
 </div>
 <div id="barangay-container" class="mt-6 relative">
-    <label for="barangay" class="block mb-1">Barangay</label>
+    <label for="barangay" class="block mb-1">{{ __('messages.personal.barangay') }}</label>
     <div class="flex items-center">
         <input id="barangay" type="text" name="barangay"
-            class="w-full p-2 border text-black dark:bg-gray-900 dark:text-gray-200 border-dark rounded shadow-sm"
-            placeholder="Type to search Barangay..." value="{{ old('barangay', $personal->barangay ?? '') }}" readonly>
-        <button id="editButton" class="btn btn-primary ml-2">Edit</button>
+            aria-label="{{ __('messages.personal.barangay') }} {{ old('barangay', $personal->barangay ?? '') }}"
+            class="w-full border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm"
+            placeholder="{{ __('messages.personal.type_to_search_barangay') }}"
+            value="{{ old('barangay', $personal->barangay ?? '') }}" readonly>
+        <button id="editButton" class="btn btn-primary ml-2" aria-label="Edit">Edit</button>
     </div>
     <div id="barangay-suggestions"
         class="absolute z-10 mt-1 w-full max-h-90 overflow-y-auto bg-gray-200 text-black dark:bg-gray-900 dark:text-gray-200 border border-gray-700 rounded shadow-md hidden">
@@ -31,10 +33,11 @@
         barangay data</div>
 </div>
 <div class="mt-6">
-    <label for="zipcode" class="block mb-1">Zip Code:</label>
+    <label for="zipcode" class="block mb-1">{{ __('messages.personal.zipcode') }}</label>
     <div class="flex items-center mt-4">
         <input type="text" id="zipcode" name="zipcode"
-            class="w-full p-2 border border-dark text-black dark:bg-gray-900 dark:text-gray-200 rounded shadow-sm"
+            aria-label="{{ __('messages.personal.zipcode') }}{{ old('zipcode', $personal->zipCode ?? '') }}"
+            class="w-full border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm"
             value="{{ old('zipcode', $personal->zipCode ?? '') }}" placeholder="Enter Zip Code" readonly />
         @error('zipcode')
             <div class="text-red-600 mt-1">{{ $message }}</div>
@@ -43,9 +46,10 @@
 </div>
 
 <div class="mt-6">
-    <label for="presentAddress" class="block mb-1">Present Address</label>
+    <label for="presentAddress" class="block mb-1">{{ __('messages.personal.present_address') }}</label>
     <input type="text" id="presentAddress" name="presentAddress"
-        class="w-full p-2 border border-dark text-black dark:bg-gray-900 dark:text-gray-200 rounded shadow-sm"
+        aria-label="{{ __('messages.personal.present_address') }} {{ old('presentAddress', $personal->presentAddress ?? '') }}"
+        class="w-full border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm"
         placeholder="Ex. Street Name, Building, House. No"
         value="{{ old('presentAddress', $personal->presentAddress ?? '') }}" placeholder="" />
     @error('presentAddress')
@@ -54,41 +58,41 @@
 </div>
 <div class="mt-6">
     <div class="mt-6">
-        <label for="tin" class="block mb-1 font-medium text-black dark:text-gray-200">Saved Tax
-            Identification
-            Number (TIN)</label>
+        <label for="tin"
+            class="block mb-1 font-medium text-black dark:text-gray-200">{{ __('messages.personal.saved_tin') }}</label>
         <input type="text" id="tin" name="tin" value="{{ old('tin', $personal->tin ?? '') }}"
-            maxlength="9"
+            maxlength="9" aria-label="{{ __('messages.personal.saved_tin') }}"
             class="w-full  py-2 rounded-md border-dark shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-black dark:bg-gray-900 dark:text-gray-200 cursor-not-allowed"
             placeholder="(9 Digits)" readonly>
     </div>
 </div>
 <div class="mt-6">
-    <label for="religion" class="block mb-1">Religion</label>
+    <label for="religion" class="block mb-1">{{ __('messages.personal.religion') }}</label>
     <select id="religion" name="religion"
-        class="w-full p-2 border border-dark text-black dark:bg-gray-900 dark:text-gray-200 rounded shadow-sm">
-        <option value="" disabled>Please select...</option>
+        aria-label="{{ __('messages.personal.religion') }}  {{ old('religion', $personal->religion ?? '') }}"
+        class="w-full border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm">
+        <option value="" disabled>{{ __('messages.personal.please_select') }}</option>
         <option value="Roman Catholic"
             {{ old('religion', $personal->religion ?? '') == 'Roman Catholic' ? 'selected' : '' }}>
-            Roman Catholic
+            {{ __('messages.personal.roman_catholic') }}
         </option>
         <option value="Iglesia Ni Cristo"
             {{ old('religion', $personal->religion ?? '') == 'Iglesia Ni Cristo' ? 'selected' : '' }}>
-            Iglesia ni Cristo
+            {{ __('messages.personal.iglesia_ni_cristo') }}
         </option>
         <option value="Islam" {{ old('religion', $personal->religion ?? '') == 'Islam' ? 'selected' : '' }}>
-            Islam
+            {{ __('messages.personal.islam') }}
         </option>
         <option value="Philippine Independent Church"
             {{ old('religion', $personal->religion ?? '') == 'Philippine Independent Church' ? 'selected' : '' }}>
-            Philippine Independent Church
+            {{ __('messages.personal.philippine_independent_church') }}
         </option>
         <option value="Seventh Day Adventist Church"
             {{ old('religion', $personal->religion ?? '') == 'Seventh Day Adventist Church' ? 'selected' : '' }}>
-            Seventh-day Adventist Church
+            {{ __('messages.personal.seventh_day_adventist_church') }}
         </option>
         <option value="Others" {{ old('religion', $personal->religion ?? '') == 'Others' ? 'selected' : '' }}>
-            Others
+            {{ __('messages.personal.others') }}
         </option>
     </select>
     @error('religion')
@@ -99,8 +103,8 @@
 <div>
     <div class="mt-6">
         <label for="landlineNo" class="block mb-1">Landline No.</label>
-        <input type="tel" id="landlineNo" name="landlineNo"
-            class="w-full p-2 border border-dark text-black dark:bg-gray-900 dark:text-gray-200 rounded shadow-sm"
+        <input type="tel" id="landlineNo" name="landlineNo" aria-label="Landline Number "
+            class="w-full border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm"
             pattern="[0-9]+"
             title="Please enter numerical characters only"value="{{ old('landlineNo', $personal->landlineNo ?? '') }}"
             placeholder="89839463" maxlength="8" readonly />
@@ -111,8 +115,8 @@
 
     <div class="mt-6">
         <label for="cellphoneNo" class="block mb-1">Cellphone No.</label>
-        <input type="tel" id="cellphoneNo" name="cellphoneNo"
-            class="w-full p-2 border border-dark rounded text-black dark:bg-gray-900 dark:text-gray-200 shadow-sm"
+        <input type="tel" id="cellphoneNo" name="cellphoneNo" aria-label="Cellphone Number"
+            class="w-full border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm"
             pattern="[0-9]+" title="Please enter numerical characters only" placeholder="09673411171" maxlength="11"
             value="{{ old('cellphoneNo', $personal->cellphoneNo ?? '') }}" readonly />
         @error('cellphoneNo')
@@ -121,17 +125,19 @@
     </div>
 
     <div class="mt-6">
-        <label class="block mb-2 ">4Ps Beneficiary</label>
+        <label class="block mb-2 ">{{ __('messages.personal.4ps_beneficiary') }}</label>
         <div class="flex items-center">
             <input type="radio" id="4ps-yes" name="beneficiary-4ps" value="Yes"
+                aria-label="{{ __('messages.personal.4ps_beneficiary') }} {{ old('beneficiary-4ps', $personal->beneficiary_4ps ?? '') }}"
                 class="mr-2 border  border-dark"
                 {{ old('beneficiary-4ps', $personal->beneficiary_4ps ?? '') == 'Yes' ? 'checked' : '' }}>
-            <label for="4ps-yes" class="mr-4">Yes</label>
+            <label for="4ps-yes" class="mr-4">{{ __('messages.personal.yes') }}</label>
 
             <input type="radio" id="4ps-no" name="beneficiary-4ps" value="No"
                 class="mr-2 border border-dark"
+                aria-label="{{ __('messages.personal.4ps_beneficiary') }} {{ old('beneficiary-4ps', $personal->beneficiary_4ps ?? '') }}"
                 {{ old('beneficiary-4ps', $personal->beneficiary_4ps ?? '') == 'No' ? 'checked' : '' }}>
-            <label for="4ps-no" class="mr-4">No</label>
+            <label for="4ps-no" class="mr-4">{{ __('messages.personal.no') }}</label>
         </div>
         @error('beneficiary-4ps')
             <div class="text-red-600 mt-1">{{ $message }}</div>
@@ -140,24 +146,40 @@
 
     <div class="mt-10">
         <div class="my-4">
-            <label class="block mb-2 font-semibold">Are you a former OFW?</label>
-            <p class="mb-2">If <b>"Yes"</b>, please provide:</p>
+            <label
+                class="block mb-2 font-semibold focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                aria-label="{{ __('messages.personal.former_ofw') }}"
+                tabindex="0">{{ __('messages.personal.former_ofw') }}</label>
+
+            <p class="block mb-2  focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                aria-label="{{ __('messages.personal.if_yes_provide') }}" tabindex="0">
+                {{ __('messages.personal.if_yes_provide') }}</p>
+
             <ul class="list-disc pl-6">
-                <li>Latest Country of Deployment</li>
-                <li>Return Date (YYYY-MM format)</li>
+                <li aria-label="{{ __('messages.personal.latest_country_of_deployment') }}" tabindex="0"
+                    class="
+focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                    {{ __('messages.personal.latest_country_of_deployment') }}</li>
+                <li aria-label="{{ __('messages.personal.return_date') }}" tabindex="0"
+                    class="
+focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                    {{ __('messages.personal.return_date') }}
+                </li>
             </ul>
         </div>
     </div>
 
     <div id="ofw-country-details" class="mt-6">
-        <label for="ofw-country" class="block mb-1">Latest Country of
-            Deployment</label>
+        <label for="ofw-country"
+            class="block mb-1">{{ __('messages.personal.latest_country_of_deployment') }}</label>
         <div class="flex items-center relative">
             <input type="text" id="ofw-country" name="ofw-country"
-                class="w-full p-2 border border-dark text-black dark:bg-gray-900 dark:text-gray-200 rounded shadow-sm"
+                class="w-full focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                 placeholder="Please specify the country"
+                aria-label="{{ __('messages.personal.latest_country_of_deployment') }} is at {{ old('ofw-country', $personal->ofw_country ?? '') }}"
                 value="{{ old('ofw-country', $personal->ofw_country ?? '') }}" list="countrySuggestions" readonly />
-            <button id="editCountryButton" type="button" class="btn btn-primary ml-2">Edit</button>
+            <button id="editCountryButton" type="button" class="btn btn-primary ml-2"
+                aria-label="Edit">Edit</button>
 
         </div>
         <div id="country-suggestions"
@@ -171,11 +193,15 @@
             value="{{ old('countryLocation', $personal->ofw_country ?? '') }}" hidden />
     </div>
 
+    @php
+        $formattedDate = $personal->ofw_return ? \Carbon\Carbon::parse($personal->ofw_return)->format('F Y') : '';
+    @endphp
+
     <div id="ofw-return-details" class="mt-6 {{ old('ofw-return') ? '' : 'disabled' }}">
-        <label for="ofw-return" class="block mb-1">Month and Year of
-            Return to Philippines</label>
+        <label for="ofw-return" class="block mb-1">{{ __('messages.personal.month_year_return') }}</label>
         <input type="month" id="ofw-return" name="ofw-return"
-            class="w-full p-2 border border-dark rounded text-black dark:bg-gray-900 dark:text-gray-200 shadow-sm"
+            aria-label="{{ __('messages.personal.month_year_return') }} is {{ old('ofw-return', $formattedDate ?? '') }}"
+            class="w-full focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
             value="{{ old('ofw-return', $personal->ofw_return ?? '') }}" readonly />
         @error('ofw-return')
             <div class="text-red-600 mt-1">{{ $message }}</div>
@@ -185,7 +211,7 @@
 </div>
 
 <div class="flex items-center gap-4 ">
-    <x-primary-button class="mt-6">{{ __('Save Changes') }}</x-primary-button>
+    <x-primary-button class="mt-6" aria-label="Save Changes">{{ __('Save Changes') }}</x-primary-button>
 
     @if (session('status') === 'profile-updated')
         <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"

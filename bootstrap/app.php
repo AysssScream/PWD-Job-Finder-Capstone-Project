@@ -4,6 +4,8 @@ use App\Http\Middleware\CheckVerificationStatus;
 use App\Http\Middleware\EmployerMiddleware;
 use App\Http\Middleware\EnsureEmployerSetupCompleted;
 use App\Http\Middleware\RedirectIfNotCompleted;
+use App\Http\Middleware\SetLocale;
+
 use App\Http\Middleware\PreventAccessFromPendingApproval;
 use App\Http\Middleware\UserMiddleware;
 use Illuminate\Foundation\Application;
@@ -24,8 +26,12 @@ return Application::configure(basePath: dirname(__DIR__))
             'checkVerificationStatus' => CheckVerificationStatus::class,
             'redirectIfNotCompleted' => RedirectIfNotCompleted::class,
             'ensureEmployerSetupCompleted' => EnsureEmployerSetupCompleted::class,
-            'preventAccessFromPendingApproval' => PreventAccessFromPendingApproval::class
+            'preventAccessFromPendingApproval' => PreventAccessFromPendingApproval::class,
 
+        ]);
+
+        $middleware->web(append: [
+            App\Http\Middleware\SetLocale::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

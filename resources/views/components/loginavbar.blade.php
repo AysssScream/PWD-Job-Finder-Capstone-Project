@@ -16,15 +16,15 @@
             </a>
             <a href="{{ url('/') }}" class="nav-link">
                 <i class="fa-solid fa-house"></i>
-                {{ __('HOME') }}
+                {{ __('messages.navigation.HOME') }}
             </a>
             <a href="{{ route('aboutus') }}" class="nav-link">
                 <i class="fas fa-info-circle"></i> <!-- Example of an about icon -->
-                {{ __('ABOUT US') }}
+                {{ __('messages.navigation.ABOUT US') }}
             </a>
             <a href="{{ url('/') }}" class="nav-link">
                 <i class="fas fa-envelope"></i> <!-- Example of a contact icon -->
-                {{ __('ASK FOR SUPPORT') }}
+                {{ __('messages.navigation.ASK FOR SUPPORT') }}
             </a>
             {{-- <a href="{{ url('/') }}" class="nav-link">
                 <i class="fas fa-life-ring"></i> <!-- Example of an ask for support icon -->
@@ -42,7 +42,7 @@
                 <a href="{{ $currentRoute === 'login' ? url('register') : url('login') }}" class="nav-link">
                     <i class="{{ $currentRoute === 'login' ? 'fas fa-right-to-bracket' : 'fas fa-user' }}"></i>
                     <!-- Example of an FAQ icon -->
-                    {{ $currentRoute === 'login' ? __('NOT YET REGISTERED?') : __('ALREADY REGISTERED?') }}
+                    {{ $currentRoute === 'login' ? __('messages.registration.NOT YET REGISTERED?') : __('messages.registration.ALREADY REGISTERED?') }}
                 </a>
             @endif
 

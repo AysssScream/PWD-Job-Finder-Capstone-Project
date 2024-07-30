@@ -15,11 +15,14 @@
         <div class="container mx-auto max-w-7xl px-4 pt-5 ">
             <div class="row">
                 <div class="col">
-                    <nav aria-label="breadcrumb" class="rounded-lg p-3">
+                    <nav class="rounded-lg p-3">
                         <ol class="breadcrumb mb-0">
-                            <li class="breadcrumb-item"><a href="{{ route('dashboard') }} "
-                                    class="text-gray-800 dark:text-gray-200"><i class="fa fa-arrow-left"
-                                        aria-hidden="true"></i> &nbsp;Back to Jobs</a></li>
+                            <li class="breadcrumb-item" aria-label="Back to Jobs"><a href="{{ route('dashboard') }} "
+                                    class="text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                    aria-label="{!! __('messages.jobinformation.back_to_jobs') !!}"><i class="fa fa-arrow-left"
+                                        aria-label="Back to Jobs"></i>
+                                    &nbsp;{!! __('messages.jobinformation.back_to_jobs') !!}</a>
+                            </li>
                         </ol>
                     </nav>
                 </div>
@@ -32,71 +35,120 @@
                         <div class="card shadow-2xl border-0 bg-white p-5 mb-10 bg-gray-100 dark:bg-gray-700">
                             <div class="flex justify-between items-center">
                                 <div>
-                                    <a href="#">
-                                        <h4 class="text-xl font-bold text-gray-900 dark:text-gray-200">
+                                    <a aria-label=" {{ $job->title }}">
+                                        <h4 class="text-xl font-bold text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                            aria-label=" {{ $job->title }}" tabindex="0">
                                             {{ $job->title }}</h4>
                                     </a>
-                                    <div class="flex items-center mt-2">
-                                        <div class="mr-4">
-                                            <p class="text-gray-800 dark:text-gray-200">
-                                                <i class="fa fa-map-marker mr-2"></i>{{ $job->location }}
-                                            </p>
+                                    <div class="flex flex-col sm:flex-row items-start mt-2 justify-start">
+                                        <div class="mr-4 mb-2 sm:mb-0">
+                                            <a href="#"
+                                                class="text-gray-800 dark:text-gray-200 text-left focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                aria-label="{{ $job->location }}" tabindex="0">
+                                                <i class="fa fa-map-marker mr-2"
+                                                    aria-label="{{ $job->location }}"></i>{{ $job->location }}
+                                            </a>
                                         </div>
-                                        <div class="text-right flex-grow">
-                                            <p class="text-gray-800 dark:text-gray-200 mr-5">
-                                                <i class="fa fa-clock mr-2"></i>{{ $job->job_type }}
-                                            </p>
+                                        <div class="mr-4 mb-2 sm:mb-0 text-left flex-grow">
+                                            <a href="#"
+                                                class="text-gray-800 dark:text-gray-200 text-left focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                aria-label="{{ $job->job_type }}" tabindex="0">
+                                                <i class="fa fa-clock mr-2"
+                                                    aria-label="{{ $job->job_type }}"></i>{{ $job->job_type }}
+                                            </a>
                                         </div>
-                                        <div class="text-right">
-                                            <p class="text-gray-800 dark:text-gray-200">
-                                                <i class="fa fa-graduation-cap mr-2"></i>{{ $job->educational_level }}
-                                            </p>
+                                        <div class="text-left">
+                                            <a href="#"
+                                                class="text-gray-800 dark:text-gray-200 text-left focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                aria-label="{{ $job->educational_level }}" tabindex="0">
+                                                <i class="fa fa-graduation-cap mr-2"
+                                                    aria-label="{{ $job->educational_level }}"></i>{{ $job->educational_level }}
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="ml-4">
-                                    <a href="#" class="text-gray-600 hover:text-blue-500"><i class="fa fa-heart-o"
-                                            aria-hidden="true"></i></a>
-                                </div>
+
                             </div>
                             <div class="mt-4">
-                                <h4 class="text-lg font-bold  text-gray-800 dark:text-gray-200">Job description</h4>
+                                <h4 class="text-lg font-bold  text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                    aria-label=" {!! __('messages.jobinformation.job_description') !!}" tabindex="0"> {!! __('messages.jobinformation.job_description') !!}
+                                </h4>
                                 <div class="border-b border-gray-300 mt-2"></div>
 
-                                <p class="text-gray-800 dark:text-gray-200 leading-loose"> {{ $job->description }}
+                                <p class="text-gray-800 dark:text-gray-200 leading-loose focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                    tabindex="0" aria-label=" {{ $job->description }}"> {{ $job->description }}
                                 </p>
                             </div>
 
 
                             <div class="mt-4 leading-relaxed">
-                                <h4 class="text-lg font-bold text-gray-800 dark:text-gray-200">Responsibility</h4>
+                                <h4 class="text-lg font-bold text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                    aria-label="{!! __('messages.jobinformation.responsibilities') !!}" tabindex="0">{!! __('messages.jobinformation.responsibilities') !!}</h4>
                                 <div class="border-b border-gray-300 mt-2"></div>
 
-                                <ul class="list-disc list-inside text-gray-800 dark:text-gray-200 mt-2 leading-loose">
-                                    {{ $job->responsibilities }}
+                                <ul class="list-disc list-inside text-gray-800 dark:text-gray-200  leading-loose">
+                                    @php
+                                        $responsibilities = preg_split(
+                                            '/[\-\•,]/',
+                                            $job->responsibilities,
+                                            -1,
+                                            PREG_SPLIT_NO_EMPTY,
+                                        );
+                                    @endphp
+
+                                    @foreach ($responsibilities as $responsibility)
+                                        @php
+                                            $trimmedResponsibility = trim($responsibility);
+                                        @endphp
+                                        <li aria-label="{{ $trimmedResponsibility }}"
+                                            class="focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                            tabindex="0">
+                                            {{ $trimmedResponsibility }}
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
 
                             <div class="mt-4 leading-relaxed">
-                                <h4 class="text-lg font-bold text-gray-800 dark:text-gray-200">Qualifications</h4>
+                                <h4 class="text-lg font-bold text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                    aria-label=" {!! __('messages.jobinformation.qualifications') !!}" tabindex="0">
+                                    {!! __('messages.jobinformation.qualifications') !!}</h4>
                                 <div class="border-b border-gray-300 mt-2"></div>
 
                                 <ul class="list-disc list-inside text-gray-800 dark:text-gray-200 leading-loose">
-                                    {{ $job->qualifications }}
+                                    @php
+                                        $qualifications = preg_split(
+                                            '/[\-\•,]/',
+                                            $job->qualifications,
+                                            -1,
+                                            PREG_SPLIT_NO_EMPTY,
+                                        );
+                                    @endphp
+
+                                    @foreach ($qualifications as $qualification)
+                                        <li aria-label=" {{ trim($qualification) }}" tabindex="0"
+                                            class="focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                            {{ trim($qualification) }}</li>
+                                    @endforeach
                                 </ul>
                             </div>
 
 
 
                             <div class="mt-4">
-                                <h4 class="text-lg font-bold text-gray-800 dark:text-gray-200">Benefits</h4>
-                                <div class="border-b border-gray-300 mt-2"></div>
+                                <h4 class="text-lg font-bold text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                    aria-label=" {!! __('messages.jobinformation.benefits') !!}" tabindex="0">
+                                    {!! __('messages.jobinformation.benefits') !!}</h4>
+                                <div class="border border-gray-300 mt-2"></div>
 
-                                <p class="text-gray-800 dark:text-gray-200 leading-loose">
+                                <ul class="list-disc list-inside text-gray-800 dark:text-gray-200 leading-loose focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400   "
+                                    aria-label="{{ $job->benefits }}" tabindex="0">
                                     {{ $job->benefits }}
-                                </p>
+                                </ul>
                             </div>
+
+
                             <div x-data="{ showModal: false, description: 'Hi, I\'m interested to apply for the {{ $job->title }} position.' }">
                                 @include('layouts.modalapply')
                             </div>
@@ -117,7 +169,9 @@
                             <div class="mb-4">
 
                                 <div class="flex items-center justify-between mt-4">
-                                    <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">Job Summary</h3>
+                                    <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                        aria-label=" {!! __('messages.jobinformation.job_summary') !!}" tabindex="0">
+                                        {!! __('messages.jobinformation.job_summary') !!}</h3>
                                     <form
                                         action="{{ route('save.job', ['company_name' => $job->company_name, 'id' => $job->id]) }}"
                                         method="POST">
@@ -130,12 +184,15 @@
                                         @endphp
                                         @if ($isSaved)
                                             <button type="button"
-                                                class="ml-4 text-sm bg-green-500 text-white px-3 py-1 rounded hover:bg-green-700 focus:outline-none focus:bg-green-700">
-                                                <i class="fas fa-check-circle mr-2"></i>Saved
+                                                class="ml-4 text-sm bg-green-500 text-white px-3 py-1 rounded hover:bg-green-700 focus:outline-none focus:bg-green-700"
+                                                aria-label="Saved">
+                                                <i
+                                                    class="fas fa-check-circle mr-2 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"></i>Saved
                                             </button>
                                         @else
                                             <button type="submit"
-                                                class="ml-4 text-sm bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-700 focus:outline-none focus:bg-blue-700">
+                                                class="ml-4 text-sm bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-700 focus:outline-none focus:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                aria-label="Save Job">
                                                 <i class="fas fa-save mr-2"></i>Save Job
                                             </button>
                                         @endif
@@ -145,30 +202,54 @@
                                 <div class="border-b border-gray-300 mt-4"></div>
 
                                 <ul class="text-gray-800 dark:text-gray-200 mt-2 leading-loose">
-                                    <li><span class="font-bold text-gray-800 dark:text-gray-200">Published on:</span>
+                                    <li aria-label=" {!! __('messages.jobinformation.published_on') !!} {{ \Carbon\Carbon::parse($job->date_posted)->format('F j, Y') }}"
+                                        tabindex="0"
+                                        class="focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 ">
+                                        <span class="font-bold text-gray-800 dark:text-gray-200 ">
+                                            {!! __('messages.jobinformation.published_on') !!}</span>
                                         {{ \Carbon\Carbon::parse($job->date_posted)->format('F j, Y') }}
                                     </li>
-                                    <li><span
-                                            class="font-bold mr-2 text-gray-800 dark:text-gray-200">Vacancy:</span>{{ $job->vacancy }}
+                                    <li aria-label="{!! __('messages.jobinformation.vacancy') !!} {{ $job->vacancy }} Positions Left"
+                                        tabindex="0"
+                                        class="focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 ">
+                                        <span
+                                            class="font-bold mr-2 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                            {!! __('messages.jobinformation.vacancy') !!}</span>{{ $job->vacancy }}
                                         Positions Left
                                     </li>
-                                    <li><span class="font-bold text-gray-800 dark:text-gray-200">Salary:</span>
-                                        ₱{{ number_format($job->salary) }}</li>
-                                    <li><span class="font-bold text-gray-800 dark:text-gray-200">Location:</span>
-                                        {{ $job->location }}</li>
-                                    <li><span class="font-bold text-gray-800 dark:text-gray-200">Job Nature:</span>
-                                        {{ $job->job_type }}</li>
+                                    <li aria-label=" {!! __('messages.jobinformation.salary') !!} {{ number_format($job->salary) }}Pesos"
+                                        class="focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                        tabindex="0">
+                                        <span class="font-bold text-gray-800 dark:text-gray-200">
+                                            {!! __('messages.jobinformation.salary') !!}</span>
+                                        ₱{{ number_format($job->salary) }}
+                                    </li>
+                                    <li class="focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                        aria-label="  {!! __('messages.jobinformation.location') !!} {{ $job->location }} " tabindex="0">
+                                        <span class="font-bold text-gray-800 dark:text-gray-200">
+                                            {!! __('messages.jobinformation.location') !!}</span>
+                                        {{ $job->location }}
+                                    </li>
+                                    <li class="focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                        aria-label=" {!! __('messages.jobinformation.job_type') !!} {{ $job->job_type }} " tabindex="0">
+                                        <span class="font-bold text-gray-800 dark:text-gray-200">
+                                            {!! __('messages.jobinformation.job_type') !!}</span>
+                                        {{ $job->job_type }}
+                                    </li>
                                 </ul>
                             </div>
                         </div>
 
                         <div class="card  border-0 bg-gray-100 dark:bg-gray-700 p-5 mt-4 mb-10 shadow-lg">
                             <div>
-                                <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">About the Company</h3>
+                                <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                    aria-label="{!! __('messages.jobinformation.about_the_company') !!}" tabindex="0"> {!! __('messages.jobinformation.about_the_company') !!}
+                                </h3>
                                 <div class="border-b border-gray-300 mt-2"></div>
                                 <div class="mt-4">
                                     @isset($employer->company_description)
-                                        <p class="text-left text-gray-800 dark:text-gray-200">
+                                        <p class="text-left text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                            aria-label="{{ $employer->company_description }}" tabindex="0">
                                             {{ $employer->company_description }}</p>
                                     @else
                                         <p class="text-left text-gray-800 dark:text-gray-200">No information available.</p>
@@ -176,31 +257,41 @@
                                 </div>
 
                                 <div class="mt-4 text-gray-800 dark:text-gray-200">
-                                    <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 mt-4">Employment Size
+                                    <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 mt-4 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                        aria-label="Employment Size" tabindex="0">{!! __('messages.jobinformation.employment_size') !!}
                                     </h3>
                                     @if ($employer)
-                                        {{ $employer->totalworkforce }}
+                                        <span
+                                            class="focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                            tabindex="0"
+                                            aria-label="The size is:{{ $employer->totalworkforce }}">{{ $employer->totalworkforce }}</span>
                                     @else
-                                        <span class="font-bold text-gray-800 dark:text-gray-200">Total Workforce:</span>
+                                        <span
+                                            class="font-bold text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                            aria-label="Total Workforce: N/A" tabindex="0">Total
+                                            Workforce:</span>
                                         N/A< @endif
                                             <div class="border-b border-gray-300 mt-4 mb-2"></div>
                                             <button
-                                                class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
-                                                View More Details
+                                                class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                aria-label="{!! __('messages.jobinformation.view_more_details') !!}" tabindex="0">
+                                                {!! __('messages.jobinformation.view_more_details') !!}
                                             </button>
                                 </div>
-                                <div class="mt-4 ">
-                                    <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 ">Share Job</h3>
+                                <div class="mt-4">
+                                    <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                        aria-label="{!! __('messages.jobinformation.share_job') !!}" tabindex="0">{!! __('messages.jobinformation.share_job') !!}
+                                    </h3>
                                     <div class="border-b border-gray-300 mt-2"></div>
-                                    <div class="mt-4 flex flex-col sm:flex-row items-center">
-                                        <div class="flex items-center mb-2 sm:mb-0">
+                                    <div class="mt-4 flex flex-col sm:flex-row sm:items-center">
+                                        <div class="flex-1 mb-2 sm:mb-0 sm:mr-2">
                                             <input type="text" id="jobUrl"
-                                                class="border border-gray-300 px-5 py-2 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                                class="w-full border border-gray-300 px-5 py-2 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                                 value="{{ $fullUrl }}" readonly>
                                         </div>
-                                        <button id="copyButton"
-                                            class="ml-0 mt-2 sm:ml-2 sm:mt-0 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                            Copy URL
+                                        <button id="copyButton" aria-label="{!! __('messages.jobinformation.copy_url') !!}"
+                                            class="w-full sm:w-auto px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                            {!! __('messages.jobinformation.copy_url') !!}
                                         </button>
                                     </div>
                                 </div>
@@ -240,14 +331,29 @@
                     "progressBar": true,
                     "closeButton": true,
                 }
-
                 toastr.success("{{ Session::get('jobsave') }}", 'Job ID: {{ $job->id }} Saved', {
                     timeOut: 5000
                 });
-
             });
         </script>
     @endif
+
+    @if (Session::has('apply'))
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                toastr.options = {
+                    "progressBar": true,
+                    "closeButton": true,
+                }
+                toastr.success("{{ Session::get('apply') }}", 'Job Successfully Applied', {
+                    timeOut: 5000
+                });
+            });
+        </script>
+    @endif
+
 
 
 </x-app-layout>

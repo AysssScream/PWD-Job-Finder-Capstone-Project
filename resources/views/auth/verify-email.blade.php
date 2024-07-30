@@ -1,7 +1,7 @@
 <x-guest-layout>
     <div class="max-w-2xl mx-auto">
 
-        <div class="mb-4 text-lg text-black-600 dark:text-gray-400">
+        <div class="mb-4 text-lg text-gray-700 dark:text-gray-200">
             {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
         </div>
 
@@ -33,7 +33,7 @@
         </div>
     </div>
 </x-guest-layout>
-<footer class="bg-gray-800 text-white w-full py-4 mt-12">
+<footer class="bg-gray-800 text-white w-full py-4">
     <div class="container mx-auto text-center">
         <span>&copy; 2024 AccessiJobs. All rights reserved.</span>
     </div>

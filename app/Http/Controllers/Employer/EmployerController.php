@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Employer;
 
+use App\Rules\EmailDomain;
+
 use App\Models\EducationalAttainment;
 use App\Models\Employer;
 use App\Models\EmploymentInfo;
@@ -27,7 +29,6 @@ class EmployerController extends Controller
 
     public function dashboard()
     {
-        Session::flash('message', 'Welcome to your Dashboard');
 
         $employerId = Auth::id();
 
@@ -48,10 +49,7 @@ class EmployerController extends Controller
     public function editprofile()
     {
 
-        Session::flash('message', 'Welcome to your profile');
-
         $employerId = Auth::id();
-
         $profile = Employer::where('user_id', $employerId)->first();
 
         if (!$profile) {
@@ -149,14 +147,30 @@ class EmployerController extends Controller
     public function hire(Request $request, $id)
     {
         $applicant = JobApplication::where('user_id', $id)->firstOrFail();
+        $job = $applicant->job; // Assuming there is a relationship defined in JobApplication model
+
         \Log::info('Textarea value:', ['value' => $request->input('remarkstextarea')]);
 
         $remarks = $request->input('remarkstextarea');
+
+        if (is_null($remarks)) {
+            $remarks = 'None';
+        }
         $status = 'hired';
 
+
+        // If job is found, decrement its vacancy
+        if ($job) {
+            $job->vacancy = $job->vacancy - 1;
+            $job->save();
+        }
+        $applicant->read_at = null;
         $applicant->remarks = $remarks;
         $applicant->status = $status;
         $applicant->save();
+
+        Session::flash('hireapplicant', 'Applicant hired successfully!');
+
 
         return redirect()->route('employer.review')->with('success', 'Applicant hired successfully!');
     }

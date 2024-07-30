@@ -70,24 +70,8 @@
                                     </div>
                                     <hr class="border-t-2 border-gray-400 rounded-full my-4">
 
-                                    <span class="text-md font-regular" style="text-align: justify;"><b>Step 3: </b>
-                                        complete the “Employment History
-                                        and
-                                        Work Experience” section of a job application form, start by entering the full
-                                        name of your previous employer in the <b>‘Employer Name’ </b> Then, input the
-                                        start and end dates of your employment in the <b> ‘From’ </b> and <b>‘To’ </b>
-                                        fields,
-                                        respectively. Provide the complete address of your employer in the <b> ‘Employer
-                                            Address’ </b> field. List your job title in the <b> ‘Position Held’ </b> and
-                                        the <b>'Skills'</b> you've gained by pressing <b>'Enter'</b>.
-                                        After that,
-                                        click the <b> 'Add Work Experience' </b> to save it. But if you want to clear
-                                        it, click
-                                        the <b> 'Clear Records' </b> button. Otherwise, leave the work experience blank
-                                        and
-                                        answer the employment status below.
-
-
+                                    <span class="text-md font-regular" style="text-align: justify;">
+                                        {!! __('messages.employment.instruction') !!}
                                     </span>
                                     <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
                                         <div>
@@ -337,52 +321,52 @@
                                                                 <optgroup label="Employed">
                                                                     <option value="Wage Employment"
                                                                         {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Wage Employment' ? 'selected' : '' }}>
-                                                                        Employed -
-                                                                        Wage
-                                                                        Employment</option>
+                                                                        {{ __('messages.employment.wage_employment') }}
+                                                                    </option>
                                                                     <option value="Self Employed"
                                                                         {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Self Employed' ? 'selected' : '' }}>
-                                                                        Employed -
-                                                                        Self
-                                                                        Employed</option>
+                                                                        {{ __('messages.employment.self_employed') }}
+                                                                    </option>
                                                                     <option value="Others"
                                                                         {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Others' ? 'selected' : '' }}>
-                                                                        Employed -
-                                                                        Others
+                                                                        {{ __('messages.employment.others') }}
                                                                     </option>
                                                                 </optgroup>
                                                                 <!-- Unemployed Options -->
                                                                 <optgroup label="Unemployed">
                                                                     <option value="Entrant/Fresh Graduate"
                                                                         {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Entrant/Fresh Graduate' ? 'selected' : '' }}>
-                                                                        Unemployed - New
-                                                                        Unemployed - Entrant/Fresh Graduate</option>
+                                                                        {{ __('messages.employment.entrant_fresh_graduate') }}
+                                                                    </option>
                                                                     <option value="Finished Contract"
                                                                         {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Finished Contract' ? 'selected' : '' }}>
-                                                                        Unemployed - Finished Contract</option>
+                                                                        {{ __('messages.employment.finished_contract') }}
+                                                                    </option>
                                                                     <option value="Resigned"
                                                                         {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Resigned' ? 'selected' : '' }}>
-                                                                        Unemployed - Resigned</option>
+                                                                        {{ __('messages.employment.resigned') }}
+                                                                    </option>
                                                                     <option value="Retired"
                                                                         {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Retired' ? 'selected' : '' }}>
-                                                                        Unemployed - Retired
+                                                                        {{ __('messages.employment.retired') }}
                                                                     </option>
                                                                     <option value="Terminated Due to Calamity"
                                                                         {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Terminated Due to Calamity' ? 'selected' : '' }}>
-                                                                        Unemployed - Terminated/Laid off due to calamity
+                                                                        {{ __('messages.employment.terminated_due_to_calamity') }}
                                                                     </option>
                                                                     <option value="Teminated Local"
                                                                         {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Teminated Local' ? 'selected' : '' }}>
-                                                                        Unemployed - Terminated/Laid off (Local)
+                                                                        {{ __('messages.employment.terminated_local') }}
                                                                     </option>
                                                                     <option value="Terminated Abroad"
                                                                         {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Terminated Abroad' ? 'selected' : '' }}>
-                                                                        Unemployed - Terminated/Laid off (abroad)
+                                                                        {{ __('messages.employment.terminated_abroad') }}
                                                                     </option>
                                                                     <option value="Other"
                                                                         {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Other' ? 'selected' : '' }}>
-                                                                        Unemployed - Others
+                                                                        {{ __('messages.employment.unemployed_others') }}
                                                                     </option>
+
                                                                 </optgroup>
                                                             </select>
                                                             @error('employment-type')
@@ -403,17 +387,17 @@
                                                                     name="duration-category"
                                                                     class="p-2 w-1/2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200">
                                                                     <option value="Days"
-                                                                        {{ old('duration-category', $formData3['duration-category'] ?? '') === 'Days' ? 'selected' : '' }}>
-                                                                        Days</option>
+                                                                        {{ old('duration-category', $employment->duration_category ?? '') === 'Days' ? 'selected' : '' }}>
+                                                                        {{ __('messages.employment.days') }}</option>
                                                                     <option value="Weeks"
-                                                                        {{ old('duration-category', $formData3['duration-category'] ?? '') === 'Weeks' ? 'selected' : '' }}>
-                                                                        Weeks</option>
+                                                                        {{ old('duration-category', $employment->duration_category ?? '') === 'Weeks' ? 'selected' : '' }}>
+                                                                        {{ __('messages.employment.weeks') }}</option>
                                                                     <option value="Months"
-                                                                        {{ old('duration-category', $formData3['duration-category'] ?? '') === 'Months' ? 'selected' : '' }}>
-                                                                        Months</option>
+                                                                        {{ old('duration-category', $employment->duration_category ?? '') === 'Months' ? 'selected' : '' }}>
+                                                                        {{ __('messages.employment.months') }}</option>
                                                                     <option value="Years"
-                                                                        {{ old('duration-category', $formData3['duration-category'] ?? '') === 'Years' ? 'selected' : '' }}>
-                                                                        Years</option>
+                                                                        {{ old('duration-category', $employment->duration_category ?? '') === 'Years' ? 'selected' : '' }}>
+                                                                        {{ __('messages.employment.years') }}</option>
                                                                 </select>
                                                             </div>
                                                             @error('job-search-duration')

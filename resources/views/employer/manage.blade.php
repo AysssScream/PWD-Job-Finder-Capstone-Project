@@ -9,8 +9,23 @@
         <link href="{{ asset('fontawesome-free-6.5.2-web/css/all.min.css') }}" rel="stylesheet">
     </head>
 
+    @if (Session::has('editjobs'))
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                toastr.options = {
+                    "progressBar": true,
+                    "closeButton": true,
+                }
 
+                toastr.success("{{ Session::get('editjobs') }}", 'Job Successfully Edited.', {
+                    timeOut: 5000
+                });
 
+            });
+        </script>
+    @endif
     <div class="py-12" style="padding-top: 30px; padding-bottom: 5px; padding-right: 60px; padding-left: 40px">
         <div class="container mx-auto max-w-7xl px-4 pt-1 mb-2">
             <div

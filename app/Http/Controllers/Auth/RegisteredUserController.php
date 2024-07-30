@@ -42,18 +42,18 @@ class RegisteredUserController extends Controller
             'account_verification_status' => ['nullable', 'string'],
             'usertype' => ['required', 'string'],
         ], [
-            'firstname.regex' => '- The first name should only contain alphabetic characters and spaces.',
-            'middlename.regex' => '- The middle name should only contain alphabetic characters and spaces.',
-            'lastname.regex' => '- The last name should only contain alphabetic characters and spaces.',
-            'password.regex' => '- The password must contain at least one uppercase letter, one special character, and one number.',
-            'firstname.required' => '- The first name is required.',
-            'firstname.string' => '- The first name must be a string.',
-            'firstname.max' => '- The first name may not be greater than 50 characters.',
-            'middlename.string' => '- The middle name must be a string.',
-            'middlename.max' => '- The middle name may not be greater than 50 characters.',
-            'lastname.required' => '- The last name is required.',
-            'lastname.string' => '- The last name must be a string.',
-            'lastname.max' => '- The last name may not be greater than 50 characters.'
+            'firstname.regex' => 'The first name should only contain alphabetic characters and spaces.',
+            'middlename.regex' => 'The middle name should only contain alphabetic characters and spaces.',
+            'lastname.regex' => 'The last name should only contain alphabetic characters and spaces.',
+            'password.regex' => 'The password must contain at least one uppercase letter, one special character, and one number.',
+            'firstname.required' => 'The first name is required.',
+            'firstname.string' => 'The first name must be a string.',
+            'firstname.max' => 'The first name may not be greater than 50 characters.',
+            'middlename.string' => 'The middle name must be a string.',
+            'middlename.max' => 'The middle name may not be greater than 50 characters.',
+            'lastname.required' => 'The last name is required.',
+            'lastname.string' => 'The last name must be a string.',
+            'lastname.max' => 'The last name may not be greater than 50 characters.'
         ]);
 
         $fullName = "{$request->firstname} " . ($request->middlename ? "{$request->middlename} " : "") . "{$request->lastname}";

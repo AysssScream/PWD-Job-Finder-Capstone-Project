@@ -26,7 +26,6 @@
         </script>
     @endif
 
-
     <div class="py-12">
         <div class="container mx-auto max-w-7xl px-4 pt-5 ">
             <div class="row">
@@ -106,6 +105,19 @@
                     <form action="{{ route('employer.updateprofile') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
+                        @if ($errors->any())
+                            <div class="bg-red-100 dark:bg-red-700 dark:text-gray-200 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                                role="alert">
+                                <strong class="font-bold">Oops!</strong>
+                                <span class="block sm:inline">There were some errors with your submission:</span>
+                                <ul class="mt-3 list-disc list-inside text-sm">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <br>
+                        @endif
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-4 p-6">
                             <label for="businessname" class="block mb-1 text-black dark:text-gray-200">
                                 Company Description
@@ -278,7 +290,7 @@
                                                 class="ml-2 px-3 py-2 bg-blue-500 text-white rounded">Edit</button>
                                         </div>
                                         <div id="barangay-suggestions"
-                                            class="absolute z-10 mt-1 w-full max-h-90 overflow-y-auto bg-white border rounded shadow-md hidden">
+                                            class="absolute z-10 mt-1 w-full max-h-90 overflow-y-autobg-white text-black dark:bg-gray-800 dark:text-gray-200 border rounded shadow-md hidden">
                                         </div>
                                         <div id="barangay-error" class="text-red-600 mt-1 hidden">
                                             Error
@@ -462,14 +474,16 @@
                 suggestionsContainer.style.display = 'block'; // Show suggestions container
                 locations.forEach(location => {
                     const suggestionElement = document.createElement('div');
-                    suggestionElement.classList.add('suggestion');
+                    suggestionElement.classList.add('suggestion', 'dark:bg-gray-800',
+                        'dark:text-white'); // Example dark mode classes
 
                     const suggestionText = document.createElement('div');
                     suggestionText.classList.add('suggestion-text');
                     suggestionText.textContent = `${location.city} - ${location.location}`;
 
                     const plusContainer = document.createElement('div');
-                    plusContainer.classList.add('plus-container');
+                    plusContainer.classList.add('plus-container', 'dark:bg-gray-600',
+                        'dark:text-gray-200'); // Example dark mode classes
                     plusContainer.textContent = '+'; // Adjust content based on your needs
 
                     suggestionElement.appendChild(suggestionText);
@@ -707,7 +721,6 @@
         justify-content: space-between;
         align-items: center;
         padding: 8px;
-        background-color: white;
         cursor: pointer;
         border-radius: 4px;
         margin-bottom: 4px;

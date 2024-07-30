@@ -23,12 +23,12 @@
                     <h3 class="text-lg font-semibold mb-2 mt-2"></h3>
                     <div class="mb-4">
                         <a href="{{ route('dashboard') }}" id="matched-jobs-link"
-                            class="block w-full text-center mb-2 bg-gray-900 text-white dark:text-gray-200 bg-gray-200 hover:bg-black dark:hover:bg-gray-700 font-semibold py-2 rounded-md transition">
-                            <i class="fas fa-check mr-2"></i>Browse Jobs
+                            class="block w-full p-2 text-center mb-2 bg-gray-900 text-white dark:text-gray-200  bg-gray-200 hover:bg-black dark:hover:bg-gray-700 font-semibold py-2 rounded-md transition">
+                            <i class="fas fa-check mr-2"></i>{{ __('messages.userdashboard.browse_jobs') }}
                         </a>
                         <a href="{{ route('dashboard.match') }}" id="browse-jobs-link"
-                            class="block w-full text-center text-white  bg-green-600 hover:bg-green-600 text-white font-semibold py-2 rounded-md ">
-                            <i class="fas fa-search mr-2"></i>Matched Jobs
+                            class="block w-full p-2 text-center text-white  bg-green-600 hover:bg-green-500  text-white font-semibold py-2 rounded-md ">
+                            <i class="fas fa-search mr-2"></i>{{ __('messages.userdashboard.matched_jobs') }}
                         </a>
                     </div>
                     <hr class="my-4 border-gray-200 dark:border-gray-900">
@@ -38,11 +38,11 @@
                     <hr class="my-4 border-gray-200 dark:border-gray-900">
 
                     <h3 class="text-lg font-semibold mb-2 mt-2 text-gray-900 dark:text-gray-200">
-                        <i class="fas fa-chalkboard-teacher mr-2"></i> Trainings
+                        <i class="fas fa-chalkboard-teacher mr-2"></i> {{ __('messages.userdashboard.trainings') }}
                     </h3>
                     <hr class="my-4 border-gray-200 dark:border-gray-900">
                     <h3 class="text-lg font-semibold mb-2 mt-2 text-gray-900 dark:text-gray-200">
-                        <i class="fas fa-lightbulb mr-2"></i> Career Advice
+                        <i class="fas fa-lightbulb mr-2"></i> {{ __('messages.userdashboard.career_advice') }}
                     </h3>
                 </div>
             </aside>

@@ -31,7 +31,9 @@ class SaveJobController extends Controller
 
     public function save(Request $request, $id, $companyName)
     {
-        // Access the job ID and company name passed as parameters
+
+        Session::flash('jobsave', 'The selected job has been saved.');
+
         $jobId = $id;
         $compName = $companyName;
         $userid = auth()->id(); // Get the authenticated user's ID
@@ -51,7 +53,6 @@ class SaveJobController extends Controller
 
             // Save the saved job entry
             $savedJob->save();
-            Session::flash('jobsave', 'Job Saved');
 
             // Optionally, you can redirect to a success page or return a response
             return redirect()->back()->with('success', 'Job saved successfully!');

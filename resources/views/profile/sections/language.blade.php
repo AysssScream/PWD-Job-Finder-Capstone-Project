@@ -1,59 +1,80 @@
-<h2 class="text-2xl font-bold mb-2">LANGUAGE PROFICIENCY</h2>
+<h2 class="text-2xl font-bold mb-2" aria-label="Language Profieciency">LANGUAGE PROFICIENCY</h2>
 <hr class="border-bottom border-2 border-primary mb-4">
 
 <table class="min-w-full border border-gray-200" id="languages-table">
     <thead>
         <tr>
             <div class="mt-4">
-                <p><strong>To update your language proficiency:</strong></p>
+                <p class="focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400" tabindex="0"
+                    aria-label="{{ __('messages.language.updatelang') }}">
+                    <strong>{{ __('messages.language.updatelang') }}</strong>
+                </p>
                 <ul class="list-unstyled">
-                    <li><i class="bi bi-arrow-right-short"></i>• Click "Add Language" to input new
-                        languages.</li>
-                    <li><i class="bi bi-arrow-right-short"></i>• Set the language proficiency first
-                        using the dropdown.</li>
-                    <li><i class="bi bi-arrow-right-short"></i>• Choose your language and determine
-                        your language proficiency.</li>
-                    <li><i class="bi bi-arrow-right-short"></i>• Use the checkboxes to select
-                        skills
-                        without formal training (Other Skills).</li>
-                    <li><i class="bi bi-arrow-right-short"></i>• Edit or remove entries as needed
-                        to
-                        accurately reflect your abilities.</li>
+                    <li aria-label="{{ __('messages.language.list-unstyled.1') }}" tabindex="0"
+                        class="bi bi-arrow-right-short focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                        <i></i>•
+                        {{ __('messages.language.list-unstyled.1') }}
+                    </li>
+                    <li aria-label="{{ __('messages.language.list-unstyled.2') }}"
+                        class="bi bi-arrow-right-short focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                        tabindex="0">
+                        <i class="bi bi-arrow-right-short"></i>• {{ __('messages.language.list-unstyled.2') }}
+                    </li>
+                    <li aria-label="{{ __('messages.language.list-unstyled.3') }}" tabindex="0"
+                        class="bi bi-arrow-right-short focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                        <i class="bi bi-arrow-right-short"></i>• {{ __('messages.language.list-unstyled.3') }}
+                    </li>
+                    <li aria-label="{{ __('messages.language.list-unstyled.4') }}" tabindex="0"
+                        class="bi bi-arrow-right-short focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                        <i class="bi bi-arrow-right-short"></i>• {{ __('messages.language.list-unstyled.4') }}
+                    </li>
+                    <li aria-label="{{ __('messages.language.list-unstyled.5') }}" tabindex="0"
+                        class="bi bi-arrow-right-short focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                        <i class="bi bi-arrow-right-short"></i>• {{ __('messages.language.list-unstyled.5') }}
+                    </li>
                 </ul>
-            </div>
 
-            <br>
-            <td colspan="4" class="text-left p-4">
-                <button type="button" class="btn btn-primary add-row">Add
-                    Language</button>
-                <button type="button" class="btn btn-danger" onclick="clearSelectedLanguages()">Clear Selected
-                    Languages</button>
+                <br>
+                <td colspan="4" class="text-left p-4">
+                    <button type="button"
+                        class="btn btn-primary add-row bi bi-arrow-right-short focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                        aria-label="{{ __('messages.language.buttons.add_language') }}">{{ __('messages.language.buttons.add_language') }}</button>
+                    <button type="button"
+                        class="btn btn-danger bi bi-arrow-right-short focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                        onclick="clearSelectedLanguages()"
+                        aria-label="{{ __('messages.language.buttons.clear_selected_languages') }}">{{ __('messages.language.buttons.clear_selected_languages') }}</button>
 
-                <script>
-                    function clearSelectedLanguages() {
-                        document.getElementById('selected-languages').value = '';
-                        localStorage.removeItem('selectedLanguages');
+                    <script>
+                        function clearSelectedLanguages() {
+                            document.getElementById('selected-languages').value = '';
+                            localStorage.removeItem('selectedLanguages');
 
-                        var table = document.getElementById('language-table-body');
+                            var table = document.getElementById('language-table-body');
 
-                        // Remove all rows from the table
-                        while (table.rows.length > 0) {
-                            table.deleteRow(0);
+                            // Remove all rows from the table
+                            while (table.rows.length > 0) {
+                                table.deleteRow(0);
+                            }
                         }
-                    }
-                </script>
-            </td>
+                    </script>
+                </td>
         </tr>
     </thead>
 
 
     <thead>
         <tr>
-            <th class="px-4 py-2 border-b bg-gray-300 text-black dark:bg-gray-900 dark:text-gray-200">Language/Dialect
+            <th class="px-4 py-2 border-b bg-gray-300 text-black dark:bg-gray-900 dark:text-gray-200"
+                aria-label="{{ __('messages.language.table_headers.language_dialect') }}">
+                {{ __('messages.language.table_headers.language_dialect') }}
             </th>
-            <th class="px-4 py-2 border-b bg-gray-300 text-black dark:bg-gray-900 dark:text-gray-200">Language
-                proficiency</th>
-            <th class="px-4 py-2 border-b bg-gray-300 text-black dark:bg-gray-900 dark:text-gray-200">Action</th>
+            <th class="px-4 py-2 border-b bg-gray-300 text-black dark:bg-gray-900 dark:text-gray-200"
+                aria-label="{{ __('messages.language.table_headers.language_proficiency') }}">
+                {{ __('messages.language.table_headers.language_proficiency') }}</th>
+            <th class="px-4 py-2 border-b bg-gray-300 text-black dark:bg-gray-900 dark:text-gray-200"
+                aria-label="{{ __('messages.language.table_headers.action') }}">
+                {{ __('messages.language.table_headers.action') }}
+            </th>
 
         </tr>
     </thead>
@@ -62,8 +83,8 @@
             <td class="px-4 py-2 border-b">
                 <div class="flex items-center">
                     <input type="text" name="language-input[]"
-                        class="w-full p-2 border border-dark rounded shadow-sm bg-gray-100 text-black dark:bg-gray-900 dark:text-gray-200 language-input "
-                        pattern="[A-Za-z\s]+" placeholder="Ex. Filipino"
+                        class="w-full p-2 border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm"
+                        pattern="[A-Za-z\s]+" placeholder="Ex. Filipino" aria-label="Language or Dialect"
                         value="{{ old('language-input.0', $formData5['language-input.0'] ?? '') }}" readonly />
                 </div>
                 <div class="suggestions-container bg-gray-100 text-black dark:bg-gray-900 dark:text-gray-200">
@@ -76,8 +97,8 @@
             <td class="px-4 py-2 border-b text-center">
                 <div class="inline-block relative">
                     <select
-                        class="block appearance-none w-full p-2 border border-dark rounded shadow-sm bg-gray-100 text-black dark:bg-gray-900 dark:text-gray-200 border border-gray rounded-md py-2 px-10 leading-tight focus:outline-none focus:border-blue-500"
-                        id="langprof">
+                        class="block appearance-none w-full border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm"
+                        id="langprof" aria-label="Language Proficiency">
                         <option value="Beginner">Beginner</option>
                         <option value="Intermediate">Intermediate</option>
                         <option value="Advanced">Advanced</option>
@@ -91,47 +112,54 @@
 
 
             <td class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 mt-1 sm:mt-0 sm:mr-2">
-                <button type="button" class="btn btn-primary edit-row mb-1 sm:mb-0">Edit</button>
-                <button type="button" class="btn btn-danger mb-1 remove-row">Remove</button>
+                <button type="button" class="btn btn-primary edit-row mb-1 sm:mb-0 "
+                    aria-label="{{ __('messages.language.actions.edit') }}">{{ __('messages.language.actions.edit') }}</button>
+                <button type="button" class="btn btn-danger mb-1 remove-row"
+                    aria-label="{{ __('messages.language.actions.remove') }}">{{ __('messages.language.actions.remove') }}</button>
             </td>
 
         </tr>
     </tbody>
 </table>
 <br>
-<label for="selected-languages" class="block text-sm font-medium text-black-700">Selected
-    Languages:</label>
+<label for="selected-languages"
+    class="block text-sm font-medium text-black-700">{{ __('messages.language.labels.selected_languages') }}</label>
 <textarea id="selected-languages" name="selected-languages"
-    class="w-full bg-gray-100 text-black dark:bg-gray-900 dark:text-gray-200 mb-5 border border-gray-300  rounded py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+    aria-label="{{ __('messages.language.labels.selected_languages') }}
+    {{ old('selected-languages', $language->language_input ?? '') }}"
+    class="w-full
+    bg-gray-100 text-black dark:bg-gray-900 dark:text-gray-200 mb-5 border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm"
     placeholder="Enter selected languages..." readonly>{{ old('selected-languages', $language->language_input ?? '') }}</textarea>
 
 
-<div id="row-limit-message" class="text-red-600 mt-2 hidden">You can only add
-    up to 5 languages.</div>
+<div id="row-limit-message" class="text-red-600 mt-2 hidden"> {{ __('messages.language.messages.row_limit_message') }}
+</div>
 
-<h3 class="text-2xl font-bold mb-2  mt-9">Other Skills (Without Formal Training)
+<h3 class="text-2xl font-bold mb-2 mt-9 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+    aria-label="                                             {{ __('messages.language.messages.other_skills_heading') }}"
+    tabindex="0">
+    {{ __('messages.language.messages.other_skills_heading') }}
 </h3>
-<span class="text-md font-regular">
-    In this section, choosing your skills without formal training are important
-    as they demonstrate a person’s
-    ability to learn independently and adapt to new challenges.
-</span>
+<div class="focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400" tabindex="0"
+    aria-label=" {{ __('messages.language.messages.other_skills_description') }}">
+    {{ __('messages.language.messages.other_skills_description') }}
+    </span>
+</div>
+
 
 <div class="mt-6">
     <!-- Label and Input field for userSkills -->
     <label for="userSkills" class="block text-sm font-medium  text-black dark:text-gray-200">Saved
         Skills:</label>
     <textarea id="userSkills" name="userSkills"
-        class="mt-1 appearance-none block w-full bg-gray-100 text-black dark:bg-gray-900 dark:text-gray-200 border rounded-lg py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        aria-label="The saved skills are {{ old('userSkills', isset($skill->skills) ? implode(', ', json_decode($skill->skills, true)) : '') }}"
+        class="mt-1 appearance-none block w-full bg-gray-100 text-black dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
         readonly>{{ old('userSkills', isset($skill->skills) ? implode(', ', json_decode($skill->skills, true)) : '') }}</textarea>
-
-
-
 
     <label for="selectedSkills" class="block text-sm font-medium text-black dark:text-gray-200 mt-4">Selected
         Skills:</label>
     <textarea id="selectedSkills" name="selectedSkills" hidden
-        class="mt-1 appearance-none block w-full border rounded-lg py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        class="mt-1 appearance-none block w-full focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
         readonly>{{ old('selectedSkills', isset($formData5['skills']) ? $formData5['skills'] : '') }}</textarea>
 </div>
 
@@ -294,7 +322,7 @@
 </div>
 
 <div class="flex items-center gap-4 ">
-    <x-primary-button class="mt-6">{{ __('Save Changes') }}</x-primary-button>
+    <x-primary-button class="mt-6" aria-label="Save Changes">{{ __('Save Changes') }}</x-primary-button>
 
     @if (session('status') === 'profile-updated')
         <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"

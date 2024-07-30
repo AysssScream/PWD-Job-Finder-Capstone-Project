@@ -10,14 +10,13 @@
         <link href="{{ asset('fontawesome-free-6.5.2-web/css/all.min.css') }}" rel="stylesheet">
     </head>
 
-    <body class="flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900 overflow-hidden">
+
+    <body class="flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900 overflow-auto">
         <div class="flex flex-col md:flex-row h-full ">
             <!-- Sidebar -->
             <div id="sidebar"
                 class="w-full md:w-64 bg-gray-100 dark:bg-gray-800 border-b md:border-r border-gray-400 dark:border-gray-600 px-4 py-6 ">
                 <div class="p-4">
-
-
                     <!-- Breadcrumb -->
                     <nav aria-label="breadcrumb" class="mb-4">
                         <ol class="flex items-center space-x-2">
@@ -219,7 +218,7 @@
                     @csrf
                     <textarea name="remarkstextarea" id="remarkstextarea"
                         class="w-full px-3 py-2 @if (session('theme') === 'dark') bg-gray-800 text-gray-300 @else bg-white text-gray-700 @endif
-        border rounded-lg focus:outline-none focus:border-blue-500 dark:bg-gray-800 dark:text-gray-300"
+                        border rounded-lg focus:outline-none focus:border-blue-500 dark:bg-gray-800 dark:text-gray-300"
                         rows="5" placeholder="Enter your message..."></textarea>
 
                     <!-- Additional form controls/buttons if needed -->

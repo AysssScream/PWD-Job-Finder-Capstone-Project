@@ -10,8 +10,10 @@
                             <nav class="text-blue-500 text-sm" aria-label="Breadcrumb">
                                 <ol class="list-none p-0 inline-flex">
                                     <li class="flex items-center">
-                                        <a href="{{ route('login') }}" class="hover:text-black text-lg">
-                                            <i class="fas fa-home"></i> Login
+                                        <a href="{{ route('login') }}"
+                                            class="hover:text-black dark:hover:text-whites text-lg">
+                                            <i class="fas fa-home"></i> {{ __('messages.registration.login') }}
+
                                         </a>
                                         <svg class="h-5 w-auto text-gray-500 mx-1 dark:text-white" fill="currentColor"
                                             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -21,29 +23,32 @@
                                         </svg>
                                     </li>
                                     <li class="flex items-center">
-                                        <a href="" class="text-black text-lg dark:text-white">Register</a>
+                                        <a href=""
+                                            class="text-black text-lg dark:text-white">{{ __('messages.registration.register') }}</a>
                                     </li>
                                 </ol>
                             </nav>
                             <div class="mb-4 text-md text-black-600 dark:text-gray-200 text-justify">
                                 <i class="fas fa-sign-in-alt mr-2 text-blue-500 dark:text-white"></i>
-                                Enter your account email address and password to login. If you encounter any issues.
-                                <br>
-                                please contact our support team for assistance.
+                                {!! __('messages.registration.login_message') !!}
+
                             </div>
                             <img src="/images/bannerregister.png" alt="Image description"
                                 class="w-full h-auto max-w-2xl rounded-lg">
                             <div>
                                 <b>
-                                    <p class="text-black dark:text-gray-200">Are you looking forward to be a :</p>
+                                    <p class="text-black dark:text-gray-200">
+                                        {{ __('messages.registration.looking_forward') }}</p>
                                 </b>
                                 <br>
                                 <label class="radio-inline text-gray-700 dark:text-gray-200">
-                                    <input type="radio" name="usertype" value="user" checked> Job Applicant
+                                    <input type="radio" name="usertype" value="user" checked>
+                                    {{ __('messages.registration.job_applicant') }}
                                 </label>
                                 &nbsp;
                                 <label class="radio-inline text-gray-700 dark:text-gray-200">
-                                    <input type="radio" name="usertype" value="employer"> Employer
+                                    <input type="radio" name="usertype" value="employer">
+                                    {{ __('messages.registration.employer') }}
                                 </label>
 
                             </div>
@@ -58,7 +63,7 @@
 
                             <div class="inline-fields">
                                 <div class="field-group">
-                                    <x-input-label for="first_name" :value="__('First Name')" />
+                                    <x-input-label for="first_name" :value="__('messages.registration.First Name')" />
                                     <x-text-input id="firstname" class="block mt-1 w-full" type="text"
                                         name="firstname" :value="old('firstname')" required autofocus
                                         autocomplete="given-name" />
@@ -66,13 +71,13 @@
 
 
                                 <div class="field-group">
-                                    <x-input-label for="middle_name" :value="__('Middle Name')" />
+                                    <x-input-label for="middle_name" :value="__('messages.registration.Middle Name')" />
                                     <x-text-input id="middlename" class="block mt-1 w-full" type="text"
                                         name="middlename" :value="old('middlename')" autocomplete="additional-name" />
                                 </div>
 
                                 <div class="field-group">
-                                    <x-input-label for="last_name" :value="__('Last Name')" />
+                                    <x-input-label for="last_name" :value="__('messages.registration.Last Name')" />
                                     <x-text-input id="lastname" class="block mt-1 w-full" type="text"
                                         name="lastname" :value="old('lastname')" required autocomplete="family-name" />
                                 </div>
@@ -98,7 +103,8 @@
                                 <x-password-text id="password" type="password" name="password" placeholder="Password"
                                     required autocomplete="new-password" />
                                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                                <div id="password-requirements" class="text-md mt-1 text-black-500"></div>
+                                <div id="password-requirements" class="text-md mt-1 text-gray-700 dark:text-gray-200">
+                                </div>
                             </div>
 
 
@@ -114,11 +120,11 @@
                             <div class="flex items-center justify-end mt-4">
                                 <a class="underline text-sm text-black-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
                                     href="{{ route('login') }}">
-                                    {{ __('Already registered?') }}
+                                    {{ __('messages.registration.Already registered?') }}
                                 </a>
 
                                 <x-primary-button class="ms-4">
-                                    {{ __('Register') }}
+                                    {{ __('messages.registration.register') }}
                                 </x-primary-button>
                             </div>
                         </div>

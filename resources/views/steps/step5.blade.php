@@ -66,10 +66,9 @@
                                      </nav>
                                  </div>
                                  <hr class="border-t-2 border-gray-400 rounded-full my-4">
-                                 <span class="text-md font-regular"><b> Step 5: </b> To update your profile, click “Add
-                                     Language” to input new languages and set the language proficiency, and use the
-                                     checkboxes to select skills without formal training (Other Skills). Edit or
-                                     remove entries as needed to accurately reflect your abilities.
+                                 <span class="text-md font-regular">
+                                     {!! __('messages.language.instruction') !!}
+
                                  </span>
                                  <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
                                      <div class="col-span-1 md:col-span-1">
@@ -81,29 +80,23 @@
                                              <thead>
                                                  <tr>
                                                      <div class="mt-6">
-                                                         <p><b>To update your profile:</b></p>
+                                                         <p><b>{{ __('messages.language.updatelang') }}</b></p>
                                                          <ul class="list-disc list-inside">
-                                                             <li>Click "Add Language" to input new languages.</li>
-                                                             <li>Set the language proficiency first using the
-                                                                 dropdown.
-                                                             <li>Choose your language and determine your language
-                                                                 proficiency.
+                                                             <li>{{ __('messages.language.list-unstyled.1') }}</li>
+                                                             <li>{{ __('messages.language.list-unstyled.2') }}
+                                                             <li>{{ __('messages.language.list-unstyled.3') }}
                                                              </li>
-                                                             <li>Use the checkboxes to select skills without formal
-                                                                 training (Other Skills).</li>
-                                                             <li>Edit or remove entries as needed to accurately
-                                                                 reflect your abilities.</li>
+                                                             <li>{{ __('messages.language.list-unstyled.4') }}</li>
+                                                             <li>{{ __('messages.language.list-unstyled.5') }}.</li>
                                                          </ul>
                                                      </div>
                                                      <br>
                                                      <td colspan="4" class="text-left p-4">
                                                          <button type="button"
-                                                             class="bg-blue-600 text-white px-10 py-2 rounded add-row">Add
-                                                             Language</button>
+                                                             class="bg-blue-600 text-white px-10 py-2 rounded add-row">{{ __('messages.language.buttons.add_language') }}</button>
                                                          <button type="button"
                                                              class="bg-red-500 text-white px-4 py-2 rounded"
-                                                             onclick="clearSelectedLanguages()">Clear Selected
-                                                             Languages</button>
+                                                             onclick="clearSelectedLanguages()">{{ __('messages.language.buttons.clear_selected_languages') }}</button>
 
                                                          <script>
                                                              function clearSelectedLanguages() {
@@ -125,9 +118,15 @@
 
                                              <thead>
                                                  <tr>
-                                                     <th class="px-4 py-2 border-b">Language/Dialect</th>
-                                                     <th class="px-4 py-2 border-b">Language proficiency</th>
-                                                     <th class="px-4 py-2 border-b">Action</th>
+                                                     <th class="px-4 py-2 border-b">
+                                                         {{ __('messages.language.table_headers.language_dialect') }}
+                                                     </th>
+                                                     <th class="px-4 py-2 border-b">
+                                                         {{ __('messages.language.table_headers.language_proficiency') }}
+                                                     </th>
+                                                     <th class="px-4 py-2 border-b">
+                                                         {{ __('messages.language.table_headers.action') }}
+                                                     </th>
 
                                                  </tr>
                                              </thead>
@@ -166,31 +165,30 @@
 
                                                      <td class="px-4 py-2 border-b text-center">
                                                          <button type="button"
-                                                             class="bg-blue-600 text-white px-7 py-1 rounded edit-row">Edit</button>
+                                                             class="bg-blue-600 text-white px-7 py-1 rounded edit-row">
+                                                             {{ __('messages.language.actions.edit') }}</button>
                                                          <button type="button"
-                                                             class="bg-red-500 text-white px-2 py-1 rounded remove-row">Remove</button>
+                                                             class="bg-red-500 text-white px-2 py-1 rounded remove-row">{{ __('messages.language.actions.remove') }}</button>
                                                      </td>
                                                  </tr>
                                              </tbody>
                                          </table>
                                          <br>
                                          <label for="selected-languages"
-                                             class="block text-sm font-medium text-black-700">Selected
-                                             Languages:</label>
+                                             class="block text-sm font-medium text-black-700">{{ __('messages.language.labels.selected_languages') }}</label>
                                          <textarea id="selected-languages" name="selected-languages"
                                              class="w-full bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 text-gray-800 border border-gray-300 rounded py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                              placeholder="Enter selected languages..." readonly>{{ old('selected-languages', $formData5['selected-languages'] ?? '') }}</textarea>
 
 
-                                         <div id="row-limit-message" class="text-red-600 mt-2 hidden">You can only add
-                                             up to 5 languages.</div>
+                                         <div id="row-limit-message" class="text-red-600 mt-2 hidden">
+                                             {{ __('messages.language.messages.row_limit_message') }}</div>
 
-                                         <h3 class="text-2xl font-bold mb-2 mt-9">Other Skills (Without Formal Training)
+                                         <h3 class="text-2xl font-bold mb-2 mt-9">
+                                             {{ __('messages.language.messages.other_skills_heading') }}
                                          </h3>
                                          <span class="text-md font-regular">
-                                             In this section, choosing your skills without formal training are important
-                                             as they demonstrate a person’s
-                                             ability to learn independently and adapt to new challenges.
+                                             {{ __('messages.language.messages.other_skills_description') }}
                                          </span>
                                          <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
 
@@ -335,8 +333,6 @@
                                                          Masonry
                                                      </label>
                                                  </div>
-
-
                                              </div>
                                              <div>
                                                  <div class="mt-6">
@@ -393,7 +389,7 @@
                              const newRow = document.createElement('tr');
                              newRow.innerHTML = `
                                             <td class="px-4 py-2 border-b">
-                                                <input type="text" name="language-input[]" class="w-full p-2 border rounded language-input" pattern="[A-Za-z\s]+" placeholder="Ex. Filipino" title="Please enter alphabetic characters only" readonly    />
+                                                <input type="text" name="language-input[]" class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 language-input" pattern="[A-Za-z\s]+" placeholder="Ex. Filipino" title="Please enter alphabetic characters only" readonly    />
                                                 <div class="suggestions-container">
                                                     <ul class="suggestions-list"></ul>
                                                 </div>
@@ -402,7 +398,7 @@
                                                      <td class="px-4 py-2 border-b text-center">
                                                          <div class="inline-block relative">
                                                              <select
-                                                                 class="block appearance-none w-full bg-white border border-gray rounded-md py-2 px-10 leading-tight focus:outline-none focus:border-blue-500"
+                                                                 class="block appearance-none w-full bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 border border-gray rounded-md py-2 px-10 leading-tight focus:outline-none focus:border-blue-500"
                                                                  id="langprof">
                                                                  <option value="Beginner">Beginner</option>
                                                                  <option value="Intermediate">Intermediate</option>

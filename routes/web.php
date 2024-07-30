@@ -1,14 +1,17 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\DarkModeController;
 use App\Http\Controllers\Employer\EmployerController;
 use App\Http\Controllers\EmployerProfilePictureController;
+use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\SaveJobController;
 use App\Http\Controllers\TopJobOpeningController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ExportController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\JobInfoController;
 use App\Http\Controllers\EmployerSetupController;
@@ -23,13 +26,9 @@ Route::get('contact', [DashboardController::class, 'contact'])->name('contact');
 Route::get('faq', [DashboardController::class, 'faq'])->name('faq');
 Route::get('findjobs', [DashboardController::class, 'findjobs'])->name('findjobs');
 Route::get('/search/jobs', [DashboardController::class, 'searchjobs'])->name('welcome.search');
+Route::post('/contact/messages', [ContactUsController::class, 'storeMessage'])->name('contact.messages.store');
 
-Route::get('lang/{lang}', function ($lang) {
-    app()->setLocale($lang);
-    session()->put('locale', $lang);
-    app()->getLocale();
-
-});
+Route::get('/locale/{lang}', [LocalizationController::class, 'setLocale'])->name('toggle.language');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -55,21 +54,36 @@ require __DIR__ . '/auth.php';
 // User routes
 Route::middleware(['auth', 'userMiddleware', 'checkVerificationStatus'])->group(function () {
     Route::get('dashboard', [UserController::class, 'index'])->name('dashboard');
+    Route::get('/jobs/remarks/{remarks}', [UserController::class, 'remarks'])->name('show.remarks');
     Route::get('/dashboard/matchedjobs', [UserController::class, 'matchindex'])->name('dashboard.match');
     Route::get('/dashboard/jobs', [UserController::class, 'search'])->name('jobs.search');
     Route::get('/jobs/{company_name}/{id}', [UserController::class, 'jobinfo'])->name('jobs.info');
     Route::post('jobs/apply/{company_name}/{id}', [UserController::class, 'applyForJob'])->name('applyForJob');
     Route::post('/applications/mark-all-as-read', [ApplicationController::class, 'markAllAsRead'])->name('applications.markAllAsRead');
     Route::post('/save-job/{id}/{company_name}', [SaveJobController::class, 'save'])->name('save.job');
-
     Route::get('savedjobs', [SaveJobController::class, 'index'])->name('savedjobs');
+    Route::patch('/dashboard/job-preferences', [UserController::class, 'updatepreferences'])->name('jobpref.updatepreferences');
 });
-
-
 
 Route::middleware(['auth', 'adminMiddleware'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/user', [AdminController::class, 'manage'])->name('admin.user');
+    Route::get('/admin/details/{type}', [AdminController::class, 'details'])->name('admin.details');
+    Route::get('/admin/manageusers', [AdminController::class, 'manageusers'])->name('admin.manageusers');
+    Route::get('/admin/audit', [AdminController::class, 'audit'])->name('admin.audit');
+    Route::get('/admin/messages', [AdminController::class, 'messages'])->name('admin.messages');
+    Route::post('/admin/messages', [AdminController::class, 'storeMessage'])->name('admin.messages.store');
+    Route::post('/admin/replies', [AdminController::class, 'storeReply'])->name('admin.replies.store');
+    Route::get('/messages/{id}/replies', [AdminController::class, 'getReplies'])->name('admin.replies.retrieve');
+
+    Route::get('/export/skillscsv', [ExportController::class, 'skillsExportCSV'])->name('exportskills.csv');
+    Route::get('/export/skillspdf', [ExportController::class, 'skillsExportPDF'])->name('exportskills.pdf');
+    Route::get('/export/educationcsv', [ExportController::class, 'educationExportCSV'])->name('exporteducation.csv');
+    Route::get('/export/educationpdf', [ExportController::class, 'educationExportPDF'])->name('exporteducation.pdf');
+    Route::get('/admin/userapplication/applicant/{id}', [AdminController::class, 'userapplication'])->name('admin.applicantinfo');
+    Route::get('/admin/userpwdapplication/applicant/{id}', [AdminController::class, 'userpwdapplication'])->name('admin.pwdapplicantinfo');
+    Route::get('/admin/employerapplication/employer/{id}', [AdminController::class, 'employerapplication'])->name('admin.employerapplicantinfo');
+    Route::post('/admin/approveuser/{id}', [AdminController::class, 'approveuser'])->name('admin.approveuser');
 });
 
 Route::middleware(['auth', 'redirectIfNotCompleted', 'userMiddleware', 'preventAccessFromPendingApproval'])->group(function () {
@@ -124,7 +138,7 @@ Route::middleware(['auth', 'employerMiddleware', 'ensureEmployerSetupCompleted']
     Route::get('/employer/applicantinformation/applicant/{id}', [EmployerController::class, 'applicantinformation'])->name('employer.applicantinfo');
     Route::get('/employer/applicantinformation/pwd/{id}', [EmployerController::class, 'pwdinformation'])->name('employer.pwdinfo');
     Route::get('/employer/editjobs/{id}', [EmployerController::class, 'editjobs'])->name('employer.edit');
-    Route::post('/employer/applicantinformation/hire{id}', [EmployerController::class, 'hire'])->name('hire.applicant');
+    Route::post('/employer/applicantinformation/hire/{id}', [EmployerController::class, 'hire'])->name('hire.applicant');
 
     Route::post('/employer/addjobs', [JobInfoController::class, 'store'])->name('jobinfos.store');
     Route::put('/employer/editjobs/{id}', [JobInfoController::class, 'update'])->name('jobinfos.update');

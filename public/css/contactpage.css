@@ -144,6 +144,26 @@ body {
     color: #343a40;
 }
 
+.form-control {
+    background-color: white;
+    border: 1px solid #111111; /* Added border color */
+    color: black; /* Ensure text is readable in light mode */
+}
+
+.form-control::placeholder {
+    color: #888888; /* Light mode placeholder color */
+}
+
+.dark .form-control {
+    background-color: rgb(22, 22, 22) !important;
+    border: 1px solid #ffffff; /* Changed border color for dark mode */
+    color: white; /* Ensure text is readable in dark mode */
+}
+
+.dark .form-control::placeholder {
+    color: #cccccc; /* Dark mode placeholder color */
+}
+
 .dark .navbar-brand,
 .dark h2,
 .dark h4,
@@ -221,8 +241,6 @@ body {
 
 .dark .text-center .col-lg-4 .lc-block {
     background-color: rgb(22, 22, 22) !important;
-    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1),
-        0 6px 6px rgba(255, 255, 255, 0.15) !important;
 }
 .ui-switch {
     position: relative;

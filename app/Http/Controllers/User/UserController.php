@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
 use Session; // Import the Session facade
 use Illuminate\Support\Facades\Log;
+use App\Http\Requests\ProfileUpdateRequest;
+use Illuminate\Http\RedirectResponse;
 
 class UserController extends Controller
 {
@@ -29,13 +31,15 @@ class UserController extends Controller
     public function index(Request $request)
     {
 
+
         Session::flash('message', 'Welcome to your Dashboard');
 
-
-        $topJobOpenings = JobInfo::select('title', DB::raw('COUNT(*) as count'))
+        $topJobOpenings = JobInfo::select('title', DB::raw('SUM(vacancy) as count'))
+            ->where('vacancy', '>', 0)
             ->groupBy('title')
+            ->having(DB::raw('SUM(vacancy)'), '>', 0)
             ->orderByDesc('count')
-            ->limit(10) // Limit the results to 2
+            ->limit(10)
             ->get();
 
 
@@ -54,7 +58,7 @@ class UserController extends Controller
 
         }
         $title = $request->query('title', null);
-        $jobsQuery = JobInfo::query();
+        $jobsQuery = JobInfo::where('vacancy', '>', 0); // Apply condition where vacancy is greater than 0
 
 
         if ($title) {
@@ -72,25 +76,74 @@ class UserController extends Controller
         });
 
 
+
+        $jobpreference = JobPreference::where('user_id', $user->id)->firstOrFail();
+
         return view('dashboard', [
             'topJobOpenings' => $topJobOpenings,
             'jobs' => $jobs,
             'applicant' => $applicant,
             'applications' => $applications,
             'matchedJobs' => $matchedJobs,
+            'jobpreference' => $jobpreference,
         ]);
+    }
+
+    public function updatepreferences(Request $request)
+    {
+        $user = $request->user();
+        //JOB PREFERENCES
+        $request->validate([
+            'preferredOccupation' => ['required', 'regex:/^[A-Za-z\s]+$/i', 'max:50'],
+            'localLocation' => ['required', 'regex:/^[A-Za-z\sñ,.]+$/i', 'max:50'],
+            'overseasLocation' => ['nullable', 'regex:/^[A-Za-z\sñ,.]+$/i', 'max:50'],
+        ], [
+            'preferredOccupation.required' => 'The preferred occupation field is required.',
+            'preferredOccupation.regex' => 'The preferred occupation must contain only letters and spaces.',
+            'preferredOccupation.max' => 'The preferred occupation may not be greater than 50 characters.',
+            'localLocation.required' => 'The local location field is required.',
+            'localLocation.regex' => 'The local location must contain only letters and spaces.',
+            'localLocation.max' => 'The local location may not be greater than 50 characters.',
+            'overseasLocation.regex' => 'The overseas location must contain only letters and spaces.',
+            'overseasLocation.max' => 'The overseas location may not be greater than 50 characters.',
+        ]);
+
+        $jobpreference = JobPreference::where('user_id', $user->id)->firstOrFail();
+        $jobpreference->preferred_occupation = $request->input('preferredOccupation');
+        $jobpreference->local_location = $request->input('localLocation');
+        $jobpreference->overseas_location = $request->input('overseasLocation');
+        $jobpreference->save();
+
+        Session::flash('preferences', 'Job Preferences Saved');
+
+        return back()->with('status', 'Job preferences updated successfully!');
+
+
+    }
+
+
+
+    public function remarks($remarks)
+    {
+        return view('layouts.remarks', [
+            'remarks' => $remarks,
+        ]);
+
     }
 
     public function matchindex(Request $request)
     {
+        Session::flash('match', 'You may change your job preferences.');
 
-        Session::flash('message', 'These jobs matches your credentials.');
 
-        $topJobOpenings = JobInfo::select('title', DB::raw('COUNT(*) as count'))
+        $topJobOpenings = JobInfo::select('title', DB::raw('SUM(vacancy) as count'))
+            ->where('vacancy', '>', 0)
             ->groupBy('title')
+            ->having(DB::raw('SUM(vacancy)'), '>', 0)
             ->orderByDesc('count')
-            ->limit(10) // Limit the results to 2
+            ->limit(10)
             ->get();
+
 
         // Fetch jobs ordered by date posted
 
@@ -101,7 +154,7 @@ class UserController extends Controller
 
         }
         $title = $request->query('title', null);
-        $jobsQuery = JobInfo::query();
+        $jobsQuery = JobInfo::where('vacancy', '>', 0); // Apply condition where vacancy is greater than 0
 
 
         if ($title) {
@@ -116,10 +169,15 @@ class UserController extends Controller
         $matchedJobs = $jobs->filter(function ($job) use ($matchedJobTitles) {
             return $matchedJobTitles->contains($job->title);
         });
+
+        $jobpreference = JobPreference::where('user_id', $user->id)->firstOrFail();
+
         return view('matchedjobs', [
             'topJobOpenings' => $topJobOpenings,
             'jobs' => $jobs,
             'matchedJobs' => $matchedJobs,
+            'jobpreference' => $jobpreference,
+
         ]);
     }
 
@@ -168,11 +226,14 @@ class UserController extends Controller
         $jobType = $request->input('job_type'); // Job type filter
         $jobsQuery = JobInfo::query();
         // Fetch top job openings based on count
-        $topJobOpenings = JobInfo::select('title', DB::raw('COUNT(*) as count'))
+        $topJobOpenings = JobInfo::select('title', DB::raw('SUM(vacancy) as count'))
+            ->where('vacancy', '>', 0)
             ->groupBy('title')
+            ->having(DB::raw('SUM(vacancy)'), '>', 0)
             ->orderByDesc('count')
-            ->limit(10) // Limit the results to 2
+            ->limit(10)
             ->get();
+
 
 
 
@@ -237,6 +298,8 @@ class UserController extends Controller
 
     public function applyForJob(Request $request, $company_name, $id)
     {
+        Session::flash('apply', 'You have applied for this job.');
+
         Log::info('Company Name:', ['company_name' => $company_name]);
 
         $request->validate([

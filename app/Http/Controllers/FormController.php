@@ -299,13 +299,13 @@ class FormController extends Controller
     public function postStep3(Request $request)
     {
         $validatedData3 = $request->validate([
-            'hiddenemployerName' => 'required|string',
-            'hiddenemployerAddress' => 'required|string',
-            'hiddenpositionHeld' => 'required|string',
-            'hiddenlistskills' => 'required|string',
-            'hiddenfromDate' => 'required|string',
-            'hiddentoDate' => 'required|string',
-            'hiddenemploymentStatus' => 'required|string',
+            'hiddenemployerName' => 'nullable|string',
+            'hiddenemployerAddress' => 'nullable|string',
+            'hiddenpositionHeld' => 'nullable|string',
+            'hiddenlistskills' => 'nullable|string',
+            'hiddenfromDate' => 'nullable|string',
+            'hiddentoDate' => 'nullable|string',
+            'hiddenemploymentStatus' => 'nullable|string',
             'employment-type' => 'required|string',
             'job-search-duration' => ['nullable', 'regex:/^\d{1,3}$/'],
             'duration-category' => ['required', 'in:Days,Weeks,Months,Years'],
@@ -421,7 +421,7 @@ class FormController extends Controller
         $validatedData6 = $request->validate([
             'educationLevel' => ['required', 'max:100'],
             'school' => ['required', 'max:100', 'regex:/^[a-zA-Z ,.\-\/]+$/'],
-            'course' => ['required', 'max:100', 'regex:/^[a-zA-Z ,.\-\/]+$/'],
+            'course' => ['nullable', 'max:100', 'regex:/^[a-zA-Z ,.\-\/]+$/'],
 
             'yearGraduated' => [
                 'nullable',

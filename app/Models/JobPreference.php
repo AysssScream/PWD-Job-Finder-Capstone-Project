@@ -8,13 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class JobPreference extends Model
 {
     use HasFactory;
+    protected $table = 'job_preferences';
 
-    protected $fillable = [
-        'user_id',
-        'preferred_occupation',
-        'localLocation',
-        'overseasLocation',
-    ];
+    protected $fillable = ['user_id', 'preferred_occupation', 'local_location', 'overseas_location'];
+
 
     public function user()
     {

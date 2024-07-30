@@ -1,20 +1,27 @@
 <div x-data="{ showModal: false }">
     <div class="text-right mt-4">
 
-        @if ($applicationStatus === 'pending')
-            <button
-                class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 ml-2 rounded-lg shadow-md transition duration-300 ease-in-out">
-                Already Applied
-            </button>
-        @elseif ($applicationStatus === 'hired')
-            <button
-                class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 ml-2 rounded-lg shadow-md transition duration-300 ease-in-out">
-                Hired
-            </button>
+        @if ($job->vacancy > 0)
+            @if ($applicationStatus === 'pending')
+                <button aria-label="Pending"
+                    class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 ml-2 rounded-lg shadow-md transition duration-300 ease-in-out focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                    Already Applied
+                </button>
+            @elseif ($applicationStatus === 'hired')
+                <button aria-label="Hired"
+                    class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 ml-2 rounded-lg shadow-md transition duration-300 ease-in-out focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                    Hired
+                </button>
+            @else
+                <button @click="showModal = true" aria-label="Apply"
+                    class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 ml-2 rounded-lg shadow-md transition duration-300 ease-in-out focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                    Apply
+                </button>
+            @endif
         @else
-            <button @click="showModal = true"
-                class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 ml-2 rounded-lg shadow-md transition duration-300 ease-in-out">
-                Apply
+            <button
+                class="bg-red-500 hover:bg-gray-600 text-white py-2 px-4 ml-2 rounded-lg shadow-md transition duration-300 ease-in-out focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                No Vacancy
             </button>
         @endif
     </div>
@@ -34,7 +41,7 @@
                 class="bg-white text-black dark:bg-gray-800 dark:text-gray-200 p-8 rounded-lg shadow-lg max-w-xl w-full">
                 <!-- Modal Header -->
                 <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-lg font-bold text-gray-900">Job Application</h2>
+                    <h2 class=" font-bold text-gray-700 dark:text-gray-200">Job Application</h2>
                     <!-- Close Button -->
                     <button @click="showModal = false" class="text-gray-600 hover:text-gray-800 focus:outline-none">
                         <svg class="h-6 w-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -47,9 +54,10 @@
                 <form action="{{ route('applyForJob', ['company_name' => $job->company_name, 'id' => $job->id]) }}"
                     method="POST">
                     @csrf
-                    <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                    <label for="description"
+                        class="block  font-medium text-gray-700 dark:text-gray-200">Description</label>
                     <textarea id="description" name="description" rows="4" x-model="description"
-                        class="mt-1 block w-full p-2 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">{!! addslashes("Hi, I'm interested to apply for the {$job->title} position.") !!}</textarea>
+                        class="mt-1 block w-full p-2 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">{!! addslashes("Hi, I'm interested to apply for the {$job->title} position.") !!}</textarea>
 
                     <!-- Apply Button -->
                     <div class="mt-4 text-right">

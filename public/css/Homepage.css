@@ -373,7 +373,7 @@ body {
     box-shadow: 0 8px 36px rgba(0, 0, 0, 0.116), 0 4px 4px rgba(0, 0, 0, 0.1);
 }
 .dark .card {
-    background-color: rgb(55 65 81) !important;
+    background-color: rgb(22, 22, 22) !important;
     color: white;
 }
 

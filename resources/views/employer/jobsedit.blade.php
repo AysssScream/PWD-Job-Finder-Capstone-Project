@@ -36,7 +36,7 @@
                             @csrf
                             @method('PUT')
                             @if ($errors->any())
-                                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                                <div class="bg-red-100 dark:bg-red-700 dark:text-gray-200 border border-red-400 text-red-700 px-4 py-3 rounded relative"
                                     role="alert">
                                     <strong class="font-bold">Oops!</strong>
                                     <span class="block sm:inline">There were some errors with your submission:</span>
@@ -76,9 +76,9 @@
                                 <select id="job_type" name="job_type"
                                     class="form-select mt-1 block w-full rounded-md border-gray-500  bg-gray-100 text-gray-800 placeholder-gray-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 dark:placeholder-gray-400">
                                     <option value="">Select job type</option>
-                                    <option value="Full Time" {{ $job->job_type == 'Full Time' ? 'selected' : '' }}>
+                                    <option value="Full-Time" {{ $job->job_type == 'Full-Time' ? 'selected' : '' }}>
                                         Full Time</option>
-                                    <option value="Part Time" {{ $job->job_type == 'Part Time' ? 'selected' : '' }}>
+                                    <option value="Part-Time" {{ $job->job_type == 'Part-Time' ? 'selected' : '' }}>
                                         Part Time</option>
                                     <option value="Probationary"
                                         {{ $job->job_type == 'Probationary' ? 'selected' : '' }}>
@@ -169,7 +169,7 @@
                                         class="ml-2 px-3 py-1 bg-blue-500 text-white rounded">Edit</button>
                                 </div>
                                 <div id="local-location-suggestions"
-                                    class="absolute z-10 w-1/6 mt-1 max-h-40 overflow-y-auto bg-white border rounded shadow-md hidden">
+                                    class="absolute z-10 w-1/6 mt-1 max-h-40 overflow-y-auto bg-white text-black dark:bg-gray-800 dark:text-gray-200 border rounded shadow-md hidden">
                                 </div>
                                 <div id="local-location-error" class="text-red-600 mt-1 hidden">Error
                                     fetching location data</div>
@@ -205,7 +205,7 @@
                                 @enderror
                             </div>
 
-                            <!-- Responsibilities -->
+                            <!-- Responsibilities
                             <div class="mb-4 p-2">
                                 <label for="responsibilitySearch"
                                     class="block p-2 text-md font-medium text-gray-800 dark:text-gray-300">
@@ -217,7 +217,7 @@
                                     list="responsibilitySuggestions"
                                     placeholder="The applicants should have experience in the following areas.">
                                 <div id="responsibilitySuggestions" class="mt-2 grid grid-cols-3 gap-2"></div>
-                            </div>
+                            </div> -->
 
 
                             <div class="mt-6 overflow-x-auto" hidden>
@@ -238,19 +238,18 @@
                             </div>
 
 
-                            <div class="mb-4">
+                            <div class="mb-4 p-2">
                                 <label for="hiddenInput" class="block text-sm font-medium text-black-700">Selected
-                                    Responsibilities: </label>
+                                    Responsibilities (Seperate it using , - • ):</label>
                                 <textarea id="hiddenInput" name="hiddenInput"
-                                    class="mt-1 block w-full px-3 py-2 p-2 border border-gray-300 rounded-md  bg-gray-100 text-gray-800 placeholder-gray-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 dark:placeholder-gray-400"
-                                    readonly>{{ $job->responsibilities }}</textarea>
+                                    class="mt-1 block w-full px-3 py-2 p-2 border border-gray-300 rounded-md  bg-gray-100 text-gray-800 placeholder-gray-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 dark:placeholder-gray-400">{{ $job->responsibilities }}</textarea>
                                 @error('hiddenInput')
                                     <div class="text-red-600 mt-1">{{ $message }}</div>
                                 @enderror
                             </div>
 
 
-                            <!-- Qualifications -->
+                            <!-- Qualifications
 
                             <div class="mb-4 p-2 mt-4">
                                 <label for="qualifications"
@@ -262,9 +261,9 @@
                   dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 dark:placeholder-gray-400"
                                     placeholder="Enter job qualifications">
                                 @error('qualificationsInput')
-                                    <div class="text-red-600 dark:text-red-400 mt-1">{{ $message }}</div>
-                                @enderror
-                            </div>
+    <div class="text-red-600 dark:text-red-400 mt-1">{{ $message }}</div>
+@enderror
+                            </div>-->
 
 
                             <div class="mt-6 overflow-x-auto" hidden>
@@ -285,13 +284,12 @@
                             </div>
 
 
-                            <div class="mb-4">
+                            <div class="mb-4 p-2">
                                 <label for="hiddenQualificationsInputt"
                                     class="block text-sm font-medium text-gray-800 dark:text-gray-300">Selected
-                                    Qualifications: </label>
+                                    Qualifications (Seperate it using , - • ):</label>
                                 <textarea id="hiddenQualificationsInput" name="hiddenQualificationsInput"
-                                    class="mt-1 block w-full px-3 py-2 p-2 border border-gray-300 rounded-md  bg-gray-100 text-gray-800 placeholder-gray-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 dark:placeholder-gray-400"
-                                    readonly>{{ $job->qualifications }}</textarea>
+                                    class="mt-1 block w-full px-3 py-2 p-2 border border-gray-300 rounded-md  bg-gray-100 text-gray-800 placeholder-gray-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 dark:placeholder-gray-400">{{ $job->qualifications }}</textarea>
                                 @error('hiddenQualificationsInput')
                                     <div class="text-red-600 mt-1">{{ $message }}</div>
                                 @enderror
@@ -520,7 +518,8 @@
 
             cities.forEach(city => {
                 const suggestionElement = document.createElement('div');
-                suggestionElement.classList.add('suggestion');
+                suggestionElement.classList.add('suggestion', 'dark:bg-gray-800',
+                    'dark:text-white'); // Example dark mode classes
 
                 const suggestionText = document.createElement('div');
                 suggestionText.classList.add('suggestion-text');
@@ -528,7 +527,8 @@
                     `${city.name}, ${city.province}`; // Display city name and province
 
                 const plusContainer = document.createElement('div');
-                plusContainer.classList.add('plus-container');
+                plusContainer.classList.add('plus-container', 'dark:bg-gray-600',
+                    'dark:text-gray-200'); // Example dark mode classes
                 plusContainer.innerHTML = '+';
 
                 suggestionElement.appendChild(suggestionText);
@@ -547,12 +547,48 @@
             });
         }
 
-        // Handle outside click to hide suggestions
+        /* Handle outside click to hide suggestions
         document.addEventListener('click', function(event) {
             if (!document.getElementById('local-location-container').contains(event.target)) {
                 suggestionsContainer.style.display = 'none';
             }
+        });*/
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('click', function(event) {
+                const localLocationContainer = document.getElementById(
+                    'local-location-container');
+                const suggestionsContainer = document.getElementById('suggestionsContainer');
+
+                if (localLocationContainer && suggestionsContainer) {
+                    if (!localLocationContainer.contains(event.target)) {
+                        suggestionsContainer.style.display = 'none';
+                    }
+                } else {
+                    console.error(
+                        'Local location container or suggestions container not found.');
+                }
+            });
         });
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('click', function(event) {
+                const localLocationContainer = document.getElementById(
+                    'local-location-container');
+                const suggestionsContainer = document.getElementById('suggestionsContainer');
+
+                if (localLocationContainer && suggestionsContainer) {
+                    if (!localLocationContainer.contains(event.target)) {
+                        suggestionsContainer.style.display = 'none';
+                    }
+                } else {
+                    console.error(
+                        'Local location container or suggestions container not found.');
+                }
+            });
+        });
+
     });
 
 
@@ -583,7 +619,6 @@
         justify-content: space-between;
         align-items: center;
         padding: 8px;
-        background-color: white;
         cursor: pointer;
         border-radius: 4px;
         margin-bottom: 4px;

@@ -1,5 +1,5 @@
 <!-- resources/views/components/work-experience-row.blade.php -->
-<tr class="hover:bg-gray-100">
+<tr class="hover:bg-gray-100 dark:hover:bg-gray-300 dark:hover:text-gray-900">
     <td class="border-b border-gray-300 py-2 px-3">
         <form action="{{ route('workexp.destroy', $workExperience->id) }}" method="POST" style="display: inline;">
             @method('delete')

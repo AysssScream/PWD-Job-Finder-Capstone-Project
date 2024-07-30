@@ -12,6 +12,9 @@
 
     </head>
 
+
+
+
     <body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 ">
         <main class="max-w-7xl mx-auto sm:px-1 lg:px-1 py-12 flex  flex-wrap gap-4">
             <aside class="w-full lg:w-1/6  bg-white dark:bg-gray-800 shadow-lg sm:rounded-lg p-4">
@@ -19,8 +22,9 @@
                     <h3 class="text-lg font-semibold mb-2 mb-2"></h3>
                     <div class="mb-4">
                         <a href="javascript:void(0);" id="browse-applications-link"
-                            class="block w-full text-center text-white dark:text-gray-200 bg-gray-700 font-semibold py-2 rounded-md mb-2 transition">
-                            <i class="fas fa-book-open mr-2"></i> Applications
+                            class="block w-full text-center p-2 text-white dark:text-gray-200 bg-gray-700 hover:bg-gray-600  font-semibold py-2 rounded-md mb-2 transition focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                            aria-label="{{ __('messages.userdashboard.applications') }}">
+                            <i class="fas fa-book-open mr-2"></i>{{ __('messages.userdashboard.applications') }}
                         </a>
                         <div id="medium-modal" tabindex="-1"
                             class="fixed top-0 left-0 right-0 z-50 hidden flex items-center justify-center w-full h-full p-4 overflow-x-hidden overflow-y-auto bg-black bg-opacity-75">
@@ -31,7 +35,7 @@
                                     <div
                                         class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                                         <h3 class="text-xl font-medium text-gray-900 dark:text-white">
-                                            My Applications
+                                            My Job Applications
                                         </h3>
                                         <button type="button"
                                             class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -47,30 +51,26 @@
                                     </div>
                                     <div class="p-4 md:p-5 space-y-4 overflow-y-auto max-h-96">
                                         <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                                            <!-- Column 1: Application List -->
                                             @foreach ($applications as $job)
-                                                <div
-                                                    class="border bg-gray-200 border-gray-200 dark:border-gray-600 dark:bg-gray-700  shadow-lg rounded-lg p-4 flex flex-col">
+                                                <div class="job-item border bg-gray-200 border-gray-200 dark:border-gray-600 dark:bg-gray-700 shadow-lg rounded-lg p-4 flex flex-col mb-4"
+                                                    data-status="{{ $job->status }}">
                                                     <div>
                                                         <h2
                                                             class="text-lg font-semibold text-gray-900 dark:text-gray-200">
-                                                            Job ID:
-                                                        </h2>
+                                                            Job ID:</h2>
                                                         <ul class="divide-y divide-gray-200 dark:divide-gray-600">
                                                             <li class="py-2 text-sm text-gray-900 dark:text-gray-200">
-                                                                {{ $job->job_id }}
-                                                            </li>
+                                                                {{ $job->job_id }}</li>
                                                         </ul>
                                                     </div>
 
                                                     <div class="mt-4">
                                                         <h2
                                                             class="text-lg font-semibold text-gray-900 dark:text-gray-200">
-                                                            Application Status:
-                                                        </h2>
+                                                            Application Status:</h2>
                                                         <div
                                                             class="py-2 max-w-xs overflow-hidden overflow-ellipsis font-bold
-                        {{ $job->status === 'pending' ? 'text-orange-500' : ($job->status === 'hired' ? 'text-green-500' : '') }}">
+                                                             {{ $job->status === 'pending' ? 'text-orange-500' : ($job->status === 'hired' ? 'text-green-500' : '') }}">
                                                             {{ $job->status }}
                                                         </div>
                                                     </div>
@@ -78,8 +78,7 @@
                                                     <div class="mt-4 mb-4">
                                                         <h2
                                                             class="text-lg font-semibold text-gray-900 dark:text-gray-200">
-                                                            Description:
-                                                        </h2>
+                                                            Description:</h2>
                                                         <div
                                                             class="max-w-xs overflow-hidden overflow-ellipsis text-gray-900 dark:text-gray-200">
                                                             {{ strlen($job->description) > 59 ? substr($job->description, 0, 59) . '...' : $job->description }}
@@ -92,11 +91,10 @@
                                                             class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md transition duration-300">
                                                             Job Details
                                                         </button>
-                                                        <!-- Add more buttons or actions as needed -->
                                                     </div>
-
                                                 </div>
                                             @endforeach
+
                                         </div>
                                     </div>
 
@@ -104,39 +102,83 @@
                                     <!-- Modal footer -->
                                     <div
                                         class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                                        <button data-modal-hide="medium-modal" type="button"
+                                        <button onclick="filterItems('hired')"
                                             class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-gray-100 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                                            Hired</button>
-                                        <button data-modal-hide="medium-modal" type="button"
-                                            class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-gray-100  rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Pending</button>
-                                        <button data-modal-hide="medium-modal" type="button"
-                                            class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-gray-100  rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Rejected</button>
+                                            Hired
+                                        </button>
+                                        <button onclick="filterItems('pending')"
+                                            class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-gray-100 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                                            Pending
+                                        </button>
+                                        <button onclick="filterItems('rejected')"
+                                            class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-gray-100 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                                            Rejected
+                                        </button>
+                                        <button onclick="filterItems('all')"
+                                            class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-gray-100 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                                            Show All
+                                        </button>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
 
+                        <script>
+                            function filterItems(status) {
+                                const items = document.querySelectorAll('.job-item'); // Select only job items
+
+                                items.forEach(item => {
+                                    const itemStatus = item.getAttribute('data-status');
+
+                                    if (status === 'all' || itemStatus === status) {
+                                        item.style.display = 'block'; // Show matching items
+                                    } else {
+                                        item.style.display = 'none'; // Hide non-matching items
+                                    }
+                                });
+                            }
+                        </script>
+
 
                         <a href="{{ route('dashboard') }}" id="browse-jobs-link"
-                            class="block w-full text-center text-white dark:text-gray-200 bg-green-600 font-semibold py-2 rounded-md mb-2 transition">
-                            <i class="fas fa-search mr-2"></i>Browse Jobs
+                            class="block p-2 w-full text-center text-white dark:text-gray-200 bg-green-600 hover:bg-green-500 font-semibold py-2 rounded-md mb-2 transition focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                            aria-label="{{ __('messages.userdashboard.browse_jobs') }}">
+                            <i class="fas fa-search mr-2"
+                                aria-label="Browse Jobs"></i>{{ __('messages.userdashboard.browse_jobs') }}
                         </a>
                         <a href="{{ route('dashboard.match') }}" id="matched-jobs-link"
-                            class="block w-full text-center bg-gray-900 text-white dark:text-gray-200 bg-gray-200 hover:bg-black dark:hover:bg-gray-700 font-semibold py-2 rounded-md transition">
-                            <i class="fas fa-check mr-2"></i>Matched Jobs
+                            class="block w-full p-1 text-center bg-gray-900 text-white dark:text-gray-200 bg-gray-200 hover:bg-black dark:hover:bg-gray-700 font-semibold py-2 rounded-md transition focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                            aria-label="{{ __('messages.userdashboard.matched_jobs') }}">
+                            <i class="fas fa-check mr-2"
+                                aria-label="Matched Jobs"></i>{{ __('messages.userdashboard.matched_jobs') }}
                         </a>
                     </div>
-                    <hr class="my-4 border-gray-200 dark:border-gray-900">
+                    <hr class="my-4 border-gray-400 dark:border-gray-600">
                     @include('layouts.topjobs')
-                    <hr class="my-4 border-gray-200 dark:border-gray-900">
+                    <hr class="my-4 border-gray-400 dark:border-gray-600">
 
-                    <h3 class="text-lg font-semibold mb-2 mt-2 text-gray-900 dark:text-gray-200">
-                        <i class="fas fa-chalkboard-teacher mr-2"></i> Trainings
-                    </h3>
-                    <hr class="my-4 border-gray-200 dark:border-gray-900">
-                    <h3 class="text-lg font-semibold mb-2 mt-2 text-gray-900 dark:text-gray-200">
-                        <i class="fas fa-lightbulb mr-2"></i> Career Advice
-                    </h3>
+                    <a href=""
+                        class="block focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400  rounded-lg"
+                        aria-label=" {{ __('messages.userdashboard.trainings') }}">
+                        <h3 class="text-lg font-semibold mb-2 mt-2 text-gray-900 dark:text-gray-200">
+                            <i class="fas fa-chalkboard-teacher mr-2"></i>
+                            {{ __('messages.userdashboard.trainings') }}
+                        </h3>
+                    </a>
+
+                    <hr class="my-4 border-gray-400 dark:border-gray-600">
+
+                    <a href=""
+                        class="block focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400  rounded-lg"
+                        aria-label="{{ __('messages.userdashboard.career_advice') }}">
+                        <h3 class="text-lg font-semibold mb-2 mt-2 text-gray-900 dark:text-gray-200">
+                            <i class="fas fa-chalkboard-teacher mr-2"></i>
+                            {{ __('messages.userdashboard.career_advice') }}
+                        </h3>
+                    </a>
+
+
                 </div>
             </aside>
             @include('dashboardpartials.browsejobs')
@@ -148,21 +190,7 @@
         <p class="text-sm text-gray-600 dark:text-gray-400">&copy; 2024 Job Finder. All rights reserved.</p>
     </div>
 </footer>
-@if (Session::has('message'))
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            toastr.options = {
-                "progressBar": true,
-                "closeButton": true,
-            }
-            toastr.info("{{ Session::get('message') }}", 'Hello, {{ $applicant->firstname }}', {
-                timeOut: 5000
-            });
-        });
-    </script>
-@endif
+
 <style>
     /* Custom scrollbar styles */
     /* For Firefox */
@@ -194,7 +222,7 @@
 </style>
 
 <script>
-    // JavaScript to handle dropdown functionality
+    /* JavaScript to handle dropdown functionality
     document.addEventListener('DOMContentLoaded', function() {
         const dropdownButton = document.getElementById('dropdown-button');
         const dropdownMenu = document.getElementById('dropdown');
@@ -212,7 +240,7 @@
                 dropdownButton.setAttribute('aria-expanded', 'false');
             }
         });
-    });
+    });*/
 
 
     // Function to show the modal

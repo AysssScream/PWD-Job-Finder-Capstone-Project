@@ -9,7 +9,23 @@
         <link href="{{ asset('fontawesome-free-6.5.2-web/css/all.min.css') }}" rel="stylesheet">
 
     </head>
+    @if (Session::has('addjobs'))
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                toastr.options = {
+                    "progressBar": true,
+                    "closeButton": true,
+                }
 
+                toastr.success("{{ Session::get('addjobs') }}", 'Job Successfully Saved.', {
+                    timeOut: 5000
+                });
+
+            });
+        </script>
+    @endif
 
     <div class="py-12">
         <div class="container mx-auto max-w-7xl px-4 pt-5 ">
@@ -39,7 +55,8 @@
                         <div class="h-4/6 sm:h-full overflow-y-auto p-5 rounded-lg custom-scrollbar">
                             @foreach ($jobs as $job)
                                 <div class="container p-5 bg-gray-100 dark:bg-gray-700 mb-3 rounded-lg custom-shadow">
-                                    <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-4">{{ $job->title }}
+                                    <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-4">
+                                        {{ $job->title }}
                                     </h2>
                                     <p class="text-sm text-gray-500 dark:text-gray-200 mb-4">{{ $job->job_type }} |
                                         {{ $job->location }}</p>
@@ -64,10 +81,11 @@
                         <form action="{{ route('jobinfos.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @if ($errors->any())
-                                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                                <div class="bg-red-100 dark:bg-red-700 dark:text-gray-200 border border-red-400 text-red-700 px-4 py-3 rounded relative"
                                     role="alert">
                                     <strong class="font-bold">Oops!</strong>
-                                    <span class="block sm:inline">There were some errors with your submission:</span>
+                                    <span class="block sm:inline">There were some errors with your
+                                        submission:</span>
                                     <ul class="mt-3 list-disc list-inside text-sm">
                                         @foreach ($errors->all() as $error)
                                             <li>{{ $error }}</li>
@@ -97,7 +115,8 @@
                             </div>
                             <div class="mb-4 p-2">
                                 <label for="job_title"
-                                    class="block text-md font-medium text-gray-700 dark:text-gray-200">Job Title</label>
+                                    class="block text-md font-medium text-gray-700 dark:text-gray-200">Job
+                                    Title</label>
                                 <input type="text" id="job_title" name="job_title" autocomplete="off"
                                     placeholder="Enter job title" value="{{ old('job_title') }}"
                                     class="form-input mt-1 block w-full rounded-md border-gray-500 dark:border-gray-600 shadow-sm 
@@ -113,15 +132,16 @@
                             <!-- Job Type -->
                             <div class="mb-4 p-2">
                                 <label for="job_type"
-                                    class="block text-md font-medium  text-gray-700 dark:text-gray-200">Job Type</label>
+                                    class="block text-md font-medium  text-gray-700 dark:text-gray-200">Job
+                                    Type</label>
                                 <select id="job_type" name="job_type"
                                     class="form-select mt-1 block w-full rounded-md border-gray-500 dark:border-gray-600 shadow-sm 
                focus:border-blue-500 dark:focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-900 
                dark:text-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2">
                                     <option value="">Select job type</option>
-                                    <option value="Full Time" {{ old('job_type') == 'Full Time' ? 'selected' : '' }}>
+                                    <option value="Full-Time" {{ old('job_type') == 'Full-Time' ? 'selected' : '' }}>
                                         Full Time</option>
-                                    <option value="Part Time" {{ old('job_type') == 'Part Time' ? 'selected' : '' }}>
+                                    <option value="Part-Time" {{ old('job_type') == 'Part-Time' ? 'selected' : '' }}>
                                         Part Time</option>
                                     <option value="Probationary"
                                         {{ old('job_type') == 'Probationary' ? 'selected' : '' }}>
@@ -139,7 +159,7 @@
                             <div class="mb-4 p-2">
                                 <label for="salary"
                                     class="block text-md font-medium  text-gray-700 dark:text-gray-200">Salary</label>
-                                <input type="text" id="salary" name="salary" autocomplete="off"
+                                <input type="number" id="salary" name="salary" autocomplete="off"
                                     placeholder="Enter salary" value="{{ old('salary') }}"
                                     class="form-input mt-1 block w-full rounded-md border-gray-500 dark:border-gray-600 shadow-sm 
                focus:border-blue-500 dark:focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-900 
@@ -167,10 +187,12 @@
                                         {{ old('educationLevel') == 'Elementary' ? 'selected' : '' }}>Elementary
                                     </option>
                                     <option value="Junior High School"
-                                        {{ old('educationLevel') == 'Junior High School' ? 'selected' : '' }}>Junior
+                                        {{ old('educationLevel') == 'Junior High School' ? 'selected' : '' }}>
+                                        Junior
                                         High School</option>
                                     <option value="Senior High School"
-                                        {{ old('educationLevel') == 'Senior High School' ? 'selected' : '' }}>Senior
+                                        {{ old('educationLevel') == 'Senior High School' ? 'selected' : '' }}>
+                                        Senior
                                         High School</option>
                                     <option value="Associate's Degree Level"
                                         {{ old('educationLevel') == "Associate's Degree Level" ? 'selected' : '' }}>
@@ -218,7 +240,7 @@
                                         class="ml-2 px-3 py-1 bg-blue-500 text-white rounded">Edit</button>
                                 </div>
                                 <div id="local-location-suggestions"
-                                    class="absolute z-10 w-1/6 mt-1 max-h-40 overflow-y-auto bg-white border rounded shadow-md hidden">
+                                    class="absolute z-10 w-1/6 mt-1 max-h-40 overflow-y-auto bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 border rounded shadow-md hidden">
                                 </div>
                                 <div id="local-location-error" class="text-red-600 mt-1 hidden">Error
                                     fetching location data</div>
@@ -275,7 +297,7 @@
 
 
                             </div>
-                            <div class="mt-6 overflow-x-auto">
+                            <div class="mt-6 overflow-x-auto p-2">
                                 <table id="responsibilityTable"
                                     class="w-full border-collapse p-2 border border-gray-200 dark:bg-gray-800 dark:border-gray-600">
                                     <thead>
@@ -297,7 +319,7 @@
 
 
 
-                            <div class="mb-4">
+                            <div class="mb-4 p-2">
                                 <label for="hiddenInput"
                                     class="block text-sm font-medium  text-gray-700 dark:text-gray-200">Selected
                                     Responsibilities: </label>
@@ -332,7 +354,7 @@
 
 
 
-                            <div class="mt-6 overflow-x-auto">
+                            <div class="mt-6 overflow-x-auto p-2">
                                 <table id="qualificationsTable"
                                     class="w-full border-collapse p-2 border border-gray-200 dark:bg-gray-800 dark:border-gray-600">
                                     <thead>
@@ -351,7 +373,7 @@
                             </div>
 
 
-                            <div class="mb-4">
+                            <div class="mb-4 p-2">
                                 <label for="hiddenQualificationsInput"
                                     class="block text-sm font-medium  text-gray-700 dark:text-gray-200">
                                     Selected Qualifications:
@@ -591,7 +613,8 @@
 
             cities.forEach(city => {
                 const suggestionElement = document.createElement('div');
-                suggestionElement.classList.add('suggestion');
+                suggestionElement.classList.add('suggestion', 'dark:bg-gray-800',
+                    'dark:text-white'); // Example dark mode classes
 
                 const suggestionText = document.createElement('div');
                 suggestionText.classList.add('suggestion-text');
@@ -599,7 +622,8 @@
                     `${city.name}, ${city.province}`; // Display city name and province
 
                 const plusContainer = document.createElement('div');
-                plusContainer.classList.add('plus-container');
+                plusContainer.classList.add('plus-container', 'dark:bg-gray-600',
+                    'dark:text-gray-200'); // Example dark mode classes
                 plusContainer.innerHTML = '+';
 
                 suggestionElement.appendChild(suggestionText);
@@ -618,32 +642,50 @@
             });
         }
 
-        // Handle outside click to hide suggestions
+        /* Handle outside click to hide suggestions
         document.addEventListener('click', function(event) {
             if (!document.getElementById('local-location-container').contains(event.target)) {
                 suggestionsContainer.style.display = 'none';
             }
-        });
+        });*/
     });
 
 
-    function clearFormFields() {
-        // Clear job type select
-        document.getElementById('job_title').value = '';
-        document.getElementById('job_type').value = '';
-        document.getElementById('salary').value = '';
-        document.getElementById('educationLevel').value = '';
-        document.getElementById('local-location').value = '';
-        document.getElementById('description').value = '';
-        document.getElementById('benefits').value = '';
-        document.getElementById('responsibilitySearch').value = '';
-        document.getElementById('responsibilityTableBody').innerHTML = '';
-        document.getElementById('hiddenInput').value = '';
-        document.getElementById('qualificationsInput').value = '';
-        document.getElementById('qualificationsTableBody').innerHTML = '';
-        document.getElementById('hiddenQualificationsInput').value = '';
-        document.getElementById('vacancy').value = '';
-    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('click', function(event) {
+            const localLocationContainer = document.getElementById('local-location-container');
+            const suggestionsContainer = document.getElementById('suggestionsContainer');
+
+            if (localLocationContainer && suggestionsContainer) {
+                if (!localLocationContainer.contains(event.target)) {
+                    suggestionsContainer.style.display = 'none';
+                }
+            } else {
+                console.error('Local location container or suggestions container not found.');
+            }
+        });
+
+
+
+        function clearFormFields() {
+            // Clear job type select
+            document.getElementById('job_title').value = '';
+            document.getElementById('job_type').value = '';
+            document.getElementById('salary').value = '';
+            document.getElementById('educationLevel').value = '';
+            document.getElementById('local-location').value = '';
+            document.getElementById('description').value = '';
+            document.getElementById('benefits').value = '';
+            document.getElementById('responsibilitySearch').value = '';
+            document.getElementById('responsibilityTableBody').innerHTML = '';
+            document.getElementById('hiddenInput').value = '';
+            document.getElementById('qualificationsInput').value = '';
+            document.getElementById('qualificationsTableBody').innerHTML = '';
+            document.getElementById('hiddenQualificationsInput').value = '';
+            document.getElementById('vacancy').value = '';
+        }
+    });
 </script>
 
 

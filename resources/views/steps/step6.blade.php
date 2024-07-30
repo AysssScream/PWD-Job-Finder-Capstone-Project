@@ -69,14 +69,9 @@
                                   <hr class="border-t-2 border-gray-400 rounded-full my-4">
 
                                   <!-- Adjusted text size to text-2xl -->
-                                  <span class="text-md font-regular" style="text-align: justify;"><b>Step 6:</b> To
-                                      complete
-                                      the application form, start by
-                                      accessing the online system and locating the section dedicated to educational
-                                      background. Here, input your highest educational attainment any awards received
-                                      (if applicable), the name of your
-                                      school, your specific course or major , and the year of your graduation
-                                      .As of the moment, you may type N/A for the School Graduated and Course.
+                                  <span class="text-md font-regular" style="text-align: justify;">
+                                      {!! __('messages.education.instruction') !!}
+
                                   </span>
 
                                   <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -86,59 +81,51 @@
                                       </div>
                                       <div>
                                           <div class="mt-6">
-                                              <label for="educationLevel" class="block mb-1">Highest Educational
-                                                  Attainment</label>
+                                              <label for="educationLevel"
+                                                  class="block mb-1">{{ __('messages.education.highest_educational_attainment') }}</label>
                                               <select id="educationLevel" name="educationLevel"
                                                   class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
                                                   autocomplete="on">
                                                   <option value="" selected disabled>Select Education Level...
                                                   </option>
                                                   <option value="Primary School"
-                                                      {{ old('educationLevel', $formData6['educationLevel'] ?? '') == 'Primary School' ? 'selected' : '' }}>
-                                                      Primary
-                                                      School
+                                                      {{ old('educationLevel', $education->educationLevel ?? '') == 'Primary School' ? 'selected' : '' }}>
+                                                      {{ __('messages.education.primary_school') }}
                                                   </option>
                                                   <option value="Elementary"
-                                                      {{ old('educationLevel', $formData6['educationLevel'] ?? '') == 'Elementary' ? 'selected' : '' }}>
-                                                      Elementary
+                                                      {{ old('educationLevel', $education->educationLevel ?? '') == 'Elementary' ? 'selected' : '' }}>
+                                                      {{ __('messages.education.elementary') }}
                                                   </option>
                                                   <option value="Junior High School"
-                                                      {{ old('educationLevel', $formData6['educationLevel'] ?? '') == 'Junior High School' ? 'selected' : '' }}>
-                                                      Junior High
-                                                      School </option>
+                                                      {{ old('educationLevel', $education->educationLevel ?? '') == 'Junior High School' ? 'selected' : '' }}>
+                                                      {{ __('messages.education.junior_high_school') }} </option>
                                                   <option value="Senior High School"
-                                                      {{ old('educationLevel', $formData6['educationLevel'] ?? '') == 'Senior High School' ? 'selected' : '' }}>
-                                                      Senior High
-                                                      School </option>
+                                                      {{ old('educationLevel', $education->educationLevel ?? '') == 'Senior High School' ? 'selected' : '' }}>
+                                                      {{ __('messages.education.senior_high_school') }} </option>
                                                   <option value="Associate's Degree Level"
-                                                      {{ old('educationLevel', $formData6['educationLevel'] ?? '') == "Associate's Degree Level" ? 'selected' : '' }}>
-                                                      Associate's
-                                                      Degree Level</option>
+                                                      {{ old('educationLevel', $education->educationLevel ?? '') == "Associate's Degree Level" ? 'selected' : '' }}>
+                                                      {{ __("messages.education.associate's_degree_level") }}</option>
                                                   <option value="Some College Level"
-                                                      {{ old('educationLevel', $formData6['educationLevel'] ?? '') == 'Some College Level' ? 'selected' : '' }}>
-                                                      Some College
-                                                      Level </option>
+                                                      {{ old('educationLevel', $education->educationLevel ?? '') == 'Some College Level' ? 'selected' : '' }}>
+                                                      {{ __('messages.education.some_college_level') }} </option>
                                                   <option value="College Graduate"
-                                                      {{ old('educationLevel', $formData6['educationLevel'] ?? '') == 'College Graduate' ? 'selected' : '' }}>
-                                                      College
-                                                      Graduate </option>
+                                                      {{ old('educationLevel', $education->educationLevel ?? '') == 'College Graduate' ? 'selected' : '' }}>
+                                                      {{ __('messages.education.college_graduate') }}</option>
                                                   <option value="Vocational Graduate"
-                                                      {{ old('educationLevel', $formData6['educationLevel'] ?? '') == 'Vocational Graduate' ? 'selected' : '' }}>
-                                                      Vocational Graduate</option>
+                                                      {{ old('educationLevel', $education->educationLevel ?? '') == 'Vocational Graduate' ? 'selected' : '' }}>
+                                                      {{ __('messages.education.vocational_graduate') }}</option>
                                                   <option value="Vocational Undergraduate"
-                                                      {{ old('educationLevel', $formData6['educationLevel'] ?? '') == 'Vocational Undergraduate' ? 'selected' : '' }}>
-                                                      Vocational
-                                                      Undergraduate</option>
+                                                      {{ old('educationLevel', $education->educationLevel ?? '') == 'Vocational Undergraduate' ? 'selected' : '' }}>
+                                                      {{ __('messages.education.vocational_undergraduate') }}</option>
                                                   <option value="Bachelor's Degree Level"
-                                                      {{ old('educationLevel', $formData6['educationLevel'] ?? '') == "Bachelor's Degree Level" ? 'selected' : '' }}>
-                                                      Bachelor's
-                                                      Degree Level</option>
+                                                      {{ old('educationLevel', $education->educationLevel ?? '') == "Bachelor's Degree Level" ? 'selected' : '' }}>
+                                                      {{ __("messages.education.bachelor's_degree_level") }}</option>
                                                   <option value="Masteral Degree Level"
-                                                      {{ old('educationLevel', $formData6['educationLevel'] ?? '') == 'Masteral Degree Level' ? 'selected' : '' }}>
-                                                      Masteral Degree Level</option>
+                                                      {{ old('educationLevel', $education->educationLevel ?? '') == 'Masteral Degree Level' ? 'selected' : '' }}>
+                                                      {{ __('messages.education.masteral_degree_level') }}</option>
                                                   <option value="Doctoral Degree Level"
-                                                      {{ old('educationLevel', $formData6['educationLevel'] ?? '') == 'Doctoral Degree Level' ? 'selected' : '' }}>
-                                                      Doctoral Degree Level</option>
+                                                      {{ old('educationLevel', $education->educationLevel ?? '') == 'Doctoral Degree Level' ? 'selected' : '' }}>
+                                                      {{ __('messages.education.doctoral_degree_level') }}</option>
                                               </select>
                                               @error('educationLevel')
                                                   <div class="text-red-600 mt-1">{{ $message }}</div>
@@ -146,8 +133,8 @@
                                           </div>
 
                                           <div class="mt-6">
-                                              <label for="school" class="block mb-1">School Graduated (Type N/A if
-                                                  not applicable)</label>
+                                              <label for="school"
+                                                  class="block mb-1">{{ __('messages.education.school_graduated') }}</label>
                                               <input type="text" id="school" name="school"
                                                   placeholder="Jose Rizal University"
                                                   class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
@@ -159,8 +146,8 @@
                                           </div>
 
                                           <div class="mt-6">
-                                              <label for="course" class="block mb-1">Course (Type N/A if
-                                                  not applicable)</label>
+                                              <label for="course"
+                                                  class="block mb-1">{{ __('messages.education.course') }}</label>
                                               <input type="text" id="course" name="course"
                                                   placeholder="Bachelor of Science in Information Technology"
                                                   class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
@@ -171,7 +158,8 @@
                                           </div>
 
                                           <div class="mt-6">
-                                              <label for="yearGraduated" class="block mb-1">Year Graduated</label>
+                                              <label for="yearGraduated"
+                                                  class="block mb-1">{{ __('messages.education.year_graduated') }}</label>
                                               <input type="number" id="yearGraduated" name="yearGraduated"
                                                   class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
                                                   min="1900" max="2099" placeholder="Year Graduated"
@@ -186,7 +174,8 @@
                                       <div>
 
                                           <div class="mt-6">
-                                              <label for="awards" class="block mb-1">Awards</label>
+                                              <label for="awards"
+                                                  class="block mb-1">{{ __('messages.education.awards') }}</label>
                                               <textarea id="awards" placeholder=" Ex. • Cum Laude" name="awards"
                                                   class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200">{{ old('awards', $formData6['awards'] ?? '') }}</textarea>
                                               @error('awards')

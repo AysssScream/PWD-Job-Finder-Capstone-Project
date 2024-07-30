@@ -13,8 +13,9 @@
                             <nav class="text-blue-500 text-lg" aria-label="Breadcrumb">
                                 <ol class="list-none p-0 inline-flex">
                                     <li class="flex items-center">
-                                        <a href="{{ route('welcome') }}" class="hover:text-black text-lg">
-                                            <i class="fas fa-home"></i> Home
+                                        <a href="{{ route('welcome') }}"
+                                            class="hover:text-black dark:hover:text-white text-lg">
+                                            <i class="fas fa-home"></i> {{ __('messages.auth.home') }}
                                         </a>
                                         <svg class="h-5 w-auto text-gray-500 mx-1" fill="currentColor"
                                             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -24,14 +25,14 @@
                                         </svg>
                                     </li>
                                     <li class="flex items-center">
-                                        <a href="" class="text-black text-lg dark:text-gray-200">Login</a>
+                                        <a href="" class="text-black text-lg dark:text-gray-200">
+                                            {{ __('messages.auth.login') }}</a>
                                     </li>
                                 </ol>
                             </nav>
                             <div class="mb-4 text-md text-black-600 dark:text-gray-200 text-justify">
                                 <i class="fas fa-sign-in-alt mr-2 text-blue-500"></i>
-                                Enter your account email address and password to login. <br>
-                                If you encounter any issues. Please contact our support team for assistance.
+                                {!! __('messages.auth.login_instructions') !!}
                             </div>
                             <img src="/images/bannerlogin.png" alt="Image description"
                                 class="block mx-auto w-full h-auto max-w-2xl rounded-lg">
@@ -42,6 +43,7 @@
                                     <div>
                                         <div>
                                             <x-input-label for="email" :value="__('Email')" />
+
                                             <x-text-input id="email" class="block mt-1 w-full" type="email"
                                                 name="email" :value="old('email')" required autofocus
                                                 autocomplete="username" placeholder="Enter Your Email" />
@@ -62,7 +64,8 @@
                                                     class="rounded dark:bg-black-900 border-black-300 dark:border-black-700 text-black-600 shadow-sm focus:ring-black-500 dark:focus:ring-black-600 dark:focus:ring-offset-black-800"
                                                     name="remember">
                                                 <span
-                                                    class="ms-2 text-sm text-black-600 dark:text-gray-200">{{ __('Remember me') }}</span>
+                                                    class="ms-2 text-sm text-black-600 dark:text-gray-200">{{ __('messages.auth.remember_me') }}</span>
+
                                             </label>
                                         </div>
                                         <br>
@@ -70,12 +73,12 @@
                                             @if (Route::has('password.requestpass'))
                                                 <a class="underline text-sm text-black-600 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black-500 dark:focus:ring-offset-gray-800"
                                                     href="{{ route('password.requestpass') }}">
-                                                    {{ __('Forgot your password?') }}
+                                                    {{ __('messages.auth.forgot_password') }}
                                                 </a>
                                             @endif
 
                                             <x-primary-button class="ms-3">
-                                                {{ __('Log in') }}
+                                                {{ __('messages.auth.login') }}
                                             </x-primary-button>
                                         </div>
                                     </div>

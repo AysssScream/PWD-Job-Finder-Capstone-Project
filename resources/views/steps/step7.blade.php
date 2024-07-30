@@ -64,17 +64,9 @@
                                 </nav>
                             </div>
                             <hr class="border-t-2 border-gray-400 rounded-full my-4">
-                            <span class="text-md font-regular" style="text-align: justify;"><b> Step 7: </b> To
-                                effectively complete the web form
-                                concerning disability occurrence and status, first, select from the dropdown menu under
-                                "Specify Disability Occurrence" and indicate whether your disability is Visual,
-                                Physical,
-                                Hearing, Psychosocial, or Others, providing specific details if choosing the latter.
-                                Then, in the "Disability Status" section, check the appropriate boxes for Visual,
-                                Physical, Hearing, or Others, and add specifics if selecting "Others." Finally, upload
-                                your Person With Disability (PWD) ID by clicking "Choose File" under "Upload PWD ID,"
-                                ensuring no previous files are selected, and optionally upload a profile picture using
-                                the same method if needed.
+                            <span class="text-md font-regular" style="text-align: justify;">
+                                {!! __('messages.pwdinfo.instruction') !!}
+
                             </span>
                             <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
                                 <div>
@@ -85,28 +77,29 @@
 
                                     <div class="mt-6">
                                         <div class="flex flex-col mr-4 w-full ">
-                                            <label for="disabilityOccurrence" class="block mb-1">Disability
-                                                Occurrence:</label>
+                                            <label for="disabilityOccurrence"
+                                                class="block mb-1">{{ __('messages.pwdinfo.disability_occurrence.label') }}</label>
                                             <select id="disabilityOccurrence" name="disabilityOccurrence"
                                                 class="p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
                                                 onchange="toggleOtherDisabilityField()">
-                                                <option value="" selected disabled>Specify Disability
-                                                    Occurrence...</option>
+                                                <option value="" selected disabled>
+                                                    {{ __('messages.pwdinfo.disability_occurrence.placeholder') }}
+                                                </option>
                                                 <option value="Birth"
                                                     {{ old('disabilityOccurrence', $formData7['disabilityOccurrence'] ?? '') == 'Birth' ? 'selected' : '' }}>
-                                                    Since Birth
+                                                    {{ __('messages.pwdinfo.disability_occurrence.options.birth') }}
                                                 </option>
                                                 <option value="Before Employment"
                                                     {{ old('disabilityOccurrence', $formData7['disabilityOccurrence'] ?? '') == 'Before Employment' ? 'selected' : '' }}>
-                                                    Before Employment
+                                                    {{ __('messages.pwdinfo.disability_occurrence.options.before_employment') }}
                                                 </option>
                                                 <option value="After Employment"
                                                     {{ old('disabilityOccurrence', $formData7['disabilityOccurrence'] ?? '') == 'After Employment' ? 'selected' : '' }}>
-                                                    After Employment
+                                                    {{ __('messages.pwdinfo.disability_occurrence.options.after_employment') }}
                                                 </option>
                                                 <option value="Other"
                                                     {{ old('disabilityOccurrence', $formData7['disabilityOccurrence'] ?? '') == 'Other' ? 'selected' : '' }}>
-                                                    Other
+                                                    {{ __('messages.pwdinfo.disability_occurrence.options.other') }}
                                                 </option>
                                             </select>
                                             @error('disabilityOccurrence')
@@ -114,8 +107,8 @@
                                             @enderror
                                         </div>
 
-                                        <label for="otherDisabilityDetails" class="block  mt-8">If you chose others,
-                                            fill up the input field below:</label>
+                                        <label for="otherDisabilityDetails" class="block  mt-8">
+                                            {{ __('messages.pwdinfo.others_specify') }}</label>
                                         <div class="flex items-center mt-2" id="otherDisabilityField">
 
                                             <input type="text" id="otherDisabilityDetails"
@@ -129,7 +122,8 @@
                                         @enderror
 
 
-                                        <label for="fileUpload" class="block mb-1 mt-6">Upload PWD ID</label>
+                                        <label for="fileUpload" class="block mb-1 mt-6">
+                                            {{ __('messages.pwdinfo.upload_pwd_id') }}</label>
                                         <div class="relative border rounded overflow-hidden mt-4">
 
                                             <input type="file" id="fileUpload" name="fileUpload"
@@ -164,7 +158,7 @@
 
                                 </div>
                                 <div class="mt-6">
-                                    <label class="block mb-2 ">Disability Status:</label>
+                                    <label class="block mb-2 ">{{ __('messages.pwdinfo.disability_status') }}</label>
                                     <div class="flex flex-wrap justify-start items-center">
                                         <div class="radio-group">
                                             <input type="radio" id="disability_visual" name="disability"
@@ -172,35 +166,38 @@
                                                 {{ old('disability', $formData7['disability'] ?? '') == 'Visual' ? 'checked' : '' }}>
                                             <label for="disability_visual" class="mr-4"><i
                                                     class="fas fa-eye mr-1"></i>
-                                                Visual </label>
+                                                {{ __('messages.pwdinfo.disability_visual') }}</label>
                                         </div>
                                         <div class="radio-group">
                                             <input type="radio" id="disability_psychosocial" name="disability"
                                                 value="Psychosocial" class="mr-2" onchange="showTextBox()"
                                                 {{ old('disability', $formData7['disability'] ?? '') == 'Psychosocial' ? 'checked' : '' }}>
                                             <label for="disability_psychosocial" class="mr-4"><i
-                                                    class="fas fa-brain mr-1"></i> Psychosocial</label>
+                                                    class="fas fa-brain mr-1"></i>
+                                                {{ __('messages.pwdinfo.disability_psychosocial') }}</label>
                                         </div>
                                         <div class="radio-group">
                                             <input type="radio" id="disability_physical" name="disability"
                                                 value="Physical" class="mr-2" onchange="showTextBox()"
                                                 {{ old('disability', $formData7['disability'] ?? '') == 'Physical' ? 'checked' : '' }}>
                                             <label for="disability_physical" class="mr-4"><i
-                                                    class="fas fa-wheelchair mr-1"></i> Physical</label>
+                                                    class="fas fa-wheelchair mr-1"></i>{{ __('messages.pwdinfo.disability_physical') }}</label>
                                         </div>
                                         <div class="radio-group">
                                             <input type="radio" id="disability_hearing" name="disability"
                                                 value="Hearing" class="mr-2" onchange="showTextBox()"
                                                 {{ old('disability', $formData7['disability'] ?? '') == 'Hearing' ? 'checked' : '' }}>
                                             <label for="disability_hearing" class="mr-4"><i
-                                                    class="fas fa-deaf mr-1"></i> Hearing</label>
+                                                    class="fas fa-deaf mr-1"></i>
+                                                {{ __('messages.pwdinfo.disability_hearing') }}</label>
                                         </div>
                                         <div class="radio-group">
                                             <input type="radio" id="disability_others" name="disability"
                                                 value="Others" class="mr-2" onchange="showTextBox()"
                                                 {{ old('disability', $formData7['disability'] ?? '') == 'Others' ? 'checked' : '' }}>
                                             <label for="disability_others" class="mr-4"><i
-                                                    class="fas fa-handshake mr-1"></i> Others</label>
+                                                    class="fas fa-handshake mr-1"></i>
+                                                {{ __('messages.pwdinfo.disability_others') }}</label>
                                         </div>
                                         @error('disability')
                                             <div class="text-red-600 mt-1">{{ $message }}</div>
@@ -208,7 +205,8 @@
 
                                         <div id="disabilityTextBox"
                                             class="mt-6 {{ old('disability', $formData7['disability'] ?? '') == 'others' ? '' : '' }} w-full">
-                                            <label class="block mb-2">Specify Disability:</label>
+                                            <label class="block mb-2">
+                                                {{ __('messages.pwdinfo.specify_disability') }}</label>
                                             <input type="text" id="disabilityDetails" name="disabilityDetails"
                                                 class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
                                                 value="{{ old('disabilityDetails', $formData7['disabilityDetails'] ?? '') }}"
@@ -221,8 +219,8 @@
                                         </div>
 
                                         <div class="mt-6">
-                                            <label for="profilePicture" class="block mb-1 ">Upload Profile
-                                                Picture</label>
+                                            <label for="profilePicture" class="block mb-1 ">
+                                                {{ __('messages.pwdinfo.upload_profile_picture') }}</label>
                                             <div class="relative border rounded overflow-hidden mt-3">
                                                 <input type="file" id="profilePicture" name="profilePicture"
                                                     class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*"
@@ -264,11 +262,7 @@
                                 <label for="acceptTerms" class="flex items-center text-justify">
                                     <input type="checkbox" id="acceptTerms" name="acceptTerms" class="mr-4"
                                         {{ old('acceptTerms', isset($formData9['acceptTerms']) ? $formData9['acceptTerms'] : false) ? 'checked' : '' }}>
-                                    This is to certify that all data/information that I have
-                                    provided in this form are true to the best of my knowledge. This
-                                    is also to authorize PDAD Mandaluyong to include my profile in
-                                    the Employment Information System and use my personal
-                                    information for employment facilitation.
+                                    {{ __('messages.pwdinfo.terms') }}
                                 </label>
                             </div>
                         </div>
