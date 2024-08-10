@@ -1,4 +1,4 @@
-<div class="py-7 grid grid-cols-1 gap-6 max-w-7xl mx-auto sm:px-6 lg:px-8">
+<div class="py-7 grid grid-cols-1 gap-6 max-w-8xl mx-auto sm:px-6 lg:px-8">
     <h2 class="text-xl px-4 mt-4 md:px-4 font-semibold text-gray-900 dark:text-white focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
         aria-label="{{ __('messages.profile.Accessibility Settings') }}" tabindex="0">
         {{ __('messages.profile.Accessibility Settings') }}</h2>

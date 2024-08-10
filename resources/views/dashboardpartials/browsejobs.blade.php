@@ -1,7 +1,7 @@
 <section class=" w-full lg:w-4/5 bg-white dark:bg-gray-800 shadow-lg sm:rounded-lg p-6 ">
     <div class="text-gray-900 dark:text-gray-100">
         <div class="max-w-full mx-auto">
-            <form action="{{ route('jobs.search') }}" method="GET" class="max-w-7xl mx-auto">
+            <form action="{{ route('jobs.search') }}" method="GET" class="max-w-8xl mx-auto">
                 @csrf
                 <div class="flex">
                     <!-- Dropdown Filter -->
@@ -371,7 +371,7 @@
                         {{ __('messages.job.Previous') }}
                     </span>
                 @else
-                    <a href="{{ $jobs->previousPageUrl() }}"
+                    <a href="{{ $jobs->previousPageUrl() }}" tabindex="0"
                         class="w-full sm:w-auto px-4 py-2 mb-2 sm:mb-0 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 rounded-md hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
                         {{ __('messages.job.Previous') }}
                     </a>
@@ -395,7 +395,7 @@
                         {{ __('messages.job.Next') }}
                     </a>
                 @else
-                    <span aria-label="Next"
+                    <span aria-label="Next" tabindex="0"
                         class="w-full sm:w-auto px-4 py-2 mt-2 sm:mt-0 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 rounded-md cursor-not-allowed focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
                         {{ __('messages.job.Next') }}
                     </span>

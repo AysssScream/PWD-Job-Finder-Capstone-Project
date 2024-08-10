@@ -11,7 +11,7 @@
     <div class="py-12">
         <div class="container mx-auto">
             <div class="flex justify-center">
-                <div class="w-5/6">
+                <div class="w-full">
                     <form action="{{ route('jobpreferences') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @if ($errors->any())
@@ -29,7 +29,8 @@
                         @endif
                         <div class="bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-200 shadow-md rounded-lg">
                             <div class="p-6">
-                                <h3 class="text-2xl font-bold mb-2 inline-flex items-center justify-between w-full">
+                                <h3 class="text-2xl font-bold mb-2 inline-flex items-center justify-between w-full focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                    tabindex="0">
                                     Job Preferences
                                     @php
                                         $currentStep = 4; // Set this dynamically based on your current step
@@ -52,22 +53,29 @@
                                     <nav class="text-sm" aria-label="Breadcrumb">
                                         <ol class="list-none p-0 inline-flex">
                                             <li class="flex items-center">
-                                                <i class="fas fa-arrow-left mr-2 text-gray-700 dark:text-gray-200"></i>
+                                                <i class="fas fa-arrow-left mr-2 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                    tabindex="0"></i>
                                                 <a href="{{ route('workexp') }}"
-                                                    class="text-gray-700 dark:text-gray-200">Employment
+                                                    class="text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">Employment
                                                     History
                                                     and Work Experience</a>
                                                 <span class="mx-2 text-gray-500">/</span>
                                             </li>
                                             <li class="flex items-center">
-                                                <span class="text-blue-500 font-semibold">Job Preferences</span>
+                                                <span
+                                                    class="text-blue-500 font-semibold focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                    tabindex="0">Job
+                                                    Preferences</span>
                                             </li>
                                         </ol>
                                     </nav>
                                 </div>
                                 <hr class="border-t-2 border-gray-400 rounded-full my-4">
-                                <!-- Adjusted text size to text-2xl -->
-                                {!! __('messages.jobpreferences.instruction') !!}
+                                <div class="focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                    tabindex="0" aria-label=" {!! __('messages.jobpreferences.instruction') !!}">
+                                    {!! __('messages.jobpreferences.instruction') !!}
+                                </div>
+
 
                                 <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
                                     <div>
@@ -79,7 +87,8 @@
                                             <label for="preferredOccupation"
                                                 class="block mb-1">{{ __('messages.jobpreferences.preferred_occupation') }}</label>
                                             <input type="text" id="preferredOccupation" name="preferredOccupation"
-                                                class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 "
+                                                aria-label="{{ __('messages.jobpreferences.preferred_occupation') }}"
+                                                class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 "
                                                 pattern="[A-Za-z\s]+" title="Please enter alphabetic characters only"
                                                 placeholder="Ex. Domestic Helper"
                                                 value="{{ old('preferredOccupation', $formData4['preferredOccupation'] ?? '') }}" />
@@ -95,13 +104,15 @@
                                                 class="block mb-1">{{ __('messages.jobpreferences.preferred_work_location_local') }}</label>
                                             <div class="flex">
                                                 <input type="text" id="local-location" name="local-location"
-                                                    class="flex-1 p-2 border rounded shadow-sm bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                    aria-label="{{ __('messages.jobpreferences.preferred_work_location_local') }}"
+                                                    class="flex-1 p-2 border rounded shadow-sm bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                     pattern="[A-Za-z\sñ]+"
                                                     title="Please enter alphabetic characters only"
                                                     placeholder="Ex. Makati, MM"
                                                     value="{{ old('local-location', $formData4['local-location'] ?? '') }}"readonly />
                                                 <button id="editLocationButton" type="button"
-                                                    class="ml-2 px-3 py-1 bg-blue-500 text-white rounded">Edit</button>
+                                                    aria-label="{{ __('messages.edit') }}"
+                                                    class="ml-2 px-3 py-1 bg-blue-500 text-white rounded focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">{{ __('messages.edit') }}</button>
                                             </div>
                                             <div id="local-location-suggestions"
                                                 class="absolute z-10 mt-1 w-full max-h-90 overflow-y-auto bg-gray-200 text-black dark:bg-gray-900 dark:text-gray-200 border rounded shadow-md hidden">
@@ -120,17 +131,18 @@
                                                 class="block mb-1">{{ __('messages.jobpreferences.preferred_work_location_overseas') }}</label>
                                             <div class="flex">
                                                 <input type="text" id="overseas-location" name="overseas-location"
-                                                    class="flex-1 p-2 border rounded shadow-sm bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                    aria-label="{{ __('messages.jobpreferences.preferred_work_location_overseas') }}"
+                                                    class="flex-1 p-2 border rounded shadow-sm bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                     pattern="[A-Za-z\s]+"
                                                     title="Please enter alphabetic characters only"
                                                     placeholder="Ex. Japan"
                                                     value="{{ old('overseas-location', $formData4['overseas-location'] ?? '') }}"
                                                     readonly />
-                                                <button id="editButton"
-                                                    class="ml-2 px-3 py-1 bg-blue-500 text-white rounded">Edit</button>
+                                                <button id="editButton" aria-label="{{ __('messages.edit') }}"
+                                                    class="ml-2 px-3 py-1 bg-blue-500 text-white rounded focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">{{ __('messages.edit') }}</button>
                                             </div>
                                             <div id="overseas-location-suggestions"
-                                                class="absolute z-10 mt-1 w-full max-h-90 overflow-y-autobg-gray-200 text-black dark:bg-gray-900 dark:text-gray-200  border rounded shadow-md hidden">
+                                                class="absolute z-10 mt-1 w-full max-h-90 overflow-y-auto bg-gray-200 text-black dark:bg-gray-900 dark:text-gray-200  border rounded shadow-md hidden">
                                             </div>
                                             <div id="overseas-location-error" class="text-red-600 mt-1 hidden">Error
                                                 fetching location data</div>
@@ -147,11 +159,11 @@
 
                                 </div>
                                 <div class="mt-4 text-right">
-                                    <a href="{{ route('workexp') }}"
-                                        class="inline-block py-2 px-4 bg-black text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mr-2">Previous</a>
+                                    <a href="{{ route('workexp') }}" aria-label=" {{ __('messages.previous') }}"
+                                        class="inline-block py-2 px-4 bg-black text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 mr-2">{{ __('messages.previous') }}</a>
 
-                                    <button type="submit"
-                                        class="inline-block py-2 px-4 bg-green-600 text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">Save</button>
+                                    <button type="submit" aria-label=" {{ __('messages.save') }}"
+                                        class="inline-block py-2 px-4 bg-green-600 text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">{{ __('messages.save') }}</button>
                                 </div>
                             </div>
                         </div>

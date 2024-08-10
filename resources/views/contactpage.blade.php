@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AccessiJobs | Contact Page</title>
+    <link rel="icon" href="{{ asset('/images/first17.png') }}" type="image/png">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" id="picostrap-styles-css" href="https://cdn.livecanvas.com/media/css/library/bundle.css"
@@ -55,7 +57,7 @@
                             <li id="menu-item-aboutus"
                                 class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home nav-item nav-item-32738">
                                 <a href="{{ route('faq') }}" class="nav-link underline-on-hover">
-                                    <i class="fas fa-info-circle"></i> FAQ
+                                    <i class="fas fas fa-question-circle"></i> FAQ
                                 </a>
                             </li>
                             <li id="menu-item-contact"
@@ -148,37 +150,53 @@
                         to contact us through any of the methods below. We're looking forward to hearing from you!</p>
                 </div>
             </div>
-            <div class="row g-0 text-center">
-                <div class="col-lg-4 mb-4">
-                    <div class="lc-block shadow p-3 mb-4">
-                        <img src="/images/phone.png" alt="Phone Icon" style="width: 50px;">
-                        <h4 class="mt-2">Call to ask any question</h4>
-                        <p><a href="tel:+0123456789" style="text-decoration: none; color: #00aaff;">+012 345 6789</a>
-                        </p>
+            <div class="container py-4">
+                <div class="row text-center">
+                    <div id="phone-section" class="col-md-4 mb-4">
+                        <div
+                            class="d-flex flex-column justify-content-between h-100 p-3 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 shadow rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-300">
+                            <div class="text-center mb-3 mt-4">
+                                <i class="fas fa-phone icon fa-2xl mx-auto"></i>
+                            </div>
+                            <h4 class="mt-2">Call to ask any question</h4>
+                            <p><a href="tel:+0123456789" class="text-primary"
+                                    style="text-decoration: none;">8532-5001 local 596</a></p>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-4 mb-4">
-                    <div class="lc-block shadow p-3 mb-4">
-                        <img src="/images/email.png" alt="Email Icon" style="width: 50px;">
-                        <h4 class="mt-2">Email to get free quote</h4>
-                        <p><a href="mailto:info@example.com"
-                                style="text-decoration: none; color: #00aaff;">info@example.com</a></p>
+                    <div id="email-section" class="col-md-4 mb-4">
+                        <div
+                            class="d-flex flex-column justify-content-between h-100 p-3 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 shadow rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-300">
+                            <div class="text-center mb-3 mt-4">
+                                <i class="fas fa-envelope icon fa-2xl mx-auto"></i>
+                            </div>
+                            <h4 class="mt-2">Email to get free quote</h4>
+                            <p><a href="mailto:info@example.com" class="text-primary"
+                                    style="text-decoration: none;">dpad@mandaluyong.gov.ph</a></p>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-4 mb-4">
-                    <div class="lc-block shadow p-3 mb-4">
-                        <img src="/images/location.png" alt="Location Icon" style="width: 50px;">
-                        <h4 class="mt-2">Visit our office</h4>
-                        <p>123 Street, NY, USA</p>
+                    <div id="location-section" class="col-md-4 mb-4">
+                        <div
+                            class="d-flex flex-column justify-content-between h-100 p-3 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 shadow rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-300">
+                            <div class="text-center mb-3 mt-4">
+                                <i class="fas fa-building icon fa-2xl mx-auto"></i>
+                            </div>
+                            <h4 class="mt-2">Visit our office</h4>
+                            <p class="text-center"><b>Back of Executive Bldg.</b><br>
+                            <p class="text-primary">City Government Complex, Maysilo Circle, Plainview</p>
+                        </div>
                     </div>
                 </div>
             </div>
+
+
             <div class="row g-0">
                 <div class="col-lg-4 offset-lg-1 px-2 px-lg-0">
                     <div class="lc-block text-center text-lg-start mb-5 mb-lg-4">
                         <div class="d-inline-flex align-items-center">
-                            <div class="ms-3" editable="rich">
-                                <h2 class="fw-bold rfs-20">Send us a mail!</h2>
+                            <div editable="rich">
+                                <h2 class="fw-bold rfs-20">
+                                    <i class="fas fa-envelope"></i> Send us a mail!
+                                </h2>
                             </div>
                         </div>
                     </div>
@@ -308,11 +326,11 @@
                         <!-- /lc-block -->
                         <div class="lc-block small">
                             <div editable="rich">
-                                <p>Home</p>
-                                <p>Find Jobs<br>
-                                </p>
-                                <p>About Us</p>
-                                <p>FAQ </p>
+                                <p><i class="fas fa-home" style="margin-right: 8px;"></i> Home</p>
+                                <p><i class="fas fa-briefcase" style="margin-right: 8px;"></i> Find Jobs</p>
+                                <p><i class="fas fa-info-circle" style="margin-right: 8px;"></i> About Us</p>
+                                <p><i class="fas fa-question-circle" style="margin-right: 8px;"></i> FAQ</p>
+
                             </div>
                         </div>
                         <!-- /lc-block -->
@@ -327,31 +345,41 @@
                         <div class="lc-block small">
                             <div editable="rich">
                                 <p></p>
-                                <p>Ask For Support</p>
-                                <p><i class="fab fa-facebook" style="margin-right: 8px;"></i> Facebook</p>
-                                <p><i class="fab fa-instagram" style="margin-right: 8px;"></i> Instagram</p>
-                                <p><i class="fab fa-twitter" style="margin-right: 8px;"></i> Twitter</p>
+                                <p><i class="fas fa-life-ring" style="margin-right: 8px;"></i> Ask For Support</p>
+                                <p><a href="https://www.facebook.com/PDADMandaluyong" target="_blank"
+                                        class="text-gray-200 dark:text-gray-200" style="text-decoration: none;">
+                                        <i class="fab fa-facebook" style="margin-right: 8px;"></i> Facebook
+                                    </a></p>
+
+                                {{-- <p><i class="fab fa-instagram" style="margin-right: 8px;"></i> Instagram</p> --}}
+                                <p><a href="https://x.com/MandaluyongPIO" target="_blank"
+                                        class="text-gray-200 dark:text-gray-200 no-underline"
+                                        style="text-decoration: none;">
+                                        <i class="fab fa-twitter" style="margin-right: 8px;"></i> Twitter
+                                    </a></p>
                             </div>
                         </div>
                         <!-- /lc-block -->
                     </div>
-                    {{-- <div class="col-lg-2 offset-lg-1">
+                    <div class="col-lg-2 offset-lg-1">
                         <div class="lc-block mb-4">
                             <div editable="rich">
-                                <h4>Downloads</h4>
+                                <h4>Location</h4>
                             </div>
                         </div>
                         <!-- /lc-block -->
                         <div class="lc-block small">
                             <div editable="rich">
-                                <p>Vertex 1.2</p>
-                                <p>Templates</p>
-                                <p>Sounds</p>
-                                <p>Gradients</p>
+                                <p><i class="fas fa-map-marker-alt"></i> Mandaluyong City Hall, Maysilo Circle,
+                                    Mandaluyong, Metro Manila, Philippines</p>
+                                <p><i class="fas fa-phone-alt"></i> (02) 8532 5001</p>
+                                <p><i class="fas fa-clock"></i> Open Hours of Government: Mon-Fri: 7:00 am - 5:00pm
+                                </p>
+                                <p><i class="fas fa-envelope"></i> info@mandaluyong.gov.ph</p>
                             </div>
                         </div>
                         <!-- /lc-block -->
-                    </div> --}}
+                    </div>
                 </div>
             </div>
             <div class="py-5 container">
@@ -388,34 +416,49 @@
 </body>
 
 <script>
-    const themeSwitch = document.getElementById('themeSwitch');
-    const logoImage = document.getElementById('logoImage');
+    document.addEventListener('DOMContentLoaded', () => {
+        const themeSwitch = document.getElementById('themeSwitch');
+        const logoImage = document.getElementById('logoImage');
 
-    // Retrieve current theme from localStorage or default to 'light'
-    const currentTheme = localStorage.getItem('theme') || 'light';
-
-    // Apply the current theme on page load
-    document.body.classList.add(currentTheme);
-    if (currentTheme === 'dark') {
-        themeSwitch.checked = true;
-        logoImage.src = logoImage.getAttribute('data-dark');
-    } else {
-        logoImage.src = logoImage.getAttribute('data-light');
-    }
-
-    // Event listener for theme switch toggle
-    themeSwitch.addEventListener('change', () => {
-        if (themeSwitch.checked) {
-            document.body.classList.remove('light');
-            document.body.classList.add('dark');
-            localStorage.setItem('theme', 'dark');
-            logoImage.src = logoImage.getAttribute('data-dark');
-        } else {
-            document.body.classList.remove('dark');
-            document.body.classList.add('light');
-            localStorage.setItem('theme', 'light');
-            logoImage.src = logoImage.getAttribute('data-light');
+        if (!themeSwitch || !logoImage) {
+            console.error('Theme switch or logo image elements not found!');
+            return;
         }
+
+        // Retrieve the current theme from localStorage or default to 'light'
+        const currentTheme = localStorage.getItem('theme') || 'light';
+
+        // Apply the current theme on page load
+        document.body.classList.add(currentTheme);
+        console.log('Current theme on load:', currentTheme);
+
+        // Set the state of the theme switch and logo image based on the current theme
+        if (currentTheme === 'dark') {
+            themeSwitch.checked = true;
+            logoImage.src = logoImage.getAttribute('data-dark');
+            console.log('Switching to dark theme on load');
+        } else {
+            themeSwitch.checked = false;
+            logoImage.src = logoImage.getAttribute('data-light');
+            console.log('Switching to light theme on load');
+        }
+
+        // Event listener for theme switch toggle
+        themeSwitch.addEventListener('change', () => {
+            if (themeSwitch.checked) {
+                document.body.classList.remove('light');
+                document.body.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                logoImage.src = logoImage.getAttribute('data-dark');
+                console.log('Theme changed to dark');
+            } else {
+                document.body.classList.remove('dark');
+                document.body.classList.add('light');
+                localStorage.setItem('theme', 'light');
+                logoImage.src = logoImage.getAttribute('data-light');
+                console.log('Theme changed to light');
+            }
+        });
     });
 </script>
 

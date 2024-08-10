@@ -7,11 +7,12 @@
         <link rel="preload" href="{{ asset('css/layouts.css') }}" as="style">
         <link rel="preload" href="{{ asset('css/layouts.css') }}" as="style"
             onload="this.onload=null;this.rel='stylesheet'">
+        <title>Saved Jobs</title>
         <link rel="preload" href="/images/team.png" as="image">
         <link href="{{ asset('fontawesome-free-6.5.2-web/css/all.min.css') }}" rel="stylesheet">
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="py-20">
+            <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                         <div class="flex items-center justify-between  ">
@@ -53,41 +54,60 @@
                                     @foreach ($savedJobs as $job)
                                         <tr>
                                             <td class="px-6 py-4 whitespace-nowrap font-medium text-center text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
-                                                tabindex="0" aria-label=" {{ $job->company_name }}">
+                                                tabindex="0" aria-label="{{ $job->company_name }}">
                                                 {{ $job->company_name }}
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-center text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
-                                                tabindex="0" aria-label=" {{ $job->title }}">
+                                                tabindex="0" aria-label="{{ $job->title }}">
                                                 {{ $job->title }}
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-center text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
-                                                tabindex="0" aria-label=" {{ $job->location }}">
+                                                tabindex="0" aria-label="{{ $job->location }}">
                                                 {{ $job->location }}
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-center font-medium">
-
                                                 <a href="{{ route('jobs.info', ['company_name' => Str::slug($job->company_name), 'id' => $job->job_id]) }}"
                                                     aria-label="{!! __('messages.savedjobs.view_job') !!}"
                                                     class="inline-flex items-center bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-700 focus:outline-none focus:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
                                                     <i class="fas fa-briefcase mr-1"></i> {!! __('messages.savedjobs.view_job') !!}
                                                 </a>
-                                                <form action="{{ url('') }}" method="POST" class="inline">
+                                                <form action="{{ route('save.destroy', ['id' => $job->id]) }}"
+                                                    method="POST" class="inline">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" aria-label="{!! __('messages.savedjobs.delete_job') !!}"
                                                         class="ml-2 inline-flex items-center bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700 focus:outline-none focus:bg-red-700 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
-                                                        <i class="fas fa-trash-alt mr-1"></i> {!! __('messages.savedjobs.delete_job') !!}
+                                                        <i class="fas fa-trash-alt mr-1"></i>
+                                                        {!! __('messages.savedjobs.delete_job') !!}
                                                     </button>
                                                 </form>
                                             </td>
-
                                         </tr>
                                     @endforeach
                                 </tbody>
+
+                                @if (Session::has('jobdelete'))
+                                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                                    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+                                    <script>
+                                        $(document).ready(function() {
+                                            toastr.options = {
+                                                "progressBar": true,
+                                                "closeButton": true,
+                                            }
+                                            toastr.error("{{ Session::get('jobdelete') }}", 'Job has been Deleted', {
+                                                timeOut: 5000
+                                            });
+                                        });
+                                    </script>
+                                @endif
+
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+
 </x-app-layout>

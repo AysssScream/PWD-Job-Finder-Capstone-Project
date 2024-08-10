@@ -15,7 +15,7 @@
         <div class="flex flex-col md:flex-row h-full ">
             <!-- Sidebar -->
             <div id="sidebar"
-                class="w-full md:w-64 bg-gray-100 dark:bg-gray-800 border-b md:border-r border-gray-400 dark:border-gray-600 px-4 py-6 flex-shrink-0">
+                class="w-full h-screen md:w-64 bg-gray-100 dark:bg-gray-800 border-b md:border-r border-gray-400 dark:border-gray-600 px-4 py-6 flex-shrink-0">
                 <div class="p-4">
                     <!-- Breadcrumb -->
                     <nav aria-label="breadcrumb" class="mb-4">
@@ -66,60 +66,58 @@
             </div>
 
             <!-- Main Content -->
-            <div id="mainContent" class="flex-1 p-6 bg-white dark:bg-gray-900">
+            <div id="mainContent" class="flex-1 p-6 bg-white dark:bg-gray-900 mb-6">
                 <h2 class="text-2xl font-bold text-gray-900 dark:text-white mt-4">
-                    {{ $employer->businessname }}</h1>
-                    <h4 class="text-lg font-regular text-gray-800 dark:text-gray-200 mt-2">
-                        <strong>TIN Number:</strong> {{ $employer->tinno }}
-                        <span class="block mt-2 md:inline-block md:mt-0 md:ml-20"><strong>Trade Name:
-                            </strong>{{ $employer->tradename }}
-                        </span>
-                    </h4>
-                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white mt-5">
-                        {{ 'Company Information' }}</h1>
-                    <div class="border-b border-gray-300 mt-2"></div>
-                    <li class="mt-3  text-gray-900 dark:text-gray-200"><strong>Location Type:</strong>
-                        {{ $employer->locationtype }}
-                    <li class="mt-3  text-gray-900 dark:text-gray-200"><strong>Employer Type:</strong>
-                        {{ $employer->employertype }}</li>
-                    <li class="mt-3  text-gray-900 dark:text-gray-200"><strong>Total Work Force:</strong>
-                        {{ $employer->totalworkforce }}
-                    </li>
-                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white mt-5">
-                        {{ 'Contact Information' }}</h1>
-                    <div class="border-b border-gray-300 mt-2"></div>
+                    {{ $employer->businessname }}</h2>
+                <h4 class="text-lg font-regular text-gray-800 dark:text-gray-200 mt-2">
+                    <strong>TIN Number:</strong> {{ $employer->tinno }}
+                    <span class="block mt-2 md:inline-block md:mt-0 md:ml-20"><strong>Trade Name:</strong>
+                        {{ $employer->tradename }}
+                    </span>
+                </h4>
+                <h1 class="text-2xl font-bold text-gray-900 dark:text-white mt-5">
+                    {{ 'Company Information' }}</h1>
+                <div class="border-b border-gray-300 mt-2"></div>
+                <li class="mt-3 text-gray-900 dark:text-gray-200"><strong>Location Type:</strong>
+                    {{ $employer->locationtype }}
+                </li>
+                <li class="mt-3 text-gray-900 dark:text-gray-200"><strong>Employer Type:</strong>
+                    {{ $employer->employertype }}</li>
+                <li class="mt-3 text-gray-900 dark:text-gray-200"><strong>Total Work Force:</strong>
+                    {{ $employer->totalworkforce }}
+                </li>
+                <h1 class="text-2xl font-bold text-gray-900 dark:text-white mt-5">
+                    {{ 'Contact Information' }}</h1>
+                <div class="border-b border-gray-300 mt-2"></div>
 
-                    <div class="mt-2">
-                        <li class="mt-3  text-gray-900 dark:text-gray-200"><strong>Address:</strong>
-                            {{ $employer->address }}
-                        <li class="mt-3  text-gray-900 dark:text-gray-200"><strong>City:</strong>
-                            {{ $employer->city }}
-                        <li class="mt-3  text-gray-900 dark:text-gray-200"><strong>Contact Person:</strong>
-                            {{ $employer->contact_person }}
-                        <li class="mt-3  text-gray-900 dark:text-gray-200"><strong>Position:</strong>
-                            {{ $employer->position }}
-                        </li>
-                        <li class="mt-3  text-gray-900 dark:text-gray-200"><strong>Telephone Number:</strong>
-                            {{ $employer->telephone_no }}
-                        </li>
-                        <li class="mt-3  text-gray-900 dark:text-gray-200"><strong>Mobile Number:</strong>
-                            {{ $employer->mobile_no }}
-                        </li>
-                        <li class="mt-3  text-gray-900 dark:text-gray-200"><strong>Fax Number:</strong>
-                            {{ $employer->fax_no }}
-                        </li>
-                        <li class="mt-3  text-gray-900 dark:text-gray-200"><strong>Zip Code:</strong>
-                            {{ $employer->zipCode }}
-                        </li>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                    </div>
+                <div class="mt-2">
+                    <li class="mt-3 text-gray-900 dark:text-gray-200"><strong>Address:</strong>
+                        {{ $employer->address }}
+                    </li>
+                    <li class="mt-3 text-gray-900 dark:text-gray-200"><strong>City:</strong>
+                        {{ $employer->city }}
+                    </li>
+                    <li class="mt-3 text-gray-900 dark:text-gray-200"><strong>Contact Person:</strong>
+                        {{ $employer->contact_person }}
+                    </li>
+                    <li class="mt-3 text-gray-900 dark:text-gray-200"><strong>Position:</strong>
+                        {{ $employer->position }}
+                    </li>
+                    <li class="mt-3 text-gray-900 dark:text-gray-200"><strong>Telephone Number:</strong>
+                        {{ $employer->telephone_no }}
+                    </li>
+                    <li class="mt-3 text-gray-900 dark:text-gray-200"><strong>Mobile Number:</strong>
+                        {{ $employer->mobile_no }}
+                    </li>
+                    <li class="mt-3 text-gray-900 dark:text-gray-200"><strong>Fax Number:</strong>
+                        {{ $employer->fax_no }}
+                    </li>
+                    <li class="mt-3 text-gray-900 dark:text-gray-200"><strong>Zip Code:</strong>
+                        {{ $employer->zipCode }}
+                    </li>
+                </div>
             </div>
+
         </div>
     </body>
 

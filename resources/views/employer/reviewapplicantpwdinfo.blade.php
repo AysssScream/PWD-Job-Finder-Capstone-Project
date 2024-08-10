@@ -7,6 +7,8 @@
         <link href="{{ asset('/css/layouts.css') }}" rel="stylesheet">
         <link rel="preload" href="/images/team.png" as="image">
         <link href="{{ asset('fontawesome-free-6.5.2-web/css/all.min.css') }}" rel="stylesheet">
+        <title>Review Applicant PWD Info </title>
+
     </head>
 
     <body class="bg-gray-100 dark:bg-gray-900">

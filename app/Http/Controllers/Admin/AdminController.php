@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Validator;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\WorkExperience;
@@ -18,8 +20,13 @@ use App\Models\AuditTrail;
 use App\Models\Employer;
 use App\Models\Message;
 use App\Models\Reply;
-use Carbon\Carbon;
+use App\Models\Video;
+use Session;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Http;
 
 class AdminController extends Controller
 {
@@ -105,12 +112,16 @@ class AdminController extends Controller
     public function getReplies($id)
     {
         $replies = Reply::where('message_id', $id)->get();
+        Log::info('Replies Data:', $replies->toArray());
+
         return response()->json(['replies' => $replies]);
     }
 
     public function messages()
     {
-        $messages = Message::all();
+        $userId = Auth::id();
+        $email = User::find($userId)->email;
+        $messages = Message::where('from', $email)->get();
         $replies = Reply::all();
         $users = User::all();
 
@@ -120,6 +131,37 @@ class AdminController extends Controller
             'replies' => $replies
         ]);
     }
+
+    public function videoStore(Request $request, $location)
+    {
+        $validator = Validator::make($request->all(), [
+            'video_id' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $videoId = $request->input('video_id');
+
+        // Check if a video with the same location exists
+        $video = Video::where('location', $location)->first();
+
+        if ($video) {
+            // Update the existing record
+            $video->update(['video_id' => $videoId]);
+            Session::flash('updatevideo', 'Video record updated successfully.');
+        } else {
+            // Create a new record
+            Video::create(['video_id' => $videoId, 'location' => $location]);
+            Session::flash('addvideo', 'You have successfully added a pre-recorded video.');
+        }
+
+        return redirect()->back()->with('success', 'Video ID processed successfully!');
+    }
+
 
     public function storeReply(Request $request)
     {
@@ -139,7 +181,7 @@ class AdminController extends Controller
         Reply::create([
             'message_id' => $message->id,
             'message' => $request->input('replyMessage'),
-            'reply_to' => $message->from,
+            'reply_to' => $message->to,
             'reply_from' => auth()->user()->email, // Get the email of the current user
         ]);
 
@@ -171,7 +213,7 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'Message sent successfully!');
     }
 
-    public function manageusers(Request $request)
+    public function manageUsers(Request $request)
     {
         // Extract filter values from request
         $status = $request->input('status');
@@ -200,10 +242,21 @@ class AdminController extends Controller
         $users = $query->paginate(10); // Adjust the number of items per page as needed
 
         // Count for statistics
-        $approvedCount = User::where('account_verification_status', 'approved')->count();
-        $declinedCount = User::where('account_verification_status', 'declined')->count();
-        $waitingforapprovalCount = User::where('account_verification_status', 'waiting for approval')->count();
-        $pendingCount = User::where('account_verification_status', 'pending')->count();
+        $approvedCount = User::where('account_verification_status', 'approved')
+            ->whereIn('usertype', ['user', 'employer'])
+            ->count();
+
+        $declinedCount = User::where('account_verification_status', 'declined')
+            ->whereIn('usertype', ['user', 'employer'])
+            ->count();
+
+        $waitingforapprovalCount = User::where('account_verification_status', 'waiting for approval')
+            ->whereIn('usertype', ['user', 'employer'])
+            ->count();
+
+        $pendingCount = User::where('account_verification_status', 'pending')
+            ->whereIn('usertype', ['user', 'employer'])
+            ->count();
 
         return view('admin.manageusers', [
             'users' => $users,
@@ -266,6 +319,25 @@ class AdminController extends Controller
         ]);
     }
 
+    private function getYouTubeThumbnail($videoId)
+    {
+        return "https://img.youtube.com/vi/{$videoId}/maxresdefault.jpg";
+    }
+
+    public function manageVideo()
+    {
+        // Retrieve all video records
+        $videos = Video::all();
+
+        // Add thumbnail URL to each video
+        foreach ($videos as $video) {
+            $video->thumbnail_url = $this->getYouTubeThumbnail($video->video_id);
+        }
+
+        // Pass the video records to the view
+        return view('admin.managevideos', ['videos' => $videos]);
+    }
+
 
     public function manage()
     {
@@ -308,7 +380,7 @@ class AdminController extends Controller
         // Check if user exists
         if ($user) {
             // Update the verification status
-            $user->account_verification_status = 'waiting for approval'; // or 1, depending on your column type
+            $user->account_verification_status = 'approved'; // or 1, depending on your column type
             $user->save();
 
             return redirect()->back()->with('success', 'User verified successfully!');
@@ -321,6 +393,8 @@ class AdminController extends Controller
 
     public function userpwdapplication($id)
     {
+        $user = User::where('id', $id)->firstOrFail();
+
         $applicant = ApplicantProfile::where('user_id', $id)->firstOrFail();
         $personal = PersonalInfo::where('user_id', $id)->firstOrFail();
         $employment = EmploymentInfo::where('user_id', $id)->firstOrFail();
@@ -331,6 +405,7 @@ class AdminController extends Controller
         $pwdinfo = PwdInformation::where('user_id', $id)->first();
 
         return view('admin.userpwdapplication', [
+            'user' => $user,
             'applicant' => $applicant,
             'pwdinfo' => $pwdinfo,
             'personal' => $personal,

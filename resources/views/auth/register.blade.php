@@ -1,4 +1,5 @@
 <x-guest-layout>
+    <title>AccessiJobs | Registration Page</title>
     <x-auth-session-status class="mb-4" :status="session('status')" />
     <form method="POST" action="{{ route('register') }}">
         @csrf
@@ -7,7 +8,7 @@
                 <div class="flex justify-center">
                     <div class="w-full">
                         <div class="mt-4 grid grid-cols-1 md:grid-cols-1 gap-4">
-                            <nav class="text-blue-500 text-sm" aria-label="Breadcrumb">
+                            <nav class="text-blue-500 text-lg" aria-label="Breadcrumb">
                                 <ol class="list-none p-0 inline-flex">
                                     <li class="flex items-center">
                                         <a href="{{ route('login') }}"
@@ -54,12 +55,7 @@
                             </div>
 
                             <br>
-                            {{--  <div >
-                                <x-input-label for="name" :value="__('Full Name')" />
-                                <x-text-input id="name" class="block mt-1 w-full" type="text" name="name"
-                                    :value="old('name')" required autofocus autocomplete="name" />
-                                <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                            </div> --}}
+
 
                             <div class="inline-fields">
                                 <div class="field-group">
@@ -89,10 +85,15 @@
 
 
                             <!-- Email Address -->
-                            <div class="mt-4">
+                            <div class="relative mt-4">
                                 <x-input-label for="email" :value="__('Email')" />
-                                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email"
-                                    :value="old('email')" required autocomplete="username" />
+
+                                <div class="flex items-center">
+                                    <i class="fas fa-envelope absolute left-3 text-gray-400 dark:text-gray-500"></i>
+                                    <x-text-input id="email" class="block mt-1 w-full pl-10" type="email"
+                                        name="email" :value="old('email')" required autofocus autocomplete="username"
+                                        placeholder="Enter Your Email" />
+                                </div>
                                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
                             </div>
 
@@ -117,7 +118,7 @@
 
                                 <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                             </div>
-                            <div class="flex items-center justify-end mt-4">
+                            <div class="flex items-center justify-end">
                                 <a class="underline text-sm text-black-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
                                     href="{{ route('login') }}">
                                     {{ __('messages.registration.Already registered?') }}
@@ -132,7 +133,6 @@
                 </div>
             </div>
         </div>
-
     </form>
 </x-guest-layout>
 <footer class="bg-gray-800 text-white w-full py-4 ">

@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
+use Illuminate\Auth\Access\AuthorizationException;
 
 use Illuminate\Support\Facades\Route;
 
@@ -42,7 +43,17 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
         $request->fulfill();
-        return redirect('/dashboard');
+        $user = $request->user();
+        if (!$user) {
+            throw new AuthorizationException('Unauthorized');
+        }
+        if ($user->usertype === 'employer') {
+            // Redirect to employer setup page if the user is an employer
+            return Redirect::to('/employer/setup')->with('verified', 1);
+        } else {
+            // Redirect to the general dashboard for other user types
+            return Redirect::to('/dashboard')->with('verified', 1);
+        }
     })->middleware(['auth', 'signed'])->name('verification.verify');
 
     Route::post('/email/verification-notification', function (Request $request) {

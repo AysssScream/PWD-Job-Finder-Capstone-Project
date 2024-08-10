@@ -7,16 +7,16 @@
         <link href="{{ asset('/css/layouts.css') }}" rel="stylesheet">
         <link rel="preload" href="{{ asset('css/layouts.css') }}" as="style"
             onload="this.onload=null;this.rel='stylesheet'">
+        <title>Dashboard</title>
         <link rel="preload" href="/images/team.png" as="image">
         <link href="{{ asset('fontawesome-free-6.5.2-web/css/all.min.css') }}" rel="stylesheet">
+        <style>
 
+        </style>
     </head>
 
-
-
-
-    <body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 ">
-        <main class="max-w-7xl mx-auto sm:px-1 lg:px-1 py-12 flex  flex-wrap gap-4">
+    <body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+        <main class="max-w-8xl mx-auto px-3 sm:px-1 lg:px-1 py-20 flex flex-wrap gap-4 lg:ml-12">
             <aside class="w-full lg:w-1/6  bg-white dark:bg-gray-800 shadow-lg sm:rounded-lg p-4">
                 <div>
                     <h3 class="text-lg font-semibold mb-2 mb-2"></h3>
@@ -178,29 +178,26 @@
                         </h3>
                     </a>
 
-
                 </div>
             </aside>
             @include('dashboardpartials.browsejobs')
         </main>
     </body>
 </x-app-layout>
-<footer class="bg-white dark:bg-gray-800 shadow-sm ">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+<footer class="bg-white dark:bg-gray-800 shadow-sm">
+    <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <p class="text-sm text-gray-600 dark:text-gray-400">&copy; 2024 Job Finder. All rights reserved.</p>
     </div>
 </footer>
 
 <style>
-    /* Custom scrollbar styles */
-    /* For Firefox */
+    /* Custom scrollbar styles
     .overflow-y-auto::-webkit-scrollbar {
         width: 12px;
     }
 
-    /* For Chrome, Edge, and Safari */
     .overflow-y-auto::-webkit-scrollbar-track {
-        background: rgba(0, 0, 0, 0.1);
+        background-color: rgba(0, 106, 255, 0.6);
         border-radius: 10px;
     }
 
@@ -214,35 +211,13 @@
         background-color: rgba(0, 0, 0, 0.5);
     }
 
-    /* For Firefox */
     .overflow-y-auto {
         scrollbar-width: thin;
         scrollbar-color: rgba(0, 0, 0, 0.3) rgba(0, 0, 0, 0.1);
-    }
+    } */
 </style>
 
 <script>
-    /* JavaScript to handle dropdown functionality
-    document.addEventListener('DOMContentLoaded', function() {
-        const dropdownButton = document.getElementById('dropdown-button');
-        const dropdownMenu = document.getElementById('dropdown');
-
-        dropdownButton.addEventListener('click', function() {
-            const isOpen = dropdownMenu.classList.contains('hidden');
-            dropdownMenu.classList.toggle('hidden', !isOpen);
-            dropdownButton.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
-        });
-
-        // Close dropdown when clicking outside of it
-        document.addEventListener('click', function(event) {
-            if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
-                dropdownMenu.classList.add('hidden');
-                dropdownButton.setAttribute('aria-expanded', 'false');
-            }
-        });
-    });*/
-
-
     // Function to show the modal
     function showModal() {
         var modal = document.getElementById('medium-modal');

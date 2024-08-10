@@ -1,6 +1,8 @@
 <x-app-layout>
-    <div class="h-full ml-14 md:ml-64 font-poppins h-screen  ">
-        <div class="flex flex-col md:flex-row bg-gray-100">
+    <title>Messages</title>
+
+    <div class="font-poppins h-screen">
+        <div class="flex flex-col md:flex-row  bg-gray-100">
             <!-- Sidebar and Email List Combined -->
             <style>
                 /* Custom Scrollbar Styles */
@@ -70,23 +72,27 @@
             </style>
 
             <div
-                class="w-full md:w-1/3 lg:w-1/4 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 border-r border-gray-200 flex flex-col">
+                class="w-full md:w-1/3 lg:w-1/4 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 border-r border-gray-200 flex flex-col ">
                 <!-- Fixed top section -->
                 <div class="flex-none">
-                    <!-- Compose Button -->
+                    <!-- Go Back Button -->
+                    <div class="p-4 border-b border-gray-200">
+                        <a href="{{ route('employer.dashboard') }}"
+                            class="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-full shadow hover:bg-blue-600 transition duration-200 flex items-center justify-center">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Go Back
+                        </a>
+                    </div>
+
                     <div class="p-4 border-b border-gray-200">
                         <button id="composeButton"
                             class="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-full shadow hover:bg-blue-600 transition duration-200 flex items-center justify-center">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 4v16m8-8H4"></path>
-                            </svg>
+                            <i class="fas fa-pen mr-2"></i>
                             Compose
                         </button>
                     </div>
 
-                    <!-- Modal -->
+
                     <!-- Modal -->
                     <div id="composeModal" class="fixed z-10 inset-0 overflow-y-auto hidden"
                         aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -110,7 +116,7 @@
                                                 Compose Message
                                             </h3>
                                             <div class="mt-2">
-                                                <form action="{{ route('admin.messages.store') }}" method="POST">
+                                                <form action="{{ route('employer.messages.store') }}" method="POST">
                                                     @csrf
                                                     <div class="mb-4">
                                                         <label for="to"
@@ -119,13 +125,15 @@
                                                             <input type="text" id="to" name="to"
                                                                 placeholder="Enter recipient's email"
                                                                 class="w-full px-3 py-2 border border-gray-300 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out"
-                                                                autocomplete="off">
+                                                                autocomplete="off" value="pdad@gmail.com" r>
                                                             <div id="suggestions"
                                                                 class="absolute left-0 right-0 mt-1 max-h-40 overflow-y-auto border border-gray-300 bg-white dark:bg-gray-900 rounded-md shadow-lg z-10 hidden">
                                                                 <!-- Suggestions will be inserted here by JavaScript -->
                                                             </div>
                                                         </div>
                                                     </div>
+
+
 
                                                     <div class="mb-4">
                                                         <label for="subject"
@@ -287,13 +295,14 @@
                             <p class="text-gray-600 ml-4">No messages found.</p>
                         </div>
                     @else
-                        <div class="messages-list overflow-y-auto h-screen"> <!-- Added classes for scrollable area -->
+                        <div class="messages-list overflow-y-auto h-screen">
+                            <!-- Added classes for scrollable area -->
                             @foreach ($messages as $message)
                                 <div class="email-item p-4 border-b border-gray-200 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800"
                                     data-id="{{ $message->id }}" data-from="{{ $message->from }}"
                                     data-subject="{{ $message->subject }}" data-message="{{ $message->message }}"
                                     data-created-at="{{ $message->created_at->format('g:i A') }}"
-                                    data-to="{{ $message->to }}" onclick="showAdminReplies({{ $message->id }})">
+                                    data-to="{{ $message->to }}" onclick="showReplies({{ $message->id }})">
 
                                     <div class="flex items-center mb-1">
                                         <div
@@ -301,7 +310,7 @@
                                             {{ substr($message->from, 0, 1) }}
                                         </div>
                                         <h3 class="font-semibold text-sm text-gray-700 dark:text-gray-200">
-                                            {{ $message->to }}</h3>
+                                            {{ $message->from }}</h3>
                                     </div>
                                     <h4 class="text-md font-medium text-gray-700 dark:text-gray-200">
                                         {{ $message->subject }}</h4>
@@ -323,7 +332,8 @@
                                     </h3>
                                 </div>
                                 <div class="p-6">
-                                    <form id="replyForm" action="{{ route('admin.replies.store') }}" method="POST">
+                                    <form id="replyForm" action="{{ route('employer.replies.store') }}"
+                                        method="POST">
                                         @csrf
                                         <input type="hidden" id="message_id" name="message_id" value="">
                                         <div class="mb-4">
@@ -348,10 +358,10 @@
                         </div>
                     @endif
                 </div>
-                {{-- admin messages --}}
+
                 <script>
-                    function showAdminReplies(messageId) {
-                        fetch(`/admin/messages/${messageId}/replies`)
+                    function showReplies(messageId) {
+                        fetch(`/employer/messages/${messageId}/replies`)
                             .then(response => response.json())
                             .then(data => {
                                 const replyContainer = document.getElementById('replyContainer');
@@ -402,7 +412,7 @@
 
 
             <div id="emailContent"
-                class="flex-1 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 flex flex-col overflow-hidden">
+                class=" flex-1 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 flex flex-col overflow-hidden">
 
                 <!-- Top section with Reply button and email details -->
                 <div class="p-4 border-b border-gray-200 flex flex-col sm:flex-row sm:items-center sm:justify-between">

@@ -7,6 +7,8 @@
         <link href="{{ asset('/css/layouts.css') }}" rel="stylesheet">
         <link rel="preload" href="/images/team.png" as="image">
         <link href="{{ asset('fontawesome-free-6.5.2-web/css/all.min.css') }}" rel="stylesheet">
+        <title>Manage Job Listings</title>
+
     </head>
 
     @if (Session::has('editjobs'))
@@ -26,47 +28,55 @@
             });
         </script>
     @endif
-    <div class="py-12" style="padding-top: 30px; padding-bottom: 5px; padding-right: 60px; padding-left: 40px">
-        <div class="container mx-auto max-w-7xl px-4 pt-1 mb-2">
+    <div class="py-12" style="padding-top: 30px; padding-bottom: 5px;">
+        <div class="container mx-auto max-w-8xl px-4 pt-2 mb-2">
             <div
                 class="flex flex-col md:flex-row md:justify-between items-start md:items-center space-y-4 md:space-y-0 md:space-x-4">
                 <!-- Breadcrumb Navigation -->
-                <nav aria-label="breadcrumb" class="rounded-lg p-3 text-gray-800 dark:text-gray-300">
-                    <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item"><a href="{{ route('employer.dashboard') }}"><i
-                                    class="fa fa-arrow-left" aria-hidden="true"></i> &nbsp;Back to Dashboard</a></li>
+                <nav aria-label="breadcrumb" class="rounded-lg p-2 text-gray-800 dark:text-gray-300">
+                    <ol class="breadcrumb mb-0 flex items-center justify-start flex-wrap">
+                        <li class="breadcrumb-item">
+                        <li class="breadcrumb-item w-full md:w-auto">
+                            <a href="{{ route('employer.dashboard') }}"
+                                class="flex items-center space-x-2 bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
+                                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                <span>Back to Dashboard</span>
+                            </a>
+                        </li>
+                        </li>
                     </ol>
                 </nav>
 
                 <!-- Date Range Filter Dropdown and Add Job Button -->
-                <div class="flex flex-col md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-4">
+                <div
+                    class="flex flex-col md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-4 w-full md:w-auto">
                     <!-- Date Range Filter Dropdown -->
                     <select id="dateFilter" name="dateFilter"
-                        class="bg-gray-100 border border-gray-600 text-gray-900 px-3 py-1 rounded focus:outline-none focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300">
+                        class="bg-gray-100 border border-gray-600 text-gray-900 px-3 py-1 rounded focus:outline-none focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 w-full md:w-auto">
                         <option value="All">All</option>
                         <option value="last-24-hours">Last 24 Hours</option>
                         <option value="last-7-days">Last 7 Days</option>
                         <option value="last-30-days">Last 30 Days</option>
                     </select>
 
-
                     <!-- Add Job Button -->
                     <a href="{{ route('employer.add') }}"
-                        class="flex items-center bg-green-500 text-white px-3 py-1 rounded">
+                        class="flex items-center bg-green-500 text-white px-3 py-1 rounded w-full md:w-auto justify-center">
                         <i class="fas fa-plus mr-2"></i> <!-- Font Awesome icon -->
                         Add Job
                     </a>
-
-
                 </div>
+
+
             </div>
         </div>
     </div>
 
 
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg shadow-lg">
-            <div class="p-6 text-gray-900 dark:text-gray-100 rounded-lg">
+    <div class="container mx-auto max-w-8xl px-4 pt-2 h-screen">
+        <div
+            class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg shadow-lg max-h-screen overflow-y-auto">
+            <div class="p-6 text-gray-900 dark:text-gray-100 rounded-lg overflow-x-auto ">
                 <div class="overflow-x-auto">
                     <div class="min-w-full overflow-hidden overflow-x-auto">
                         <table id="jobTable" class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">

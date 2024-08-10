@@ -20,7 +20,7 @@
                         class=" container-wrapper  bg-white text-black dark:bg-gray-800 dark:text-gray-200 shadow-md rounded-lg">
                         <div class="p-6">
                             <h3 class="text-2xl font-bold mb-2 inline-flex items-center justify-between w-full">
-                                Update Employment History and Work Experience
+                                {{ __('messages.workexperience.update_employment_history') }}
                             </h3>
                             <div class="p-6 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                                 <div class="flex items-center justify-between  ">
@@ -28,7 +28,7 @@
                                         <a href="{{ route('profile.edit') }}"
                                             class="text-lg  font-lg text-blue-500 hover:text-gray-700 dark:text-blue-500 dark:hover:text-gray-200">
                                             <i class="fas fa-arrow-left mr-1"></i>
-                                            Go Back to Profile
+                                            {{ __('messages.workexperience.go_back_to_profile') }}
                                         </a>
                                     </h2>
                                 </div>
@@ -40,14 +40,14 @@
                                     <table>
                                         <thead>
                                             <tr>
-                                                <th>Action</th>
-                                                <th>Employer Name</th>
-                                                <th>Employer Address</th>
-                                                <th>Position Held</th>
-                                                <th>Skills</th>
-                                                <th>Employment Status</th>
-                                                <th>From Date</th>
-                                                <th>To Date</th>
+                                                <th>{{ __('messages.workexperience.actions') }}</th>
+                                                <th>{{ __('messages.workexperience.employer_name') }}</th>
+                                                <th>{{ __('messages.workexperience.employer_address') }}</th>
+                                                <th>{{ __('messages.workexperience.position_held') }}</th>
+                                                <th>{{ __('messages.workexperience.skills_gained') }}</th>
+                                                <th>{{ __('messages.workexperience.employment_status') }}</th>
+                                                <th>{{ __('messages.workexperience.from') }}</th>
+                                                <th>{{ __('messages.workexperience.to') }}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -65,7 +65,8 @@
                                 <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <div class="mt-6">
-                                            <label for="employerName" class="block mb-1">Employer Name</label>
+                                            <label for="employerName"
+                                                class="block mb-1">{{ __('messages.workexperience.employer_name') }}</label>
                                             <input type="text" id="employerName" name="employerName"
                                                 class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
                                                 placeholder="Ex. XYZ Tech Solutions"
@@ -76,8 +77,8 @@
                                         </div>
 
                                         <div class="mt-6">
-                                            <label for="employerAddress" class="block mb-1">Employer
-                                                Address</label>
+                                            <label for="employerAddress"
+                                                class="block mb-1">{{ __('messages.workexperience.employer_address') }}</label>
                                             <input type="text" id="employerAddress" name="employerAddress"
                                                 class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
                                                 placeholder="Ex. Street Name, Building, House. No"
@@ -89,7 +90,8 @@
                                         </div>
 
                                         <div class="mt-6">
-                                            <label for="positionHeld" class="block mb-1">Position Held</label>
+                                            <label for="positionHeld"
+                                                class="block mb-1">{{ __('messages.workexperience.position_held') }}</label>
                                             <input type="text" id="positionHeld" name="positionHeld"
                                                 class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
                                                 pattern="[A-Za-z\s]+" title="Please enter alphabetic characters only"
@@ -101,7 +103,9 @@
                                         </div>
 
                                         <div class="mt-6">
-                                            <label for="skillSearch" class="block mb-1">Skills Gained (Press
+                                            <label for="skillSearch"
+                                                class="block mb-1">{{ __('messages.workexperience.skills_gained') }}
+                                                (Press
                                                 <b>Enter</b> to Add Items)</label>
                                             <input type="text" id="skillSearch" name="skillSearch[]"
                                                 class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
@@ -118,7 +122,8 @@
                                     </div>
                                     <div>
                                         <div class="mt-6">
-                                            <label for="fromDate" class="block mb-1">From:</label>
+                                            <label for="fromDate"
+                                                class="block mb-1">{{ __('messages.workexperience.from') }}</label>
                                             <input type="date" id="fromDate" name="fromDate"
                                                 class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
                                                 value="{{ old('fromDate', $formData3['fromDate'] ?? '') }}" />
@@ -128,7 +133,8 @@
                                         </div>
 
                                         <div class="mt-6">
-                                            <label for="toDate" class="block mb-1">To:</label>
+                                            <label for="toDate"
+                                                class="block mb-1">{{ __('messages.workexperience.to') }}</label>
                                             <input type="date" id="toDate" name="toDate"
                                                 class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
                                                 value="{{ old('toDate', $formData3['toDate'] ?? '') }}" />
@@ -138,8 +144,8 @@
                                         </div>
 
                                         <div class="mt-6">
-                                            <label for="employmentStatus" class="block mb-1">Employment
-                                                Status:</label>
+                                            <label for="employmentStatus"
+                                                class="block mb-1">{{ __('messages.workexperience.employment_status') }}</label>
                                             <select id="employmentStatus" name="employmentStatus"
                                                 class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200">
                                                 <option value="" selected disabled>Select status...
@@ -183,8 +189,7 @@
 
                                         <div class="mb-4">
                                             <label for="hiddenInput"
-                                                class="block text-sm font-medium text-black-700">Selected
-                                                Skills: </label>
+                                                class="block text-sm font-medium text-black-700">{{ __('messages.workexperience.selected_skills') }}</label>
                                             <textarea id="hiddenInput" name="hiddenInput"
                                                 class="mt-1 block w-full px-3 py-2 border bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                                 readonly>{{ old('hiddenInput', $formData3['hiddenInput'] ?? '') }}</textarea>
@@ -195,17 +200,20 @@
                                 </div>
                                 <div class="mt-4 text-right">
                                     <a id="clearFormDataButton"
-                                        class="inline-block py-2 px-4 bg-black text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mr-2">Clear
-                                        Records</a>
+                                        class="inline-block py-2 px-4 bg-black text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mr-2">
+                                        {{ __('messages.workexperience.clear_records') }}
+                                    </a>
                                     <button type="submit "
                                         class="inline-block py-2 px-4 bg-green-600 text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-                                        id="submitButton">Add Work Experience</button>
+                                        id="submitButton">
+                                        {{ __('messages.workexperience.add_work_experience') }}
+                                    </button>
                                 </div>
                         </div>
                     </div>
                     </form>
 
-                    <div class="py-12">
+                    <div class="mt-12">
                         <div class="container mx-auto">
                             <div class="flex justify-center">
                                 <div class="w-full">
@@ -220,9 +228,9 @@
                                         <div
                                             class="container-wrapper bg-white text-black dark:bg-gray-800 dark:text-gray-200 text-black dark:bg-gray-800 dark:text-gray-200 shadow-md rounded-lg">
                                             <div class="p-6">
-                                                <h3 class="text-2xl font-bold mb-2">New Submitted Work Experience
-                                                    and
-                                                    Skills</h3>
+                                                <h3 class="text-2xl font-bold mb-2">
+                                                    {{ __('messages.workexperience.new_submitted_work_experience') }}
+                                                </h3>
                                                 <div class="mt-4 grid grid-cols-1 md:grid-cols-1 gap-4">
                                                     <div class="overflow-x-auto">
                                                         <table class="min-w-full divide-y divide-gray-200">
@@ -230,47 +238,45 @@
                                                                 class="bg-gray-200 text-gray-900 dark:bg-gray-900 dark:text-gray-200">
                                                                 <tr>
                                                                     <th scope="col"
-                                                                        class="px-6 py-3 bg-gray-200 text-gray-900 dark:bg-gray-900 dark:text-gray-200  text-left text-xs font-medium text-black uppercase tracking-wider">
-                                                                        Actions
+                                                                        class="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-200 uppercase tracking-wider">
+                                                                        {{ __('messages.workexperience.actions') }}
                                                                     </th>
                                                                     <th scope="col"
-                                                                        class="px-6 py-3 bg-gray-200 text-gray-900 dark:bg-gray-900 dark:text-gray-200  text-left text-xs font-medium text-black uppercase tracking-wider">
-                                                                        Employer Name
+                                                                        class="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-200 uppercase tracking-wider">
+                                                                        {{ __('messages.workexperience.employer_name') }}
                                                                     </th>
                                                                     <th scope="col"
-                                                                        class="px-6 py-3  bg-gray-200 text-gray-900 dark:bg-gray-900 dark:text-gray-200 text-left text-xs font-medium text-black uppercase tracking-wider">
-                                                                        Employer Address
+                                                                        class="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-200 uppercase tracking-wider">
+                                                                        {{ __('messages.workexperience.employer_address') }}
                                                                     </th>
                                                                     <th scope="col"
-                                                                        class="px-6 py-3  bg-gray-200 text-gray-900 dark:bg-gray-900 dark:text-gray-200 text-left text-xs font-medium text-black uppercase tracking-wider">
-                                                                        Position Held
+                                                                        class="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-200 uppercase tracking-wider">
+                                                                        {{ __('messages.workexperience.position_held') }}
                                                                     </th>
                                                                     <th scope="col"
-                                                                        class="px-6 py-3 bg-gray-200 text-gray-900 dark:bg-gray-900 dark:text-gray-200  text-left text-xs font-medium text-black uppercase tracking-wider">
-                                                                        Skills
+                                                                        class="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-200 uppercase tracking-wider">
+                                                                        {{ __('messages.workexperience.skills_gained') }}
                                                                     </th>
                                                                     <th scope="col"
-                                                                        class="px-6 py-3 bg-gray-200 text-gray-900 dark:bg-gray-900 dark:text-gray-200  text-left text-xs font-medium text-black uppercase tracking-wider">
-                                                                        From Date
+                                                                        class="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-200 uppercase tracking-wider">
+                                                                        {{ __('messages.workexperience.from') }}
                                                                     </th>
                                                                     <th scope="col"
-                                                                        class="px-6 py-3 bg-gray-200 text-gray-900 dark:bg-gray-900 dark:text-gray-200 text-left text-xs font-medium text-black uppercase tracking-wider">
-                                                                        To Date
-                                                                    </th>
+                                                                        class="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-200 uppercase tracking-wider">
+                                                                        {{ __('messages.workexperience.to') }} </th>
                                                                     <th scope="col"
-                                                                        class="px-6 py-3 bg-gray-200 text-gray-900 dark:bg-gray-900 dark:text-gray-200  text-left text-xs font-medium text-black uppercase tracking-wider">
-                                                                        Employment Status
+                                                                        class="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-200 uppercase tracking-wider">
+                                                                        {{ __('messages.workexperience.employment_status') }}
                                                                     </th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody class="bg-white divide-y divide-gray-200"
                                                                 id="submittedDataBody">
+                                                                <!-- Data rows will be inserted here -->
                                                             </tbody>
                                                         </table>
                                                     </div>
-
                                                 </div>
-
                                                 <br>
 
                                                 <input type="text" id="hiddenemployerName"
@@ -493,7 +499,7 @@
 ">
                                         <button onclick="deleteRow(event, this)"
                                                 class="bg-red-500 hover:bg-red-600 text-white font-regular py-2 px-4 rounded">
-                                            Delete
+                                          {{ __('messages.workexperience.delete') }}
                                         </button>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap border border-gray-200 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200">
@@ -637,7 +643,7 @@
 
                 // Add each skill as a new row in the table
                 skills.forEach(function(skill) {
-                    if (skill && skillTableBody.rows.length < 5 && !isSkillDuplicate(skill)) {
+                    if (skill && !isSkillDuplicate(skill)) {
                         var row = skillTableBody.insertRow();
                         var cell = row.insertCell();
                         cell.textContent = skill;

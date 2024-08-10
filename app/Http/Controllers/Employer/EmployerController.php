@@ -18,6 +18,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\JobInfo;
 use App\Models\ApplicantProfile;
+use App\Models\Message;
+use App\Models\Reply;
+use App\Models\User;
+use Illuminate\Support\Facades\Log;
+
 use Session; // Import the Session facade
 
 class EmployerController extends Controller
@@ -173,5 +178,79 @@ class EmployerController extends Controller
 
 
         return redirect()->route('employer.review')->with('success', 'Applicant hired successfully!');
+    }
+
+
+    public function messages()
+    {
+        $userId = Auth::id();
+        $email = User::find($userId)->email;
+        $messages = Message::where('to', $email)->get();
+        $replies = Reply::all();
+        $users = User::all();
+
+        return view('employer.messages', [
+            'messages' => $messages,
+            'users' => $users,
+            'replies' => $replies
+        ]);
+    }
+
+    public function storeReply(Request $request)
+    {
+        // Validate incoming request
+        $request->validate([
+            'replyMessage' => 'required|string|max:300',
+            'message_id' => 'required|exists:messages,id', // Validate that the message_id exists in the messages table
+        ]);
+
+        // Find the message
+        $message = Message::find($request->input('message_id'));
+        if (!$message) {
+            return redirect()->back()->withErrors('Message not found.');
+        }
+
+        // Create a new reply
+        Reply::create([
+            'message_id' => $message->id,
+            'message' => $request->input('replyMessage'),
+            'reply_to' => $message->to,
+            'reply_from' => auth()->user()->email, // Get the email of the current user
+        ]);
+
+        // Redirect or return a response
+        return redirect()->back()->with('success', 'Reply sent successfully!');
+    }
+
+    public function getReplies($id)
+    {
+        $replies = Reply::where('message_id', $id)->get();
+        Log::info('Replies Data:', $replies->toArray());
+
+        return response()->json(['replies' => $replies]);
+
+    }
+
+    public function storeMessage(Request $request)
+    {
+        // Validate the incoming request data
+        $request->validate([
+            'to' => 'required|email',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string|max:300',
+        ]);
+
+        // Create a new message record
+        Message::create([
+            'from' => auth()->user()->email, // Use the authenticated user's email
+            'to' => $request->input('to'),
+            'subject' => $request->input('subject'),
+            'message' => $request->input('message'),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Message sent successfully!');
     }
 }

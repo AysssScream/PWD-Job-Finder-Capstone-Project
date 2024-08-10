@@ -1,6 +1,5 @@
 <x-guest-layout>
 
-
     <div class="max-w-2xl mx-auto">
         <form method="POST" action="{{ route('password.store') }}">
             @csrf

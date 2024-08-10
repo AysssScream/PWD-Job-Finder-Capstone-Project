@@ -297,9 +297,21 @@ body {
     background-color: rgb(31, 41, 55) !important;
     color: white;
 }
+.container {
+    width: 100%;
+}
+
 #containerbg {
     background-color: white !important;
     color: white;
+    padding: 2rem; /* Adds padding inside the container */
+    margin-top: 2.5rem; /* Adds margin at the top */
+    margin-bottom: 2.5rem; /* Adds margin at the bottom */
+    border-radius: 0.5rem; /* Rounds the corners of the container */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
+    max-width: 90%; /* Limits the maximum width of the container */
+    margin-left: auto; /* Centers the container horizontally */
+    margin-right: auto; /* Centers the container horizontally */
 }
 
 .dark {
@@ -312,7 +324,7 @@ body {
 
 .dark .second-section .bg-light,
 .dark .bg-light {
-    background-color: rgb(22, 22, 22) !important;
+    background-color: rgb(31 41 55) !important;
     color: white;
 }
 
@@ -361,11 +373,6 @@ body {
 .dark .use p,
 .dark .text-muted {
     color: rgb(160, 159, 159) !important;
-}
-
-.dark .accordion .lc-block {
-    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1),
-        0 6px 6px rgba(255, 255, 255, 0.15) !important;
 }
 
 body {

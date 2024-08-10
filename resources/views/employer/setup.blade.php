@@ -2,7 +2,6 @@
     @if (Auth::check() && Auth::user()->account_verification_status === 'pending')
         <x-slot name="header">
             <div class="flex items-center">
-                <i class="fas fa-plus-circle fa-xl text-green-400 dark:text-green-400 mr-2"></i>
                 <h2 class="font-semibold text-xl text-black dark:text-gray-200 leading-tight">
                     {{ __('Encode Employer Profile') }}
                 </h2>
@@ -67,7 +66,7 @@
                 <div class="py-12">
                     <div class="container mx-auto">
                         <div class="flex justify-center">
-                            <div class="w-5/6">
+                            <div class="w-screen">
                                 <form action="{{ route('employer.setup') }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
@@ -338,15 +337,15 @@
                                                     </label>
                                                     <div class="flex items-center">
                                                         <input id="city" type="text" name="city"
-                                                            class="w-full p-2 border rounded shadow-sm bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                            class="w-full p-2 border rounded shadow-sm bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-200"
                                                             placeholder="Type to search Barangay..."
                                                             value="{{ old('city', $employerData['city'] ?? '') }}"
                                                             readonly>
                                                         <button id="editButton"
                                                             class="ml-2 px-3 py-2 bg-black text-white rounded">Edit</button>
                                                     </div>
-                                                    <div id="barangay-suggestions"
-                                                        class="absolute z-10 mt-1 w-full max-h-90 overflow-y-auto bg-white border rounded shadow-md hidden">
+                                                    <div id="city-suggestions"
+                                                        class="absolute z-10 mt-1 w-full max-h-90 overflow-y-auto bg-white text-black dark:bg-gray-800 dark:text-gray-200  border rounded shadow-md hidden">
                                                     </div>
                                                     <div id="barangay-error" class="text-red-600 mt-1 hidden">
                                                         Error
@@ -527,7 +526,8 @@
                 @elseif (Auth::check() && Auth::user()->account_verification_status === 'waiting for approval')
                     <div class="landscape-container mt-20"> <!-- Add mt-5 class for margin-top -->
                         <div class="container w-3/4 mx-auto landscape-content">
-                            <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                            <div
+                                class="bg-white text-black dark:bg-gray-800 dark:text-gray-200 p-6 rounded-lg shadow-md text-center">
                                 <div class="text-6xl text-green-500 ">&#10004;</div>
                                 <h2 class="text-2xl font-bold mb-4">Waiting for Administrator Approval</h2>
                                 <p class="text-lg text-black-700 mb-8 ">Your employer information has been
@@ -562,7 +562,7 @@
                     <div class="landscape-container mt-20"> <!-- Add mt-5 class for margin-top -->
                         <div class="container w-3/4 mx-auto landscape-content">
                             <div
-                                class="bg-white text-black dark:bg-gray-700 dark:text-gray-200  p-6 rounded-lg shadow-md text-center">
+                                class="  text-black dark:bg-gray-700 dark:text-gray-200  p-6 rounded-lg shadow-md text-center">
                                 <div class="text-6xl text-green-500 ">&#10004;</div>
                                 <h2 class="text-2xl font-bold mb-4">Account Approved!</h2>
                                 <p class="text-lg text-black-700 mb-8 ">Your employer information has been approved
@@ -601,7 +601,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const barangayInput = document.getElementById('city');
-        const suggestionsContainer = document.getElementById('barangay-suggestions');
+        const suggestionsContainer = document.getElementById('city-suggestions');
         const errorDiv = document.getElementById('barangay-error');
         const zipCodeInput = document.getElementById('zipcode');
 
@@ -900,7 +900,6 @@
         justify-content: space-between;
         align-items: center;
         padding: 8px;
-        background-color: white;
         cursor: pointer;
         border-radius: 4px;
         margin-bottom: 4px;

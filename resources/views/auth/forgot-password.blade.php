@@ -1,4 +1,6 @@
 <x-guest-layout>
+    <title>AccessiJobs | Forgot Password</title>
+
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
     <form method="POST" action="{{ route('password.passemail') }}">
@@ -8,10 +10,19 @@
                 <i class="fas fa-lock mr-2"></i>
                 {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
             </div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required
-                autofocus />
+            <div class="relative mb-4">
+                <x-input-label for="email" :value="__('Email')" />
+
+                <div class="flex items-center">
+                    <i class="fas fa-envelope absolute left-3 text-gray-400 dark:text-gray-500"></i>
+                    <x-text-input id="email" class="block mt-1 w-full pl-10" type="email" name="email"
+                        :value="old('email')" required autofocus autocomplete="username" placeholder="Enter Your Email" />
+                </div>
+                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            </div>
             <x-input-error :messages="$errors->get('email')" class="mt-1" />
+
+
 
             <!-- Email Address -->
             <div class="flex items-center justify-end mt-4">

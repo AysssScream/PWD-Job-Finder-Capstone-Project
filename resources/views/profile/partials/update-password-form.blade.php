@@ -49,7 +49,7 @@
               <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
           </div>
 
-          <div class="flex items-center gap-4">
+          <div class="flex items-center gap-4 mb-5">
               <x-primary-button aria-label="Save" tabindex="0">{{ __('Save') }}</x-primary-button>
 
               {{-- Debugging: Output session status --}}

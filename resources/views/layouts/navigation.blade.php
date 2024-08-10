@@ -1,9 +1,8 @@
 <link href="{{ asset('fontawesome-free-6.5.2-web/css/all.min.css') }}" rel="stylesheet">
 
-@if (Auth::user()->usertype == 'user' || Auth::user()->usertype == 'employer')
-
+@if (!(Auth::user()->usertype == 'admin' || Route::currentRouteName() === 'employer.messages'))
     <nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 shadow-lg py-2 dark:shadow-lg" id="main-nav">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 lg:ml-12">
             <div class="flex justify-between h-16">
                 <div class="flex">
                     <!-- Logo -->

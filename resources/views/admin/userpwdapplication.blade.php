@@ -13,12 +13,18 @@
         <div class="flex flex-col md:flex-row h-screen">
             <!-- Sidebar -->
             <div id="sidebar"
-                class="w-full md:w-64 bg-gray-100 dark:bg-gray-800 border-b md:border-r border-gray-200 dark:border-gray-600 px-4 py-6">
+                class="h-screen w-full md:w-64 bg-gray-100 dark:bg-gray-800 border-b md:border-r border-gray-200 dark:border-gray-600 px-4 py-6">
                 <div class="p-4">
                     <div class="flex flex-col items-center mb-5 ">
-                        <img src="{{ asset('storage/' . $pwdinfo->profilePicture) }} " alt="Applicant Image"
-                            class="w-44 h-44 object-contain rounded-full mb-4 border-4 custom-shadow border-gray-600">
+                        @if ($user->pwdInformation && $user->pwdInformation->profilePicture)
+                            <img src="{{ asset('storage/' . $user->pwdInformation->profilePicture) }}"
+                                alt="Profile Picture" class="w-44 h-44 rounded-full">
+                        @else
+                            <img src="{{ asset('/images/avatar.png') }}" alt="Profile Picture"
+                                class="w-44 h-44 rounded-full">
+                        @endif
                     </div>
+
                     <h2 class="text-2xl mb-5 font-bold text-gray-800 dark:text-gray-200">Applicant:</h2>
                     <ul class="mt-2 space-y-2">
                         <li>

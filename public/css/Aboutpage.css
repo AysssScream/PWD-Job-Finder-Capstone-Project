@@ -19,7 +19,7 @@ body {
         255,
         255,
         255,
-        0.9
+        0.8
     ); /* Adjust the alpha value to control the fading effect */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Reduce the box shadow to make it less pronounced */
 }
@@ -100,7 +100,7 @@ input:checked + .slider {
 }
 
 .dark {
-    background-color: black;
+    background-color: rgb(31 41 55);
     color: white;
 }
 

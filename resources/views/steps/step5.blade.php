@@ -11,7 +11,7 @@
      <div class="py-12">
          <div class="container mx-auto">
              <div class="flex justify-center">
-                 <div class="w-5/6">
+                 <div class="w-full">
                      <form action="{{ route('dialect') }}" method="POST" enctype="multipart/form-data">
                          @csrf
                          @if ($errors->any())
@@ -29,7 +29,8 @@
                          @endif
                          <div class="bg-white text-black dark:bg-gray-800 dark:text-gray-200 shadow-md rounded-lg">
                              <div class="p-6">
-                                 <h3 class="text-2xl font-bold mb-2 inline-flex items-center justify-between w-full">
+                                 <h3 class="text-2xl font-bold mb-2 inline-flex items-center justify-between w-full focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                     tabindex="0">
                                      Language and Other Skills
                                      @php
                                          $currentStep = 5; // Set this dynamically based on your current step
@@ -52,24 +53,30 @@
                                      <nav class="text-sm" aria-label="Breadcrumb">
                                          <ol class="list-none p-0 inline-flex">
                                              <li class="flex items-center">
-                                                 <i class="fas fa-arrow-left mr-2 text-gray-700 dark:text-gray-200"></i>
+                                                 <i tabindex="0"
+                                                     class="fas fa-arrow-left mr-2 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"></i>
                                                  <a href="{{ route('jobpreferences') }}"
-                                                     class="text-gray-700 dark:text-gray-200">Job
+                                                     class="text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">Job
                                                      Preferences</a>
                                                  <span class="mx-2 text-gray-500">/</span>
                                              </li>
                                              <li class="flex items-center">
-                                                 <span class="text-blue-500 font-semibold">Language Proficiency and
+                                                 <span
+                                                     class="text-blue-500 font-semibold focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                     tabindex="0">Language Proficiency and
                                                      Other Skills</span>
                                              </li>
                                          </ol>
                                      </nav>
                                  </div>
                                  <hr class="border-t-2 border-gray-400 rounded-full my-4">
-                                 <span class="text-md font-regular">
-                                     {!! __('messages.language.instruction') !!}
+                                 <div class="focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                     tabindex="0" aria-label="{!! __('messages.language.instruction') !!}">
+                                     <span class="text-md font-regular">
+                                         {!! __('messages.language.instruction') !!}
+                                     </span>
+                                 </div>
 
-                                 </span>
                                  <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
                                      <div class="col-span-1 md:col-span-1">
                                          @include('layouts.dropdown')
@@ -80,22 +87,54 @@
                                              <thead>
                                                  <tr>
                                                      <div class="mt-6">
-                                                         <p><b>{{ __('messages.language.updatelang') }}</b></p>
-                                                         <ul class="list-disc list-inside">
-                                                             <li>{{ __('messages.language.list-unstyled.1') }}</li>
-                                                             <li>{{ __('messages.language.list-unstyled.2') }}
-                                                             <li>{{ __('messages.language.list-unstyled.3') }}
+                                                         <p class="focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                             tabindex="0"
+                                                             aria-label="{{ __('messages.language.updatelang') }}">
+                                                             <strong>{{ __('messages.language.updatelang') }}</strong>
+                                                         </p>
+                                                         <ul class="list-unstyled">
+                                                             <li aria-label="{{ __('messages.language.list-unstyled.1') }}"
+                                                                 tabindex="0"
+                                                                 class="bi bi-arrow-right-short focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                                 <i></i>•
+                                                                 {{ __('messages.language.list-unstyled.1') }}
                                                              </li>
-                                                             <li>{{ __('messages.language.list-unstyled.4') }}</li>
-                                                             <li>{{ __('messages.language.list-unstyled.5') }}.</li>
+                                                             <li aria-label="{{ __('messages.language.list-unstyled.2') }}"
+                                                                 class="bi bi-arrow-right-short focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                                 tabindex="0">
+                                                                 <i class="bi bi-arrow-right-short"></i>•
+                                                                 {{ __('messages.language.list-unstyled.2') }}
+                                                             </li>
+                                                             <li aria-label="{{ __('messages.language.list-unstyled.3') }}"
+                                                                 tabindex="0"
+                                                                 class="bi bi-arrow-right-short focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                                 <i class="bi bi-arrow-right-short"></i>•
+                                                                 {{ __('messages.language.list-unstyled.3') }}
+                                                             </li>
+                                                             <li aria-label="{{ __('messages.language.list-unstyled.4') }}"
+                                                                 tabindex="0"
+                                                                 class="bi bi-arrow-right-short focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                                 <i class="bi bi-arrow-right-short"></i>•
+                                                                 {{ __('messages.language.list-unstyled.4') }}
+                                                             </li>
+                                                             <li aria-label="{{ __('messages.language.list-unstyled.5') }}"
+                                                                 tabindex="0"
+                                                                 class="bi bi-arrow-right-short focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                                 <i class="bi bi-arrow-right-short"></i>•
+                                                                 {{ __('messages.language.list-unstyled.5') }}
+                                                             </li>
                                                          </ul>
                                                      </div>
                                                      <br>
                                                      <td colspan="4" class="text-left p-4">
                                                          <button type="button"
-                                                             class="bg-blue-600 text-white px-10 py-2 rounded add-row">{{ __('messages.language.buttons.add_language') }}</button>
+                                                             class="bg-blue-600 text-white px-10 py-2 rounded add-row  focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                             tabindex="0"
+                                                             aria-label="{{ __('messages.language.buttons.add_language') }}">{{ __('messages.language.buttons.add_language') }}</button>
                                                          <button type="button"
-                                                             class="bg-red-500 text-white px-4 py-2 rounded"
+                                                             class="bg-red-500 text-white px-4 py-2 rounded  focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                             tabindex="0"
+                                                             aria-label="{{ __('messages.language.buttons.clear_selected_languages') }}"
                                                              onclick="clearSelectedLanguages()">{{ __('messages.language.buttons.clear_selected_languages') }}</button>
 
                                                          <script>
@@ -118,13 +157,16 @@
 
                                              <thead>
                                                  <tr>
-                                                     <th class="px-4 py-2 border-b">
+                                                     <th class="px-4 py-2 border-b bg-gray-300 text-black dark:bg-gray-900 dark:text-gray-200"
+                                                         aria-label="{{ __('messages.language.table_headers.language_dialect') }}">
                                                          {{ __('messages.language.table_headers.language_dialect') }}
                                                      </th>
-                                                     <th class="px-4 py-2 border-b">
+                                                     <th class="px-4 py-2 border-b bg-gray-300 text-black dark:bg-gray-900 dark:text-gray-200"
+                                                         aria-label="{{ __('messages.language.table_headers.language_proficiency') }}">
                                                          {{ __('messages.language.table_headers.language_proficiency') }}
                                                      </th>
-                                                     <th class="px-4 py-2 border-b">
+                                                     <th class="px-4 py-2 border-b bg-gray-300 text-black dark:bg-gray-900 dark:text-gray-200"
+                                                         aria-label="{{ __('messages.language.table_headers.action') }}">
                                                          {{ __('messages.language.table_headers.action') }}
                                                      </th>
 
@@ -135,10 +177,11 @@
                                                      <td class="px-4 py-2 border-b">
                                                          <div class="flex items-center">
                                                              <input type="text" name="language-input[]"
-                                                                 class="flex-1 p-2 border rounded language-input bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 "
+                                                                 class="flex-1 p-2 border rounded language-input bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 "
                                                                  pattern="[A-Za-z\s]+" placeholder="Ex. Filipino"
                                                                  value="{{ old('language-input.0', $formData5['language-input.0'] ?? '') }}"
-                                                                 readonly />
+                                                                 readonly
+                                                                 aria-label="{{ __('messages.language.table_headers.language_dialect') }}" />
                                                          </div>
                                                          <div class="suggestions-container ">
                                                              <ul class="suggestions-list"></ul>
@@ -149,7 +192,8 @@
                                                      <td class="px-4 py-2 border-b text-center ">
                                                          <div class="inline-block relative">
                                                              <select
-                                                                 class="block appearance-none w-full bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 border border-gray rounded-md py-2 px-10 leading-tight focus:outline-none focus:border-blue-500"
+                                                                 aria-label="{{ __('messages.language.table_headers.language_proficiency') }}"
+                                                                 class="block appearance-none w-full bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 border border-gray rounded-md py-2 px-10 leading-tightfocus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                                  id="langprof">
                                                                  <option value="Beginner">Beginner</option>
                                                                  <option value="Intermediate">Intermediate</option>
@@ -165,10 +209,12 @@
 
                                                      <td class="px-4 py-2 border-b text-center">
                                                          <button type="button"
-                                                             class="bg-blue-600 text-white px-7 py-1 rounded edit-row">
+                                                             aria-label="{{ __('messages.language.actions.edit') }}"
+                                                             class="bg-blue-600 text-white px-7 py-1 rounded edit-row focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
                                                              {{ __('messages.language.actions.edit') }}</button>
                                                          <button type="button"
-                                                             class="bg-red-500 text-white px-2 py-1 rounded remove-row">{{ __('messages.language.actions.remove') }}</button>
+                                                             aria-label="{{ __('messages.language.actions.remove') }}"
+                                                             class="bg-red-500 text-white px-2 py-1 rounded remove-row focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">{{ __('messages.language.actions.remove') }}</button>
                                                      </td>
                                                  </tr>
                                              </tbody>
@@ -177,19 +223,26 @@
                                          <label for="selected-languages"
                                              class="block text-sm font-medium text-black-700">{{ __('messages.language.labels.selected_languages') }}</label>
                                          <textarea id="selected-languages" name="selected-languages"
-                                             class="w-full bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 text-gray-800 border border-gray-300 rounded py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                             aria-label="{{ __('messages.language.labels.selected_languages') }}"
+                                             class="w-full bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 text-gray-800 border border-gray-300 rounded py-2 px-4 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                              placeholder="Enter selected languages..." readonly>{{ old('selected-languages', $formData5['selected-languages'] ?? '') }}</textarea>
 
 
                                          <div id="row-limit-message" class="text-red-600 mt-2 hidden">
                                              {{ __('messages.language.messages.row_limit_message') }}</div>
 
-                                         <h3 class="text-2xl font-bold mb-2 mt-9">
+                                         <h3 class="text-2xl font-bold mb-2 mt-9 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                             aria-label="                                             {{ __('messages.language.messages.other_skills_heading') }}"
+                                             tabindex="0">
                                              {{ __('messages.language.messages.other_skills_heading') }}
                                          </h3>
-                                         <span class="text-md font-regular">
+                                         <div class="focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                             tabindex="0"
+                                             aria-label=" {{ __('messages.language.messages.other_skills_description') }}">
                                              {{ __('messages.language.messages.other_skills_description') }}
-                                         </span>
+                                             </span>
+                                         </div>
+
                                          <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
 
                                              <div>
@@ -197,6 +250,7 @@
                                                      <label for="autoMechanic" class="flex items-center">
                                                          <input type="checkbox" id="autoMechanic" name="skills[]"
                                                              value="AUTO MECHANIC" class="mr-2"
+                                                             aria-label="Auto Mechanic"
                                                              {{ in_array('AUTO MECHANIC', old('skills', $formData5['skills'] ?? [])) ? 'checked' : '' }}>
                                                          Auto Mechanic
                                                      </label>
@@ -204,7 +258,7 @@
                                                  <div class="mt-6">
                                                      <label for="gardening" class="flex items-center">
                                                          <input type="checkbox" id="gardening" name="skills[]"
-                                                             value="GARDENING" class="mr-2"
+                                                             value="GARDENING" class="mr-2" aria-label="Gardening"
                                                              {{ in_array('GARDENING', old('skills', $formData5['skills'] ?? [])) ? 'checked' : '' }}>
                                                          Gardening
                                                      </label>
@@ -213,6 +267,7 @@
                                                      <label for="beautician" class="flex items-center">
                                                          <input type="checkbox" id="beautician" name="skills[]"
                                                              value="BEAUTICIAN" class="mr-2"
+                                                             aria-label="Beautician"
                                                              {{ in_array('BEAUTICIAN', old('skills', $formData5['skills'] ?? [])) ? 'checked' : '' }}>
                                                          Beautician
                                                      </label>
@@ -222,6 +277,7 @@
                                                      <label for="carpentry" class="flex items-center">
                                                          <input type="checkbox" id="carpentry" name="skills[]"
                                                              value="CARPENTRY WORK" class="mr-2"
+                                                             aria-label="Carpentry Work"
                                                              {{ in_array('CARPENTRY WORK', old('skills', $formData5['skills'] ?? [])) ? 'checked' : '' }}>
                                                          Carpentry Work
                                                      </label>
@@ -231,6 +287,7 @@
                                                      <label for="painter" class="flex items-center">
                                                          <input type="checkbox" id="painter" name="skills[]"
                                                              value="PAINTER/ARTIST" class="mr-2"
+                                                             aria-label="Painter or Artist"
                                                              {{ in_array('PAINTER/ARTIST', old('skills', $formData5['skills'] ?? [])) ? 'checked' : '' }}>
                                                          Painter/Artist
                                                      </label>
@@ -240,6 +297,7 @@
                                                      <label for="computerLiteracy" class="flex items-center">
                                                          <input type="checkbox" id="computerLiteracy" name="skills[]"
                                                              value="COMPUTER LITERATE" class="mr-2"
+                                                             aria-label="Computer Literate"
                                                              {{ in_array('COMPUTER LITERATE', old('skills', $formData5['skills'] ?? [])) ? 'checked' : '' }}>
                                                          Computer Literate
                                                      </label>
@@ -249,6 +307,7 @@
                                                      <label for="paintingJobs" class="flex items-center">
                                                          <input type="checkbox" id="paintingJobs" name="skills[]"
                                                              value="PAINTING JOBS" class="mr-2"
+                                                             aria-label="Painting Jobs"
                                                              {{ in_array('PAINTING JOBS', old('skills', $formData5['skills'] ?? [])) ? 'checked' : '' }}>
                                                          Painting Jobs
                                                      </label>
@@ -258,6 +317,7 @@
                                                      <label for="domesticChores" class="flex items-center">
                                                          <input type="checkbox" id="domesticChores" name="skills[]"
                                                              value="DOMESTIC CHORES" class="mr-2"
+                                                             aria-label="Domestic Chores"
                                                              {{ in_array('DOMESTIC CHORES', old('skills', $formData5['skills'] ?? [])) ? 'checked' : '' }}>
                                                          Domestic Chores
                                                      </label>
@@ -268,6 +328,7 @@
                                                      <label for="photography" class="flex items-center">
                                                          <input type="checkbox" id="photography" name="skills[]"
                                                              value="PHOTOGRAPHY" class="mr-2"
+                                                             aria-label="Photography"
                                                              {{ in_array('PHOTOGRAPHY', old('skills', $formData5['skills'] ?? [])) ? 'checked' : '' }}>
                                                          Photography
                                                      </label>
@@ -276,7 +337,7 @@
                                                  <div class="mt-6">
                                                      <label for="driving" class="flex items-center">
                                                          <input type="checkbox" id="driving" name="skills[]"
-                                                             value="DRIVING" class="mr-2"
+                                                             value="DRIVING" class="mr-2" aria-label="Driving"
                                                              {{ in_array('DRIVING', old('skills', $formData5['skills'] ?? [])) ? 'checked' : '' }}>
                                                          Driving
                                                      </label>
@@ -285,6 +346,7 @@
                                                      <label for="sewingDresses" class="flex items-center">
                                                          <input type="checkbox" id="sewingDresses" name="skills[]"
                                                              value="SEWING DRESSES" class="mr-2"
+                                                             aria-label="Sewing Dresses"
                                                              {{ in_array('SEWING DRESSES', old('skills', $formData5['skills'] ?? [])) ? 'checked' : '' }}>
                                                          Sewing Dresses
                                                      </label>
@@ -294,6 +356,7 @@
                                                      <label for="electrician" class="flex items-center">
                                                          <input type="checkbox" id="electrician" name="skills[]"
                                                              value="ELECTRICIAN" class="mr-2"
+                                                             aria-label="Electrician"
                                                              {{ in_array('ELECTRICIAN', old('skills', $formData5['skills'] ?? [])) ? 'checked' : '' }}>
                                                          Electrician
                                                      </label>
@@ -303,6 +366,7 @@
                                                      <label for="stenography" class="flex items-center">
                                                          <input type="checkbox" id="stenography" name="skills[]"
                                                              value="STENOGRAPHY" class="mr-2"
+                                                             aria-label="Stenography"
                                                              {{ in_array('STENOGRAPHY', old('skills', $formData5['skills'] ?? [])) ? 'checked' : '' }}>
                                                          Stenography
                                                      </label>
@@ -312,6 +376,7 @@
                                                      <label for="embroidery" class="flex items-center">
                                                          <input type="checkbox" id="embroidery" name="skills[]"
                                                              value="EMBROIDERY" class="mr-2"
+                                                             aria-label="Embroidery"
                                                              {{ in_array('EMBROIDERY', old('skills', $formData5['skills'] ?? [])) ? 'checked' : '' }}>
                                                          Embroidery
                                                      </label>
@@ -319,7 +384,7 @@
                                                  <div class="mt-6">
                                                      <label for="tailoring" class="flex items-center">
                                                          <input type="checkbox" id="tailoring" name="skills[]"
-                                                             value="TAILORING" class="mr-2"
+                                                             value="TAILORING" class="mr-2" aria-label="Tailoring"
                                                              {{ in_array('TAILORING', old('skills', $formData5['skills'] ?? [])) ? 'checked' : '' }}>
                                                          Tailoring
                                                      </label>
@@ -328,7 +393,7 @@
                                                  <div class="mt-6">
                                                      <label for="masonry" class="flex items-center">
                                                          <input type="checkbox" id="masonry" name="skills[]"
-                                                             value="MASONRY" class="mr-2"
+                                                             value="MASONRY" class="mr-2" aria-label="Masonry"
                                                              {{ in_array('MASONRY', old('skills', $formData5['skills'] ?? [])) ? 'checked' : '' }}>
                                                          Masonry
                                                      </label>
@@ -339,6 +404,7 @@
                                                      <label for="otherSkills" class="flex items-center">
                                                          <input type="checkbox" id="otherSkillsCheckbox"
                                                              name="skills[]" value="OTHER_SKILLS" class="mr-2"
+                                                             aria-label="Other"
                                                              {{ in_array('OTHER_SKILLS', old('skills', $formData5['skills'] ?? [])) ? 'checked' : '' }}
                                                              onchange="toggleTextBox()">
                                                          Other:
@@ -348,8 +414,8 @@
                                                  @error('skills')
                                                      <div class="text-red-600 mt-1">{{ $message }}</div>
                                                  @enderror
-                                                 <textarea type="text" id="otherSkills" name="otherSkills"
-                                                     class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 "
+                                                 <textarea type="text" id="otherSkills" name="otherSkills" tabindex="0" aria-label="Others textarea"
+                                                     class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200  focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                      {{ in_array('OTHER_SKILLS', old('skills', $formData8['skills'] ?? [])) ? '' : 'disabled' }}>{{ old('otherSkills', $formData8['otherSkills'] ?? '') }}</textarea>
                                                  <br>
                                                  <input type="hidden" id="selectedSkills" name="selectedSkills"
@@ -363,9 +429,12 @@
                                  </div>
                                  <div class="mt-4 text-right">
                                      <a href="{{ route('jobpreferences') }}"
-                                         class="inline-block py-2 px-4 bg-black text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mr-2">Previous</a>
-                                     <button type="submit"
-                                         class="inline-block py-2 px-4 bg-green-600 text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">Save</button>
+                                         aria-label=" {{ __('messages.previous') }}"
+                                         class="inline-block py-2 px-4 bg-black text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 mr-2">
+                                         {{ __('messages.previous') }}</a>
+                                     <button type="submit" aria-label=" {{ __('messages.save') }}"
+                                         class="inline-block py-2 px-4 bg-green-600 text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                         {{ __('messages.save') }}</button>
                                  </div>
                              </div>
 
@@ -704,8 +773,6 @@
                      // Call updateHiddenInputs on page load to initialize hidden inputs
                      window.addEventListener('load', updateHiddenInputs);
                  </script>
-
-
              </div>
              </form>
          </div>

@@ -29,19 +29,20 @@
     @endif
 
     <div class="py-12">
-        <div class="container mx-auto max-w-7xl px-4 pt-2 mb-2 ">
+        <div class="container mx-auto max-w-8xl px-4 pt-2 mb-2">
             <div class="row">
                 <div class="col">
                     <nav aria-label="breadcrumb" class="rounded-lg p-3 text-gray-800 dark:text-gray-300">
-                        <ol class="breadcrumb mb-0 flex items-center justify-between">
-                            <li class="breadcrumb-item">
-                                <a href="{{ route('employer.dashboard') }}" class="flex items-center space-x-2">
+                        <ol class="breadcrumb mb-0 flex items-center justify-between flex-wrap">
+                            <li class="breadcrumb-item w-full md:w-auto">
+                                <a href="{{ route('employer.dashboard') }}"
+                                    class="flex items-center space-x-2 bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
                                     <i class="fa fa-arrow-left" aria-hidden="true"></i>
                                     <span>Back to Dashboard</span>
                                 </a>
                             </li>
-                            <li class="breadcrumb-item">
-                                <div class="flex space-x-4">
+                            <li class="breadcrumb-item w-full md:w-auto ml-auto flex space-x-4">
+                                <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
                                     <select id="dateFilter" name="dateFilter"
                                         class="bg-gray-100 border border-gray-600 text-gray-900 px-3 py-1 rounded focus:outline-none focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300">
                                         <option value="All">All</option>
@@ -59,13 +60,12 @@
                                 </div>
                             </li>
                         </ol>
-
-
                     </nav>
                 </div>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+
+        <div class="container mx-auto max-w-8xl px-4 pt-2 mb-2">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg shadow-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100 rounded-lg">
                     <div class="overflow-x-auto">

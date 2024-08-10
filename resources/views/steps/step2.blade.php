@@ -17,7 +17,7 @@
     <div class="py-12">
         <div class="container mx-auto">
             <div class="flex justify-center">
-                <div class="w-5/6">
+                <div class="w-full">
                     <form action="{{ route('personal') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @if ($errors->any())
@@ -35,7 +35,8 @@
                         @endif
                         <div class="bg-white text-black dark:bg-gray-800 dark:text-gray-200 shadow-md rounded-lg">
                             <div class="p-6">
-                                <h3 class="text-2xl font-bold mb-2 inline-flex items-center justify-between w-full">
+                                <h3 class="text-2xl font-bold mb-2 inline-flex items-center justify-between w-full focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                    tabindex="0">
                                     Personal Information
                                     @php
                                         $currentStep = 2; // Set this dynamically based on your current step
@@ -58,23 +59,29 @@
                                     <nav class="text-sm" aria-label="Breadcrumb">
                                         <ol class="list-none p-0 inline-flex">
                                             <li class="flex items-center">
-                                                <i class="fas fa-arrow-left mr-2 text-gray-700 dark:text-gray-200"></i>
+                                                <i class="fas fa-arrow-left mr-2 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                    tabindex="0"></i>
                                                 <a href="{{ route('setup') }}"
-                                                    class="text-gray-700 dark:text-gray-200">Applicant
+                                                    class="text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">Applicant
                                                     Profile</a>
                                                 <span class="mx-2 text-gray-500">/</span>
                                             </li>
                                             <li class="flex items-center">
-                                                <span class="text-blue-500 font-semibold">Personal Information</span>
+                                                <span
+                                                    class="text-blue-500 font-semibold focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                    tabindex="0">Personal Information</span>
                                             </li>
                                         </ol>
                                     </nav>
                                 </div>
                                 <hr class="border-t-2 border-gray-400 rounded-full my-4">
+                                <div class="focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                    tabindex="0" aria-label="{!! __('messages.personal.instruction') !!}">
+                                    <span class="text-md font-regular " style="text-align: justify;">
+                                        {!! __('messages.personal.instruction') !!}
+                                    </span>
+                                </div>
 
-                                <span class="text-md font-regular" style="text-align: justify;">
-                                    {!! __('messages.personal.instruction') !!}
-                                </span>
                                 <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
 
                                     <div>
@@ -87,7 +94,8 @@
                                             <label for="civilStatus"
                                                 class="block mb-1">{{ __('messages.personal.civil_status') }}</label>
                                             <select id="civilStatus" name="civilStatus"
-                                                class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200">
+                                                aria-label="{{ __('messages.personal.civil_status') }}"
+                                                class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
                                                 <option value="Single"
                                                     {{ old('civilStatus', $personal->civilStatus ?? '') == 'Single' ? 'selected' : '' }}>
                                                     {{ __('messages.personal.single') }}</option>
@@ -107,12 +115,13 @@
                                                 class="block mb-1">{{ __('messages.personal.barangay') }}</label>
                                             <div class="flex items-center">
                                                 <input id="barangay" type="text" name="barangay"
-                                                    class="w-full p-2 border rounded shadow-sm bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                    aria-label="{{ __('messages.personal.barangay') }}"
+                                                    class="w-full p-2 border rounded shadow-sm bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                     placeholder="{{ __('messages.personal.type_to_search_barangay') }}"
                                                     value="{{ old('barangay', $formData2['barangay'] ?? '') }}"
                                                     readonly>
-                                                <button id="editButton"
-                                                    class="ml-2 px-3 py-2 bg-blue-500 text-white rounded">Edit</button>
+                                                <button id="editButton" aria-label="{{ __('messages.edit') }}"
+                                                    class="ml-2 px-3 py-2 bg-blue-500 text-white rounded focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">{{ __('messages.edit') }}</button>
                                             </div>
                                             <div id="barangay-suggestions"
                                                 class="absolute z-10 mt-1 w-full max-h-90 overflow-y-auto bg-gray-200 text-black dark:bg-gray-900 dark:text-gray-200 border border-gray-700 rounded shadow-md hidden">
@@ -126,7 +135,8 @@
                                                 class="block mb-1">{{ __('messages.personal.zipcode') }}</label>
                                             <div class="flex items-center mt-4">
                                                 <input type="text" id="zipcode" name="zipcode"
-                                                    class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                    aria-label="{{ __('messages.personal.zipcode') }}"
+                                                    class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                     value="{{ old('zipcode', $formData2['zipcode'] ?? '') }}"
                                                     placeholder="Enter Zip Code" readonly />
                                                 <!-- Add disabled attribute here -->
@@ -142,10 +152,10 @@
                                             <label for="presentAddress"
                                                 class="block mb-1">{{ __('messages.personal.present_address') }}</label>
                                             <input type="text" id="presentAddress" name="presentAddress"
-                                                class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                aria-label="{{ __('messages.personal.present_address') }}"
+                                                class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                 placeholder="Ex. Street Name, Building, House. No"
-                                                value="{{ old('presentAddress', $formData2['presentAddress'] ?? '') }}"
-                                                placeholder="" />
+                                                value="{{ old('presentAddress', $formData2['presentAddress'] ?? '') }}" />
                                             @error('presentAddress')
                                                 <div class="text-red-600 mt-1">{{ $message }}</div>
                                             @enderror
@@ -158,17 +168,20 @@
                                                 <div class="flex flex-wrap gap-1">
                                                     <!-- Group 1 -->
                                                     <input type="text" id="tin1" name="tin[]"
-                                                        class="w-12 sm:w-10 md:w-12 lg:w-10 xl:w-12 h-12 sm:h-10 text-center border rounded mb-1 sm:mb-0 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                        class="w-12 sm:w-10 md:w-12 lg:w-10 xl:w-12 h-12 sm:h-10 text-center border rounded mb-1 sm:mb-0 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200  focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                         pattern="\d" title="Enter a single digit" maxlength="1"
-                                                        value="{{ old('tin.0', $formData2['tin.0'] ?? '') }}" />
+                                                        value="{{ old('tin.0', $formData2['tin.0'] ?? '') }}"
+                                                        aria-label="Tin Digit 1" />
                                                     <input type="text" id="tin2" name="tin[]"
-                                                        class="w-12 sm:w-10 md:w-12 lg:w-10 xl:w-12 h-12 sm:h-10 text-center border rounded mb-1 sm:mb-0 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                        class="w-12 sm:w-10 md:w-12 lg:w-10 xl:w-12 h-12 sm:h-10 text-center border rounded mb-1 sm:mb-0 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                         pattern="\d" title="Enter a single digit" maxlength="1"
-                                                        value="{{ old('tin.1', $formData2['tin.1'] ?? '') }}" />
+                                                        value="{{ old('tin.1', $formData2['tin.1'] ?? '') }}"
+                                                        aria-label="Tin Digit 2" />
                                                     <input type="text" id="tin3" name="tin[]"
-                                                        class="w-12 sm:w-10 md:w-12 lg:w-10 xl:w-12 h-12 sm:h-10 text-center border rounded mb-1 sm:mb-0 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                        class="w-12 sm:w-10 md:w-12 lg:w-10 xl:w-12 h-12 sm:h-10 text-center border rounded mb-1 sm:mb-0 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                         pattern="\d" title="Enter a single digit" maxlength="1"
-                                                        value="{{ old('tin.2', $formData2['tin.2'] ?? '') }}" />
+                                                        value="{{ old('tin.2', $formData2['tin.2'] ?? '') }}"
+                                                        aria-label="Tin Digit 3" />
 
                                                     <!-- Hyphen -->
                                                     <span
@@ -176,34 +189,38 @@
 
                                                     <!-- Group 2 -->
                                                     <input type="text" id="tin4" name="tin[]"
-                                                        class="w-12 sm:w-10 md:w-12 lg:w-10 xl:w-12 h-12 sm:h-10 text-center border rounded mb-1 sm:mb-0 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                        class="w-12 sm:w-10 md:w-12 lg:w-10 xl:w-12 h-12 sm:h-10 text-center border rounded mb-1 sm:mb-0 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                         pattern="\d" title="Enter a single digit" maxlength="1"
-                                                        value="{{ old('tin.3', $formData2['tin.3'] ?? '') }}" />
+                                                        value="{{ old('tin.3', $formData2['tin.3'] ?? '') }}"
+                                                        aria-label="Tin Digit 4" />
                                                     <input type="text" id="tin5" name="tin[]"
-                                                        class="w-12 sm:w-10 md:w-12 lg:w-10 xl:w-12 h-12 sm:h-10 text-center border rounded mb-1 sm:mb-0 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                        class="w-12 sm:w-10 md:w-12 lg:w-10 xl:w-12 h-12 sm:h-10 text-center border rounded mb-1 sm:mb-0 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                         pattern="\d" title="Enter a single digit" maxlength="1"
-                                                        value="{{ old('tin.4', $formData2['tin.4'] ?? '') }}" />
+                                                        value="{{ old('tin.4', $formData2['tin.4'] ?? '') }}"
+                                                        aria-label="Tin Digit 5" />
                                                     <input type="text" id="tin6" name="tin[]"
-                                                        class="w-12 sm:w-10 md:w-12 lg:w-10 xl:w-12 h-12 sm:h-10 text-center border rounded mb-1 sm:mb-0 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                        class="w-12 sm:w-10 md:w-12 lg:w-10 xl:w-12 h-12 sm:h-10 text-center border rounded mb-1 sm:mb-0 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                         pattern="\d" title="Enter a single digit" maxlength="1"
-                                                        value="{{ old('tin.5', $formData2['tin.5'] ?? '') }}" />
+                                                        value="{{ old('tin.5', $formData2['tin.5'] ?? '') }}"
+                                                        aria-label="Tin Digit 6" />
                                                     <!-- Hyphen -->
                                                     <span
                                                         class="flex items-center justify-center font-semibold w-5 sm:w-auto md:w-5 lg:w-auto xl:w-5 text-center">-</span>
 
                                                     <!-- Group 3 -->
                                                     <input type="text" id="tin7" name="tin[]"
-                                                        class="w-12 sm:w-10 md:w-12 lg:w-10 xl:w-12 h-12 sm:h-10 text-center border rounded mb-1 sm:mb-0 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                        class="w-12 sm:w-10 md:w-12 lg:w-10 xl:w-12 h-12 sm:h-10 text-center border rounded mb-1 sm:mb-0 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                         pattern="\d" title="Enter a single digit" maxlength="1"
                                                         value="{{ old('tin.6', $formData2['tin.6'] ?? '') }}" />
                                                     <input type="text" id="tin8" name="tin[]"
-                                                        class="w-12 sm:w-10 md:w-12 lg:w-10 xl:w-12 h-12 sm:h-10 text-center border rounded mb-1 sm:mb-0 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                        class="w-12 sm:w-10 md:w-12 lg:w-10 xl:w-12 h-12 sm:h-10 text-center border rounded mb-1 sm:mb-0 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                         pattern="\d" title="Enter a single digit" maxlength="1"
                                                         value="{{ old('tin.7', $formData2['tin.7'] ?? '') }}" />
                                                     <input type="text" id="tin9" name="tin[]"
-                                                        class="w-12 sm:w-10 md:w-12 lg:w-10 xl:w-12 h-12 sm:h-10 text-center border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                        class="w-12 sm:w-10 md:w-12 lg:w-10 xl:w-12 h-12 sm:h-10 text-center border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                         pattern="\d" title="Enter a single digit" maxlength="1"
-                                                        value="{{ old('tin.8', $formData2['tin.8'] ?? '') }}" />
+                                                        value="{{ old('tin.8', $formData2['tin.8'] ?? '') }}"
+                                                        aria-label="Tin Digit 9" />
                                                 </div>
                                                 <div class="mt-6">
                                                     <label for="tin"
@@ -212,9 +229,10 @@
                                                         Identification
                                                         Number (TIN)</label>
                                                     <input type="text" id="tin" name="tin"
+                                                        aria-label="Saved Tax Identification Number (TIN)"
                                                         value="{{ old('tin', $formData2['tin'] ?? '') }}"
                                                         maxlength="9" readonly
-                                                        class="w-full px-4 py-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 cursor-not-allowed"
+                                                        class="w-full px-4 py-2 rounded-md border-gray-300 shadow-sm  focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 cursor-not-allowed"
                                                         placeholder="(9 Digits)">
                                                 </div>
 
@@ -225,7 +243,8 @@
                                             <label for="religion"
                                                 class="block mb-1">{{ __('messages.personal.religion') }}</label>
                                             <select id="religion" name="religion"
-                                                class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200">
+                                                aria-label="{{ __('messages.personal.religion') }}"
+                                                class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
                                                 <option value="" disabled>Please select...</option>
                                                 <option value="Roman Catholic"
                                                     {{ old('religion', $personal->religion ?? '') == 'Roman Catholic' ? 'selected' : '' }}>
@@ -261,7 +280,8 @@
                                         <div class="mt-6">
                                             <label for="landlineNo" class="block mb-1">Landline No.</label>
                                             <input type="tel" id="landlineNo" name="landlineNo"
-                                                class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                aria-label="Landline Number"
+                                                class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                 pattern="[0-9]+"
                                                 title="Please enter numerical characters only"value="{{ old('landlineNo', $formData2['landlineNo'] ?? '') }}"
                                                 placeholder="89839463" maxlength="8" />
@@ -273,7 +293,8 @@
                                         <div class="mt-6">
                                             <label for="cellphoneNo" class="block mb-1">Cellphone No.</label>
                                             <input type="tel" id="cellphoneNo" name="cellphoneNo"
-                                                class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                aria-label="Cellphone NUMBER"
+                                                class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 "
                                                 pattern="[0-9]+" title="Please enter numerical characters only"
                                                 placeholder="09673411171" maxlength="11"
                                                 value="{{ old('cellphoneNo', $formData2['cellphoneNo'] ?? '') }}" />
@@ -285,14 +306,19 @@
                                         <div class="mt-6">
                                             <label
                                                 class="block mb-2 ">{{ __('messages.personal.4ps_beneficiary') }}</label>
-                                            <div class="flex items-center">
+                                            <div class="flex items-center ">
                                                 <input type="radio" id="4ps-yes" name="beneficiary-4ps"
-                                                    value="Yes" class="mr-2"
+                                                    value="Yes"
+                                                    aria-label="{{ __('messages.personal.4ps_beneficiary') }} Yes"
+                                                    class="mr-2 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                     {{ old('beneficiary-4ps', $formData2['beneficiary-4ps'] ?? '') == 'Yes' ? 'checked' : '' }}>
                                                 <label for="4ps-yes" class="mr-4">Yes</label>
 
                                                 <input type="radio" id="4ps-no" name="beneficiary-4ps"
-                                                    value="No" class="mr-2"
+                                                    value="No"
+                                                    aria-label="{{ __('messages.personal.4ps_beneficiary') }}
+                                                    No"
+                                                    class="mr-2 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                     {{ old('beneficiary-4ps', $formData2['beneficiary-4ps'] ?? '') == 'No' ? 'checked' : '' }}>
                                                 <label for="4ps-no" class="mr-4">No</label>
                                             </div>
@@ -304,12 +330,23 @@
 
                                         <div class="mt-10">
                                             <label
-                                                class="block mb-2 font-semibold">{{ __('messages.personal.former_ofw') }}</label>
+                                                class="block mb-2 font-semibold focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                tabindex="0"
+                                                aria-label="{{ __('messages.personal.former_ofw') }}">{{ __('messages.personal.former_ofw') }}</label>
                                             <div class="my-4">
-                                                <p class="mb-2">{{ __('messages.personal.if_yes_provide') }}</p>
+                                                <p class="mb-2 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                    tabindex="0"
+                                                    aria-label="{{ __('messages.personal.if_yes_provide') }}">
+                                                    {{ __('messages.personal.if_yes_provide') }}</p>
                                                 <ul class="list-disc pl-6">
-                                                    <li>{{ __('messages.personal.latest_country_of_deployment') }}</li>
-                                                    <li>{{ __('messages.personal.return_date') }}</li>
+                                                    <li class="focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                        tabindex="0"
+                                                        aria-label=" {{ __('messages.personal.latest_country_of_deployment') }}">
+                                                        {{ __('messages.personal.latest_country_of_deployment') }}</li>
+                                                    <li class="focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                        tabindex="0"
+                                                        aria-label=" {{ __('messages.personal.return_date') }}">
+                                                        {{ __('messages.personal.return_date') }}</li>
                                                 </ul>
                                             </div>
 
@@ -321,12 +358,14 @@
                                                 class="block mb-1">{{ __('messages.personal.latest_country_of_deployment') }}</label>
                                             <div class="flex items-center relative">
                                                 <input type="text" id="ofw-country" name="ofw-country"
-                                                    class="flex-1 p-2 border rounded shadow-sm bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                    aria-label="{{ __('messages.personal.latest_country_of_deployment') }}"
+                                                    class="flex-1 p-2 border rounded shadow-sm bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                     placeholder="Please specify the country"
                                                     value="{{ old('ofw-country', $formData2['ofw-country'] ?? '') }}"
                                                     list="countrySuggestions" />
                                                 <button id="editCountryButton" type="button"
-                                                    class="ml-2 px-3 py-2 bg-blue-500 text-white rounded">Edit</button>
+                                                    aria-label="{{ __('messages.edit') }}"
+                                                    class="ml-2 px-3 py-2 bg-blue-500 text-white rounded focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">{{ __('messages.edit') }}</button>
                                             </div>
                                             <div id="country-suggestions"
                                                 class="absolute z-10 mt-5  max-h-90 overflow-y-auto bg-gray-200 text-black dark:bg-gray-900 dark:text-gray-200 border-darkborder rounded shadow-md hidden">
@@ -340,15 +379,13 @@
                                                 hidden />
                                         </div>
 
-
-
-
                                         <div id="ofw-return-details"
                                             class="mt-6 {{ old('ofw-return') ? '' : 'disabled' }}">
                                             <label for="ofw-return"
                                                 class="block mb-1">{{ __('messages.personal.month_year_return') }}</label>
                                             <input type="month" id="ofw-return" name="ofw-return"
-                                                class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 "
+                                                aria-label="{{ __('messages.personal.month_year_return') }}"
+                                                class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 "
                                                 value="{{ old('ofw-return', $formData2['ofw-return'] ?? '') }}" />
                                             @error('ofw-return')
                                                 <div class="text-red-600 mt-1">{{ $message }}</div>
@@ -358,11 +395,15 @@
 
                                 </div>
                                 <div class="mt-4 text-right">
-                                    <a href="{{ route('setup') }}"
-                                        class="inline-block py-2 px-4 bg-black text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mr-2">Previous</a>
+                                    <a href="{{ route('setup') }}" aria-label=" {{ __('messages.previous') }}"
+                                        class="inline-block py-2 px-4 bg-black text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 mr-2"
+                                        aria-label="Previous"> {{ __('messages.previous') }}
+                                    </a>
 
-                                    <button type="submit"
-                                        class="inline-block py-2 px-4 bg-green-600 text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">Save</button>
+                                    <button type="submit" aria-label=" {{ __('messages.save') }}"
+                                        class="inline-block py-2 px-4 bg-green-600 text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                        aria-label="Save"> {{ __('messages.save') }}
+                                    </button>
                                 </div>
                             </div>
 

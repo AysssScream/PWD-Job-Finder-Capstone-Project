@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="{{ asset('/css/layouts.css') }}" rel="stylesheet">
-    <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- Fonts -->
+    <link rel="icon" href="{{ asset('/images/first17.png') }}" type="image/png">
+
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.bunny.net/css?family=Poppins:400,500,600&display=swap" rel="stylesheet">
@@ -21,8 +22,6 @@
         .dark-transition {
             transition: background-color 0.3s ease, color 0.3s ease, opacity 0.3s ease;
         }
-
-
 
         /* Adjust the button and icon size */
         #toggleDarkMode {
@@ -57,6 +56,24 @@
 
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
             background: #555;
+        }
+
+        .bg {
+            background-image: url('/images/dashboard-light.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: auto;
+            background-attachment: fixed;
+        }
+
+        .dark .bg {
+            background-image: url('/images/dashboard-dark.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: auto;
+            background-attachment: fixed;
         }
     </style>
 </head>
@@ -170,26 +187,21 @@
                         </span>
                         <span
                             class="ml-2 text-sm tracking-wide truncate text-gray-700 dark:text-gray-200">Messages</span>
-                        {{--  <span
-                            class="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-500 bg-red-50 rounded-full">100</span> --}}
+
                     </a>
                 </li>
                 <li>
-                    <a href="#"
-                        class="relative flex flex-row items-center h-11 focus:outline-none  border-l-4 border-transparent hover:border-gray-500 pr-6">
+                    <a href="{{ route('admin.managevideos') }}"
+                        class="relative flex flex-row items-center h-11 focus:outline-none border-l-4 border-transparent hover:border-gray-500 pr-6">
                         <span class="inline-flex justify-center items-center ml-4">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
-                                </path>
-                            </svg>
+                            <i class="fas fa-video w-5 h-5"></i>
                         </span>
-                        <span
-                            class="ml-2 text-sm tracking-wide truncate text-gray-700 dark:text-gray-200">Notifications</span>
+                        <span class="ml-2 text-sm tracking-wide truncate text-gray-700 dark:text-gray-200">Manage
+                            Videos</span>
                         {{--  <span
-                            class="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-500 bg-red-50 rounded-full">1.2k</span> --}}
+        class="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-500 bg-red-50 rounded-full">1.2k</span> --}}
                     </a>
+
                 </li>
                 <li class="px-5 hidden md:block">
                     <div class="flex flex-row items-center mt-5 h-8">
@@ -247,7 +259,7 @@
                     </form>
                 </li>
             </ul>
-            <p class="mb-14 px-5 py-3 hidden md:block text-center text-xs">Copyright @2024</p>
+            <p class="mb-14 px-5 py-3 hidden md:block text-center text-xs">AccessiJobs @2024</p>
         </div>
     </div>
 @endif
@@ -307,7 +319,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
-            // Check local storage for the item
             const modalDisplayed = localStorage.getItem('modalDisplayed');
             const locale = "{{ App::getLocale() }}";
 
@@ -317,10 +328,8 @@
                 const closeModalButton = document.getElementById('closeModal');
                 const focusableElements = modal.querySelectorAll('button, a, input, select, textarea, h2,p');
 
-                // Show the modal
                 modal.classList.remove('hidden');
 
-                // Focus the first focusable element
                 if (focusableElements.length > 0) {
                     focusableElements[0].focus();
                 }
@@ -346,7 +355,6 @@
                     }
                 }
 
-                // Attach event listener to trap focus
                 document.addEventListener('keydown', trapFocus);
 
 
@@ -389,7 +397,6 @@
                 </button>
 
 
-
                 <!-- Language Toggle -->
                 <a href="{{ route('toggle.language', ['lang' => App::isLocale('en') ? 'fil' : 'en']) }}"
                     id="toggleLanguage" aria-label="Toggle Language"
@@ -414,14 +421,82 @@
                 <a href="#" id="toggleScreenReader" onclick="toggleScreenReader()"
                     class="hidden bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 mt-4 floating-button rounded-full flex items-center justify-center z-10 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                     aria-label="Toggle On Screen Reader">
-                    <i id="screenReaderIcon" class="fas "></i>
+                    <i id="screenReaderIcon" class="fas"></i>
                 </a>
+
+                @php
+                    // Use the method from the Video model to fetch the video data
+                    $dashboard = \App\Models\Video::getVideoByLocation('Dashboard');
+                    $savedjobs = \App\Models\Video::getVideoByLocation('Saved Jobs');
+                    $settings = \App\Models\Video::getVideoByLocation('Settings');
+
+                @endphp
+
+                @if (Route::currentRouteName() === 'dashboard')
+                    @if ($dashboard && $dashboard->video_id)
+                        <a id="toggleVideo" onclick="openModal('{{ $dashboard->video_id }}')" tabindex="0"
+                            class="hidden bg-red-500 hover:bg-red-700 text-white font-bold py-2 mt-4 floating-button rounded-full flex items-center justify-center z-10 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                            aria-label="Toggle Pre-recorded Video (Sign Language)">
+                            <i id="videoIcon" class="fas fa-sign-language "></i>
+                        </a>
+                    @endif
+                @elseif (Route::currentRouteName() === 'savedjobs')
+                    @if ($savedjobs && $savedjobs->video_id)
+                        <a id="toggleVideo" onclick="openModal('{{ $savedjobs->video_id }}')" tabindex="0"
+                            class="hidden bg-red-500 hover:bg-red-700 text-white font-bold py-2 mt-4 floating-button rounded-full flex items-center justify-center z-10 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                            aria-label="Toggle Pre-recorded Video (Sign Language)">
+                            <i id="videoIcon" class="fas fa-sign-language "></i>
+                        </a>
+                    @endif
+                @elseif (Route::currentRouteName() === 'profile.edit')
+                    @if ($settings && $settings->video_id)
+                        <a id="toggleVideo" onclick="openModal('{{ $settings->video_id }}')" tabindex="0"
+                            class="hidden bg-red-500 hover:bg-red-700 text-white font-bold py-2 mt-4 floating-button rounded-full flex items-center justify-center z-10 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                            aria-label="Toggle Pre-recorded Video (Sign Language)">
+                            <i id="videoIcon" class="fas fa-sign-language "></i>
+                        </a>
+                    @endif
+                @endif
+
+
+
+                <!-- Modal Structure -->
+                <div id="videoModal"
+                    class="fixed inset-0 z-50 hidden bg-gray-900 bg-opacity-75 flex items-center justify-center p-4">
+                    <div class="bg-gray-800 p-4 rounded-lg relative w-full max-w-3xl mx-auto">
+                        <div class="relative overflow-hidden" style="padding-top: 56.25%;">
+                            <iframe id="videoIframe" class="absolute top-0 left-0 w-full h-full" src=""
+                                frameborder="0" allowfullscreen></iframe>
+                            <button onclick="closeModal()"
+                                class="absolute top-0 right-0 mt-2 mr-2 text-white hover:text-gray-300 focus:outline-none z-10">
+                                <i class="fas fa-times text-2xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
 
             </div>
+
         @endif
 
         <script>
+            // Function to open the modal
+            function openModal(videoId) {
+                const modal = document.getElementById('videoModal');
+                const iframe = document.getElementById('videoIframe');
+                iframe.src = `https://www.youtube.com/embed/${videoId}`; // Use backticks for template literals
+                modal.classList.remove('hidden');
+            }
+
+            // Function to close the modal
+            function closeModal() {
+                const modal = document.getElementById('videoModal');
+                const iframe = document.getElementById('videoIframe');
+                iframe.src = ''; // Stop the video
+                modal.classList.add('hidden');
+            }
+
             let screenReaderEnabled = localStorage.getItem('screenReaderEnabled') === 'true';
             let speechSynthesisUtterance;
             // const enableSound = new Audio('enable.mp3'); // Path to enable sound
@@ -434,10 +509,11 @@
                 var toggleLanguage = document.getElementById('toggleLanguage');
                 var toggleTextSize = document.getElementById('toggletextsize');
                 var toggleScreenReader = document.getElementById('toggleScreenReader');
+                var togglePreRecord = document.getElementById('toggleVideo')
                 toggleLanguage.classList.toggle('hidden');
                 toggleTextSize.classList.toggle('hidden');
                 toggleScreenReader.classList.toggle('hidden');
-
+                togglePreRecord.classList.toggle('hidden');
             }
 
             function toggleTextSize() {
@@ -739,6 +815,8 @@
     // Event listener for toggle button
     toggleButton.addEventListener('click', function() {
         isDarkMode = !isDarkMode;
+        const theme = isDarkMode ? 'dark' : 'light';
+        localStorage.setItem('theme', theme); // Store theme preference in local storage
         localStorage.setItem('darkMode', isDarkMode); // Store dark mode preference in local storage
         updateDarkModeUI();
 
@@ -767,23 +845,51 @@
     });
 </script>
 
-<div class="min-h-screen bg-gray-100 dark:bg-gray-900 ">
-    @if (!request()->routeIs('profile.edit'))
-        @include('layouts.navigation')
-    @endif
-    <!-- Page Heading -->
-    @isset($header)
-        <header class="bg-gray-100 dark:bg-gray-800  shadow-xl">
-            <div class="bg-gray-100 dark:bg-gray-800 max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                {{ $header }}
-            </div>
-        </header>
-    @endisset
-    <!-- Page Content -->
-    <main>
-        {{ $slot }}
-    </main>
-</div>
+
+@if (Route::currentRouteName() === 'profile.edit' ||
+        Route::currentRouteName() === 'admin.dashboard' ||
+        Route::currentRouteName() === 'admin.manageusers' ||
+        Route::currentRouteName() === 'admin.audit' ||
+        Route::currentRouteName() === 'admin.managevideos')
+    <div class="min-h-screen bg-gray-100 dark:bg-gray-900 ">
+        @if (!request()->routeIs('profile.edit'))
+            @include('layouts.navigation')
+        @endif
+        <!-- Page Heading -->
+        @isset($header)
+            <header class="bg-gray-100 dark:bg-gray-800  shadow-xl">
+                <div class="bg-gray-100 dark:bg-gray-800 max-w-8xl mx-auto py-6 px-4 sm:px-6 lg:ml-12 lg:px-8">
+                    {{ $header }}
+                </div>
+            </header>
+        @endisset
+        <!-- Page Content -->
+        <main>
+            {{ $slot }}
+        </main>
+    </div>
+@else
+    <div class="min-h-screen bg-gray-100 dark:bg-gray-900 bg">
+        @if (!request()->routeIs('profile.edit'))
+            @include('layouts.navigation')
+        @endif
+        <!-- Page Heading -->
+        @isset($header)
+            <header class="bg-gray-100 dark:bg-gray-800  shadow-xl">
+                <div class="bg-gray-100 dark:bg-gray-800 max-w-8xl mx-auto py-6 px-4 sm:px-6 lg:ml-12 lg:px-8">
+                    {{ $header }}
+                </div>
+            </header>
+        @endisset
+        <!-- Page Content -->
+        <main>
+            {{ $slot }}
+        </main>
+    </div>
+@endif
+
+
+
 
 </body>
 

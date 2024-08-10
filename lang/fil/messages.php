@@ -2,7 +2,13 @@
 
 
 return [
-    // Authentication
+    'previous' => 'Bumalik',
+    'save' => 'I-save',
+    'edit' => 'Ibahin',
+
+    'verify_email' => 'Salamat sa pag-sign up! Bago magsimula, maaari mo bang i-verify ang iyong email address sa pamamagitan ng pag-click sa link na ipinadala namin sa iyong email? Kung hindi mo natanggap ang email, ikalulugod naming magpadala ng isa pang email.',
+    'new_verification_link' => "Isang bagong link sa pag-verify ang ipinadala sa email address na iyong ibinigay sa panahon ng pagpaparehistro.",
+
     'auth' => [
         'Email' => 'Email',
         'Password' => 'Password',
@@ -59,6 +65,8 @@ return [
         'applications' => 'Mga Aplikasyon',
         'browse_jobs' => 'Maghanap ng Trabaho',
         'matched_jobs' => 'Mga Katugmang Trabaho',
+        'matched_jobs_preferences' => 'Naaangkop na Trabaho batay sa Mga Kagustuhan',
+        'resume_matched_jobs' => 'Naaangkop na Trabaho batay sa Resume',
         'trainings' => 'Pagsasanay',
         'career_advice' => 'Payo sa Karera',
         'top_job_openings' => 'Mga Pangunahing Trabaho',
@@ -89,13 +97,13 @@ return [
 
 
         //MENU LIST
-        'applicant_profile' => 'Profile ng Applicant',
+        'applicant_profile' => 'Profile ng Aplikante',
         'personal_information' => 'Personal na Impormasyon',
-        'employment_history' => 'Kasaysayan ng Trabaho at Karanasan sa Trabaho',
-        'job_preferences' => 'Mga Preferensya sa Trabaho',
-        'language_proficiency' => 'Kakayahan sa Wika at Iba pang Kasanayan',
-        'educational_background' => 'Edukasyonal na Background',
-        'pwd_information' => 'Impormasyon ng PWD',
+        'employment_history' => ' Kasaysayan ng Trabaho at Karanasan sa Trabaho',
+        'job_preferences' => 'Mga Kagustuhan sa Trabaho',
+        'language_proficiency' => 'Kakayahan sa Wika at Iba Pang Kasanayan',
+        'educational_background' => 'Pang-edukasyonal na Background',
+        'pwd_information' => 'Patunayan ang Impormasyon bilang PWD',
 
         //UPDATE PASSWORD
         'update_password' => 'Baguhin ang Password',
@@ -114,7 +122,7 @@ return [
 
 
     'applicant' => [
-        'instruction' => '<b>Hakbang 1:</b> Upang tapusin ang iyong profile bilang aplikante, ilagay ang iyong petsa ng kapanganakan, tiyakin na hindi ka mas bata sa <b>16 taong gulang</b>, dahil ito ang minimum na edad na kinakailangan. Pumili ng isang suffix kung kinakailangan, at piliin ang iyong kasarian mula sa mga dropdown menu na ibinigay. Pagkatapos, kung mayroon kang suffix tulad ng <b>Jr., Sr., o III,</b> pumili ng angkop na opsyon mula sa <b>“Suffix”</b> dropdown menu; kung wala, iwanan itong nakatakda sa <b>‘None.’</b> Sa huli, kumpirmahin ang iyong kasarian sa pamamagitan ng pagpili ng tamang opsyon mula sa “Gender” dropdown menu. Sa mga hakbang na ito, mapupunan mo ang lahat ng kinakailangang personal na impormasyon sa iyong profile bilang aplikante.',
+        'instruction' => 'Hakbang 1: Upang tapusin ang iyong profile bilang aplikante, ilagay ang iyong petsa ng kapanganakan, tiyakin na hindi ka mas bata sa 16 taong gulang, dahil ito ang minimum na edad na kinakailangan. Pumili ng isang suffix kung kinakailangan, at piliin ang iyong kasarian mula sa mga dropdown menu na ibinigay. Pagkatapos, kung mayroon kang suffix tulad ng Jr., Sr., o III, pumili ng angkop na opsyon mula sa “Suffix” dropdown menu; kung wala, iwanan itong nakatakda sa ‘None.’ Sa huli, kumpirmahin ang iyong kasarian sa pamamagitan ng pagpili ng tamang opsyon mula sa “Gender” dropdown menu. Sa mga hakbang na ito, mapupunan mo ang lahat ng kinakailangang personal na impormasyon sa iyong profile bilang aplikante.',
         'email' => 'Email',
         'firstname' => 'Unang Pangalan',
         'middlename' => 'Gitnang Pangalan',
@@ -149,7 +157,7 @@ return [
     ],
 
     'personal' => [
-        'instruction' => '<b>Hakbang 2:</b> Upang mapunan ng wasto ang iyong personal na impormasyon, simulan sa pagpili ng iyong Katayuan sa Civil. Pagkatapos, ilagay ang pangalan ng iyong Barangay at kung kinakailangan, gamitin ang ‘Edit’ button para sa mga pagbabago. Automatikong pupunan nito ang Zip Code at kompletuhin ang buong Present Address batay lamang sa <b>27 mga barangay na magagamit sa Mandaluyong City</b>, kasama ang lungsod at rehiyon. Ilagay ang iyong Tax Identification Number (TIN). Ang iyong Saved Tax Code ay dapat lumitaw nang awtomatiko; tiyakin na ito ay tama. Pumili ng iyong Relihiyon mula sa mga available na opsyon. <b>Kung ikaw ay OFW, pakilagay ang impormasyon sa dalawang field sa ibaba. Kung hindi, iwanan itong blangko.</b>',
+        'instruction' => 'Hakbang 2: Upang mapunan ng wasto ang iyong personal na impormasyon, simulan sa pagpili ng iyong Katayuan sa Civil. Pagkatapos, ilagay ang pangalan ng iyong Barangay at kung kinakailangan, gamitin ang ‘Edit’ button para sa mga pagbabago. Automatikong pupunan nito ang Zip Code at kompletuhin ang buong Present Address batay lamang sa 27 mga barangay na magagamit sa Mandaluyong City, kasama ang lungsod at rehiyon. Ilagay ang iyong Tax Identification Number (TIN). Ang iyong Saved Tax Code ay dapat lumitaw nang awtomatiko; tiyakin na ito ay tama. Pumili ng iyong Relihiyon mula sa mga available na opsyon. Kung ikaw ay OFW, pakilagay ang impormasyon sa dalawang field sa ibaba. Kung hindi, iwanan itong blangko.',
 
         'civil_status' => 'Katayuan sa Sibil',
         'single' => 'Walang Asawa',
@@ -183,7 +191,7 @@ return [
     ],
 
     'employment' => [
-        'instruction' => '<b>Hakbang 3:</b> Upang makumpleto ang seksyon ng “Kasaysayan ng Trabaho at Karanasan sa Trabaho” ng form ng aplikasyon sa trabaho, simulan sa paglagay ng buong pangalan ng iyong dating employer sa <b>‘Employer Name’</b>. Pagkatapos, ilagay ang petsa ng simula at pagtatapos ng iyong trabaho sa mga <b>‘From’</b> at <b>‘To’</b> fields, ayon sa pagkakasunod-sunod. Ilagay ang kumpletong address ng iyong employer sa <b>‘Employer Address’</b> field. Tukuyin ang posisyon mo sa <b>‘Position Held’</b> at ang mga <b>‘Skills’</b> na iyong natamo sa pagpindot ng <b>‘Enter’</b>. Pagkatapos nito, i-click ang <b>‘Add Work Experience’</b> button upang i-save ito. Kung nais mong burahin ang mga rekord, i-click ang <b>‘Clear Records’</b> button. Kung hindi naman, iwanang blangko ang seksyon ng work experience at sagutin ang kalagayan sa trabaho sa ibaba.',
+        'instruction' => 'Hakbang 3: Upang makumpleto ang seksyon ng “Kasaysayan ng Trabaho at Karanasan sa Trabaho” ng form ng aplikasyon sa trabaho, simulan sa paglagay ng buong pangalan ng iyong dating employer sa ‘Employer Name’. Pagkatapos, ilagay ang petsa ng simula at pagtatapos ng iyong trabaho sa mga ‘From’ at ‘To’ fields, ayon sa pagkakasunod-sunod. Ilagay ang kumpletong address ng iyong employer sa ‘Employer Address’ field. Tukuyin ang posisyon mo sa ‘Position Held’ at ang mga ‘Skills’ na iyong natamo sa pagpindot ng ‘Enter’. Pagkatapos nito, i-click ang ‘Add Work Experience’ button upang i-save ito. Kung nais mong burahin ang mga rekord, i-click ang ‘Clear Records’ button. Kung hindi naman, iwanang blangko ang seksyon ng work experience at sagutin ang kalagayan sa trabaho sa ibaba.',
         'employment_history' => 'KASAYSAYAN NG TRABAHO',
         'modify_work_experience' => 'Baguhin ang Karanasan sa Trabaho',
         'specify_current_employment' => 'Tukuyin ang Iyong Kasalukuyang Trabaho',
@@ -212,7 +220,7 @@ return [
 
 
     'jobpreferences' => [
-        'instruction' => '<b>Hakbang 4:</b> Sa mga seksyon ng <b>\'Preferred Occupation\'</b> at <b>\'Preferred Work Location\'</b> ng form ng aplikasyon sa trabaho, itala ang iyong inaasam na posisyon sa trabaho at ang lugar kung saan mo gusto magtrabaho. Tukuyin ang iyong mga napipiling lokasyon para sa local at <b>overseas</b> na mga oportunidad. Para sa lokal na mga preference, pumili mula sa mga iminungkahing lokasyon na ibinigay. Kung bukas ka sa internasyonal na mga oportunidad, maaari kang maglista ng mga bansa o lungsod sa overseas section. Maaari mong baguhin ang mga field na ito kung magbago ang iyong mga preference.',
+        'instruction' => 'Hakbang 4: Sa mga seksyon ng \'Preferred Occupation\' at \'Preferred Work Location\' ng form ng aplikasyon sa trabaho, itala ang iyong inaasam na posisyon sa trabaho at ang lugar kung saan mo gusto magtrabaho. Tukuyin ang iyong mga napipiling lokasyon para sa local at overseas na mga oportunidad. Para sa lokal na mga preference, pumili mula sa mga iminungkahing lokasyon na ibinigay. Kung bukas ka sa internasyonal na mga oportunidad, maaari kang maglista ng mga bansa o lungsod sa overseas section. Maaari mong baguhin ang mga field na ito kung magbago ang iyong mga preference.',
         'preferred_occupation' => 'Nais na Trabaho',
         'alphabetic_characters_only' => 'Pakilagay ng mga alpabetikong karakter lamang',
         'preferred_work_location_local' => 'Nais na Lugar ng Trabaho - Lokal',
@@ -229,7 +237,7 @@ return [
 
 
     'education' => [
-        'instruction' => '<b>Hakbang 6:</b> Upang makumpleto ang form ng aplikasyon, simulan sa pag-access sa online system at paghanap sa seksyon na nakatuon sa background sa edukasyon. Dito, ilagay ang iyong pinakamataas na natapos na edukasyon, mga natanggap na parangal (kung mayroon), pangalan ng iyong paaralan, iyong tiyak na kurso o major, at taon ng iyong pagtatapos. Sa ngayon, maaari mong itype ang <b>N/A</b> para sa mga fields ng School Graduated at Course.',
+        'instruction' => 'Hakbang 6: Upang makumpleto ang form ng aplikasyon, simulan sa pag-access sa online system at paghanap sa seksyon na nakatuon sa background sa edukasyon. Dito, ilagay ang iyong pinakamataas na natapos na edukasyon, mga natanggap na parangal (kung mayroon), pangalan ng iyong paaralan, iyong tiyak na kurso o major, at taon ng iyong pagtatapos. Sa ngayon, maaari mong itype ang N/A para sa mga fields ng School Graduated at Course.',
         'highest_educational_attainment' => 'Pinakamataas na Natamong Edukasyon',
         'select_education_level' => 'Pumili ng Antas ng Edukasyon...',
         'primary_school' => 'Primary School',
@@ -262,17 +270,18 @@ return [
 
     'steps' => [
         'toggle_button' => 'Mga Hakbang',
-        'step_1' => 'Hakbang 1: Profile ng Applicant',
+        'step_1' => 'Hakbang 1: Profile ng Aplikante',
         'step_2' => 'Hakbang 2: Personal na Impormasyon',
         'step_3' => 'Hakbang 3: Kasaysayan ng Trabaho at Karanasan sa Trabaho',
-        'step_4' => 'Hakbang 4: Mga Preferences sa Trabaho',
-        'step_5' => 'Hakbang 5: Kakayahan sa Wika at Iba Pang Skills',
-        'step_6' => 'Hakbang 6: Edukasyonal na Background',
-        'step_7' => 'Hakbang 7: Patunayan ang Impormasyon ng PWD',
+        'step_4' => 'Hakbang 4: Mga Kagustuhan sa Trabaho',
+        'step_5' => 'Hakbang 5: Kakayahan sa Wika at Iba Pang Kasanayan',
+        'step_6' => 'Hakbang 6: Pang-edukasyonal na Background',
+        'step_7' => 'Hakbang 7: Patunayan ang Impormasyon bilang PWD',
+
     ],
 
     'language' => [
-        'instruction' => '<b>Hakbang 5:</b> Upang i-update ang iyong profile, i-click ang <b>“Magdagdag ng Wika”</b> para magdagdag ng bagong mga wika at itakda ang proficiency ng bawat isa. Gamitin ang mga checkboxes para pumili ng mga kasanayang walang pormal na pagsasanay (Iba pang Skills). I-edit o tanggalin ang mga entry ayon sa pangangailangan upang wastong maipakita ang iyong mga kakayahan.',
+        'instruction' => 'Hakbang 5: Upang i-update ang iyong profile, i-click ang “Magdagdag ng Wika” para magdagdag ng bagong mga wika at itakda ang proficiency ng bawat isa. Gamitin ang mga checkboxes para pumili ng mga kasanayang walang pormal na pagsasanay (Iba pang Skills). I-edit o tanggalin ang mga entry ayon sa pangangailangan upang wastong maipakita ang iyong mga kakayahan.',
         'updatelang' => 'Upang ma-update ang iyong kasanayan sa wika:',
         'list-unstyled' => [
             '1' => 'I-click ang "Magdagdag ng Wika" para magdagdag ng bagong mga wika.',
@@ -316,7 +325,7 @@ return [
     ],
 
     'pwdinfo' => [
-        'instruction' => '<b>Hakbang 7:</b> Upang maayos na makumpleto ang web form hinggil sa pangyayari at katayuan ng kapansanan, simulan sa pagpili mula sa dropdown menu sa ilalim ng "Tukuyin ang Pangyayari ng Kapansanan" at itala kung ang iyong kapansanan ay Pang-akit sa Paningin, Pang-akit sa Katawan, Pang-akit sa Pandinig, Psychosocial, o Iba pa, na nagbibigay ng mga tiyak na detalye kung pipiliin ang huli. Pagkatapos, sa seksyon ng "Katayuan sa Kapansanan," suriin ang mga naaangkop na checkbox para sa Pang-akit sa Paningin, Pang-akit sa Katawan, Pang-akit sa Pandinig, o Iba pa, at magdagdag ng mga tiyak na detalye kung pipiliin ang "Iba." Sa huli, mag-upload ng iyong Person With Disability (PWD) ID sa pamamagitan ng pag-click sa "Pumili ng File" sa ilalim ng "Mag-upload ng PWD ID," tiyaking walang naunang mga file ang napili. Opsyonal, maaari mong mag-upload ng larawan ng iyong profile gamit ang parehong paraan kung kinakailangan.',
+        'instruction' => 'Hakbang 7: Upang maayos na makumpleto ang web form hinggil sa pangyayari at katayuan ng kapansanan, simulan sa pagpili mula sa dropdown menu sa ilalim ng "Tukuyin ang Pangyayari ng Kapansanan" at itala kung ang iyong kapansanan ay Pang-akit sa Paningin, Pang-akit sa Katawan, Pang-akit sa Pandinig, Psychosocial, o Iba pa, na nagbibigay ng mga tiyak na detalye kung pipiliin ang huli. Pagkatapos, sa seksyon ng "Katayuan sa Kapansanan," suriin ang mga naaangkop na checkbox para sa Pang-akit sa Paningin, Pang-akit sa Katawan, Pang-akit sa Pandinig, o Iba pa, at magdagdag ng mga tiyak na detalye kung pipiliin ang "Iba." Sa huli, mag-upload ng iyong Person With Disability (PWD) ID sa pamamagitan ng pag-click sa "Pumili ng File" sa ilalim ng "Mag-upload ng PWD ID," tiyaking walang naunang mga file ang napili. Opsyonal, maaari mong mag-upload ng larawan ng iyong profile gamit ang parehong paraan kung kinakailangan.',
         'disability_status' => 'Katayuan sa Kapansanan:',
         'disability_visual' => 'Pang-akit sa Paningin',
         'disability_psychosocial' => 'Psychosocial',
@@ -342,6 +351,7 @@ return [
         'specify_disability' => 'Tukuyin ang Kapansanan:',
         'upload_pwd_id' => 'Mag-upload ng PWD ID',
         'upload_profile_picture' => 'Mag-upload ng Larawan ng Profile',
+        'certification_authorization' => 'Sertipikasyon/Awtorizasyon',
         'terms' => 'Ito ay upang patunayan na lahat ng data/impormasyon na aking ibinigay sa form na ito ay totoo sa abot ng aking kaalaman. Ipinapahintulot ko rin sa PDAD Mandaluyong na isama ang aking profile sa Employment Information System at gamitin ang aking personal na impormasyon para sa pag-facilitate ng employment.
 '
     ],
@@ -381,6 +391,28 @@ return [
         'location' => 'Lokasyon',
         'action' => 'Aksyon',
     ],
+
+    'workexperience' => [
+        'employer_name' => 'Pangalan ng Empleyado',
+        'employer_address' => 'Tirahan ng Empleyado',
+        'position_held' => 'Posisyong Hinawakan',
+        'skills_gained' => 'Mga Kakayahang Natutunan',
+        'employment_status' => 'Katayuan sa Trabaho',
+        'from' => 'Mula sa',
+        'to' => 'Hanggang sa',
+        'selected_skills' => 'Piniling Kakayahan',
+        'clear_records' => 'Burahin ang mga Rekord',
+        'add_work_experience' => 'Magdagdag ng Karanasan sa Trabaho',
+        'actions' => 'Mga Aksyon',
+        'delete' => 'Burahin',
+        'current_employment' => 'Ilarawan ang Iyong Kasalukuyang Trabaho:',
+        'job_search_duration' => 'Gaano katagal ka nang naghahanap ng trabaho?',
+        'update_employment_history' => 'I-update ang Kasaysayan ng Trabaho at Karanasan sa Trabaho',
+        'go_back_to_profile' => 'Bumalik sa Profile',
+        'new_submitted_work_experience' => 'Bagong Isinumiteng Karanasan sa Trabaho at Kasanayan',
+
+    ]
+
 ];
 
 

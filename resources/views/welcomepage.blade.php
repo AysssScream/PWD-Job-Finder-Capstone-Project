@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AccessiJobs | Welcome</title>
+    <link rel="icon" href="{{ asset('/images/first17.png') }}" type="image/png">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link href="https://fonts.bunny.net/css?family=Poppins:400,500,600&display=swap" rel="stylesheet">
@@ -17,9 +19,7 @@
     <link rel="preload" href="images/lightnavbarlogo.png" as="image">
     <link rel="preload" href="images/darknavbarlogo.png" as="image">
     <link rel="preload" href="images/team.png" as="image">
-    <link rel="preload" href="images/1bg.mp4" as="video" type="video/mp4">
-    <link rel="preload" href="images/2bg.mp4" as="video" type="video/mp4">
-    <link rel="preload" href="images/3bg.mp4" as="video" type="video/mp4">
+
 
     <script defer="" src="https://unpkg.com/vanilla-counter" onload="initializeCounterRANDOMID()"></script>
 </head>
@@ -64,7 +64,7 @@
                                 <li id="menu-item-aboutus"
                                     class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home nav-item nav-item-32738">
                                     <a href="{{ route('faq') }}" class="nav-link underline-on-hover">
-                                        <i class="fas fa-info-circle"></i> FAQ
+                                        <i class="fas fas fa-question-circle"></i> FAQ
                                     </a>
                                 </li>
                                 <li id="menu-item-contact"
@@ -237,51 +237,51 @@
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <video class="bd-placeholder-img" autoplay loop muted playsinline>
-                        <source src="images/1bg.mp4" type="video/mp4">
-                    </video>
+                    <div class="full-screen-container">
+                        <img class="full-screen-img" src="images/governance.jpg" alt="Governance Image">
+                        <div class="overlay"></div>
+                    </div>
                     <div class="container">
                         <div class="carousel-caption text-start">
-                            <h1 style="font-weight: bold; line-height: 1.9;">Empowering Job Seekers with Disabilities
-                            </h1>
+                            <h1 class="underlined-heading">Empowering Job Seekers with Disabilities</h1>
+
                             <p style="line-height: 1.9; ">Discover our innovative job search platform designed
                                 specifically for persons with <br>
                                 disabilities in Mandaluyong City, featuring advanced resume parsing and descriptive <br>
                                 analytics to enhance job accessibility and inclusivity.</p>
-                            <p><a class="btn btn-lg btn-primary btn-black-white" href="#how-it-works">How it
+                            <p><a class="btn btn-lg btn-primary" href="#how-it-works">How it
                                     Works?</a></p>
                         </div>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <video class="bd-placeholder-img" autoplay loop muted playsinline>
-                        <source src="/images/2bg.mp4" type="video/mp4">
-                    </video>
+                    <img class="full-screen-img" src="images/governance2.jpg" alt="Governance Image">
+                    <div class="overlay"></div>
                     <div class="container">
                         <div class="carousel-caption">
-                            <h1 style="font-weight: bold; line-height: 1.9;">Accessible and Inclusive Job Search</h1>
+                            <h1 class="underlined-heading">Accessible and Inclusive Job Search</h1>
                             <p style="line-height: 1.9;">Our platform offers secure login, accessibility options, a
                                 resume parser subsystem, <br>
                                 a PWD-friendly dashboard, employer functionalities, and real-time notifications, <br>
                                 all tailored to meet the unique needs of job seekers with disabilities.</p>
-                            <p><a class="btn btn-lg btn-primary btn-black-white" href={{ route('aboutus') }}>Learn
+                            <p><a class="btn btn-lg btn-primary " href={{ route('aboutus') }}>Learn
                                     more</a></p>
                         </div>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <video class="bd-placeholder-img" autoplay loop muted playsinline>
-                        <source src="/images/3bg.mp4" type="video/mp4">
+                    <img class="full-screen-img" src="images/governance3.png" alt="Governance Image">
+                    <div class="overlay"></div>
                     </video>
                     <div class="container">
                         <div class="carousel-caption text-end">
-                            <h1 style="line-height: 1.9; font-weight: bold;">Transforming Employment Opportunities</h1>
+                            <h1 class="underlined-heading">Transforming Employment Opportunities</h1>
                             <p style="line-height: 1.9;">By addressing the employment barriers faced by persons with
                                 disabilities and <br>
                                 implementing comprehensive accessibility features, our platform aims to significantly
                                 <br>improve job matching success rates and overall user satisfaction.
                             </p>
-                            <p><a class="btn btn-lg btn-primary btn-black-white" href={{ route('login') }}>Get
+                            <p><a class="btn btn-lg btn-primary" href={{ route('login') }}>Get
                                     Started</a></p>
                         </div>
                     </div>
@@ -297,44 +297,75 @@
             </button>
         </div>
 
-        <section class="section-1 py-5 ">
+        <section class="section-1 py-5 " id="popularbg">
             <div class="container">
                 <h2 class=" fw-bold" id="designedheader">Find Jobs</h2>
                 <br>
                 <div class="card border-0 shadow p-5">
                     <div class="row pt-2">
-                        <div class="col-md-3 mb-3 mb-sm-3 mb-lg-0">
-                            <label for="search-keywords" class="form-label">Keywords</label>
-                            <input type="text" class="form-control" name="search" id="search-keywords"
-                                placeholder="Keywords">
-                        </div>
-                        <div class="col-md-3 mb-3 mb-sm-3 mb-lg-0">
-                            <label for="search-location" class="form-label">Location</label>
-                            <input type="text" class="form-control" name="search" id="search-location"
-                                placeholder="Location">
-                        </div>
-                        <div class="col-md-3 mb-3 mb-sm-3 mb-lg-0">
-                            <label for="category" class="form-label">Category</label>
-                            <select name="category" id="category" class="form-control">
-                                <option value="">Select a Category</option>
-                                <option value="engineering">Engineering</option>
-                                <option value="accountant">Accountant</option>
-                                <option value="it">Information Technology</option>
-                                <option value="fashion">Fashion Designing</option>
-                            </select>
-                        </div>
-                        <div class="col-md-3 mb-3 mb-sm-3 mb-lg-0">
-                            <label for="search-submit" class="form-label d-block">&nbsp;</label>
-                            <div class="d-grid gap-2">
-                                <a href="jobs.html" class="btn btn-primary btn-block">
-                                    <i class="fas fa-search"></i> Search Job
-                                </a>
+
+                        <div class="row">
+                            <div class="col-md-3 mb-3 mb-sm-3 mb-lg-0">
+                                <label for="search-location"
+                                    class="form-label text-gray-900 dark:text-gray-200">Location</label>
+                                <div class="input-group">
+                                    <span
+                                        class="input-group-text bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-200">
+                                        <i class="fas fa-map-marker-alt icon"></i>
+                                    </span>
+                                    <input type="text"
+                                        class="form-control bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200"
+                                        name="search" id="search-location" placeholder="Location">
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 mb-3 mb-sm-3 mb-lg-0">
+                                <label for="jobtype" class="form-label text-gray-900 dark:text-gray-200">Job
+                                    Type</label>
+                                <div class="input-group">
+                                    <span
+                                        class="input-group-text bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-200">
+                                        <i class="fas fa-tag icon"></i>
+                                    </span>
+                                    <select name="jobtype" id="jobtype"
+                                        class="form-control bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200 dark:border-gray-600">
+                                        <option value="">Select a Job Type</option>
+                                        <option value="fullttime">Full Time</option>
+                                        <option value="parttime">Part Time</option>
+                                        <option value="contractual">Contractual</option>
+                                        <option value="probationary">Probationary</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 mb-3 mb-sm-3 mb-lg-0">
+                                <label for="job-title" class="form-label text-gray-900 dark:text-gray-200">Job
+                                    Title</label>
+                                <div class="input-group">
+                                    <span
+                                        class="input-group-text bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-200">
+                                        <i class="fas fa-briefcase icon"></i>
+                                    </span>
+                                    <input type="text"
+                                        class="form-control bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200"
+                                        name="job-title" id="job-title" placeholder="Job Title">
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 mb-3 mb-sm-3 mb-lg-0">
+                                <label for="search-submit" class="form-label d-block">&nbsp;</label>
+                                <div class="d-grid gap-2">
+                                    <a href="{{ route('findjobs') }}" class="btn btn-primary btn-block">
+                                        <i class="fas fa-search icon"></i> Search Job
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
+
+                    </div>
                 </div>
-            </div>
         </section>
 
         <section class="section-2 bg-2 py-5" id="popularbg">
@@ -342,74 +373,32 @@
                 <h2 class=" fw-bold" id="designedheader">Featured Companies</h2>
                 <div class="row pt-4">
                     <br>
-                    <div class="col-lg-4 col-xl-3 col-md-6 ">
-                        <div class="single_catagory shadow  rounded">
-                            <a href="jobs.html">
-                                <h4 class="pb-2">Design &amp; Creative</h4>
-                            </a>
-                            <p class="mb-0"> <span>50</span> Available position</p>
+                    <div class="container ">
+                        <div class="row">
+                            @foreach ($jobs as $job)
+                                <div class="col-lg-4 col-xl-3 col-md-6 d-flex align-items-stretch">
+                                    <div class="single_catagory shadow rounded flex-grow-1 d-flex flex-column ">
+                                        <a href="{{ route('jobs.info', ['company_name' => Str::slug($job->company_name), 'id' => $job->id]) }}"
+                                            class="text-decoration-none">
+                                            <h4 class="pb-2">{{ $job->company_name }}</h4>
+                                        </a>
+                                        <p class="mb-0"><span>{{ $job->location }}</span></p>
+                                        <p class="mb-0">
+                                            <span>{{ $totalVacanciesPerCompany[$job->company_name] ?? 'N/A' }}
+                                                job positions given</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            @endforeach
+
                         </div>
                     </div>
-                    <div class="col-lg-4 col-xl-3 col-md-6">
-                        <div class="single_catagory shadow  rounded">
-                            <a href="jobs.html">
-                                <h4 class="pb-2">Finance</h4>
-                            </a>
-                            <p class="mb-0"> <span>50</span> Available position</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-xl-3 col-md-6">
-                        <div class="single_catagory shadow  rounded">
-                            <a href="jobs.html">
-                                <h4 class="pb-2">Banking</h4>
-                            </a>
-                            <p class="mb-0"> <span>50</span> Available position</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-xl-3 col-md-6">
-                        <div class="single_catagory shadow  rounded">
-                            <a href="jobs.html">
-                                <h4 class="pb-2">Data Science</h4>
-                            </a>
-                            <p class="mb-0"> <span>50</span> Available position</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-xl-3 col-md-6">
-                        <div class="single_catagory shadow  rounded">
-                            <a href="jobs.html">
-                                <h4 class="pb-2">Marketing</h4>
-                            </a>
-                            <p class="mb-0"> <span>50</span> Available position</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-xl-3 col-md-6">
-                        <div class="single_catagory shadow  rounded">
-                            <a href="jobs.html">
-                                <h4 class="pb-2">Digital Marketing</h4>
-                            </a>
-                            <p class="mb-0"> <span>50</span> Available position</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-xl-3 col-md-6">
-                        <div class="single_catagory shadow  rounded">
-                            <a href="jobs.html">
-                                <h4 class="pb-2">Digital Marketing</h4>
-                            </a>
-                            <p class="mb-0"> <span>50</span> Available position</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-xl-3 col-md-6">
-                        <div class="single_catagory shadow rounded">
-                            <a href="jobs.html">
-                                <h4 class="pb-2">Digital Marketing</h4>
-                            </a>
-                            <p class="mb-0"> <span>50</span> Available position</p>
-                        </div>
-                    </div>
+
+
                 </div>
             </div>
         </section>
-        <main class="mt-5">
+        <main class="mt-5 " id="main">
             <div class="container">
                 <!--Section: Content-->
 
@@ -467,182 +456,39 @@
                             <div class="job_listing_area">
                                 <div class="job_lists">
                                     <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="card border-0 p-3 shadow mb-4 ">
-                                                <div class="card-body">
-                                                    <h3 class="border-0 fs-5 pb-2 mb-0">Web Developer</h3>
-                                                    <p>We are in need of a Web Developer for our company.</p>
-                                                    <div class="bg-light p-3 border rounded">
-                                                        <p class="mb-0">
-                                                            <span class="fw-bolder"><i
-                                                                    class="fa fa-map-marker"></i></span>
-                                                            <span class="ps-1">Noida</span>
-                                                        </p>
-                                                        <p class="mb-0">
-                                                            <span class="fw-bolder"><i
-                                                                    class="fa fa-clock-o"></i></span>
-                                                            <span class="ps-1">Remote</span>
-                                                        </p>
-                                                        <p class="mb-0">
-                                                            <span class="fw-bolder"><i class="fa fa-usd"></i></span>
-                                                            <span class="ps-1">2-3 Lacs PA</span>
-                                                        </p>
-                                                    </div>
+                                        @foreach ($featuredjobs as $job)
+                                            <div class="col-md-4">
+                                                <div class="card border-0 p-3 shadow mb-4 ">
+                                                    <div class="card-body">
+                                                        <h3 class="border-0 fs-5 pb-2 mb-0">{{ $job->title }}</h3>
+                                                        <p>We are in need of a {{ $job->title }} for our company.</p>
+                                                        <div class="bg-light p-3 border rounded">
+                                                            <p class="mb-0">
+                                                                <span class="fw-bolder"><i
+                                                                        class="fa fa-map-marker"></i></span>
+                                                                <span class="ps-1">{{ $job->location }}</span>
+                                                            </p>
+                                                            <p class="mb-0">
+                                                                <span class="fw-bolder"><i
+                                                                        class="fa fa-clock"></i></span>
+                                                                <span class="ps-1">{{ $job->job_type }}</span>
+                                                            </p>
+                                                            <p class="mb-0">
+                                                                <span class="fw-bolder"><i
+                                                                        class="fa fa-usd"></i></span>
+                                                                <span
+                                                                    class="ps-1">{{ $job->educational_level }}</span>
+                                                            </p>
+                                                        </div>
 
-                                                    <div class="d-grid mt-3">
-                                                        <a href="job-detail.html"
-                                                            class="btn btn-primary btn-lg">Details</a>
+                                                        <div class="d-grid mt-3">
+                                                            <a href="{{ route('jobs.info', ['company_name' => Str::slug($job->company_name), 'id' => $job->id]) }}"
+                                                                class="btn btn-primary btn-lg">Details</a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <div class="card border-0 p-3 shadow mb-4">
-                                                <div class="card-body">
-                                                    <h3 class="border-0 fs-5 pb-2 mb-0">Web Developer</h3>
-                                                    <p>We are in need of a Web Developer for our company.</p>
-                                                    <div class="bg-light p-3 border rounded">
-                                                        <p class="mb-0">
-                                                            <span class="fw-bolder"><i
-                                                                    class="fa fa-map-marker"></i></span>
-                                                            <span class="ps-1">Noida</span>
-                                                        </p>
-                                                        <p class="mb-0">
-                                                            <span class="fw-bolder"><i
-                                                                    class="fa fa-clock-o"></i></span>
-                                                            <span class="ps-1">Remote</span>
-                                                        </p>
-                                                        <p class="mb-0">
-                                                            <span class="fw-bolder"><i class="fa fa-usd"></i></span>
-                                                            <span class="ps-1">2-3 Lacs PA</span>
-                                                        </p>
-                                                    </div>
-
-                                                    <div class="d-grid mt-3">
-                                                        <a href="job-detail.html"
-                                                            class="btn btn-primary btn-lg">Details</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="card border-0 p-3 shadow mb-4">
-                                                <div class="card-body">
-                                                    <h3 class="border-0 fs-5 pb-2 mb-0">Web Developer</h3>
-                                                    <p>We are in need of a Web Developer for our company.</p>
-                                                    <div class="bg-light p-3 border rounded">
-                                                        <p class="mb-0">
-                                                            <span class="fw-bolder"><i
-                                                                    class="fa fa-map-marker"></i></span>
-                                                            <span class="ps-1">Noida</span>
-                                                        </p>
-                                                        <p class="mb-0">
-                                                            <span class="fw-bolder"><i
-                                                                    class="fa fa-clock-o"></i></span>
-                                                            <span class="ps-1">Remote</span>
-                                                        </p>
-                                                        <p class="mb-0">
-                                                            <span class="fw-bolder"><i class="fa fa-usd"></i></span>
-                                                            <span class="ps-1">2-3 Lacs PA</span>
-                                                        </p>
-                                                    </div>
-
-                                                    <div class="d-grid mt-3">
-                                                        <a href="job-detail.html"
-                                                            class="btn btn-primary btn-lg">Details</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="card border-0 p-3 shadow mb-4">
-                                                <div class="card-body">
-                                                    <h3 class="border-0 fs-5 pb-2 mb-0">Web Developer</h3>
-                                                    <p>We are in need of a Web Developer for our company.</p>
-                                                    <div class="bg-light p-3 border rounded">
-                                                        <p class="mb-0">
-                                                            <span class="fw-bolder"><i
-                                                                    class="fa fa-map-marker"></i></span>
-                                                            <span class="ps-1">Noida</span>
-                                                        </p>
-                                                        <p class="mb-0">
-                                                            <span class="fw-bolder"><i
-                                                                    class="fa fa-clock-o"></i></span>
-                                                            <span class="ps-1">Remote</span>
-                                                        </p>
-                                                        <p class="mb-0">
-                                                            <span class="fw-bolder"><i class="fa fa-usd"></i></span>
-                                                            <span class="ps-1">2-3 Lacs PA</span>
-                                                        </p>
-                                                    </div>
-
-                                                    <div class="d-grid mt-3">
-                                                        <a href="job-detail.html"
-                                                            class="btn btn-primary btn-lg">Details</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="card border-0 p-3 shadow mb-4">
-                                                <div class="card-body">
-                                                    <h3 class="border-0 fs-5 pb-2 mb-0">Web Developer</h3>
-                                                    <p>We are in need of a Web Developer for our company.</p>
-                                                    <div class="bg-light p-3 border rounded">
-                                                        <p class="mb-0">
-                                                            <span class="fw-bolder"><i
-                                                                    class="fa fa-map-marker"></i></span>
-                                                            <span class="ps-1">Noida</span>
-                                                        </p>
-                                                        <p class="mb-0">
-                                                            <span class="fw-bolder"><i
-                                                                    class="fa fa-clock-o"></i></span>
-                                                            <span class="ps-1">Remote</span>
-                                                        </p>
-                                                        <p class="mb-0">
-                                                            <span class="fw-bolder"><i class="fa fa-usd"></i></span>
-                                                            <span class="ps-1">2-3 Lacs PA</span>
-                                                        </p>
-                                                    </div>
-
-                                                    <div class="d-grid mt-3">
-                                                        <a href="job-detail.html"
-                                                            class="btn btn-primary btn-lg">Details</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="card border-0 p-3 shadow mb-4">
-                                                <div class="card-body">
-                                                    <h3 class="border-0 fs-5 pb-2 mb-0">Web Developer</h3>
-                                                    <p>We are in need of a Web Developer for our company.</p>
-                                                    <div class="bg-light p-3 border rounded">
-                                                        <p class="mb-0">
-                                                            <span class="fw-bolder"><i
-                                                                    class="fa fa-map-marker"></i></span>
-                                                            <span class="ps-1">Noida</span>
-                                                        </p>
-                                                        <p class="mb-0">
-                                                            <span class="fw-bolder"><i
-                                                                    class="fa fa-clock-o"></i></span>
-                                                            <span class="ps-1">Remote</span>
-                                                        </p>
-                                                        <p class="mb-0">
-                                                            <span class="fw-bolder"><i class="fa fa-usd"></i></span>
-                                                            <span class="ps-1">2-3 Lacs PA</span>
-                                                        </p>
-                                                    </div>
-
-                                                    <div class="d-grid mt-3">
-                                                        <a href="job-detail.html"
-                                                            class="btn btn-primary btn-lg">Details</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
@@ -650,8 +496,8 @@
                     </div>
                 </section>
                 <div class="second-section mt-4">
-                    <section class="bg-light">
-                        <div class="container py-6">
+                    <section class="bg-light ">
+                        <div class="container py-6 ">
                             <div class="row mb-5">
                                 <div class="col-md-12">
                                     <div class="lc-block text-center">
@@ -721,12 +567,17 @@
                                 </div>
                             </div>
                         </div>
+
+
                 </div>
+                <br>
+                <br>
+                <br>
+                <br>
                 </section>
+
     </header>
 
-    <br>
-    <br>
 
     <div class="offer-section">
         <section class="d-flex align-items-center min-vh-50">
@@ -853,7 +704,7 @@
 
 
 
-    <section class="bg-light">
+    <section class="bg-light" style="background-color:#f7fbfe">
         <div class="container py-6">
             <div class="row mb-5">
                 <div class="col-md-12">
@@ -1533,147 +1384,6 @@
                     </div><!-- /col -->
                 </div>
         </section>
-        {{-- <div class="faq-section">
-
-            <section class="pb-6">
-                <div class="container pt-5 my-4 rounded">
-
-                    <div class="row justify-content-center text-center mb-4">
-
-                        <div class="lc-block col-xl-8">
-                            <h1 editable="inline" class="fw-bold display-5">FAQ</h1>
-                        </div><!-- /lc-block -->
-
-                    </div>
-                    <div class="row justify-content-center text-center mb-4">
-
-                        <div class="lc-block col-xl-8">
-                            <div editable="rich">
-                                <p class="text-muted rfs-8">Welcome to our FAQ section, where we provide answers to
-                                    your most common questions about AccessiJobs. Here, you’ll find information on
-                                    everything from how to use our platform to the specialized services we offer for
-                                    persons with disabilities and employers alike. Our goal is to ensure that all your
-                                    inquiries are addressed, making your experience as smooth and productive as
-                                    possible. If you have any questions that are not covered here, please don’t hesitate
-                                    to contact us directly.</p>
-                            </div>
-                        </div><!-- /lc-block -->
-
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="col-md-12 col-xxl-8">
-                            <div class="lc-block">
-                                <div class="accordion accordion-flush" id="accordionFlushMyFAQ2">
-                                    <div class="lc-block accordion-item mb-5 p-md-4 card card-body shadow">
-
-                                        <a editable="inline"
-                                            class="fw-bold text-decoration-none text-dark h4 collapsed" href=""
-                                            data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
-                                            aria-expanded="false" aria-controls="flush-collapseOne">
-                                            How does AccessiJobs tailor job searches for PWDs?
-                                        </a>
-
-                                        <div id="flush-collapseOne" class="accordion-collapse collapse show"
-                                            aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushMyFAQ2">
-                                            <div class="accordion-body" editable="rich">AccessiJobs utilizes advanced
-                                                descriptive analytics and resume parsing technology to match persons
-                                                with disabilities (PWDs) with suitable job opportunities. Our platform
-                                                analyzes your skills, experience, and specific disability requirements
-                                                to find jobs that not only match your qualifications but also
-                                                accommodate your individual needs, ensuring an optimal work environment
-                                                for your success.<p><br></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="lc-block accordion-item mb-5 p-md-4 card card-body shadow"><a
-                                            editable="inline" class="fw-bold text-decoration-none text-dark h4"
-                                            href="" data-bs-toggle="collapse"
-                                            data-bs-target="#flush-collapseTwo" aria-expanded="false"
-                                            aria-controls="flush-collapseTwo">
-                                            What types of disabilities does AccessiJobs support?
-                                        </a>
-
-                                        <div id="flush-collapseTwo" class="accordion-collapse collapse"
-                                            aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushMyFAQ2">
-                                            <div class="accordion-body" editable="rich">AccessiJobs is designed to
-                                                support a wide range of disabilities, including but not limited to
-                                                visual, psychosocial, and physical disabilities. We also cater to
-                                                individuals who are deaf or hard of hearing. Each disability category
-                                                benefits from tailored features on our platform, such as text-to-speech
-                                                for those with visual impairments, captioning for the deaf, and
-                                                customizable interface options to enhance usability for all users.</div>
-                                        </div>
-                                    </div>
-                                    <div class="lc-block accordion-item mb-5 p-md-4 card card-body shadow"><a
-                                            editable="inline"
-                                            class="fw-bold text-decoration-none text-dark h4 collapsed" href=""
-                                            data-bs-toggle="collapse" data-bs-target="#flush-collapseThree"
-                                            aria-expanded="false" aria-controls="flush-collapseThree">
-                                            How can employers use AccessiJobs to post jobs and find candidates?
-                                        </a>
-
-                                        <div id="flush-collapseThree" class="accordion-collapse collapse"
-                                            aria-labelledby="flush-headingThree"
-                                            data-bs-parent="#accordionFlushMyFAQ2">
-                                            <div class="accordion-body" editable="rich">Employers can easily post job
-                                                openings on AccessiJobs by registering on our platform and filling out
-                                                job details that highlight the skills and qualifications required. Our
-                                                platform allows employers to specify the type of accommodations needed
-                                                for the job, making it easier to match with suitable candidates.
-                                                Additionally, employers can utilize our analytics tools to monitor the
-                                                effectiveness of their postings and interact directly with potential
-                                                candidates, ensuring a smooth hiring process.</div>
-                                        </div>
-                                    </div>
-                                    <div class="lc-block accordion-item mb-5 p-md-4 card card-body shadow"><a
-                                            editable="inline" class="fw-bold text-decoration-none text-dark h4"
-                                            href="" data-bs-toggle="collapse"
-                                            data-bs-target="#flush-collapseFour" aria-expanded="false"
-                                            aria-controls="flush-collapseFour">&nbsp;How does AccessiJobs ensure the
-                                            accessibility of its platform?</a>
-
-                                        <div id="flush-collapseFour" class="accordion-collapse collapse"
-                                            aria-labelledby="flush-headingFour"
-                                            data-bs-parent="#accordionFlushMyFAQ2">
-                                            <div class="accordion-body" editable="rich">Our platform is built with
-                                                accessibility at its core. AccessiJobs includes features such as
-                                                text-to-speech functionality, screen readers, and customizable user
-                                                interfaces that accommodate different disability needs. We regularly
-                                                update our platform based on user feedback and the latest accessibility
-                                                standards to ensure that it remains accessible to everyone.</div>
-                                        </div>
-                                    </div>
-                                    <div class="lc-block accordion-item mb-5 p-md-4 card card-body shadow">
-
-                                        <a editable="inline"
-                                            class="fw-bold text-decoration-none text-dark h4 collapsed" href=""
-                                            data-bs-toggle="collapse" data-bs-target="#flush-collapseFive"
-                                            aria-expanded="false" aria-controls="flush-collapseFive">
-                                            What are the steps to create an account and start using AccessiJobs?</a>
-
-                                        <div id="flush-collapseFive" class="accordion-collapse collapse"
-                                            aria-labelledby="flush-headingFive"
-                                            data-bs-parent="#accordionFlushMyFAQ2">
-                                            <div class="accordion-body" editable="rich">To start using AccessiJobs,
-                                                follow these simple steps:<br>
-                                                1. Visit our website and click on the 'Sign Up' button.<br>
-                                                2. Fill in the registration form with your personal and professional
-                                                details.<br>
-                                                3. Set up your profile by adding your resume and specifying your job
-                                                preferences and any necessary accommodations.<br>
-                                                4. Begin searching for jobs using our search tools and apply directly
-                                                through the platform.<br>
-                                                5. Utilize our job matching and alerts to receive notifications about
-                                                new job opportunities that fit your profile.</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /col -->
-                        <!-- /lc-block -->
-                    </div><!-- /col -->
-                </div> --}}
         </div>
     </section>
     <footer class="footer-section">
@@ -1749,11 +1459,11 @@
                         <!-- /lc-block -->
                         <div class="lc-block small">
                             <div editable="rich">
-                                <p>Home</p>
-                                <p>Find Jobs<br>
-                                </p>
-                                <p>About Us</p>
-                                <p>FAQ </p>
+                                <p><i class="fas fa-home" style="margin-right: 8px;"></i> Home</p>
+                                <p><i class="fas fa-briefcase" style="margin-right: 8px;"></i> Find Jobs</p>
+                                <p><i class="fas fa-info-circle" style="margin-right: 8px;"></i> About Us</p>
+                                <p><i class="fas fa-question-circle" style="margin-right: 8px;"></i> FAQ</p>
+
                             </div>
                         </div>
                         <!-- /lc-block -->
@@ -1768,31 +1478,41 @@
                         <div class="lc-block small">
                             <div editable="rich">
                                 <p></p>
-                                <p>Ask For Support</p>
-                                <p><i class="fab fa-facebook" style="margin-right: 8px;"></i> Facebook</p>
-                                <p><i class="fab fa-instagram" style="margin-right: 8px;"></i> Instagram</p>
-                                <p><i class="fab fa-twitter" style="margin-right: 8px;"></i> Twitter</p>
+                                <p><i class="fas fa-life-ring" style="margin-right: 8px;"></i> Ask For Support</p>
+                                <p><a href="https://www.facebook.com/PDADMandaluyong" target="_blank"
+                                        class="text-gray-200 dark:text-gray-200" style="text-decoration: none;">
+                                        <i class="fab fa-facebook" style="margin-right: 8px;"></i> Facebook
+                                    </a></p>
+
+                                {{-- <p><i class="fab fa-instagram" style="margin-right: 8px;"></i> Instagram</p> --}}
+                                <p><a href="https://x.com/MandaluyongPIO" target="_blank"
+                                        class="text-gray-200 dark:text-gray-200 no-underline"
+                                        style="text-decoration: none;">
+                                        <i class="fab fa-twitter" style="margin-right: 8px;"></i> Twitter
+                                    </a></p>
                             </div>
                         </div>
                         <!-- /lc-block -->
                     </div>
-                    {{-- <div class="col-lg-2 offset-lg-1">
+                    <div class="col-lg-2 offset-lg-1">
                         <div class="lc-block mb-4">
                             <div editable="rich">
-                                <h4>Downloads</h4>
+                                <h4>Location</h4>
                             </div>
                         </div>
                         <!-- /lc-block -->
                         <div class="lc-block small">
                             <div editable="rich">
-                                <p>Vertex 1.2</p>
-                                <p>Templates</p>
-                                <p>Sounds</p>
-                                <p>Gradients</p>
+                                <p><i class="fas fa-map-marker-alt"></i> Mandaluyong City Hall, Maysilo Circle,
+                                    Mandaluyong, Metro Manila, Philippines</p>
+                                <p><i class="fas fa-phone-alt"></i> (02) 8532 5001</p>
+                                <p><i class="fas fa-clock"></i> Open Hours of Government: Mon-Fri: 7:00 am - 5:00pm
+                                </p>
+                                <p><i class="fas fa-envelope"></i> info@mandaluyong.gov.ph</p>
                             </div>
                         </div>
                         <!-- /lc-block -->
-                    </div> --}}
+                    </div>
                 </div>
             </div>
             <div class="py-5 container">
@@ -1847,34 +1567,49 @@
 
 
 
-        const themeSwitch = document.getElementById('themeSwitch');
-        const logoImage = document.getElementById('logoImage');
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeSwitch = document.getElementById('themeSwitch');
+            const logoImage = document.getElementById('logoImage');
 
-        // Retrieve current theme from localStorage or default to 'light'
-        const currentTheme = localStorage.getItem('theme') || 'light';
-
-        // Apply the current theme on page load
-        document.body.classList.add(currentTheme);
-        if (currentTheme === 'dark') {
-            themeSwitch.checked = true;
-            logoImage.src = logoImage.getAttribute('data-dark');
-        } else {
-            logoImage.src = logoImage.getAttribute('data-light');
-        }
-
-        // Event listener for theme switch toggle
-        themeSwitch.addEventListener('change', () => {
-            if (themeSwitch.checked) {
-                document.body.classList.remove('light');
-                document.body.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-                logoImage.src = logoImage.getAttribute('data-dark');
-            } else {
-                document.body.classList.remove('dark');
-                document.body.classList.add('light');
-                localStorage.setItem('theme', 'light');
-                logoImage.src = logoImage.getAttribute('data-light');
+            if (!themeSwitch || !logoImage) {
+                console.error('Theme switch or logo image elements not found!');
+                return;
             }
+
+            // Retrieve the current theme from localStorage or default to 'light'
+            const currentTheme = localStorage.getItem('theme') || 'light';
+
+            // Apply the current theme on page load
+            document.body.classList.add(currentTheme);
+            console.log('Current theme on load:', currentTheme);
+
+            // Set the state of the theme switch and logo image based on the current theme
+            if (currentTheme === 'dark') {
+                themeSwitch.checked = true;
+                logoImage.src = logoImage.getAttribute('data-dark');
+                console.log('Switching to dark theme on load');
+            } else {
+                themeSwitch.checked = false;
+                logoImage.src = logoImage.getAttribute('data-light');
+                console.log('Switching to light theme on load');
+            }
+
+            // Event listener for theme switch toggle
+            themeSwitch.addEventListener('change', () => {
+                if (themeSwitch.checked) {
+                    document.body.classList.remove('light');
+                    document.body.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                    logoImage.src = logoImage.getAttribute('data-dark');
+                    console.log('Theme changed to dark');
+                } else {
+                    document.body.classList.remove('dark');
+                    document.body.classList.add('light');
+                    localStorage.setItem('theme', 'light');
+                    logoImage.src = logoImage.getAttribute('data-light');
+                    console.log('Theme changed to light');
+                }
+            });
         });
     </script>
 

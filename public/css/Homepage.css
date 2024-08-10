@@ -18,6 +18,49 @@ body {
     left: 0px;
 }
 
+.full-screen-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.full-screen-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the container */
+    position: absolute;
+    top: 10%;
+    left: 0;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(42, 48, 53, 0.842); /* Dark blue transparent overlay */
+    mix-blend-mode: normal; /* Optional blend mode effect */
+}
+
+.underlined-heading {
+    font-weight: bold;
+    line-height: 1.9;
+    position: relative;
+    display: inline-block; /* Ensures the underline matches the text length */
+}
+
+.underlined-heading::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px; /* Adjust space between text and underline */
+    width: 100%; /* Matches the width of the text */
+    height: 3px; /* Thickness of the underline */
+    background-color: #007bff; /* Customize the color */
+}
+
 #designedheader {
     font-size: 30px;
     position: relative;
@@ -48,7 +91,7 @@ body {
 }
 #faqpage {
     background-image: url("/images/bg.png");
-    background-color: #fcfbfbd3;
+    background-color: #f7fbfe;
     background-blend-mode: lighten;
     background-size: cover;
     background-position: center;
@@ -73,7 +116,7 @@ body {
         255,
         255,
         255,
-        0.9
+        0.8
     ); /* Adjust the alpha value to control the fading effect */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Reduce the box shadow to make it less pronounced */
 }
@@ -113,17 +156,17 @@ body {
 }
 
 .hero-section {
-    background-color: #f8f9fa;
+    background-color: #f7fbfe;
 }
 
 .faq-section {
-    background-color: #ffffff;
+    background-color: #f7fbfe;
 }
 
 .offer-section {
     position: relative;
     padding: 20px;
-    background-color: #fcfbfbd3;
+    background-color: #f7fbfe;
     border-radius: 5px;
     box-shadow: 0 8px 36px rgba(0, 0, 0, 0.116), 0 4px 4px rgba(0, 0, 0, 0.1);
 }
@@ -135,7 +178,7 @@ body {
 }
 
 .step-section {
-    background-color: #ffffff;
+    background-color: #f7fbfe;
 }
 .second-section {
     position: relative;
@@ -285,7 +328,7 @@ body {
 }
 
 .section-2 .single_catagory {
-    background: #fff;
+    background: #f7fbfe;
     padding: 25px;
     margin-bottom: 20px;
 }
@@ -332,7 +375,7 @@ body {
 .hero-section,
 .faq-section,
 .step-section {
-    background-color: white;
+    background-color: #f7fbfe;
 }
 
 .dark .hero-section,
@@ -373,7 +416,7 @@ body {
     box-shadow: 0 8px 36px rgba(0, 0, 0, 0.116), 0 4px 4px rgba(0, 0, 0, 0.1);
 }
 .dark .card {
-    background-color: rgb(22, 22, 22) !important;
+    background-color: rgb(55 65 81) !important;
     color: white;
 }
 
@@ -381,13 +424,17 @@ body {
     background-color: rgb(31, 41, 55) !important;
 }
 .dark .single_catagory {
-    background-color: rgb(22, 22, 22) !important;
+    background-color: rgb(55 65 81) !important;
     color: white;
 }
 
-.dark .second-section .bg-light,
+.dark .second-section {
+    background-color: rgb(31, 41, 55) !important;
+    color: white;
+}
+
 .dark .bg-light {
-    background-color: rgb(22, 22, 22) !important;
+    background-color: rgb(55 65 81) !important;
     color: white;
 }
 
@@ -420,7 +467,7 @@ body {
 }
 
 #bgcontainer {
-    background-color: white !important;
+    background-color: #f7fbfe !important;
 }
 
 .dark #bgcontainer {
@@ -442,9 +489,112 @@ body {
     color: rgb(160, 159, 159) !important;
 }
 
-.dark .accordion .lc-block {
-    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1),
-        0 6px 6px rgba(255, 255, 255, 0.15) !important;
+.input-group {
+    position: relative;
+}
+
+.input-group-text {
+    display: flex;
+    align-items: center;
+    background-color: #f8f9fa; /* Light mode background color */
+    color: #495057; /* Light mode text color */
+    border: 1px solid #ced4da; /* Light mode border color */
+}
+
+.dark .input-group-text {
+    background-color: #343a40; /* Dark mode background color */
+    color: #adb5bd; /* Dark mode text color */
+    border: 1px solid #495057; /* Dark mode border color */
+}
+
+.form-control {
+    border: 1px solid #ced4da; /* Light mode border color */
+}
+
+.dark .form-control {
+    border: 1px solid #495057; /* Dark mode border color */
+}
+
+.bg-white {
+    background-color: #ffffff; /* Light mode background color */
+}
+
+.dark .bg-white {
+    background-color: #212529; /* Dark mode background color */
+}
+
+.text-gray-900 {
+    color: #212529; /* Light mode text color */
+}
+
+.dark .text-gray-900 {
+    color: #f8f9fa; /* Dark mode text color */
+}
+
+.text-gray-200 {
+    color: #e9ecef; /* Light mode text color */
+}
+
+.dark .text-gray-200 {
+    color: #adb5bd; /* Dark mode text color */
+}
+
+.icon {
+    font-size: 1.25rem; /* Adjust icon size */
+    margin-right: 0.5rem; /* Space between icon and text */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Light mode button color */
+    border-color: #007bff; /* Light mode button border color */
+}
+
+.dark .btn-primary {
+    background-color: #0069d9; /* Dark mode button color */
+    border-color: #0062cc; /* Dark mode button border color */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Light mode button hover color */
+    border-color: #004085; /* Light mode button border hover color */
+}
+
+.dark .btn-primary:hover {
+    background-color: #0056b3; /* Dark mode button hover color */
+    border-color: #004085; /* Dark mode button border hover color */
+}
+
+::placeholder {
+    color: #6c757d; /* Light mode placeholder color */
+}
+
+input.form-control {
+    color: #111827; /* Dark text color while typing in light mode */
+}
+
+.dark input.form-control {
+    color: #111827; /* Dark text color while typing in light mode */
+}
+
+.dark ::placeholder {
+    color: #6c757d; /* Dark mode placeholder color */
+}
+
+.dark select.form-control {
+    background-color: #1f2937; /* Dark mode background color for the select dropdown */
+    color: #1f2937; /* Light text color for the select dropdown */
+    border-color: #4b5563; /* Dark mode border color */
+}
+
+.dark select.form-control option {
+    background-color: #1f2937; /* Dark mode background color for options */
+    color: #e5e7eb; /* Light text color for options */
+}
+
+/* Ensure focus state is visible */
+.dark select.form-control:focus {
+    border-color: #3b82f6; /* Border color on focus */
+    box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.25); /* Shadow on focus */
 }
 
 body {

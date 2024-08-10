@@ -7,6 +7,7 @@
         <link href="{{ asset('/css/layouts.css') }}" rel="stylesheet">
         <link rel="preload" href="/images/team.png" as="image">
         <link href="{{ asset('fontawesome-free-6.5.2-web/css/all.min.css') }}" rel="stylesheet">
+        <title>Edit Jobs</title>
 
     </head>
 
@@ -14,17 +15,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="container mx-auto max-w-7xl px-4 pt-5 ">
-                <div class="row">
-                    <div class="col">
-                        <nav aria-label="breadcrumb" class="rounded-lg p-3 text-gray-800 dark:text-gray-300">
-                            <ol class="breadcrumb mb-0">
-                                <li class="breadcrumb-item"><a href="{{ route('employer.manage') }}"><i
-                                            class="fa fa-arrow-left" aria-hidden="true"></i> &nbsp;Back to Job Lists</a>
-                                </li>
-                            </ol>
-                        </nav>
-                    </div>
-                </div>
+
             </div>
             <div class="grid grid-cols-1 gap-4 lg:grid-cols-1">
 
@@ -49,13 +40,20 @@
                                 <br>
                             @endif
                             <!-- Top Buttons -->
-                            <div class="flex justify-end mb-4 space-x-4">
+                            <div
+                                class="flex flex-col md:flex-row justify-between mb-4 space-y-4 md:space-y-0 md:space-x-4">
+                                <a href="{{ route('employer.manage') }}"
+                                    class="flex items-center space-x-2 bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
+                                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                    <span>Back to Job Lists</span>
+                                </a>
                                 <!-- Save Button -->
                                 <button type="submit"
-                                    class="bg-green-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md shadow-sm">
+                                    class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-md shadow-sm">
                                     Save Job Details
                                 </button>
                             </div>
+
                             <div class="mb-4 p-2">
                                 <label for="job_title"
                                     class="block text-md font-medium text-gray-800 dark:text-gray-300">Job Title</label>

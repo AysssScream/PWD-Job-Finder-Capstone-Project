@@ -164,11 +164,6 @@
                         </div>
                     </div>
 
-
-
-
-
-
                     <h1 class="text-2xl font-bold text-gray-900 dark:text-white mt-5">
                         {{ 'Other Skills and Languages' }}
                         <div class="border-b border-gray-300 mt-2"></div>

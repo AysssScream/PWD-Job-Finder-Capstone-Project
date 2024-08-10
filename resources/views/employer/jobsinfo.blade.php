@@ -7,6 +7,7 @@
         <link href="{{ asset('/css/layouts.css') }}" rel="stylesheet">
         <link rel="preload" href="/images/team.png" as="image">
         <link href="{{ asset('fontawesome-free-6.5.2-web/css/all.min.css') }}" rel="stylesheet">
+        <title>Add Jobs</title>
 
     </head>
     @if (Session::has('addjobs'))
@@ -28,25 +29,31 @@
     @endif
 
     <div class="py-12">
-        <div class="container mx-auto max-w-7xl px-4 pt-5 ">
+        <div class="container mx-auto max-w-8xl px-4 pt-5"
+            style="
+    margin-left: 0px;
+    margin-right: 0px;
+            ">
             <div class="row">
                 <div class="col">
-                    <nav aria-label="breadcrumb" class="rounded-lg p-3">
-                        <ol class="breadcrumb mb-0">
+                    <nav aria-label="breadcrumb" class="rounded-lg p-3 text-gray-800 dark:text-gray-300">
+                        <ol class="breadcrumb mb-0 flex items-center justify-start flex-wrap">
                             <li class="breadcrumb-item">
-                                <a href="{{ route('employer.manage') }}"
-                                    class="text-gray-800 dark:text-gray-300 flex items-center">
-                                    <i class="fa fa-arrow-left mr-1" aria-hidden="true"></i>
-                                    <span>Back to Job Lists</span>
+                            <li class="breadcrumb-item w-full md:w-auto">
+                                <a href="{{ route('employer.dashboard') }}"
+                                    class="flex items-center space-x-2 bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
+                                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                    <span>Back to Dashboard</span>
                                 </a>
+                            </li>
                             </li>
                         </ol>
                     </nav>
-
                 </div>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+
+        <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:gap-4 lg:grid-cols-3">
                 <!-- First Column -->
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg col-span-1">
@@ -65,7 +72,7 @@
                                         {{ $job->created_at->format('F j, Y') }}</p>
                                     <div class="mt-4 flex justify-end">
                                         <a href="{{ route('employer.edit', $job->id) }}"
-                                            class="bg-blue-500 hover:bg-blue-600 text-white dark:text-gray-900 px-3 py-1 rounded shadow">Edit</a>
+                                            class="bg-blue-500 hover:bg-blue-600 text-white dark:text-white dark:text-gray-900 px-3 py-1 rounded shadow">Edit</a>
                                     </div>
                                 </div>
                             @endforeach
@@ -99,18 +106,20 @@
 
 
 
-                                <!-- Clear Button -->
-                                <button type="button"
-                                    class="bg-red-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md shadow-sm"
-                                    onclick="clearFormFields()">
-                                    Clear Fields
-                                </button>
+                                <div class="flex flex-col sm:flex-row gap-4 mt-4">
+                                    <!-- Clear Button -->
+                                    <button type="button"
+                                        class="bg-red-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md shadow-sm w-full sm:w-auto"
+                                        onclick="clearFormFields()">
+                                        Clear Fields
+                                    </button>
 
-                                <!-- Save Button -->
-                                <button type="submit"
-                                    class="bg-green-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md shadow-sm">
-                                    Add Job
-                                </button>
+                                    <!-- Save Button -->
+                                    <button type="submit"
+                                        class="bg-green-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md shadow-sm w-full sm:w-auto">
+                                        Add Job
+                                    </button>
+                                </div>
 
                             </div>
                             <div class="mb-4 p-2">

@@ -23,7 +23,7 @@
     <div class="py-12">
         <div class="container mx-auto">
             <div class="flex justify-center">
-                <div class="w-5/6">
+                <div class="w-full">
                     <form action="{{ route('setup') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @if ($errors->any())
@@ -87,8 +87,9 @@
                                 </div>
 
                                 <hr class="border-t-2 border-gray-400 rounded-full my-4">
-                                <div aria-label="{!! __('messages.applicant.instruction') !!}" tabindex="0">
-                                    <span class="font-regular" style="text-align: justify;">
+                                <div aria-label="{!! __('messages.applicant.instruction') !!}" tabindex="0"
+                                    class="focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                    <span class="font-regular " style="text-align: justify;">
                                         {!! __('messages.applicant.instruction') !!}
                                     </span>
                                 </div>
@@ -102,7 +103,8 @@
                                             <label for="lastname"
                                                 class="block mb-1">{{ __('messages.applicant.lastname') }}</label>
                                             <input type="text" id="lastname" name="lastname"
-                                                class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                aria-label="{{ __('messages.applicant.lastname') }}"
+                                                class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                 pattern="[A-Za-z\s]+" title="Please enter alphabetic characters only"
                                                 placeholder="Last Name"
                                                 value="{{ old('lastname', isset($formData['lastname']) ? $formData['lastname'] : $lastName) }}">
@@ -114,7 +116,8 @@
                                             <label for="firstname"
                                                 class="block mb-1">{{ __('messages.applicant.firstname') }}</label>
                                             <input type="text" id="firstname" name="firstname"
-                                                class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                aria-label="{{ __('messages.applicant.firstname') }}"
+                                                class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                 pattern="[A-Za-z\s]+" title="Please enter alphabetic characters only"
                                                 placeholder="First Name"
                                                 value="{{ old('firstname', isset($formData['firstname']) ? $formData['firstname'] : $firstName) }}">
@@ -127,7 +130,8 @@
                                             <label for="middlename"
                                                 class="block mb-1">{{ __('messages.applicant.middlename') }}</label>
                                             <input type="text" id="middlename" name="middlename"
-                                                class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                aria-label="{{ __('messages.applicant.middlename') }}"
+                                                class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                 pattern="[A-Za-z\s]+" title="Please enter alphabetic characters only"
                                                 placeholder="Middle Name"
                                                 value="{{ old('middlename', isset($formData['middlename']) ? $formData['middlename'] : $middleName) }}">
@@ -144,7 +148,8 @@
                                             <label for="birthdate"
                                                 class="block mb-1">{{ __('messages.applicant.birthdate') }}</label>
                                             <input type="date" id="birthdate" name="birthdate"
-                                                class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                aria-label="{{ __('messages.applicant.birthdate') }}"
+                                                class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                 value="{{ old('birthdate', $formData['birthdate'] ?? '') }}">
                                             @error('birthdate')
                                                 <div class="text-red-600 mt-1">{{ $message }}</div>
@@ -156,7 +161,8 @@
                                             <label for="suffix"
                                                 class="block mb-1">{{ __('messages.applicant.suffix') }}</label>
                                             <select id="suffix" name="suffix"
-                                                class="w-full p-2 border rounded  bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200">
+                                                aria-label="{{ __('messages.applicant.suffix') }}"
+                                                class="w-full p-2 border rounded  bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
                                                 <option value="None"
                                                     {{ old('suffix', $applicant->suffix ?? '') == 'None' ? 'selected' : '' }}>
                                                     {{ __('messages.applicant.suffix_none') }}</option>
@@ -206,7 +212,8 @@
                                             <label for="gender"
                                                 class="block mb-1">{{ __('messages.applicant.gender') }}</label>
                                             <select id="gender" name="gender"
-                                                class="w-full p-2 border rounded  bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200">
+                                                aria-label="{{ __('messages.applicant.gender') }}"
+                                                class="w-full p-2 border rounded  bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
                                                 <option value="Male"
                                                     {{ old('gender', $applicant->gender ?? '') == 'Male' ? 'selected' : '' }}>
                                                     {{ __('messages.applicant.male') }}
@@ -229,9 +236,9 @@
                                 </div>
 
                                 <div class="mt-2 text-right">
-                                    <button type="submit"
-                                        class="py-2 px-4 bg-green-600 text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-                                        Save
+                                    <button type="submit" aria-label=" {{ __('messages.save') }}"
+                                        class="py-2 px-4 bg-green-600 text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                        {{ __('messages.save') }}
                                     </button>
                                 </div>
 

@@ -1,8 +1,6 @@
 <x-app-layout>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <!-- Sidebar -->
-
     <div class="h-full ml-14 md:ml-64">
         <!-- Statistics Cards -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 p-4 gap-4">

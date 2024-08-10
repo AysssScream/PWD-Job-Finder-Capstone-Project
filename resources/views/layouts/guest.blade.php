@@ -10,7 +10,7 @@
     <link rel="preload" href="/images/team.png" as="image">
     <link href="{{ asset('fontawesome-free-6.5.2-web/css/all.min.css') }}" rel="stylesheet">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <link rel="icon" href="{{ asset('/images/first17.png') }}" type="image/png">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -142,6 +142,8 @@
         // Event listener for toggle button
         toggleButton.addEventListener('click', function() {
             isDarkMode = !isDarkMode;
+            const theme = isDarkMode ? 'dark' : 'light';
+            localStorage.setItem('theme', theme); // Store theme preference in local storage
             localStorage.setItem('darkMode', isDarkMode); // Store dark mode preference in local storage
             updateDarkModeUI();
 
@@ -171,13 +173,27 @@
     </script>
     <div
         class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900 bg-image">
-        <div class="container flex justify-center mx-auto">
-            <div class="max-w-full px-6 py-4 bg-white dark:bg-gray-800 shadow-md sm:rounded-lg text-black"
-                style="margin-top: 50px; margin-bottom: 70px;">
-                {{ $slot }}
+        @if (Route::is('register'))
+            <div class="container flex justify-center mx-auto">
+                <div class="max-w-full px-6 py-4 bg-white dark:bg-gray-800 shadow-md sm:rounded-lg text-black"
+                    style="margin-top:100px; margin-bottom: 100px;">
+                    {{ $slot }}
+                </div>
             </div>
-        </div>
+        @else
+            <div class="container flex justify-center mx-auto">
+                <div class="max-w-full px-6 py-4 bg-white dark:bg-gray-800 shadow-md sm:rounded-lg text-black"
+                    style="margin-top:0px; margin-bottom: 100px;">
+                    {{ $slot }}
+                </div>
+            </div>
+        @endif
+
     </div>
+
+
 </body>
+
+
 
 @include('layouts.darkmode')

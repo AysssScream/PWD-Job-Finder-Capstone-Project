@@ -11,7 +11,7 @@
         <div class="py-12">
             <div class="container mx-auto  ">
                 <div class="flex justify-center">
-                    <div class="w-5/6">
+                    <div class="w-full">
                         <form id="workExperienceForm" onsubmit="myfunc(event)" enctype="multipart/form-data">
                             @csrf
                             @if ($errors->any())
@@ -30,7 +30,8 @@
                             <div
                                 class=" container-wrapper bg-white text-black dark:bg-gray-800 dark:text-gray-200 shadow-md rounded-lg">
                                 <div class="p-6">
-                                    <h3 class="text-2xl font-bold mb-2 inline-flex items-center justify-between w-full">
+                                    <h3 class="text-2xl font-bold mb-2 inline-flex items-center justify-between w-full focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                        tabindex="0">
                                         Employment History and Work Experience
                                         @php
                                             $currentStep = 3; // Set this dynamically based on your current step
@@ -54,25 +55,31 @@
                                         <nav class="text-sm" aria-label="Breadcrumb">
                                             <ol class="list-none p-0 inline-flex">
                                                 <li class="flex items-center">
-                                                    <i
-                                                        class="fas fa-arrow-left mr-2 text-gray-700 dark:text-gray-200"></i>
+                                                    <i class="fas fa-arrow-left mr-2 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                        tabindex="0"></i>
                                                     <a href="{{ route('personal') }}"
-                                                        class="text-gray-700 dark:text-gray-200">Personal
+                                                        class="text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">Personal
                                                         Information</a>
                                                     <span class="mx-2 text-gray-500">/</span>
                                                 </li>
                                                 <li class="flex items-center">
-                                                    <span class="text-blue-500 font-semibold">Employment History and
+                                                    <span
+                                                        class="text-blue-500 font-semibold focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                        tabindex="0">Employment
+                                                        History and
                                                         Work Experience</span>
                                                 </li>
                                             </ol>
                                         </nav>
                                     </div>
                                     <hr class="border-t-2 border-gray-400 rounded-full my-4">
+                                    <div class="focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                        tabindex="0" aria-label="{!! __('messages.employment.instruction') !!}">
+                                        <span class="text-md font-regular" style="text-align: justify;">
+                                            {!! __('messages.employment.instruction') !!}
+                                        </span>
+                                    </div>
 
-                                    <span class="text-md font-regular" style="text-align: justify;">
-                                        {!! __('messages.employment.instruction') !!}
-                                    </span>
                                     <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
                                         <div>
                                             @include('layouts.dropdown')
@@ -80,10 +87,12 @@
                                         </div>
                                         <div>
                                             <div class="mt-6">
-                                                <label for="employerName" class="block mb-1">Employer Name</label>
+                                                <label for="employerName" class="block mb-1"> {!! __('messages.workexperience.employer_name') !!}
+                                                </label>
                                                 <input type="text" id="employerName" name="employerName"
-                                                    class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                    class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                     placeholder="Ex. XYZ Tech Solutions"
+                                                    aria-label=" {!! __('messages.workexperience.employer_name') !!}"
                                                     value="{{ old('employerName', $formData3['employerName'] ?? '') }}" />
                                                 @error('employerName')
                                                     <div class="text-red-600 mt-1">{{ $message }}</div>
@@ -91,10 +100,12 @@
                                             </div>
 
                                             <div class="mt-6">
-                                                <label for="employerAddress" class="block mb-1">Employer Address</label>
+                                                <label for="employerAddress"
+                                                    class="block mb-1">{!! __('messages.workexperience.employer_address') !!}</label>
                                                 <input type="text" id="employerAddress" name="employerAddress"
-                                                    class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                    class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                     placeholder="Ex. Street Name, Building, House. No"
+                                                    aria-label="{!! __('messages.workexperience.employer_address') !!}"
                                                     value="{{ old('employerAddress', $formData3['employerAddress'] ?? '') }}"
                                                     placeholder="Ex. 17 San Miguel Ave, San Antonio, Pasig, 1605 Metro Manila
 " />
@@ -104,10 +115,11 @@
                                             </div>
 
                                             <div class="mt-6">
-                                                <label for="positionHeld" class="block mb-1">Position Held</label>
+                                                <label for="positionHeld"
+                                                    class="block mb-1">{!! __('messages.workexperience.position_held') !!}</label>
                                                 <input type="text" id="positionHeld" name="positionHeld"
-                                                    class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
-                                                    pattern="[A-Za-z\s]+"
+                                                    class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                    pattern="[A-Za-z\s]+" aria-label="{!! __('messages.workexperience.position_held') !!}"
                                                     title="Please enter alphabetic characters only"
                                                     placeholder=" Ex. Web Developer"
                                                     value="{{ old('positionHeld', $formData3['positionHeld'] ?? '') }}" />
@@ -117,11 +129,11 @@
                                             </div>
 
                                             <div class="mt-6">
-                                                <label for="skillSearch" class="block mb-1">Skills Gained (Press
-                                                    <b>Enter</b> to Add Items)</label>
+                                                <label for="skillSearch" class="block mb-1">{!! __('messages.workexperience.skills_gained') !!}
+                                                    (Skills)</label>
                                                 <input type="text" id="skillSearch" name="skillSearch[]"
-                                                    class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
-                                                    list="skillSuggestions"
+                                                    class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                    list="skillSuggestions" aria-label="{!! __('messages.workexperience.skills_gained') !!}"
                                                     placeholder="Ex. Soft Skills, Bilingual Communication">
                                                 <div id="skillSuggestions" class="mt-2 grid grid-cols-3 gap-2"></div>
 
@@ -138,9 +150,11 @@
 
 
                                             <div class="mt-6">
-                                                <label for="fromDate" class="block mb-1">From:</label>
+                                                <label for="fromDate"
+                                                    class="block mb-1">{!! __('messages.workexperience.from') !!}</label>
                                                 <input type="date" id="fromDate" name="fromDate"
-                                                    class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                    aria-label="{!! __('messages.workexperience.from') !!}"
+                                                    class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                     value="{{ old('fromDate', $formData3['fromDate'] ?? '') }}" />
                                                 @error('fromDate')
                                                     <div class="text-red-600 mt-1">{{ $message }}</div>
@@ -148,9 +162,11 @@
                                             </div>
 
                                             <div class="mt-6">
-                                                <label for="toDate" class="block mb-1">To:</label>
+                                                <label for="toDate"
+                                                    class="block mb-1">{!! __('messages.workexperience.to') !!}</label>
                                                 <input type="date" id="toDate" name="toDate"
-                                                    class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                    aria-label="{!! __('messages.workexperience.to') !!}"
+                                                    class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                     value="{{ old('toDate', $formData3['toDate'] ?? '') }}" />
                                                 @error('toDate')
                                                     <div class="text-red-600 mt-1">{{ $message }}</div>
@@ -158,10 +174,11 @@
                                             </div>
 
                                             <div class="mt-6">
-                                                <label for="employmentStatus" class="block mb-1">Employment
-                                                    Status:</label>
+                                                <label for="employmentStatus"
+                                                    class="block mb-1">{!! __('messages.workexperience.employment_status') !!}</label>
                                                 <select id="employmentStatus" name="employmentStatus"
-                                                    class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200">
+                                                    aria-label="{!! __('messages.workexperience.employment_status') !!}"
+                                                    class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
                                                     <option value="" selected disabled>Select status...</option>
                                                     <option value="Permanent"
                                                         {{ old('employmentStatus', $formData3['employmentStatus'] ?? '') == 'Permanent' ? 'selected' : '' }}>
@@ -204,10 +221,11 @@
 
                                             <div class="mb-4">
                                                 <label for="hiddenInput"
-                                                    class="block text-sm font-medium text-black-700">Selected
-                                                    Skills: </label>
-                                                <textarea id="hiddenInput" name="hiddenInput"
-                                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                                    class="block text-sm font-medium text-black-700">
+                                                    {!! __('messages.workexperience.selected_skills') !!} :
+                                                </label>
+                                                <textarea id="hiddenInput" name="hiddenInput" aria-label="{!! __('messages.workexperience.selected_skills') !!}"
+                                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 sm:text-sm"
                                                     readonly>{{ old('hiddenInput', $formData3['hiddenInput'] ?? '') }}</textarea>
 
                                             </div>
@@ -215,18 +233,18 @@
 
                                     </div>
                                     <div class="mt-4 text-right">
-                                        <a id="clearFormDataButton"
-                                            class="inline-block py-2 px-4 bg-black text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mr-2">Clear
-                                            Records</a>
-                                        <button type="submit "
-                                            class="inline-block py-2 px-4 bg-green-600 text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-                                            id="submitButton">Add Work Experience</button>
+                                        <a id="clearFormDataButton" tabindex="0"
+                                            aria-label="{!! __('messages.workexperience.clear_records') !!}"
+                                            class="inline-block py-2 px-4 bg-black text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 mr-2">{!! __('messages.workexperience.clear_records') !!}</a>
+                                        <button type="submit"aria-label=" {!! __('messages.workexperience.add_work_experience') !!}" tabindex="0"
+                                            class="inline-block py-2 px-4 bg-green-600 text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                            id="submitButton"> {!! __('messages.workexperience.add_work_experience') !!}</button>
                                     </div>
                                 </div>
                             </div>
                         </form>
 
-                        <div class="py-12">
+                        <div class="mt-14">
                             <div class="container mx-auto">
                                 <div class="flex justify-center">
                                     <div class="w-full">
@@ -239,43 +257,49 @@
                                                     <h3 class="text-2xl font-bold mb-2">Submitted Work Experience and
                                                         Skills</h3>
                                                     <div class="mt-4 grid grid-cols-1 md:grid-cols-1 gap-4">
-                                                        <div class="overflow-x-auto">
+                                                        <div>
                                                             <table
                                                                 class="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
                                                                 <thead class="bg-gray-100 dark:bg-gray-700">
                                                                     <tr>
-                                                                        <th scope="col"
-                                                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 dark:text-gray-200 uppercase tracking-wider">
-                                                                            Actions
+                                                                        <th scope="col" tabindex="0"
+                                                                            aria-label=" {!! __('messages.workexperience.actions') !!} "
+                                                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 dark:text-gray-200 uppercase tracking-wider focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                                            {!! __('messages.workexperience.actions') !!} </th>
+                                                                        <th scope="col" tabindex="0"
+                                                                            aria-label=" {!! __('messages.workexperience.employer_name') !!} "
+                                                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 dark:text-gray-200 uppercase tracking-wider focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                                            {!! __('messages.workexperience.employer_name') !!} </th>
                                                                         </th>
-                                                                        <th scope="col"
-                                                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 dark:text-gray-200 uppercase tracking-wider">
-                                                                            Employer Name
+                                                                        <th scope="col" tabindex="0"
+                                                                            aria-label=" {!! __('messages.workexperience.employer_address') !!} "
+                                                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 dark:text-gray-200 uppercase tracking-wider focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                                            {!! __('messages.workexperience.employer_address') !!} </th>
                                                                         </th>
-                                                                        <th scope="col"
-                                                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 dark:text-gray-200 uppercase tracking-wider">
-                                                                            Employer Address
+                                                                        <th scope="col" tabindex="0"
+                                                                            aria-label=" {!! __('messages.workexperience.position_held') !!} "
+                                                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 dark:text-gray-200 uppercase tracking-wider focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                                            {!! __('messages.workexperience.position_held') !!} </th>
                                                                         </th>
-                                                                        <th scope="col"
-                                                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 dark:text-gray-200 uppercase tracking-wider">
-                                                                            Position Held
+                                                                        <th scope="col" tabindex="0"
+                                                                            aria-label=" {!! __('messages.workexperience.skills_gained') !!} "
+                                                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 dark:text-gray-200 uppercase tracking-wider focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                                            {!! __('messages.workexperience.skills_gained') !!} </th>
                                                                         </th>
-                                                                        <th scope="col"
-                                                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 dark:text-gray-200 uppercase tracking-wider">
-                                                                            Skills
+                                                                        <th scope="col" tabindex="0"
+                                                                            aria-label=" {!! __('messages.workexperience.from') !!} "
+                                                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 dark:text-gray-200 uppercase tracking-wider focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                                            {!! __('messages.workexperience.from') !!} </th>
                                                                         </th>
-                                                                        <th scope="col"
-                                                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 dark:text-gray-200 uppercase tracking-wider">
-                                                                            From Date
+                                                                        <th scope="col" tabindex="0"
+                                                                            aria-label=" {!! __('messages.workexperience.to') !!} "
+                                                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 dark:text-gray-200 uppercase tracking-wider focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                                            {!! __('messages.workexperience.to') !!} </th>
                                                                         </th>
-                                                                        <th scope="col"
-                                                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 dark:text-gray-200 uppercase tracking-wider">
-                                                                            To Date
-                                                                        </th>
-                                                                        <th scope="col"
-                                                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 dark:text-gray-200 uppercase tracking-wider">
-                                                                            Employment Status
-                                                                        </th>
+                                                                        <th scope="col" tabindex="0"
+                                                                            aria-label=" {!! __('messages.workexperience.employment_status') !!} "
+                                                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 dark:text-gray-200 uppercase tracking-wider focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                                            {!! __('messages.workexperience.employment_status') !!} </th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody
@@ -309,11 +333,12 @@
 
                                                     <div>
                                                         <div id="employment-type-options" class="mt-6">
-                                                            <label for="employment-type" class="block mb-1">Specify
-                                                                your Current
-                                                                Employment:</label>
+                                                            <label for="employment-type" class="block mb-1">
+                                                                {!! __('messages.workexperience.current_employment') !!}
+                                                            </label>
                                                             <select id="employment-type" name="employment-type"
-                                                                class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200">
+                                                                class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                                tabindex="0" aria-label=" {!! __('messages.workexperience.current_employment') !!}">
                                                                 <option value="" selected disabled>Please select
                                                                     your employment
                                                                     status...
@@ -375,17 +400,18 @@
                                                         </div>
 
                                                         <div id="job-search-duration " class="mt-6">
-                                                            <label for="job-search-duration" class="block mb-1">How
-                                                                long have you been
-                                                                looking for a job?</label>
+                                                            <label for="job-search-duration" class="block mb-1">
+                                                                {!! __('messages.workexperience.job_search_duration') !!}
+                                                            </label>
                                                             <div class="flex">
                                                                 <input type="number" id="job-search-duration"
                                                                     placeholder="Specify " name="job-search-duration"
-                                                                    class="w-5/6 p-2 border rounded mr-2 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                                    aria-label="{!! __('messages.workexperience.job_search_duration') !!}"
+                                                                    class="w-5/6 p-2 border rounded mr-2 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                                     value="{{ old('job-search-duration', $formData3['job-search-duration'] ?? '') }}">
                                                                 <select id="duration-category"
                                                                     name="duration-category"
-                                                                    class="p-2 w-1/2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200">
+                                                                    class="p-2 w-1/2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
                                                                     <option value="Days"
                                                                         {{ old('duration-category', $employment->duration_category ?? '') === 'Days' ? 'selected' : '' }}>
                                                                         {{ __('messages.employment.days') }}</option>
@@ -406,9 +432,15 @@
                                                         </div>
                                                         <div class="mt-4 text-right">
                                                             <a href="{{ route('personal') }}"
-                                                                class="inline-block py-2 px-4 bg-black text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mr-2">Previous</a>
+                                                                aria-label=" {{ __('messages.previous') }}"
+                                                                class="inline-block py-2 px-4 bg-black text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 mr-2">
+                                                                {{ __('messages.previous') }}
+                                                            </a>
                                                             <button type="submit"
-                                                                class="inline-block py-2 px-4 bg-green-600 text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">Save</button>
+                                                                aria-label=" {{ __('messages.save') }}"
+                                                                class="inline-block py-2 px-4 bg-green-600 text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                                {{ __('messages.save') }}
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -441,7 +473,8 @@
                                         <svg class="h-6 w-6" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M6 18L18 6M6 6l12 12"></path>
+                                                d=" M6 18L18 6M6 6l12 12">
+                                            </path>
                                         </svg>
                                     </button>
                                 </div>
@@ -609,35 +642,33 @@
                                     row.innerHTML = `
                                     <td class="px-6 py-4 whitespace-nowrap ">
                                         <button onclick="deleteRow(event, this)"
-                                                class="bg-red-500 hover:bg-red-600 text-white font-regular py-2 px-4 rounded">
-                                            Delete
+                                                class="bg-red-500 hover:bg-red-600 text-white font-regular py-2 px-4 rounded focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400" tabindex="0" 
+                                                aria-label="{{ __('messages.workexperience.delete') }}">
+                                        {{ __('messages.workexperience.delete') }}                                       
                                         </button>
                                     </td>
-                                  <td class="px-6 py-4 whitespace-nowrap border border-gray-200 dark:border-gray-600">
-                                        <div class="font-medium text-gray-900 dark:text-gray-200">${formData.employerName}</div>
+                                  <td class="px-6 py-4 whitespace-nowrap border border-gray-200 dark:border-gray-600" >
+                                        <div class="font-medium text-gray-900 dark:text-gray-200 focus:ring-4 focus:outline-none focus:ring-orange-400 focus:border-orange-400" tabindex="0" >${formData.employerName}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap border border-gray-200 dark:border-gray-600">
-                                        <div class="text-gray-900 dark:text-gray-200">${formData.employerAddress}</div>
+                                        <div class="text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400" tabindex="0">${formData.employerAddress}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap border border-gray-200 dark:border-gray-600">
-                                        <div class="text-gray-900 dark:text-gray-200">${formData.positionHeld}</div>
+                                        <div class="text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400" tabindex="0">${formData.positionHeld}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap border border-gray-200 dark:border-gray-600">
-                                        <div class="text-gray-900 dark:text-gray-200">${formData.skillSearch}</div>
+                                        <div class="text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400" tabindex="0">${formData.skillSearch}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap border border-gray-200 dark:border-gray-600">
-                                        <div class="text-gray-900 dark:text-gray-200">${formData.fromDate}</div>
+                                        <div class="text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400" tabindex="0">${formData.fromDate}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap border border-gray-200 dark:border-gray-600">
-                                        <div class="text-gray-900 dark:text-gray-200">${formData.toDate}</div>
+                                        <div class="text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400" tabindex="0">${formData.toDate}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap border border-gray-200 dark:border-gray-600">
-                                        <div class="text-gray-900 dark:text-gray-200">${formData.employmentStatus}</div>
+                                        <div class="text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400" tabindex="0">${formData.employmentStatus}</div>
                                     </td>
                                 `;
-
-
-
                                     // Append the row to the table body
                                     tableBody.appendChild(row);
                                     concatenatedEmployerName.push([formData.employerName]);
@@ -754,7 +785,7 @@
 
                         // Add each skill as a new row in the table
                         skills.forEach(function(skill) {
-                            if (skill && skillTableBody.rows.length < 5 && !isSkillDuplicate(skill)) {
+                            if (skill && !isSkillDuplicate(skill)) {
                                 var row = skillTableBody.insertRow();
                                 var cell = row.insertCell();
                                 cell.textContent = skill;

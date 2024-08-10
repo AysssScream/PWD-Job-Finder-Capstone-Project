@@ -11,7 +11,7 @@
       <div class="py-12">
           <div class="container mx-auto">
               <div class="flex justify-center">
-                  <div class="w-5/6">
+                  <div class="w-full">
                       <form action="{{ route('educationalbg') }}" method="POST" enctype="multipart/form-data">
                           @csrf
                           @if ($errors->any())
@@ -29,7 +29,8 @@
                           @endif
                           <div class="bg-white text-black dark:bg-gray-800 dark:text-gray-200 shadow-md rounded-lg">
                               <div class="p-6">
-                                  <h3 class="text-2xl font-bold mb-2 inline-flex items-center justify-between w-full">
+                                  <h3 class="text-2xl font-bold mb-2 inline-flex items-center justify-between w-full focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                      tabindex="0">
                                       Educational Background
                                       @php
                                           $currentStep = 6; // Set this dynamically based on your current step
@@ -52,28 +53,29 @@
                                       <nav class="text-sm" aria-label="Breadcrumb">
                                           <ol class="list-none p-0 inline-flex">
                                               <li class="flex items-center">
-                                                  <i
-                                                      class="fas fa-arrow-left mr-2 text-gray-700 dark:text-gray-200"></i>
+                                                  <i class="fas fa-arrow-left mr-2 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                      tabindex="0"></i>
                                                   <a href="{{ route('workexp') }}"
-                                                      class="text-gray-700 dark:text-gray-200">Language
+                                                      class="text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">Language
                                                       Proficiency and Other Skills</a>
                                                   <span class="mx-2 text-gray-500">/</span>
                                               </li>
                                               <li class="flex items-center">
-                                                  <span class="text-blue-500 font-semibold">Educational
+                                                  <span
+                                                      class="text-blue-500 font-semibold focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                      tabindex="0">Educational
                                                       Background</span>
                                               </li>
                                           </ol>
                                       </nav>
                                   </div>
                                   <hr class="border-t-2 border-gray-400 rounded-full my-4">
-
-                                  <!-- Adjusted text size to text-2xl -->
-                                  <span class="text-md font-regular" style="text-align: justify;">
-                                      {!! __('messages.education.instruction') !!}
-
-                                  </span>
-
+                                  <div class="focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                      tabindex="0" aria-label=" {!! __('messages.education.instruction') !!}">
+                                      <span class="text-md font-regular" style="text-align: justify;">
+                                          {!! __('messages.education.instruction') !!}
+                                      </span>
+                                  </div>
                                   <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
                                       <div>
                                           @include('layouts.dropdown')
@@ -84,8 +86,9 @@
                                               <label for="educationLevel"
                                                   class="block mb-1">{{ __('messages.education.highest_educational_attainment') }}</label>
                                               <select id="educationLevel" name="educationLevel"
-                                                  class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
-                                                  autocomplete="on">
+                                                  class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                  autocomplete="on"
+                                                  aria-label="{{ __('messages.education.highest_educational_attainment') }}">
                                                   <option value="" selected disabled>Select Education Level...
                                                   </option>
                                                   <option value="Primary School"
@@ -136,8 +139,9 @@
                                               <label for="school"
                                                   class="block mb-1">{{ __('messages.education.school_graduated') }}</label>
                                               <input type="text" id="school" name="school"
+                                                  aria-label="{{ __('messages.education.school_graduated') }}"
                                                   placeholder="Jose Rizal University"
-                                                  class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                  class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                   title="Please enter alphabetic characters only"
                                                   value="{{ old('school', $formData6['school'] ?? '') }}" />
                                               @error('school')
@@ -149,8 +153,9 @@
                                               <label for="course"
                                                   class="block mb-1">{{ __('messages.education.course') }}</label>
                                               <input type="text" id="course" name="course"
+                                                  aria-label="{{ __('messages.education.course') }}"
                                                   placeholder="Bachelor of Science in Information Technology"
-                                                  class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                  class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                   value="{{ old('course', $formData6['course'] ?? '') }}" />
                                               @error('course')
                                                   <div class="text-red-600 mt-1">{{ $message }}</div>
@@ -161,7 +166,8 @@
                                               <label for="yearGraduated"
                                                   class="block mb-1">{{ __('messages.education.year_graduated') }}</label>
                                               <input type="number" id="yearGraduated" name="yearGraduated"
-                                                  class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                  aria-label="{{ __('messages.education.year_graduated') }}"
+                                                  class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                   min="1900" max="2099" placeholder="Year Graduated"
                                                   oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                                                   maxlength="4"
@@ -177,7 +183,8 @@
                                               <label for="awards"
                                                   class="block mb-1">{{ __('messages.education.awards') }}</label>
                                               <textarea id="awards" placeholder=" Ex. • Cum Laude" name="awards"
-                                                  class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200">{{ old('awards', $formData6['awards'] ?? '') }}</textarea>
+                                                  aria-label="{{ __('messages.education.awards') }}"
+                                                  class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">{{ old('awards', $formData6['awards'] ?? '') }}</textarea>
                                               @error('awards')
                                                   <div class="text-red-600 mt-1">{{ $message }}</div>
                                               @enderror
@@ -185,11 +192,13 @@
                                       </div>
                                   </div>
                                   <div class="mt-4 text-right">
-                                      <a href="{{ route('dialect') }}"
-                                          class="inline-block py-2 px-4 bg-black text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mr-2">Previous</a>
+                                      <a href="{{ route('dialect') }}" aria-label="{{ __('messages.previous') }}"
+                                          class="inline-block py-2 px-4 bg-black text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 mr-2">
+                                          {{ __('messages.previous') }}</a>
 
-                                      <button type="submit"
-                                          class="inline-block py-2 px-4 bg-green-600 text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">Save</button>
+                                      <button type="submit" aria-label=" {{ __('messages.save') }}"
+                                          class="inline-block py-2 px-4 bg-green-600 text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                          {{ __('messages.save') }}</button>
                                   </div>
                               </div>
 

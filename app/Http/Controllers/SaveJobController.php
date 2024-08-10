@@ -61,4 +61,17 @@ class SaveJobController extends Controller
             abort(404, 'Job not found');
         }
     }
+    public function destroy($id)
+    {
+        try {
+            $savedJob = SavedJob::findOrFail($id);
+            $savedJob->delete();
+            session()->flash('jobdelete', 'Job ID: ' . $id . ' has been deleted');
+            return redirect()->route('savedjobs')->with('success', 'Employment record deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('savedjobs')->with('error', 'Failed to delete employment record.');
+        }
+    }
+
+
 }

@@ -1,13 +1,15 @@
 <x-guest-layout>
+    <title>AccessiJobs | Verify Email</title>
+
     <div class="max-w-2xl mx-auto">
 
         <div class="mb-4 text-lg text-gray-700 dark:text-gray-200">
-            {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
+            <p>{{ __('messages.verify_email') }}</p>
         </div>
 
         @if (session('status') == 'verification-link-sent')
             <div class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
-                {{ __('A new verification link has been sent to the email address you provided during registration.') }}
+                <p>{{ __('messages.new_verification_link') }}</p>
             </div>
         @endif
 
@@ -33,7 +35,7 @@
         </div>
     </div>
 </x-guest-layout>
-<footer class="bg-gray-800 text-white w-full py-4">
+<footer class="bg-gray-800 text-white w-full py-4 ">
     <div class="container mx-auto text-center">
         <span>&copy; 2024 AccessiJobs. All rights reserved.</span>
     </div>

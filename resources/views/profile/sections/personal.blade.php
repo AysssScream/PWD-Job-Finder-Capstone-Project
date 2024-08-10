@@ -174,7 +174,7 @@ focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
             class="block mb-1">{{ __('messages.personal.latest_country_of_deployment') }}</label>
         <div class="flex items-center relative">
             <input type="text" id="ofw-country" name="ofw-country"
-                class="w-full focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                class="w-full border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm"
                 placeholder="Please specify the country"
                 aria-label="{{ __('messages.personal.latest_country_of_deployment') }} is at {{ old('ofw-country', $personal->ofw_country ?? '') }}"
                 value="{{ old('ofw-country', $personal->ofw_country ?? '') }}" list="countrySuggestions" readonly />
@@ -201,7 +201,7 @@ focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
         <label for="ofw-return" class="block mb-1">{{ __('messages.personal.month_year_return') }}</label>
         <input type="month" id="ofw-return" name="ofw-return"
             aria-label="{{ __('messages.personal.month_year_return') }} is {{ old('ofw-return', $formattedDate ?? '') }}"
-            class="w-full focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+            class="w-full border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm"
             value="{{ old('ofw-return', $personal->ofw_return ?? '') }}" readonly />
         @error('ofw-return')
             <div class="text-red-600 mt-1">{{ $message }}</div>

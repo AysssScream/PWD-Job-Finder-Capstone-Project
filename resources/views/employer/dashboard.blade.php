@@ -7,6 +7,7 @@
         <link href="{{ asset('/css/layouts.css') }}" rel="stylesheet">
         <link rel="preload" href="/images/team.png" as="image">
         <link href="{{ asset('fontawesome-free-6.5.2-web/css/all.min.css') }}" rel="stylesheet">
+        <title>Employer Dashboard</title>
 
     </head>
 
@@ -14,7 +15,7 @@
     <div class="py-12">
         <!-- Padding top and bottom of 12 (48px) -->
 
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 grid lg:gap-8  gap-4 lg:grid-cols-3 md:grid-cols-1 sm:grid-cols-1">
+        <div class="max-w-8xl mx-auto px-6 lg:px-8 grid lg:gap-8  gap-4 lg:grid-cols-3 md:grid-cols-1 sm:grid-cols-1">
             <!-- Responsive grid container with padding, three columns on large screens, one column on medium and small screens, no gap on medium and small screens -->
 
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg shadow-lg">
@@ -30,32 +31,38 @@
                         <div class="flex justify-between items-center mb-4">
                             <!-- Left side: Breadcrumb -->
                             <nav class="flex" aria-label="Breadcrumb">
-                                <ol class="flex items-center space-x-2 text-gray-500 dark:text-gray-300">
-                                    <li>
+                                <ol class="flex items-center text-gray-500 dark:text-gray-300">
+                                    <li class="flex items-center">
                                         <a href="#">Home</a>
+                                        <i class="fas fa-chevron-right mx-2"></i>
                                     </li>
-                                    <li>
-                                        /
-                                    </li>
-                                    <li>
+                                    <li class="flex items-center">
                                         <a href="#" aria-current="page">Dashboard</a>
                                     </li>
                                 </ol>
-
                             </nav>
-
-
 
                             <!-- Button to add a new job -->
                         </div>
 
-
                         <!-- Image Preview -->
-                        <div
-                            class="w-48 h-48 md:w-40 md:h-40 sm:w-36 sm:h-36 bg-white rounded-full overflow-hidden mx-auto mb-4 border border-gray-700 shadow-lg">
-                            <img id="imagePreview" src="{{ asset('storage/' . Auth::user()->employer->company_logo) }}"
-                                alt="Profile Picture" class="w-full h-full object-contain">
-                        </div>
+
+
+                        @if (Auth::user()->employer->company_logo)
+                            <div
+                                class="w-48 h-48 md:w-40 md:h-40 sm:w-36 sm:h-36 bg-white rounded-full overflow-hidden mx-auto mb-4 border border-gray-700 shadow-lg">
+                                <img id="imagePreview"
+                                    src="{{ asset('storage/' . Auth::user()->employer->company_logo) }}"
+                                    alt="Profile Picture" class="w-full h-full object-contain">
+                            </div>
+                        @else
+                            <div
+                                class="w-48 h-48 md:w-40 md:h-40 sm:w-36 sm:h-36 bg-gray-200 rounded-full overflow-hidden mx-auto mb-4 border border-gray-700 shadow-lg flex items-center justify-center">
+                                <img id="imagePreview" src="/images/avatar.png" alt="Profile Picture"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        @endif
+
 
 
                         <!-- Edit Profile Button -->
@@ -120,7 +127,8 @@
                                         <span class="flex-1">Created Job Orders</span>
                                     </button>
 
-                                    <button type="button" onclick="window.location='#'" id="togglePersonalButton4"
+                                    <button type="button" onclick="window.location='{{ route('employer.messages') }}'"
+                                        id="togglePersonalButton4"
                                         class="flex items-center justify-between w-full px-4 py-2 font-medium text-left rtl:text-right border-b border-gray-200 cursor-pointer hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
                                         <i class="fas fa-comments mr-2"></i> <!-- Font Awesome icon -->
                                         <span class="flex-1">Provide Feedback</span>
@@ -131,15 +139,9 @@
                                         <i class="fas fa-question-circle mr-2"></i> <!-- Font Awesome icon -->
                                         <span class="flex-1">Frequently Asked Questions</span>
                                     </button>
-
-
-
                                 </div>
                             </div>
-
-
                         </div>
-
                     </div>
                     <!-- End of content area -->
 
@@ -206,7 +208,7 @@
                         </div>
                         {{-- ADD HERE --}}
                         <div
-                            class="border-b border-gray-200 dark:border-gray-700 py-4 h-96 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+                            class="p-4 border-border-gray-200 dark:border-gray-700 py-4 h-96 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
                             <div class="flex items-center justify-between mb-4">
                                 <h2 class="text-xl font-bold flex items-center">
                                     <i class="fas fa-briefcase mr-2"></i>
@@ -287,27 +289,7 @@
 
 <style>
     /* Custom scrollbar styles */
-    .scrollbar-thin::-webkit-scrollbar {
-        width: 8px;
-    }
 
-    .scrollbar-thin::-webkit-scrollbar-track {
-        background: #f1f1f1;
-        /* Light gray track */
-    }
-
-    .scrollbar-thin::-webkit-scrollbar-thumb {
-        background-color: #888;
-        /* Gray thumb */
-        border-radius: 10px;
-        border: 2px solid #f1f1f1;
-        /* Match track color */
-    }
-
-    .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-        background-color: #555;
-        /* Darker gray on hover */
-    }
 
     .centered-shadow {
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);

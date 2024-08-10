@@ -333,16 +333,49 @@ class FormController extends Controller
         // Assuming $hiddenemployerName, $hiddenemployerAddress, etc. are arrays after decoding
 
         // Example of how to access individual values (assuming count($hiddenemployerName) is the same for all):
-        foreach ($hiddenemployerName as $index => $employerName) {
-            $workExperience = new WorkExperience();
-            $workExperience->employer_name = $employerName[0]; // Accessing the first element of each nested array
-            $workExperience->employer_address = $hiddenemployerAddress[$index][0];
-            $workExperience->position_held = $hiddenpositionHeld[$index][0];
-            $workExperience->from_date = $hiddenfromDate[$index][0];
-            $workExperience->to_date = $hiddentoDate[$index][0];
-            $workExperience->skills = $hiddenlistskills[$index][0];
-            $workExperience->employment_status = $hiddenemploymentStatus[$index][0];
-            $workExperience->user_id = Auth::id();
+        // Ensure all variables are arrays and not null
+        $hiddenemployerName = $hiddenemployerName ?? [];
+        $hiddenemployerAddress = $hiddenemployerAddress ?? [];
+        $hiddenpositionHeld = $hiddenpositionHeld ?? [];
+        $hiddenfromDate = $hiddenfromDate ?? [];
+        $hiddentoDate = $hiddentoDate ?? [];
+        $hiddenlistskills = $hiddenlistskills ?? [];
+        $hiddenemploymentStatus = $hiddenemploymentStatus ?? [];
+
+        // Iterate only if all arrays are non-empty and have the same length
+        if (
+            is_array($hiddenemployerName) && is_array($hiddenemployerAddress) &&
+            is_array($hiddenpositionHeld) && is_array($hiddenfromDate) &&
+            is_array($hiddentoDate) && is_array($hiddenlistskills) &&
+            is_array($hiddenemploymentStatus) &&
+            count($hiddenemployerName) === count($hiddenemployerAddress) &&
+            count($hiddenemployerAddress) === count($hiddenpositionHeld) &&
+            count($hiddenpositionHeld) === count($hiddenfromDate) &&
+            count($hiddenfromDate) === count($hiddentoDate) &&
+            count($hiddentoDate) === count($hiddenlistskills) &&
+            count($hiddenlistskills) === count($hiddenemploymentStatus)
+        ) {
+            foreach ($hiddenemployerName as $index => $employerName) {
+                if (
+                    isset($employerName[0]) && $employerName[0] !== null &&
+                    isset($hiddenemployerAddress[$index][0]) && $hiddenemployerAddress[$index][0] !== null &&
+                    isset($hiddenpositionHeld[$index][0]) && $hiddenpositionHeld[$index][0] !== null &&
+                    isset($hiddenfromDate[$index][0]) && $hiddenfromDate[$index][0] !== null &&
+                    isset($hiddentoDate[$index][0]) && $hiddentoDate[$index][0] !== null &&
+                    isset($hiddenlistskills[$index][0]) && $hiddenlistskills[$index][0] !== null &&
+                    isset($hiddenemploymentStatus[$index][0]) && $hiddenemploymentStatus[$index][0] !== null
+                ) {
+                    $workExperience = new WorkExperience();
+                    $workExperience->employer_name = $employerName[0];
+                    $workExperience->employer_address = $hiddenemployerAddress[$index][0];
+                    $workExperience->position_held = $hiddenpositionHeld[$index][0];
+                    $workExperience->from_date = $hiddenfromDate[$index][0];
+                    $workExperience->to_date = $hiddentoDate[$index][0];
+                    $workExperience->skills = $hiddenlistskills[$index][0];
+                    $workExperience->employment_status = $hiddenemploymentStatus[$index][0];
+                    $workExperience->user_id = Auth::id();
+                }
+            }
         }
 
 
@@ -421,7 +454,7 @@ class FormController extends Controller
         $validatedData6 = $request->validate([
             'educationLevel' => ['required', 'max:100'],
             'school' => ['required', 'max:100', 'regex:/^[a-zA-Z ,.\-\/]+$/'],
-            'course' => ['nullable', 'max:100', 'regex:/^[a-zA-Z ,.\-\/]+$/'],
+            'course' => ['required', 'max:100', 'regex:/^[a-zA-Z ,.\-\/]+$/'],
 
             'yearGraduated' => [
                 'nullable',

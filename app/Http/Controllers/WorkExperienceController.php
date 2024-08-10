@@ -19,7 +19,6 @@ class WorkExperienceController extends Controller
     }
 
 
-
     public function destroy($id)
     {
         try {

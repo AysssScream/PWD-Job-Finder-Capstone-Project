@@ -7,7 +7,7 @@
         <link href="{{ asset('/css/layouts.css') }}" rel="stylesheet">
         <link rel="preload" href="/images/team.png" as="image">
         <link href="{{ asset('fontawesome-free-6.5.2-web/css/all.min.css') }}" rel="stylesheet">
-
+        <title>Company Profile</title>
     </head>
 
     @if (Session::has('message'))
@@ -27,21 +27,30 @@
     @endif
 
     <div class="py-12">
-        <div class="container mx-auto max-w-7xl px-4 pt-5 ">
+        <div class="container mx-auto max-w-8xl px-4 pt-5 "
+            style="
+    margin-left: 0px;
+    margin-right: 0px;
+            ">
             <div class="row">
                 <div class="col">
                     <nav aria-label="breadcrumb" class="rounded-lg p-3 text-gray-800 dark:text-gray-300">
                         <ol class="breadcrumb mb-0">
-                            <li class="breadcrumb-item"><a href="{{ route('employer.dashboard') }}"><i
-                                        class="fa fa-arrow-left" aria-hidden="true"></i> &nbsp;Back to Dashboard</a>
+                            <li class="breadcrumb-item">
+                                <a href="{{ route('employer.dashboard') }}"
+                                    class="inline-flex items-center space-x-2 bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
+                                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                    <span>&nbsp;Back to Dashboard</span>
+                                </a>
                             </li>
+
                         </ol>
                     </nav>
                 </div>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="container mx-auto max-w-7xl px-4 pt-5 ">
+        <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
+            <div class="container mx-auto max-w-8xl px-4 pt-5 ">
             </div>
             <div class="grid grid-cols-1  g:grid-cols-3">
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg col-span-1 shadow-lg">
@@ -49,15 +58,21 @@
                         <h3 class="text-2xl font-bold mb-2">Employer Profile</h3>
                         <div class="flex flex-col items-center space-y-4">
 
-
                             <!-- Image Preview -->
-                            <div
-                                class="w-48 h-48 bg-gray-200 rounded-full overflow-hidden border border-gray-500 shadow-lg">
-                                <img id="imagePreview"
-                                    src="{{ asset('storage/' . Auth::user()->employer->company_logo) }}"
-                                    alt="Profile Picture" class="w-full h-full object-contain">
-                            </div>
-
+                            @if (Auth::user()->employer->company_logo)
+                                <div
+                                    class="w-48 h-48 md:w-40 md:h-40 sm:w-36 sm:h-36 bg-white rounded-full overflow-hidden mx-auto mb-4 border border-gray-700 shadow-lg">
+                                    <img id="imagePreview"
+                                        src="{{ asset('storage/' . Auth::user()->employer->company_logo) }}"
+                                        alt="Profile Picture" class="w-full h-full object-contain">
+                                </div>
+                            @else
+                                <div
+                                    class="w-48 h-48 md:w-40 md:h-40 sm:w-36 sm:h-36 bg-gray-200 rounded-full overflow-hidden mx-auto mb-4 border border-gray-700 shadow-lg flex items-center justify-center">
+                                    <img id="imagePreview" src="/images/avatar.png" alt="Profile Picture"
+                                        class="w-full h-full object-contain">
+                                </div>
+                            @endif
 
                             <!-- File Path Display -->
                             <div id="filePath" class="text-sm text-gray-600"></div>
@@ -118,7 +133,7 @@
                             </div>
                             <br>
                         @endif
-                        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-4 p-6">
+                        <div class="max-w-8xl mx-auto sm:px-6 lg:px-8 mt-4 p-6">
                             <label for="businessname" class="block mb-1 text-black dark:text-gray-200">
                                 Company Description
                                 <span class="text-black">

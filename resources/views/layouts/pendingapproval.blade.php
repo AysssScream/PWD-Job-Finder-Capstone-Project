@@ -8,13 +8,11 @@
     <link href="{{ asset('/css/layouts.css') }}" rel="stylesheet">
     <link rel="preload" href="/images/team.png" as="image">
     <link href="{{ asset('fontawesome-free-6.5.2-web/css/all.min.css') }}" rel="stylesheet">
-
 </head>
 
-<body>
-    <div class="py-12"
-        style="background-image: url('{{ asset('images/team.png') }}'); background-size: cover; background-position: center;">
 
+<body>
+    <div class="py-36 bg-cover bg-center">
         @if (Auth::check() && is_null(Auth::user()->email_verified_at))
             <div class="landscape-container mt-15">
                 <div class="container w-3/4 mx-auto landscape-content">
@@ -112,7 +110,7 @@
                     </div>
                 </div>
             @else
-                <div class="landscape-container mt-15"> <!-- Add mt-5 class for margin-top -->
+                <div class="landscape-container mt-15">
                     <div class="container w-3/4 mx-auto landscape-content">
                         <div
                             class="bg-white text-black dark:bg-gray-700 dark:text-gray-200 p-6 rounded-lg shadow-md text-center">
@@ -141,7 +139,5 @@
         @endif
     </div>
 </body>
-
-
 
 </html>

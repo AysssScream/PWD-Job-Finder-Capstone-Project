@@ -8,28 +8,31 @@
         <link rel="preload" href="/images/team.png" as="image">
         <link href="{{ asset('fontawesome-free-6.5.2-web/css/all.min.css') }}" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.8.2/dist/alpine.min.js" defer></script>
-
+        <title>Job Information</title>
     </head>
 
-    <body class="bg-white mx-auto max-w-7xl px-4">
-        <div class="container mx-auto max-w-7xl px-4 pt-5 ">
+    <body class="bg-white mx-auto max-w-8xl px-4">
+        <div class="container mx-auto max-w-8xl px-4 pt-5 ">
             <div class="row">
                 <div class="col">
-                    <nav class="rounded-lg p-3">
+                    <nav class="rounded-lg p-3 bg-gray-100 dark:bg-gray-700">
                         <ol class="breadcrumb mb-0">
-                            <li class="breadcrumb-item" aria-label="Back to Jobs"><a href="{{ route('dashboard') }} "
+                            <li class="breadcrumb-item" aria-label="Back to Jobs">
+                                <a href="{{ route('dashboard') }}"
                                     class="text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
-                                    aria-label="{!! __('messages.jobinformation.back_to_jobs') !!}"><i class="fa fa-arrow-left"
-                                        aria-label="Back to Jobs"></i>
-                                    &nbsp;{!! __('messages.jobinformation.back_to_jobs') !!}</a>
+                                    aria-label="{!! __('messages.jobinformation.back_to_jobs') !!}">
+                                    <i class="fa fa-arrow-left" aria-label="Back to Jobs"></i>
+                                    &nbsp;{!! __('messages.jobinformation.back_to_jobs') !!}
+                                </a>
                             </li>
                         </ol>
                     </nav>
+
                 </div>
             </div>
         </div>
         <section>
-            <div class="container mx-auto max-w-7xl px-4 pt-5  "> {{-- this must be changed to change the margin --}}
+            <div class="container mx-auto max-w-8xl px-4 pt-5  "> {{-- this must be changed to change the margin --}}
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 rounded-lg">
                     <div class="lg:col-span-2">
                         <div class="card shadow-2xl border-0 bg-white p-5 mb-10 bg-gray-100 dark:bg-gray-700">
