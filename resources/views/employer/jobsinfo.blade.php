@@ -54,12 +54,14 @@
         </div>
 
         <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:gap-4 lg:grid-cols-3">
+            <div class="grid grid-cols-1 lg:gap-4 sm:gap-4 lg:grid-cols-3">
                 <!-- First Column -->
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg col-span-1">
                     <div class="w-full h-full p-6 text-gray-900 dark:text-gray-100">
+
+
                         <h2 class="text-xl font-bold mb-4">Recently Added Jobs</h2>
-                        <div class="h-4/6 sm:h-full overflow-y-auto p-5 rounded-lg custom-scrollbar">
+                        <div class="lg:h-full p-5 rounded-lg custom-scrollbar">
                             @foreach ($jobs as $job)
                                 <div class="container p-5 bg-gray-100 dark:bg-gray-700 mb-3 rounded-lg custom-shadow">
                                     <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-4">
@@ -76,14 +78,25 @@
                                     </div>
                                 </div>
                             @endforeach
+                            <div class="mt-4">
+                                {{ $jobs->links('pagination::tailwind') }}
+                            </div>
                         </div>
+
+
+
                     </div>
+
+
                 </div>
+
+
+                <!-- Pagination Links -->
 
 
 
                 <!-- Second Column (Occupies More Space) -->
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg col-span-2">
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg col-span-2 p-4">
                     <div class="p-6 text-gray-900 dark:text-gray-100">
                         <form action="{{ route('jobinfos.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
@@ -129,11 +142,39 @@
                                 <input type="text" id="job_title" name="job_title" autocomplete="off"
                                     placeholder="Enter job title" value="{{ old('job_title') }}"
                                     class="form-input mt-1 block w-full rounded-md border-gray-500 dark:border-gray-600 shadow-sm 
-               focus:border-blue-500 dark:focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-900 
-               dark:text-gray-300">
+                                    focus:border-blue-500 dark:focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-900 
+                                    dark:text-gray-300">
                                 @error('job_title')
                                     <div class="text-red-600 mt-1">{{ $message }}</div>
                                 @enderror
+                            </div>
+
+                            <div class="form-group flex space-x-4 p-2">
+                                <!-- Minimum Age -->
+                                <div class="w-1/2">
+                                    <label for="min_age">Minimum Age</label>
+                                    <input type="number" name="min_age"
+                                        class="form-input mt-1 block w-full rounded-md border-gray-500 dark:border-gray-600 shadow-sm 
+                                        focus:border-blue-500 dark:focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-900 
+                                        dark:text-gray-300"
+                                        id="min_age" value="{{ old('min_age') }}" required>
+                                    @error('min_age')
+                                        <small class="text-red-600 mt-1">{{ $message }}</small>
+                                    @enderror
+                                </div>
+
+                                <!-- Maximum Age -->
+                                <div class="w-1/2">
+                                    <label for="max_age">Maximum Age</label>
+                                    <input type="number" name="max_age"
+                                        class="form-input mt-1 block w-full rounded-md border-gray-500 dark:border-gray-600 shadow-sm 
+                                        focus:border-blue-500 dark:focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-900 
+                                        dark:text-gray-300"
+                                        id="max_age" value="{{ old('max_age') }}" required>
+                                    @error('max_age')
+                                        <small class="text-red-600 mt-1">{{ $message }}</small>
+                                    @enderror
+                                </div>
                             </div>
 
 
@@ -329,15 +370,15 @@
 
 
                             <div class="mb-4 p-2">
-                                <label for="hiddenInput"
+                                <label for="hiddenResponsibilitiesInput"
                                     class="block text-sm font-medium  text-gray-700 dark:text-gray-200">Selected
                                     Responsibilities: </label>
-                                <textarea id="hiddenInput" name="hiddenInput"
+                                <textarea id="hiddenResponsibilitiesInput" name="hiddenResponsibilitiesInput"
                                     class="mt-1 block w-full px-3 py-2 p-2 border-gray-500 dark:border-gray-600 shadow-sm 
                focus:border-blue-500 dark:focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-900 
                dark:text-gray-300 rounded-lg"
-                                    readonly>{{ old('hiddenInput') }}</textarea>
-                                @error('hiddenInput')
+                                    readonly>{{ old('hiddenResponsibilitiesInput') }}</textarea>
+                                @error('hiddenResponsibilitiesInput')
                                     <div class="text-red-600 mt-1">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -424,7 +465,7 @@
     document.addEventListener('DOMContentLoaded', function() {
         var responsibilitySearch = document.getElementById('responsibilitySearch');
         var responsibilityTableBody = document.getElementById('responsibilityTableBody');
-        var hiddenInput = document.getElementById('hiddenInput');
+        var hiddenInput = document.getElementById('hiddenResponsibilitiesInput');
 
         responsibilitySearch.addEventListener('keydown', function(event) {
             if (event.key === 'Enter') {
@@ -445,7 +486,7 @@
                         var row = responsibilityTableBody.insertRow();
                         var cell = row.insertCell();
 
-                        cell.className = 'p-2 border border-gray-200';
+                        cell.className = 'p-2 border ';
                         cell.style.maxWidth = '500px'; // Example: Adjust max-width as needed
                         cell.style.wordWrap = 'break-word'; // Ensures text wraps within cell
                         cell.innerHTML = responsibility.replace(/\n/g,
@@ -519,7 +560,7 @@
                         var row = qualificationsTableBody.insertRow();
 
                         var cell = row.insertCell();
-                        cell.className = 'p-2 border border-gray-200';
+                        cell.className = 'p-2 border ';
                         cell.style.maxWidth = '500px'; // Example: Adjust max-width as needed
                         cell.style.wordWrap = 'break-word'; // Ensures text wraps within cell
                         cell.innerHTML = qualifications.replace(/\n/g,
@@ -688,7 +729,7 @@
             document.getElementById('benefits').value = '';
             document.getElementById('responsibilitySearch').value = '';
             document.getElementById('responsibilityTableBody').innerHTML = '';
-            document.getElementById('hiddenInput').value = '';
+            document.getElementById('hiddenResponsibilityInput').value = '';
             document.getElementById('qualificationsInput').value = '';
             document.getElementById('qualificationsTableBody').innerHTML = '';
             document.getElementById('hiddenQualificationsInput').value = '';

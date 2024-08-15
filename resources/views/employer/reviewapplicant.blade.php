@@ -1,4 +1,5 @@
 <x-app-layout>
+    <title>Review Applicants</title>
 
     <head>
         <meta charset="UTF-8">

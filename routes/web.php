@@ -59,6 +59,9 @@ Route::middleware(['auth', 'userMiddleware', 'checkVerificationStatus'])->group(
     Route::get('dashboard', [UserController::class, 'index'])->name('dashboard');
     Route::get('/jobs/remarks/{remarks}', [UserController::class, 'remarks'])->name('show.remarks');
     Route::get('/dashboard/matchedjobs', [UserController::class, 'matchindex'])->name('dashboard.match');
+    Route::get('/dashboard/resumeupload', [UserController::class, 'resumeupload'])->name('dashboard.resumeupload');
+    Route::post('/resume-matched-jobs', [UserController::class, 'fetchResumeMatchedJobs'])->name('resume.uploadresults');
+
     Route::get('/dashboard/jobs', [UserController::class, 'search'])->name('jobs.search');
     Route::get('/jobs/{company_name}/{id}', [UserController::class, 'jobinfo'])->name('jobs.info');
     Route::post('jobs/apply/{company_name}/{id}', [UserController::class, 'applyForJob'])->name('applyForJob');
@@ -90,9 +93,22 @@ Route::middleware(['auth', 'adminMiddleware'])->group(function () {
     Route::get('/export/skillspdf', [ExportController::class, 'skillsExportPDF'])->name('exportskills.pdf');
     Route::get('/export/educationcsv', [ExportController::class, 'educationExportCSV'])->name('exporteducation.csv');
     Route::get('/export/educationpdf', [ExportController::class, 'educationExportPDF'])->name('exporteducation.pdf');
+    Route::get('/export/disabilityoccurencecsv', [ExportController::class, 'disabilityOccurenceExportCSV'])->name('exportDisabilityOccurence.csv');
+    Route::get('/export/disabilityoccurencepdf', [ExportController::class, 'disabilityOccurenceExportPDF'])->name('exportDisabilityOccurence.pdf');
+    Route::get('/export/disabilitytypecsv', [ExportController::class, 'disabilityTypeExportCSV'])->name('exportDisabilityType.csv');
+    Route::get('/export/disabilitytypepdf', [ExportController::class, 'disabilityTypeExportPDF'])->name('exportDisabilityType.pdf');
+
+    Route::get('/export/employmenttypecsv', [ExportController::class, 'employmentTypeExportCSV'])->name('exportEmploymentType.csv');
+    Route::get('/export/employmenttypepdf', [ExportController::class, 'employmentTypeExportPDF'])->name('exportEmploymentType.pdf');
+    Route::get('/export/agebinscsv', [ExportController::class, 'ageBinsExportCSV'])->name('exportageBins.csv');
+    Route::get('/export/agebinspdf', [ExportController::class, 'ageBinsExportPDF'])->name('exportageBins.pdf');
+
+
     Route::get('/admin/userapplication/applicant/{id}', [AdminController::class, 'userapplication'])->name('admin.applicantinfo');
     Route::get('/admin/userpwdapplication/applicant/{id}', [AdminController::class, 'userpwdapplication'])->name('admin.pwdapplicantinfo');
     Route::get('/admin/employerapplication/employer/{id}', [AdminController::class, 'employerapplication'])->name('admin.employerapplicantinfo');
+
+
     Route::post('/admin/approveuser/{id}', [AdminController::class, 'approveuser'])->name('admin.approveuser');
 });
 

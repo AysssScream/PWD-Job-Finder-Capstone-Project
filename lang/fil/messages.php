@@ -363,6 +363,8 @@ return [
         'qualifications' => 'Mga Kwalipikasyon',
         'benefits' => 'Mga Benepisyo',
         'job_summary' => 'Buod ng Trabaho',
+        'age_requirement' => 'Kinakailangang Edad:',
+        'years_old' => 'taon gulang',
         'published_on' => 'Nailathala Noong:',
         'vacancy' => 'Bakante:',
         'salary' => 'Suweldo:',
@@ -374,6 +376,8 @@ return [
         'view_more_details' => 'Tingnan ang Karagdagang Detalye',
         'copy_url' => 'Kopyahin ang Job URL',
         'back_to_jobs' => 'Bumalik sa Mga Trabaho',
+        'similar_jobs' => 'Katulad na Trabaho',
+        'no_similar_jobs' => 'Walang katulad na trabaho na natagpuan.',
     ],
 
 

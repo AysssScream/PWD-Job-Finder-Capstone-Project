@@ -9,6 +9,8 @@ use App\Models\Employer;
 use App\Models\JobApplication;
 use App\Models\JobInfo;
 use App\Models\JobPreference;
+use App\Models\Resume;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
@@ -17,6 +19,7 @@ use Session; // Import the Session facade
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Http;
 
 class UserController extends Controller
 {
@@ -131,6 +134,159 @@ class UserController extends Controller
 
     }
 
+
+    public function resumeupload(Request $request)
+    {
+        $userId = Auth::id();
+
+        // Retrieve the top job openings
+        $topJobOpenings = JobInfo::select('title', DB::raw('SUM(vacancy) as count'))
+            ->where('vacancy', '>', 0)
+            ->groupBy('title')
+            ->having(DB::raw('SUM(vacancy)'), '>', 0)
+            ->orderByDesc('count')
+            ->limit(10)
+            ->get();
+
+        // Retrieve the latest resume data for the authenticated user
+        $resume = Resume::where('user_id', $userId)->orderBy('upload_date', 'desc')->first();
+
+
+        if ($resume) {
+            // Extract and normalize skills
+            $skills = explode(',', $resume->skills);
+            $normalizedSkills = array_map('trim', array_map('strtolower', $skills));
+
+            // Normalize education
+            $educations = array_map('trim', explode(',', strtolower($resume->education)));
+
+            // Match jobs based on the resume data
+            $matchedResumeJobs = DB::table('jobinfos')
+                ->select('*')
+                ->where(function ($query) use ($educations) {
+                    foreach ($educations as $education) {
+                        $query->orWhereRaw('LOWER(`educational_level`) LIKE ?', ["%{$education}%"]);
+                    }
+                })
+                ->where(function ($query) use ($normalizedSkills) {
+                    foreach ($normalizedSkills as $skill) {
+                        $skill = strtolower(trim($skill)); // Normalize skill
+                        $words = explode(' ', $skill);
+                        foreach ($words as $word) {
+                            $word = strtolower(trim($word)); // Normalize word
+                            // Match each word in title, description, and qualifications fields
+                            $query->orWhere(function ($subQuery) use ($word) {
+                                $subQuery->whereRaw('LOWER(`title`) LIKE ?', ["%{$word}%"])
+                                    ->orWhereRaw('LOWER(`description`) LIKE ?', ["%{$word}%"])
+                                    ->orWhereRaw('LOWER(`qualifications`) LIKE ?', ["%{$word}%"]);
+                            });
+                        }
+                    }
+                })
+                ->get();
+        } else {
+            // Handle case where no resume is found
+            $matchedResumeJobs = collect(); // Return an empty collection
+        }
+
+        return view('uploadresume', [
+            'resume' => $resume,
+            'topJobOpenings' => $topJobOpenings,
+            'matchedResumeJobs' => $matchedResumeJobs,
+        ]);
+
+    }
+
+
+
+    public function fetchResumeMatchedJobs(Request $request)
+    {
+        $userId = Auth::id();
+
+        // Retrieve the latest resume data for the authenticated user
+        $resume = Resume::where('user_id', $userId)->orderBy('upload_date', 'desc')->first();
+        if ($resume) {
+            // Extract and normalize skills
+            $skills = explode(',', $resume->skills);
+            $normalizedSkills = array_map('trim', array_map('strtolower', $skills));
+
+            // Normalize education
+            $education = strtolower(trim($resume->education));
+
+            // Match jobs based on the resume data
+            $matchedResumeJobs = DB::table('jobinfos')
+                ->select('*')
+                ->where(function ($query) use ($education) {
+                    // Match education as a substring in educational_level
+                    $query->whereRaw('LOWER(`educational_level`) LIKE ?', ["%{$education}%"]);
+                })
+                ->where(function ($query) use ($normalizedSkills) {
+                    foreach ($normalizedSkills as $skill) {
+                        $skill = strtolower(trim($skill)); // Normalize skill
+                        $words = explode(' ', $skill);
+                        foreach ($words as $word) {
+                            $word = strtolower(trim($word)); // Normalize word
+                            // Match each word in title, description, and qualifications fields
+                            $query->orWhere(function ($subQuery) use ($word) {
+                                $subQuery->whereRaw('LOWER(`title`) LIKE ?', ["%{$word}%"])
+                                    ->orWhereRaw('LOWER(`description`) LIKE ?', ["%{$word}%"])
+                                    ->orWhereRaw('LOWER(`qualifications`) LIKE ?', ["%{$word}%"]);
+                            });
+                        }
+                    }
+                })
+                ->get();
+        } else {
+            // Handle case where no resume is found
+            $matchedResumeJobs = collect(); // Return an empty collection
+        }
+
+
+        $topJobOpenings = JobInfo::select('title', DB::raw('SUM(vacancy) as count'))
+            ->where('vacancy', '>', 0)
+            ->groupBy('title')
+            ->having(DB::raw('SUM(vacancy)'), '>', 0)
+            ->orderByDesc('count')
+            ->limit(10)
+            ->get();
+
+        $request->validate([
+            'file' => 'required|file|mimes:pdf,doc,docx|max:2048',
+        ]);
+
+        // Get the uploaded file
+        $file = $request->file('file');
+        $filePath = $file->getPathname();
+        $fileName = $file->getClientOriginalName();
+        $fileType = $file->getClientMimeType();
+
+        $response = Http::attach('file', file_get_contents($filePath), $fileName)
+            ->post('http://127.0.0.1:5000/upload');
+
+        if ($response->successful()) {
+            $data = $response->json();
+            $userId = Auth::id();
+
+            Resume::updateOrCreate(
+                ['user_id' => $userId], // Unique identifier for existing records
+                [
+                    'file_name' => $fileName,
+                    'file_type' => $fileType,
+                    'text_content' => json_encode($data), // Assuming `text_content` will store JSON data
+                    'age' => $data['age'],
+                    'skills' => $data['skills'],
+                    'education' => $data['education'],
+                ]
+            );
+
+
+            return redirect()->route('dashboard.resumeupload');
+        } else {
+            return response()->json(['error' => 'Failed to upload to Flask server'], $response->status());
+        }
+    }
+
+
     public function matchindex(Request $request)
     {
         Session::flash('match', 'You may change your job preferences.');
@@ -191,10 +347,35 @@ class UserController extends Controller
         // Fetch job details based on $id
         $job = JobInfo::findOrFail($id); // Assuming 'Job' is your model and 'id' is the primary key
         $employer = Employer::where('user_id', $job->employer_id)->with('jobs')->first();
+        $jobTitle = $job->title;
+        $normalizedJobTitle = strtolower(trim($jobTitle));
 
+        $keywords = array_filter(explode(' ', $normalizedJobTitle), function ($word) {
+            return strlen($word) > 2; // Skip very short words
+        });
+
+        $query = JobInfo::where('id', '!=', $id) // Exclude the current job
+            ->where('vacancy', '!=', 0); // Ensure jobs have vacancies
+
+        $query->where(function ($q) use ($keywords) {
+            foreach ($keywords as $keyword) {
+                // Trim whitespace from each keyword
+                $keyword = trim($keyword);
+                if (!empty($keyword)) {
+                    // Apply LIKE condition for each keyword
+                    $q->orWhere('title', 'LIKE', "%{$keyword}%");
+                }
+            }
+        });
+
+        // Execute the query and get results
+        $similarJobs = $query->get();
+
+
+        $similarJobs = $query->get();
         $applicationStatus = JobApplication::where('user_id', Auth::id())
             ->where('job_id', $id)
-            ->value('status') ?? 'not_applied';
+            ->value('status') ?? 'Not Applied';
 
         if (!$employer) {
             throw new \Exception("Employer not found for job with ID: $id");
@@ -206,6 +387,7 @@ class UserController extends Controller
             'company_name' => $company_name, // Pass company_name to the view
             'employer' => $employer,
             'job' => $job,
+            'jobs' => $similarJobs, // Pass similar jobs to the view
             'fullUrl' => $fullUrl, // Pass the full URL to the view
             'applicationStatus' => $applicationStatus, // Pass the application status to the view
 

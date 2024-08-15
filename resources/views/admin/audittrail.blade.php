@@ -1,4 +1,5 @@
 <x-app-layout>
+    <title>Audit Trail</title>
 
 
     <div class="h-full ml-14 md:ml-64 font-poppins p-10 ">

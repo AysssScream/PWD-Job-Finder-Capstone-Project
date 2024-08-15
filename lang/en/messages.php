@@ -362,6 +362,8 @@ return [
         'benefits' => 'Benefits',
         'job_summary' => 'Job Summary',
         'published_on' => 'Published On:',
+        'age_requirement' => 'Age Requirement:',
+        'years_old' => 'years old',
         'vacancy' => 'Vacancy:',
         'salary' => 'Salary:',
         'location' => 'Location:',
@@ -372,7 +374,8 @@ return [
         'view_more_details' => 'View More Details',
         'copy_url' => 'Copy Job URL',
         'back_to_jobs' => 'Back to Jobs',
-
+        'similar_jobs' => 'Similar Jobs',
+        'no_similar_jobs' => 'No similar jobs found.',
     ],
 
     'savedjobs' => [

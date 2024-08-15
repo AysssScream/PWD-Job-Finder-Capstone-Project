@@ -44,10 +44,11 @@ class JobInfoController extends Controller
             'job_type' => ['required', 'string', 'max:255'],
             'salary' => ['required', 'string', 'max:255', 'regex:/^\d+(\.\d{1,2})?$/'], // Example regex for salary (numeric with optional decimal up to two places)
             'benefits' => 'nullable|string',
-            'hiddenInput' => 'nullable|string',
+            'hiddenResponsibilitiesInput' => 'nullable|string',
             'hiddenQualificationsInput' => 'nullable|string',
             'vacancy' => 'required|integer',
-
+            'min_age' => 'required|integer',
+            'max_age' => 'required|integer|gte:min_age', // Adding max_age validation, must be greater than or equal to min_age
         ]);
         $employer_id = auth()->user()->id; // Adjust this based on how you retrieve the authenticated user's ID
 
@@ -61,9 +62,11 @@ class JobInfoController extends Controller
         $jobInfo->job_type = $request->input('job_type');
         $jobInfo->salary = $request->input('salary');
         $jobInfo->benefits = $request->input('benefits');
-        $jobInfo->responsibilities = $request->input('hiddenInput');
+        $jobInfo->responsibilities = $request->input('hiddenResponsibilitiesInput');
         $jobInfo->qualifications = $request->input('hiddenQualificationsInput');
         $jobInfo->vacancy = $request->input('vacancy');
+        $jobInfo->min_age = $request->input('min_age');
+        $jobInfo->max_age = $request->input('max_age');
         $jobInfo->date_posted = $date_posted;
 
 
@@ -110,7 +113,7 @@ class JobInfoController extends Controller
             'job_type' => 'required|string|max:255',
             'salary' => ['required', 'string', 'max:255', 'regex:/^\d+(\.\d{1,2})?$/'],
             'benefits' => 'nullable|string',
-            'hiddenInput' => 'nullable|string',
+            'hiddenResponsibilitiesInput' => 'nullable|string',
             'hiddenQualificationsInput' => 'nullable|string',
             'vacancy' => 'required|integer',
         ], [
@@ -132,7 +135,7 @@ class JobInfoController extends Controller
             'salary.max' => 'The salary may not be greater than 255 characters.',
             'salary.regex' => 'The salary must be a valid numeric value with up to 2 decimal places.',
             'benefits.string' => 'The benefits must be a string.',
-            'hiddenInput.string' => 'The hidden input must be a string.',
+            'hiddenResponsibilitiesInput.string' => 'The hidden input must be a string.',
             'hiddenQualificationsInput.string' => 'The hidden qualifications input must be a string.',
             'vacancy.required' => 'The vacancy field is required.',
             'vacancy.integer' => 'The vacancy must be an integer.',
@@ -149,9 +152,11 @@ class JobInfoController extends Controller
         $jobInfo->job_type = $request->input('job_type');
         $jobInfo->salary = $request->input('salary');
         $jobInfo->benefits = $request->input('benefits');
-        $jobInfo->responsibilities = $request->input('hiddenInput');
+        $jobInfo->responsibilities = $request->input('hiddenResponsibilitiesInput');
         $jobInfo->qualifications = $request->input('hiddenQualificationsInput');
         $jobInfo->vacancy = $request->input('vacancy');
+        $jobInfo->min_age = $request->input('min_age');
+        $jobInfo->max_age = $request->input('max_age');
 
         // Save the updated job information
         $jobInfo->save();

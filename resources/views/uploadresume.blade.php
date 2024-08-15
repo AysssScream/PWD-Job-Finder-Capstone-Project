@@ -1,9 +1,4 @@
 <x-app-layout>
-    {{-- <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot> --}}
 
     <head>
         <meta charset="UTF-8">
@@ -12,11 +7,10 @@
         <link href="{{ asset('/css/layouts.css') }}" rel="stylesheet">
         <link rel="preload" href="/images/team.png" as="image">
         <link href="{{ asset('fontawesome-free-6.5.2-web/css/all.min.css') }}" rel="stylesheet">
-        <title>Matched Jobs</title>
+        <title>Resume Matched Jobs</title>
     </head>
 
     <body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-
         <main class="max-w-8xl mx-auto px-3 sm:px-1 lg:px-1 py-20 flex flex-wrap gap-4 lg:ml-12">
             <aside class="w-full lg:w-1/6  bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg p-4">
                 <div>
@@ -40,7 +34,6 @@
                             aria-label="{{ __('messages.userdashboard.upload_resume') }}" tabindex="0">
                             <i class="fas fa-file mr-2"></i>{{ __('messages.userdashboard.resume_matched_jobs') }}
                         </a>
-
                     </div>
                     <hr class="my-4 border-gray-400 dark:border-gray-900">
                     <!-- Sidebar content (links, filters, etc.) -->
@@ -59,7 +52,7 @@
                     </h3>
                 </div>
             </aside>
-            @include('dashboardpartials.matchedjobs')
+            @include('dashboardpartials.uploadresume')
         </main>
     </body>
 </x-app-layout>

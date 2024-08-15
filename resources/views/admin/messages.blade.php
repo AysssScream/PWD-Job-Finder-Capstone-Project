@@ -1,4 +1,6 @@
 <x-app-layout>
+    <title>Admin Messages</title>
+
     <div class="h-full ml-14 md:ml-64 font-poppins h-screen  ">
         <div class="flex flex-col md:flex-row bg-gray-100">
             <!-- Sidebar and Email List Combined -->

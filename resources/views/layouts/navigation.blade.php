@@ -82,9 +82,6 @@
                     </div>
 
 
-
-
-
                     <!-- Employer Navigation Links -->
                     <div class="hidden md:flex md:space-x-8 md:-my-px md:ms-10">
                         @if (Auth::user()->usertype == 'employer' && Auth::user()->account_verification_status === 'approved')
@@ -173,9 +170,15 @@
                                                 Applied Jobs</h3>
 
                                             <!-- Replace with actual notification items -->
+                                            @php
+                                                $pendingApplications = Auth::user()
+                                                    ->applications->where('status', 'pending')
+                                                    ->sortByDesc('created_at');
+                                            @endphp
+
                                             <ul
                                                 class="mt-4 h-52 overflow-y-auto bg-white p-4 dark:bg-gray-700 rounded-lg shadow-md">
-                                                @foreach (Auth::user()->applications->where('status', 'pending') as $application)
+                                                @foreach ($pendingApplications as $application)
                                                     <li
                                                         class="flex items-center justify-between py-2 border-b border-gray-200 dark:border-gray-600">
                                                         <div class="flex items-center space-x-3">

@@ -26,6 +26,8 @@ return new class extends Migration {
             $table->integer('vacancy'); // Adding vacancy column
             $table->string('company_name')->nullable(); // Adding company_name column
             $table->string('company_logo')->nullable(); // Adding company_logo column
+            $table->integer('min_age'); // Adding min_age column
+            $table->integer('max_age'); // Adding max_age column
             $table->timestamps();
         });
     }

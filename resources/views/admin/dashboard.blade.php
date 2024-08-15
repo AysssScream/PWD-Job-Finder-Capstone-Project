@@ -1,4 +1,5 @@
 <x-app-layout>
+    <title>Admin Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <div class="h-full ml-14 md:ml-64">
@@ -160,6 +161,10 @@
                             </table>
                         </div>
                     </div>
+                    <div class="text-center mt-4">
+                        <a href="{{ route('admin.details', ['type' => 'disabilityoccurence']) }}"
+                            class="text-sm font-semibold text-blue-500 hover:text-blue-700">See More</a>
+                    </div>
                 </div>
 
                 <div
@@ -228,6 +233,10 @@
                             </table>
 
                         </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <a href="{{ route('admin.details', ['type' => 'disabilitytype']) }}"
+                            class="text-sm font-semibold text-blue-500 hover:text-blue-700">See More</a>
                     </div>
                 </div>
             </div>
@@ -389,7 +398,6 @@
                 });
             </script>
             <div class="grid grid-cols-1 lg:grid-cols-2 p-4 gap-4">
-
                 <!-- Most Employable Skills -->
                 <div
                     class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-800 w-full shadow-lg rounded">
@@ -473,7 +481,6 @@
                                     </tr>
                                 </tbody>
                             </table>
-
                             <div class="text-center mt-4">
                                 <a href="{{ route('admin.details', ['type' => 'skills']) }}"
                                     class="text-sm font-semibold text-blue-500 hover:text-blue-700">See
@@ -650,7 +657,7 @@
                             data: {
                                 labels: labels,
                                 datasets: [{
-                                    label: 'Most Employable Skills Count',
+                                    label: 'Top PWD Skills Count',
                                     data: data,
                                     backgroundColor: colors.backgroundColor,
                                     borderColor: colors.borderColor,
@@ -772,7 +779,7 @@
                             data: {
                                 labels: labels,
                                 datasets: [{
-                                    label: 'Least Employable Skills Count',
+                                    label: 'Least PWD Skills Count',
                                     data: data,
                                     backgroundColor: colors.backgroundColor,
                                     borderColor: colors.borderColor,
@@ -860,7 +867,6 @@
                     initializeSkillsChart(darkMode);
                     initializeLeastEmployableSkillsChart(darkMode);
                 </script>
-
             </div>
 
             <!-- Education Analytics Section -->
@@ -999,6 +1005,7 @@
                                                 </td>
                                             </tr>
                                         @endforeach
+
                                     </tbody>
                                 </table>
                             </div>
@@ -1011,6 +1018,12 @@
                     </div>
                 </div>
             </div>
+
+
+
+
+            <!-- Employment Type Analytics Section -->
+
 
             <script>
                 document.addEventListener('DOMContentLoaded', function() {
@@ -1225,64 +1238,740 @@
 
 
 
+            <div class="mt-8 mx-4">
+                <h2 class="text-2xl font-semibold text-gray-700 dark:text-gray-200 mb-4">Employment Type Analytics for
+                    PWDs</h2>
 
-            <!-- Client Table -->
-            <div class="mt-4 mx-4">
-                <div class="w-full overflow-hidden rounded-lg shadow-xs">
-                    <div class="w-full overflow-x-auto">
-                        <table class="w-full">
-                            <thead>
-                                <tr
-                                    class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                                    <th class="px-4 py-3">USERS</th>
-                                    <th class="px-4 py-3">Status</th>
-                                    <th class="px-4 py-3">Date</th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                                @foreach ($users as $user)
-                                    <tr
-                                        class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
-                                        <td class="px-4 py-3">
-                                            <div class="flex items-center text-sm">
-                                                <div>
-                                                    <p class="font-semibold">{{ $user->name }}</p>
-                                                    <p class="text-xs text-gray-600 dark:text-gray-400">
-                                                        {{ $user->usertype }}</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="px-4 py-3 text-xs">
-                                            <!-- Change the status dynamically based on user data -->
-                                            <span
-                                                class="px-2 py-1 font-semibold leading-tight {{ $user->account_verification_status == 'approved' ? 'text-green-700 bg-green-100 dark:bg-green-700 dark:text-green-100' : 'text-gray-700 bg-orange-100 dark:bg-orange-700 dark:text-red-100' }} rounded-full">
-                                                {{ $user->account_verification_status }}
-                                            </span>
-                                        </td>
-                                        <td class="px-4 py-3 text-sm">{{ $user->created_at->format('d-m-Y') }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <!-- Most Employable Education Levels -->
                     <div
-                        class="grid mb-10 px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
-                        <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-start">
-                            <nav aria-label="Table navigation" class="p-2">
-                                <ul class="inline-flex items-left">
-                                    <li>
-                                        <a href="{{ route('admin.manageusers') }}"
-                                            class=" px-2 py-2 bg-blue-500 text-white rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200 focus:ring-opacity-50">
-                                            View More
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </span>
+                        class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-800 w-full shadow-lg rounded">
+                        <div class="rounded-t mb-0 px-0 border-0">
+                            <div class="container mx-auto p-10" width="700" height="600">
+                                <canvas id="employmentTypePieChartMostEmployable"></canvas>
+                            </div>
+                            <div class="flex flex-wrap items-center px-4 py-2">
+                                <div class="relative w-full max-w-full flex-grow flex-1">
+                                    <h3 class="font-semibold text-base text-gray-900 dark:text-gray-50">Top Employment
+                                        Types for PWDs</h3>
+                                </div>
+                            </div>
+                            <div class="block w-full overflow-x-auto">
+                                <table class="items-center w-full bg-transparent border-collapse">
+                                    <thead>
+                                        <tr>
+                                            <th
+                                                class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                                Employment Type</th>
+                                            <th
+                                                class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                                Employed</th>
+                                            <th
+                                                class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left min-w-140-px">
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($mostEmployableEmploymentTypes as $type => $count)
+                                            <tr class="text-gray-700 dark:text-gray-100">
+                                                <td
+                                                    class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
+                                                    {{ $type }}
+                                                </td>
+                                                <td
+                                                    class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
+                                                    {{ $count }}
+                                                </td>
+                                                <td
+                                                    class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
+                                                    <div class="flex items-center">
+                                                        <span
+                                                            class="mr-2">{{ number_format(($count / $mostEmployableEmploymentTypes->sum()) * 100, 1) }}%</span>
+                                                        <div class="relative w-full">
+                                                            <div
+                                                                class="overflow-hidden h-2 text-xs flex rounded bg-blue-200">
+                                                                <div style="width: {{ number_format(($count / $mostEmployableEmploymentTypes->sum()) * 100, 1) }}%"
+                                                                    class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-600">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="text-center mt-4">
+                            <a href="{{ route('admin.details', ['type' => 'mostemployment']) }}"
+                                class="text-sm font-semibold text-blue-500 hover:text-blue-700">See More</a>
+                        </div>
+                    </div>
+
+                    <!-- Least Employable Employment Types -->
+                    <div
+                        class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-800 w-full shadow-lg rounded">
+                        <div class="rounded-t mb-0 px-0 border-0">
+                            <div class="mx-auto p-10">
+                                <canvas id="employmentTypePieChartLeastEmployable" width="800" height="600"
+                                    class=""></canvas>
+                            </div>
+
+                            <div class="flex flex-wrap items-center px-4 py-2">
+                                <div class="relative w-full max-w-full flex-grow flex-1">
+                                    <h3 class="font-semibold text-base text-gray-900 dark:text-gray-50">Least
+                                        Employment Types for PWDs</h3>
+                                </div>
+                            </div>
+                            <div class="block w-full overflow-x-auto">
+                                <table class="items-center w-full bg-transparent border-collapse">
+                                    <thead>
+                                        <tr>
+                                            <th
+                                                class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                                Employment Type</th>
+                                            <th
+                                                class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                                Employed</th>
+                                            <th
+                                                class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left min-w-140-px">
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($leastEmployableEmploymentTypes as $type => $count)
+                                            <tr class="text-gray-700 dark:text-gray-100">
+                                                <td
+                                                    class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
+                                                    {{ $type }}
+                                                </td>
+                                                <td
+                                                    class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
+                                                    {{ $count }}
+                                                </td>
+                                                <td
+                                                    class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
+                                                    <div class="flex items-center">
+                                                        <span
+                                                            class="mr-2">{{ number_format(($count / $leastEmployableEmploymentTypes->sum()) * 100, 1) }}%</span>
+                                                        <div class="relative w-full">
+                                                            <div
+                                                                class="overflow-hidden h-2 text-xs flex rounded bg-blue-200">
+                                                                <div style="width: {{ number_format(($count / $leastEmployableEmploymentTypes->sum()) * 100, 1) }}%"
+                                                                    class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-600">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="text-center mt-4">
+                            <a href="{{ route('admin.details', ['type' => 'leastemployment']) }}"
+                                class="text-sm font-semibold text-blue-500 hover:text-blue-700">See More</a>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
+
+        <div class="mt-8 mx-4 p-4">
+            <h2 class="text-2xl font-semibold text-gray-700 dark:text-gray-200 mb-4">Age Bin Analytics for PWDs</h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <!-- Most Common Age Bins -->
+                <div
+                    class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-800 w-full shadow-lg rounded">
+                    <div class="rounded-t mb-0 px-0 border-0">
+                        <div class="container mx-auto p-10" width="700" height="600">
+                            <canvas id="ageBinChartMostCommon"></canvas>
+                        </div>
+                        <div class="flex flex-wrap items-center px-4 py-2">
+                            <div class="relative w-full max-w-full flex-grow flex-1">
+                                <h3 class="font-semibold text-base text-gray-900 dark:text-gray-50">Top Age Bins for
+                                    PWDs</h3>
+                            </div>
+                        </div>
+                        <div class="block w-full overflow-x-auto">
+                            <table class="items-center w-full bg-transparent border-collapse">
+                                <thead>
+                                    <tr>
+                                        <th
+                                            class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                            Age Bin</th>
+                                        <th
+                                            class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                            Count</th>
+                                        <th
+                                            class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left min-w-140-px">
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($mostCommonAges as $bin => $count)
+                                        <tr class="text-gray-700 dark:text-gray-100">
+                                            <td
+                                                class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
+                                                {{ $bin }}
+                                            </td>
+                                            <td
+                                                class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
+                                                {{ $count }}
+                                            </td>
+                                            <td
+                                                class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
+                                                <div class="flex items-center">
+                                                    @php
+                                                        $totalCount = $mostCommonAges->sum();
+                                                        $percentage =
+                                                            $totalCount > 0
+                                                                ? number_format(($count / $totalCount) * 100, 1)
+                                                                : 0;
+                                                    @endphp
+                                                    <span class="mr-2">{{ $percentage }}%</span>
+                                                    <div class="relative w-full">
+                                                        <div
+                                                            class="overflow-hidden h-2 text-xs flex rounded bg-blue-200">
+                                                            <div style="width: {{ $percentage }}%"
+                                                                class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-600">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <a href="{{ route('admin.details', ['type' => 'mostagesbins']) }}"
+                            class="text-sm font-semibold text-blue-500 hover:text-blue-700">See More</a>
+                    </div>
+                </div>
+
+                <!-- Least Common Age Bins -->
+                <div
+                    class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-800 w-full shadow-lg rounded">
+                    <div class="rounded-t mb-0 px-0 border-0">
+                        <div class="mx-auto p-10">
+                            <canvas id="ageBinChartLeastCommon" width="800" height="600"></canvas>
+                        </div>
+
+                        <div class="flex flex-wrap items-center px-4 py-2">
+                            <div class="relative w-full max-w-full flex-grow flex-1">
+                                <h3 class="font-semibold text-base text-gray-900 dark:text-gray-50">Least Age Bins for
+                                    PWDs</h3>
+                            </div>
+                        </div>
+                        <div class="block w-full overflow-x-auto">
+                            <table class="items-center w-full bg-transparent border-collapse">
+                                <thead>
+                                    <tr>
+                                        <th
+                                            class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                            Age Bin</th>
+                                        <th
+                                            class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                            Count</th>
+                                        <th
+                                            class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left min-w-140-px">
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($leastCommonAges as $bin => $count)
+                                        <tr class="text-gray-700 dark:text-gray-100">
+                                            <td
+                                                class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
+                                                {{ $bin }}
+                                            </td>
+                                            <td
+                                                class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
+                                                {{ $count }}
+                                            </td>
+                                            <td
+                                                class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
+                                                <div class="flex items-center">
+                                                    @php
+                                                        $totalCount = $leastCommonAges->sum();
+                                                        $percentage =
+                                                            $totalCount > 0
+                                                                ? number_format(($count / $totalCount) * 100, 1)
+                                                                : 0;
+                                                    @endphp
+                                                    <span class="mr-2">{{ $percentage }}%</span>
+                                                    <div class="relative w-full">
+                                                        <div
+                                                            class="overflow-hidden h-2 text-xs flex rounded bg-blue-200">
+                                                            <div style="width: {{ $percentage }}%"
+                                                                class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-600">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <a href="{{ route('admin.details', ['type' => 'leastagesbins']) }}"
+                            class="text-sm font-semibold text-blue-500 hover:text-blue-700">See More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Get dark mode preference from local storage
+                function getDarkMode() {
+                    return localStorage.getItem('darkMode') === 'true';
+                }
+
+                // Assuming both $mostCommonAges and $leastCommonAges are passed to JavaScript as JSON
+                const mostCommonAgesData = @json($mostCommonAges);
+                const leastCommonAgesData = @json($leastCommonAges);
+
+                // Prepare data for both pie charts
+                const mostCommonAgesLabels = Object.keys(mostCommonAgesData);
+                const mostCommonAgesCounts = Object.values(mostCommonAgesData);
+
+                const leastCommonAgesLabels = Object.keys(leastCommonAgesData);
+                const leastCommonAgesCounts = Object.values(leastCommonAgesData);
+
+                // Determine if dark mode is enabled
+                const darkMode = getDarkMode();
+
+                // Define colors based on dark mode
+                const backgroundColor = darkMode ? [
+                    'rgba(54, 162, 235, 0.6)',
+                    'rgba(255, 99, 132, 0.6)',
+                    'rgba(255, 206, 86, 0.6)',
+                    'rgba(75, 192, 192, 0.6)',
+                    'rgba(153, 102, 255, 0.6)',
+                    'rgba(255, 159, 64, 0.6)'
+                ] : [
+                    'rgba(54, 162, 235, 0.6)',
+                    'rgba(255, 99, 132, 0.6)',
+                    'rgba(255, 206, 86, 0.6)',
+                    'rgba(75, 192, 192, 0.6)',
+                    'rgba(153, 102, 255, 0.6)',
+                    'rgba(255, 159, 64, 0.6)'
+                ];
+
+                const borderColor = darkMode ? [
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ] : [
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ];
+
+                // Define label colors based on dark mode
+                const labelColor = darkMode ? '#ffffff' : '#000000';
+                const tooltipBackgroundColor = darkMode ? 'rgba(0, 0, 0, 0.7)' : 'rgba(255, 255, 255, 0.7)';
+                const tooltipTitleColor = darkMode ? '#ffffff' : '#000000';
+                const tooltipBodyColor = darkMode ? '#ffffff' : '#000000';
+                const gridColor = darkMode ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)'; // Grid color
+
+                // Get the canvas elements
+                const ctxMostCommonAges = document.getElementById('ageBinChartMostCommon').getContext('2d');
+                const ctxLeastCommonAges = document.getElementById('ageBinChartLeastCommon').getContext('2d');
+
+                // Create the pie chart for most common age bins
+                new Chart(ctxMostCommonAges, {
+                    type: 'pie',
+                    data: {
+                        labels: mostCommonAgesLabels,
+                        datasets: [{
+                            label: 'Most Common Age Bins',
+                            data: mostCommonAgesCounts,
+                            backgroundColor: backgroundColor,
+                            borderColor: borderColor,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    color: labelColor,
+                                    font: {
+                                        family: 'Poppins', // Apply Poppins font
+                                        size: 14 // Adjust font size if needed
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: tooltipBackgroundColor,
+                                titleColor: tooltipTitleColor,
+                                bodyColor: tooltipBodyColor,
+                                callbacks: {
+                                    label: function(tooltipItem) {
+                                        return tooltipItem.label + ': ' + tooltipItem.raw + ' (' +
+                                            ((tooltipItem.raw / mostCommonAgesCounts.reduce((a, b) => a + b,
+                                                0)) * 100)
+                                            .toFixed(1) + '%)';
+                                    }
+                                },
+                                bodyFont: {
+                                    family: 'Poppins' // Apply Poppins font
+                                },
+                                titleFont: {
+                                    family: 'Poppins' // Apply Poppins font
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: {
+                                    color: gridColor // Apply grid color
+                                },
+                                ticks: {
+                                    font: {
+                                        family: 'Poppins' // Apply Poppins font
+                                    }
+                                }
+                            },
+                            y: {
+                                grid: {
+                                    color: gridColor // Apply grid color
+                                },
+                                ticks: {
+                                    font: {
+                                        family: 'Poppins' // Apply Poppins font
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // Create the pie chart for least common age bins
+                new Chart(ctxLeastCommonAges, {
+                    type: 'pie',
+                    data: {
+                        labels: leastCommonAgesLabels,
+                        datasets: [{
+                            label: 'Least Common Age Bins',
+                            data: leastCommonAgesCounts,
+                            backgroundColor: backgroundColor,
+                            borderColor: borderColor,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    color: labelColor,
+                                    font: {
+                                        family: 'Poppins', // Apply Poppins font
+                                        size: 14 // Adjust font size if needed
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: tooltipBackgroundColor,
+                                titleColor: tooltipTitleColor,
+                                bodyColor: tooltipBodyColor,
+                                callbacks: {
+                                    label: function(tooltipItem) {
+                                        return tooltipItem.label + ': ' + tooltipItem.raw + ' (' +
+                                            ((tooltipItem.raw / leastCommonAgesCounts.reduce((a, b) => a +
+                                                b, 0)) * 100)
+                                            .toFixed(1) + '%)';
+                                    }
+                                },
+                                bodyFont: {
+                                    family: 'Poppins' // Apply Poppins font
+                                },
+                                titleFont: {
+                                    family: 'Poppins' // Apply Poppins font
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: {
+                                    color: gridColor // Apply grid color
+                                },
+                                ticks: {
+                                    font: {
+                                        family: 'Poppins' // Apply Poppins font
+                                    }
+                                }
+                            },
+                            y: {
+                                grid: {
+                                    color: gridColor // Apply grid color
+                                },
+                                ticks: {
+                                    font: {
+                                        family: 'Poppins' // Apply Poppins font
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Get dark mode preference from local storage
+                function getDarkMode() {
+                    return localStorage.getItem('darkMode') === 'true';
+                }
+
+                // Assuming $mostEmployableEmploymentTypes and $leastEmployableEmploymentTypes are passed to JavaScript as JSON
+                const mostEmployableEmploymentData = @json($mostEmployableEmploymentTypes);
+                const leastEmployableEmploymentData = @json($leastEmployableEmploymentTypes);
+
+                // Prepare data for both pie charts
+                const mostEmployableLabels = Object.keys(mostEmployableEmploymentData);
+                const mostEmployableData = Object.values(mostEmployableEmploymentData);
+
+                const leastEmployableLabels = Object.keys(leastEmployableEmploymentData);
+                const leastEmployableData = Object.values(leastEmployableEmploymentData);
+
+                // Determine if dark mode is enabled
+                const darkMode = getDarkMode();
+
+                // Define colors based on dark mode
+                const backgroundColor = darkMode ? [
+                    'rgba(54, 162, 235, 0.6)',
+                    'rgba(255, 99, 132, 0.6)',
+                    'rgba(255, 206, 86, 0.6)',
+                    'rgba(75, 192, 192, 0.6)',
+                    'rgba(153, 102, 255, 0.6)',
+                    'rgba(255, 159, 64, 0.6)'
+                ] : [
+                    'rgba(54, 162, 235, 0.6)',
+                    'rgba(255, 99, 132, 0.6)',
+                    'rgba(255, 206, 86, 0.6)',
+                    'rgba(75, 192, 192, 0.6)',
+                    'rgba(153, 102, 255, 0.6)',
+                    'rgba(255, 159, 64, 0.6)'
+                ];
+
+                const borderColor = darkMode ? [
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ] : [
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ];
+
+                // Define label colors based on dark mode
+                const labelColor = darkMode ? '#ffffff' : '#000000';
+                const tooltipBackgroundColor = darkMode ? 'rgba(0, 0, 0, 0.7)' : 'rgba(255, 255, 255, 0.7)';
+                const tooltipTitleColor = darkMode ? '#ffffff' : '#000000';
+                const tooltipBodyColor = darkMode ? '#ffffff' : '#000000';
+
+                // Get the canvas elements
+                const ctxMostEmployable = document.getElementById('employmentTypePieChartMostEmployable').getContext(
+                    '2d');
+                const ctxLeastEmployable = document.getElementById('employmentTypePieChartLeastEmployable').getContext(
+                    '2d');
+
+                // Create the pie chart for most employable employment types
+                new Chart(ctxMostEmployable, {
+                    type: 'pie',
+                    data: {
+                        labels: mostEmployableLabels,
+                        datasets: [{
+                            label: 'Most Employable Employment Types',
+                            data: mostEmployableData,
+                            backgroundColor: backgroundColor,
+                            borderColor: borderColor,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    color: labelColor,
+                                    font: {
+                                        family: 'Poppins', // Apply Poppins font
+                                        size: 14 // Adjust font size if needed
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: tooltipBackgroundColor,
+                                titleColor: tooltipTitleColor,
+                                bodyColor: tooltipBodyColor,
+                                callbacks: {
+                                    label: function(tooltipItem) {
+                                        return tooltipItem.label + ': ' + tooltipItem.raw + ' (' +
+                                            ((tooltipItem.raw / mostEmployableData.reduce((a, b) => a + b,
+                                                0)) * 100)
+                                            .toFixed(1) + '%)';
+                                    }
+                                },
+                                bodyFont: {
+                                    family: 'Poppins' // Apply Poppins font
+                                },
+                                titleFont: {
+                                    family: 'Poppins' // Apply Poppins font
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // Create the pie chart for least employable employment types
+                new Chart(ctxLeastEmployable, {
+                    type: 'pie',
+                    data: {
+                        labels: leastEmployableLabels,
+                        datasets: [{
+                            label: 'Least Employable Employment Types',
+                            data: leastEmployableData,
+                            backgroundColor: backgroundColor,
+                            borderColor: borderColor,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    color: labelColor,
+                                    font: {
+                                        family: 'Poppins', // Apply Poppins font
+                                        size: 14 // Adjust font size if needed
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: tooltipBackgroundColor,
+                                titleColor: tooltipTitleColor,
+                                bodyColor: tooltipBodyColor,
+                                callbacks: {
+                                    label: function(tooltipItem) {
+                                        return tooltipItem.label + ': ' + tooltipItem.raw + ' (' +
+                                            ((tooltipItem.raw / leastEmployableData.reduce((a, b) => a + b,
+                                                0)) * 100)
+                                            .toFixed(1) + '%)';
+                                    }
+                                },
+                                bodyFont: {
+                                    family: 'Poppins' // Apply Poppins font
+                                },
+                                titleFont: {
+                                    family: 'Poppins' // Apply Poppins font
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+
+
+
+
+
+        <!-- Client Table -->
+        <div class="mt-4 mx-4 p-4">
+            <div class="w-full overflow-hidden rounded-lg shadow-xs">
+                <div class="w-full overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr
+                                class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                                <th class="px-4 py-3">USERS</th>
+                                <th class="px-4 py-3">Status</th>
+                                <th class="px-4 py-3">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                            @foreach ($users as $user)
+                                <tr
+                                    class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
+                                    <td class="px-4 py-3">
+                                        <div class="flex items-center text-sm">
+                                            <div>
+                                                <p class="font-semibold">{{ $user->name }}</p>
+                                                <p class="text-xs text-gray-600 dark:text-gray-400">
+                                                    {{ $user->usertype }}</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-3 text-xs">
+                                        <!-- Change the status dynamically based on user data -->
+                                        <span
+                                            class="px-2 py-1 font-semibold leading-tight {{ $user->account_verification_status == 'approved' ? 'text-green-700 bg-green-100 dark:bg-green-700 dark:text-green-100' : 'text-gray-700 bg-orange-100 dark:bg-orange-700 dark:text-red-100' }} rounded-full">
+                                            {{ $user->account_verification_status }}
+                                        </span>
+                                    </td>
+                                    <td class="px-4 py-3 text-sm">{{ $user->created_at->format('d-m-Y') }}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div
+                    class="grid mb-10 px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+                    <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-start">
+                        <nav aria-label="Table navigation" class="p-2">
+                            <ul class="inline-flex items-left">
+                                <li>
+                                    <a href="{{ route('admin.manageusers') }}"
+                                        class=" px-2 py-2 bg-blue-500 text-white rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                                        View More
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
 
 </x-app-layout>

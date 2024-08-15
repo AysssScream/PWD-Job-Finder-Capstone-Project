@@ -42,6 +42,8 @@ class AdminController extends Controller
         $users = User::take(4)->get();
         $maxSkills = 3;
         $maxEducation = 3;
+        $maxEmploymentType = 3;
+        $maxAge = 3;
         $maxDisabilities = 3;
         $workExperiences = WorkExperience::all();
         $skills = $workExperiences->flatMap(function ($workExperience) {
@@ -74,10 +76,63 @@ class AdminController extends Controller
         $educationLevels = $educationalAttainments->pluck('educationLevel')->countBy(); // Count occurrences of each education level
         $mostEmployableEducationLevels = $educationLevels->sortDesc()->take($maxEducation); // Limit to top 5 most frequent education levels
         $leastEmployableEducationLevels = $educationLevels->sort()->take($maxEducation); // Limit to bottom 5 least frequent education levels
+
         $otherEducationLevels = $educationLevels->except($mostEmployableEducationLevels->keys())->sum();
         $otherleastEducationLevels = $educationLevels->except($leastEmployableEducationLevels->keys())->sum();
         $mostEmployableEducationLevels = $mostEmployableEducationLevels->put('Others', $otherEducationLevels);
         $leastEmployableEducationLevels = $leastEmployableEducationLevels->put('Others', $otherleastEducationLevels);
+
+
+        // Fetch and process employment types
+        $employmentInfo = EmploymentInfo::all();
+        $employmentTypes = $employmentInfo->pluck('employment_type')->countBy(); // Count occurrences of each employment type
+
+        // Get most and least employable employment types
+        $mostEmployableEmploymentTypes = $employmentTypes->sortDesc()->take($maxEmploymentType); // Top 5 most frequent employment types
+        $leastEmployableEmploymentTypes = $employmentTypes->sort()->take($maxEmploymentType); // Bottom 5 least frequent employment types
+
+        // Calculate 'Others' for employment types
+        $otherEmploymentTypes = $employmentTypes->except($mostEmployableEmploymentTypes->keys())->sum();
+        $otherLeastEmploymentTypes = $employmentTypes->except($leastEmployableEmploymentTypes->keys())->sum();
+        $mostEmployableEmploymentTypes = $mostEmployableEmploymentTypes->put('Others', $otherEmploymentTypes);
+        $leastEmployableEmploymentTypes = $leastEmployableEmploymentTypes->put('Others', $otherLeastEmploymentTypes);
+
+
+
+        // Define age bins
+        $ageBins = [
+            '0-10' => [0, 10],
+            '11-20' => [11, 20],
+            '21-30' => [21, 30],
+            '31-40' => [31, 40],
+            '41-50' => [41, 50],
+            '51-60' => [51, 60],
+            '61+' => [61, 100],
+        ];
+        // Fetch all applicant profiles
+        $applicantProfiles = ApplicantProfile::all();
+
+        // Calculate ages and categorize them into bins
+        $ages = $applicantProfiles->map(function ($profile) {
+            return Carbon::parse($profile->birthdate)->age;
+        });
+
+        $ageBinsCount = collect($ageBins)->map(function ($range, $bin) use ($ages) {
+            return $ages->filter(function ($age) use ($range) {
+                return $age >= $range[0] && $age <= $range[1];
+            })->count();
+        });
+
+        // Sort bins by most and least common
+        $ageBinsCountFiltered = $ageBinsCount->filter(function ($count) {
+            return $count > 0;
+        });
+
+        // Sort bins by most common
+        $mostCommonAges = $ageBinsCount->sortDesc()->take($maxAge);
+
+        // Sort bins by least common (after filtering out zeros)
+        $leastCommonAges = $ageBinsCountFiltered->sort()->take($maxAge);
 
 
 
@@ -101,6 +156,10 @@ class AdminController extends Controller
             'educationLevels' => $educationLevels,
             'mostEmployableEducationLevels' => $mostEmployableEducationLevels, // Pass most employable education levels to the view
             'leastEmployableEducationLevels' => $leastEmployableEducationLevels, // Pass least employable education levels to the view
+            'mostEmployableEmploymentTypes' => $mostEmployableEmploymentTypes, // Most employable employment types
+            'leastEmployableEmploymentTypes' => $leastEmployableEmploymentTypes, // Least employable employment types
+            'mostCommonAges' => $mostCommonAges,
+            'leastCommonAges' => $leastCommonAges,
             'disabilityOccurrences' => $disabilityOccurrences, // Pass disability occurrences to the view
             'disabilityType' => $disabilityType,
             'hiredjobCount' => $hiredjobCount,
@@ -435,6 +494,12 @@ class AdminController extends Controller
         $topSkillsCount = $topSkills->sum(); // Get the total count of top skills
         $othersCount = $totalSkillsCount - $topSkillsCount; // Calculate the count for "Others
 
+        $pwdInformationData = PwdInformation::all();
+
+        $disabilityOccurrences = $pwdInformationData->pluck('disabilityOccurrence')->countBy(); // Count occurrences of each disability
+        $disabilityType = $pwdInformationData->pluck('disability')->countBy(); // Count occurrences of each disability
+        $totaldisabilityOccurences = $disabilityOccurrences->sum(); // Total count of all education levels
+        $totaldisabilityType = $disabilityType->sum(); // Total count of all education levels
 
         // For least employable skills
         $leastEmployableSkills = $skills->sort(); // Get the bottom $maxSkills - 1 skills
@@ -455,10 +520,59 @@ class AdminController extends Controller
         // Get least employable education levels (least frequent)
         $leastEmployableEducationLevels = $educationLevels->sort(); // Sorted in ascending order
 
+        // Fetch employment types and calculate top/least employable employment types
+        $employmentInfo = EmploymentInfo::all();
+        $employmentTypes = $employmentInfo->pluck('employment_type')->countBy();
+        $mostEmployableEmploymentTypes = $employmentTypes->sortDesc();
+        $leastEmployableEmploymentTypes = $employmentTypes->sort();
+        $totalEmployableEmploymentTypes = $employmentTypes->sum();
+
+
+        // Define age bins
+        $ageBins = [
+            '16-20' => [16, 20],
+            '21-30' => [21, 30],
+            '31-40' => [31, 40],
+            '41-50' => [41, 50],
+            '51-60' => [51, 60],
+            '61+' => [61, 100],
+        ];
+
+        // Fetch all applicant profiles
+        $applicantProfiles = ApplicantProfile::all();
+
+        // Calculate ages and categorize them into bins
+        $ages = $applicantProfiles->map(function ($profile) {
+            return Carbon::parse($profile->birthdate)->age;
+        });
+
+        $ageBinsCount = collect($ageBins)->map(function ($range, $bin) use ($ages) {
+            return $ages->filter(function ($age) use ($range) {
+                return $age >= $range[0] && $age <= $range[1];
+            })->count();
+        });
+
+        // Filter out bins with zero counts
+        $ageBinsCountFiltered = $ageBinsCount->filter(function ($count) {
+            return $count > 0;
+        });
+
+        // Sort bins by most common
+        $mostCommonAges = $ageBinsCount->sortDesc();
+
+        // Sort bins by least common (after filtering out zeros)
+        $leastCommonAges = $ageBinsCountFiltered->sort();
+
+        // Calculate total number of ages across all bins
+        $totalCommonAges = $ageBinsCount->sum();
 
 
 
         return view('admin.details', [
+            'totaldisabilityOccurences' => $totaldisabilityOccurences,
+            'totaldisabilityType' => $totaldisabilityType,
+            'disabilityOccurrences' => $disabilityOccurrences, // Pass disability occurrences to the view
+            'disabilityType' => $disabilityType,
             'skills' => $topSkills, // Pass top skills to the view
             'othersCount' => $othersCount, // Pass others count to the view
             'totalSkillsCount' => $totalSkillsCount, // Pass total skills count to the view
@@ -466,8 +580,16 @@ class AdminController extends Controller
             'leastEmployableSkills' => $leastEmployableSkills,
             'educationLevels' => $educationLevels,
             'totalEducationLevelsCount' => $totalEducationLevelsCount,
+            'totalEmployableEmploymentTypes' => $totalEmployableEmploymentTypes,
+
+
             'mostEmployableEducationLevels' => $mostEmployableEducationLevels,
             'leastEmployableEducationLevels' => $leastEmployableEducationLevels,
+            'mostEmployableEmploymentTypes' => $mostEmployableEmploymentTypes, // Passing this to the view
+            'leastEmployableEmploymentTypes' => $leastEmployableEmploymentTypes, // Passing this to the view
+            'mostCommonAges' => $mostCommonAges,
+            'leastCommonAges' => $leastCommonAges,
+            'totalCommonAges' => $totalCommonAges,
         ]);
     }
 

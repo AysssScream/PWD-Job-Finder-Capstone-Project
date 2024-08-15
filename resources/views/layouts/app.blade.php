@@ -208,7 +208,7 @@
                         <div class="text-sm font-light tracking-wide text-gray-400 uppercase">Settings</div>
                     </div>
                 </li>
-                <li>
+                {{-- <li>
                     <a href="{{ route('profile.edit') }}"
                         class="relative flex flex-row items-center h-11 focus:outline-none border-l-4 border-transparent hover:border-gray-500 pr-6">
                         <span class="inline-flex justify-center items-center ml-4">
@@ -238,7 +238,7 @@
                         <span
                             class="ml-2 text-sm tracking-wide truncate text-gray-700 dark:text-gray-200">Settings</span>
                     </a>
-                </li>
+                </li> --}}
                 <!-- Logout Link -->
                 <li>
                     <form method="POST" action="{{ route('logout') }}" class="w-full">

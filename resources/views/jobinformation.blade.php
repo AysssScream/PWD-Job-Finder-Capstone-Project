@@ -11,7 +11,7 @@
         <title>Job Information</title>
     </head>
 
-    <body class="bg-white mx-auto max-w-8xl px-4">
+    <body class="bg-white  mx-auto max-w-8xl px-4">
         <div class="container mx-auto max-w-8xl px-4 pt-5 ">
             <div class="row">
                 <div class="col">
@@ -205,6 +205,14 @@
                                 <div class="border-b border-gray-300 mt-4"></div>
 
                                 <ul class="text-gray-800 dark:text-gray-200 mt-2 leading-loose">
+                                    <li aria-label=" {!! __('messages.jobinformation.age_requirement') !!}  {{ $job->min_age }} - {{ $job->max_age }} {!! __('messages.jobinformation.years_old') !!}"
+                                        tabindex="0"
+                                        class="focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 ">
+                                        <span class="font-bold text-gray-800 dark:text-gray-200 ">
+                                            {!! __('messages.jobinformation.age_requirement') !!} </span>
+                                        {{ $job->min_age }} - {{ $job->max_age }} {!! __('messages.jobinformation.years_old') !!}
+
+                                    </li>
                                     <li aria-label=" {!! __('messages.jobinformation.published_on') !!} {{ \Carbon\Carbon::parse($job->date_posted)->format('F j, Y') }}"
                                         tabindex="0"
                                         class="focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 ">
@@ -319,7 +327,61 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
+                <div class="mt-4 mb-4 bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-gray-100 
+                    focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                        aria-label="  {{ __('messages.jobinformation.similar_jobs') }}" tabindex="0">
+                        <i class="fas fa-briefcase text-gray-500 dark:text-gray-400 mr-2"></i>
+                        {{ __('messages.jobinformation.similar_jobs') }}
+                    </h3>
+                    <div class="border-b border-gray-300 dark:border-gray-600 mt-2"></div>
+
+                    <div class="mt-4 overflow-x-auto p-3">
+                        <div class="flex space-x-4 lg:space-x-6">
+                            @if ($jobs->isEmpty())
+                                <div class="text-center p-4">
+                                    <p class="text-gray-700 dark:text-gray-300 flex items-center justify-center 
+                            focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                        aria-label="   {{ __('messages.jobinformation.no_similar_jobs') }}"
+                                        tabindex="0">
+                                        <i class="fas fa-search text-gray-500 dark:text-gray-400 mr-2"></i>
+                                        {{ __('messages.jobinformation.no_similar_jobs') }}
+                                    </p>
+                                </div>
+                            @else
+                                @foreach ($jobs as $job)
+                                    <div
+                                        class="relative flex-shrink-0 bg-gray-200 dark:bg-gray-700 p-4 rounded-lg shadow-md w-64 sm:w-80 md:w-96 lg:w-80 xl:w-96">
+                                        <h4
+                                            class="text-lg font-semibold text-gray-900 dark:text-gray-100 flex items-center">
+                                            <i class="fas fa-briefcase text-gray-500 dark:text-gray-400 mr-2"></i>
+                                            {{ $job->title }}
+                                        </h4>
+                                        <p class="text-gray-500 dark:text-gray-400 mt-2 flex items-center">
+                                            <i class="fas fa-building text-gray-500 dark:text-gray-400 mr-2"></i>
+                                            {{ $job->company_name }}
+                                        </p>
+
+                                        <p class="text-gray-700 dark:text-gray-300 mt-2 mb-12">{{ $job->description }}
+                                        </p>
+                                        <div class="absolute bottom-4 right-4">
+                                            <a href="{{ route('jobs.info', ['company_name' => Str::slug($job->company_name), 'id' => $job->id]) }}"
+                                                class="bg-blue-500 hover:bg-blue-600 text-white dark:text-gray-200 px-4 py-2 rounded-lg shadow-md">
+                                                View
+                                            </a>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
+
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <br>
             </div>
         </section>
     </body>

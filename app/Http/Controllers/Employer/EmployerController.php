@@ -67,9 +67,12 @@ class EmployerController extends Controller
     public function addjobs()
     {
         $employerId = Auth::id();
-        $jobs = JobInfo::where('employer_id', $employerId)->get();
+        $jobs = JobInfo::where('employer_id', $employerId)
+            ->orderBy('created_at', 'desc') // Order by created_at in descending order
+            ->paginate(6);
         return view('employer.jobsinfo', compact('jobs'));
     }
+
 
     public function editjobs($id)
     {

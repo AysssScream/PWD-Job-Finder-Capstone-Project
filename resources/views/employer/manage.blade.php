@@ -73,7 +73,7 @@
     </div>
 
 
-    <div class="container mx-auto max-w-8xl px-4 pt-2 h-screen">
+    <div class="container mx-auto max-w-8xl px-4 pt-2 h-full">
         <div
             class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg shadow-lg max-h-screen overflow-y-auto">
             <div class="p-6 text-gray-900 dark:text-gray-100 rounded-lg overflow-x-auto ">
@@ -136,6 +136,8 @@
             </div>
         </div>
     </div>
+    <br>
+    <br>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

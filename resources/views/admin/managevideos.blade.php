@@ -1,4 +1,6 @@
 <x-app-layout>
+    <title>Manage Videos</title>
+
     <div class="h-full ml-14 md:ml-64 font-poppins p-10">
 
         <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-200 mb-6 mt-8">
