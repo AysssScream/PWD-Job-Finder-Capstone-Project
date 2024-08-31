@@ -27,59 +27,126 @@ class ExportController extends Controller
             ->sortDesc();
 
         // Prepare data for the PDF
+        $totalSkillsCount = $skills->sum(); // Calculate the total count
+
         $data = [];
         foreach ($skills as $skill => $count) {
             $data[] = [
                 'Skill' => $skill,
-                'Employed' => $count,
+                'Count' => $count,
+                'Percentage' => $totalSkillsCount > 0 ? number_format(($count / $totalSkillsCount) * 100, 1) . '%' : '0%',
             ];
         }
 
+
+
         // Define the HTML content for the PDF
-        $htmlContent = '<!DOCTYPE html>
+        $html = '<!DOCTYPE html>
         <html>
-        <head>
-            <title>Skills Report</title>
-            <style>
-                table {
-                    width: 100%;
-                    border-collapse: collapse;
-                }
-                th, td {
-                    border: 1px solid black;
-                    padding: 8px;
-                    text-align: left;
-                }
-                th {
-                    background-color: #f2f2f2;
-                }
-            </style>
-        </head>
+           <head>
+        <title>Disability Occurrences Report</title>
+        <style>
+
+         body {
+            margin: 0;
+            padding: 0;
+            font-family: Helvetica, sans-serif;
+        }
+        h4 {
+          margin: 0;
+        }
+        .w-full {
+            width: 100%;
+            border-bottom: 1px solid #000; /* Optional for visual separation */
+
+        }
+       .w-one-third {
+            width: 33.33%; /* Each cell takes one-third of the table width */
+            text-align: center; /* Center images horizontally within each cell */
+        }
+        .image-style {
+              width: 70px; /* Set image width to 70px */
+                height: auto; /* Maintain aspect ratio */
+                margin-bottom: 10%;
+         }
+        .line {
+            width: 100%;
+            border: none; /* Remove default borders */
+            border-top: 1px solid #000; /* Line color and style */
+            margin: 10px 0; /* Space above and below the line */
+        }
+            .text p {
+            margin: 1;
+            padding: 0;
+            font-size: 14px; 
+            font-family: Times New Roman;
+
+        }
+
+          th {
+         background-color: #f2f2f2;
+         }
+
+        .results{
+            font-family: Times New Roman;
+
+            
+         }
+            
+    </style>
+    </head>
         <body>
-            <h1>Skills Report</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Skill</th>
-                        <th>Count</th>
-                    </tr>
-                </thead>
-                <tbody>';
+            <table class="w-full " >
+        <tr>
+             <td class="w-one-third">
+            <img src="' . public_path('images/bagongpilipinas.jpg') . '" alt="Image 1" class="image-style" style="margin-right: 70%;"> 
+            </td>
+            <td class="w-one-third">
+            <div class="text" >
+            <p style="font-weight: bold;">REPUBLIKA NG PILIPINAS</p>
+            <p style="">CITY OF MANDALUYONG</p>
+            <p style="">OFFICE OF THE MAYOR</p>
+            <p style="">PERSONS WITH DISABILITIES AFFAIRS DIVISION</p>
+            </div>
+            </td>
+            <td class="w-one-third">
+                <img src="' . public_path('images/cityofmandalogo.jpg') . '" alt="Image 3" class="image-style" style="margin-left: 70%;"> 
+            </td>
+            <hr class="line">
+
+        </tr>
+
+    </table>
+
+        <h1 style="text-align: center;">Skills Report</h1>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+            <thead>
+                <tr>
+                    <th style="border: 1px solid #000; padding: 8px; text-align: left;">Skills</th>
+                    <th style="border: 1px solid #000; padding: 8px; text-align: left;">Count</th>
+                    <th style="border: 1px solid #000; padding: 8px; text-align: left;">Percentage</th>
+                </tr>
+            </thead>
+            <tbody>';
 
         foreach ($data as $row) {
-            $htmlContent .= '<tr>
-                <td>' . htmlspecialchars($row['Skill']) . '</td>
-                <td>' . htmlspecialchars($row['Employed']) . '</td>
+            $html .= '
+            <tr>
+                <td style="border: 1px solid #000; padding: 8px;">' . htmlspecialchars($row['Skill']) . '</td>
+                <td style="border: 1px solid #000; padding: 8px; text-align: right;">' . htmlspecialchars($row['Count']) . '</td>
+                <td style="border: 1px solid #000; padding: 8px; text-align: right;">' . htmlspecialchars($row['Percentage']) . '</td>
+
             </tr>';
         }
 
-        $htmlContent .= '</tbody>
-            </table>
-        </body>
-        </html>';
+        $html .= '
+            </tbody>
+        </table>
+    </body>
+    </html>';
 
         // Generate PDF from HTML content
-        $pdf = PDF::loadHTML($htmlContent);
+        $pdf = PDF::loadHTML($html);
 
         // Return PDF download response
         return $pdf->stream('skills.pdf');
@@ -145,34 +212,103 @@ class ExportController extends Controller
         $html = '
         <html>
         <head>
-            <title>Education Levels Report</title>
-        </head>
-        <body>
-            <h1 style="text-align: center;">Education Levels Report</h1>
-            <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
-                <thead>
-                    <tr>
-                        <th style="border: 1px solid #000; padding: 8px; text-align: left;">Education Level</th>
-                        <th style="border: 1px solid #000; padding: 8px; text-align: left;">Count</th>
-                        <th style="border: 1px solid #000; padding: 8px; text-align: left;">Percentage</th>
-                    </tr>
-                </thead>
-                <tbody>';
+        <title>Education Level Report</title>
+        <style>
+
+         body {
+            margin: 0;
+            padding: 0;
+            font-family: Helvetica, sans-serif;
+        }
+        h4 {
+          margin: 0;
+        }
+        .w-full {
+            width: 100%;
+            border-bottom: 1px solid #000; /* Optional for visual separation */
+
+        }
+       .w-one-third {
+            width: 33.33%; /* Each cell takes one-third of the table width */
+            text-align: center; /* Center images horizontally within each cell */
+        }
+        .image-style {
+              width: 70px; /* Set image width to 70px */
+                height: auto; /* Maintain aspect ratio */
+                margin-bottom: 10%;
+         }
+        .line {
+            width: 100%;
+            border: none; /* Remove default borders */
+            border-top: 1px solid #000; /* Line color and style */
+            margin: 10px 0; /* Space above and below the line */
+        }
+            .text p {
+            margin: 1;
+            padding: 0;
+            font-size: 14px; 
+            font-family: Times New Roman;
+
+        }
+        th {
+         background-color: #f2f2f2;
+         }
+        .results{
+            font-family: Times New Roman;
+
+            
+         }
+            
+    </style>
+    </head>
+         <table class="w-full " >
+        <tr>
+             <td class="w-one-third">
+            <img src="' . public_path('images/bagongpilipinas.jpg') . '" alt="Image 1" class="image-style" style="margin-right: 70%;"> 
+            </td>
+            <td class="w-one-third">
+            <div class="text" >
+            <p style="font-weight: bold;">REPUBLIKA NG PILIPINAS</p>
+            <p style="">CITY OF MANDALUYONG</p>
+            <p style="">OFFICE OF THE MAYOR</p>
+            <p style="">PERSONS WITH DISABILITIES AFFAIRS DIVISION</p>
+            </div>
+            </td>
+            <td class="w-one-third">
+                <img src="' . public_path('images/cityofmandalogo.jpg') . '" alt="Image 3" class="image-style" style="margin-left: 70%;"> 
+            </td>
+            <hr class="line">
+
+        </tr>
+
+    </table>
+
+    <h1 style="text-align: center;">Education Levels Report</h1>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+            <thead>
+                <tr>
+                    <th style="border: 1px solid #000; padding: 8px; text-align: left;">Education Level</th>
+                    <th style="border: 1px solid #000; padding: 8px; text-align: left;">Count</th>
+                    <th style="border: 1px solid #000; padding: 8px; text-align: left;">Percentage</th>
+                </tr>
+            </thead>
+            <tbody>';
 
         foreach ($data as $row) {
             $html .= '
-                <tr>
-                    <td style="border: 1px solid #000; padding: 8px;">' . htmlspecialchars($row['Education Level']) . '</td>
-                    <td style="border: 1px solid #000; padding: 8px; text-align: right;">' . htmlspecialchars($row['Count']) . '</td>
-                    <td style="border: 1px solid #000; padding: 8px; text-align: right;">' . htmlspecialchars($row['Percentage']) . '</td>
-                </tr>';
+            <tr>
+                <td style="border: 1px solid #000; padding: 8px;">' . htmlspecialchars($row['Education Level']) . '</td>
+                <td style="border: 1px solid #000; padding: 8px; text-align: right;">' . htmlspecialchars($row['Count']) . '</td>
+                <td style="border: 1px solid #000; padding: 8px; text-align: right;">' . htmlspecialchars($row['Percentage']) . '</td>
+
+            </tr>';
         }
 
         $html .= '
-                </tbody>
-            </table>
-        </body>
-        </html>';
+            </tbody>
+        </table>
+    </body>
+    </html>';
 
         // Generate PDF from the HTML content
         $pdf = Pdf::loadHTML($html);
@@ -217,6 +353,7 @@ class ExportController extends Controller
 
         // Count occurrences of each disability
         $disabilityOccurrences = $pwdInformationData->pluck('disabilityOccurrence')->countBy();
+        $totalDisabilityOccurrencesCount = $disabilityOccurrences->sum(); // Calculate the total count
 
         // Prepare data for the view
         $data = [];
@@ -224,22 +361,100 @@ class ExportController extends Controller
             $data[] = [
                 'Disability Occurrence' => $disability,
                 'Count' => $count,
+                'Percentage' => $totalDisabilityOccurrencesCount > 0 ? number_format(($count / $totalDisabilityOccurrencesCount) * 100, 1) . '%' : '0%',
+
             ];
         }
 
         // Define the HTML content for the PDF
         $html = '
     <html>
+
     <head>
         <title>Disability Occurrences Report</title>
+        <style>
+
+         body {
+            margin: 0;
+            padding: 0;
+            font-family: Helvetica, sans-serif;
+        }
+        h4 {
+          margin: 0;
+        }
+        .w-full {
+            width: 100%;
+            border-bottom: 1px solid #000; /* Optional for visual separation */
+
+        }
+       .w-one-third {
+            width: 33.33%; /* Each cell takes one-third of the table width */
+            text-align: center; /* Center images horizontally within each cell */
+        }
+        .image-style {
+              width: 70px; /* Set image width to 70px */
+                height: auto; /* Maintain aspect ratio */
+                margin-bottom: 10%;
+         }
+        .line {
+            width: 100%;
+            border: none; /* Remove default borders */
+            border-top: 1px solid #000; /* Line color and style */
+            margin: 10px 0; /* Space above and below the line */
+        }
+            .text p {
+            margin: 1;
+            padding: 0;
+            font-size: 14px; 
+            font-family: Times New Roman;
+
+        }
+
+        th {
+         background-color: #f2f2f2;
+         }
+
+        .results{
+            font-family: Times New Roman;
+
+            
+         }
+            
+    </style>
     </head>
+
+   
     <body>
+    <table class="w-full " >
+        <tr>
+             <td class="w-one-third">
+            <img src="' . public_path('images/bagongpilipinas.jpg') . '" alt="Image 1" class="image-style" style="margin-right: 70%;"> 
+            </td>
+            <td class="w-one-third">
+            <div class="text" >
+            <p style="font-weight: bold;">REPUBLIKA NG PILIPINAS</p>
+            <p style="">CITY OF MANDALUYONG</p>
+            <p style="">OFFICE OF THE MAYOR</p>
+            <p style="">PERSONS WITH DISABILITIES AFFAIRS DIVISION</p>
+            </div>
+            </td>
+            <td class="w-one-third">
+                <img src="' . public_path('images/cityofmandalogo.jpg') . '" alt="Image 3" class="image-style" style="margin-left: 70%;"> 
+            </td>
+            <hr class="line">
+
+        </tr>
+
+    </table>
+
+
         <h1 style="text-align: center;">Disability Occurrences Report</h1>
         <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
             <thead>
                 <tr>
                     <th style="border: 1px solid #000; padding: 8px; text-align: left;">Disability Occurrence</th>
                     <th style="border: 1px solid #000; padding: 8px; text-align: left;">Count</th>
+                    <th style="border: 1px solid #000; padding: 8px; text-align: left;">Percentage</th>
                 </tr>
             </thead>
             <tbody>';
@@ -249,6 +464,8 @@ class ExportController extends Controller
             <tr>
                 <td style="border: 1px solid #000; padding: 8px;">' . htmlspecialchars($row['Disability Occurrence']) . '</td>
                 <td style="border: 1px solid #000; padding: 8px; text-align: right;">' . htmlspecialchars($row['Count']) . '</td>
+                <td style="border: 1px solid #000; padding: 8px; text-align: right;">' . htmlspecialchars($row['Percentage']) . '</td>
+
             </tr>';
         }
 
@@ -314,10 +531,79 @@ class ExportController extends Controller
         // Define the HTML content for the PDF
         $html = '
     <html>
-    <head>
-        <title>Disability Types Report</title>
+     <head>
+        <title>Disability Occurrences Report</title>
+        <style>
+
+         body {
+            margin: 0;
+            padding: 0;
+            font-family: Helvetica, sans-serif;
+        }
+        h4 {
+          margin: 0;
+        }
+        .w-full {
+            width: 100%;
+            border-bottom: 1px solid #000; /* Optional for visual separation */
+
+        }
+       .w-one-third {
+            width: 33.33%; /* Each cell takes one-third of the table width */
+            text-align: center; /* Center images horizontally within each cell */
+        }
+        .image-style {
+              width: 70px; /* Set image width to 70px */
+                height: auto; /* Maintain aspect ratio */
+                margin-bottom: 10%;
+         }
+        .line {
+            width: 100%;
+            border: none; /* Remove default borders */
+            border-top: 1px solid #000; /* Line color and style */
+            margin: 10px 0; /* Space above and below the line */
+        }
+            .text p {
+            margin: 1;
+            padding: 0;
+            font-size: 14px; 
+            font-family: Times New Roman;
+
+        }
+
+        th {
+         background-color: #f2f2f2;
+        }
+
+        .results{
+            font-family: Times New Roman;
+         }
+            
+    </style>
     </head>
     <body>
+     <table class="w-full " >
+        <tr>
+             <td class="w-one-third">
+            <img src="' . public_path('images/bagongpilipinas.jpg') . '" alt="Image 1" class="image-style" style="margin-right: 70%;"> 
+            </td>
+            <td class="w-one-third">
+            <div class="text" >
+            <p style="font-weight: bold;">REPUBLIKA NG PILIPINAS</p>
+            <p style="">CITY OF MANDALUYONG</p>
+            <p style="">OFFICE OF THE MAYOR</p>
+            <p style="">PERSONS WITH DISABILITIES AFFAIRS DIVISION</p>
+            </div>
+            </td>
+            <td class="w-one-third">
+                <img src="' . public_path('images/cityofmandalogo.jpg') . '" alt="Image 3" class="image-style" style="margin-left: 70%;"> 
+            </td>
+            <hr class="line">
+
+        </tr>
+
+    </table>
+
         <h1 style="text-align: center;">Disability Types Report</h1>
         <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
             <thead>
@@ -404,10 +690,80 @@ class ExportController extends Controller
         // Define the HTML content for the PDF
         $html = '
     <html>
-    <head>
-        <title>Employment Types Report</title>
+   <head>
+        <title>Disability Occurrences Report</title>
+        <style>
+
+         body {
+            margin: 0;
+            padding: 0;
+            font-family: Helvetica, sans-serif;
+        }
+        h4 {
+          margin: 0;
+        }
+        .w-full {
+            width: 100%;
+            border-bottom: 1px solid #000; /* Optional for visual separation */
+
+        }
+       .w-one-third {
+            width: 33.33%; /* Each cell takes one-third of the table width */
+            text-align: center; /* Center images horizontally within each cell */
+        }
+        .image-style {
+              width: 70px; /* Set image width to 70px */
+                height: auto; /* Maintain aspect ratio */
+                margin-bottom: 10%;
+         }
+        .line {
+            width: 100%;
+            border: none; /* Remove default borders */
+            border-top: 1px solid #000; /* Line color and style */
+            margin: 10px 0; /* Space above and below the line */
+        }
+            .text p {
+            margin: 1;
+            padding: 0;
+            font-size: 14px; 
+            font-family: Times New Roman;
+
+        }
+
+          th {
+         background-color: #f2f2f2;
+         }
+
+        .results{
+            font-family: Times New Roman;
+
+            
+         }
+            
+    </style>
     </head>
     <body>
+       <table class="w-full " >
+        <tr>
+             <td class="w-one-third">
+            <img src="' . public_path('images/bagongpilipinas.jpg') . '" alt="Image 1" class="image-style" style="margin-right: 70%;"> 
+            </td>
+            <td class="w-one-third">
+            <div class="text" >
+            <p style="font-weight: bold;">REPUBLIKA NG PILIPINAS</p>
+            <p style="">CITY OF MANDALUYONG</p>
+            <p style="">OFFICE OF THE MAYOR</p>
+            <p style="">PERSONS WITH DISABILITIES AFFAIRS DIVISION</p>
+            </div>
+            </td>
+            <td class="w-one-third">
+                <img src="' . public_path('images/cityofmandalogo.jpg') . '" alt="Image 3" class="image-style" style="margin-left: 70%;"> 
+            </td>
+            <hr class="line">
+
+        </tr>
+
+    </table>
         <h1 style="text-align: center;">Employment Types Report</h1>
         <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
             <thead>
@@ -544,15 +900,87 @@ class ExportController extends Controller
     <html>
     <head>
         <title>Age Bins Report</title>
+        <style>
+
+         body {
+            margin: 0;
+            padding: 0;
+            font-family: Helvetica, sans-serif;
+        }
+        h4 {
+          margin: 0;
+        }
+        .w-full {
+            width: 100%;
+            border-bottom: 1px solid #000; /* Optional for visual separation */
+
+        }
+       .w-one-third {
+            width: 33.33%; /* Each cell takes one-third of the table width */
+            text-align: center; /* Center images horizontally within each cell */
+        }
+        .image-style {
+              width: 70px; /* Set image width to 70px */
+                height: auto; /* Maintain aspect ratio */
+                margin-bottom: 10%;
+         }
+        .line {
+            width: 100%;
+            border: none; /* Remove default borders */
+            border-top: 1px solid #000; /* Line color and style */
+            margin: 10px 0; /* Space above and below the line */
+        }
+            .text p {
+            margin: 1;
+            padding: 0;
+            font-size: 14px; 
+            font-family: Times New Roman;
+
+        }
+
+          th {
+         background-color: #f2f2f2;
+         }
+
+        .results{
+            font-family: Times New Roman;
+
+            
+         }
+            
+    </style>
     </head>
     <body>
-        <h1 style="text-align: center;">Age Bins Report (16 and Above)</h1>
+       <table class="w-full " >
+        <tr>
+             <td class="w-one-third">
+            <img src="' . public_path('images/bagongpilipinas.jpg') . '" alt="Image 1" class="image-style" style="margin-right: 70%;"> 
+            </td>
+            <td class="w-one-third">
+            <div class="text" >
+            <p style="font-weight: bold;">REPUBLIKA NG PILIPINAS</p>
+            <p style="">CITY OF MANDALUYONG</p>
+            <p style="">OFFICE OF THE MAYOR</p>
+            <p style="">PERSONS WITH DISABILITIES AFFAIRS DIVISION</p>
+            </div>
+            </td>
+            <td class="w-one-third">
+                <img src="' . public_path('images/cityofmandalogo.jpg') . '" alt="Image 3" class="image-style" style="margin-left: 70%;"> 
+            </td>
+            <hr class="line">
+
+        </tr>
+
+    </table>
+
+
+         <h1 style="text-align: center;">Age Bins Report</h1>
         <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
             <thead>
                 <tr>
-                    <th style="border: 1px solid #000; padding: 8px; text-align: left;">Age Bin</th>
-                    <th style="border: 1px solid #000; padding: 8px; text-align: right;">Count</th>
-                    <th style="border: 1px solid #000; padding: 8px; text-align: right;">Percentage</th>
+                    <th style="border: 1px solid #000; padding: 8px; text-align: left;">Age Bins</th>
+                    <th style="border: 1px solid #000; padding: 8px; text-align: left;">Count</th>
+                    <th style="border: 1px solid #000; padding: 8px; text-align: left;">Percentage</th>
                 </tr>
             </thead>
             <tbody>';
@@ -563,6 +991,7 @@ class ExportController extends Controller
                 <td style="border: 1px solid #000; padding: 8px;">' . htmlspecialchars($row['Age Bin']) . '</td>
                 <td style="border: 1px solid #000; padding: 8px; text-align: right;">' . htmlspecialchars($row['Count']) . '</td>
                 <td style="border: 1px solid #000; padding: 8px; text-align: right;">' . htmlspecialchars($row['Percentage']) . '</td>
+
             </tr>';
         }
 
@@ -577,6 +1006,368 @@ class ExportController extends Controller
 
         // Return the PDF as a download
         return $pdf->stream('age_bins.pdf');
+    }
+
+
+
+    public function companiesExportPDF()
+    {
+        // Fetch all work experience data
+        $workExperience = WorkExperience::all();
+
+        // Count occurrences of each employer
+        $employerCounts = $workExperience->groupBy('employer_name')->map(function ($experience) {
+            return $experience->count(); // Count how many times each employer appears
+        });
+
+        // Sort employers by count from highest to lowest
+        $sortedEmployerCounts = $employerCounts->sortDesc();
+
+        // Calculate the total number of work experiences for percentage calculation
+        $totalWorkExperienceCount = $sortedEmployerCounts->sum();
+
+        // Prepare data for the view with percentage
+        $data = [];
+        foreach ($sortedEmployerCounts as $employer => $count) {
+            $percentage = $totalWorkExperienceCount > 0 ? number_format(($count / $totalWorkExperienceCount) * 100, 1) . '%' : '0%';
+            $data[] = [
+                'Employer' => $employer,
+                'Count' => $count,
+                'Percentage' => $percentage,
+            ];
+        }
+
+        // Define the HTML content for the PDF
+        $html = '
+    <html>
+    <head>
+        <title>Work Experience Report</title>
+        <style>
+         body {
+            margin: 0;
+            padding: 0;
+            font-family: Helvetica, sans-serif;
+        }
+        h1, h4 {
+          margin: 0;
+            margin-top: 20px; /* Adjust the top margin as needed */
+        }
+        
+        
+
+        .w-full {
+            width: 100%;
+            border-bottom: 1px solid #000; /* Optional for visual separation */
+        }
+       .w-one-third {
+            width: 33.33%; /* Each cell takes one-third of the table width */
+            text-align: center; /* Center images horizontally within each cell */
+        }
+        .image-style {
+              width: 70px; /* Set image width to 70px */
+                height: auto; /* Maintain aspect ratio */
+                margin-bottom: 10%;
+         }
+        .line {
+            width: 100%;
+            border: none; /* Remove default borders */
+            border-top: 1px solid #000; /* Line color and style */
+            margin: 10px 0; /* Space above and below the line */
+        }
+            .text p {
+            margin: 1;
+            padding: 0;
+            font-size: 14px; 
+            font-family: Times New Roman;
+        }
+         th {
+         background-color: #f2f2f2;
+         }
+
+        .results {
+            font-family: Times New Roman;
+         }
+            
+    </style>
+    </head>
+    <body>
+       <table class="w-full">
+        <tr>
+             <td class="w-one-third">
+            <img src="' . public_path('images/bagongpilipinas.jpg') . '" alt="Image 1" class="image-style" style="margin-right: 70%;"> 
+            </td>
+            <td class="w-one-third">
+            <div class="text">
+            <p style="font-weight: bold;">REPUBLIKA NG PILIPINAS</p>
+            <p style="">CITY OF MANDALUYONG</p>
+            <p style="">OFFICE OF THE MAYOR</p>
+            <p style="">PERSONS WITH DISABILITIES AFFAIRS DIVISION</p>
+            </div>
+            </td>
+            <td class="w-one-third">
+                <img src="' . public_path('images/cityofmandalogo.jpg') . '" alt="Image 3" class="image-style" style="margin-left: 70%;"> 
+            </td>
+            <hr class="line">
+        </tr>
+    </table>
+    <h1 style="text-align: center;">Employers Count Report</h1>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+        <thead>
+            <tr>
+                <th style="border: 1px solid #000; padding: 8px; text-align: left;">Employer</th>
+                <th style="border: 1px solid #000; padding: 8px; text-align: left;">Count</th>
+                <th style="border: 1px solid #000; padding: 8px; text-align: left;">Percentage</th>
+            </tr>
+        </thead>
+        <tbody>';
+
+        foreach ($data as $row) {
+            $html .= '
+        <tr>
+            <td style="border: 1px solid #000; padding: 8px;">' . htmlspecialchars($row['Employer']) . '</td>
+            <td style="border: 1px solid #000; padding: 8px; text-align: right;">' . htmlspecialchars($row['Count']) . '</td>
+            <td style="border: 1px solid #000; padding: 8px; text-align: right;">' . htmlspecialchars($row['Percentage']) . '</td>
+        </tr>';
+        }
+
+        $html .= '
+        </tbody>
+    </table>
+    </body>
+    </html>';
+
+        // Generate PDF from the HTML content
+        $pdf = Pdf::loadHTML($html);
+
+        // Return the PDF as a download
+        return $pdf->stream('work_experience.pdf');
+    }
+
+
+    public function companiesExportCSV()
+    {
+        // Fetch all work experience data
+        $workExperience = WorkExperience::all();
+
+        // Count occurrences of each employer
+        $employerCounts = $workExperience->groupBy('employer_name')->map(function ($experience) {
+            return $experience->count(); // Count how many times each employer appears
+        })->sortDesc();
+
+        // Prepare CSV content
+        $csvContent = "Employer,Count,Percentage\n"; // CSV header
+
+        $totalWorkExperienceCount = $employerCounts->sum(); // Calculate the total count
+
+        foreach ($employerCounts as $employer => $count) {
+            $percentage = $totalWorkExperienceCount > 0 ? number_format(($count / $totalWorkExperienceCount) * 100, 1) . '%' : '0%';
+            $csvContent .= "\"$employer\",$count,$percentage\n"; // CSV rows
+        }
+
+        // Define filename
+        $filename = 'work_experience.csv';
+
+        // Return CSV response
+        return response($csvContent, 200)
+            ->header('Content-Type', 'text/csv')
+            ->header('Content-Disposition', "attachment; filename=\"$filename\"");
+    }
+
+    public function yearsofExperienceExportPDF()
+    {
+        // Fetch all work experiences
+        $workExperience = WorkExperience::all();
+
+        // Calculate the number of years for each work experience
+        $workExperience = $workExperience->map(function ($experience) {
+            $fromDate = Carbon::parse($experience->from_date);
+            $toDate = Carbon::parse($experience->to_date);
+            $years = $fromDate->diffInYears($toDate);
+            return $experience->setAttribute('years', $years);
+        });
+
+        // Group by employer name and calculate total years for each employer
+        $employerYears = $workExperience->groupBy('employer_name')->map(function ($experiences) {
+            return $experiences->sum('years');
+        });
+
+        // Sort employers by total years in descending order
+        $sortedEmployerYears = $employerYears->sortDesc();
+
+        // Calculate the total years of all work experiences
+        $totalYears = $sortedEmployerYears->sum();
+
+        // Round the total years to two decimal places
+        $roundedTotalYears = round($totalYears, 2);
+
+        // Prepare the data for the view with rounded years and percentage
+        $data = [];
+        foreach ($sortedEmployerYears as $employer => $years) {
+            // Round the individual years to two decimal places
+            $roundedYears = round($years);
+            // Calculate the percentage based on rounded total years
+            $percentage = $roundedTotalYears > 0 ? number_format(($roundedYears / $roundedTotalYears) * 100, 1) . '%' : '0%';
+            $data[] = [
+                'Employer' => $employer,
+                'Years' => $roundedYears,
+                'Percentage' => $percentage,
+            ];
+        }
+
+
+        // Define the HTML content for the PDF
+        $html = '
+    <html>
+    <head>
+        <title>Work Experience Report</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: Helvetica, sans-serif;
+            }
+            h1, h4 {
+                margin: 0;
+                margin-top: 20px; /* Adjust the top margin as needed */
+            }
+            .w-full {
+                width: 100%;
+                border-bottom: 1px solid #000; /* Optional for visual separation */
+            }
+            .w-one-third {
+                width: 33.33%; /* Each cell takes one-third of the table width */
+                text-align: center; /* Center images horizontally within each cell */
+            }
+            .image-style {
+                width: 70px; /* Set image width to 70px */
+                height: auto; /* Maintain aspect ratio */
+                margin-bottom: 10%;
+            }
+            .line {
+                width: 100%;
+                border: none; /* Remove default borders */
+                border-top: 1px solid #000; /* Line color and style */
+                margin: 10px 0; /* Space above and below the line */
+            }
+            .text p {
+                margin: 1;
+                padding: 0;
+                font-size: 14px;
+                font-family: Times New Roman;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+            }
+            th{
+                border: 1px solid #000;
+                padding: 8px;
+                text-align: left;
+            }
+            th {
+                background-color: #f2f2f2;
+            }
+            .text-center {
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+       <table class="w-full">
+        <tr>
+             <td class="w-one-third">
+            <img src="' . public_path('images/bagongpilipinas.jpg') . '" alt="Image 1" class="image-style" style="margin-right: 70%;"> 
+            </td>
+            <td class="w-one-third">
+            <div class="text">
+            <p style="font-weight: bold;">REPUBLIKA NG PILIPINAS</p>
+            <p style="">CITY OF MANDALUYONG</p>
+            <p style="">OFFICE OF THE MAYOR</p>
+            <p style="">PERSONS WITH DISABILITIES AFFAIRS DIVISION</p>
+            </div>
+            </td>
+            <td class="w-one-third">
+                <img src="' . public_path('images/cityofmandalogo.jpg') . '" alt="Image 3" class="image-style" style="margin-left: 70%;"> 
+            </td>
+            <hr class="line">
+        </tr>
+       </table>
+        <h1 style="text-align: center;">Years of Experience Report</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Employer</th>
+                    <th>Total Years Employees Worked</th>
+                    <th>Percentage of Total Work Experience</th>
+                </tr>
+            </thead>
+            <tbody>';
+
+        foreach ($data as $row) {
+            $html .= '
+            <tr>
+                 <td style="border: 1px solid #000; padding: 8px;">' . htmlspecialchars($row['Employer']) . '</td>
+                    <td style="border: 1px solid #000; padding: 8px; text-align: right;">' . htmlspecialchars($row['Years']) . '</td>
+                <td style="border: 1px solid #000; padding: 8px; text-align: right;">' . htmlspecialchars($row['Percentage']) . '</td>
+            </tr>';
+        }
+
+
+
+        $html .= '
+            </tbody>
+        </table>
+    </body>
+    </html>';
+
+        // Generate PDF from the HTML content
+        $pdf = Pdf::loadHTML($html);
+
+        // Return the PDF as a download
+        return $pdf->stream('years_of_experience_report.pdf');
+    }
+
+
+    public function yearsofExperienceExportCSV()
+    {
+        // Fetch all work experiences
+        $workExperience = WorkExperience::all();
+
+        // Calculate the number of years for each work experience
+        $workExperience = $workExperience->map(function ($experience) {
+            $fromDate = Carbon::parse($experience->from_date);
+            $toDate = Carbon::parse($experience->to_date);
+            $years = $fromDate->diffInYears($toDate);
+            return $experience->setAttribute('years', $years);
+        });
+
+        // Group by employer name and calculate total years for each employer
+        $employerYears = $workExperience->groupBy('employer_name')->map(function ($experiences) {
+            return $experiences->sum('years');
+        });
+
+        // Sort employers by total years in descending order
+        $sortedEmployerYears = $employerYears->sortDesc();
+
+        // Calculate the total years of all work experiences
+        $totalYears = $sortedEmployerYears->sum();
+
+        // Prepare CSV content
+        $csvContent = "Employer Name,Total Years Employees Worked,Percentage of Total Work Experience\n"; // CSV header
+
+        foreach ($sortedEmployerYears as $employer => $years) {
+            $percentage = $totalYears > 0 ? number_format(($years / $totalYears) * 100, 1) . '%' : '0%';
+            $csvContent .= "\"$employer\",$years,$percentage\n"; // CSV rows
+        }
+
+        // Define filename
+        $filename = 'work_experience_report.csv';
+
+        // Return CSV response
+        return response($csvContent, 200)
+            ->header('Content-Type', 'text/csv')
+            ->header('Content-Disposition', "attachment; filename=\"$filename\"");
     }
 
 

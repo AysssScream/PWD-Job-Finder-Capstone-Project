@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use Carbon\Carbon;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Models\ApplicantProfile;
 use App\Models\Employer;
@@ -10,7 +11,8 @@ use App\Models\JobApplication;
 use App\Models\JobInfo;
 use App\Models\JobPreference;
 use App\Models\Resume;
-
+use App\Models\Message;
+use App\Models\Reply;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
@@ -69,7 +71,7 @@ class UserController extends Controller
         }
 
 
-        $jobs = $jobsQuery->orderBy('date_posted', 'desc')->paginate(8);
+        $jobs = $jobsQuery->orderBy('date_posted', 'desc')->paginate(10);
         $preferredOccupation = $jobPreference->preferred_occupation;
         $matchedJobTitles = JobInfo::where('title', $preferredOccupation)
             ->pluck('title');
@@ -151,50 +153,94 @@ class UserController extends Controller
         // Retrieve the latest resume data for the authenticated user
         $resume = Resume::where('user_id', $userId)->orderBy('upload_date', 'desc')->first();
 
-
         if ($resume) {
             // Extract and normalize skills
-            $skills = explode(',', $resume->skills);
-            $normalizedSkills = array_map('trim', array_map('strtolower', $skills));
+            $skills = array_map('trim', explode(',', $resume->skills));
+            $normalizedSkills = array_map('strtolower', $skills);
+            $age = $resume->age;
 
             // Normalize education
             $educations = array_map('trim', explode(',', strtolower($resume->education)));
 
-            // Match jobs based on the resume data
+            // Get all jobs and map match reasons
             $matchedResumeJobs = DB::table('jobinfos')
                 ->select('*')
-                ->where(function ($query) use ($educations) {
+                ->get()
+                ->map(function ($job) use ($educations, $normalizedSkills, $age) {
+                    $matchReasons = [
+                        'education' => [],
+                        'skills' => [],
+                        'age' => []
+                    ];
+
+                    // Check for education match
                     foreach ($educations as $education) {
-                        $query->orWhereRaw('LOWER(`educational_level`) LIKE ?', ["%{$education}%"]);
-                    }
-                })
-                ->where(function ($query) use ($normalizedSkills) {
-                    foreach ($normalizedSkills as $skill) {
-                        $skill = strtolower(trim($skill)); // Normalize skill
-                        $words = explode(' ', $skill);
-                        foreach ($words as $word) {
-                            $word = strtolower(trim($word)); // Normalize word
-                            // Match each word in title, description, and qualifications fields
-                            $query->orWhere(function ($subQuery) use ($word) {
-                                $subQuery->whereRaw('LOWER(`title`) LIKE ?', ["%{$word}%"])
-                                    ->orWhereRaw('LOWER(`description`) LIKE ?', ["%{$word}%"])
-                                    ->orWhereRaw('LOWER(`qualifications`) LIKE ?', ["%{$word}%"]);
-                            });
+                        if (stripos($job->educational_level, $education) !== false) {
+                            $matchReasons['education'][] = ucwords($education);
                         }
                     }
+
+                    // Check for skill match
+                    foreach ($normalizedSkills as $skill) {
+                        // Match the whole skill phrase
+                        if (
+                            stripos($job->title, $skill) !== false ||
+                            stripos($job->description, $skill) !== false ||
+                            stripos($job->qualifications, $skill) !== false ||
+                            stripos($job->responsibilities, $skill) !== false
+
+                        ) {
+                            $matchReasons['skills'][] = ucwords($skill);
+                        }
+                    }
+
+                    // Check for age match
+                    if ($job->min_age <= $age && $job->max_age >= $age) {
+                        $matchReasons['age'][] = $age;
+                    }
+
+                    // Remove duplicate match reasons
+                    $matchReasons['education'] = array_unique($matchReasons['education']);
+                    $matchReasons['skills'] = array_unique($matchReasons['skills']);
+                    $matchReasons['age'] = array_unique($matchReasons['age']);
+
+                    // Calculate match percentages
+                    $totalEducation = count($educations);
+                    $totalSkills = count($normalizedSkills);
+                    $matchedEducationCount = count($matchReasons['education']);
+                    $matchedSkillsCount = count($matchReasons['skills']);
+                    $matchedAgeCount = count($matchReasons['age']);
+
+                    $educationPercentage = $totalEducation > 0 ? ($matchedEducationCount) * 100 : 0;
+                    $skillsCount = $matchedSkillsCount; // Use count for skills instead of percentage
+                    $agePercentage = !empty($matchReasons['age']) ? 100 : 0; // If age matches, it's 100%
+    
+                    // Include jobs only if there are matches for both education and age
+                    if (!empty($matchReasons['education']) && !empty($matchReasons['age'])) {
+                        $job->match_reasons = $matchReasons;
+                        $job->match_percentages = [
+                            'education' => number_format($educationPercentage, 2) . '%',
+                            'skills' => $skillsCount . ' ' . ($skillsCount === 1 ? 'Skill' : 'Skills') . ' Keyword Matched',
+                            'age' => number_format($agePercentage, 2) . '%',
+                        ];
+                        return $job;
+                    }
+
                 })
-                ->get();
+                ->filter(); // Remove jobs with no match reasons for both education and age
         } else {
-            // Handle case where no resume is found
             $matchedResumeJobs = collect(); // Return an empty collection
         }
 
+
+
+
+        // Pass matched jobs to the view
         return view('uploadresume', [
             'resume' => $resume,
             'topJobOpenings' => $topJobOpenings,
             'matchedResumeJobs' => $matchedResumeJobs,
         ]);
-
     }
 
 
@@ -230,7 +276,8 @@ class UserController extends Controller
                             $query->orWhere(function ($subQuery) use ($word) {
                                 $subQuery->whereRaw('LOWER(`title`) LIKE ?', ["%{$word}%"])
                                     ->orWhereRaw('LOWER(`description`) LIKE ?', ["%{$word}%"])
-                                    ->orWhereRaw('LOWER(`qualifications`) LIKE ?', ["%{$word}%"]);
+                                    ->orWhereRaw('LOWER(`qualifications`) LIKE ?', ["%{$word}%"])
+                                    ->orWhereRaw('LOWER(`responsibilities`) LIKE ?', ["%{$word}%"]);
                             });
                         }
                     }
@@ -250,39 +297,51 @@ class UserController extends Controller
             ->limit(10)
             ->get();
 
-        $request->validate([
-            'file' => 'required|file|mimes:pdf,doc,docx|max:2048',
-        ]);
+        try {
+            $request->validate([
+                'resume' => 'required|mimes:pdf,docx|max:2048', // Max 2MB
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()->back()->withErrors($e->errors())->withInput();
+        }
 
         // Get the uploaded file
-        $file = $request->file('file');
-        $filePath = $file->getPathname();
-        $fileName = $file->getClientOriginalName();
-        $fileType = $file->getClientMimeType();
+        try {
+            $file = $request->file('resume');
+            $filePath = $file->getPathname();
+            $fileName = $file->getClientOriginalName();
+            $fileType = $file->getClientMimeType();
 
-        $response = Http::attach('file', file_get_contents($filePath), $fileName)
-            ->post('http://127.0.0.1:5000/upload');
+            // Send the file to the Flask server
+            $response = Http::attach('file', file_get_contents($filePath), $fileName)
+                ->post('http://127.0.0.1:5000/upload');
 
-        if ($response->successful()) {
-            $data = $response->json();
-            $userId = Auth::id();
+            if ($response->successful()) {
+                $data = $response->json();
+                $userId = Auth::id();
 
-            Resume::updateOrCreate(
-                ['user_id' => $userId], // Unique identifier for existing records
-                [
-                    'file_name' => $fileName,
-                    'file_type' => $fileType,
-                    'text_content' => json_encode($data), // Assuming `text_content` will store JSON data
-                    'age' => $data['age'],
-                    'skills' => $data['skills'],
-                    'education' => $data['education'],
-                ]
-            );
+                // Update or create the resume record in the database
+                Resume::updateOrCreate(
+                    ['user_id' => $userId], // Unique identifier for existing records
+                    [
+                        'file_name' => $fileName,
+                        'file_type' => $fileType,
+                        'text_content' => json_encode($data), // Assuming `text_content` will store JSON data
+                        'age' => $data['age'] ?? null, // Use null coalescing operator to handle undefined keys
+                        'skills' => $data['skills'] ?? null,
+                        'education' => $data['education'] ?? null,
+                    ]
+                );
 
-
-            return redirect()->route('dashboard.resumeupload');
-        } else {
-            return response()->json(['error' => 'Failed to upload to Flask server'], $response->status());
+                return redirect()->route('dashboard.resumeupload')->with('success', 'Resume uploaded and processed successfully!');
+            } else {
+                // Handle API request failure
+                $errorMessage = $response->json('error', 'Unknown error occurred');
+                return redirect()->back()->withErrors(['api' => 'Failed to upload to Flask server: ' . $errorMessage]);
+            }
+        } catch (\Exception $e) {
+            // Handle general exceptions (e.g., file handling or HTTP request issues)
+            return redirect()->back()->withErrors(['error' => 'An error occurred while processing the file: ' . $e->getMessage()]);
         }
     }
 
@@ -314,10 +373,10 @@ class UserController extends Controller
 
 
         if ($title) {
-            $jobsQuery->where('title', $title);
+            $jobsQuery->where('title', 'like', "%$title%"); // Use LIKE for partial matches
         }
 
-        $jobs = $jobsQuery->orderBy('date_posted', 'desc')->paginate(8);
+        $jobs = $jobsQuery->orderBy('date_posted', 'desc')->paginate(10);
         $preferredOccupation = $jobPreference->preferred_occupation;
         $matchedJobTitles = JobInfo::where('title', 'like', '%' . $preferredOccupation . '%')
             ->pluck('title');
@@ -505,6 +564,109 @@ class UserController extends Controller
 
 
 
+    public function showCompany($employer_id)
+    {
+        // Find the employer or fail if not found
+        $employer = Employer::where('user_id', $employer_id)->firstOrFail();
+
+        // Retrieve all jobs associated with the given employer_id
+        $jobs = JobInfo::where('employer_id', $employer_id)->paginate(6);
+
+        // Return the view with the employer and jobs data
+        return view('companyprofile', [
+            'employer' => $employer,
+            'jobs' => $jobs, // Fixed syntax error
+        ]);
+    }
+
+
+    //INBOX
+
+    public function messages()
+    {
+        $userId = Auth::id();
+        $email = User::find($userId)->email;
+        $messages = Message::where('to', $email)->get();
+        $replies = Reply::all();
+        $users = User::all();
+
+        return view('messages', [
+            'messages' => $messages,
+            'users' => $users,
+            'replies' => $replies
+        ]);
+    }
+
+    public function sentmessages()
+    {
+        $userId = Auth::id();
+        $email = User::find($userId)->email;
+        $messages = Message::where('from', $email)->get();
+        $replies = Reply::all();
+        $users = User::all();
+
+        return view('messages', [
+            'messages' => $messages,
+            'users' => $users,
+            'replies' => $replies
+        ]);
+    }
+
+    public function storeMessage(Request $request)
+    {
+        // Validate the incoming request data
+        $request->validate([
+            'to' => 'required|email',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string|max:300',
+        ]);
+
+        // Create a new message record
+        Message::create([
+            'from' => auth()->user()->email, // Use the authenticated user's email
+            'to' => $request->input('to'),
+            'subject' => $request->input('subject'),
+            'message' => $request->input('message'),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Message sent successfully!');
+    }
+    public function getReplies($id)
+    {
+        $replies = Reply::where('message_id', $id)->get();
+        Log::info('Replies Data:', $replies->toArray());
+
+        return response()->json(['replies' => $replies]);
+    }
+
+    public function storeReply(Request $request)
+    {
+        // Validate incoming request
+        $request->validate([
+            'replyMessage' => 'required|string|max:300',
+            'message_id' => 'required|exists:messages,id', // Validate that the message_id exists in the messages table
+        ]);
+
+        // Find the message
+        $message = Message::find($request->input('message_id'));
+        if (!$message) {
+            return redirect()->back()->withErrors('Message not found.');
+        }
+
+        // Create a new reply
+        Reply::create([
+            'message_id' => $message->id,
+            'message' => $request->input('replyMessage'),
+            'reply_to' => $message->to,
+            'reply_from' => auth()->user()->email, // Get the email of the current user
+        ]);
+
+        // Redirect or return a response
+        return redirect()->back()->with('success', 'Reply sent successfully!');
+    }
 
 
 

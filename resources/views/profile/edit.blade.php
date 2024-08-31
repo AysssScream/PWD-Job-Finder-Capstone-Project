@@ -242,69 +242,42 @@
                     <form id="send-verification" method="post" action="{{ route('verification.emailsend') }}">
                         @csrf
                     </form>
-                    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
-                        @csrf
-                        @method('patch')
-                        @if ($errors->any())
-                            <div class="bg-red-100 dark:bg-red-700 dark:text-gray-200 border border-red-400 text-red-700 px-4 py-3 rounded relative"
-                                role="alert">
-                                <strong class="font-bold">Oops!</strong>
-                                <span class="block sm:inline">There were some errors with your submission:</span>
-                                <ul class="mt-3 list-disc list-inside text-sm">
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                            <br>
-                        @endif
 
-                        @if (Auth::user()->usertype === 'employer')
-                            <div id="applicantFields" style="display: block;">
-                                @include('profile.sections.applicant')
-                            </div>
-                        @endif
-
-
-                        <div id="applicantFields" style="display: none;">
+                    @if (Auth::user()->usertype === 'employer')
+                        <div id="applicantFields" style="display: block;">
                             @include('profile.sections.applicant')
                         </div>
+                    @endif
+                    <div id="applicantFields" style="display: none;">
+                        @include('profile.sections.applicant')
+                    </div>
 
-                        @if (Auth::user()->account_verification_status === 'approved')
-                            <div id="personalFields" style="display: none;" class="text-gray-800 dark:text-gray-100">
-                                @include('profile.sections.personal')
-                            </div>
-                            <div id="employmentFields" class="text-gray-800 dark:text-gray-100">
-                                @include('profile.sections.employment')
-                            </div>
-                            <div id="jobprefFields" style="display: none;" class="text-gray-800 dark:text-gray-100">
-                                @include('profile.sections.jobpreferences')
-                            </div>
-
-                            <div id="languageFields" style="display: none;" class="text-gray-800 dark:text-gray-100">
-                                @include('profile.sections.language')
-                            </div>
-
-                            <div id="educationFields" style="display: none;"
-                                class="text-gray-800 dark:text-gray-100">
-                                @include('profile.sections.education')
-                            </div>
-                            <div id="pwdFields" style="display: none;" class="text-gray-800 dark:text-gray-100">
-                                @include('profile.sections.pwdinfo')
-                            </div>
-                        @endif
-
+                    @if (Auth::user()->account_verification_status === 'approved')
+                        <div id="personalFields" class="text-gray-800 dark:text-gray-100" style="display: none;">
+                            @include('profile.sections.personal')
+                        </div>
+                        <div id="employmentFields" class="text-gray-800 dark:text-gray-100" style="display: none;">
+                            @include('profile.sections.employment')
+                        </div>
+                        <div id="jobprefFields" class="text-gray-800 dark:text-gray-100" style="display: none;">
+                            @include('profile.sections.jobpreferences')
+                        </div>
+                        <div id="languageFields" class="text-gray-800 dark:text-gray-100" style="display: none;">
+                            @include('profile.sections.language')
+                        </div>
+                        <div id="educationFields" class="text-gray-800 dark:text-gray-100" style="display: none;">
+                            @include('profile.sections.education')
+                        </div>
+                        <div id="pwdFields" class="text-gray-800 dark:text-gray-100" style="display: none;">
+                            @include('profile.sections.pwdinfo')
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
 
     </div>
 
-    </form>
-    </div>
-
-    </div>
-    </div>
 
 </x-app-layout>
 
@@ -366,10 +339,9 @@
 
 
 
-
     // Add more event listeners for other buttons as needed
-    window.onload = function() {
-        // Show or hide sections as needed on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        // Your existing onload code
         document.getElementById('applicantFields').style.display = 'block';
         document.getElementById('employmentFields').style.display = 'none';
         document.getElementById('personalFields').style.display = 'none';
@@ -377,7 +349,8 @@
         document.getElementById('languageFields').style.display = 'none';
         document.getElementById('educationFields').style.display = 'none';
         document.getElementById('pwdFields').style.display = 'none';
-    };
+    });
+
 
 
     function previewImage(event) {

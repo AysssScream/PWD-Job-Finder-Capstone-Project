@@ -42,7 +42,7 @@ class AuthenticatedSessionController extends Controller
         }
 
 
-        if (Auth::user()->account_verification_status == 'waiting for approval' || Auth::user()->account_verification_status == 'pending') {
+        if (Auth::user()->account_verification_status == 'waiting for approval' || Auth::user()->account_verification_status == 'pending' || Auth::user()->account_verification_status == 'declined') {
             // Check if the user is an employer
             if (Auth::user()->usertype === 'employer') {
                 return redirect()->route('employer.setup');

@@ -17,14 +17,12 @@ class CreateLanguageInputsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('language_input')->nullable();
-            $table->string('language_input2')->nullable();
+            $table->json('proficiencies')->nullable();
             $table->timestamps();
 
-            // Add foreign key constraint
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
-
     /**
      * Reverse the migrations.
      *

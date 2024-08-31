@@ -99,7 +99,7 @@
                                <div>
                                    <div class="text-right">
                                        <h3
-                                           class="text-xl sm:text-lg md:text-xl lg:text-2xl font-semibold focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                           class="text-black dark:text-white text-xl sm:text-lg md:text-xl lg:text-2xl font-semibold focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
                                            {{ $job->title }}</h3>
                                        <p class="text-md sm:text-sm md:text-md lg:text-lg text-gray-600  dark:text-gray-400 mt-1 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                            tabindex="0"
@@ -139,7 +139,7 @@
                                </a>
                            </div>
 
-                           <div class="flex justify-between mt-2">
+                           <div class="flex justify-between mt-2 text-gray-700 dark:text-gray-200">
                                <div class="mr-4">
                                    <p aria-label="{{ __('messages.userdashboard.educational_level') }} {{ $job->educational_level }}"
                                        class="focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">

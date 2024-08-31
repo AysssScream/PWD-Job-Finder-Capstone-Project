@@ -21,7 +21,7 @@
                     <form action="{{ route('personal') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @if ($errors->any())
-                            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                            <div class="bg-red-100 border border-red-400 text-red-700 dark:bg-red-700 dark:text-gray-100 dark:border-red-600 dark:text-red-200 px-4 py-3 rounded relative"
                                 role="alert">
                                 <strong class="font-bold">Oops!</strong>
                                 <span class="block sm:inline">There were some errors with your submission:</span>
@@ -33,6 +33,7 @@
                             </div>
                             <br>
                         @endif
+
                         <div class="bg-white text-black dark:bg-gray-800 dark:text-gray-200 shadow-md rounded-lg">
                             <div class="p-6">
                                 <h3 class="text-2xl font-bold mb-2 inline-flex items-center justify-between w-full focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
@@ -110,7 +111,7 @@
                                                 <div class="text-red-600 mt-1">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <div id="barangay-container" class="mt-6 relative">
+                                        {{-- <div id="barangay-container" class="mt-6 relative">
                                             <label for="barangay"
                                                 class="block mb-1">{{ __('messages.personal.barangay') }}</label>
                                             <div class="flex items-center">
@@ -128,7 +129,38 @@
                                             </div>
                                             <div id="barangay-error" class="text-red-600 mt-1 hidden">Error fetching
                                                 barangay data</div>
+                                        </div> --}}
+
+                                        <div id="barangay-container" class="mt-6">
+                                            <label for="barangay" class="block mb-1">
+                                                {{ __('messages.personal.barangay') }}
+                                            </label>
+                                            <div class="flex items-center space-x-2">
+                                                <!-- Dropdown (Select) for Barangay -->
+                                                <select id="barangay" name="barangay"
+                                                    aria-label="{{ __('messages.personal.barangay') }}"
+                                                    class="flex-1 p-2 border rounded shadow-sm bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                    <option value="" disabled>Select a Barangay</option>
+                                                </select>
+
+                                                <!-- Clear Button -->
+                                                <button id="clearBarangayButton" type="button"
+                                                    class="ml-4 p-2 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-400">
+                                                    Clear
+                                                </button>
+                                            </div>
+                                            <input type="text" id="barangayLocation" name="barangayLocation"
+                                                value="{{ old('barangayLocation', $formData2['barangayLocation'] ?? '') }}"
+                                                hidden />
+                                            <!-- Error Message -->
+                                            <div id="barangay-error" class="text-red-600 mt-1 hidden">Error fetching
+                                                barangay data</div>
+                                            @error('barangayLocation')
+                                                <div class="text-red-600 mt-1">{{ $message }}</div>
+                                            @enderror
                                         </div>
+
+
 
                                         <div class="mt-6">
                                             <label for="zipcode"
@@ -163,9 +195,8 @@
 
                                         <div class="mt-6">
                                             <div class="mt-6">
-                                                <label for="tin"
-                                                    class="block mb-1">{{ __('messages.personal.saved_tin') }}</label>
-                                                <div class="flex flex-wrap gap-1">
+
+                                                {{-- <div class="flex flex-wrap gap-1">
                                                     <!-- Group 1 -->
                                                     <input type="text" id="tin1" name="tin[]"
                                                         class="w-12 sm:w-10 md:w-12 lg:w-10 xl:w-12 h-12 sm:h-10 text-center border rounded mb-1 sm:mb-0 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200  focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
@@ -221,18 +252,15 @@
                                                         pattern="\d" title="Enter a single digit" maxlength="1"
                                                         value="{{ old('tin.8', $formData2['tin.8'] ?? '') }}"
                                                         aria-label="Tin Digit 9" />
-                                                </div>
+                                                </div>  --}}
                                                 <div class="mt-6">
                                                     <label for="tin"
-                                                        class="block mb-1 font-medium text-gray-700 dark:text-gray-200">Saved
-                                                        Tax
-                                                        Identification
-                                                        Number (TIN)</label>
+                                                        class="block mb-1">{{ __('messages.personal.saved_tin') }}</label>
                                                     <input type="text" id="tin" name="tin"
-                                                        aria-label="Saved Tax Identification Number (TIN)"
+                                                        aria-label="Tax Identification Number (TIN)"
                                                         value="{{ old('tin', $formData2['tin'] ?? '') }}"
-                                                        maxlength="9" readonly
-                                                        class="w-full px-4 py-2 rounded-md border-gray-300 shadow-sm  focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 cursor-not-allowed"
+                                                        maxlength="9"
+                                                        class="w-full px-4 py-2 rounded-md border-gray-500 shadow-sm  focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 cursor-not-allowed"
                                                         placeholder="(9 Digits)">
                                                 </div>
 
@@ -353,7 +381,7 @@
                                         </div>
 
 
-                                        <div id="ofw-country-details" class="mt-6">
+                                        {{-- <div id="ofw-country-details" class="mt-6">
                                             <label for="ofw-country"
                                                 class="block mb-1">{{ __('messages.personal.latest_country_of_deployment') }}</label>
                                             <div class="flex items-center relative">
@@ -377,7 +405,33 @@
                                             <input type="text" id="countryLocation" name="countryLocation"
                                                 value="{{ old('countryLocation', $formData2['countryLocation'] ?? '') }}"
                                                 hidden />
+                                        </div> --}}
+
+                                        <div id="ofw-country-details" class="mt-6">
+                                            <label for="ofw-country" class="block mb-1">
+                                                {{ __('messages.personal.latest_country_of_deployment') }}
+                                            </label>
+                                            <div class="flex items-center relative">
+                                                <!-- Dropdown (Select) for Country -->
+                                                <select id="ofw-country" name="ofw-country"
+                                                    class="flex-1 p-2 border rounded shadow-sm bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                    <option value="" disabled selected>Select a Country</option>
+                                                </select>
+
+                                                <!-- Clear Button -->
+                                                <button id="clearCountryButton" type="button"
+                                                    class="ml-4 p-2 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-400">
+                                                    Clear
+                                                </button>
+                                            </div>
+                                            <input type="text" id="countryLocation" name="countryLocation"
+                                                value="{{ old('countryLocation', $formData2['countryLocation'] ?? '') }}"
+                                                hidden />
+                                            @error('countryLocation')
+                                                <div class="text-red-600 mt-1">{{ $message }}</div>
+                                            @enderror
                                         </div>
+
 
                                         <div id="ofw-return-details"
                                             class="mt-6 {{ old('ofw-return') ? '' : 'disabled' }}">
@@ -409,117 +463,192 @@
 
                             <script>
                                 document.addEventListener('DOMContentLoaded', function() {
-                                    const barangayInput = document.getElementById('barangay');
-                                    const suggestionsContainer = document.getElementById('barangay-suggestions');
-                                    const errorDiv = document.getElementById('barangay-error');
+                                    const barangaySelect = document.getElementById('barangay');
+                                    const editBarangayButton = document.getElementById('editBarangayButton');
+                                    const barangayLocation = document.getElementById('barangayLocation');
+                                    const clearButton = document.getElementById('clearBarangayButton');
                                     const zipCodeInput = document.getElementById('zipcode');
 
-                                    let mandaluyongBarangays = [];
+                                    // Clear button functionality
+                                    clearButton.addEventListener('click', function() {
+                                        barangaySelect.value = ''; // Clear the dropdown selection
+                                        barangayLocation.value = ''; // Clear the hidden input field
+                                        zipCodeInput.value = ''; // Clear the zip code input field
+                                    });
 
-                                    // Fetch barangay data
+                                    // Fetch barangay data from the JSON file
                                     fetch('/locations/barangays.json')
-                                        .then(response => {
-                                            if (!response.ok) {
-                                                throw new Error('Network response was not ok');
-                                            }
-                                            return response.json();
-                                        })
+                                        .then(response => response.json())
                                         .then(data => {
-                                            mandaluyongBarangays = data.Mandaluyong;
+                                            const barangays = data.Mandaluyong;
 
-                                            barangayInput.addEventListener('input', function() {
-                                                const query = this.value.trim().toLowerCase();
-                                                const filteredBarangays = mandaluyongBarangays.filter(barangay =>
-                                                    barangay.location.toLowerCase().includes(query)
-                                                ).slice(0, 10);
+                                            // Populate the dropdown with barangay options
+                                            barangaySelect.innerHTML = '<option value="" disabled selected>Select a Barangay</option>';
+                                            barangays.forEach(barangayObj => {
+                                                const option = document.createElement('option');
+                                                option.value = barangayObj.location;
+                                                option.textContent = barangayObj.location;
+                                                barangaySelect.appendChild(option);
+                                            });
 
-                                                renderSuggestions(filteredBarangays,
-                                                    query);
+                                            // Set selected value to the saved barangay if available
+                                            if (barangayLocation.value) {
+                                                barangaySelect.value = barangayLocation.value;
+                                                updateZipCode(barangaySelect.value); // Update zip code if barangay is already selected
+                                            }
+
+                                            // Update hidden input value and zip code on selection change
+                                            barangaySelect.addEventListener('change', function() {
+                                                barangayLocation.value = this.value;
+                                                updateZipCode(this.value);
                                             });
                                         })
-                                        .catch(error => {
-                                            console.error('Error fetching barangay data:', error);
-                                            errorDiv.classList.remove('hidden');
-                                        });
-
-                                    function renderSuggestions(barangays, query) {
-                                        suggestionsContainer.innerHTML = ''; // Clear previous suggestions
-                                        suggestionsContainer.style.display = barangays.length && query ? 'block' :
-                                            'none';
-
-
-                                        barangays.forEach(barangay => {
-                                            const suggestionElement = document.createElement('div');
-                                            suggestionElement.classList.add(
-                                                'flex', // Flexbox layout
-                                                'justify-between', // Space between items
-                                                'items-center', // Center items vertically
-                                                'p-2', // Padding
-                                                'cursor-pointer', // Pointer cursor on hover
-                                                'rounded', // Rounded corners
-                                                'mb-1', // Margin bottom
-                                                'bg-gray-200',
-                                                'text-black',
-                                                'dark:bg-gray-900',
-                                                'dark:text-gray-200',
-                                            );
-
-                                            const suggestionText = document.createElement('div');
-                                            suggestionText.classList.add('suggestion-text');
-                                            suggestionText.textContent = barangay.location;
-
-                                            const plusContainer = document.createElement('div');
-                                            plusContainer.classList.add('plus-container');
-                                            plusContainer.innerHTML = '+';
-
-                                            suggestionElement.appendChild(suggestionText);
-                                            suggestionElement.appendChild(plusContainer);
-
-                                            suggestionElement.addEventListener('click', function() {
-                                                barangayInput.value = barangay.location;
-                                                zipCodeInput.value = barangay.zip;
-                                                editButton.style.display = 'inline-block'; // Show edit button
-                                                barangayInput.readOnly = true;
-
-                                                suggestionsContainer.style.display = 'none';
-
-                                            });
-
-                                            suggestionsContainer.appendChild(suggestionElement);
-
-
-                                        });
-                                    }
+                                        .catch(error => console.error('Error fetching barangay data:', error));
 
                                     // Edit button functionality
-                                    editButton.addEventListener('click', function() {
-                                        event.preventDefault()
-
-                                        barangayInput.removeAttribute('readonly'); // Allow editing
-                                        barangayInput.focus(); // Focus on the input field
-                                        barangayInput.value = ''
-                                        zipCodeInput.value = ''
+                                    editBarangayButton.addEventListener('click', function(event) {
+                                        event.preventDefault();
+                                        barangaySelect.removeAttribute('disabled'); // Enable dropdown for editing
+                                        barangaySelect.focus(); // Focus on the select field
                                     });
 
-                                    // Handle input changes in barangayInput
-                                    barangayInput.addEventListener('input', function() {
-                                        const selectedBarangay = this.value.trim();
-                                        if (selectedBarangay === '') {
-                                            zipCodeInput.value = ''; // Clear zip code input if barangay input is empty
-                                            editButton.style.display = 'inline-block'; // Hide edit button if input is empty
-
-                                        }
-                                        if (selectedBarangay === '' || selectedBarangay.split(' ').length < 2) {
-                                            zipCodeInput.value = ''; // Clear zip code input
-                                            editButton.style.display = 'inline-block'; // Hide edit button
-
-                                        }
-                                    });
-                                    if (barangayInput.value.trim() === '') {
-                                        editButton.style.display = 'inline-block';
+                                    // Disable the select field by default if a barangay is already selected
+                                    if (barangaySelect.value) {
+                                        barangaySelect.setAttribute('disabled', true);
                                     }
 
+                                    // Function to update the zip code based on the selected barangay
+                                    function updateZipCode(selectedBarangay) {
+                                        fetch('/locations/barangays.json')
+                                            .then(response => response.json())
+                                            .then(data => {
+                                                const selectedBarangayData = data.Mandaluyong.find(barangayObj => barangayObj
+                                                    .location === selectedBarangay);
+                                                if (selectedBarangayData) {
+                                                    zipCodeInput.value = selectedBarangayData.zip; // Update the zip code input field
+                                                }
+                                            })
+                                            .catch(error => console.error('Error updating zip code:', error));
+                                    }
                                 });
+
+
+
+                                // document.addEventListener('DOMContentLoaded', function() {
+                                //     const barangayInput = document.getElementById('barangay');
+                                //     const suggestionsContainer = document.getElementById('barangay-suggestions');
+                                //     const errorDiv = document.getElementById('barangay-error');
+                                //     const zipCodeInput = document.getElementById('zipcode');
+
+                                //     let mandaluyongBarangays = [];
+
+                                //     // Fetch barangay data
+                                //     fetch('/locations/barangays.json')
+                                //         .then(response => {
+                                //             if (!response.ok) {
+                                //                 throw new Error('Network response was not ok');
+                                //             }
+                                //             return response.json();
+                                //         })
+                                //         .then(data => {
+                                //             mandaluyongBarangays = data.Mandaluyong;
+
+                                //             barangayInput.addEventListener('input', function() {
+                                //                 const query = this.value.trim().toLowerCase();
+                                //                 const filteredBarangays = mandaluyongBarangays.filter(barangay =>
+                                //                     barangay.location.toLowerCase().includes(query)
+                                //                 ).slice(0, 10);
+
+                                //                 renderSuggestions(filteredBarangays,
+                                //                     query);
+                                //             });
+                                //         })
+                                //         .catch(error => {
+                                //             console.error('Error fetching barangay data:', error);
+                                //             errorDiv.classList.remove('hidden');
+                                //         });
+
+                                //     function renderSuggestions(barangays, query) {
+                                //         suggestionsContainer.innerHTML = ''; // Clear previous suggestions
+                                //         suggestionsContainer.style.display = barangays.length && query ? 'block' :
+                                //             'none';
+
+
+                                //         barangays.forEach(barangay => {
+                                //             const suggestionElement = document.createElement('div');
+                                //             suggestionElement.classList.add(
+                                //                 'flex', // Flexbox layout
+                                //                 'justify-between', // Space between items
+                                //                 'items-center', // Center items vertically
+                                //                 'p-2', // Padding
+                                //                 'cursor-pointer', // Pointer cursor on hover
+                                //                 'rounded', // Rounded corners
+                                //                 'mb-1', // Margin bottom
+                                //                 'bg-gray-200',
+                                //                 'text-black',
+                                //                 'dark:bg-gray-900',
+                                //                 'dark:text-gray-200',
+                                //             );
+
+                                //             const suggestionText = document.createElement('div');
+                                //             suggestionText.classList.add('suggestion-text');
+                                //             suggestionText.textContent = barangay.location;
+
+                                //             const plusContainer = document.createElement('div');
+                                //             plusContainer.classList.add('plus-container');
+                                //             plusContainer.innerHTML = '+';
+
+                                //             suggestionElement.appendChild(suggestionText);
+                                //             suggestionElement.appendChild(plusContainer);
+
+                                //             suggestionElement.addEventListener('click', function() {
+                                //                 barangayInput.value = barangay.location;
+                                //                 zipCodeInput.value = barangay.zip;
+                                //                 editButton.style.display = 'inline-block'; // Show edit button
+                                //                 barangayInput.readOnly = true;
+
+                                //                 suggestionsContainer.style.display = 'none';
+
+                                //             });
+
+                                //             suggestionsContainer.appendChild(suggestionElement);
+
+
+                                //         });
+                                //     }
+
+                                //     // Edit button functionality
+                                //     editButton.addEventListener('click', function() {
+                                //         event.preventDefault()
+
+                                //         barangayInput.removeAttribute('readonly'); // Allow editing
+                                //         barangayInput.focus(); // Focus on the input field
+                                //         barangayInput.value = ''
+                                //         zipCodeInput.value = ''
+                                //     });
+
+                                //     // Handle input changes in barangayInput
+                                //     barangayInput.addEventListener('input', function() {
+                                //         const selectedBarangay = this.value.trim();
+                                //         if (selectedBarangay === '') {
+                                //             zipCodeInput.value = ''; // Clear zip code input if barangay input is empty
+                                //             editButton.style.display = 'inline-block'; // Hide edit button if input is empty
+
+                                //         }
+                                //         if (selectedBarangay === '' || selectedBarangay.split(' ').length < 2) {
+                                //             zipCodeInput.value = ''; // Clear zip code input
+                                //             editButton.style.display = 'inline-block'; // Hide edit button
+
+                                //         }
+                                //     });
+                                //     if (barangayInput.value.trim() === '') {
+                                //         editButton.style.display = 'inline-block';
+                                //     }
+
+                                // });
+
+
+
 
                                 document.addEventListener('DOMContentLoaded', function() {
                                     const zipCodeInput = document.getElementById('zipcode');
@@ -603,13 +732,16 @@
 
 
                                 //COUNTRIES
-
                                 document.addEventListener('DOMContentLoaded', function() {
-                                    const countryInput = document.getElementById('ofw-country');
+                                    const countrySelect = document.getElementById('ofw-country');
                                     const editButton = document.getElementById('editCountryButton');
-                                    const suggestionsContainer = document.getElementById('country-suggestions');
                                     const ofwLocation = document.getElementById('countryLocation');
+                                    const clearButton = document.getElementById('clearCountryButton');
 
+                                    clearButton.addEventListener('click', function() {
+                                        countrySelect.value = ''; // Clear the dropdown selection
+                                        ofwLocation.value = ''; // Clear the hidden input field
+                                    });
 
                                     // Fetch country data from the JSON file
                                     fetch('/locations/countries.json')
@@ -617,72 +749,118 @@
                                         .then(data => {
                                             const countries = data.map(countryObj => countryObj.country);
 
-                                            countryInput.addEventListener('input', function() {
-                                                const query = this.value.trim().toLowerCase();
-                                                const filteredCountries = countries.filter(country =>
-                                                    country.toLowerCase().includes(query)
-                                                ).slice(0, 6);
+                                            // Populate the dropdown with country options
+                                            countrySelect.innerHTML = '<option value="" disabled selected>Select a Country</option>';
+                                            countries.forEach(country => {
+                                                const option = document.createElement('option');
+                                                option.value = country;
+                                                option.textContent = country;
+                                                countrySelect.appendChild(option);
+                                            });
 
-                                                renderSuggestions(filteredCountries, query);
+                                            // Set selected value to the saved country if available
+                                            if (ofwLocation.value) {
+                                                countrySelect.value = ofwLocation.value;
+                                            }
+
+                                            // Update hidden input value on selection change
+                                            countrySelect.addEventListener('change', function() {
+                                                ofwLocation.value = this.value;
                                             });
                                         })
                                         .catch(error => console.error('Error fetching country data:', error));
 
-                                    function renderSuggestions(countries, query) {
-                                        suggestionsContainer.innerHTML = ''; // Clear previous suggestions
-                                        suggestionsContainer.classList.toggle('hidden', !countries.length || !query);
-
-                                        countries.forEach(country => {
-                                            const suggestionElement = document.createElement('div');
-                                            suggestionElement.classList.add('flex', 'justify-between', 'items-center', 'p-2',
-                                                'cursor-pointer', 'hover:bg-black', 'hover:text-white', 'border-b',
-                                                'last:border-none');
-
-                                            const suggestionText = document.createElement('div');
-                                            suggestionText.textContent = country;
-                                            suggestionText.classList.add('flex-1'); // Make the text take up remaining space
-
-                                            const plusContainer = document.createElement('div');
-                                            plusContainer.classList.add('text-green-500', 'ml-10'); // Add left margin for spacing
-                                            plusContainer.textContent = '+';
-
-                                            suggestionElement.appendChild(suggestionText);
-                                            suggestionElement.appendChild(plusContainer);
-
-                                            suggestionElement.addEventListener('click', function() {
-                                                countryInput.value = country;
-                                                suggestionsContainer.classList.add('hidden');
-                                                ofwLocation.value = country;
-                                                countryInput.readOnly = true;
-                                            });
-
-                                            suggestionsContainer.appendChild(suggestionElement);
-                                        });
-                                    }
-
                                     // Edit button functionality
                                     editButton.addEventListener('click', function(event) {
                                         event.preventDefault();
-                                        countryInput.removeAttribute('readonly');
-                                        countryInput.focus();
-                                        countryInput.value = '';
-                                        ofwLocation.value = '';
+                                        countrySelect.removeAttribute('disabled'); // Enable dropdown for editing
+                                        countrySelect.focus(); // Focus on the select field
                                     });
 
-                                    // Handle input changes in countryInput
-                                    countryInput.addEventListener('input', function() {
-                                        const selectedCountry = this.value.trim();
-                                        if (selectedCountry === '') {
-                                            editButton.style.display = 'inline-block';
-                                        }
-                                    });
-
-                                    if (countryInput.value.trim() === '') {
-                                        editButton.style.display = 'inline-block';
+                                    // Disable the select field by default if a country is already selected
+                                    if (countrySelect.value) {
+                                        countrySelect.setAttribute('disabled', true);
                                     }
-
-
                                 });
+                                // document.addEventListener('DOMContentLoaded', function() {
+                                //     const countryInput = document.getElementById('ofw-country');
+                                //     const editButton = document.getElementById('editCountryButton');
+                                //     const suggestionsContainer = document.getElementById('country-suggestions');
+                                //     const ofwLocation = document.getElementById('countryLocation');
+
+
+                                //     // Fetch country data from the JSON file
+                                //     fetch('/locations/countries.json')
+                                //         .then(response => response.json())
+                                //         .then(data => {
+                                //             const countries = data.map(countryObj => countryObj.country);
+
+                                //             countryInput.addEventListener('input', function() {
+                                //                 const query = this.value.trim().toLowerCase();
+                                //                 const filteredCountries = countries.filter(country =>
+                                //                     country.toLowerCase().includes(query)
+                                //                 ).slice(0, 6);
+
+                                //                 renderSuggestions(filteredCountries, query);
+                                //             });
+                                //         })
+                                //         .catch(error => console.error('Error fetching country data:', error));
+
+                                //     function renderSuggestions(countries, query) {
+                                //         suggestionsContainer.innerHTML = ''; // Clear previous suggestions
+                                //         suggestionsContainer.classList.toggle('hidden', !countries.length || !query);
+
+                                //         countries.forEach(country => {
+                                //             const suggestionElement = document.createElement('div');
+                                //             suggestionElement.classList.add('flex', 'justify-between', 'items-center', 'p-2',
+                                //                 'cursor-pointer', 'hover:bg-black', 'hover:text-white', 'border-b',
+                                //                 'last:border-none');
+
+                                //             const suggestionText = document.createElement('div');
+                                //             suggestionText.textContent = country;
+                                //             suggestionText.classList.add('flex-1'); // Make the text take up remaining space
+
+                                //             const plusContainer = document.createElement('div');
+                                //             plusContainer.classList.add('text-green-500', 'ml-10'); // Add left margin for spacing
+                                //             plusContainer.textContent = '+';
+
+                                //             suggestionElement.appendChild(suggestionText);
+                                //             suggestionElement.appendChild(plusContainer);
+
+                                //             suggestionElement.addEventListener('click', function() {
+                                //                 countryInput.value = country;
+                                //                 suggestionsContainer.classList.add('hidden');
+                                //                 ofwLocation.value = country;
+                                //                 countryInput.readOnly = true;
+                                //             });
+
+                                //             suggestionsContainer.appendChild(suggestionElement);
+                                //         });
+                                //     }
+
+                                //     // Edit button functionality
+                                //     editButton.addEventListener('click', function(event) {
+                                //         event.preventDefault();
+                                //         countryInput.removeAttribute('readonly');
+                                //         countryInput.focus();
+                                //         countryInput.value = '';
+                                //         ofwLocation.value = '';
+                                //     });
+
+                                //     // Handle input changes in countryInput
+                                //     countryInput.addEventListener('input', function() {
+                                //         const selectedCountry = this.value.trim();
+                                //         if (selectedCountry === '') {
+                                //             editButton.style.display = 'inline-block';
+                                //         }
+                                //     });
+
+                                //     if (countryInput.value.trim() === '') {
+                                //         editButton.style.display = 'inline-block';
+                                //     }
+
+
+                                // });
                             </script>
                             <style>
                                 .suggestion {

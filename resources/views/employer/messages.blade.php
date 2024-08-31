@@ -72,11 +72,11 @@
             </style>
 
             <div
-                class="w-full md:w-1/3 lg:w-1/4 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 border-r border-gray-200 flex flex-col ">
+                class="w-full md:w-1/3 lg:w-1/4 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 border-r border-gray-400 flex flex-col ">
                 <!-- Fixed top section -->
                 <div class="flex-none">
                     <!-- Go Back Button -->
-                    <div class="p-4 border-b border-gray-200">
+                    <div class="p-4 border-b border-gray-400">
                         <a href="{{ route('employer.dashboard') }}"
                             class="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-full shadow hover:bg-blue-600 transition duration-200 flex items-center justify-center">
                             <i class="fas fa-arrow-left mr-2"></i>
@@ -84,7 +84,7 @@
                         </a>
                     </div>
 
-                    <div class="p-4 border-b border-gray-200">
+                    <div class="p-4 border-b border-gray-400">
                         <button id="composeButton"
                             class="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-full shadow hover:bg-blue-600 transition duration-200 flex items-center justify-center">
                             <i class="fas fa-pen mr-2"></i>
@@ -108,7 +108,7 @@
                             <div
                                 class="inline-block align-bottom bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
                                 <div
-                                    class="bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                    class="bg-white text-gray-900 mr-4 dark:bg-gray-900 dark:text-gray-200 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                     <div class="sm:items-start">
                                         <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                                             <h3 class="text-lg leading-6 font-medium text-gray-700 dark:text-gray-200"
@@ -241,17 +241,19 @@
 
                     <!-- Main folders -->
                     <div
-                        class="flex justify-between px-4 py-2 bg-gray-100 border-b border-gray-200 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200">
-                        <button
+                        class="flex justify-between px-4 py-2 bg-gray-100 border-b border-gray-400 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200">
+                        <a href="{{ route('employer.messages') }}"
                             class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg transition duration-150 ease-in-out">
                             <svg class="w-5 h-5 mr-2 text-gray-700 dark:text-gray-200" fill="none"
                                 stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4">
-                                </path>
+                                    d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
                             </svg>
-                            <span class="hidden sm:inline text-gray-700 dark:text-gray-200 ">Inbox</span>
-                        </button>
+                            <span class="text-gray-700 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400">
+                                Inbox
+                            </span>
+                        </a>
+
                         {{--  <button
                             class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200  dark:hover:bg-gray-800 rounded-lg transition duration-150 ease-in-out">
                             <svg class="w-5 h-5 mr-2 text-gray-700 dark:text-gray-200" fill="none"
@@ -262,19 +264,23 @@
                             </svg>
                             <span class="hidden sm:inline text-gray-700 dark:text-gray-200">Unread</span>
                         </button> --}}
-                        <button
-                            class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200  dark:hover:bg-gray-800 rounded-lg transition duration-150 ease-in-out">
+                        <a href="{{ route('employer.sentmessages') }}"
+                            class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg transition duration-150 ease-in-out">
                             <svg class="w-5 h-5 mr-2 text-gray-700 dark:text-gray-200" fill="none"
                                 stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
                             </svg>
-                            <span class="hidden sm:inline text-gray-700 dark:text-gray-200">Sent</span>
-                        </button>
+                            <span
+                                class="hidden sm:inline text-gray-700 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400">
+                                Sent
+                            </span>
+                        </a>
+
                     </div>
 
                     <!-- Search Bar -->
-                    <div class="p-4 border-b border-gray-200">
+                    <div class="p-4 border-b border-gray-400">
                         <div class="relative">
                             <input type="text" placeholder="Search mail"
                                 class="w-full pl-10 pr-4 py-2 bg-white text-black dark:bg-gray-800 dark:text-gray-200 rounded-lg focus:outline-none focus:border-blue-500">
@@ -288,8 +294,18 @@
                 </div>
 
                 <div class="container mx-auto">
-                    <h1 class="text-2xl font-bold mb-4 p-4">Messages</h1>
-
+                    @php
+                        $currentRoute = Route::currentRouteName();
+                    @endphp
+                    <h1 class="text-2xl font-bold mb-4 p-4">
+                        @if ($currentRoute == 'employer.messages')
+                            Messages
+                        @elseif ($currentRoute == 'employer.sentmessages')
+                            Sent Messages
+                        @else
+                            Messages
+                        @endif
+                    </h1>
                     @if ($messages->isEmpty())
                         <div class="messages-list overflow-y-auto h-screen"> <!-- Added classes for scrollable area -->
                             <p class="text-gray-600 ml-4">No messages found.</p>
@@ -298,7 +314,7 @@
                         <div class="messages-list overflow-y-auto h-screen">
                             <!-- Added classes for scrollable area -->
                             @foreach ($messages as $message)
-                                <div class="email-item p-4 border-b border-gray-200 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800"
+                                <div class="email-item p-4 border-b border-gray-400 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800"
                                     data-id="{{ $message->id }}" data-from="{{ $message->from }}"
                                     data-subject="{{ $message->subject }}" data-message="{{ $message->message }}"
                                     data-created-at="{{ $message->created_at->format('g:i A') }}"
@@ -317,7 +333,7 @@
                                     <p class="text-sm text-gray-700 dark:text-gray-200 truncate">
                                         {{ $message->message }}</p>
                                     <span class="ml-auto text-xs text-gray-700 dark:text-gray-200">
-                                        {{ $message->created_at->format('g:i A') }}
+                                        {{ $message->created_at->setTimezone('Asia/Singapore')->format('g:i A') }}
                                     </span>
                                 </div>
                             @endforeach
@@ -327,7 +343,7 @@
                             class="fixed inset-0 z-50 hidden flex items-center justify-center bg-gray-800 bg-opacity-75">
                             <div
                                 class="bg-white dark:bg-gray-900 rounded-lg overflow-hidden shadow-xl w-full max-w-lg mx-4">
-                                <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+                                <div class="p-4 border-b border-gray-400 dark:border-gray-700">
                                     <h3 class="text-lg font-medium text-gray-900 dark:text-gray-200">Reply to Email
                                     </h3>
                                 </div>
@@ -415,7 +431,7 @@
                 class=" flex-1 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 flex flex-col overflow-hidden">
 
                 <!-- Top section with Reply button and email details -->
-                <div class="p-4 border-b border-gray-200 flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                <div class="p-4 border-b border-gray-400 flex flex-col sm:flex-row sm:items-center sm:justify-between">
                     <!-- Email Details Section -->
                     <div class="flex-1 mb-4 sm:mb-0">
                         <h2 id="emailSubject" class="text-xl font-semibold mb-2 text-gray-700 dark:text-gray-200">

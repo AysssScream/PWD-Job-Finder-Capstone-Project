@@ -1,8 +1,8 @@
 <x-app-layout>
-    <title>Admin Messages</title>
+    <title>User Messages</title>
 
-    <div class="h-full ml-14 md:ml-64 font-poppins h-screen  ">
-        <div class="flex flex-col md:flex-row bg-gray-100">
+    <div class="font-poppins h-screen">
+        <div class="flex flex-col md:flex-row  bg-gray-100">
             <!-- Sidebar and Email List Combined -->
             <style>
                 /* Custom Scrollbar Styles */
@@ -72,23 +72,37 @@
             </style>
 
             <div
-                class="w-full md:w-1/3 lg:w-1/4 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 border-r border-gray-400 flex flex-col">
+                class="w-full md:w-1/3 lg:w-1/4 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 border-r border-gray-400 flex flex-col ">
                 <!-- Fixed top section -->
                 <div class="flex-none">
-                    <!-- Compose Button -->
+                    <!-- Go Back Button -->
+                    @if (Auth::user()->account_verification_status == 'declined' && Auth::user()->usertype == 'user')
+                        <div class="p-4 border-b border-gray-400">
+                            <a href="{{ route('pendingapproval') }}"
+                                class="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-full shadow hover:bg-blue-600 transition duration-200 flex items-center justify-center">
+                                <i class="fas fa-arrow-left mr-2"></i>
+                                Go Back
+                            </a>
+                        </div>
+                    @else
+                        <div class="p-4 border-b border-gray-400">
+                            <a href="{{ route('dashboard') }}"
+                                class="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-full shadow hover:bg-blue-600 transition duration-200 flex items-center justify-center">
+                                <i class="fas fa-arrow-left mr-2"></i>
+                                Go Back
+                            </a>
+                        </div>
+                    @endif
+
                     <div class="p-4 border-b border-gray-400">
                         <button id="composeButton"
                             class="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-full shadow hover:bg-blue-600 transition duration-200 flex items-center justify-center">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 4v16m8-8H4"></path>
-                            </svg>
+                            <i class="fas fa-pen mr-2"></i>
                             Compose
                         </button>
                     </div>
 
-                    <!-- Modal -->
+
                     <!-- Modal -->
                     <div id="composeModal" class="fixed z-10 inset-0 overflow-y-auto hidden"
                         aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -112,7 +126,7 @@
                                                 Compose Message
                                             </h3>
                                             <div class="mt-2">
-                                                <form action="{{ route('admin.messages.store') }}" method="POST">
+                                                <form action="{{ route('user.messages.store') }}" method="POST">
                                                     @csrf
                                                     <div class="mb-4">
                                                         <label for="to"
@@ -121,13 +135,15 @@
                                                             <input type="text" id="to" name="to"
                                                                 placeholder="Enter recipient's email"
                                                                 class="w-full px-3 py-2 border border-gray-300 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out"
-                                                                autocomplete="off">
+                                                                autocomplete="off" value="pdad@gmail.com" r>
                                                             <div id="suggestions"
                                                                 class="absolute left-0 right-0 mt-1 max-h-40 overflow-y-auto border border-gray-300 bg-white dark:bg-gray-900 rounded-md shadow-lg z-10 hidden">
                                                                 <!-- Suggestions will be inserted here by JavaScript -->
                                                             </div>
                                                         </div>
                                                     </div>
+
+
 
                                                     <div class="mb-4">
                                                         <label for="subject"
@@ -236,8 +252,7 @@
                     <!-- Main folders -->
                     <div
                         class="flex justify-between px-4 py-2 bg-gray-100 border-b border-gray-400 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200">
-
-                        <a href="{{ route('admin.messages') }}"
+                        <a href="{{ route('user.messages') }}"
                             class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg transition duration-150 ease-in-out">
                             <svg class="w-5 h-5 mr-2 text-gray-700 dark:text-gray-200" fill="none"
                                 stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -248,6 +263,7 @@
                                 Inbox
                             </span>
                         </a>
+
                         {{--  <button
                             class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200  dark:hover:bg-gray-800 rounded-lg transition duration-150 ease-in-out">
                             <svg class="w-5 h-5 mr-2 text-gray-700 dark:text-gray-200" fill="none"
@@ -258,8 +274,7 @@
                             </svg>
                             <span class="hidden sm:inline text-gray-700 dark:text-gray-200">Unread</span>
                         </button> --}}
-
-                        <a href="{{ route('admin.sentmessages') }}"
+                        <a href="{{ route('user.sentmessages') }}"
                             class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg transition duration-150 ease-in-out">
                             <svg class="w-5 h-5 mr-2 text-gray-700 dark:text-gray-200" fill="none"
                                 stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -271,6 +286,7 @@
                                 Sent
                             </span>
                         </a>
+
                     </div>
 
                     <!-- Search Bar -->
@@ -292,27 +308,27 @@
                         $currentRoute = Route::currentRouteName();
                     @endphp
                     <h1 class="text-2xl font-bold mb-4 p-4">
-                        @if ($currentRoute == 'admin.messages')
+                        @if ($currentRoute == 'user.messages')
                             Messages
-                        @elseif ($currentRoute == 'admin.sentmessages')
+                        @elseif ($currentRoute == 'user.sentmessages')
                             Sent Messages
                         @else
                             Messages
                         @endif
                     </h1>
-
                     @if ($messages->isEmpty())
                         <div class="messages-list overflow-y-auto h-screen"> <!-- Added classes for scrollable area -->
                             <p class="text-gray-600 ml-4">No messages found.</p>
                         </div>
                     @else
-                        <div class="messages-list overflow-y-auto h-screen"> <!-- Added classes for scrollable area -->
+                        <div class="messages-list overflow-y-auto h-screen">
+                            <!-- Added classes for scrollable area -->
                             @foreach ($messages as $message)
                                 <div class="email-item p-4 border-b border-gray-400 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800"
                                     data-id="{{ $message->id }}" data-from="{{ $message->from }}"
                                     data-subject="{{ $message->subject }}" data-message="{{ $message->message }}"
                                     data-created-at="{{ $message->created_at->format('g:i A') }}"
-                                    data-to="{{ $message->to }}" onclick="showAdminReplies({{ $message->id }})">
+                                    data-to="{{ $message->to }}" onclick="showReplies({{ $message->id }})">
 
                                     <div class="flex items-center mb-1">
                                         <div
@@ -342,7 +358,7 @@
                                     </h3>
                                 </div>
                                 <div class="p-6">
-                                    <form id="replyForm" action="{{ route('admin.replies.store') }}" method="POST">
+                                    <form id="replyForm" action="{{ route('user.replies.store') }}" method="POST">
                                         @csrf
                                         <input type="hidden" id="message_id" name="message_id" value="">
                                         <div class="mb-4">
@@ -367,10 +383,10 @@
                         </div>
                     @endif
                 </div>
-                {{-- admin messages --}}
+
                 <script>
-                    function showAdminReplies(messageId) {
-                        fetch(`/admin/messages/${messageId}/replies`)
+                    function showReplies(messageId) {
+                        fetch(`/user/messages/${messageId}/replies`)
                             .then(response => response.json())
                             .then(data => {
                                 const replyContainer = document.getElementById('replyContainer');
@@ -421,7 +437,7 @@
 
 
             <div id="emailContent"
-                class="flex-1 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 flex flex-col overflow-hidden">
+                class=" flex-1 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 flex flex-col overflow-hidden">
 
                 <!-- Top section with Reply button and email details -->
                 <div class="p-4 border-b border-gray-400 flex flex-col sm:flex-row sm:items-center sm:justify-between">
@@ -453,7 +469,7 @@
 
 
                     <div id="replyContainer"
-                        class="new-content w-full  p-4 bg-gray-200 dark:bg-gray-700 rounded shadow-inner">
+                        class="new-content w-full  p-4 bg-gray-50 dark:bg-gray-900 rounded shadow-inner">
                         <p class="dark:text-gray-300">Please select a message to view its replies.</p>
                     </div>
 

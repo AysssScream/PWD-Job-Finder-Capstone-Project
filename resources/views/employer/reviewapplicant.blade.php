@@ -33,7 +33,7 @@
         <div class="container mx-auto max-w-8xl px-4 pt-2 mb-2">
             <div class="row">
                 <div class="col">
-                    <nav aria-label="breadcrumb" class="rounded-lg p-3 text-gray-800 dark:text-gray-300">
+                    <nav aria-label="breadcrumb" class="rounded-lg text-gray-800 dark:text-gray-300">
                         <ol class="breadcrumb mb-0 flex items-center justify-between flex-wrap">
                             <li class="breadcrumb-item w-full md:w-auto">
                                 <a href="{{ route('employer.dashboard') }}"
@@ -42,26 +42,34 @@
                                     <span>Back to Dashboard</span>
                                 </a>
                             </li>
-                            <li class="breadcrumb-item w-full md:w-auto ml-auto flex space-x-4">
-                                <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
-                                    <select id="dateFilter" name="dateFilter"
-                                        class="bg-gray-100 border border-gray-600 text-gray-900 px-3 py-1 rounded focus:outline-none focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300">
-                                        <option value="All">All</option>
-                                        <option value="last-24-hours">Last 24 Hours</option>
-                                        <option value="last-7-days">Last 7 Days</option>
-                                        <option value="last-30-days">Last 30 Days</option>
-                                    </select>
-                                    <select id="anotherFilter" name="anotherFilter"
-                                        class="bg-gray-100 border border-gray-600 text-gray-900 px-3 py-1 rounded focus:outline-none focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300">
-                                        <option value="All" selected disabled>Status</option>
-                                        <option value="Hired">Hired</option>
-                                        <option value="Pending">Pending</option>
-                                        <option value="Deleted">Deleted</option>
-                                    </select>
-                                </div>
+                            <li class="breadcrumb-item w-full md:w-auto ml-auto flex space-x-4 mt-4 md:mt-0">
+                                <form action="{{ route('employer.review') }}" method="GET" class="w-full">
+                                    <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 w-full">
+                                        <select id="dateFilter" name="dateFilter"
+                                            class="bg-gray-100 border border-gray-600 text-gray-900 px-3 py-2 rounded focus:outline-none focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 flex-1">
+                                            <option value="All">All</option>
+                                            <option value="last-24-hours">Last 24 Hours</option>
+                                            <option value="last-7-days">Last 7 Days</option>
+                                            <option value="last-30-days">Last 30 Days</option>
+                                        </select>
+                                        <select id="anotherFilter" name="anotherFilter"
+                                            class="bg-gray-100 border border-gray-600 text-gray-900 px-8 py-2 rounded focus:outline-none focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 flex-1">
+                                            <option value="All" selected disabled>Status</option>
+                                            <option value="Hired">Hired</option>
+                                            <option value="Pending">Pending</option>
+                                            <option value="Deleted">Deleted</option>
+                                        </select>
+                                        <button type="submit"
+                                            class="bg-blue-500 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 hover:bg-blue-600">
+                                            Apply
+                                        </button>
+                                    </div>
+                                </form>
                             </li>
+
                         </ol>
                     </nav>
+
                 </div>
             </div>
         </div>

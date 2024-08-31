@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -32,18 +33,19 @@ class AdminController extends Controller
 {
     public function index()
     {
-
         // Perform the database queries to get user counts
         $userCount = \App\Models\User::where('usertype', 'user')->count();
         $employerCount = \App\Models\User::where('usertype', 'employer')->count();
         $jobInfoCount = \App\Models\JobInfo::count();
         $hiredjobCount = \App\Models\JobApplication::where('status', 'hired')->count();
         $pendingjobCount = \App\Models\JobApplication::where('status', 'pending')->count();
+        $accountCreations = \App\Models\User::where('account_verification_status', 'waiting for approval')->count();
         $users = User::take(4)->get();
         $maxSkills = 3;
         $maxEducation = 3;
         $maxEmploymentType = 3;
         $maxAge = 3;
+        $maxEmployerCount = 3;
         $maxDisabilities = 3;
         $workExperiences = WorkExperience::all();
         $skills = $workExperiences->flatMap(function ($workExperience) {
@@ -143,6 +145,54 @@ class AdminController extends Controller
         $disabilityOccurrences = $pwdInformationData->pluck('disabilityOccurrence')->countBy(); // Count occurrences of each disability
         $disabilityType = $pwdInformationData->pluck('disability')->countBy(); // Count occurrences of each disability
 
+        // Fetch all work experience data
+        $workExperience = WorkExperience::all();
+        // Count occurrences of each employer
+        $employerCounts = $workExperience->groupBy('employer_name')->map(function ($experience) {
+            return $experience->count(); // Count how many times each employer appears
+        });
+        // Get the most and least frequent employers
+        $mostFrequentEmployers = $employerCounts->sortDesc()->take($maxEmployerCount); // Top most frequent employers
+        $leastFrequentEmployers = $employerCounts->sort()->take($maxEmployerCount); // Bottom least frequent employers
+        // Calculate 'Others' for employers
+        $otherMostFrequentEmployers = $employerCounts->except($mostFrequentEmployers->keys())->sum();
+        $otherLeastFrequentEmployers = $employerCounts->except($leastFrequentEmployers->keys())->sum();
+        // Add 'Others' to both most and least frequent employers
+        $mostFrequentEmployers = $mostFrequentEmployers->put('Others', $otherMostFrequentEmployers);
+        $leastFrequentEmployers = $leastFrequentEmployers->put('Others', $otherLeastFrequentEmployers);
+
+
+        // Years of experience
+
+        // Calculate the number of years for each work experience
+        $workExperience = $workExperience->map(function ($experience) {
+            $fromDate = Carbon::parse($experience->from_date);
+            $toDate = Carbon::parse($experience->to_date);
+            $years = $fromDate->diffInYears($toDate);
+            return $experience->setAttribute('years', $years);
+        });
+
+        // Group by employer and sum the total years of experience
+        $employerYears = $workExperience->groupBy('employer_name')->map(function ($experiences) {
+            $totalYears = $experiences->sum('years');
+            return $totalYears;
+        });
+
+        // Get the most and least frequent employers based on the total years
+        $mostFrequentEmployersByYears = $employerYears->sortDesc()->take($maxEmployerCount);
+        $leastFrequentEmployersByYears = $employerYears->sort()->take($maxEmployerCount);
+
+        // Calculate 'Others' for employers
+        $otherMostFrequentEmployersByYears = $employerYears->except($mostFrequentEmployersByYears->keys())->sum();
+        $otherLeastFrequentEmployersByYears = $employerYears->except($leastFrequentEmployersByYears->keys())->sum();
+
+        // Add 'Others' to both most and least frequent employers
+        $mostFrequentEmployersByYears = $mostFrequentEmployersByYears->put('Others', $otherMostFrequentEmployersByYears);
+        $leastFrequentEmployersByYears = $leastFrequentEmployersByYears->put('Others', $otherLeastFrequentEmployersByYears);
+
+        // Optionally, you can filter by date range
+
+
         return view('admin.dashboard', [
             'users' => $users,
             'userCount' => $userCount,
@@ -160,11 +210,15 @@ class AdminController extends Controller
             'leastEmployableEmploymentTypes' => $leastEmployableEmploymentTypes, // Least employable employment types
             'mostCommonAges' => $mostCommonAges,
             'leastCommonAges' => $leastCommonAges,
+            'mostFrequentEmployers' => $mostFrequentEmployers,
+            'leastFrequentEmployers' => $leastFrequentEmployers,
+            'mostFrequentEmployersByYears' => $mostFrequentEmployersByYears,
+            'leastFrequentEmployersByYears' => $leastFrequentEmployersByYears,
             'disabilityOccurrences' => $disabilityOccurrences, // Pass disability occurrences to the view
             'disabilityType' => $disabilityType,
             'hiredjobCount' => $hiredjobCount,
-            'pendingjobCount' => $pendingjobCount
-
+            'pendingjobCount' => $pendingjobCount,
+            'accountCreations' => $accountCreations
         ]);
     }
 
@@ -177,6 +231,21 @@ class AdminController extends Controller
     }
 
     public function messages()
+    {
+        $userId = Auth::id();
+        $email = User::find($userId)->email;
+        $messages = Message::where('to', $email)->get();
+        $replies = Reply::all();
+        $users = User::all();
+
+        return view('admin.messages', [
+            'messages' => $messages,
+            'users' => $users,
+            'replies' => $replies
+        ]);
+    }
+
+    public function sentmessages()
     {
         $userId = Auth::id();
         $email = User::find($userId)->email;
@@ -194,7 +263,7 @@ class AdminController extends Controller
     public function videoStore(Request $request, $location)
     {
         $validator = Validator::make($request->all(), [
-            'video_id' => 'required|string',
+            'video_id' => 'required|string|unique:videos,video_id',
         ]);
 
         if ($validator->fails()) {
@@ -204,6 +273,7 @@ class AdminController extends Controller
         }
 
         $videoId = $request->input('video_id');
+        $user = Auth::user();
 
         // Check if a video with the same location exists
         $video = Video::where('location', $location)->first();
@@ -212,11 +282,24 @@ class AdminController extends Controller
             // Update the existing record
             $video->update(['video_id' => $videoId]);
             Session::flash('updatevideo', 'Video record updated successfully.');
+            AuditTrail::create([
+                'user_id' => $user->id,
+                'user' => $user->firstname . ' ' . $user->middlename . ' ' . $user->lastname,
+                'action' => 'Modified Video in ' . '' . $location,
+                'section' => 'Manage Videos',
+            ]);
         } else {
             // Create a new record
             Video::create(['video_id' => $videoId, 'location' => $location]);
             Session::flash('addvideo', 'You have successfully added a pre-recorded video.');
+            AuditTrail::create([
+                'user_id' => $user->id,
+                'user' => $user->firstname . ' ' . $user->middlename . ' ' . $user->lastname,
+                'action' => 'Added a Video in ' . '' . $location,
+                'section' => 'Manage Videos',
+            ]);
         }
+
 
         return redirect()->back()->with('success', 'Video ID processed successfully!');
     }
@@ -244,6 +327,16 @@ class AdminController extends Controller
             'reply_from' => auth()->user()->email, // Get the email of the current user
         ]);
 
+        $email = $request->input('reply.reply_from');
+        $adminuser = Auth::user();
+
+        AuditTrail::create([
+            'user_id' => $adminuser->id,
+            'user' => $adminuser->firstname . ' ' . $adminuser->middlename . ' ' . $adminuser->lastname,
+            'action' => 'Replied to Message ID:' . ' ' . $message->id,
+            'section' => 'Messages',
+        ]);
+
         // Redirect or return a response
         return redirect()->back()->with('success', 'Reply sent successfully!');
     }
@@ -266,6 +359,16 @@ class AdminController extends Controller
             'message' => $request->input('message'),
             'created_at' => now(),
             'updated_at' => now(),
+        ]);
+
+        $email = $request->input('to');
+        $adminuser = Auth::user();
+
+        AuditTrail::create([
+            'user_id' => $adminuser->id,
+            'user' => $adminuser->firstname . ' ' . $adminuser->middlename . ' ' . $adminuser->lastname,
+            'action' => 'Composed a Message to User: ' . ' ' . $email,
+            'section' => 'Messages',
         ]);
 
         // Redirect back with a success message
@@ -298,7 +401,7 @@ class AdminController extends Controller
             $query->whereBetween('created_at', [$formattedDateFrom, $formattedDateTo]);
         }
         // Apply pagination
-        $users = $query->paginate(10); // Adjust the number of items per page as needed
+        $users = $query->paginate(8); // Adjust the number of items per page as needed
 
         // Count for statistics
         $approvedCount = User::where('account_verification_status', 'approved')
@@ -326,6 +429,37 @@ class AdminController extends Controller
         ]);
     }
 
+    public function declineUser($id)
+    {
+        // Find the user by ID
+        $user = User::find($id);
+
+        if ($user) {
+            // Perform the decline action (e.g., update a status field)
+            $user->account_verification_status = 'declined'; // Update this according to your application logic
+            $user->save();
+
+            // Flash a success message to the session
+            Session::flash('declined', 'User has been declined successfully.');
+
+            $adminuser = Auth::user();
+            AuditTrail::create([
+                'user_id' => $adminuser->id,
+                'user' => $adminuser->firstname . ' ' . $adminuser->middlename . ' ' . $adminuser->lastname,
+                'action' => 'Declined User : ' . '' . $user->email,
+                'section' => 'Manage Users',
+            ]);
+        } else {
+            // Flash an error message if the user is not found
+            Session::flash('error', 'User not found.');
+        }
+
+
+
+        // Redirect back to the previous page or wherever you want
+        return redirect()->back();
+    }
+
 
     public function audit(Request $request)
     {
@@ -340,7 +474,13 @@ class AdminController extends Controller
 
         // Apply action filter
         if ($action) {
-            $query->where('action', $action);
+            // Split the input into words
+            $words = explode(' ', $action);
+
+            foreach ($words as $word) {
+                // Apply a LIKE condition for each word
+                $query->where('action', 'like', '%' . $word . '%');
+            }
         }
 
         // Apply section filter
@@ -359,6 +499,17 @@ class AdminController extends Controller
         $auditTrails = $query->paginate(10); // Adjust the number of items per page as needed
 
         return view('admin.audittrail', ['auditTrails' => $auditTrails]);
+    }
+
+    public function clearlogs(Request $request)
+    {
+        // Truncate the audit table
+        DB::table('audit_trail')->truncate();
+
+        Session::flash('clearlogs', 'All audit logs has been removed successfully.');
+
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Audit logs cleared successfully.');
     }
 
 
@@ -435,15 +586,24 @@ class AdminController extends Controller
     {
         // Find the user by ID
         $user = User::find($id);
+        $adminuser = Auth::user();
 
         // Check if user exists
         if ($user) {
             // Update the verification status
             $user->account_verification_status = 'approved'; // or 1, depending on your column type
             $user->save();
+            AuditTrail::create([
+                'user_id' => $adminuser->id,
+                'user' => $adminuser->firstname . ' ' . $adminuser->middlename . ' ' . $adminuser->lastname,
+                'action' => 'Approved User : ' . ' ' . $user->id,
+                'section' => 'Manage Users',
+            ]);
+            Session::flash('approve', 'User has been approved successfully.');
 
             return redirect()->back()->with('success', 'User verified successfully!');
         }
+
 
         return redirect()->back()->with('error', 'User not found.');
     }
@@ -498,8 +658,25 @@ class AdminController extends Controller
 
         $disabilityOccurrences = $pwdInformationData->pluck('disabilityOccurrence')->countBy(); // Count occurrences of each disability
         $disabilityType = $pwdInformationData->pluck('disability')->countBy(); // Count occurrences of each disability
+
         $totaldisabilityOccurences = $disabilityOccurrences->sum(); // Total count of all education levels
         $totaldisabilityType = $disabilityType->sum(); // Total count of all education levels
+
+
+        // Filter out empty or null 'otherDisabilityDetails' and count occurrences
+        $otherdisabilityDetails = $pwdInformationData->filter(function ($item) {
+            return !empty($item['otherDisabilityDetails']); // Exclude null or empty values
+        })->pluck('otherDisabilityDetails')->countBy();
+
+        // Total count of all other disability occurrences
+        $totalotherdisabilityOccurences = $otherdisabilityDetails->sum();
+
+
+        $disabilityDetails = $pwdInformationData->filter(function ($item) {
+            return !empty($item['disabilityDetails']); // Exclude null or empty values
+        })->pluck('disabilityDetails')->countBy();
+
+        $totaldisabilityDetails = $disabilityDetails->sum();
 
         // For least employable skills
         $leastEmployableSkills = $skills->sort(); // Get the bottom $maxSkills - 1 skills
@@ -567,12 +744,41 @@ class AdminController extends Controller
         $totalCommonAges = $ageBinsCount->sum();
 
 
+        $workExperience = WorkExperience::all();
+
+        // Count occurrences of each employer
+        $employerCounts = $workExperience->groupBy('employer_name')->map(function ($experience) {
+            return $experience->count(); // Count how many times each employer appears
+        });
+
+
+
+        // Calculate the number of years for each work experience
+        $workExperience = $workExperience->map(function ($experience) {
+            $fromDate = Carbon::parse($experience->from_date);
+            $toDate = Carbon::parse($experience->to_date);
+            $years = $fromDate->diffInYears($toDate);
+            return $experience->setAttribute('years', $years);
+        });
+
+        // Group by employer name and calculate total years for each employer
+        $employerYears = $workExperience->groupBy('employer_name')->map(function ($experiences) {
+            $totalYears = $experiences->sum('years');
+            return $totalYears;
+        });
+
+        // Sort employers by total years in descending order
+        $employerYearsCounts = $employerYears->sortDesc();
 
         return view('admin.details', [
             'totaldisabilityOccurences' => $totaldisabilityOccurences,
+            'otherdisabilityDetails' => $otherdisabilityDetails,
+            'totalotherdisabilityOccurences' => $totalotherdisabilityOccurences,
             'totaldisabilityType' => $totaldisabilityType,
+            'disabilityType'=> $disabilityType,
             'disabilityOccurrences' => $disabilityOccurrences, // Pass disability occurrences to the view
-            'disabilityType' => $disabilityType,
+            'disabilityDetails'=> $disabilityDetails,
+            'totaldisabilityDetails'=>$totaldisabilityDetails,
             'skills' => $topSkills, // Pass top skills to the view
             'othersCount' => $othersCount, // Pass others count to the view
             'totalSkillsCount' => $totalSkillsCount, // Pass total skills count to the view
@@ -581,8 +787,6 @@ class AdminController extends Controller
             'educationLevels' => $educationLevels,
             'totalEducationLevelsCount' => $totalEducationLevelsCount,
             'totalEmployableEmploymentTypes' => $totalEmployableEmploymentTypes,
-
-
             'mostEmployableEducationLevels' => $mostEmployableEducationLevels,
             'leastEmployableEducationLevels' => $leastEmployableEducationLevels,
             'mostEmployableEmploymentTypes' => $mostEmployableEmploymentTypes, // Passing this to the view
@@ -590,6 +794,8 @@ class AdminController extends Controller
             'mostCommonAges' => $mostCommonAges,
             'leastCommonAges' => $leastCommonAges,
             'totalCommonAges' => $totalCommonAges,
+            'employerCounts' => $employerCounts,
+            'employerYearsCounts' => $employerYearsCounts,
         ]);
     }
 

@@ -4,7 +4,7 @@
 
     <div class="h-full ml-14 md:ml-64">
         <!-- Statistics Cards -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 p-4 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 p-4 gap-4">
             <div
                 class="bg-white text-black dark:bg-gray-800 dark:text-gray-200 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 text-blue-500 font-medium group">
                 <div
@@ -26,12 +26,9 @@
                 class="bg-white text-black dark:bg-gray-800 dark:text-gray-200 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 text-blue-500 font-medium group">
                 <div
                     class="flex justify-center items-center w-14 h-14 bg-blue-100 rounded-full transition-all duration-300 transform group-hover:rotate-12">
-                    <svg width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                        class="stroke-current text-blue-800 transform transition-transform duration-500 ease-in-out">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
-                        </path>
-                    </svg>
+                    <i
+                        class="fas fa-building text-blue-800 text-2xl transform transition-transform duration-500 ease-in-out"></i>
+
                 </div>
                 <div class="text-right">
                     <p class="text-2xl text-gray-700 dark:text-gray-200">{{ $employerCount }}</p>
@@ -60,16 +57,13 @@
                 class="bg-white text-black dark:bg-gray-800 dark:text-gray-200 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 text-blue-500 font-medium group">
                 <div
                     class="flex justify-center items-center w-14 h-14 bg-blue-100 rounded-full transition-all duration-300 transform group-hover:rotate-12">
-                    <svg width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                        class="stroke-current text-blue-800 transform transition-transform duration-500 ease-in-out">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636">
-                        </path>
-                    </svg>
+                    <i
+                        class="fas fa-thumbs-up text-blue-800 text-2xl transform transition-transform duration-500 ease-in-out"></i>
+
                 </div>
                 <div class="text-right">
                     <p class="text-2xl text-gray-700 dark:text-gray-200">{{ $hiredjobCount }}
-                    <p>Hired PWDs</p>
+                    <p>Approved Job Applications</p>
                 </div>
             </div>
             <!-- Employed PWD Card -->
@@ -85,10 +79,28 @@
                 </div>
                 <div class="text-right">
                     <p class="text-2xl text-gray-700 dark:text-gray-200">{{ $pendingjobCount }}</p>
-                    <p>Pending Applications</p>
+                    <p>Pending Job Applications</p>
+                </div>
+            </div>
+
+            <div
+                class="bg-white text-black dark:bg-gray-800 dark:text-gray-200 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 text-blue-500 font-medium group">
+                <div
+                    class="flex justify-center items-center w-14 h-14 bg-blue-100 rounded-full transition-all duration-300 transform group-hover:rotate-12">
+                    <i
+                        class="fas fa-check-circle text-blue-800 text-2xl transform transition-transform duration-500 ease-in-out"></i>
+
+                </div>
+                <div class="text-right">
+                    <p class="text-2xl text-gray-700 dark:text-gray-200">{{ $accountCreations }}</p>
+                    <p>On-Review User Accounts</p>
                 </div>
             </div>
         </div>
+
+
+
+
         <!-- ./Statistics Cards -->
 
 
@@ -165,6 +177,8 @@
                         <a href="{{ route('admin.details', ['type' => 'disabilityoccurence']) }}"
                             class="text-sm font-semibold text-blue-500 hover:text-blue-700">See More</a>
                     </div>
+                    <br>
+                    <br>
                 </div>
 
                 <div
@@ -397,7 +411,11 @@
                     });
                 });
             </script>
+            <h2 class="text-2xl font-semibold text-gray-700 dark:text-gray-200 mb-4 ml-4 mt-6">Skills Information of
+                PWDs
+            </h2>
             <div class="grid grid-cols-1 lg:grid-cols-2 p-4 gap-4">
+
                 <!-- Most Employable Skills -->
                 <div
                     class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-800 w-full shadow-lg rounded">
@@ -486,6 +504,8 @@
                                     class="text-sm font-semibold text-blue-500 hover:text-blue-700">See
                                     More</a>
                             </div>
+                            <br>
+                            <br>
 
                             <!-- Modal -->
                             <div id="chartModal"
@@ -942,6 +962,8 @@
                                 class="text-sm font-semibold text-blue-500 hover:text-blue-700">See
                                 More</a>
                         </div>
+                        <br>
+                        <br>
                     </div>
 
 
@@ -1307,6 +1329,8 @@
                             <a href="{{ route('admin.details', ['type' => 'mostemployment']) }}"
                                 class="text-sm font-semibold text-blue-500 hover:text-blue-700">See More</a>
                         </div>
+                        <br>
+                        <br>
                     </div>
 
                     <!-- Least Employable Employment Types -->
@@ -1455,6 +1479,8 @@
                         <a href="{{ route('admin.details', ['type' => 'mostagesbins']) }}"
                             class="text-sm font-semibold text-blue-500 hover:text-blue-700">See More</a>
                     </div>
+                    <br>
+                    <br>
                 </div>
 
                 <!-- Least Common Age Bins -->
@@ -1531,6 +1557,508 @@
                 </div>
             </div>
         </div>
+
+
+
+
+        <div class="mt-8 mx-4 p-4">
+            <h2 class="text-2xl font-semibold text-gray-700 dark:text-gray-200 mb-4">Work Experience Analytics for PWDs
+            </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <!-- Most Common Age Bins -->
+                <div
+                    class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-800 w-full shadow-lg rounded">
+                    <div class="rounded-t mb-0 px-0 border-0">
+                        <div class="container mx-auto p-10" width="700" height="600">
+                            <canvas id="mostFrequentEmployersChart"></canvas>
+                        </div>
+                        <div class="flex flex-wrap items-center px-4 py-2">
+                            <div class="relative w-full max-w-full flex-grow flex-1">
+                                <h3 class="font-semibold text-base text-gray-900 dark:text-gray-50">Top Companies for
+                                    PWDs with Employee Count</h3>
+                            </div>
+                        </div>
+                        <div class="block w-full overflow-x-auto">
+                            <table class="min-w-full table-auto border-collapse">
+                                <thead>
+                                    <tr>
+                                        <th
+                                            class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                            Employer</th>
+                                        <th
+                                            class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                            Count</th>
+                                        <th
+                                            class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Most Frequent Employers -->
+                                    <tr class="bg-gray-200 text-black dark:bg-gray-700 dark:text-white">
+                                        <td class="px-4 py-2 text-sm" colspan="3">Most Frequent Number of Employees
+                                            in a Company</td>
+                                    </tr>
+                                    @php
+                                        $totalMostFrequent = $mostFrequentEmployers->sum();
+                                    @endphp
+                                    @foreach ($mostFrequentEmployers as $employer_name => $count)
+                                        @php
+                                            $percentage = ($count / $totalMostFrequent) * 100;
+                                        @endphp
+                                        <tr class="bg-gray-100 dark:bg-gray-800">
+                                            <td class="px-4 py-2 text-sm text-black dark:text-white">
+                                                {{ $employer_name }}</td>
+                                            <td class="px-4 py-2 text-sm text-black dark:text-white">
+                                                {{ $count }}</td>
+                                            <td
+                                                class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
+                                                <div class="flex items-center">
+                                                    <span
+                                                        class="mr-2 text-black dark:text-white">{{ number_format($percentage, 1) }}%</span>
+                                                    <div class="relative w-full">
+                                                        <div
+                                                            class="overflow-hidden h-2 text-xs flex rounded bg-blue-200">
+                                                            <div style="width: {{ $percentage }}%"
+                                                                class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-600">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+
+                                    <!-- Least Frequent Employers -->
+                                    <tr class="bg-gray-200 text-black dark:bg-gray-700 dark:text-white">
+                                        <td class="px-4 py-2 text-sm" colspan="3">Least Frequent Number of
+                                            Employees in a Company</td>
+                                    </tr>
+                                    @php
+                                        $totalLeastFrequent = $leastFrequentEmployers->sum();
+                                    @endphp
+                                    @foreach ($leastFrequentEmployers as $employer_name => $count)
+                                        @php
+                                            $percentage = ($count / $totalLeastFrequent) * 100;
+                                        @endphp
+                                        <tr class="bg-gray-100 dark:bg-gray-800">
+                                            <td class="px-4 py-2 text-sm text-black dark:text-white">
+                                                {{ $employer_name }}</td>
+                                            <td class="px-4 py-2 text-sm text-black dark:text-white">
+                                                {{ $count }}</td>
+                                            <td
+                                                class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
+                                                <div class="flex items-center">
+                                                    <span
+                                                        class="mr-2 text-black dark:text-white">{{ number_format($percentage, 1) }}%</span>
+                                                    <div class="relative w-full">
+                                                        <div
+                                                            class="overflow-hidden h-2 text-xs flex rounded bg-blue-200">
+                                                            <div style="width: {{ $percentage }}%"
+                                                                class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-600">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <a href="{{ route('admin.details', ['type' => 'employeecount']) }}"
+                            class="text-sm font-semibold text-blue-500 hover:text-blue-700">See More</a>
+                    </div>
+                    <br>
+                    <br>
+                </div>
+
+                <div
+                    class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-800 w-full shadow-lg rounded">
+                    <div class="rounded-t mb-0 px-0 border-0">
+                        <div class="container mx-auto p-10" width="700" height="600">
+                            <canvas id="mostFrequentEmployersYearsChart"></canvas>
+                        </div>
+                        <div class="flex flex-wrap items-center px-4 py-2">
+                            <div class="relative w-full max-w-full flex-grow flex-1">
+                                <h3 class="font-semibold text-base text-gray-900 dark:text-gray-50">Top Companies for
+                                    PWDs with Employee's Work Experiences</h3>
+                            </div>
+                        </div>
+                        <div class="block w-full overflow-x-auto">
+                            <table class="min-w-full table-auto border-collapse">
+                                <thead>
+                                    <tr>
+                                        <th
+                                            class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                            Employer
+                                        </th>
+                                        <th
+                                            class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                            Count
+                                        </th>
+                                        <th
+                                            class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Most Frequent Employers by Years -->
+                                    <tr class="bg-gray-200 text-black dark:bg-gray-700 dark:text-white">
+                                        <td class="px-4 py-2 text-sm" colspan="3">
+                                            Most Frequent Years of Experience in a Company
+                                        </td>
+                                    </tr>
+                                    @php
+                                        // Calculate total years for most frequent employers
+                                        $totalMostFrequentYears = $mostFrequentEmployersByYears->sum();
+                                    @endphp
+                                    @foreach ($mostFrequentEmployersByYears as $employer_name => $totalYears)
+                                        @php
+                                            // Calculate percentage
+                                            $percentage =
+                                                $totalMostFrequentYears > 0
+                                                    ? ($totalYears / $totalMostFrequentYears) * 100
+                                                    : 0;
+                                        @endphp
+                                        <tr class="bg-gray-100 dark:bg-gray-800">
+                                            <td class="px-4 py-2 text-sm text-black dark:text-white">
+                                                {{ $employer_name }}</td>
+                                            <td class="px-4 py-2 text-sm text-black dark:text-white">
+                                                {{ round($totalYears) }} years</td>
+                                            <td
+                                                class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
+                                                <div class="flex items-center">
+                                                    <span
+                                                        class="mr-2 text-black dark:text-white">{{ number_format($percentage, 1) }}%</span>
+                                                    <div class="relative w-full">
+                                                        <div
+                                                            class="overflow-hidden h-2 text-xs flex rounded bg-blue-200">
+                                                            <div style="width: {{ $percentage }}%"
+                                                                class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-600">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+
+                                    <!-- Least Frequent Employers by Years -->
+                                    <tr class="bg-gray-200 text-black dark:bg-gray-700 dark:text-white">
+                                        <td class="px-4 py-2 text-sm" colspan="3">
+                                            Least Frequent Years of Experience in a Company
+                                        </td>
+                                    </tr>
+                                    @php
+                                        // Calculate total years for least frequent employers
+                                        $totalLeastFrequentYears = $leastFrequentEmployersByYears->sum();
+                                    @endphp
+                                    @foreach ($leastFrequentEmployersByYears as $employer_name => $totalYears)
+                                        @php
+                                            // Calculate percentage
+                                            $percentage =
+                                                $totalLeastFrequentYears > 0
+                                                    ? ($totalYears / $totalLeastFrequentYears) * 100
+                                                    : 0;
+                                        @endphp
+                                        <tr class="bg-gray-100 dark:bg-gray-800">
+                                            <td class="px-4 py-2 text-sm text-black dark:text-white">
+                                                {{ $employer_name }}</td>
+                                            <td class="px-4 py-2 text-sm text-black dark:text-white">
+                                                {{ round($totalYears) }} years</td>
+                                            <td
+                                                class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
+                                                <div class="flex items-center">
+                                                    <span
+                                                        class="mr-2 text-black dark:text-white">{{ number_format($percentage, 1) }}%</span>
+                                                    <div class="relative w-full">
+                                                        <div
+                                                            class="overflow-hidden h-2 text-xs flex rounded bg-blue-200">
+                                                            <div style="width: {{ $percentage }}%"
+                                                                class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-600">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <a href="{{ route('admin.details', ['type' => 'yearsofexperience']) }}"
+                            class="text-sm font-semibold text-blue-500 hover:text-blue-700">See More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Get dark mode preference from local storage
+                function getDarkMode() {
+                    return localStorage.getItem('darkMode') === 'true';
+                }
+
+                // Pass PHP variables to JavaScript as JSON
+                const mostFrequentEmployersByYearsData = @json($mostFrequentEmployersByYears);
+                const leastFrequentEmployersByYearsData = @json($leastFrequentEmployersByYears);
+
+                // Prepare data for the pie charts
+                const mostFrequentEmployersByYearsLabels = Object.keys(mostFrequentEmployersByYearsData);
+                const mostFrequentEmployersByYearsCounts = Object.values(mostFrequentEmployersByYearsData);
+
+                const leastFrequentEmployersByYearsLabels = Object.keys(leastFrequentEmployersByYearsData);
+                const leastFrequentEmployersByYearsCounts = Object.values(leastFrequentEmployersByYearsData);
+
+                // Determine if dark mode is enabled
+                const darkMode = getDarkMode();
+
+                // Define colors based on dark mode
+                const backgroundColor = darkMode ? [
+                    'rgba(54, 162, 235, 0.6)',
+                    'rgba(255, 99, 132, 0.6)',
+                    'rgba(255, 206, 86, 0.6)',
+                    'rgba(75, 192, 192, 0.6)',
+                    'rgba(153, 102, 255, 0.6)',
+                    'rgba(255, 159, 64, 0.6)',
+                    'rgba(201, 203, 207, 0.6)' // Additional color for 'Others'
+                ] : [
+                    'rgba(54, 162, 235, 0.6)',
+                    'rgba(255, 99, 132, 0.6)',
+                    'rgba(255, 206, 86, 0.6)',
+                    'rgba(75, 192, 192, 0.6)',
+                    'rgba(153, 102, 255, 0.6)',
+                    'rgba(255, 159, 64, 0.6)',
+                    'rgba(201, 203, 207, 0.6)' // Additional color for 'Others'
+                ];
+
+                const borderColor = darkMode ? [
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(201, 203, 207, 1)' // Additional border color for 'Others'
+                ] : [
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(201, 203, 207, 1)' // Additional border color for 'Others'
+                ];
+
+                const labelColor = darkMode ? '#ffffff' : '#000000';
+                const tooltipBackgroundColor = darkMode ? 'rgba(0, 0, 0, 0.7)' : 'rgba(255, 255, 255, 0.7)';
+                const tooltipTitleColor = darkMode ? '#ffffff' : '#000000';
+                const tooltipBodyColor = darkMode ? '#ffffff' : '#000000';
+
+                // Create pie chart for Most Frequent Employers by Years
+                const ctxMostFrequent = document.getElementById('mostFrequentEmployersYearsChart').getContext('2d');
+                new Chart(ctxMostFrequent, {
+                    type: 'pie',
+                    data: {
+                        labels: mostFrequentEmployersByYearsLabels,
+                        datasets: [{
+                            label: 'Most Frequent Employers by Years',
+                            data: mostFrequentEmployersByYearsCounts,
+                            backgroundColor: backgroundColor,
+                            borderColor: borderColor,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    color: labelColor,
+                                    font: {
+                                        family: 'Poppins',
+                                        size: 14
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: tooltipBackgroundColor,
+                                titleColor: tooltipTitleColor,
+                                bodyColor: tooltipBodyColor,
+                                callbacks: {
+                                    label: function(tooltipItem) {
+                                        const total = mostFrequentEmployersByYearsCounts.reduce((a, b) =>
+                                            a + b, 0);
+                                        const percentage = ((tooltipItem.raw / total) * 100).toFixed(1);
+                                        return `${tooltipItem.label}: ${tooltipItem.raw} years (${percentage}%)`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // Create pie chart for Least Frequent Employers by Years
+                const ctxLeastFrequent = document.getElementById('leastFrequentEmployersYearsChart').getContext('2d');
+                new Chart(ctxLeastFrequent, {
+                    type: 'pie',
+                    data: {
+                        labels: leastFrequentEmployersByYearsLabels,
+                        datasets: [{
+                            label: 'Least Frequent Employers by Years',
+                            data: leastFrequentEmployersByYearsCounts,
+                            backgroundColor: backgroundColor,
+                            borderColor: borderColor,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    color: labelColor,
+                                    font: {
+                                        family: 'Poppins',
+                                        size: 14
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: tooltipBackgroundColor,
+                                titleColor: tooltipTitleColor,
+                                bodyColor: tooltipBodyColor,
+                                callbacks: {
+                                    label: function(tooltipItem) {
+                                        const total = leastFrequentEmployersByYearsCounts.reduce((a, b) =>
+                                            a + b, 0);
+                                        const percentage = ((tooltipItem.raw / total) * 100).toFixed(1);
+                                        return `${tooltipItem.label}: ${tooltipItem.raw} years (${percentage}%)`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Get dark mode preference from local storage
+                function getDarkMode() {
+                    return localStorage.getItem('darkMode') === 'true';
+                }
+
+                // Pass PHP variables to JavaScript as JSON
+                const mostFrequentEmployersData = @json($mostFrequentEmployers);
+                const leastFrequentEmployersData = @json($leastFrequentEmployers);
+
+                // Prepare data for the pie charts
+                const mostFrequentEmployersLabels = Object.keys(mostFrequentEmployersData);
+                const mostFrequentEmployersCounts = Object.values(mostFrequentEmployersData);
+
+                const leastFrequentEmployersLabels = Object.keys(leastFrequentEmployersData);
+                const leastFrequentEmployersCounts = Object.values(leastFrequentEmployersData);
+
+                // Determine if dark mode is enabled
+                const darkMode = getDarkMode();
+
+                // Define colors based on dark mode
+                const backgroundColor = darkMode ? [
+                    'rgba(54, 162, 235, 0.6)',
+                    'rgba(255, 99, 132, 0.6)',
+                    'rgba(255, 206, 86, 0.6)',
+                    'rgba(75, 192, 192, 0.6)',
+                    'rgba(153, 102, 255, 0.6)',
+                    'rgba(255, 159, 64, 0.6)',
+                    'rgba(201, 203, 207, 0.6)' // Additional color for 'Others'
+                ] : [
+                    'rgba(54, 162, 235, 0.6)',
+                    'rgba(255, 99, 132, 0.6)',
+                    'rgba(255, 206, 86, 0.6)',
+                    'rgba(75, 192, 192, 0.6)',
+                    'rgba(153, 102, 255, 0.6)',
+                    'rgba(255, 159, 64, 0.6)',
+                    'rgba(201, 203, 207, 0.6)' // Additional color for 'Others'
+                ];
+
+                const borderColor = darkMode ? [
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(201, 203, 207, 1)' // Additional border color for 'Others'
+                ] : [
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(201, 203, 207, 1)' // Additional border color for 'Others'
+                ];
+
+                const labelColor = darkMode ? '#ffffff' : '#000000';
+                const tooltipBackgroundColor = darkMode ? 'rgba(0, 0, 0, 0.7)' : 'rgba(255, 255, 255, 0.7)';
+                const tooltipTitleColor = darkMode ? '#ffffff' : '#000000';
+                const tooltipBodyColor = darkMode ? '#ffffff' : '#000000';
+
+                // Create pie chart for Most Frequent Employers
+                const ctxMostFrequent = document.getElementById('mostFrequentEmployersChart').getContext('2d');
+                new Chart(ctxMostFrequent, {
+                    type: 'pie',
+                    data: {
+                        labels: mostFrequentEmployersLabels,
+                        datasets: [{
+                            label: 'Most Frequent Employers',
+                            data: mostFrequentEmployersCounts,
+                            backgroundColor: backgroundColor,
+                            borderColor: borderColor,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    color: labelColor,
+                                    font: {
+                                        family: 'Poppins',
+                                        size: 14
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: tooltipBackgroundColor,
+                                titleColor: tooltipTitleColor,
+                                bodyColor: tooltipBodyColor,
+                                callbacks: {
+                                    label: function(tooltipItem) {
+                                        const total = mostFrequentEmployersCounts.reduce((a, b) => a + b,
+                                            0);
+                                        const percentage = ((tooltipItem.raw / total) * 100).toFixed(1);
+                                        return `${tooltipItem.label}: ${tooltipItem.raw} (${percentage}%)`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
 
         <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -1741,7 +2269,6 @@
             });
         </script>
 
-
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 // Get dark mode preference from local storage
@@ -1919,7 +2446,7 @@
                     <table class="w-full">
                         <thead>
                             <tr
-                                class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                                class="text-lg font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                                 <th class="px-4 py-3">USERS</th>
                                 <th class="px-4 py-3">Status</th>
                                 <th class="px-4 py-3">Date</th>
@@ -1930,22 +2457,22 @@
                                 <tr
                                     class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
                                     <td class="px-4 py-3">
-                                        <div class="flex items-center text-sm">
+                                        <div class="flex items-center text-md ">
                                             <div>
-                                                <p class="font-semibold">{{ $user->name }}</p>
-                                                <p class="text-xs text-gray-600 dark:text-gray-400">
+                                                <p class="font-semibold ">{{ $user->name }}</p>
+                                                <p class=" text-gray-600 dark:text-gray-400">
                                                     {{ $user->usertype }}</p>
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="px-4 py-3 text-xs">
+                                    <td class="px-4 py-3 text-md">
                                         <!-- Change the status dynamically based on user data -->
                                         <span
-                                            class="px-2 py-1 font-semibold leading-tight {{ $user->account_verification_status == 'approved' ? 'text-green-700 bg-green-100 dark:bg-green-700 dark:text-green-100' : 'text-gray-700 bg-orange-100 dark:bg-orange-700 dark:text-red-100' }} rounded-full">
+                                            class="px-2 py-1 font-semibold leading-tight uppercase {{ $user->account_verification_status == 'approved' ? 'text-green-700 bg-green-100 dark:bg-green-700 dark:text-green-100' : 'text-gray-700 bg-orange-100 dark:bg-orange-700 dark:text-red-100' }} rounded-full">
                                             {{ $user->account_verification_status }}
                                         </span>
                                     </td>
-                                    <td class="px-4 py-3 text-sm">{{ $user->created_at->format('d-m-Y') }}
+                                    <td class="px-4 py-3 text-md">{{ $user->created_at->format('d-m-Y') }}
                                     </td>
                                 </tr>
                             @endforeach
@@ -1953,7 +2480,7 @@
                     </table>
                 </div>
                 <div
-                    class="grid mb-10 px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+                    class="grid mb-10 px-2 py-3 text-md font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
                     <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-start">
                         <nav aria-label="Table navigation" class="p-2">
                             <ul class="inline-flex items-left">
@@ -1970,8 +2497,5 @@
             </div>
         </div>
     </div>
-
-
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
-
 </x-app-layout>

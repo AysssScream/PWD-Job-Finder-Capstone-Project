@@ -50,20 +50,29 @@
 
                         @if (Auth::user()->employer->company_logo)
                             <div
-                                class="w-48 h-48 md:w-40 md:h-40 sm:w-36 sm:h-36 bg-white rounded-full overflow-hidden mx-auto mb-4 border border-gray-700 shadow-lg">
+                                class="w-48 h-48 md:w-40 md:h-40 sm:w-36 sm:h-36 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden mx-auto mb-4 border border-gray-700 shadow-lg">
                                 <img id="imagePreview"
                                     src="{{ asset('storage/' . Auth::user()->employer->company_logo) }}"
                                     alt="Profile Picture" class="w-full h-full object-contain">
                             </div>
                         @else
                             <div
-                                class="w-48 h-48 md:w-40 md:h-40 sm:w-36 sm:h-36 bg-gray-200 rounded-full overflow-hidden mx-auto mb-4 border border-gray-700 shadow-lg flex items-center justify-center">
-                                <img id="imagePreview" src="/images/avatar.png" alt="Profile Picture"
-                                    class="w-full h-full object-contain">
+                                class="w-48 h-48 md:w-40 md:h-40 sm:w-36 sm:h-36 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden mx-auto mb-4 border border-gray-700 shadow-lg flex items-center justify-center">
+                                <img class="h-full w-full object-contain" aria-label="Company Logo"
+                                    src="{{ asset('/images/avatar.png') }}" alt="Company Logo">
                             </div>
                         @endif
 
 
+
+                        {{-- @if (Auth::user()->employer->company_logo)
+                            <img class="h-full w-full object-contain" aria-label="Company Logo"
+                                src="{{ asset('storage/' . Auth::user()->employer->company_logo) }}" alt="Company Logo"
+                                onerror="this.onerror=null; this.src='{{ asset('/images/avatar.png') }}';">
+                        @else
+                            <img class="h-full w-full object-contain" aria-label="Company Logo"
+                                src="{{ asset('/images/avatar.png') }}" alt="Company Logo">
+                        @endif --}}
 
                         <!-- Edit Profile Button -->
                         <div class="text-center">

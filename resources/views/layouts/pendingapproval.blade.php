@@ -109,6 +109,33 @@
                         </div>
                     </div>
                 </div>
+            @elseif (Auth::check() && Auth::user()->account_verification_status === 'declined')
+                <div class="landscape-container mt-15">
+                    <div class="container w-3/4 mx-auto landscape-content">
+                        <div
+                            class="bg-white text-black dark:bg-gray-700 dark:text-gray-200 p-6 rounded-lg shadow-md text-center">
+                            <div class="text-red-500 text-7xl mb-5">
+                                <i class="fa-solid fa-exclamation-triangle"></i>
+                                <!-- Changed icon to indicate an issue -->
+                            </div>
+                            <h2 class="font-bold mb-4 text-3xl">Account Declined</h2> <!-- Updated title -->
+                            <h2 class="text-black-700 mb-4">We're sorry, but your account has been declined.</h2>
+                            <!-- Updated message -->
+                            <br>
+                            <p class="text-black-700 mb-8">
+                                Unfortunately, your account did not meet the criteria required to join our platform. If
+                                you believe this is a mistake or have any questions, please contact our support team for
+                                further assistance.
+                            </p>
+                            <form action="{{ route('user.messages') }}" method="GET">
+                                @csrf
+                                <button type="submit"
+                                    class="py-2 px-4 bg-red-500 text-white rounded inline-block">CONTACT
+                                    SUPPORT</button> <!-- Updated button text and color -->
+                            </form>
+                        </div>
+                    </div>
+                </div>
             @else
                 <div class="landscape-container mt-15">
                     <div class="container w-3/4 mx-auto landscape-content">

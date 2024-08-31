@@ -2,11 +2,39 @@
     <title>Audit Trail</title>
 
 
+
+    @if (Session::has('clearlogs'))
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                toastr.options = {
+                    "progressBar": true,
+                    "closeButton": true,
+                }
+                toastr.error("{{ Session::get('clearlogs') }}", 'Audit Log Cleared', {
+                    timeOut: 5000
+                });
+            });
+        </script>
+    @endif
+
     <div class="h-full ml-14 md:ml-64 font-poppins p-10 ">
 
-        <h1 class="text-2xl font-semibold text-gray-900 mb-6 mt-8 text-gray-700 dark:text-gray-200">Audit Trail</h1>
+        <div
+            class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 mt-8 space-y-4 sm:space-y-0">
+            <h1 class="text-2xl font-semibold text-gray-900 text-gray-700 dark:text-gray-200">Audit Trail</h1>
+            <form action="{{ route('audit.clearlogs') }}" method="POST">
+                @csrf
+                <button type="submit"
+                    class="bg-red-500 dark:bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full sm:w-auto">
+                    Clear Logs
+                </button>
+            </form>
+        </div>
 
         <form method="GET" action="{{ route('admin.audit') }}">
+            @csrf
             <div class="mb-4 flex flex-col space-y-4 md:flex-row md:items-end md:justify-between md:space-y-0">
                 <div class="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4 w-full">
                     <div class="lg:w-full lg:w-40">
@@ -17,9 +45,10 @@
                             <option value="">All Actions</option>
                             <option value="Logged In">Logged In</option>
                             <option value="Logged Out">Logged Out</option>
-                            <option value="Approve User">Approve User</option>
-                            <option value="Decline User">Decline User</option>
-                            <option value="Responded">Responded</option>
+                            <option value="Approve User">Approved User</option>
+                            <option value="Decline User">Declined User</option>
+                            <option value="Composed">Composed</option>
+                            <option value="Replied">Replied</option>
                         </select>
                     </div>
                     <div class="lg:w-full lg:w-40">
@@ -29,9 +58,9 @@
                             class="mt-1 bg-white text-black dark:bg-gray-800 dark:text-gray-200 block w-full rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                             <option value="">All</option>
                             <option value="Dashboard">Dashboard</option>
-                            <option value="Audit Trail">Audit Trail</option>
                             <option value="Manage Users">Manage Users</option>
                             <option value="Messages">Messages</option>
+                            <option value="Messages">Manage Videos</option>
                         </select>
                     </div>
                     <div class="lg:w-full lg:w-40">

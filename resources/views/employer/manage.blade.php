@@ -33,9 +33,8 @@
             <div
                 class="flex flex-col md:flex-row md:justify-between items-start md:items-center space-y-4 md:space-y-0 md:space-x-4">
                 <!-- Breadcrumb Navigation -->
-                <nav aria-label="breadcrumb" class="rounded-lg p-2 text-gray-800 dark:text-gray-300">
-                    <ol class="breadcrumb mb-0 flex items-center justify-start flex-wrap">
-                        <li class="breadcrumb-item">
+                <nav aria-label="breadcrumb" class="rounded-lg text-gray-800 dark:text-gray-300">
+                    <ol class="breadcrumb mb-0 flex items-center flex-wrap">
                         <li class="breadcrumb-item w-full md:w-auto">
                             <a href="{{ route('employer.dashboard') }}"
                                 class="flex items-center space-x-2 bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
@@ -43,9 +42,9 @@
                                 <span>Back to Dashboard</span>
                             </a>
                         </li>
-                        </li>
                     </ol>
                 </nav>
+
 
                 <!-- Date Range Filter Dropdown and Add Job Button -->
                 <div
@@ -73,10 +72,10 @@
     </div>
 
 
-    <div class="container mx-auto max-w-8xl px-4 pt-2 h-full">
+    <div class="container mx-auto max-w-8xl px-4 pt-2">
         <div
-            class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg shadow-lg max-h-screen overflow-y-auto">
-            <div class="p-6 text-gray-900 dark:text-gray-100 rounded-lg overflow-x-auto ">
+            class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg shadow-lg max-h-screen overflow-y-auto ">
+            <div class="p-6 text-gray-900 dark:text-gray-100 rounded-lg overflow-x-auto">
                 <div class="overflow-x-auto">
                     <div class="min-w-full overflow-hidden overflow-x-auto">
                         <table id="jobTable" class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
@@ -120,13 +119,15 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-center">
                                             <a href="{{ route('employer.edit', $job->id) }}"
                                                 class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded">Edit</a>
-                                            <form action="{{ url('') }}" method="POST" class="inline-block">
+                                            <form action="{{ route('employer.delete', ['id' => $job->id]) }}"
+                                                method="POST" class="inline-block">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"
                                                     class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded ml-2">Delete</button>
                                             </form>
                                         </td>
+
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -139,6 +140,22 @@
     <br>
     <br>
 
+
+    @if (Session::has('jobinfodelete'))
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                toastr.options = {
+                    "progressBar": true,
+                    "closeButton": true,
+                }
+                toastr.error("{{ Session::get('jobinfodelete') }}", 'Job has been Deleted', {
+                    timeOut: 5000
+                });
+            });
+        </script>
+    @endif
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const dateFilter = document.getElementById('dateFilter');

@@ -15,7 +15,7 @@
                      <form action="{{ route('dialect') }}" method="POST" enctype="multipart/form-data">
                          @csrf
                          @if ($errors->any())
-                             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                             <div class="bg-red-100 border border-red-400 text-red-700 dark:bg-red-700 dark:text-gray-100 dark:border-red-600 dark:text-red-200 px-4 py-3 rounded relative"
                                  role="alert">
                                  <strong class="font-bold">Oops!</strong>
                                  <span class="block sm:inline">There were some errors with your submission:</span>
@@ -27,6 +27,7 @@
                              </div>
                              <br>
                          @endif
+
                          <div class="bg-white text-black dark:bg-gray-800 dark:text-gray-200 shadow-md rounded-lg">
                              <div class="p-6">
                                  <h3 class="text-2xl font-bold mb-2 inline-flex items-center justify-between w-full focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
@@ -83,7 +84,54 @@
                                      </div>
                                      <div class="col-span-1 md:col-span-2">
 
-                                         <table class="min-w-full border border-gray-200" id="languages-table">
+                                         <table id="language-table"
+                                             class="min-w-full mt-6 divide-y divide-gray-200 dark:divide-gray-700">
+                                             <thead>
+                                                 <tr>
+                                                     <th
+                                                         class="px-4 py-2 border-b bg-gray-300 text-black dark:bg-gray-900 dark:text-gray-200">
+                                                         {{ __('messages.language.table_headers.language_dialect') }}
+                                                     </th>
+                                                     <th
+                                                         class="px-4 py-2 text-center border-b bg-gray-300 text-black dark:bg-gray-900 dark:text-gray-200">
+                                                         {{ __('messages.language.table_headers.language_proficiency') }}
+                                                     </th>
+                                                 </tr>
+                                             </thead>
+                                             <tbody id="language-table-body">
+                                                 @foreach ($formData5['language-input'] as $index => $language)
+                                                     <tr>
+                                                         <td class="px-4 py-2 border-b">
+                                                             <div class="flex items-center">
+                                                                 <input type="text" name="language-input[]"
+                                                                     class="w-full p-2 border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm language-input"
+                                                                     placeholder="Ex. {{ $language }}"
+                                                                     aria-label="Language or Dialect"
+                                                                     value="{{ $language }}" readonly />
+                                                             </div>
+                                                         </td>
+                                                         <td class="px-4 py-2 border-b text-right">
+                                                             <div class="flex items-center">
+                                                                 @foreach (['Read', 'Write', 'Speak', 'Understand'] as $skill)
+                                                                     <label class="inline-flex items-center mr-4">
+                                                                         <input type="checkbox"
+                                                                             name="proficiency[{{ $index }}][]"
+                                                                             value="{{ $skill }}"
+                                                                             class="form-checkbox text-blue-500 focus:ring-orange-400 dark:focus:ring-orange-400"
+                                                                             {{ in_array($skill, $formData5['proficiency'][$index] ?? []) ? 'checked' : '' }} />
+                                                                         <span
+                                                                             class="ml-2 text-gray-700 dark:text-gray-200">Can
+                                                                             {{ $skill }}?</span>
+                                                                     </label>
+                                                                 @endforeach
+                                                             </div>
+                                                         </td>
+                                                     </tr>
+                                                 @endforeach
+                                             </tbody>
+                                         </table>
+
+                                         {{-- <table class="min-w-full border border-gray-200" id="languages-table">
                                              <thead>
                                                  <tr>
                                                      <div class="mt-6">
@@ -205,8 +253,6 @@
                                                          </div>
                                                      </td>
 
-
-
                                                      <td class="px-4 py-2 border-b text-center">
                                                          <button type="button"
                                                              aria-label="{{ __('messages.language.actions.edit') }}"
@@ -218,9 +264,9 @@
                                                      </td>
                                                  </tr>
                                              </tbody>
-                                         </table>
+                                         </table> --}}
                                          <br>
-                                         <label for="selected-languages"
+                                         {{-- <label for="selected-languages"
                                              class="block text-sm font-medium text-black-700">{{ __('messages.language.labels.selected_languages') }}</label>
                                          <textarea id="selected-languages" name="selected-languages"
                                              aria-label="{{ __('messages.language.labels.selected_languages') }}"
@@ -229,7 +275,7 @@
 
 
                                          <div id="row-limit-message" class="text-red-600 mt-2 hidden">
-                                             {{ __('messages.language.messages.row_limit_message') }}</div>
+                                             {{ __('messages.language.messages.row_limit_message') }}</div> --}}
 
                                          <h3 class="text-2xl font-bold mb-2 mt-9 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                              aria-label="                                             {{ __('messages.language.messages.other_skills_heading') }}"

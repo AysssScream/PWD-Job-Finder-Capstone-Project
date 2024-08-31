@@ -58,26 +58,27 @@ class EmployerSetupController extends Controller
     {
         // Validate the form data
         $validatedData = $request->validate([
-            'businessname' => 'required|string|max:100|regex:/^[A-Za-z\s.,-]+$/',
+            'businessname' => 'required|string|max:300|regex:/^[A-Za-z0-9\s.,-]+$/',
             'tinno' => 'required|regex:/^[0-9-]+$/|unique:employers,tinno',
-            'tradename' => 'nullable|regex:/^[A-Za-z\s.,-]+$/|max:50',
+            'tradename' => 'nullable|max:300',
             'locationtype' => 'required|in:Main,Branch',
             'employertype' => 'required|in:Public,Private',
             'totalworkforce' => 'required|in:1-10,11-50,51-100,101-500,501-1000,1001+',
-            'address' => 'required|string|max:100',
-            'city' => 'required|string|regex:/^[A-Za-z\s.,-]+$/|max:50',
+            'address' => 'required|string|max:300',
+            'municipality' => 'required|string|regex:/^[A-Za-z0-9\s.,-]+$/|max:200',
             'zipcode' => 'required|digits:4|regex:/^[0-9]+$/',
-            'contact_person' => 'required|string|regex:/^[A-Za-z\s.,-]+$/|max:50',
-            'position' => 'required|string|regex:/^[A-Za-z\s.,-]+$/|max:50',
+            'contact_person' => 'required|string|regex:/^[A-Za-z0-9\s.,-]+$/|max:250',
+            'position' => 'required|string|regex:/^[A-Za-z0-9\s.,-]+$/|max:250',
             'telephone_no' => 'nullable|digits:8|regex:/^[0-9-]+$/|unique:employers,telephone_no',
             'mobile_no' => 'required|digits:11|regex:/^[0-9-]+$/|unique:employers,mobile_no',
             'hiddenFaxNumber' => 'nullable|digits:9|regex:/^[0-9]+$/',
             'email_address' => ['required', 'email', 'max:50', new EmailDomain, 'lowercase', 'unique:employers,email_address'],
         ], [
-            'businessname.regex' => 'Business name must contain only alphabetic characters.',
+            
+            'businessname.regex' => 'Business name may only contain alphabetic characters, numbers, spaces, periods, commas, and hyphens.',
             'businessname.required' => 'Business name is required.',
             'businessname.string' => 'Business name must be a string.',
-            'businessname.max' => 'Business name must not exceed 100 characters.',
+            'businessname.max' => 'Business name must not exceed 300 characters.',
 
             'tinno.required' => 'TIN number is required.',
             'tinno.regex' => 'TIN number must contain only numbers and hyphens.',
@@ -104,22 +105,22 @@ class EmployerSetupController extends Controller
 
             'address.required' => 'Address is required.',
             'address.string' => 'Address must be a string.',
-            'address.max' => 'Address must not exceed 100 characters.',
+            'address.max' => 'Address must not exceed 300 characters.',
 
-            'city.required' => 'City is required.',
-            'city.string' => 'City must be a string.',
-            'city.regex' => 'City must contain only alphabetic characters.',
-            'city.max' => 'City must not exceed 50 characters.',
+            'municipality.required' => 'Municipality or City is required.',
+            'municipality.string' => 'Municipality or City must be a string.',
+            'municipality.regex' => 'Municipality may only contain alphabetic characters, numbers, spaces, periods, commas, and hyphens.',
+            'municipality.max' => 'Municipality or City must not exceed 200 characters.',
 
             'contact_person.required' => 'Contact person is required.',
             'contact_person.string' => 'Contact person must be a string.',
-            'contact_person.regex' => 'Contact person must contain only alphabetic characters.',
-            'contact_person.max' => 'Contact person must not exceed 50 characters.',
+            'contact_person.regex' => 'Contact may only contain alphabetic characters, numbers, spaces, periods, commas, and hyphens.',
+            'contact_person.max' => 'Contact person must not exceed 250 characters.',
 
             'position.required' => 'Position is required.',
             'position.string' => 'Position must be a string.',
-            'position.regex' => 'Position must contain only alphabetic characters.',
-            'position.max' => 'Position must not exceed 50 characters.',
+            'position.regex' => 'Contact Person may only contain alphabetic characters, numbers, spaces, periods, commas, and hyphens..',
+            'position.max' => 'Position must not exceed 250 characters.',
 
             'telephone_no.required' => 'The telephone number is required.',
             'telephone_no.digits' => 'The telephone number must be exactly :digits digits.',
@@ -145,7 +146,7 @@ class EmployerSetupController extends Controller
         $employer->employertype = $validatedData['employertype'];
         $employer->totalworkforce = $validatedData['totalworkforce'];
         $employer->address = $validatedData['address'];
-        $employer->city = $validatedData['city'];
+        $employer->municipality = $validatedData['municipality'];
         $employer->zipCode = $validatedData['zipcode'];
         $employer->contact_person = $validatedData['contact_person'];
         $employer->position = $validatedData['position'];

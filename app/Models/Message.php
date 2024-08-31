@@ -25,4 +25,5 @@ class Message extends Model
         return $this->hasMany(Reply::class);
     }
 
+
 }

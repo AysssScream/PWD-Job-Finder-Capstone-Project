@@ -75,6 +75,36 @@
             height: auto;
             background-attachment: fixed;
         }
+
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(0);
+            /* Inverts the colors for dark mode */
+        }
+
+        .dark input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+        }
+
+        input[type="date"] {
+            background-color: transparent;
+        }
+
+        .dark input[type="date"] {
+            color: #e5e7eb;
+        }
+
+        /* Light mode */
+        input[type="month"]::-webkit-calendar-picker-indicator {
+            filter: invert(0);
+            /* Normal color for light mode */
+        }
+
+        /* Dark mode */
+        .dark input[type="month"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            /* Inverts the colors for dark mode */
+        }
     </style>
 </head>
 
@@ -85,7 +115,7 @@
     <div
         class="fixed top-0 left-0 h-full w-14 hover:w-64 md:w-64 bg-white dark:bg-gray-900 text-black dark:text-white transition-all duration-300 border-none z-10 mb-10 sidebar">
         <div
-            class="overflow-y-auto overflow-x-hidden flex flex-col justify-between flex-grow h-full bg-white text-black dark:bg-gray-800 dark:text-gray-200 custom-scrollbar">
+            class="overflow-y-auto overflow-x-hidden flex flex-col justify-between flex-grow h-full bg-gray-200 text-black dark:bg-gray-800 dark:text-gray-200 custom-scrollbar">
             <ul class="flex flex-col py-4 space-y-1">
                 <li class="px-5 hidden md:flex md:flex-col md:justify-center md:items-center text-center">
                     <img class="rounded-full object-contain h-32 w-32 border-2 border-gray-300 mb-4"

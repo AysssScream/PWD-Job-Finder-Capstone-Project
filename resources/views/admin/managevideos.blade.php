@@ -275,6 +275,9 @@
                 <input type="text" id="video-id" name="video_id"
                     class="bg-white text-black dark:bg-gray-900 dark:text-gray-200 border border-gray-300 rounded-lg w-full p-2 mb-4"
                     placeholder="Enter Video ID" required>
+                @error('video_id')
+                    <div class="text-red-500 text-sm mt-1 mb-1">{{ $message }}</div>
+                @enderror
                 <p class="text-sm text-gray-800 dark:text-gray-200 mb-4">
                     For example, for the URL https://www.youtube.com/watch?v=liJVSwOiiwg, enter
                     <b><span class="text-gray-900 dark:text-gray-100">liJVSwOiiwg</span></b>

@@ -27,7 +27,7 @@
                     <form action="{{ route('setup') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @if ($errors->any())
-                            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                            <div class="bg-red-100 border border-red-400 text-red-700 dark:bg-red-700 dark:text-gray-100 dark:border-red-600 dark:text-red-200 px-4 py-3 rounded relative"
                                 role="alert">
                                 <strong class="font-bold">Oops!</strong>
                                 <span class="block sm:inline">There were some errors with your submission:</span>
@@ -39,6 +39,7 @@
                             </div>
                             <br>
                         @endif
+
                         <!-- Step 1: Applicant Profile -->
                         <div class="bg-white text-black dark:bg-gray-800 dark:text-gray-200 shadow-md rounded-lg mb-4"
                             id="step1">

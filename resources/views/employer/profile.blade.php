@@ -26,6 +26,8 @@
         </script>
     @endif
 
+
+
     <div class="py-12">
         <div class="container mx-auto max-w-8xl px-4 pt-5 "
             style="
@@ -291,7 +293,47 @@
                                         @enderror
                                     </div>
 
-                                    <div id="barangay-container" class=" relative">
+
+
+                                    <div id="municipality-container" class="relative">
+                                        <label for="city" class="block mb-1">
+                                            City
+                                            <span class="text-red-500">*</span>
+                                        </label>
+                                        <div class="relative">
+                                            <select id="municipality-dropdown" name="municipality"
+                                                class="w-full p-2 border rounded shadow-sm bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-gray-200"
+                                                aria-placeholder="Select a Municipality or City">
+                                                <option value="" disabled selected>
+                                                    {{ old('municipality', $profile->municipality ?? '') }}"
+                                                </option>
+                                                <!-- Options will be dynamically populated here -->
+                                            </select>
+                                        </div>
+                                        <!-- Hidden input to store the selected barangay data -->
+                                        <input type="text" id="selected-municipality" name="selected-municipality"
+                                            value="{{ old('municipality', $employerData['municipality'] ?? '') }}"
+                                            hidden>
+                                    </div>
+
+                                    <div class="mt">
+                                        <label for="zipcode" class="block mb-1">
+                                            Zip Code
+                                            <span class="text-red-500">*</span>
+                                        </label>
+                                        <div class="flex items-center mt-2">
+                                            <input type="text" id="zipcode" name="zipcode"
+                                                class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-700 dark:text-gray-200"
+                                                value="{{ old('zipcode', $profile->zipCode ?? '') }}"
+                                                placeholder="Enter Zip Code" readonly />
+                                            <!-- Add disabled attribute here -->
+                                            @error('zipcode')
+                                                <div class="text-red-600 mt-1">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    {{-- <div id="barangay-container" class=" relative">
                                         <label for="city" class="block mb-1">
                                             City
                                             <span class="text-red-500">*</span>
@@ -311,9 +353,9 @@
                                             Error
                                             fetching
                                             barangay data</div>
-                                    </div>
+                                    </div> --}}
 
-                                    <div class="mt">
+                                    {{-- <div class="mt">
                                         <label for="city" class="block mb-1">
                                             Zip Code
                                             <span class="text-red-500">*</span>
@@ -328,7 +370,7 @@
                                                 <div class="text-red-600 mt-1">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     <div>
                                         <label for="contactperson" class="block mb-1">
@@ -414,13 +456,7 @@
                                         </button>
                                     </div>
                                     <br>
-
-
-
                                 </div>
-
-
-
                             </div>
                         </div>
                     </form>
@@ -428,18 +464,157 @@
             </div>
         </div>
     </div>
-
+    @if (Session::has('profilesave'))
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                toastr.options = {
+                    "progressBar": true,
+                    "closeButton": true,
+                }
+                toastr.info("{{ Session::get('profilesave') }}", 'Account Updated', {
+                    timeOut: 4000
+                });
+            });
+        </script>
+    @endif
 
 
 </x-app-layout>
 <script>
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     const barangayInput = document.getElementById('city');
+    //     const suggestionsContainer = document.getElementById('barangay-suggestions');
+    //     const errorDiv = document.getElementById('barangay-error');
+    //     const zipCodeInput = document.getElementById('zipcode');
+
+    //     let mandaluyongBarangays = [];
+
+    //     // Fetch barangay data
+    //     fetch('/locations/municipalities.json')
+    //         .then(response => {
+    //             if (!response.ok) {
+    //                 throw new Error('Network response was not ok');
+    //             }
+    //             return response.json();
+    //         })
+    //         .then(data => {
+    //             // Flatten all barangays into a single array with city information
+    //             allBarangays = Object.keys(data).flatMap(city => {
+    //                 return data[city].map(barangay => ({
+    //                     city: city,
+    //                     location: barangay.location,
+    //                     zip: barangay.zip
+    //                 }));
+    //             });
+
+    //             // Add input event listener after data is fetched and processed
+    //             barangayInput.addEventListener('input', function() {
+    //                 const query = this.value.trim().toLowerCase();
+
+    //                 // Filter barangays based on the input query
+    //                 const filteredBarangays = allBarangays.filter(barangay =>
+    //                     barangay.location.toLowerCase().includes(query)
+    //                 ).slice(0, 5); // Limit to first 10 results
+
+    //                 // Render filtered suggestions
+    //                 renderSuggestions(filteredBarangays);
+    //                 editButton.style.display = 'none'; // Show edit button
+
+    //             });
+
+
+    //         })
+    //         .catch(error => {
+    //             console.error('Error fetching barangay data:', error);
+    //             errorDiv.classList.remove('hidden');
+    //         });
+
+
+    //     function renderSuggestions(locations) {
+    //         suggestionsContainer.innerHTML = ''; // Clear previous suggestions
+
+    //         if (locations.length > 0) {
+    //             suggestionsContainer.style.display = 'block'; // Show suggestions container
+    //             locations.forEach(location => {
+    //                 const suggestionElement = document.createElement('div');
+    //                 suggestionElement.classList.add('suggestion', 'dark:bg-gray-800',
+    //                     'dark:text-white'); // Example dark mode classes
+
+    //                 const suggestionText = document.createElement('div');
+    //                 suggestionText.classList.add('suggestion-text');
+    //                 suggestionText.textContent = `${location.city} - ${location.location}`;
+
+    //                 const plusContainer = document.createElement('div');
+    //                 plusContainer.classList.add('plus-container', 'dark:bg-gray-600',
+    //                     'dark:text-gray-200'); // Example dark mode classes
+    //                 plusContainer.textContent = '+'; // Adjust content based on your needs
+
+    //                 suggestionElement.appendChild(suggestionText);
+    //                 suggestionElement.appendChild(plusContainer);
+
+    //                 suggestionElement.addEventListener('click', function() {
+    //                     barangayInput.value = `${location.city} - ${location.location}`;;
+    //                     zipCodeInput.value = location.zip;
+    //                     suggestionsContainer.style.display = 'none';
+    //                     editButton.style.display = 'inline-block'; // Show edit button
+    //                     barangayInput.readOnly = true;
+    //                 });
+
+    //                 suggestionsContainer.appendChild(suggestionElement);
+    //             });
+
+    //             document.addEventListener('click', function(event) {
+    //                 if (!suggestionsContainer.contains(event.target)) {
+    //                     suggestionsContainer.style.display = 'none';
+    //                 }
+    //             });
+    //         } else {
+    //             suggestionsContainer.style.display = 'none'; // Hide suggestions if no matches
+    //         }
+    //     }
+
+
+
+    //     // Edit button functionality
+    //     editButton.addEventListener('click', function() {
+    //         event.preventDefault();
+    //         editButton.style.display = 'none'; // Show edit button
+    //         barangayInput.removeAttribute('readonly'); // Allow editing
+    //         barangayInput.focus(); // Focus on the input field
+    //         barangayInput.value = ''
+    //         zipCodeInput.value = ''
+    //     });
+
+    //     // Handle input changes in barangayInput
+    //     barangayInput.addEventListener('input', function() {
+    //         const selectedBarangay = this.value.trim();
+    //         if (selectedBarangay === '') {
+    //             zipCodeInput.value = ''; // Clear zip code input if barangay input is empty
+    //             editButton.style.display = 'inline-block'; // Hide edit button if input is empty
+
+    //         }
+    //         if (selectedBarangay === '' || selectedBarangay.split(' ').length < 2) {
+    //             zipCodeInput.value = ''; // Clear zip code input
+    //             editButton.style.display = 'inline-block'; // Hide edit button
+
+    //         }
+    //     });
+    //     if (barangayInput.value.trim() === '') {
+    //         editButton.style.display = 'inline-block';
+    //     }
+
+    // });
+
     document.addEventListener('DOMContentLoaded', function() {
-        const barangayInput = document.getElementById('city');
-        const suggestionsContainer = document.getElementById('barangay-suggestions');
-        const errorDiv = document.getElementById('barangay-error');
+        const cityDropdown = document.getElementById('municipality-dropdown');
+        const errorDiv = document.getElementById('municipality-error');
+        const editButton = document.getElementById('editButton');
+        const selectedBarangayInput = document.getElementById('selected-municipality');
         const zipCodeInput = document.getElementById('zipcode');
 
-        let mandaluyongBarangays = [];
+        let allBarangays = [];
 
         // Fetch barangay data
         fetch('/locations/municipalities.json')
@@ -459,103 +634,51 @@
                     }));
                 });
 
-                // Add input event listener after data is fetched and processed
-                barangayInput.addEventListener('input', function() {
-                    const query = this.value.trim().toLowerCase();
-
-                    // Filter barangays based on the input query
-                    const filteredBarangays = allBarangays.filter(barangay =>
-                        barangay.location.toLowerCase().includes(query)
-                    ).slice(0, 5); // Limit to first 10 results
-
-                    // Render filtered suggestions
-                    renderSuggestions(filteredBarangays);
-                    editButton.style.display = 'none'; // Show edit button
-
-                });
-
-
+                // Populate dropdown with barangay data
+                populateDropdown(allBarangays);
             })
             .catch(error => {
                 console.error('Error fetching barangay data:', error);
                 errorDiv.classList.remove('hidden');
             });
 
-
-        function renderSuggestions(locations) {
-            suggestionsContainer.innerHTML = ''; // Clear previous suggestions
-
-            if (locations.length > 0) {
-                suggestionsContainer.style.display = 'block'; // Show suggestions container
-                locations.forEach(location => {
-                    const suggestionElement = document.createElement('div');
-                    suggestionElement.classList.add('suggestion', 'dark:bg-gray-800',
-                        'dark:text-white'); // Example dark mode classes
-
-                    const suggestionText = document.createElement('div');
-                    suggestionText.classList.add('suggestion-text');
-                    suggestionText.textContent = `${location.city} - ${location.location}`;
-
-                    const plusContainer = document.createElement('div');
-                    plusContainer.classList.add('plus-container', 'dark:bg-gray-600',
-                        'dark:text-gray-200'); // Example dark mode classes
-                    plusContainer.textContent = '+'; // Adjust content based on your needs
-
-                    suggestionElement.appendChild(suggestionText);
-                    suggestionElement.appendChild(plusContainer);
-
-                    suggestionElement.addEventListener('click', function() {
-                        barangayInput.value = `${location.city} - ${location.location}`;;
-                        zipCodeInput.value = location.zip;
-                        suggestionsContainer.style.display = 'none';
-                        editButton.style.display = 'inline-block'; // Show edit button
-                        barangayInput.readOnly = true;
-                    });
-
-                    suggestionsContainer.appendChild(suggestionElement);
-                });
-
-                document.addEventListener('click', function(event) {
-                    if (!suggestionsContainer.contains(event.target)) {
-                        suggestionsContainer.style.display = 'none';
-                    }
-                });
-            } else {
-                suggestionsContainer.style.display = 'none'; // Hide suggestions if no matches
-            }
+        function populateDropdown(barangays) {
+            barangays.forEach(barangay => {
+                const option = document.createElement('option');
+                // Use a unique value, like city and location combined, to differentiate options
+                option.value = `${barangay.city}-${barangay.location}`;
+                option.textContent = `${barangay.city} - ${barangay.location}`;
+                cityDropdown.appendChild(option);
+            });
         }
+
+
+
+        cityDropdown.addEventListener('change', function() {
+            const selectedValue = this.value; // This is in the format 'City-Location'
+            const selectedBarangay = allBarangays.find(b => b.city === selectedCityName && b
+                .location === selectedLocation);
+            const [selectedCityName, selectedLocation] = selectedValue.split('-');
+
+            if (selectedBarangay) {
+                selectedBarangayInput.value = `${selectedBarangay.city} - ${selectedBarangay.location}`;
+                zipCodeInput.value = selectedBarangay.zip; // Set the zip code separately
+                editButton.style.display = 'inline-block'; // Show edit button
+            }
+        });
 
 
 
         // Edit button functionality
-        editButton.addEventListener('click', function() {
+        editButton.addEventListener('click', function(event) {
             event.preventDefault();
-            editButton.style.display = 'none'; // Show edit button
-            barangayInput.removeAttribute('readonly'); // Allow editing
-            barangayInput.focus(); // Focus on the input field
-            barangayInput.value = ''
-            zipCodeInput.value = ''
+            editButton.style.display = 'none'; // Hide edit button
+            cityDropdown.value = ''; // Reset dropdown
+            selectedBarangayInput.value = ''; // Clear selected barangay input
+            zipCodeInput.value = ''; // Clear zip code input
         });
-
-        // Handle input changes in barangayInput
-        barangayInput.addEventListener('input', function() {
-            const selectedBarangay = this.value.trim();
-            if (selectedBarangay === '') {
-                zipCodeInput.value = ''; // Clear zip code input if barangay input is empty
-                editButton.style.display = 'inline-block'; // Hide edit button if input is empty
-
-            }
-            if (selectedBarangay === '' || selectedBarangay.split(' ').length < 2) {
-                zipCodeInput.value = ''; // Clear zip code input
-                editButton.style.display = 'inline-block'; // Hide edit button
-
-            }
-        });
-        if (barangayInput.value.trim() === '') {
-            editButton.style.display = 'inline-block';
-        }
-
     });
+
 
 
 

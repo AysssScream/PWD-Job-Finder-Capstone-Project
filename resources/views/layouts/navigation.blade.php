@@ -1,6 +1,12 @@
 <link href="{{ asset('fontawesome-free-6.5.2-web/css/all.min.css') }}" rel="stylesheet">
 
-@if (!(Auth::user()->usertype == 'admin' || Route::currentRouteName() === 'employer.messages'))
+@if (
+    !(Auth::user()->usertype == 'admin' ||
+        Route::currentRouteName() === 'employer.messages' ||
+        Route::currentRouteName() === 'employer.sentmessages' ||
+        Route::currentRouteName() === 'user.messages' ||
+        Route::currentRouteName() === 'user.sentmessages'
+    ))
     <nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 shadow-lg py-2 dark:shadow-lg" id="main-nav">
         <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 lg:ml-12">
             <div class="flex justify-between h-16">
@@ -251,14 +257,27 @@
                                     class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-700 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-300 focus:outline-none focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 dark:focus:border-gray-600 transition duration-150 ease-in-out">
                                     <div
                                         class="flex-shrink-0 h-9 w-9 sm:h-11 sm:w-11 rounded-full overflow-hidden border-2 border-blue-400 bg-white">
-                                        @if (Auth::user()->pwdInformation)
-                                            <img class="h-full w-full object-contain" aria-label="Profile"
-                                                src="{{ asset('storage/' . Auth::user()->pwdInformation->profilePicture) }}"
-                                                alt="Avatar"
-                                                onerror="this.onerror=null; this.src='{{ asset('/images/avatar.png') }}';">
-                                        @else
-                                            <img class="h-full w-full object-contain"
-                                                src="{{ asset('/images/avatar.png') }}" alt="Avatar">
+                                        @if (Auth::user()->usertype === 'user')
+
+                                            @if (Auth::user()->pwdInformation)
+                                                <img class="h-full w-full object-contain" aria-label="Profile"
+                                                    src="{{ asset('storage/' . Auth::user()->pwdInformation->profilePicture) }}"
+                                                    alt="Avatar"
+                                                    onerror="this.onerror=null; this.src='{{ asset('/images/avatar.png') }}';">
+                                            @else
+                                                <img class="h-full w-full object-contain"
+                                                    src="{{ asset('/images/avatar.png') }}" alt="Avatar">
+                                            @endif
+                                        @elseif (Auth::user()->usertype === 'employer')
+                                            @if (Auth::user()->employer->company_logo)
+                                                <img class="h-full w-full object-contain" aria-label="Profile"
+                                                    src="{{ asset('storage/' . Auth::user()->employer->company_logo) }}"
+                                                    alt="Avatar"
+                                                    onerror="this.onerror=null; this.src='{{ asset('/images/avatar.png') }}';">
+                                            @else
+                                                <img class="h-full w-full object-contain"
+                                                    src="{{ asset('/images/avatar.png') }}" alt="Avatar">
+                                            @endif
                                         @endif
                                     </div>
                                     <!-- User Name -->
@@ -286,14 +305,26 @@
                                     <!-- Avatar Container -->
                                     <div
                                         class="flex-shrink-0 h-20 w-20 rounded-full overflow-hidden border-2 border-blue-400 bg-white flex items-center justify-center shadow-md">
-                                        @if (Auth::user()->pwdInformation)
-                                            <img class="h-full w-full object-contain" aria-label="Profile Picture"
-                                                src="{{ asset('storage/' . Auth::user()->pwdInformation->profilePicture) }}"
-                                                alt="Avatar"
-                                                onerror="this.onerror=null; this.src='{{ asset('/images/avatar.png') }}';">
-                                        @else
-                                            <img class="h-full w-full object-contain" aria-label="Profile Picture"
-                                                src="{{ asset('/images/avatar.png') }}" alt="Avatar">
+                                        @if (Auth::user()->usertype === 'user')
+                                            @if (Auth::user()->pwdInformation)
+                                                <img class="h-full w-full object-contain" aria-label="Profile Picture"
+                                                    src="{{ asset('storage/' . Auth::user()->pwdInformation->profilePicture) }}"
+                                                    alt="Avatar"
+                                                    onerror="this.onerror=null; this.src='{{ asset('/images/avatar.png') }}';">
+                                            @else
+                                                <img class="h-full w-full object-contain" aria-label="Profile Picture"
+                                                    src="{{ asset('/images/avatar.png') }}" alt="Avatar">
+                                            @endif
+                                        @elseif (Auth::user()->usertype === 'employer')
+                                            @if (Auth::user()->employer->company_logo)
+                                                <img class="h-full w-full object-contain" aria-label="Company Logo"
+                                                    src="{{ asset('storage/' . Auth::user()->employer->company_logo) }}"
+                                                    alt="Company Logo"
+                                                    onerror="this.onerror=null; this.src='{{ asset('/images/avatar.png') }}';">
+                                            @else
+                                                <img class="h-full w-full object-contain" aria-label="Company Logo"
+                                                    src="{{ asset('/images/avatar.png') }}" alt="Company Logo">
+                                            @endif
                                         @endif
                                     </div>
 
@@ -312,10 +343,43 @@
                                         {{ Auth::user()->email }}
                                     </div>
                                 </div>
-
+                                @if (
+                                    (Auth::user()->account_verification_status == 'approved' ||
+                                        Auth::user()->account_verification_status == 'declined') &&
+                                        Auth::user()->usertype == 'user')
+                                    <div class="px-0 py-2">
+                                        <x-dropdown-link :href="route('user.messages')" aria-label="Inbox"
+                                            class="block text-md font-medium text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                            <i class="fas fa-envelope mr-2"></i>
+                                            {{ __('messages.navigation.Inbox') }}
+                                        </x-dropdown-link>
+                                    </div>
+                                @elseif (
+                                    (Auth::user()->account_verification_status == 'approved' ||
+                                        Auth::user()->account_verification_status == 'declined') &&
+                                        Auth::user()->usertype == 'employer')
+                                    <div class="px-0 py-2">
+                                        <x-dropdown-link :href="route('employer.messages')" aria-label="Inbox"
+                                            class="block text-md font-medium text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                            <i class="fas fa-envelope mr-2"></i>
+                                            {{ __('messages.navigation.Inbox') }}
+                                        </x-dropdown-link>
+                                    </div>
+                                @elseif (
+                                    (Auth::user()->account_verification_status == 'approved' ||
+                                        Auth::user()->account_verification_status == 'declined') &&
+                                        Auth::user()->usertype == 'admin')
+                                    <div class="px-0 py-2">
+                                        <x-dropdown-link :href="route('admin.messages')" aria-label="Inbox"
+                                            class="block text-md font-medium text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                            <i class="fas fa-envelope mr-2"></i>
+                                            {{ __('messages.navigation.Inbox') }}
+                                        </x-dropdown-link>
+                                    </div>
+                                @endif
 
                                 @if (Auth::user()->account_verification_status == 'approved' && Auth::user()->usertype == 'user')
-                                    <div class="px-0 py-2">
+                                    <div class="px-0 ">
                                         <x-dropdown-link :href="route('profile.edit')" aria-label="Profile Settings"
                                             class="block text-md font-medium text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
                                             <i class="fas fa-user mr-2"></i>

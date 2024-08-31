@@ -17,6 +17,8 @@ use App\Http\Controllers\JobInfoController;
 use App\Http\Controllers\EmployerSetupController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\WorkExperienceController;
+use App\Http\Controllers\DocxController;
+
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +38,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::patch('/profile/updatepic', [ProfileController::class, 'updatepic'])->name('profile.updatepic');
 
+
+    Route::patch('/profile/update-applicant-profile', [ProfileController::class, 'updateApplicantProfile'])->name('profile.update.applicant-profile');
+    Route::patch('/profile/update-personal-info', [ProfileController::class, 'updatePersonalInfo'])->name('profile.update.personal-info');
+    Route::patch('/profile/update-employment-info', [ProfileController::class, 'updateEmploymentInfo'])->name('profile.update.employment-info');
+    Route::patch('/profile/update-job-preferences', [ProfileController::class, 'updateJobPreferences'])->name('profile.update.job-preferences');
+    Route::patch('/profile/update-language-info', [ProfileController::class, 'updateLanguageInfo'])->name('profile.update.language-info');
+    Route::patch('/profile/update-education-info', [ProfileController::class, 'updateEducationInfo'])->name('profile.update.education-info');
+    Route::patch('/profile/update-pwd-info', [ProfileController::class, 'updatePwdInfo'])->name('profile.update.pwd-info');
 });
 
 
@@ -67,11 +77,22 @@ Route::middleware(['auth', 'userMiddleware', 'checkVerificationStatus'])->group(
     Route::post('jobs/apply/{company_name}/{id}', [UserController::class, 'applyForJob'])->name('applyForJob');
     Route::post('/applications/mark-all-as-read', [ApplicationController::class, 'markAllAsRead'])->name('applications.markAllAsRead');
     Route::post('/save-job/{id}/{company_name}', [SaveJobController::class, 'save'])->name('save.job');
+    Route::get('/company/profile/{employer_id}', [UserController::class, 'showCompany'])->name('company.profile');
     Route::get('savedjobs', [SaveJobController::class, 'index'])->name('savedjobs');
     Route::delete('/savedjobs/{id}', [SaveJobController::class, 'destroy'])->name('save.destroy');
-
     Route::patch('/dashboard/job-preferences', [UserController::class, 'updatepreferences'])->name('jobpref.updatepreferences');
+    Route::get('/download-template', [DocxController::class, 'download'])->name('download.docx');
+
 });
+//Inbox
+Route::middleware('auth')->group(function () {
+    Route::get('/user/messages', [UserController::class, 'messages'])->name('user.messages');
+    Route::get('/user/sent/messages', [UserController::class, 'sentmessages'])->name('user.sentmessages');
+    Route::post('/user/messages', [UserController::class, 'storeMessage'])->name('user.messages.store');
+    Route::post('/user/replies', [UserController::class, 'storeReply'])->name('user.replies.store');
+    Route::get('/user/messages/{id}/replies', [UserController::class, 'getReplies'])->name('user.replies.retrieve');
+});
+
 
 Route::middleware(['auth', 'adminMiddleware'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
@@ -79,15 +100,19 @@ Route::middleware(['auth', 'adminMiddleware'])->group(function () {
     Route::get('/admin/details/{type}', [AdminController::class, 'details'])->name('admin.details');
     Route::get('/admin/manageusers', [AdminController::class, 'manageUsers'])->name('admin.manageusers');
     Route::get('/admin/audit', [AdminController::class, 'audit'])->name('admin.audit');
+    Route::post('/clear-audit-logs', [AdminController::class, 'clearlogs'])->name('audit.clearlogs');
+
 
     Route::get('/admin/messages', [AdminController::class, 'messages'])->name('admin.messages');
     Route::post('/admin/messages', [AdminController::class, 'storeMessage'])->name('admin.messages.store');
-
+    Route::get('/admin/sent/messages', [AdminController::class, 'sentmessages'])->name('admin.sentmessages');
     Route::post('/admin/replies', [AdminController::class, 'storeReply'])->name('admin.replies.store');
+    Route::get('/admin/messages/{id}/replies', [AdminController::class, 'getReplies'])->name('admin.replies.retrieve');
+
+    Route::get('/admin/decline/{id}', [AdminController::class, 'declineUser'])->name('admin.decline');
     Route::get('/admin/managevideos', [AdminController::class, 'manageVideo'])->name('admin.managevideos');
     Route::post('/video/store/{location}', [AdminController::class, 'videoStore'])->name('admin.video.store');
 
-    Route::get('/admin/messages/{id}/replies', [AdminController::class, 'getReplies'])->name('admin.replies.retrieve');
 
     Route::get('/export/skillscsv', [ExportController::class, 'skillsExportCSV'])->name('exportskills.csv');
     Route::get('/export/skillspdf', [ExportController::class, 'skillsExportPDF'])->name('exportskills.pdf');
@@ -103,6 +128,12 @@ Route::middleware(['auth', 'adminMiddleware'])->group(function () {
     Route::get('/export/agebinscsv', [ExportController::class, 'ageBinsExportCSV'])->name('exportageBins.csv');
     Route::get('/export/agebinspdf', [ExportController::class, 'ageBinsExportPDF'])->name('exportageBins.pdf');
 
+    Route::get('/export/companiespdf', [ExportController::class, 'companiesExportPDF'])->name('exportCompanies.pdf');
+    Route::get('/export/companiescsv', [ExportController::class, 'companiesExportCSV'])->name('exportCompanies.csv');
+
+
+    Route::get('/export/yearsofexperiencepdf', [ExportController::class, 'yearsofExperienceExportPDF'])->name('yearsofExperience.pdf');
+    Route::get('/export/yearsofexperiencecsv', [ExportController::class, 'yearsofExperienceExportCSV'])->name('yearsofExperience.csv');
 
     Route::get('/admin/userapplication/applicant/{id}', [AdminController::class, 'userapplication'])->name('admin.applicantinfo');
     Route::get('/admin/userpwdapplication/applicant/{id}', [AdminController::class, 'userpwdapplication'])->name('admin.pwdapplicantinfo');
@@ -160,22 +191,28 @@ Route::middleware(['auth', 'employerMiddleware', 'ensureEmployerSetupCompleted']
     Route::get('/employer/profile', [EmployerController::class, 'editprofile'])->name('employer.profile');
     Route::get('/employer/manage', [EmployerController::class, 'manage'])->name('employer.manage');
     Route::get('/employer/addjobs', [EmployerController::class, 'addjobs'])->name('employer.add');
+    Route::delete('/employer/delete/{id}', [EmployerController::class, 'deletejobs'])->name('employer.delete');
     Route::get('/employer/reviewapplicants', [EmployerController::class, 'review'])->name('employer.review');
 
-    Route::get('/employer/messages', [EmployerController::class, 'messages'])->name('employer.messages');
-    Route::post('/employer/messages', [EmployerController::class, 'storeMessage'])->name('employer.messages.store');
 
     Route::get('/employer/applicantinformation/applicant/{id}', [EmployerController::class, 'applicantinformation'])->name('employer.applicantinfo');
     Route::get('/employer/applicantinformation/pwd/{id}', [EmployerController::class, 'pwdinformation'])->name('employer.pwdinfo');
     Route::get('/employer/editjobs/{id}', [EmployerController::class, 'editjobs'])->name('employer.edit');
     Route::post('/employer/applicantinformation/hire/{id}', [EmployerController::class, 'hire'])->name('hire.applicant');
-    Route::post('/employer/replies', [EmployerController::class, 'storeReply'])->name('employer.replies.store');
 
-    Route::get('/employer/messages/{id}/replies', [EmployerController::class, 'getReplies'])->name('employer.replies.retrieve');
 
     Route::post('/employer/addjobs', [JobInfoController::class, 'store'])->name('jobinfos.store');
     Route::put('/employer/editjobs/{id}', [JobInfoController::class, 'update'])->name('jobinfos.update');
     Route::put('/employer/profile/update', [JobInfoController::class, 'updateprofile'])->name('employer.updateprofile');
+});
+
+
+Route::middleware(['auth', 'employerMiddleware'])->group(function () {
+    Route::get('/employer/messages', [EmployerController::class, 'messages'])->name('employer.messages');
+    Route::get('/employer/sent/messages', [EmployerController::class, 'sentmessages'])->name('employer.sentmessages');
+    Route::post('/employer/messages', [EmployerController::class, 'storeMessage'])->name('employer.messages.store');
+    Route::post('/employer/replies', [EmployerController::class, 'storeReply'])->name('employer.replies.store');
+    Route::get('/employer/messages/{id}/replies', [EmployerController::class, 'getReplies'])->name('employer.replies.retrieve');
 });
 
 

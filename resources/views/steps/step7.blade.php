@@ -15,7 +15,7 @@
                 <form action="{{ route('pwdinfo') }}" id="lastform" method="POST" enctype="multipart/form-data">
                     @csrf
                     @if ($errors->any())
-                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                        <div class="bg-red-100 border border-red-400 text-red-700 dark:bg-red-700 dark:text-gray-100 dark:border-red-600 dark:text-red-200 px-4 py-3 rounded relative"
                             role="alert">
                             <strong class="font-bold">Oops!</strong>
                             <span class="block sm:inline">There were some errors with your submission:</span>
@@ -27,6 +27,7 @@
                         </div>
                         <br>
                     @endif
+
                     <div class="bg-white text-black dark:bg-gray-800 dark:text-gray-200 shadow-md rounded-lg">
                         <div class="p-6">
                             <h3 class="text-2xl font-bold mb-2 inline-flex items-center justify-between w-full focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400s"

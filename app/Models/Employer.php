@@ -20,7 +20,7 @@ class Employer extends Model
         'employertype',
         'totalworkforce',
         'address',
-        'city',
+        'municipality',
         'contact_person',
         'position',
         'zipCode',
@@ -45,5 +45,10 @@ class Employer extends Model
     {
         return $this->hasMany(JobInfo::class, 'employer_id', 'user_id');
     }
+
+    // public function userpic()
+    // {
+    //     return $this->belongsTo(User::class, 'id');
+    // }
 
 }

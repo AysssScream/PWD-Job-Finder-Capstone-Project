@@ -317,10 +317,11 @@
 
                     <!-- Modal -->
                     <div id="validationModal"
-                        class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white shadow-lg rounded-lg p-8 z-50 hidden">
+                        class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-200 dark:bg-gray-800 text-black dark:text-white shadow-lg rounded-lg p-8 z-50 hidden">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h2 class="text-xl text-red-600 font-bold mb-4">Form Submission Error</h2>
+                                <h2 id="formMessage" class="text-xl text-blue-500 font-bold mb-4">Form Submission Info
+                                </h2>
                                 <button id="modalCloseButton"
                                     class="absolute top-0 right-0 mt-4 mr-4 text-gray-500 hover:text-gray-700 focus:outline-none"
                                     aria-label="Close">
@@ -336,11 +337,10 @@
                             </div>
                             <div class="modal-footer mt-4 text-right">
                                 <button id="modalClose"
-                                    class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 focus:outline-none">Close</button>
+                                    class="px-4 py-2 bg-gray-200 text-gray-800 dark:bg-red-700 dark:text-gray-200 rounded-md focus:outline-none">Close</button>
                             </div>
                         </div>
                     </div>
-
                 </div>
 </x-app-layout>
 

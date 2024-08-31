@@ -15,7 +15,7 @@
                     <form action="{{ route('jobpreferences') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @if ($errors->any())
-                            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                            <div class="bg-red-100 border border-red-400 text-red-700 dark:bg-red-700 dark:text-gray-100 dark:border-red-600 dark:text-red-200 px-4 py-3 rounded relative"
                                 role="alert">
                                 <strong class="font-bold">Oops!</strong>
                                 <span class="block sm:inline">There were some errors with your submission:</span>
@@ -27,6 +27,7 @@
                             </div>
                             <br>
                         @endif
+
                         <div class="bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-200 shadow-md rounded-lg">
                             <div class="p-6">
                                 <h3 class="text-2xl font-bold mb-2 inline-flex items-center justify-between w-full focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
@@ -93,12 +94,15 @@
                                                 placeholder="Ex. Domestic Helper"
                                                 value="{{ old('preferredOccupation', $formData4['preferredOccupation'] ?? '') }}" />
 
+
                                             @error('preferredOccupation')
                                                 <div class="text-red-600 mt-1">{{ $message }}</div>
                                             @enderror
 
                                         </div>
 
+
+                                        {{-- 
                                         <div class="mt-6 relative">
                                             <label for="local-location"
                                                 class="block mb-1">{{ __('messages.jobpreferences.preferred_work_location_local') }}</label>
@@ -123,27 +127,58 @@
                                             <input type="text" id="localLocationHidden" name="localLocation"
                                                 value="{{ old('local-location', $formData4['local-location'] ?? '') }}"
                                                 hidden />
+                                        </div> --}}
+
+                                        <div class="mt-6 relative">
+                                            <label for="local-location" class="block mb-1">
+                                                {{ __('messages.jobpreferences.preferred_work_location_local') }}
+                                            </label>
+                                            <div class="flex items-center space-x-2">
+                                                <!-- Dropdown (Select) for Local Location -->
+                                                <select id="local-location" name="local-location"
+                                                    aria-label="{{ __('messages.jobpreferences.preferred_work_location_local') }}"
+                                                    class="flex-1 p-2 border rounded shadow-sm bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+
+                                                </select>
+
+                                                <!-- Clear Button -->
+                                                <button id="clearLocationButton" type="button" aria-label="Clear"
+                                                    class="ml-2   px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-400">
+                                                    Clear
+                                                </button>
+                                            </div>
+
+                                            <div id="local-location-error" class="text-red-600 mt-1 hidden">Error
+                                                fetching location data</div>
+                                            <input type="text" id="localLocationHidden" name="localLocation"
+                                                value="{{ old('local-location', $formData4['local-location'] ?? '') }}"
+                                                hidden />
+                                            @error('localLocation')
+                                                <div class="text-red-600 mt-1">{{ $message }}</div>
+                                            @enderror
                                         </div>
+
 
 
                                         <div class="mt-6 relative">
                                             <label for="overseas-location"
                                                 class="block mb-1">{{ __('messages.jobpreferences.preferred_work_location_overseas') }}</label>
-                                            <div class="flex">
-                                                <input type="text" id="overseas-location" name="overseas-location"
+                                            <div class="flex items-center space-x-2">
+                                                <!-- Dropdown (Select) for Overseas Location -->
+                                                <select id="overseas-location" name="overseas-location"
                                                     aria-label="{{ __('messages.jobpreferences.preferred_work_location_overseas') }}"
-                                                    class="flex-1 p-2 border rounded shadow-sm bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
-                                                    pattern="[A-Za-z\s]+"
-                                                    title="Please enter alphabetic characters only"
-                                                    placeholder="Ex. Japan"
-                                                    value="{{ old('overseas-location', $formData4['overseas-location'] ?? '') }}"
-                                                    readonly />
-                                                <button id="editButton" aria-label="{{ __('messages.edit') }}"
-                                                    class="ml-2 px-3 py-1 bg-blue-500 text-white rounded focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">{{ __('messages.edit') }}</button>
+                                                    class="flex-1 p-2 border rounded shadow-sm bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                </select>
+
+                                                <!-- Clear Button -->
+                                                <button id="clearOverseasLocationButton" type="button"
+                                                    aria-label="Clear"
+                                                    class="ml-2 px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-400">
+                                                    Clear
+                                                </button>
                                             </div>
-                                            <div id="overseas-location-suggestions"
-                                                class="absolute z-10 mt-1 w-full max-h-90 overflow-y-auto bg-gray-200 text-black dark:bg-gray-900 dark:text-gray-200  border rounded shadow-md hidden">
-                                            </div>
+
+                                            <!-- Error Message -->
                                             <div id="overseas-location-error" class="text-red-600 mt-1 hidden">Error
                                                 fetching location data</div>
 
@@ -151,6 +186,7 @@
                                                 value="{{ old('overseas-location', $formData4['overseas-location'] ?? '') }}"
                                                 hidden />
                                         </div>
+
 
 
                                     </div>
@@ -170,11 +206,129 @@
 
 
                         <script>
+                            // document.addEventListener('DOMContentLoaded', function() {
+                            //     const localLocationInput = document.getElementById('local-location');
+                            //     const localLocationHidden = document.getElementById('localLocationHidden');
+                            //     const suggestionsContainer = document.getElementById('local-location-suggestions');
+                            //     const editLocationButton = document.getElementById('editLocationButton');
+                            //     const errorDiv = document.getElementById('local-location-error');
+
+                            //     let citiesData = []; // Array to store cities data fetched from API
+
+                            //     // Fetch cities data from the API
+                            //     fetch('/locations/cities.json')
+                            //         .then(response => {
+                            //             if (!response.ok) {
+                            //                 throw new Error('Network response was not ok');
+                            //             }
+                            //             return response.json();
+                            //         })
+                            //         .then(data => {
+                            //             citiesData = data;
+
+                            //             // Event listener for input changes
+                            //             localLocationInput.addEventListener('input', function() {
+                            //                 const query = this.value.trim().toLowerCase();
+                            //                 const filteredCities = citiesData.filter(city =>
+                            //                     city.name.toLowerCase().includes(query)
+                            //                 ).slice(0, 6); // Limit to 10 results
+
+                            //                 renderSuggestions(filteredCities, query);
+                            //             });
+                            //         })
+                            //         .catch(error => {
+                            //             console.error('Error fetching city data:', error);
+                            //             errorDiv.classList.remove('hidden');
+                            //         });
+
+                            //     // Event listener for edit button
+                            //     editLocationButton.addEventListener('click', function() {
+                            //         localLocationInput.value = ''; // Clear input value
+                            //         localLocationInput.focus(); // Set focus on input field
+                            //         localLocationInput.removeAttribute('readonly');
+                            //         suggestionsContainer.style.display = 'none'; // Hide suggestions
+                            //         editLocationButton.style.display = 'none'; // Show edit button
+                            //         localLocationHidden.value = ``
+
+                            //     });
+
+
+
+                            //     // Function to render suggestions in the suggestions container
+                            //     function renderSuggestions(cities, query) {
+                            //         suggestionsContainer.innerHTML = ''; // Clear previous suggestions
+                            //         suggestionsContainer.style.display = cities.length && query ? 'block' : 'none';
+
+                            //         cities.forEach(city => {
+                            //             const suggestionElement = document.createElement('div');
+                            //             suggestionElement.classList.add(
+                            //                 'flex', // Flexbox layout
+                            //                 'justify-between', // Space between items
+                            //                 'items-center', // Center items vertically
+                            //                 'p-2', // Padding
+                            //                 'cursor-pointer', // Pointer cursor on hover
+                            //                 'rounded', // Rounded corners
+                            //                 'mb-1', // Margin bottom
+                            //                 'bg-gray-200',
+                            //                 'text-black',
+                            //                 'dark:bg-gray-900',
+                            //                 'dark:text-gray-200',
+                            //             );
+
+
+                            //             const suggestionText = document.createElement('div');
+                            //             suggestionText.classList.add('suggestion-text');
+                            //             suggestionText.textContent =
+                            //                 `${city.name}, ${city.province}`; // Display city name and province
+
+                            //             const plusContainer = document.createElement('div');
+                            //             plusContainer.classList.add('plus-container');
+                            //             plusContainer.innerHTML = '+';
+
+                            //             suggestionElement.appendChild(suggestionText);
+                            //             suggestionElement.appendChild(plusContainer);
+
+                            //             suggestionElement.addEventListener('click', function() {
+                            //                 localLocationInput.value =
+                            //                     `${city.name}, ${city.province}`; // Set input value to city name
+                            //                 suggestionsContainer.style.display =
+                            //                     'none'; // Hide suggestions after selection
+                            //                 editLocationButton.style.display = 'inline-block'; // Show edit button
+                            //                 localLocationHidden.value = `${city.name}, ${city.province}`
+                            //                 localLocationInput.readOnly = true;
+                            //             });
+                            //             suggestionsContainer.appendChild(suggestionElement);
+                            //         });
+                            //     }
+
+                            //     /* Handle outside click to hide suggestions
+                            //     document.addEventListener('click', function(event) {
+                            //         if (!document.getElementById('local-location-container').contains(event.target)) {
+                            //             suggestionsContainer.style.display = 'none';
+                            //         }
+                            //     });*/
+                            //     document.addEventListener('DOMContentLoaded', function() {
+                            //         document.addEventListener('click', function(event) {
+                            //             const localLocationContainer = document.getElementById(
+                            //                 'local-location-container');
+                            //             const suggestionsContainer = document.getElementById('suggestionsContainer');
+
+                            //             if (localLocationContainer && suggestionsContainer) {
+                            //                 if (!localLocationContainer.contains(event.target)) {
+                            //                     suggestionsContainer.style.display = 'none';
+                            //                 }
+                            //             } else {
+                            //                 console.error(
+                            //                     'Local location container or suggestions container not found.');
+                            //             }
+                            //         });
+                            //     });
+                            // });
+
                             document.addEventListener('DOMContentLoaded', function() {
-                                const localLocationInput = document.getElementById('local-location');
+                                const locationSelect = document.getElementById('local-location');
+                                const clearButton = document.getElementById('clearLocationButton');
                                 const localLocationHidden = document.getElementById('localLocationHidden');
-                                const suggestionsContainer = document.getElementById('local-location-suggestions');
-                                const editLocationButton = document.getElementById('editLocationButton');
                                 const errorDiv = document.getElementById('local-location-error');
 
                                 let citiesData = []; // Array to store cities data fetched from API
@@ -188,125 +342,66 @@
                                         return response.json();
                                     })
                                     .then(data => {
-                                        citiesData = data;
+                                        citiesData = data.filter(city => city.province === 'MM' && city.city);
 
-                                        // Event listener for input changes
-                                        localLocationInput.addEventListener('input', function() {
-                                            const query = this.value.trim().toLowerCase();
-                                            const filteredCities = citiesData.filter(city =>
-                                                city.name.toLowerCase().includes(query)
-                                            ).slice(0, 6); // Limit to 10 results
-
-                                            renderSuggestions(filteredCities, query);
-                                        });
+                                        // Populate the dropdown with filtered cities data
+                                        populateLocationDropdown(citiesData);
                                     })
                                     .catch(error => {
                                         console.error('Error fetching city data:', error);
                                         errorDiv.classList.remove('hidden');
                                     });
 
-                                // Event listener for edit button
-                                editLocationButton.addEventListener('click', function() {
-                                    localLocationInput.value = ''; // Clear input value
-                                    localLocationInput.focus(); // Set focus on input field
-                                    localLocationInput.removeAttribute('readonly');
-                                    suggestionsContainer.style.display = 'none'; // Hide suggestions
-                                    editLocationButton.style.display = 'none'; // Show edit button
-                                    localLocationHidden.value = ``
 
-                                });
-
-
-
-                                // Function to render suggestions in the suggestions container
-                                function renderSuggestions(cities, query) {
-                                    suggestionsContainer.innerHTML = ''; // Clear previous suggestions
-                                    suggestionsContainer.style.display = cities.length && query ? 'block' : 'none';
+                                // Populate the dropdown with location options
+                                function populateLocationDropdown(cities) {
+                                    locationSelect.innerHTML =
+                                        '<option value="" disabled selected>Select a Location</option>'; // Default option
 
                                     cities.forEach(city => {
-                                        const suggestionElement = document.createElement('div');
-                                        suggestionElement.classList.add(
-                                            'flex', // Flexbox layout
-                                            'justify-between', // Space between items
-                                            'items-center', // Center items vertically
-                                            'p-2', // Padding
-                                            'cursor-pointer', // Pointer cursor on hover
-                                            'rounded', // Rounded corners
-                                            'mb-1', // Margin bottom
-                                            'bg-gray-200',
-                                            'text-black',
-                                            'dark:bg-gray-900',
-                                            'dark:text-gray-200',
-                                        );
+                                        const option = document.createElement('option');
+                                        option.value = `${city.name}, ${city.province}`;
+                                        option.textContent = `${city.name}, ${city.province}`;
+                                        locationSelect.appendChild(option);
+                                    });
 
+                                    // Set selected value to the saved location if available
+                                    if (localLocationHidden.value) {
+                                        locationSelect.value = localLocationHidden.value;
+                                    }
 
-                                        const suggestionText = document.createElement('div');
-                                        suggestionText.classList.add('suggestion-text');
-                                        suggestionText.textContent =
-                                            `${city.name}, ${city.province}`; // Display city name and province
-
-                                        const plusContainer = document.createElement('div');
-                                        plusContainer.classList.add('plus-container');
-                                        plusContainer.innerHTML = '+';
-
-                                        suggestionElement.appendChild(suggestionText);
-                                        suggestionElement.appendChild(plusContainer);
-
-                                        suggestionElement.addEventListener('click', function() {
-                                            localLocationInput.value =
-                                                `${city.name}, ${city.province}`; // Set input value to city name
-                                            suggestionsContainer.style.display =
-                                                'none'; // Hide suggestions after selection
-                                            editLocationButton.style.display = 'inline-block'; // Show edit button
-                                            localLocationHidden.value = `${city.name}, ${city.province}`
-                                            localLocationInput.readOnly = true;
-                                        });
-                                        suggestionsContainer.appendChild(suggestionElement);
+                                    // Update hidden input value on selection change
+                                    locationSelect.addEventListener('change', function() {
+                                        localLocationHidden.value = this.value;
                                     });
                                 }
 
-                                /* Handle outside click to hide suggestions
-                                document.addEventListener('click', function(event) {
-                                    if (!document.getElementById('local-location-container').contains(event.target)) {
-                                        suggestionsContainer.style.display = 'none';
-                                    }
-                                });*/
-                                document.addEventListener('DOMContentLoaded', function() {
-                                    document.addEventListener('click', function(event) {
-                                        const localLocationContainer = document.getElementById(
-                                            'local-location-container');
-                                        const suggestionsContainer = document.getElementById('suggestionsContainer');
-
-                                        if (localLocationContainer && suggestionsContainer) {
-                                            if (!localLocationContainer.contains(event.target)) {
-                                                suggestionsContainer.style.display = 'none';
-                                            }
-                                        } else {
-                                            console.error(
-                                                'Local location container or suggestions container not found.');
-                                        }
-                                    });
+                                // Clear button functionality
+                                clearButton.addEventListener('click', function() {
+                                    locationSelect.value = ''; // Clear the dropdown selection
+                                    localLocationHidden.value = ''; // Clear the hidden input field
                                 });
+
+                                // Edit button functionality (optional if you want to include it)
+                                const editLocationButton = document.getElementById('editLocationButton');
+                                if (editLocationButton) {
+                                    editLocationButton.addEventListener('click', function() {
+                                        locationSelect.removeAttribute('disabled'); // Enable dropdown for editing
+                                        locationSelect.focus(); // Focus on the select field
+                                    });
+                                }
                             });
 
+
                             //COUNTRIES
-
-
                             document.addEventListener('DOMContentLoaded', function() {
-                                const overseasLocationInput = document.getElementById('overseas-location');
+                                const overseasLocationSelect = document.getElementById('overseas-location');
                                 const overseasLocationHidden = document.getElementById('overseaslocationHidden');
-
-                                const suggestionsContainer = document.getElementById('overseas-location-suggestions');
+                                const clearOverseasLocationButton = document.getElementById('clearOverseasLocationButton');
                                 const errorDiv = document.getElementById('overseas-location-error');
-                                const editOverseasButton = document.getElementById('editButton');
 
-                                let countries = [];
-
-                                // Replace 'countries.json' with your actual JSON file path or URL
-                                const jsonUrl = '/locations/countries.json';
-
-                                // Fetch countries data
-                                fetch(jsonUrl)
+                                // Fetch countries data from the JSON file
+                                fetch('/locations/countries.json')
                                     .then(response => {
                                         if (!response.ok) {
                                             throw new Error('Network response was not ok');
@@ -314,88 +409,146 @@
                                         return response.json();
                                     })
                                     .then(data => {
-                                        countries = data;
+                                        // Populate the dropdown with country options
+                                        overseasLocationSelect.innerHTML =
+                                            '<option value="" disabled selected>Select an Overseas Location</option>';
+                                        data.forEach(country => {
+                                            const option = document.createElement('option');
+                                            option.value = country.country;
+                                            option.textContent = country.country;
+                                            overseasLocationSelect.appendChild(option);
+                                        });
 
-                                        overseasLocationInput.addEventListener('input', function() {
-                                            const query = this.value.trim().toLowerCase();
-                                            const filteredCountries = countries.filter(country =>
-                                                country.country.toLowerCase().includes(query)
-                                            ).slice(0, 4); // Limit suggestions to 10 results
+                                        // Set the selected value to the hidden input if available
+                                        if (overseasLocationHidden.value) {
+                                            overseasLocationSelect.value = overseasLocationHidden.value;
+                                        }
 
-                                            renderSuggestions(filteredCountries, query);
+                                        // Update hidden input value on dropdown change
+                                        overseasLocationSelect.addEventListener('change', function() {
+                                            overseasLocationHidden.value = this.value;
                                         });
                                     })
                                     .catch(error => {
-                                        console.error('Error fetching countries data:', error);
+                                        console.error('Error fetching country data:', error);
                                         errorDiv.classList.remove('hidden');
                                     });
 
-                                function renderSuggestions(countries, query) {
-                                    suggestionsContainer.innerHTML = ''; // Clear previous suggestions
-                                    suggestionsContainer.style.display = countries.length && query ? 'block' : 'none';
-
-                                    countries.forEach(country => {
-                                        const suggestionElement = document.createElement('div');
-                                        suggestionElement.classList.add(
-                                            'flex', // Flexbox layout
-                                            'justify-between', // Space between items
-                                            'items-center', // Center items vertically
-                                            'p-2', // Padding
-                                            'cursor-pointer', // Pointer cursor on hover
-                                            'rounded', // Rounded corners
-                                            'mb-1', // Margin bottom
-                                            'bg-gray-200',
-                                            'text-black',
-                                            'dark:bg-gray-900',
-                                            'dark:text-gray-200',
-                                        );
-
-                                        const suggestionText = document.createElement('div');
-                                        suggestionText.classList.add('suggestion-text');
-                                        suggestionText.textContent = country.country;
-
-
-                                        const plusContainer = document.createElement('div');
-                                        plusContainer.classList.add('plus-container');
-                                        plusContainer.innerHTML = '+';
-
-                                        suggestionElement.appendChild(suggestionText);
-                                        suggestionElement.appendChild(plusContainer);
-
-                                        suggestionElement.addEventListener('click', function() {
-                                            overseasLocationInput.value = country.country;
-                                            overseasLocationInput.readOnly = true; // Make input readonly
-                                            editOverseasButton.style.display =
-                                                'inline-block'; // Show edit button
-                                            suggestionsContainer.style.display = 'none';
-                                            overseasLocationHidden.value = country.country;
-                                        });
-
-                                        suggestionsContainer.appendChild(suggestionElement);
-                                    });
-                                }
-
-                                // Edit button functionality
-                                editOverseasButton.addEventListener('click', function(event) {
-                                    event.preventDefault();
-                                    overseasLocationInput.readOnly = !overseasLocationInput.readOnly;
-                                    overseasLocationInput.value = ''; // Hide edit button after clicking
-                                    overseasLocationHidden.value = '';
-
-                                    if (overseasLocationInput.readOnly) {
-                                        editOverseasButton.textContent = 'Edit';
-                                    } else {
-                                        editOverseasButton.style.display = 'none';
-                                    }
-                                });
-
-                                document.addEventListener('click', function(event) {
-                                    if (!suggestionsContainer.contains(event.target) && event.target !==
-                                        overseasLocationInput) {
-                                        suggestionsContainer.style.display = 'none';
-                                    }
+                                // Clear button functionality
+                                clearOverseasLocationButton.addEventListener('click', function() {
+                                    overseasLocationSelect.value = ''; // Clear the dropdown selection
+                                    overseasLocationHidden.value = ''; // Clear the hidden input field
                                 });
                             });
+
+
+
+
+
+                            // document.addEventListener('DOMContentLoaded', function() {
+                            //     const overseasLocationInput = document.getElementById('overseas-location');
+                            //     const overseasLocationHidden = document.getElementById('overseaslocationHidden');
+
+                            //     const suggestionsContainer = document.getElementById('overseas-location-suggestions');
+                            //     const errorDiv = document.getElementById('overseas-location-error');
+                            //     const editOverseasButton = document.getElementById('editButton');
+
+                            //     let countries = [];
+
+                            //     // Replace 'countries.json' with your actual JSON file path or URL
+                            //     const jsonUrl = '/locations/countries.json';
+
+                            //     // Fetch countries data
+                            //     fetch(jsonUrl)
+                            //         .then(response => {
+                            //             if (!response.ok) {
+                            //                 throw new Error('Network response was not ok');
+                            //             }
+                            //             return response.json();
+                            //         })
+                            //         .then(data => {
+                            //             countries = data;
+
+                            //             overseasLocationInput.addEventListener('input', function() {
+                            //                 const query = this.value.trim().toLowerCase();
+                            //                 const filteredCountries = countries.filter(country =>
+                            //                     country.country.toLowerCase().includes(query)
+                            //                 ).slice(0, 4); // Limit suggestions to 10 results
+
+                            //                 renderSuggestions(filteredCountries, query);
+                            //             });
+                            //         })
+                            //         .catch(error => {
+                            //             console.error('Error fetching countries data:', error);
+                            //             errorDiv.classList.remove('hidden');
+                            //         });
+
+                            //     function renderSuggestions(countries, query) {
+                            //         suggestionsContainer.innerHTML = ''; // Clear previous suggestions
+                            //         suggestionsContainer.style.display = countries.length && query ? 'block' : 'none';
+
+                            //         countries.forEach(country => {
+                            //             const suggestionElement = document.createElement('div');
+                            //             suggestionElement.classList.add(
+                            //                 'flex', // Flexbox layout
+                            //                 'justify-between', // Space between items
+                            //                 'items-center', // Center items vertically
+                            //                 'p-2', // Padding
+                            //                 'cursor-pointer', // Pointer cursor on hover
+                            //                 'rounded', // Rounded corners
+                            //                 'mb-1', // Margin bottom
+                            //                 'bg-gray-200',
+                            //                 'text-black',
+                            //                 'dark:bg-gray-900',
+                            //                 'dark:text-gray-200',
+                            //             );
+
+                            //             const suggestionText = document.createElement('div');
+                            //             suggestionText.classList.add('suggestion-text');
+                            //             suggestionText.textContent = country.country;
+
+
+                            //             const plusContainer = document.createElement('div');
+                            //             plusContainer.classList.add('plus-container');
+                            //             plusContainer.innerHTML = '+';
+
+                            //             suggestionElement.appendChild(suggestionText);
+                            //             suggestionElement.appendChild(plusContainer);
+
+                            //             suggestionElement.addEventListener('click', function() {
+                            //                 overseasLocationInput.value = country.country;
+                            //                 overseasLocationInput.readOnly = true; // Make input readonly
+                            //                 editOverseasButton.style.display =
+                            //                     'inline-block'; // Show edit button
+                            //                 suggestionsContainer.style.display = 'none';
+                            //                 overseasLocationHidden.value = country.country;
+                            //             });
+
+                            //             suggestionsContainer.appendChild(suggestionElement);
+                            //         });
+                            //     }
+
+                            //     // Edit button functionality
+                            //     editOverseasButton.addEventListener('click', function(event) {
+                            //         event.preventDefault();
+                            //         overseasLocationInput.readOnly = !overseasLocationInput.readOnly;
+                            //         overseasLocationInput.value = ''; // Hide edit button after clicking
+                            //         overseasLocationHidden.value = '';
+
+                            //         if (overseasLocationInput.readOnly) {
+                            //             editOverseasButton.textContent = 'Edit';
+                            //         } else {
+                            //             editOverseasButton.style.display = 'none';
+                            //         }
+                            //     });
+
+                            //     document.addEventListener('click', function(event) {
+                            //         if (!suggestionsContainer.contains(event.target) && event.target !==
+                            //             overseasLocationInput) {
+                            //             suggestionsContainer.style.display = 'none';
+                            //         }
+                            //     });
+                            // });
                         </script>
 
 

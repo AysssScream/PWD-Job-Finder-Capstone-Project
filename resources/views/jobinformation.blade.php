@@ -283,11 +283,16 @@
                                             Workforce:</span>
                                         N/A< @endif
                                             <div class="border-b border-gray-300 mt-4 mb-2"></div>
-                                            <button
-                                                class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
-                                                aria-label="{!! __('messages.jobinformation.view_more_details') !!}" tabindex="0">
-                                                {!! __('messages.jobinformation.view_more_details') !!}
-                                            </button>
+                                            <form
+                                                action="{{ route('company.profile', ['employer_id' => $employer->user_id]) }}"
+                                                method="GET">
+                                                <button type="submit"
+                                                    class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                    aria-label="{!! __('messages.jobinformation.view_more_details') !!}" tabindex="0">
+                                                    {!! __('messages.jobinformation.view_more_details') !!}
+                                                </button>
+                                            </form>
+
                                 </div>
                                 <div class="mt-4">
                                     <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"

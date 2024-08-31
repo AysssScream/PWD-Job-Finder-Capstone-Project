@@ -171,20 +171,20 @@ class JobInfoController extends Controller
     {
         $request->validate([
             'businessname' => 'required|string|max:100',
-            /*'tinno' => 'required|regex:/^[0-9-]+$/|unique:employers,tinno',*/
             'hiddenFaxNumber' => 'nullable|digits:9|regex:/^[0-9]+$/',
-            'tradename' => 'nullable|regex:/^[A-Za-z\s.,-]+$/|max:50',
+            'tradename' => 'nullable|max:200',
             'locationtype' => 'required|in:Main,Branch',
             'employertype' => 'required|in:Public,Private',
             'totalworkforce' => 'required|in:1-10,11-50,51-100,101-500,501-1000,1001+',
             'address' => 'required|string|max:100',
-            'city' => 'required|string|regex:/^[A-Za-z\s.,-]+$/|max:50',
+            'municipality' => 'required|string|regex:/^[A-Za-z\s.,-]+$/|max:50',
             'zipcode' => 'required|digits:4|regex:/^[0-9]+$/',
             'contact_person' => 'required|string|regex:/^[A-Za-z\s.,-]+$/|max:50',
             'position' => 'required|string|regex:/^[A-Za-z\s.,-]+$/|max:50',
-            /*'telephone_no' => 'nullable|digits:8|regex:/^[0-9-]+$/|unique:employers,telephone_no',
-            'mobile_no' => 'required|digits:11|regex:/^[0-9-]+$/|unique:employers,mobile_no',*/
-            /*'email_address' => ['required', 'email', 'max:50', new EmailDomain, 'lowercase', 'unique:employers,email_address'],*/
+            // 'tinno' => 'required|regex:/^[0-9-]+$/|unique:employers,tinno',
+            // 'telephone_no' => 'nullable|digits:8|regex:/^[0-9-]+$/|unique:employers,telephone_no',
+            // 'mobile_no' => 'required|digits:11|regex:/^[0-9-]+$/|unique:employers,mobile_no',
+            // 'email_address' => ['required', 'email', 'max:50', new EmailDomain, 'lowercase', 'unique:employers,email_address'],
         ], [
             'businessname.regex' => 'Business name must contain only alphabetic characters.',
             'businessname.required' => 'Business name is required.',
@@ -218,10 +218,10 @@ class JobInfoController extends Controller
             'address.string' => 'Address must be a string.',
             'address.max' => 'Address must not exceed 100 characters.',
 
-            'city.required' => 'City is required.',
-            'city.string' => 'City must be a string.',
-            'city.regex' => 'City must contain only alphabetic characters.',
-            'city.max' => 'City must not exceed 50 characters.',
+            'municipality.required' => 'Municipality is required.',
+            'municipality.string' => 'Municipality must be a string.',
+            'municipality.regex' => 'Municipality must contain only alphabetic characters.',
+            'municipality.max' => 'Municipality must not exceed 50 characters.',
 
             'contact_person.required' => 'Contact person is required.',
             'contact_person.string' => 'Contact person must be a string.',
@@ -261,7 +261,7 @@ class JobInfoController extends Controller
         $profile->employertype = $request->input('employertype');
         $profile->totalworkforce = $request->input('totalworkforce');
         $profile->address = $request->input('address');
-        $profile->city = $request->input('city');
+        $profile->municipality = $request->input('municipality');
         $profile->zipcode = $request->input('zipcode');
         $profile->contact_person = $request->input('contact_person');
         $profile->position = $request->input('position');
@@ -270,6 +270,9 @@ class JobInfoController extends Controller
         $profile->fax_no = $request->input('hiddenFaxNumber');
         $profile->email_address = $request->input('email_address');
         $profile->save();
+
+        Session::flash('profilesave', 'You have successfully edited your company profile.');
+
 
         return redirect()->route('employer.profile')->with('success', 'Employer profile has been successfully updated.');
     }

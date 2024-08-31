@@ -71,7 +71,7 @@
                                     enctype="multipart/form-data">
                                     @csrf
                                     @if ($errors->any())
-                                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                                        <div class="bg-red-100 border dark:bg-red-700 dark:text-gray-100 border-red-400 text-red-700 px-4 py-3 rounded relative"
                                             role="alert">
                                             <strong class="font-bold">Oops!</strong>
                                             <span class="block sm:inline">There were some errors with your
@@ -129,10 +129,15 @@
 
                                                 <div class="mt-0">
                                                     <label for="tin" class="block mb-1">
-                                                        TIN Number
+                                                        Taxpayer Identification Number
                                                         <span class="text-red-500">*</span>
                                                     </label>
-                                                    <div class="flex flex-wrap gap-1">
+                                                    <input type="text" id="tinno" name="tinno"
+                                                        value="{{ old('tinno', $employerData['tinno'] ?? '') }}"
+                                                        maxlength="12"
+                                                        class="w-full px-4 py-2 rounded-md border-gray-300 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                                        placeholder="(12 Digits Max)">
+                                                    {{-- <div class="flex flex-wrap gap-1">
                                                         <!-- Group 1 -->
                                                         <input type="text" id="tin1" name="tin[]"
                                                             class="w-12 sm:w-10 md:w-12 lg:w-10 xl:w-12 h-12 sm:h-10 text-center border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 mb-1 sm:mb-0"
@@ -208,18 +213,10 @@
                                                             pattern="\d" title="Enter a single digit"
                                                             maxlength="1"
                                                             value="{{ old('tin.11', $employerData['tin.11'] ?? '') }}" />
-                                                    </div>
-                                                    <div class="mt-6">
-                                                        <label for="tinno"
-                                                            class="block text-sm font-medium text-gray-700 dark:text-gray-200">Saved
-                                                            Taxpayer Identification Number
-                                                        </label>
-                                                        <input type="text" id="tinno" name="tinno"
-                                                            value="{{ old('tinno', $employerData['tinno'] ?? '') }}"
-                                                            maxlength="12"
-                                                            class="w-full px-4 py-2 rounded-md border-gray-300 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                                            placeholder="(12 Digits Max)" readonly>
-                                                    </div>
+                                                    </div> --}}
+                                                    {{-- <div class="mt-6">
+
+                                                    </div> --}}
 
 
                                                 </div>
@@ -330,42 +327,41 @@
 
 
 
-                                                <div id="barangay-container" class=" relative">
+                                                <div id="municipality-container" class="relative">
                                                     <label for="city" class="block mb-1">
                                                         City
                                                         <span class="text-red-500">*</span>
                                                     </label>
-                                                    <div class="flex items-center">
-                                                        <input id="city" type="text" name="city"
+                                                    <div class="relative">
+                                                        <select id="municipality-dropdown" name="municipality"
                                                             class="w-full p-2 border rounded shadow-sm bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-200"
-                                                            placeholder="Type to search Barangay..."
-                                                            value="{{ old('city', $employerData['city'] ?? '') }}"
-                                                            readonly>
-                                                        <button id="editButton"
-                                                            class="ml-2 px-3 py-2 bg-black text-white rounded">Edit</button>
+                                                            aria-placeholder="Select a Municipality or City">
+                                                            <option value="" disabled selected>Select a
+                                                                Municipality or City
+                                                            </option>
+                                                            <!-- Options will be dynamically populated here -->
+                                                        </select>
                                                     </div>
-                                                    <div id="city-suggestions"
-                                                        class="absolute z-10 mt-1 w-full max-h-90 overflow-y-auto bg-white text-black dark:bg-gray-800 dark:text-gray-200  border rounded shadow-md hidden">
-                                                    </div>
-                                                    <div id="barangay-error" class="text-red-600 mt-1 hidden">
-                                                        Error
-                                                        fetching
-                                                        barangay data</div>
+                                                    <!-- Hidden input to store the selected barangay data -->
+                                                    <input type="text" id="selected-municipality"
+                                                        name="selected-municipality"
+                                                        value="{{ old('municipality', $employerData['municipality'] ?? '') }}"
+                                                        hidden>
                                                 </div>
 
 
                                                 <div class="mt">
-                                                    <label for="city" class="block mb-1">
+                                                    <label for="zipcode" class="block mb-1">
                                                         Zip Code
                                                         <span class="text-red-500">*</span>
                                                     </label>
-                                                    <div class="flex items-center mt-4">
+                                                    <div class="flex items-center mt-2">
                                                         <input type="text" id="zipcode" name="zipcode"
                                                             class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
                                                             value="{{ old('zipcode', $employerData['zipcode'] ?? '') }}"
                                                             placeholder="Enter Zip Code" readonly />
                                                         <!-- Add disabled attribute here -->
-                                                        @error('zipCode')
+                                                        @error('zipcode')
                                                             <div class="text-red-600 mt-1">{{ $message }}</div>
                                                         @enderror
                                                     </div>
@@ -486,8 +482,9 @@
                                                             maxlength="9" placeholder="4631"
                                                             value="{{ old('hiddenFaxNumber', $employerData['hiddenFaxNumber'] ?? '') }}"
                                                             hidden>
-
-
+                                                        @error('hiddenFaxNumber')
+                                                            <div class="text-red-600 mt-1">{{ $message }}</div>
+                                                        @enderror
                                                     </div>
 
 
@@ -512,7 +509,7 @@
                                                 <div class="text-right">
                                                     <!-- Container div with text alignment set to right -->
                                                     <button type="submit"
-                                                        class="py-2 px-4 bg-black text-white rounded">Submit
+                                                        class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600">Submit
                                                         Form</button>
                                                 </div>
 
@@ -523,11 +520,39 @@
                         </div>
                     </div>
                     </form>
+                @elseif(Auth::check() && Auth::user()->account_verification_status === 'declined')
+                    <div class="landscape-container mt-20">
+                        <div class="container w-3/4 mx-auto landscape-content">
+                            <div
+                                class="bg-white text-black dark:bg-gray-700 dark:text-gray-200 p-6 rounded-lg shadow-md text-center">
+                                <div class="text-red-500 text-7xl mb-5">
+                                    <i class="fa-solid fa-exclamation-triangle"></i>
+                                    <!-- Changed icon to indicate an issue -->
+                                </div>
+                                <h2 class="font-bold mb-4 text-3xl">Account Declined</h2> <!-- Updated title -->
+                                <h2 class="text-black-700 mb-4">We're sorry, but your account has been declined.</h2>
+                                <!-- Updated message -->
+                                <br>
+                                <p class="text-black-700 mb-8">
+                                    Unfortunately, your account did not meet the criteria required to join our platform.
+                                    If you believe this is a mistake or have any questions, please contact our support
+                                    team for further assistance.
+                                </p>
+                                <form action="{{ route('employer.messages') }}" method="GET">
+                                    <!-- Updated form action to a support route -->
+                                    @csrf
+                                    <button type="submit"
+                                        class="py-2 px-4 bg-red-500 text-white rounded inline-block">CONTACT
+                                        SUPPORT</button> <!-- Updated button text and color -->
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 @elseif (Auth::check() && Auth::user()->account_verification_status === 'waiting for approval')
                     <div class="landscape-container mt-20"> <!-- Add mt-5 class for margin-top -->
                         <div class="container w-3/4 mx-auto landscape-content">
                             <div
-                                class="bg-white text-black dark:bg-gray-800 dark:text-gray-200 p-6 rounded-lg shadow-md text-center">
+                                class="bg-white text-black dark:bg-gray-700 dark:text-gray-200 p-6 rounded-lg shadow-md text-center">
                                 <div class="text-6xl text-green-500 ">&#10004;</div>
                                 <h2 class="text-2xl font-bold mb-4">Waiting for Administrator Approval</h2>
                                 <p class="text-lg text-black-700 mb-8 ">Your employer information has been
@@ -600,12 +625,13 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const barangayInput = document.getElementById('city');
-        const suggestionsContainer = document.getElementById('city-suggestions');
-        const errorDiv = document.getElementById('barangay-error');
+        const cityDropdown = document.getElementById('municipality-dropdown');
+        const errorDiv = document.getElementById('municipality-error');
+        const editButton = document.getElementById('editButton');
+        const selectedBarangayInput = document.getElementById('selected-municipality');
         const zipCodeInput = document.getElementById('zipcode');
 
-        let mandaluyongBarangays = [];
+        let allBarangays = [];
 
         // Fetch barangay data
         fetch('/locations/municipalities.json')
@@ -625,102 +651,50 @@
                     }));
                 });
 
-                // Add input event listener after data is fetched and processed
-                barangayInput.addEventListener('input', function() {
-                    const query = this.value.trim().toLowerCase();
-
-                    // Filter barangays based on the input query
-                    const filteredBarangays = allBarangays.filter(barangay =>
-                        barangay.location.toLowerCase().includes(query)
-                    ).slice(0, 5); // Limit to first 10 results
-
-                    // Render filtered suggestions
-                    renderSuggestions(filteredBarangays);
-                    editButton.style.display = 'none'; // Show edit button
-
-                });
-
-
+                // Populate dropdown with barangay data
+                populateDropdown(allBarangays);
             })
             .catch(error => {
                 console.error('Error fetching barangay data:', error);
                 errorDiv.classList.remove('hidden');
             });
 
-
-        function renderSuggestions(locations) {
-            suggestionsContainer.innerHTML = ''; // Clear previous suggestions
-
-            if (locations.length > 0) {
-                suggestionsContainer.style.display = 'block'; // Show suggestions container
-                locations.forEach(location => {
-                    const suggestionElement = document.createElement('div');
-                    suggestionElement.classList.add('suggestion');
-
-                    const suggestionText = document.createElement('div');
-                    suggestionText.classList.add('suggestion-text');
-                    suggestionText.textContent = `${location.city} - ${location.location}`;
-
-                    const plusContainer = document.createElement('div');
-                    plusContainer.classList.add('plus-container');
-                    plusContainer.textContent = '+'; // Adjust content based on your needs
-
-                    suggestionElement.appendChild(suggestionText);
-                    suggestionElement.appendChild(plusContainer);
-
-                    suggestionElement.addEventListener('click', function() {
-                        barangayInput.value = `${location.city} - ${location.location}`;;
-                        zipCodeInput.value = location.zip;
-                        suggestionsContainer.style.display = 'none';
-                        editButton.style.display = 'inline-block'; // Show edit button
-                        barangayInput.readOnly = true;
-                    });
-
-                    suggestionsContainer.appendChild(suggestionElement);
-                });
-
-                document.addEventListener('click', function(event) {
-                    if (!suggestionsContainer.contains(event.target)) {
-                        suggestionsContainer.style.display = 'none';
-                    }
-                });
-            } else {
-                suggestionsContainer.style.display = 'none'; // Hide suggestions if no matches
-            }
+        function populateDropdown(barangays) {
+            barangays.forEach(barangay => {
+                const option = document.createElement('option');
+                // Use a unique value, like city and location combined, to differentiate options
+                option.value = `${barangay.city}-${barangay.location}`;
+                option.textContent = `${barangay.city} - ${barangay.location}`;
+                cityDropdown.appendChild(option);
+            });
         }
+
+
+
+        cityDropdown.addEventListener('change', function() {
+            const selectedValue = this.value; // This is in the format 'City-Location'
+            const [selectedCityName, selectedLocation] = selectedValue.split('-');
+            const selectedBarangay = allBarangays.find(b => b.city === selectedCityName && b
+                .location === selectedLocation);
+
+            if (selectedBarangay) {
+                selectedBarangayInput.value = `${selectedBarangay.city} - ${selectedBarangay.location}`;
+                zipCodeInput.value = selectedBarangay.zip; // Set the zip code separately
+                editButton.style.display = 'inline-block'; // Show edit button
+            }
+        });
 
 
 
         // Edit button functionality
-        editButton.addEventListener('click', function() {
+        editButton.addEventListener('click', function(event) {
             event.preventDefault();
-            editButton.style.display = 'none'; // Show edit button
-            barangayInput.removeAttribute('readonly'); // Allow editing
-            barangayInput.focus(); // Focus on the input field
-            barangayInput.value = ''
-            zipCodeInput.value = ''
+            editButton.style.display = 'none'; // Hide edit button
+            cityDropdown.value = ''; // Reset dropdown
+            selectedBarangayInput.value = ''; // Clear selected barangay input
+            zipCodeInput.value = ''; // Clear zip code input
         });
-
-        // Handle input changes in barangayInput
-        barangayInput.addEventListener('input', function() {
-            const selectedBarangay = this.value.trim();
-            if (selectedBarangay === '') {
-                zipCodeInput.value = ''; // Clear zip code input if barangay input is empty
-                editButton.style.display = 'inline-block'; // Hide edit button if input is empty
-
-            }
-            if (selectedBarangay === '' || selectedBarangay.split(' ').length < 2) {
-                zipCodeInput.value = ''; // Clear zip code input
-                editButton.style.display = 'inline-block'; // Hide edit button
-
-            }
-        });
-        if (barangayInput.value.trim() === '') {
-            editButton.style.display = 'inline-block';
-        }
-
     });
-
 
 
 

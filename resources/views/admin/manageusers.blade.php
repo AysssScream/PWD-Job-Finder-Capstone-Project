@@ -1,4 +1,19 @@
     <x-app-layout>
+        @if (Session::has('declined'))
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    toastr.options = {
+                        "progressBar": true,
+                        "closeButton": true,
+                    }
+                    toastr.error("{{ Session::get('declined') }}", 'User Account Creation Declined', {
+                        timeOut: 5000
+                    });
+                });
+            </script>
+        @endif
         <title>Manage Users</title>
 
         <div class="h-full ml-14 md:ml-64 font-poppins p-10">
@@ -175,20 +190,44 @@
                                         </div>
                                     </td>
                                     <td class="px-4 py-4 sm:px-6">
+                                        @php
+                                            $status = $user->account_verification_status;
+                                        @endphp
+
                                         <span
-                                            class="inline-flex items-center gap-1 rounded-full  px-2 py-1 text-md font-semibold text-gray-700 dark:text-gray-200">
-                                            <span class="h-1.5 w-1.5 rounded-full bg-yellow-600"></span>
-                                            {{ $user->account_verification_status }}
+                                            class="inline-flex items-center gap-1 rounded-full px-2 py-1 text-md font-semibold uppercase
+                                            @if ($status === 'approved') text-green-600
+                                            @elseif ($status === 'pending')
+                                                text-yellow-600
+                                            @elseif ($status === 'waiting for approval')
+                                                text-yellow-500
+                                            @else
+                                                text-red-500 @endif">
+                                            @if ($status === 'approved')
+                                                <span class="h-1.5 w-1.5 rounded-full bg-green-600"></span>
+                                                {{ $status }}
+                                            @elseif ($status === 'pending')
+                                                <span class="h-1.5 w-1.5 rounded-full bg-yellow-600"></span>
+                                                {{ $status }}
+                                            @elseif ($status === 'waiting for approval')
+                                                <span class="h-1.5 w-1.5 rounded-full bg-yellow-500"></span>
+                                                {{ $status }}
+                                            @else
+                                                <span class="h-1.5 w-1.5 rounded-full bg-red-500"></span>
+                                                {{ $status }}
+                                            @endif
                                         </span>
+
+
                                     </td>
-                                    <td class="px-4 py-4 sm:px-6 "> {{ $user->usertype }} </td>
+                                    <td class="px-4 py-4 sm:px-6 uppercase"> {{ $user->usertype }} </td>
                                     <td class="px-4 py-4 sm:px-6"> {{ $user->created_at->format('F j, Y, g:i a') }}
                                     </td>
 
                                     </td>
                                     <td class="px-4 py-4 sm:px-6">
                                         <div class="flex flex-col gap-2 sm:flex-row">
-                                            @if ($user->usertype === 'user')
+                                            @if ($user->usertype === 'user' || $user->usertype === 'employer')
                                                 @if ($user->account_verification_status == 'waiting for approval')
                                                     <a href="{{ route('admin.applicantinfo', ['id' => $user->id]) }}"
                                                         class="inline-block">
@@ -197,10 +236,10 @@
                                                             View
                                                         </button>
                                                     </a>
-                                                    <button
-                                                        class="px-3 py-2 text-md font-medium text-white bg-red-600 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                                                    <a href="{{ route('admin.decline', ['id' => $user->id]) }}"
+                                                        class="inline-block px-3 py-2 text-md font-medium text-white bg-red-600 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
                                                         Decline
-                                                    </button>
+                                                    </a>
                                                 @elseif ($user->account_verification_status == 'approved')
                                                     <a href="{{ route('admin.applicantinfo', ['id' => $user->id]) }}"
                                                         class="inline-block">
@@ -209,10 +248,6 @@
                                                             View
                                                         </button>
                                                     </a>
-                                                    <button
-                                                        class="px-3 py-2 text-md font-medium text-white bg-red-600 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-                                                        Decline
-                                                    </button>
                                                 @elseif ($user->account_verification_status != 'pending')
                                                     <button
                                                         class="px-3 py-2 text-md font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">

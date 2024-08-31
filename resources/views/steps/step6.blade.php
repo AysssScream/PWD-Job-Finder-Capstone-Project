@@ -15,7 +15,7 @@
                       <form action="{{ route('educationalbg') }}" method="POST" enctype="multipart/form-data">
                           @csrf
                           @if ($errors->any())
-                              <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                              <div class="bg-red-100 border border-red-400 text-red-700 dark:bg-red-700 dark:text-gray-100 dark:border-red-600 dark:text-red-200 px-4 py-3 rounded relative"
                                   role="alert">
                                   <strong class="font-bold">Oops!</strong>
                                   <span class="block sm:inline">There were some errors with your submission:</span>
@@ -27,6 +27,7 @@
                               </div>
                               <br>
                           @endif
+
                           <div class="bg-white text-black dark:bg-gray-800 dark:text-gray-200 shadow-md rounded-lg">
                               <div class="p-6">
                                   <h3 class="text-2xl font-bold mb-2 inline-flex items-center justify-between w-full focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
@@ -91,7 +92,55 @@
                                                   aria-label="{{ __('messages.education.highest_educational_attainment') }}">
                                                   <option value="" selected disabled>Select Education Level...
                                                   </option>
-                                                  <option value="Primary School"
+                                                  <option value="Doctoral Degree"
+                                                      {{ old('educationLevel', $formData6['educationLevel'] ?? '') == 'Doctoral Degree' ? 'selected' : '' }}>
+                                                      {{ __('messages.education.doctoral_degree') }}
+                                                  </option>
+                                                  <option value="Master's Degree"
+                                                      {{ old('educationLevel', $formData6['educationLevel'] ?? '') == "Master's Degree" ? 'selected' : '' }}>
+                                                      {{ __('messages.education.masters_degree') }}
+                                                  </option>
+                                                  <option value="College Graduate"
+                                                      {{ old('educationLevel', $formData6['educationLevel'] ?? '') == 'College Graduate' ? 'selected' : '' }}>
+                                                      {{ __('messages.education.college_graduate') }}
+                                                  </option>
+                                                  <option value="Bachelor's Degree"
+                                                      {{ old('educationLevel', $formData6['educationLevel'] ?? '') == "Bachelor's Degree" ? 'selected' : '' }}>
+                                                      {{ __('messages.education.bachelors_degree') }}
+                                                  </option>
+                                                  <option value="Vocational Graduate"
+                                                      {{ old('educationLevel', $formData6['educationLevel'] ?? '') == 'Vocational Graduate' ? 'selected' : '' }}>
+                                                      {{ __('messages.education.vocational_graduate') }}
+                                                  </option>
+                                                  <option value="Associate's Degree"
+                                                      {{ old('educationLevel', $formData6['educationLevel'] ?? '') == "Associate's Degree" ? 'selected' : '' }}>
+                                                      {{ __('messages.education.associates_degree') }}
+                                                  </option>
+                                                  <option value="Some College Level"
+                                                      {{ old('educationLevel', $formData6['educationLevel'] ?? '') == 'Some College Level' ? 'selected' : '' }}>
+                                                      {{ __('messages.education.some_college_level') }}
+                                                  </option>
+                                                  <option value="Vocational Undergraduate"
+                                                      {{ old('educationLevel', $formData6['educationLevel'] ?? '') == 'Vocational Undergraduate' ? 'selected' : '' }}>
+                                                      {{ __('messages.education.vocational_undergraduate') }}
+                                                  </option>
+                                                  <option value="Technical-Vocational Education and Training"
+                                                      {{ old('educationLevel', $formData6['educationLevel'] ?? '') == 'Technical-Vocational Education and Training' ? 'selected' : '' }}>
+                                                      {{ __('messages.education.technical_vocational_training') }}
+                                                  </option>
+                                                  <option value="Senior High School"
+                                                      {{ old('educationLevel', $formData6['educationLevel'] ?? '') == 'Senior High School' ? 'selected' : '' }}>
+                                                      {{ __('messages.education.senior_high_school') }}
+                                                  </option>
+                                                  <option value="Junior High School"
+                                                      {{ old('educationLevel', $formData6['educationLevel'] ?? '') == 'Junior High School' ? 'selected' : '' }}>
+                                                      {{ __('messages.education.junior_high_school') }}
+                                                  </option>
+                                                  <option value="Elementary School"
+                                                      {{ old('educationLevel', $formData6['educationLevel'] ?? '') == 'Elementary School' ? 'selected' : '' }}>
+                                                      {{ __('messages.education.elementary_school') }}
+                                                  </option>
+                                                  {{-- <option value="Primary School"
                                                       {{ old('educationLevel', $education->educationLevel ?? '') == 'Primary School' ? 'selected' : '' }}>
                                                       {{ __('messages.education.primary_school') }}
                                                   </option>
@@ -128,7 +177,7 @@
                                                       {{ __('messages.education.masteral_degree_level') }}</option>
                                                   <option value="Doctoral Degree Level"
                                                       {{ old('educationLevel', $education->educationLevel ?? '') == 'Doctoral Degree Level' ? 'selected' : '' }}>
-                                                      {{ __('messages.education.doctoral_degree_level') }}</option>
+                                                      {{ __('messages.education.doctoral_degree_level') }}</option> --}}
                                               </select>
                                               @error('educationLevel')
                                                   <div class="text-red-600 mt-1">{{ $message }}</div>

@@ -140,6 +140,15 @@
                                     class="mt-1 block w-full bg-white dark:bg-gray-900 border border-gray-500 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 sm:text-sm"
                                     placeholder="Enter maximum salary" aria-label="Maximum Salary">
                             </div>
+
+                            <div class="mb-2">
+                                <label for="max-salary"
+                                    class="block  font-medium text-gray-900 dark:text-gray-200">Age
+                                    Requirement:</label>
+                                <input type="number" id="age" name="age"
+                                    class="mt-1 block w-full bg-white dark:bg-gray-900 border border-gray-500 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 sm:text-sm"
+                                    placeholder="Enter Age" aria-label="Age">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -170,10 +179,6 @@
                         }
                     });
                 </script>
-
-
-
-
             </form>
         </div>
 
@@ -266,8 +271,9 @@
                                 <img src="{{ asset('/images/avatar.png') }}" alt="Default Image" class="w-24 h-24"
                                     aria-label="Empty Company Logo">
                             @endif
+
                             <div>
-                                <div class="text-right">
+                                <div class="text-right text-black dark:text-white">
                                     <h3
                                         class="text-xl sm:text-lg md:text-xl lg:text-2xl font-semibold focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
                                         {{ $job->title }}</h3>
@@ -309,7 +315,7 @@
                             </a>
                         </div>
 
-                        <div class="flex justify-between mt-2">
+                        <div class="flex justify-between mt-2 text-black dark:text-white">
                             <div class="mr-4">
                                 <p aria-label="{{ __('messages.userdashboard.educational_level') }} {{ $job->educational_level }}"
                                     class="focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">

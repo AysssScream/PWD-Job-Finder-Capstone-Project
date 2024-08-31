@@ -416,7 +416,12 @@ class FormController extends Controller
     public function postStep5(Request $request)
     {
         $validatedData5 = $request->validate([
-            'selected-languages' => ['required', 'regex:/^[A-Za-z\s.,-]+$/i', 'max:255'],
+            'language-input' => 'required|array',
+            'language-input.*' => 'string|max:255',
+            'proficiency' => 'required|array',
+            'proficiency.*' => 'array',
+            'selectedProficiencies' => 'nullable|string',
+            'proficiency.*.*' => 'string|in:Read,Write,Speak,Understand',
             'skills' => 'array',
             'otherSkills' => in_array('OTHER_SKILLS', $request->input('skills', [])) ? 'required|regex:/^[A-Za-z\s,-.]+$/i|max:300' : '', // Conditionally require input for "otherSkills"
             'selectedSkills' => 'nullable|string',
@@ -430,17 +435,25 @@ class FormController extends Controller
 
         ]);
 
-        $LanguageInput = new LanguageInput();
-        $LanguageInput->language_input = $validatedData5['selected-languages'];
-        $LanguageInput->user_id = Auth::id();
-        $LanguageInput->save();
+        $userId = Auth::id();
+        $languages = $validatedData5['language-input'];
+        $proficiencies = $validatedData5['proficiency'];
+        $selectedProficiencies = json_decode($validatedData['selectedProficiencies'] ?? '[]', true);
+
+        foreach ($languages as $index => $language) {
+            $languageModel = new LanguageInput();
+            $languageModel->user_id = $userId;
+            $languageModel->language_input = $language;
+            $languageModel->proficiencies = json_encode($proficiencies[$index]);
+            $languageModel->save();
+        }
 
         $Skills = new Skill();
         $Skills->skills = $validatedData5['selectedSkills'];
         $Skills->otherSkills = $validatedData5['otherSkillsInput'];
         $Skills->user_id = Auth::id();
 
-
+        Session::put('selectedProficiencies', $selectedProficiencies);
         Session::put('formData5', $request->except('_token'));
         Session::put('step5_completed', true);
         return redirect()->route('educationalbg');
@@ -453,11 +466,12 @@ class FormController extends Controller
 
         $validatedData6 = $request->validate([
             'educationLevel' => ['required', 'max:100'],
-            'school' => ['required', 'max:100', 'regex:/^[a-zA-Z ,.\-\/]+$/'],
-            'course' => ['required', 'max:100', 'regex:/^[a-zA-Z ,.\-\/]+$/'],
+            'school' => ['required_if:educationLevel,Doctoral Degree,Master\'s Degree,College Graduate,Bachelor\'s Degree,Vocational Graduate,Associate\'s Degree,Some College Level,Vocational Undergraduate,Technical-Vocational Education and Training', 'max:100', 'regex:/^[a-zA-Z ,.\-\/]+$/'],
+            'course' => ['required_if:educationLevel,Doctoral Degree,Master\'s Degree,College Graduate,Bachelor\'s Degree,Vocational Graduate,Associate\'s Degree,Some College Level,Vocational Undergraduate,Technical-Vocational Education and Training', 'max:100', 'regex:/^[a-zA-Z ,.\-\/]+$/'],
 
             'yearGraduated' => [
-                'nullable',
+                'required_if:educationLevel,Doctoral Degree,Master\'s Degree,College Graduate,Bachelor\'s Degree,Vocational Graduate,Associate\'s Degree,Some College Level,Vocational Undergraduate,Technical-Vocational Education and Training',
+                'nullable', // Make sure it's nullable when not required
                 'integer',
                 'digits:4',
                 'min:' . $minimumYear, // Minimum year allowed based on user being at least 59 years old
@@ -679,19 +693,45 @@ class FormController extends Controller
         $hiddenlistskills = json_decode($data['hiddenlistskills']);
         $hiddenemploymentStatus = json_decode($data['hiddenemploymentStatus']);
 
-
-        foreach ($hiddenemployerName as $index => $employerName) {
-            $workExperience = new WorkExperience();
-            $workExperience->employer_name = $employerName[0]; // Accessing the first element of each nested array
-            $workExperience->employer_address = $hiddenemployerAddress[$index][0];
-            $workExperience->position_held = $hiddenpositionHeld[$index][0];
-            $workExperience->from_date = $hiddenfromDate[$index][0];
-            $workExperience->to_date = $hiddentoDate[$index][0];
-            $workExperience->skills = $hiddenlistskills[$index][0];
-            $workExperience->employment_status = $hiddenemploymentStatus[$index][0];
-            $workExperience->user_id = Auth::id();
-            $workExperience->save();
+        // Iterate only if all arrays are non-empty and have the same length
+        if (
+            is_array($hiddenemployerName) && is_array($hiddenemployerAddress) &&
+            is_array($hiddenpositionHeld) && is_array($hiddenfromDate) &&
+            is_array($hiddentoDate) && is_array($hiddenlistskills) &&
+            is_array($hiddenemploymentStatus) &&
+            count($hiddenemployerName) === count($hiddenemployerAddress) &&
+            count($hiddenemployerAddress) === count($hiddenpositionHeld) &&
+            count($hiddenpositionHeld) === count($hiddenfromDate) &&
+            count($hiddenfromDate) === count($hiddentoDate) &&
+            count($hiddentoDate) === count($hiddenlistskills) &&
+            count($hiddenlistskills) === count($hiddenemploymentStatus)
+        ) {
+            foreach ($hiddenemployerName as $index => $employerName) {
+                if (
+                    isset($employerName[0]) && $employerName[0] !== null &&
+                    isset($hiddenemployerAddress[$index][0]) && $hiddenemployerAddress[$index][0] !== null &&
+                    isset($hiddenpositionHeld[$index][0]) && $hiddenpositionHeld[$index][0] !== null &&
+                    isset($hiddenfromDate[$index][0]) && $hiddenfromDate[$index][0] !== null &&
+                    isset($hiddentoDate[$index][0]) && $hiddentoDate[$index][0] !== null &&
+                    isset($hiddenlistskills[$index][0]) && $hiddenlistskills[$index][0] !== null &&
+                    isset($hiddenemploymentStatus[$index][0]) && $hiddenemploymentStatus[$index][0] !== null
+                ) {
+                    $workExperience = new WorkExperience();
+                    $workExperience->employer_name = $employerName[0];
+                    $workExperience->employer_address = $hiddenemployerAddress[$index][0];
+                    $workExperience->position_held = $hiddenpositionHeld[$index][0];
+                    $workExperience->from_date = $hiddenfromDate[$index][0];
+                    $workExperience->to_date = $hiddentoDate[$index][0];
+                    $workExperience->skills = $hiddenlistskills[$index][0];
+                    $workExperience->employment_status = $hiddenemploymentStatus[$index][0];
+                    $workExperience->user_id = Auth::id();
+                }
+            }
         }
+
+     
+
+
     }
 
     private function saveJobPreference($data)
@@ -706,10 +746,18 @@ class FormController extends Controller
 
     private function saveLanguageInput($data)
     {
-        $languageInput = new LanguageInput();
-        $languageInput->language_input = $data['selected-languages'] ?? null;
-        $languageInput->user_id = Auth::id();
-        $languageInput->save();
+        $userId = Auth::id();
+        $languages = $data['language-input'];
+        $proficiencies = $data['proficiency'];
+        // $selectedProficiencies = json_decode($validatedData['selectedProficiencies'] ?? '[]', true);
+
+        foreach ($languages as $index => $language) {
+            $languageModel = new LanguageInput();
+            $languageModel->user_id = $userId;
+            $languageModel->language_input = $language;
+            $languageModel->proficiencies = json_encode($proficiencies[$index]);
+            $languageModel->save();
+        }
 
         $Skills = new Skill();
         $Skills->skills = $data['selectedSkills'];

@@ -18,7 +18,7 @@ class EnsureEmployerSetupCompleted
     public function handle(Request $request, Closure $next)
     {
         // Check if the user is an employer and if setup is completed
-        if (Auth::check() && Auth::user()->account_verification_status === 'pending' || Auth::user()->account_verification_status === 'waiting for approval') {
+        if (Auth::check() && Auth::user()->account_verification_status === 'pending' || Auth::user()->account_verification_status === 'waiting for approval' || Auth::check() && Auth::user()->account_verification_status === 'declined') {
             return redirect()->route('employer.setup');
         }
         return $next($request);

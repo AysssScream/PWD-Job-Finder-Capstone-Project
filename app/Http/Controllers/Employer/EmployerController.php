@@ -73,6 +73,18 @@ class EmployerController extends Controller
         return view('employer.jobsinfo', compact('jobs'));
     }
 
+    public function deletejobs($id)
+    {
+        try {
+            $job = JobInfo::findOrFail($id);
+            $job->delete();
+            session()->flash('jobinfodelete', 'Job ID: ' . $id . ' has been deleted');
+            return redirect()->route('employer.manage')->with('success', 'Employment record deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('employer.manage')->with('error', 'Failed to delete employment record.');
+        }
+    }
+
 
     public function editjobs($id)
     {
@@ -90,15 +102,36 @@ class EmployerController extends Controller
 
     }
 
-    public function review()
+    public function review(Request $request)
     {
         $employerId = Auth::id();
-        $applications = JobApplication::where('employer_id', $employerId)
-            ->orderBy('created_at', 'desc')
-            ->get();
+        $query = JobApplication::where('employer_id', $employerId);
+
+        // Apply date filter
+        if ($request->has('dateFilter') && $request->dateFilter != 'All') {
+            $now = now();
+            switch ($request->dateFilter) {
+                case 'last-24-hours':
+                    $query->where('created_at', '>=', $now->subDay());
+                    break;
+                case 'last-7-days':
+                    $query->where('created_at', '>=', $now->subDays(7));
+                    break;
+                case 'last-30-days':
+                    $query->where('created_at', '>=', $now->subDays(30));
+                    break;
+            }
+        }
+
+        // Apply status filter
+        if ($request->has('anotherFilter') && $request->anotherFilter != 'All') {
+            $query->where('status', $request->anotherFilter);
+        }
+
+        // Get filtered applications
+        $applications = $query->orderBy('created_at', 'desc')->get();
+
         return view('employer.reviewapplicant', compact('applications'));
-
-
     }
 
 
@@ -189,6 +222,22 @@ class EmployerController extends Controller
         $userId = Auth::id();
         $email = User::find($userId)->email;
         $messages = Message::where('to', $email)->get();
+        $replies = Reply::all();
+        $users = User::all();
+
+        return view('employer.messages', [
+            'messages' => $messages,
+            'users' => $users,
+            'replies' => $replies
+        ]);
+    }
+
+    public function sentmessages()
+    {
+
+        $userId = Auth::id();
+        $email = User::find($userId)->email;
+        $messages = Message::where('from', $email)->get();
         $replies = Reply::all();
         $users = User::all();
 

@@ -11,6 +11,12 @@
                 {{ __('Waiting For For Approval') }}
             </h2>
         </x-slot>
+    @elseif (Auth::check() && Auth::user()->account_verification_status === 'declined')
+        <x-slot name="header">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                {{ __('Account Declined') }}
+            </h2>
+        </x-slot>
     @else
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">

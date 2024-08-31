@@ -93,7 +93,7 @@
        </form>
    </x-guest-layout>
 
-   <footer class="bg-gray-800 text-white w-full py-4">
+   <footer class="bg-gray-300 dark:bg-gray-800 text-black dark:text-white w-full py-4">
        <div class="container mx-auto text-center">
            <span>&copy; 2024 AccessiJobs. All rights reserved.</span>
        </div>

@@ -229,45 +229,55 @@
                focus:border-blue-500 dark:focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-900 
                dark:text-gray-300"
                                     autocomplete="on">
-                                    <option value="" disabled>Select Education Level...</option>
-                                    <option value="Primary School"
-                                        {{ old('educationLevel') == 'Primary School' ? 'selected' : '' }}>Primary
-                                        School</option>
-                                    <option value="Elementary"
-                                        {{ old('educationLevel') == 'Elementary' ? 'selected' : '' }}>Elementary
+                                    <option value="" selected disabled>Select Education Level...</option>
+                                    <option value="Doctoral Degree"
+                                        {{ old('educationLevel', $education->educationLevel ?? '') == 'Doctoral Degree' ? 'selected' : '' }}>
+                                        {{ __('messages.education.doctoral_degree') }}
+                                    </option>
+                                    <option value="Master's Degree"
+                                        {{ old('educationLevel', $education->educationLevel ?? '') == "Master's Degree" ? 'selected' : '' }}>
+                                        {{ __('messages.education.masters_degree') }}
+                                    </option>
+                                    <option value="College Graduate"
+                                        {{ old('educationLevel', $education->educationLevel ?? '') == 'College Graduate' ? 'selected' : '' }}>
+                                        {{ __('messages.education.college_graduate') }}
+                                    </option>
+                                    <option value="Bachelor's Degree"
+                                        {{ old('educationLevel', $education->educationLevel ?? '') == "Bachelor's Degree" ? 'selected' : '' }}>
+                                        {{ __('messages.education.bachelors_degree') }}
+                                    </option>
+                                    <option value="Vocational Graduate"
+                                        {{ old('educationLevel', $education->educationLevel ?? '') == 'Vocational Graduate' ? 'selected' : '' }}>
+                                        {{ __('messages.education.vocational_graduate') }}
+                                    </option>
+                                    <option value="Associate's Degree"
+                                        {{ old('educationLevel', $education->educationLevel ?? '') == "Associate's Degree" ? 'selected' : '' }}>
+                                        {{ __('messages.education.associates_degree') }}
+                                    </option>
+                                    <option value="Some College Level"
+                                        {{ old('educationLevel', $education->educationLevel ?? '') == 'Some College Level' ? 'selected' : '' }}>
+                                        {{ __('messages.education.some_college_level') }}
+                                    </option>
+                                    <option value="Vocational Undergraduate"
+                                        {{ old('educationLevel', $education->educationLevel ?? '') == 'Vocational Undergraduate' ? 'selected' : '' }}>
+                                        {{ __('messages.education.vocational_undergraduate') }}
+                                    </option>
+                                    <option value="Technical-Vocational Education and Training"
+                                        {{ old('educationLevel', $education->educationLevel ?? '') == 'Technical-Vocational Education and Training' ? 'selected' : '' }}>
+                                        {{ __('messages.education.technical_vocational_training') }}
+                                    </option>
+                                    <option value="Senior High School"
+                                        {{ old('educationLevel', $education->educationLevel ?? '') == 'Senior High School' ? 'selected' : '' }}>
+                                        {{ __('messages.education.senior_high_school') }}
                                     </option>
                                     <option value="Junior High School"
-                                        {{ old('educationLevel') == 'Junior High School' ? 'selected' : '' }}>
-                                        Junior
-                                        High School</option>
-                                    <option value="Senior High School"
-                                        {{ old('educationLevel') == 'Senior High School' ? 'selected' : '' }}>
-                                        Senior
-                                        High School</option>
-                                    <option value="Associate's Degree Level"
-                                        {{ old('educationLevel') == "Associate's Degree Level" ? 'selected' : '' }}>
-                                        Associate's Degree Level</option>
-                                    <option value="Some College Level"
-                                        {{ old('educationLevel') == 'Some College Level' ? 'selected' : '' }}>Some
-                                        College Level</option>
-                                    <option value="College Graduate"
-                                        {{ old('educationLevel') == 'College Graduate' ? 'selected' : '' }}>College
-                                        Graduate</option>
-                                    <option value="Vocational Graduate"
-                                        {{ old('educationLevel') == 'Vocational Graduate' ? 'selected' : '' }}>
-                                        Vocational Graduate</option>
-                                    <option value="Vocational Undergraduate"
-                                        {{ old('educationLevel') == 'Vocational Undergraduate' ? 'selected' : '' }}>
-                                        Vocational Undergraduate</option>
-                                    <option value="Bachelor's Degree Level"
-                                        {{ old('educationLevel') == "Bachelor's Degree Level" ? 'selected' : '' }}>
-                                        Bachelor's Degree Level</option>
-                                    <option value="Masteral Degree Level"
-                                        {{ old('educationLevel') == 'Masteral Degree Level' ? 'selected' : '' }}>
-                                        Masteral Degree Level</option>
-                                    <option value="Doctoral Degree Level"
-                                        {{ old('educationLevel') == 'Doctoral Degree Level' ? 'selected' : '' }}>
-                                        Doctoral Degree Level</option>
+                                        {{ old('educationLevel', $education->educationLevel ?? '') == 'Junior High School' ? 'selected' : '' }}>
+                                        {{ __('messages.education.junior_high_school') }}
+                                    </option>
+                                    <option value="Elementary School"
+                                        {{ old('educationLevel', $education->educationLevel ?? '') == 'Elementary School' ? 'selected' : '' }}>
+                                        {{ __('messages.education.elementary_school') }}
+                                    </option>
                                 </select>
                                 @error('educationLevel')
                                     <div class="text-red-600 mt-1">{{ $message }}</div>

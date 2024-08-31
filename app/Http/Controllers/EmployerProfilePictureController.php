@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Employer;
+use App\Models\JobInfo;
 
 class EmployerProfilePictureController extends Controller
 {
@@ -31,6 +32,9 @@ class EmployerProfilePictureController extends Controller
 
             // Update the employer's company_logo path in the database
             $employer->company_logo = $filePath;
+            JobInfo::where('employer_id', $employer->user_id)
+                ->update(['company_logo' => $filePath]);
+
             $employer->save();
 
             // Optionally, delete the old picture if it exists
@@ -38,6 +42,8 @@ class EmployerProfilePictureController extends Controller
                 unlink(public_path('storage/' . $oldPicture));
             }
         }
+
+
 
         // Redirect back with success message
         return back()->with('success', 'Profile picture updated successfully.');
