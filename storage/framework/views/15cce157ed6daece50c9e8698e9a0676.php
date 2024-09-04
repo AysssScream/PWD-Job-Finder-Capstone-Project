@@ -1,0 +1,1 @@
+<?php /**PATH C:\xampp\htdocs\finalproj\resources\views\admin\approveuser.blade.php ENDPATH**/ ?>

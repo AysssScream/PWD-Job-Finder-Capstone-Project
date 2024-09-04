@@ -65,6 +65,8 @@ class RegisteredUserController extends Controller
             'middlename' => $request->middlename,
             'lastname' => $request->lastname,
             'usertype' => $request->usertype,
+            'usertype_plain' => $request->usertype,
+            'account_verification_status_plain' => 'pending',
             'account_verification_status' => 'pending', // Set default value to 'pending'
             'password' => Hash::make($request->password),
         ]);

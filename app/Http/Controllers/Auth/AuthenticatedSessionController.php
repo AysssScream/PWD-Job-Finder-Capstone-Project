@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
+use Illuminate\Support\Facades\Cookie;
 
 use App\Models\AuditTrail;
 use App\Http\Controllers\Controller;
@@ -42,7 +43,7 @@ class AuthenticatedSessionController extends Controller
         }
 
 
-        if (Auth::user()->account_verification_status == 'waiting for approval' || Auth::user()->account_verification_status == 'pending' || Auth::user()->account_verification_status == 'declined') {
+        if (Auth::user()->account_verification_status == 'waiting for approval' || Auth::user()->account_verification_status == 'pending') {
             // Check if the user is an employer
             if (Auth::user()->usertype === 'employer') {
                 return redirect()->route('employer.setup');
@@ -79,8 +80,6 @@ class AuthenticatedSessionController extends Controller
                     'action' => 'Logged Out',
                     'section' => 'Authentication',
                 ]);
-
-                // Perform logout
                 Auth::guard('web')->logout();
 
                 // Invalidate the session
@@ -88,9 +87,14 @@ class AuthenticatedSessionController extends Controller
 
                 // Regenerate the CSRF token
                 $request->session()->regenerateToken();
+
+
+                \Log::info('Session data after logout: ', $request->session()->all());
+
             }
         }
 
+        // Perform logout
         // Redirect to home page
         return redirect('/');
 

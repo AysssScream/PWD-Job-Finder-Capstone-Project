@@ -9,7 +9,7 @@
                         <label for="custom_recency_filter" class="sr-only">Filter by Date</label>
                         <div class="relative">
                             <select id="custom_recency_filter" name="custom_recency_filter"
-                                class="block w-full py-2.5 px-4 text-sm font-medium text-gray-900 bg-gray-100 border border-gray-300 rounded-lg hover:bg-gray-200  dark:bg-gray-700 dark:hover:bg-gray-600  dark:text-white dark:border-gray-600 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 "
+                                class="block w-full py-2.5 px-9 text-sm font-medium text-gray-900 bg-gray-100 border border-gray-300 rounded-lg hover:bg-gray-200  dark:bg-gray-700 dark:hover:bg-gray-600  dark:text-white dark:border-gray-600 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 "
                                 aria-label="Filter by Date">
                                 <option value="All">
                                     {{ __('messages.userdashboard.All') }}</option>
@@ -142,10 +142,10 @@
                             </div>
 
                             <div class="mb-2">
-                                <label for="max-salary"
-                                    class="block  font-medium text-gray-900 dark:text-gray-200">Age
+                                <label for="max-age" class="block  font-medium text-gray-900 dark:text-gray-200">Max
+                                    Age
                                     Requirement:</label>
-                                <input type="number" id="age" name="age"
+                                <input type="number" id="max-age" name="max-age"
                                     class="mt-1 block w-full bg-white dark:bg-gray-900 border border-gray-500 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 sm:text-sm"
                                     placeholder="Enter Age" aria-label="Age">
                             </div>
@@ -266,11 +266,14 @@
                         <div class="mb-4 flex justify-between" aria-label="Job Number {{ $job->id }}">
                             @if ($job->company_logo && Storage::exists('public/' . $job->company_logo))
                                 <img src="{{ asset('storage/' . $job->company_logo) }}" alt="Company Logo"
-                                    aria-label="Company Logo" class="w-24 h-24 rounded-lg shadow-md">
+                                    aria-label="Company Logo"
+                                    onerror="this.onerror=null; this.src='{{ asset('/images/avatar.png') }}"
+                                    class="w-24 h-24 rounded-lg shadow-md object-contain bg-gray-300 dark:bg-gray-500">
                             @else
-                                <img src="{{ asset('/images/avatar.png') }}" alt="Default Image" class="w-24 h-24"
-                                    aria-label="Empty Company Logo">
+                                <img src="{{ asset('/images/avatar.png') }}" alt="Default Image"
+                                    class="w-24 h-24 rounded-lg shadow-md" aria-label="Empty Company Logo">
                             @endif
+
 
                             <div>
                                 <div class="text-right text-black dark:text-white">
@@ -412,8 +415,6 @@
 </section>
 
 @if (Session::has('preferences'))
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
         $(document).ready(function() {
             toastr.options = {
@@ -428,6 +429,8 @@
         });
     </script>
 @endif
+
+
 
 <style>
     /* Custom shadow class for 3D effect */

@@ -135,7 +135,7 @@
                                                     <input type="text" id="tinno" name="tinno"
                                                         value="{{ old('tinno', $employerData['tinno'] ?? '') }}"
                                                         maxlength="12"
-                                                        class="w-full px-4 py-2 rounded-md border-gray-300 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                                        class="w-full px-4 py-2 rounded-md border-gray-500 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                         placeholder="(12 Digits Max)">
                                                     {{-- <div class="flex flex-wrap gap-1">
                                                         <!-- Group 1 -->
@@ -334,7 +334,7 @@
                                                     </label>
                                                     <div class="relative">
                                                         <select id="municipality-dropdown" name="municipality"
-                                                            class="w-full p-2 border rounded shadow-sm bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                            class="w-full p-2 border rounded shadow-sm bg-transparent text-gray-900 dark:bg-gray-900 dark:text-gray-200"
                                                             aria-placeholder="Select a Municipality or City">
                                                             <option value="" disabled selected>Select a
                                                                 Municipality or City
@@ -520,7 +520,7 @@
                         </div>
                     </div>
                     </form>
-                @elseif(Auth::check() && Auth::user()->account_verification_status === 'declined')
+                    {{-- @elseif(Auth::check() && Auth::user()->account_verification_status === 'declined')
                     <div class="landscape-container mt-20">
                         <div class="container w-3/4 mx-auto landscape-content">
                             <div
@@ -547,7 +547,7 @@
                                 </form>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 @elseif (Auth::check() && Auth::user()->account_verification_status === 'waiting for approval')
                     <div class="landscape-container mt-20"> <!-- Add mt-5 class for margin-top -->
                         <div class="container w-3/4 mx-auto landscape-content">

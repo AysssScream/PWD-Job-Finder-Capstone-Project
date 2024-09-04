@@ -279,7 +279,7 @@ return [
     ],
 
     'language' => [
-        'instruction' => 'Step 5: To update your profile, click “Add Language” to input new languages and set the language proficiency. Use the checkboxes to select skills without formal training (Other Skills). Edit or remove entries as needed to accurately reflect your abilities.',
+        'instruction' => 'Step 5: To update your profile, click the checkboxes in "Language Proficiency" specificially for Filipino and English only. Use the checkboxes to select skills without formal training (Other Skills). Edit or remove entries as needed to accurately reflect your abilities.',
         'updatelang' => 'To update your language proficiency:',
         'list-unstyled' => [
             '1' => 'Set the language proficiency using the checkbox.',

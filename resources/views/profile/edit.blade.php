@@ -2,10 +2,10 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <title>Profile</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 @if (Session::has('saveprofile'))
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
         $(document).ready(function() {
             toastr.options = {
@@ -23,8 +23,6 @@
 
 
 @if (Session::has('saveprofilepic'))
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
         $(document).ready(function() {
             toastr.options = {
@@ -41,8 +39,6 @@
 @endif
 
 @if (Session::has('updatepass'))
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
         $(document).ready(function() {
             toastr.options = {
@@ -115,19 +111,22 @@
                                     <div id="container"
                                         style="width: 200px; height: 200px; overflow: hidden; position: relative;">
                                         @if (Auth::check() && Auth::user()->pwdInformation && Auth::user()->pwdInformation->profilePicture)
-                                            <img class="rounded-circle img-fluid" alt="avatar1"
+                                            <!-- Display user's profile picture, with onerror fallback to default avatar -->
+                                            <img class="rounded-circle img-fluid"
                                                 src="{{ asset('storage/' . Auth::user()->pwdInformation->profilePicture) }}"
                                                 style="width: 100%; height: 100%; object-fit: contain;"
-                                                aria-label="Profile Picture">
-                                        @else
-                                            <!-- Placeholder image or default image -->
-                                            <img class="rounded-circle img-fluid" alt="placeholder-avatar"
-                                                aria-label="Empty Profile Picture"
+                                                aria-label="Profile Picture" alt="Profile Picture"
+                                                onerror="this.onerror=null; this.src='{{ asset('/images/avatar.png') }}';">
+                                            {{-- @else
+                                            <!-- Display default avatar -->
+                                            <img class="rounded-circle img-fluid"
                                                 src="{{ asset('/images/avatar.png') }}"
-                                                style="width: 100%; height: 100%; object-fit: contain;">
+                                                style="width: 100%; height: 100%; object-fit: contain;"
+                                                aria-label="Empty Profile Picture" alt="Default Avatar"> --}}
                                         @endif
                                     </div>
                                 </div>
+
 
                                 <form method="post" action="{{ route('profile.updatepic') }}"
                                     enctype="multipart/form-data" id="formprofpic">

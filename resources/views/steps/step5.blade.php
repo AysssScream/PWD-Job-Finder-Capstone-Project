@@ -95,18 +95,21 @@
                                                      <th
                                                          class="px-4 py-2 text-center border-b bg-gray-300 text-black dark:bg-gray-900 dark:text-gray-200">
                                                          {{ __('messages.language.table_headers.language_proficiency') }}
+                                                         <i class="fas fa-asterisk text-red-500 text-xs"></i>
                                                      </th>
                                                  </tr>
                                              </thead>
                                              <tbody id="language-table-body">
-                                                 @foreach ($formData5['language-input'] as $index => $language)
+                                                 @php
+                                                     $languages = ['English', 'Filipino'];
+                                                 @endphp
+
+                                                 @foreach ($languages as $index => $language)
                                                      <tr>
                                                          <td class="px-4 py-2 border-b">
                                                              <div class="flex items-center">
                                                                  <input type="text" name="language-input[]"
                                                                      class="w-full p-2 border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm language-input"
-                                                                     placeholder="Ex. {{ $language }}"
-                                                                     aria-label="Language or Dialect"
                                                                      value="{{ $language }}" readonly />
                                                              </div>
                                                          </td>
@@ -118,7 +121,7 @@
                                                                              name="proficiency[{{ $index }}][]"
                                                                              value="{{ $skill }}"
                                                                              class="form-checkbox text-blue-500 focus:ring-orange-400 dark:focus:ring-orange-400"
-                                                                             {{ in_array($skill, $formData5['proficiency'][$index] ?? []) ? 'checked' : '' }} />
+                                                                             {{ isset($formData5['proficiency'][$index]) && in_array($skill, $formData5['proficiency'][$index]) ? 'checked' : '' }} />
                                                                          <span
                                                                              class="ml-2 text-gray-700 dark:text-gray-200">Can
                                                                              {{ $skill }}?</span>
@@ -128,7 +131,7 @@
                                                          </td>
                                                      </tr>
                                                  @endforeach
-                                             </tbody>
+
                                          </table>
 
                                          {{-- <table class="min-w-full border border-gray-200" id="languages-table">

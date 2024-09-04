@@ -15,7 +15,7 @@
         <div class="container mx-auto max-w-8xl px-4 pt-5 ">
             <div class="row">
                 <div class="col">
-                    <nav class="rounded-lg p-3 bg-gray-100 dark:bg-gray-700">
+                    <nav class="rounded-lg p-3 bg-white dark:bg-gray-700 shadow-md">
                         <ol class="breadcrumb mb-0">
                             <li class="breadcrumb-item" aria-label="Back to Jobs">
                                 <a href="{{ route('dashboard') }}"
@@ -393,8 +393,6 @@
 
 
     @if (Session::has('jobsave'))
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <script>
             $(document).ready(function() {
                 toastr.options = {
@@ -409,8 +407,6 @@
     @endif
 
     @if (Session::has('apply'))
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <script>
             $(document).ready(function() {
                 toastr.options = {

@@ -53,13 +53,14 @@
                                 class="w-48 h-48 md:w-40 md:h-40 sm:w-36 sm:h-36 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden mx-auto mb-4 border border-gray-700 shadow-lg">
                                 <img id="imagePreview"
                                     src="{{ asset('storage/' . Auth::user()->employer->company_logo) }}"
-                                    alt="Profile Picture" class="w-full h-full object-contain">
+                                    alt="Profile Picture" class="w-full h-full object-contain"
+                                    onerror="this.onerror=null; this.src='{{ asset('/images/avatar.png') }}';">
                             </div>
                         @else
                             <div
-                                class="w-48 h-48 md:w-40 md:h-40 sm:w-36 sm:h-36 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden mx-auto mb-4 border border-gray-700 shadow-lg flex items-center justify-center">
-                                <img class="h-full w-full object-contain" aria-label="Company Logo"
-                                    src="{{ asset('/images/avatar.png') }}" alt="Company Logo">
+                                class="w-48 h-48 md:w-40 md:h-40 sm:w-36 sm:h-36 bg-gray-200 rounded-full overflow-hidden mx-auto mb-4 border border-gray-700 shadow-lg flex items-center justify-center">
+                                <img id="imagePreview" src="/images/avatar.png" alt="Profile Picture"
+                                    class="w-full h-full object-contain">
                             </div>
                         @endif
 
@@ -279,8 +280,6 @@
     <!-- End of py-12 padding -->
 
     @if (Session::has('message'))
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <script>
             $(document).ready(function() {
                 toastr.options = {

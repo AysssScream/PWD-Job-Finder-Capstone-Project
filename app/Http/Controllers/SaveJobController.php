@@ -27,8 +27,6 @@ class SaveJobController extends Controller
 
 
 
-
-
     public function save(Request $request, $id, $companyName)
     {
 

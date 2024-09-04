@@ -154,7 +154,7 @@
                             <div class="form-group position-relative">
                                 <label for="date-filter" class="sr-only">Filter by Date</label>
                                 <select id="custom_recency_filter" name="custom_recency_filter"
-                                    class="form-control border-primary rounded" id="dropdowndate">
+                                    class="form-control border-primary rounded px-4" id="dropdowndate">
                                     <option value="">Date Filters</option>
                                     <option value="All">All</option>
                                     <option value="last-24-hours">Last 24 Hours</option>
@@ -171,6 +171,11 @@
                         <!-- Filters Column -->
                         <div class="col-sm-12 col-md-12 col-lg-4 ms-auto">
                             <h2 class=" fw-bold mb-2" id="designedheader">Job Filters</h2>
+                            <p class="mb-4">
+                                To find the most suitable job opportunities, please use the filters below: select the
+                                job type, enter the desired location, specify the minimum salary you are willing to
+                                accept, and set the maximum salary you are aiming for.
+                            </p>
 
                             <!-- Filter Container -->
                             <div id="filterContainer"
@@ -232,7 +237,7 @@
                                         <div
                                             class="card bg-white text-black dark:bg-gray-800 dark:text-gray-200 shadow p-4 border-secondary w-100">
                                             <div class="d-flex flex-column">
-                                                <div class="d-flex justify-content-between w-100 mb-5">
+                                                <div class="d-flex justify-content-between w-100 mb-2">
                                                     @if ($job->company_logo && Storage::exists('public/' . $job->company_logo))
                                                         <img src="{{ asset('storage/' . $job->company_logo) }}"
                                                             alt="Company Logo" class="rounded-circle shadow-md"
@@ -251,7 +256,10 @@
                                                             {{ $job->company_name }}
                                                         </p>
                                                     </div>
+
                                                 </div>
+                                                <hr class="border-b border-gray-300 ">
+
                                             </div>
 
                                             <p><strong>Date Posted:</strong>
@@ -268,12 +276,13 @@
                                                 </div>
                                                 <div>
                                                     <a href="{{ route('jobs.info', ['company_name' => Str::slug($job->company_name), 'id' => $job->id]) }}"
-                                                        class="btn btn-primary">
+                                                        class="btn btn-primary btn-lg p-3 rounded-pill">
                                                         <i class="bi bi-arrow-right"></i>
                                                         <i class="fas fa-arrow-right"></i>
                                                         <!-- Font Awesome icon -->
                                                     </a>
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -410,13 +419,12 @@
                                 <p></p>
                                 <p><i class="fas fa-life-ring" style="margin-right: 8px;"></i> Ask For Support</p>
                                 <p><a href="https://www.facebook.com/PDADMandaluyong" target="_blank"
-                                        class="text-gray-200 dark:text-gray-200" style="text-decoration: none;">
+                                        class="text-white" style="text-decoration: none;">
                                         <i class="fab fa-facebook" style="margin-right: 8px;"></i> Facebook
                                     </a></p>
 
                                 {{-- <p><i class="fab fa-instagram" style="margin-right: 8px;"></i> Instagram</p> --}}
-                                <p><a href="https://x.com/MandaluyongPIO" target="_blank"
-                                        class="text-gray-200 dark:text-gray-200 no-underline"
+                                <p><a href="https://x.com/MandaluyongPIO" target="_blank" class="text-white"
                                         style="text-decoration: none;">
                                         <i class="fab fa-twitter" style="margin-right: 8px;"></i> Twitter
                                     </a></p>

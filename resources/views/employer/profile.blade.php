@@ -11,8 +11,6 @@
     </head>
 
     @if (Session::has('message'))
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <script>
             $(document).ready(function() {
                 toastr.options = {
@@ -66,7 +64,8 @@
                                     class="w-48 h-48 md:w-40 md:h-40 sm:w-36 sm:h-36 bg-white rounded-full overflow-hidden mx-auto mb-4 border border-gray-700 shadow-lg">
                                     <img id="imagePreview"
                                         src="{{ asset('storage/' . Auth::user()->employer->company_logo) }}"
-                                        alt="Profile Picture" class="w-full h-full object-contain">
+                                        alt="Profile Picture" class="w-full h-full object-contain"
+                                        onerror="this.onerror=null; this.src='{{ asset('/images/avatar.png') }}';">
                                 </div>
                             @else
                                 <div
@@ -123,7 +122,7 @@
                         @csrf
                         @method('PUT')
                         @if ($errors->any())
-                            <div class="bg-red-100 dark:bg-red-700 dark:text-gray-200 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                            <div class="bg-red-100 p-10 dark:bg-red-700 dark:text-gray-200 border border-red-400 text-red-700 px-8 py-3 rounded relative"
                                 role="alert">
                                 <strong class="font-bold">Oops!</strong>
                                 <span class="block sm:inline">There were some errors with your submission:</span>
@@ -135,7 +134,7 @@
                             </div>
                             <br>
                         @endif
-                        <div class="max-w-8xl mx-auto sm:px-6 lg:px-8 mt-4 p-6">
+                        <div class="max-w-8xl mx-auto sm:px-6 lg:px-8 mt-4 p-4">
                             <label for="businessname" class="block mb-1 text-black dark:text-gray-200">
                                 Company Description
                                 <span class="text-black">
@@ -296,7 +295,7 @@
 
 
                                     <div id="municipality-container" class="relative">
-                                        <label for="city" class="block mb-1">
+                                        <label for="municipality" class="block mb-1">
                                             City
                                             <span class="text-red-500">*</span>
                                         </label>
@@ -305,15 +304,14 @@
                                                 class="w-full p-2 border rounded shadow-sm bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-gray-200"
                                                 aria-placeholder="Select a Municipality or City">
                                                 <option value="" disabled selected>
-                                                    {{ old('municipality', $profile->municipality ?? '') }}"
+                                                    {{ old('municipality', $profile->municipality ?? '') }}
                                                 </option>
                                                 <!-- Options will be dynamically populated here -->
                                             </select>
                                         </div>
                                         <!-- Hidden input to store the selected barangay data -->
                                         <input type="text" id="selected-municipality" name="selected-municipality"
-                                            value="{{ old('municipality', $employerData['municipality'] ?? '') }}"
-                                            hidden>
+                                            value="{{ old('municipality', $profile->municipality ?? '') }}" hidden>
                                     </div>
 
                                     <div class="mt">
@@ -646,7 +644,7 @@
             barangays.forEach(barangay => {
                 const option = document.createElement('option');
                 // Use a unique value, like city and location combined, to differentiate options
-                option.value = `${barangay.city}-${barangay.location}`;
+                option.value = `${barangay.city} - ${barangay.location}`;
                 option.textContent = `${barangay.city} - ${barangay.location}`;
                 cityDropdown.appendChild(option);
             });
@@ -658,7 +656,7 @@
             const selectedValue = this.value; // This is in the format 'City-Location'
             const selectedBarangay = allBarangays.find(b => b.city === selectedCityName && b
                 .location === selectedLocation);
-            const [selectedCityName, selectedLocation] = selectedValue.split('-');
+            const [selectedCityName, selectedLocation] = selectedValue.split(' - ');
 
             if (selectedBarangay) {
                 selectedBarangayInput.value = `${selectedBarangay.city} - ${selectedBarangay.location}`;

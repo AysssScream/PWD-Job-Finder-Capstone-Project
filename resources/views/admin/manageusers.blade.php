@@ -1,19 +1,5 @@
     <x-app-layout>
-        @if (Session::has('declined'))
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-            <script>
-                $(document).ready(function() {
-                    toastr.options = {
-                        "progressBar": true,
-                        "closeButton": true,
-                    }
-                    toastr.error("{{ Session::get('declined') }}", 'User Account Creation Declined', {
-                        timeOut: 5000
-                    });
-                });
-            </script>
-        @endif
+
         <title>Manage Users</title>
 
         <div class="h-full ml-14 md:ml-64 font-poppins p-10">
@@ -47,7 +33,7 @@
                             d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                 </div>
-                <div
+                {{-- <div
                     class="bg-white text-black dark:bg-gray-800 dark:text-gray-200 rounded-lg shadow-md p-6 flex justify-between items-center">
                     <div>
                         <h2 class="text-lg font-semibold text-gray-700 dark:text-gray-200 mb-2">Declined Accounts</h2>
@@ -58,7 +44,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
-                </div>
+                </div> --}}
                 <div
                     class="bg-white text-black dark:bg-gray-800 dark:text-gray-200 rounded-lg shadow-md p-6 flex justify-between items-center">
                     <div>
@@ -75,6 +61,7 @@
             </div>
 
             <form method="GET" action="{{ route('admin.manageusers') }}">
+                @csrf
                 <div
                     class="mb-4 flex flex-col space-y-4 md:flex-row md:items-end md:justify-between md:space-y-0 lg:flex-row lg:space-x-4 w-full">
                     <!-- Filters Container -->
@@ -88,7 +75,6 @@
                                 <option value="">All</option>
                                 <option value="pending">Pending</option>
                                 <option value="approved">Approved</option>
-                                <option value="declined">Declined</option>
                                 <option value="waiting for approval">Waiting for Approval</option>
                             </select>
                         </div>
@@ -100,7 +86,7 @@
                                 class="mt-1 bg-white text-black dark:bg-gray-800 dark:text-gray-200 block w-full rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                 <option value="">All</option>
                                 <option value="employer">Employer</option>
-                                <option value="employee">User</option>
+                                <option value="user">User</option>
                             </select>
                         </div>
                         <!-- Date Filters -->
@@ -140,25 +126,26 @@
                     class="w-full border-collapse bg-white text-black dark:bg-gray-800 dark:text-gray-200 text-left text-sm text-gray-500">
                     <thead class="bg-white text-black dark:bg-gray-800 dark:text-gray-200">
                         <tr>
-                            <th scope="col" class="px-4 py-4 font-medium text-gray-700 dark:text-gray-200 sm:px-6">
+                            <th scope="col"
+                                class="text-center ml-4 px-4 py-4 font-medium text-gray-700 dark:text-gray-200 sm:px-6">
                                 User
                                 ID</th>
                             <th scope="col" class="px-4 py-4 font-medium text-gray-700 dark:text-gray-200 sm:px-6">
                                 Name
                             </th>
                             <th scope="col"
-                                class="text-right px-4 py-4 font-medium text-gray-700 dark:text-gray-200 sm:px-6">
+                                class="text-left px-4 py-4 font-medium text-gray-700 dark:text-gray-200 sm:px-6">
                                 Status
                             </th>
                             <th scope="col"
-                                class=" text-right px-4 py-4 font-medium text-gray-700 dark:text-gray-200 sm:px-6">Role
+                                class=" text-left px-4 py-4 font-medium text-gray-700 dark:text-gray-200 sm:px-6">Role
                             </th>
                             <th scope="col"
-                                class=" text-center px-4 py-4 font-medium text-gray-700 dark:text-gray-200 sm:px-6">
+                                class=" text-left px-4 py-4 font-medium text-gray-700 dark:text-gray-200 sm:px-6">
                                 Date
                                 Requested</th>
                             <th scope="col"
-                                class=" text-center px-4 py-4 font-medium text-gray-700 dark:text-gray-200 sm:px-6">
+                                class=" text-left px-4 py-4 font-medium text-gray-700 dark:text-gray-200 sm:px-6">
                                 Actions</th>
                         </tr>
                     </thead>
@@ -227,63 +214,132 @@
                                     </td>
                                     <td class="px-4 py-4 sm:px-6">
                                         <div class="flex flex-col gap-2 sm:flex-row">
-                                            @if ($user->usertype === 'user' || $user->usertype === 'employer')
+                                            @if ($user->usertype === 'user')
                                                 @if ($user->account_verification_status == 'waiting for approval')
                                                     <a href="{{ route('admin.applicantinfo', ['id' => $user->id]) }}"
                                                         class="inline-block">
                                                         <button
                                                             class="px-3 py-2 text-md font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                                            View
+                                                            View Applicant
                                                         </button>
                                                     </a>
-                                                    <a href="{{ route('admin.decline', ['id' => $user->id]) }}"
-                                                        class="inline-block px-3 py-2 text-md font-medium text-white bg-red-600 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-                                                        Decline
-                                                    </a>
+                                                    <div x-data="{ showModal: false }">
+                                                        <!-- Reset Button -->
+                                                        <a href="javascript:void(0);" @click="showModal = true"
+                                                            class="inline-block px-3 py-2 text-md font-medium text-white bg-red-600 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
+                                                            Reset Application
+                                                        </a>
+                                                        <!-- Modal -->
+                                                        <template x-if="showModal" class="modal-wrapper">
+                                                            <div x-show="showModal"
+                                                                class="fixed inset-0 flex items-center justify-center z-50">
+                                                                <div
+                                                                    class="bg-gray-100 dark:bg-gray-800  p-6 rounded-lg shadow-lg w-96 z-10">
+                                                                    <h2 class="text-lg font-semibold  mb-4">
+                                                                        Are you sure?
+                                                                    </h2>
+                                                                    <p class="text-gray-600 dark:text-gray-100 mb-6">
+                                                                        Do you really want to reset the application?
+                                                                        This
+                                                                        action cannot be undone.
+                                                                    </p>
+                                                                    <div class="flex justify-end space-x-4">
+                                                                        <!-- Cancel Button -->
+                                                                        <button @click="showModal = false"
+                                                                            class="px-4 py-2 text-gray-700 bg-gray-200 rounded hover:bg-gray-300">
+                                                                            Cancel
+                                                                        </button>
+                                                                        <!-- Proceed Button -->
+                                                                        <a href="{{ route('admin.reset', ['id' => $user->id]) }}"
+                                                                            class="px-4 py-2 text-white bg-red-600 rounded hover:bg-red-700">
+                                                                            Proceed
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+
+                                                                <!-- Background overlay -->
+                                                                <div @click="showModal = false"
+                                                                    class="fixed inset-0 bg-gray-900 bg-opacity-50 z-40">
+                                                                </div>
+                                                            </div>
+                                                        </template>
+                                                    </div>
                                                 @elseif ($user->account_verification_status == 'approved')
                                                     <a href="{{ route('admin.applicantinfo', ['id' => $user->id]) }}"
                                                         class="inline-block">
                                                         <button
                                                             class="px-3 py-2 text-md font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                                            View
+                                                            View Applicant
                                                         </button>
                                                     </a>
                                                 @elseif ($user->account_verification_status != 'pending')
                                                     <button
                                                         class="px-3 py-2 text-md font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                                        View
+                                                        View Applicant
                                                     </button>
                                                 @endif
                                             @elseif ($user->usertype == 'employer')
                                                 @if ($user->account_verification_status == 'waiting for approval')
                                                     <a href="{{ route('admin.employerapplicantinfo', ['id' => $user->id]) }}"
                                                         class="inline-block">
-
                                                         <button
                                                             class="px-3 py-2 text-md font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                                            View
+                                                            View Employer
                                                         </button>
                                                     </a>
-                                                    <button
-                                                        class="px-3 py-2 text-md font-medium text-white bg-red-600 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-                                                        Decline
-                                                    </button>
+                                                    <div x-data="{ showModal: false }">
+                                                        <!-- Reset Button -->
+                                                        <a href="javascript:void(0);" @click="showModal = true"
+                                                            class="inline-block px-3 py-2 text-md font-medium text-white bg-red-600 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
+                                                            Reset Application
+                                                        </a>
+                                                        <!-- Modal -->
+                                                        <template x-if="showModal" class="modal-wrapper">
+                                                            <div x-show="showModal"
+                                                                class="fixed inset-0 flex items-center justify-center z-50">
+                                                                <div
+                                                                    class="bg-gray-100 dark:bg-gray-800  p-6 rounded-lg shadow-lg w-96 z-10">
+                                                                    <h2 class="text-lg font-semibold  mb-4">
+                                                                        Are you sure?
+                                                                    </h2>
+                                                                    <p class="text-gray-600 dark:text-gray-100 mb-6">
+                                                                        Do you really want to reset the application?
+                                                                        This
+                                                                        action cannot be undone.
+                                                                    </p>
+                                                                    <div class="flex justify-end space-x-4">
+                                                                        <!-- Cancel Button -->
+                                                                        <button @click="showModal = false"
+                                                                            class="px-4 py-2 text-gray-700 bg-gray-200 rounded hover:bg-gray-300">
+                                                                            Cancel
+                                                                        </button>
+                                                                        <!-- Proceed Button -->
+                                                                        <a href="{{ route('admin.reset', ['id' => $user->id]) }}"
+                                                                            class="px-4 py-2 text-white bg-red-600 rounded hover:bg-red-700">
+                                                                            Proceed
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+
+                                                                <!-- Background overlay -->
+                                                                <div @click="showModal = false"
+                                                                    class="fixed inset-0 bg-gray-900 bg-opacity-50 z-40">
+                                                                </div>
+                                                            </div>
+                                                        </template>
+                                                    </div>
                                                 @elseif ($user->account_verification_status == 'approved')
                                                     <a href="{{ route('admin.employerapplicantinfo', ['id' => $user->id]) }}"
                                                         class="inline-block">
                                                         <button
                                                             class="px-3 py-2 text-md font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                                            View
+                                                            View Employer
                                                         </button>
                                                     </a>
-                                                    <button
-                                                        class="px-3 py-2 text-md font-medium text-white bg-red-600 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-                                                        Decline
-                                                    </button>
                                                 @elseif ($user->account_verification_status != 'pending')
                                                     <button
                                                         class="px-3 py-2 text-md font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                                        View
+                                                        View Employer
                                                     </button>
                                                 @endif
                                             @endif
@@ -292,10 +348,26 @@
                                     </td>
                                 </tr>
                             @endforeach
+                            @if (Session::has('Reset'))
+                                <script>
+                                    $(document).ready(function() {
+                                        toastr.options = {
+                                            "progressBar": true,
+                                            "closeButton": true,
+                                        }
+                                        toastr.warning("{{ Session::get('Reset') }}",
+                                            'User ID: {{ $user->id }} Application were Reset', {
+                                                timeOut: 5000
+                                            });
+                                    });
+                                </script>
+                            @endif
                         </tbody>
                     </table>
             </div>
         </div>
+
+
 
         {{-- <script>
         document.getElementById('status-filter').addEventListener('change', filterTable);

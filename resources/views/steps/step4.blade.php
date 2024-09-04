@@ -86,7 +86,8 @@
                                     <div>
                                         <div class="mt-6">
                                             <label for="preferredOccupation"
-                                                class="block mb-1">{{ __('messages.jobpreferences.preferred_occupation') }}</label>
+                                                class="block mb-1">{{ __('messages.jobpreferences.preferred_occupation') }}
+                                                <i class="fas fa-asterisk text-red-500 text-xs"></i></label>
                                             <input type="text" id="preferredOccupation" name="preferredOccupation"
                                                 aria-label="{{ __('messages.jobpreferences.preferred_occupation') }}"
                                                 class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 "
@@ -131,7 +132,8 @@
 
                                         <div class="mt-6 relative">
                                             <label for="local-location" class="block mb-1">
-                                                {{ __('messages.jobpreferences.preferred_work_location_local') }}
+                                                {{ __('messages.jobpreferences.preferred_work_location_local') }} <i
+                                                    class="fas fa-asterisk text-red-500 text-xs"></i>
                                             </label>
                                             <div class="flex items-center space-x-2">
                                                 <!-- Dropdown (Select) for Local Location -->

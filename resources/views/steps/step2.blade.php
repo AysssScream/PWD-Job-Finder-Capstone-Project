@@ -93,7 +93,9 @@
                                     <div>
                                         <div class="mt-6">
                                             <label for="civilStatus"
-                                                class="block mb-1">{{ __('messages.personal.civil_status') }}</label>
+                                                class="block mb-1">{{ __('messages.personal.civil_status') }} <i
+                                                    class="fas fa-asterisk text-red-500 text-xs"></i>
+                                            </label>
                                             <select id="civilStatus" name="civilStatus"
                                                 aria-label="{{ __('messages.personal.civil_status') }}"
                                                 class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
@@ -133,7 +135,9 @@
 
                                         <div id="barangay-container" class="mt-6">
                                             <label for="barangay" class="block mb-1">
-                                                {{ __('messages.personal.barangay') }}
+                                                {{ __('messages.personal.barangay') }} <i
+                                                    class="fas fa-asterisk text-red-500 text-xs"></i>
+
                                             </label>
                                             <div class="flex items-center space-x-2">
                                                 <!-- Dropdown (Select) for Barangay -->
@@ -164,7 +168,8 @@
 
                                         <div class="mt-6">
                                             <label for="zipcode"
-                                                class="block mb-1">{{ __('messages.personal.zipcode') }}</label>
+                                                class="block mb-1">{{ __('messages.personal.zipcode') }} <i
+                                                    class="fas fa-asterisk text-red-500 text-xs"></i></label>
                                             <div class="flex items-center mt-4">
                                                 <input type="text" id="zipcode" name="zipcode"
                                                     aria-label="{{ __('messages.personal.zipcode') }}"
@@ -182,7 +187,9 @@
 
                                         <div class="mt-6">
                                             <label for="presentAddress"
-                                                class="block mb-1">{{ __('messages.personal.present_address') }}</label>
+                                                class="block mb-1">{{ __('messages.personal.present_address') }} <i
+                                                    class="fas fa-asterisk text-red-500 text-xs"></i>
+                                            </label>
                                             <input type="text" id="presentAddress" name="presentAddress"
                                                 aria-label="{{ __('messages.personal.present_address') }}"
                                                 class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
@@ -319,7 +326,8 @@
                                         </div>
 
                                         <div class="mt-6">
-                                            <label for="cellphoneNo" class="block mb-1">Cellphone No.</label>
+                                            <label for="cellphoneNo" class="block mb-1">Cellphone No. <i
+                                                    class="fas fa-asterisk text-red-500 text-xs"></i></label>
                                             <input type="tel" id="cellphoneNo" name="cellphoneNo"
                                                 aria-label="Cellphone NUMBER"
                                                 class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 "
@@ -332,8 +340,8 @@
                                         </div>
 
                                         <div class="mt-6">
-                                            <label
-                                                class="block mb-2 ">{{ __('messages.personal.4ps_beneficiary') }}</label>
+                                            <label class="block mb-2 ">{{ __('messages.personal.4ps_beneficiary') }}
+                                                <i class="fas fa-asterisk text-red-500 text-xs"></i></label>
                                             <div class="flex items-center ">
                                                 <input type="radio" id="4ps-yes" name="beneficiary-4ps"
                                                     value="Yes"

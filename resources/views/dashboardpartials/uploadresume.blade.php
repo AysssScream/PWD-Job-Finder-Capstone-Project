@@ -9,7 +9,13 @@
              onload="this.onload=null;this.rel='stylesheet'">
          <link rel="preload" href="/images/team.png" as="image">
          <link href="{{ asset('fontawesome-free-6.5.2-web/css/all.min.css') }}" rel="stylesheet">
-
+         <style>
+             /* Custom shadow class for 3D effect */
+             .shadow-3d {
+                 box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+                 transition: transform 0.3s ease, box-shadow 0.3s ease;
+             }
+         </style>
      </head>
      <div class="text-gray-900 dark:text-gray-100">
          <div class="flex items-center justify-between mb-2 mt-6">
@@ -70,7 +76,7 @@
          </script>
 
          @if (isset($data))
-             <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-4">
+             <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-3d shadow-lg mb-4">
                  <p class="text-gray-700 dark:text-gray-200"><strong>Education:</strong> {{ $data['education'] }}</p>
                  <br>
                  <p class="text-gray-700 dark:text-gray-200"><strong>Age:</strong> {{ $data['age'] ?? 'N/A' }}</p>
@@ -84,7 +90,7 @@
                  <br>
              </div>
          @elseif (isset($resume))
-             <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-4">
+             <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-3d shadow-lg mb-4">
                  <p class="text-gray-700 dark:text-gray-200"><strong>Education:</strong> {{ $resume->education }}</p>
                  <br>
                  <p class="text-gray-700 dark:text-gray-200"><strong>Age:</strong> {{ $resume->age ?? 'N/A' }}</p>
@@ -114,13 +120,16 @@
                              aria-label="Job Number {{ $job->id }}{{ $job->title }}">
 
                              <div class="mb-4 flex justify-between" aria-label="Job Number {{ $job->id }}">
+
                                  @if ($job->company_logo && Storage::exists('public/' . $job->company_logo))
                                      <img src="{{ asset('storage/' . $job->company_logo) }}" alt="Company Logo"
-                                         aria-label="Company Logo" class="w-24 h-24 rounded-lg shadow-md">
+                                         aria-label="Company Logo" class="w-24 h-24 rounded-lg shadow-md"
+                                         onerror="this.onerror=null; this.src='{{ asset('/images/avatar.png') }}';">
                                  @else
-                                     <img src="{{ asset('/images/avatar.png') }}" alt="Default Image" class="w-24 h-24"
-                                         aria-label="Empty Company Logo">
+                                     <img src="{{ asset('/images/avatar.png') }}" alt="Default Image"
+                                         class="w-24 h-24 rounded-lg shadow-md" aria-label="Empty Company Logo">
                                  @endif
+
 
 
                                  <div>

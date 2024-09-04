@@ -134,7 +134,7 @@
                                                         <div class="relative">
                                                             <input type="text" id="to" name="to"
                                                                 placeholder="Enter recipient's email"
-                                                                class="w-full px-3 py-2 border border-gray-300 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out"
+                                                                class="w-full px-3 py-2 border border-gray-500 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out"
                                                                 autocomplete="off" value="pdad@gmail.com" r>
                                                             <div id="suggestions"
                                                                 class="absolute left-0 right-0 mt-1 max-h-40 overflow-y-auto border border-gray-300 bg-white dark:bg-gray-900 rounded-md shadow-lg z-10 hidden">
@@ -150,13 +150,13 @@
                                                             class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Subject:</label>
                                                         <input type="text" id="subject" name="subject"
                                                             placeholder="Enter subject"
-                                                            class="w-full px-3 py-2 border border-gray-300 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out">
+                                                            class="w-full px-3 py-2 border border-gray-500 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out">
                                                     </div>
                                                     <div class="mb-4">
                                                         <label for="message"
                                                             class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Message:</label>
                                                         <textarea id="message" name="message" rows="6" placeholder="Type your message here" maxlength="1200"
-                                                            class="w-full px-3 py-2 border border-gray-300 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out"></textarea>
+                                                            class="w-full px-3 py-2 border border-gray-500 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out"></textarea>
                                                         <div id="charCount"
                                                             class="text-sm mt-1 text-gray-500 dark:text-gray-400">
                                                             <span id="currentCharCount">0</span> / <span
@@ -196,7 +196,7 @@
                                                             Send
                                                         </button>
                                                         <button type="button" id="cancelCompose"
-                                                            class="ml-2 inline-flex items-center px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out">
+                                                            class="ml-2 inline-flex items-center px-4 py-2 border border-gray-500 rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out">
                                                             Cancel
                                                         </button>
                                                     </div>

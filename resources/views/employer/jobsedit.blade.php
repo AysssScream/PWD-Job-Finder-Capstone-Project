@@ -129,67 +129,47 @@
                             <!-- Educational Level -->
                             <div class="mb-4 p-2">
                                 <label for="educationLevel"
-                                    class="block text-md font-medium text-gray-800 dark:text-gray-300">Educational
-                                    Level Requirement</label>
+                                    class="block mb-1">{{ __('messages.education.highest_educational_attainment') }}</label>
                                 <select id="educationLevel" name="educationLevel"
-                                    class="w-full p-2 border rounded bg-gray-100 text-gray-800 placeholder-gray-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 dark:placeholder-gray-400"
-                                    autocomplete="on">
-                                    <option value="" selected disabled>Select Education Level...</option>
-                                    <option value="Doctoral Degree"
-                                        {{ old('educationLevel', $education->educationLevel ?? '') == 'Doctoral Degree' ? 'selected' : '' }}>
-                                        {{ __('messages.education.doctoral_degree') }}
-                                    </option>
-                                    <option value="Master's Degree"
-                                        {{ old('educationLevel', $education->educationLevel ?? '') == "Master's Degree" ? 'selected' : '' }}>
-                                        {{ __('messages.education.masters_degree') }}
-                                    </option>
-                                    <option value="College Graduate"
-                                        {{ old('educationLevel', $education->educationLevel ?? '') == 'College Graduate' ? 'selected' : '' }}>
-                                        {{ __('messages.education.college_graduate') }}
-                                    </option>
-                                    <option value="Bachelor's Degree"
-                                        {{ old('educationLevel', $education->educationLevel ?? '') == "Bachelor's Degree" ? 'selected' : '' }}>
-                                        {{ __('messages.education.bachelors_degree') }}
-                                    </option>
-                                    <option value="Vocational Graduate"
-                                        {{ old('educationLevel', $education->educationLevel ?? '') == 'Vocational Graduate' ? 'selected' : '' }}>
-                                        {{ __('messages.education.vocational_graduate') }}
-                                    </option>
-                                    <option value="Associate's Degree"
-                                        {{ old('educationLevel', $education->educationLevel ?? '') == "Associate's Degree" ? 'selected' : '' }}>
-                                        {{ __('messages.education.associates_degree') }}
-                                    </option>
-                                    <option value="Some College Level"
-                                        {{ old('educationLevel', $education->educationLevel ?? '') == 'Some College Level' ? 'selected' : '' }}>
-                                        {{ __('messages.education.some_college_level') }}
-                                    </option>
-                                    <option value="Vocational Undergraduate"
-                                        {{ old('educationLevel', $education->educationLevel ?? '') == 'Vocational Undergraduate' ? 'selected' : '' }}>
-                                        {{ __('messages.education.vocational_undergraduate') }}
-                                    </option>
-                                    <option value="Technical-Vocational Education and Training"
-                                        {{ old('educationLevel', $education->educationLevel ?? '') == 'Technical-Vocational Education and Training' ? 'selected' : '' }}>
-                                        {{ __('messages.education.technical_vocational_training') }}
-                                    </option>
-                                    <option value="Senior High School"
-                                        {{ old('educationLevel', $education->educationLevel ?? '') == 'Senior High School' ? 'selected' : '' }}>
-                                        {{ __('messages.education.senior_high_school') }}
-                                    </option>
-                                    <option value="Junior High School"
-                                        {{ old('educationLevel', $education->educationLevel ?? '') == 'Junior High School' ? 'selected' : '' }}>
-                                        {{ __('messages.education.junior_high_school') }}
-                                    </option>
-                                    <option value="Elementary School"
-                                        {{ old('educationLevel', $education->educationLevel ?? '') == 'Elementary School' ? 'selected' : '' }}>
-                                        {{ __('messages.education.elementary_school') }}
-                                    </option>
+                                    class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-700 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                    autocomplete="on"
+                                    aria-label="{{ __('messages.education.highest_educational_attainment') }}">
+                                    <option value="" selected disabled>{{ $job->educational_level }}</option>
+                                    @php
+                                        $educationLevels = [
+                                            'Doctoral Degree' => __('messages.education.doctoral_degree'),
+                                            "Master's Degree" => __('messages.education.masters_degree'),
+                                            'College Graduate' => __('messages.education.college_graduate'),
+                                            "Bachelor's Degree" => __('messages.education.bachelors_degree'),
+                                            'Vocational Graduate' => __('messages.education.vocational_graduate'),
+                                            "Associate's Degree" => __('messages.education.associates_degree'),
+                                            'Some College Level' => __('messages.education.some_college_level'),
+                                            'Vocational Undergraduate' => __(
+                                                'messages.education.vocational_undergraduate',
+                                            ),
+                                            'Technical-Vocational Education and Training' => __(
+                                                'messages.education.technical_vocational_training',
+                                            ),
+                                            'Senior High School' => __('messages.education.senior_high_school'),
+                                            'Junior High School' => __('messages.education.junior_high_school'),
+                                            'Elementary School' => __('messages.education.elementary_school'),
+                                        ];
+                                    @endphp
+
+                                    @foreach ($educationLevels as $value => $label)
+                                        <option value="{{ $value }}"
+                                            {{ old('educationLevel', $job->educational_level ?? '') == $value ? 'selected' : '' }}>
+                                            {{ $label }}
+                                        </option>
+                                    @endforeach
                                 </select>
                                 @error('educationLevel')
                                     <div class="text-red-600 mt-1">{{ $message }}</div>
                                 @enderror
                             </div>
 
-                            <!-- Location -->
+
+                            {{-- <!-- Location -->
                             <div class="mt-4 p-2 ">
                                 <label for="local-location"
                                     class="block text-md font-medium text-gray-800 dark:text-gray-300">Work
@@ -211,6 +191,34 @@
                                 <input type="text" id="localLocationHidden" name="localLocation"
                                     value="{{ old('local-location') }}" hidden />
                                 @error('local-location')
+                                    <div class="text-red-600 mt-1">{{ $message }}</div>
+                                @enderror
+                            </div> --}}
+
+
+                            <div class="mt-6 relative p-2">
+                                <label for="local-location" class="block mb-1">
+                                    Work Location
+                                </label>
+                                <div class="flex items-center space-x-2">
+                                    <!-- Dropdown (Select) for Local Location -->
+                                    <select id="local-location" name="local-location" aria-label="Work Location"
+                                        class="flex-1 p-2 border rounded shadow-sm bg-white text-gray-900 dark:bg-gray-700 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+
+                                    </select>
+
+                                    <!-- Clear Button -->
+                                    <button id="clearLocationButton" type="button" aria-label="Clear"
+                                        class="ml-2   px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-400">
+                                        Clear
+                                    </button>
+                                </div>
+
+                                <div id="local-location-error" class="text-red-600 mt-1 hidden">Error
+                                    fetching location data</div>
+                                <input type="text" id="localLocationHidden" name="localLocation"
+                                    value="{{ old('local-location', $job->location ?? '') }}" hidden />
+                                @error('localLocation')
                                     <div class="text-red-600 mt-1">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -504,14 +512,14 @@
 
     //CITIES
     document.addEventListener('DOMContentLoaded', function() {
-        const localLocationInput = document.getElementById('local-location');
+        const locationSelect = document.getElementById('local-location');
+        const clearButton = document.getElementById('clearLocationButton');
         const localLocationHidden = document.getElementById('localLocationHidden');
-        const suggestionsContainer = document.getElementById('local-location-suggestions');
-        const editLocationButton = document.getElementById('editLocationButton');
         const errorDiv = document.getElementById('local-location-error');
 
         let citiesData = []; // Array to store cities data fetched from API
 
+        // Fetch cities data from the API
         fetch('/locations/cities.json')
             .then(response => {
                 if (!response.ok) {
@@ -520,113 +528,230 @@
                 return response.json();
             })
             .then(data => {
-                citiesData = data;
+                citiesData = data.filter(city => city.province === 'MM' && city.city);
 
-                // Event listener for input changes
-                localLocationInput.addEventListener('input', function() {
-                    const query = this.value.trim().toLowerCase();
-                    const filteredCities = citiesData.filter(city =>
-                        city.name.toLowerCase().includes(query)
-                    ).slice(0, 6); // Limit to 10 results
-
-                    renderSuggestions(filteredCities, query);
-                });
+                // Populate the dropdown with filtered cities data
+                populateLocationDropdown(citiesData);
             })
             .catch(error => {
                 console.error('Error fetching city data:', error);
                 errorDiv.classList.remove('hidden');
             });
 
-        editLocationButton.addEventListener('click', function() {
-            localLocationInput.value = ''; // Clear input value
-            localLocationInput.focus(); // Set focus on input field
-            localLocationInput.removeAttribute('readonly');
-            suggestionsContainer.style.display = 'none'; // Hide suggestions
-            editLocationButton.style.display = 'none'; // Show edit button
-            localLocationHidden.value = ``
 
-        });
-
-
-
-        function renderSuggestions(cities, query) {
-            suggestionsContainer.innerHTML = ''; // Clear previous suggestions
-            suggestionsContainer.style.display = cities.length && query ? 'block' : 'none';
+        // Populate the dropdown with location options
+        function populateLocationDropdown(cities) {
+            locationSelect.innerHTML =
+                '<option value="" disabled selected>Select a Location</option>'; // Default option
 
             cities.forEach(city => {
-                const suggestionElement = document.createElement('div');
-                suggestionElement.classList.add('suggestion', 'dark:bg-gray-800',
-                    'dark:text-white'); // Example dark mode classes
+                const option = document.createElement('option');
+                option.value = `${city.name}, ${city.province}`;
+                option.textContent = `${city.name}, ${city.province}`;
+                locationSelect.appendChild(option);
+            });
 
-                const suggestionText = document.createElement('div');
-                suggestionText.classList.add('suggestion-text');
-                suggestionText.textContent =
-                    `${city.name}, ${city.province}`; // Display city name and province
+            // Set selected value to the saved location if available
+            if (localLocationHidden.value) {
+                locationSelect.value = localLocationHidden.value;
+            }
 
-                const plusContainer = document.createElement('div');
-                plusContainer.classList.add('plus-container', 'dark:bg-gray-600',
-                    'dark:text-gray-200'); // Example dark mode classes
-                plusContainer.innerHTML = '+';
-
-                suggestionElement.appendChild(suggestionText);
-                suggestionElement.appendChild(plusContainer);
-
-                suggestionElement.addEventListener('click', function() {
-                    localLocationInput.value =
-                        `${city.name}, ${city.province}`; // Set input value to city name
-                    suggestionsContainer.style.display =
-                        'none'; // Hide suggestions after selection
-                    editLocationButton.style.display = 'inline-block'; // Show edit button
-                    localLocationHidden.value = `${city.name}, ${city.province}`
-                    localLocationInput.readOnly = true;
-                });
-                suggestionsContainer.appendChild(suggestionElement);
+            // Update hidden input value on selection change
+            locationSelect.addEventListener('change', function() {
+                localLocationHidden.value = this.value;
             });
         }
 
-        /* Handle outside click to hide suggestions
-        document.addEventListener('click', function(event) {
-            if (!document.getElementById('local-location-container').contains(event.target)) {
-                suggestionsContainer.style.display = 'none';
-            }
-        });*/
-
-        document.addEventListener('DOMContentLoaded', function() {
-            document.addEventListener('click', function(event) {
-                const localLocationContainer = document.getElementById(
-                    'local-location-container');
-                const suggestionsContainer = document.getElementById('suggestionsContainer');
-
-                if (localLocationContainer && suggestionsContainer) {
-                    if (!localLocationContainer.contains(event.target)) {
-                        suggestionsContainer.style.display = 'none';
-                    }
-                } else {
-                    console.error(
-                        'Local location container or suggestions container not found.');
-                }
-            });
+        // Clear button functionality
+        clearButton.addEventListener('click', function() {
+            locationSelect.value = ''; // Clear the dropdown selection
+            localLocationHidden.value = ''; // Clear the hidden input field
         });
 
-
-        document.addEventListener('DOMContentLoaded', function() {
-            document.addEventListener('click', function(event) {
-                const localLocationContainer = document.getElementById(
-                    'local-location-container');
-                const suggestionsContainer = document.getElementById('suggestionsContainer');
-
-                if (localLocationContainer && suggestionsContainer) {
-                    if (!localLocationContainer.contains(event.target)) {
-                        suggestionsContainer.style.display = 'none';
-                    }
-                } else {
-                    console.error(
-                        'Local location container or suggestions container not found.');
-                }
+        // Edit button functionality (optional if you want to include it)
+        const editLocationButton = document.getElementById('editLocationButton');
+        if (editLocationButton) {
+            editLocationButton.addEventListener('click', function() {
+                locationSelect.removeAttribute('disabled'); // Enable dropdown for editing
+                locationSelect.focus(); // Focus on the select field
             });
-        });
-
+        }
     });
+
+
+    //COUNTRIES
+    document.addEventListener('DOMContentLoaded', function() {
+        const overseasLocationSelect = document.getElementById('overseas-location');
+        const overseasLocationHidden = document.getElementById('overseaslocationHidden');
+        const clearOverseasLocationButton = document.getElementById('clearOverseasLocationButton');
+        const errorDiv = document.getElementById('overseas-location-error');
+
+        // Fetch countries data from the JSON file
+        fetch('/locations/countries.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Populate the dropdown with country options
+                overseasLocationSelect.innerHTML =
+                    '<option value="" disabled selected>Select an Overseas Location</option>';
+                data.forEach(country => {
+                    const option = document.createElement('option');
+                    option.value = country.country;
+                    option.textContent = country.country;
+                    overseasLocationSelect.appendChild(option);
+                });
+
+                // Set the selected value to the hidden input if available
+                if (overseasLocationHidden.value) {
+                    overseasLocationSelect.value = overseasLocationHidden.value;
+                }
+
+                // Update hidden input value on dropdown change
+                overseasLocationSelect.addEventListener('change', function() {
+                    overseasLocationHidden.value = this.value;
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching country data:', error);
+                errorDiv.classList.remove('hidden');
+            });
+
+        // Clear button functionality
+        clearOverseasLocationButton.addEventListener('click', function() {
+            overseasLocationSelect.value = ''; // Clear the dropdown selection
+            overseasLocationHidden.value = ''; // Clear the hidden input field
+        });
+    });
+
+
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     const localLocationInput = document.getElementById('local-location');
+    //     const localLocationHidden = document.getElementById('localLocationHidden');
+    //     const suggestionsContainer = document.getElementById('local-location-suggestions');
+    //     const editLocationButton = document.getElementById('editLocationButton');
+    //     const errorDiv = document.getElementById('local-location-error');
+
+    //     let citiesData = []; // Array to store cities data fetched from API
+
+    //     fetch('/locations/cities.json')
+    //         .then(response => {
+    //             if (!response.ok) {
+    //                 throw new Error('Network response was not ok');
+    //             }
+    //             return response.json();
+    //         })
+    //         .then(data => {
+    //             citiesData = data;
+
+    //             // Event listener for input changes
+    //             localLocationInput.addEventListener('input', function() {
+    //                 const query = this.value.trim().toLowerCase();
+    //                 const filteredCities = citiesData.filter(city =>
+    //                     city.name.toLowerCase().includes(query)
+    //                 ).slice(0, 6); // Limit to 10 results
+
+    //                 renderSuggestions(filteredCities, query);
+    //             });
+    //         })
+    //         .catch(error => {
+    //             console.error('Error fetching city data:', error);
+    //             errorDiv.classList.remove('hidden');
+    //         });
+
+    //     editLocationButton.addEventListener('click', function() {
+    //         localLocationInput.value = ''; // Clear input value
+    //         localLocationInput.focus(); // Set focus on input field
+    //         localLocationInput.removeAttribute('readonly');
+    //         suggestionsContainer.style.display = 'none'; // Hide suggestions
+    //         editLocationButton.style.display = 'none'; // Show edit button
+    //         localLocationHidden.value = ``
+
+    //     });
+
+
+
+    //     function renderSuggestions(cities, query) {
+    //         suggestionsContainer.innerHTML = ''; // Clear previous suggestions
+    //         suggestionsContainer.style.display = cities.length && query ? 'block' : 'none';
+
+    //         cities.forEach(city => {
+    //             const suggestionElement = document.createElement('div');
+    //             suggestionElement.classList.add('suggestion', 'dark:bg-gray-800',
+    //                 'dark:text-white'); // Example dark mode classes
+
+    //             const suggestionText = document.createElement('div');
+    //             suggestionText.classList.add('suggestion-text');
+    //             suggestionText.textContent =
+    //                 `${city.name}, ${city.province}`; // Display city name and province
+
+    //             const plusContainer = document.createElement('div');
+    //             plusContainer.classList.add('plus-container', 'dark:bg-gray-600',
+    //                 'dark:text-gray-200'); // Example dark mode classes
+    //             plusContainer.innerHTML = '+';
+
+    //             suggestionElement.appendChild(suggestionText);
+    //             suggestionElement.appendChild(plusContainer);
+
+    //             suggestionElement.addEventListener('click', function() {
+    //                 localLocationInput.value =
+    //                     `${city.name}, ${city.province}`; // Set input value to city name
+    //                 suggestionsContainer.style.display =
+    //                     'none'; // Hide suggestions after selection
+    //                 editLocationButton.style.display = 'inline-block'; // Show edit button
+    //                 localLocationHidden.value = `${city.name}, ${city.province}`
+    //                 localLocationInput.readOnly = true;
+    //             });
+    //             suggestionsContainer.appendChild(suggestionElement);
+    //         });
+    //     }
+
+    //     /* Handle outside click to hide suggestions
+    //     document.addEventListener('click', function(event) {
+    //         if (!document.getElementById('local-location-container').contains(event.target)) {
+    //             suggestionsContainer.style.display = 'none';
+    //         }
+    //     });*/
+
+    //     document.addEventListener('DOMContentLoaded', function() {
+    //         document.addEventListener('click', function(event) {
+    //             const localLocationContainer = document.getElementById(
+    //                 'local-location-container');
+    //             const suggestionsContainer = document.getElementById('suggestionsContainer');
+
+    //             if (localLocationContainer && suggestionsContainer) {
+    //                 if (!localLocationContainer.contains(event.target)) {
+    //                     suggestionsContainer.style.display = 'none';
+    //                 }
+    //             } else {
+    //                 console.error(
+    //                     'Local location container or suggestions container not found.');
+    //             }
+    //         });
+    //     });
+
+
+    //     document.addEventListener('DOMContentLoaded', function() {
+    //         document.addEventListener('click', function(event) {
+    //             const localLocationContainer = document.getElementById(
+    //                 'local-location-container');
+    //             const suggestionsContainer = document.getElementById('suggestionsContainer');
+
+    //             if (localLocationContainer && suggestionsContainer) {
+    //                 if (!localLocationContainer.contains(event.target)) {
+    //                     suggestionsContainer.style.display = 'none';
+    //                 }
+    //             } else {
+    //                 console.error(
+    //                     'Local location container or suggestions container not found.');
+    //             }
+    //         });
+    //     });
+
+    // });
 
 
     function clearFormFields() {

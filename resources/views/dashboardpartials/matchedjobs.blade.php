@@ -22,7 +22,7 @@
            <div class="flex flex-col sm:flex-row justify-end items-center mt-4 mb-4">
                <div class="text-center sm:text-right">
                    @php
-                       $numberOfResults = $matchedJobs->count();
+                       $numberOfResults = $jobs->count();
                    @endphp
                    @if ($numberOfResults > 0)
                        <p aria-label="{{ $numberOfResults }} {{ __('messages.userdashboard.results_found') }}"
@@ -82,7 +82,7 @@
 
 
            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-               @foreach ($matchedJobs as $job)
+               @foreach ($jobs as $job)
                    @if ($job->vacancy > 0)
                        <div tabindex="0"
                            class="bg-gray-100 hover:bg-gray-200 dark:hover:bg-gray-600 dark:bg-gray-700 p-4 rounded-lg shadow-3d focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
@@ -91,11 +91,13 @@
                            <div class="mb-4 flex justify-between" aria-label="Job Number {{ $job->id }}">
                                @if ($job->company_logo && Storage::exists('public/' . $job->company_logo))
                                    <img src="{{ asset('storage/' . $job->company_logo) }}" alt="Company Logo"
-                                       aria-label="Company Logo" class="w-24 h-24 rounded-lg shadow-md">
+                                       aria-label="Company Logo" class="w-24 h-24 rounded-lg shadow-md"
+                                       onerror="this.onerror=null; this.src='{{ asset('/images/avatar.png') }}';">
                                @else
-                                   <img src="{{ asset('/images/avatar.png') }}" alt="Default Image" class="w-24 h-24"
-                                       aria-label="Empty Company Logo">
+                                   <img src="{{ asset('/images/avatar.png') }}" alt="Default Image"
+                                       class="w-24 h-24 rounded-lg shadow-md" aria-label="Empty Company Logo">
                                @endif
+
                                <div>
                                    <div class="text-right">
                                        <h3
@@ -196,13 +198,13 @@
            <div class="mt-6">
                <nav class="flex flex-col sm:flex-row justify-between items-center">
                    @if ($jobs->onFirstPage())
-                       <span aria-label="{{ __('messages.job.Previous') }}"
-                           class="w-full sm:w-auto px-4 py-2 mb-2 sm:mb-0 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 rounded-md cursor-not-allowed">
+                       <span aria-label="Previous"
+                           class="w-full sm:w-auto px-4 py-2 mb-2 sm:mb-0 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 rounded-md cursor-not-allowed focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
                            {{ __('messages.job.Previous') }}
                        </span>
                    @else
-                       <a href="{{ $jobs->previousPageUrl() }}" aria-label="{{ __('messages.job.Previous') }}"
-                           class="w-full sm:w-auto px-4 py-2 mb-2 sm:mb-0 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 rounded-md hover:bg-gray-100 dark:hover:bg-gray-900">
+                       <a href="{{ $jobs->previousPageUrl() }}" tabindex="0"
+                           class="w-full sm:w-auto px-4 py-2 mb-2 sm:mb-0 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 rounded-md hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
                            {{ __('messages.job.Previous') }}
                        </a>
                    @endif
@@ -213,20 +215,20 @@
                                aria-label="{{ __('messages.job.Page Number') }} {{ $page }}"
                                class="px-4 py-2 border border-gray-300 dark:border-gray-700
                            {{ $jobs->currentPage() == $page ? 'bg-blue-500 text-white dark:bg-blue-700 dark:text-gray-100' : 'text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900' }}
-                           rounded-md">
+                           rounded-md focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
                                {{ $page }}
                            </a>
                        @endforeach
                    </div>
 
                    @if ($jobs->hasMorePages())
-                       <a href="{{ $jobs->nextPageUrl() }}" aria-label="{{ __('messages.job.Next') }}"
-                           class="w-full sm:w-auto px-4 py-2 mt-2 sm:mt-0 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 rounded-md hover:bg-gray-100 dark:hover:bg-gray-900">
+                       <a href="{{ $jobs->nextPageUrl() }}" aria-label="Next"
+                           class="w-full sm:w-auto px-4 py-2 mt-2 sm:mt-0 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 rounded-md hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
                            {{ __('messages.job.Next') }}
                        </a>
                    @else
-                       <span aria-label="{{ __('messages.job.Next') }}"
-                           class="w-full sm:w-auto px-4 py-2 mt-2 sm:mt-0 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 rounded-md cursor-not-allowed">
+                       <span aria-label="Next" tabindex="0"
+                           class="w-full sm:w-auto px-4 py-2 mt-2 sm:mt-0 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 rounded-md cursor-not-allowed focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
                            {{ __('messages.job.Next') }}
                        </span>
                    @endif
@@ -235,15 +237,13 @@
        </div>
    </section>
    @if (Session::has('match'))
-       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-       <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
        <script>
            $(document).ready(function() {
                toastr.options = {
                    "progressBar": true,
                    "closeButton": true,
                }
-               toastr.success("{{ Session::get('match') }}", '{{ $matchedJobs->count() }} Matched Jobs Found', {
+               toastr.success("{{ Session::get('match') }}", '{{ $jobs->count() }} Matched Jobs Found', {
                    timeOut: 5000
                });
            });
@@ -251,8 +251,6 @@
    @endif
 
    @if (Session::has('preferences'))
-       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-       <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
        <script>
            $(document).ready(function() {
                toastr.options = {

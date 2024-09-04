@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -146,21 +148,29 @@ class AdminController extends Controller
         $disabilityType = $pwdInformationData->pluck('disability')->countBy(); // Count occurrences of each disability
 
         // Fetch all work experience data
+        // Retrieve all work experiences
         $workExperience = WorkExperience::all();
+
         // Count occurrences of each employer
         $employerCounts = $workExperience->groupBy('employer_name')->map(function ($experience) {
             return $experience->count(); // Count how many times each employer appears
         });
+
         // Get the most and least frequent employers
         $mostFrequentEmployers = $employerCounts->sortDesc()->take($maxEmployerCount); // Top most frequent employers
         $leastFrequentEmployers = $employerCounts->sort()->take($maxEmployerCount); // Bottom least frequent employers
-        // Calculate 'Others' for employers
-        $otherMostFrequentEmployers = $employerCounts->except($mostFrequentEmployers->keys())->sum();
-        $otherLeastFrequentEmployers = $employerCounts->except($leastFrequentEmployers->keys())->sum();
+
+        // Convert the keys of the most and least frequent employers to arrays
+        $mostFrequentKeys = $mostFrequentEmployers->keys()->toArray();
+        $leastFrequentKeys = $leastFrequentEmployers->keys()->toArray();
+
+        // Calculate 'Others' for employers not in the top or bottom lists
+        $otherMostFrequentEmployers = $employerCounts->except($mostFrequentKeys)->sum();
+        $otherLeastFrequentEmployers = $employerCounts->except($leastFrequentKeys)->sum();
+
         // Add 'Others' to both most and least frequent employers
         $mostFrequentEmployers = $mostFrequentEmployers->put('Others', $otherMostFrequentEmployers);
         $leastFrequentEmployers = $leastFrequentEmployers->put('Others', $otherLeastFrequentEmployers);
-
 
         // Years of experience
 
@@ -174,17 +184,20 @@ class AdminController extends Controller
 
         // Group by employer and sum the total years of experience
         $employerYears = $workExperience->groupBy('employer_name')->map(function ($experiences) {
-            $totalYears = $experiences->sum('years');
-            return $totalYears;
+            return $experiences->sum('years');
         });
 
         // Get the most and least frequent employers based on the total years
         $mostFrequentEmployersByYears = $employerYears->sortDesc()->take($maxEmployerCount);
         $leastFrequentEmployersByYears = $employerYears->sort()->take($maxEmployerCount);
 
-        // Calculate 'Others' for employers
-        $otherMostFrequentEmployersByYears = $employerYears->except($mostFrequentEmployersByYears->keys())->sum();
-        $otherLeastFrequentEmployersByYears = $employerYears->except($leastFrequentEmployersByYears->keys())->sum();
+        // Convert the keys of the most and least frequent employers to arrays
+        $mostFrequentKeysByYears = $mostFrequentEmployersByYears->keys()->toArray();
+        $leastFrequentKeysByYears = $leastFrequentEmployersByYears->keys()->toArray();
+
+        // Calculate 'Others' for employers not in the top or bottom lists
+        $otherMostFrequentEmployersByYears = $employerYears->except($mostFrequentKeysByYears)->sum();
+        $otherLeastFrequentEmployersByYears = $employerYears->except($leastFrequentKeysByYears)->sum();
 
         // Add 'Others' to both most and least frequent employers
         $mostFrequentEmployersByYears = $mostFrequentEmployersByYears->put('Others', $otherMostFrequentEmployersByYears);
@@ -375,6 +388,9 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'Message sent successfully!');
     }
 
+
+
+
     public function manageUsers(Request $request)
     {
         // Extract filter values from request
@@ -385,14 +401,14 @@ class AdminController extends Controller
 
         // Query to fetch users with optional filters
         $query = User::with('pwdInformation')
-            ->whereIn('usertype', ['user', 'employer']);
+            ->whereIn('usertype_plain', ['user', 'employer']);
 
         if ($status) {
-            $query->where('account_verification_status', $status);
+            $query->where('account_verification_status_plain', $status);
         }
 
         if ($role) {
-            $query->where('usertype', $role);
+            $query->where('usertype_plain', $role);
         }
 
         if ($dateFrom && $dateTo) {
@@ -404,20 +420,20 @@ class AdminController extends Controller
         $users = $query->paginate(8); // Adjust the number of items per page as needed
 
         // Count for statistics
-        $approvedCount = User::where('account_verification_status', 'approved')
-            ->whereIn('usertype', ['user', 'employer'])
+        $approvedCount = User::where('account_verification_status_plain', 'approved')
+            ->whereIn('usertype_plain', ['user', 'employer'])
             ->count();
 
-        $declinedCount = User::where('account_verification_status', 'declined')
-            ->whereIn('usertype', ['user', 'employer'])
+        $declinedCount = User::where('account_verification_status_plain', 'declined')
+            ->whereIn('usertype_plain', ['user', 'employer'])
             ->count();
 
-        $waitingforapprovalCount = User::where('account_verification_status', 'waiting for approval')
-            ->whereIn('usertype', ['user', 'employer'])
+        $waitingforapprovalCount = User::where('account_verification_status_plain', 'waiting for approval')
+            ->whereIn('usertype_plain', ['user', 'employer'])
             ->count();
 
-        $pendingCount = User::where('account_verification_status', 'pending')
-            ->whereIn('usertype', ['user', 'employer'])
+        $pendingCount = User::where('account_verification_status_plain', 'pending')
+            ->whereIn('usertype_plain', ['user', 'employer'])
             ->count();
 
         return view('admin.manageusers', [
@@ -428,41 +444,134 @@ class AdminController extends Controller
             'pendingCount' => $pendingCount,
         ]);
     }
+    // public function manageUsers(Request $request)
+    // {
+    //     // Extract filter values from request
+    //     $status = $request->input('status');
+    //     $role = $request->input('role');
+    //     $dateFrom = $request->input('date_from');
+    //     $dateTo = $request->input('date_to');
 
-    public function declineUser($id)
+    //     // Query to fetch users with optional filters
+    //     $query = User::with('pwdInformation')
+    //         ->whereIn('usertype', ['user', 'employer']);
+
+    //     if ($status) {
+    //         $query->where('account_verification_status', $status);
+    //     }
+
+    //     if ($role) {
+    //         $query->where('usertype', $role);
+    //     }
+
+    //     if ($dateFrom && $dateTo) {
+    //         $formattedDateFrom = Carbon::parse($dateFrom)->startOfDay();
+    //         $formattedDateTo = Carbon::parse($dateTo)->endOfDay();
+    //         $query->whereBetween('created_at', [$formattedDateFrom, $formattedDateTo]);
+    //     }
+    //     // Apply pagination
+    //     $users = $query->paginate(8); // Adjust the number of items per page as needed
+
+    //     // Count for statistics
+    //     $approvedCount = User::where('account_verification_status', 'approved')
+    //         ->whereIn('usertype', ['user', 'employer'])
+    //         ->count();
+
+    //     $declinedCount = User::where('account_verification_status', 'declined')
+    //         ->whereIn('usertype', ['user', 'employer'])
+    //         ->count();
+
+    //     $waitingforapprovalCount = User::where('account_verification_status', 'waiting for approval')
+    //         ->whereIn('usertype', ['user', 'employer'])
+    //         ->count();
+
+    //     $pendingCount = User::where('account_verification_status', 'pending')
+    //         ->whereIn('usertype', ['user', 'employer'])
+    //         ->count();
+
+    //     dd($users);
+
+    //     return view('admin.manageusers', [
+    //         'users' => $users,
+    //         'approvedCount' => $approvedCount,
+    //         'declinedCount' => $declinedCount,
+    //         'waitingforapprovalCount' => $waitingforapprovalCount,
+    //         'pendingCount' => $pendingCount,
+    //     ]);
+    // }
+
+    // public function declineUser($id)
+    // {
+    //     // Find the user by ID
+    //     $user = User::find($id);
+
+    //     if ($user) {
+    //         // Perform the decline action (e.g., update a status field)
+    //         $user->account_verification_status = 'declined'; // Update this according to your application logic
+    //         $user->save();
+
+    //         // Flash a success message to the session
+    //         Session::flash('declined', 'User has been declined successfully.');
+
+    //         $adminuser = Auth::user();
+    //         AuditTrail::create([
+    //             'user_id' => $adminuser->id,
+    //             'user' => $adminuser->firstname . ' ' . $adminuser->middlename . ' ' . $adminuser->lastname,
+    //             'action' => 'Declined User : ' . '' . $user->email,
+    //             'section' => 'Manage Users',
+    //         ]);
+    //     } else {
+    //         // Flash an error message if the user is not found
+    //         Session::flash('error', 'User not found.');
+    //     }
+    // }
+
+
+    public function resetUser($id)
     {
         // Find the user by ID
         $user = User::find($id);
 
         if ($user) {
             // Perform the decline action (e.g., update a status field)
-            $user->account_verification_status = 'declined'; // Update this according to your application logic
+            $user->account_verification_status = 'pending'; // Update this according to your application logic
+            $user->account_verification_status_plain = 'pending';
             $user->save();
 
             // Flash a success message to the session
-            Session::flash('declined', 'User has been declined successfully.');
+            Session::flash('Reset', 'User status has been reset successfully.');
 
             $adminuser = Auth::user();
             AuditTrail::create([
                 'user_id' => $adminuser->id,
                 'user' => $adminuser->firstname . ' ' . $adminuser->middlename . ' ' . $adminuser->lastname,
-                'action' => 'Declined User : ' . '' . $user->email,
+                'action' => 'Reset User : ' . $user->email,
                 'section' => 'Manage Users',
             ]);
+
+            // Redirect back with success message
+            return redirect()->back();
         } else {
             // Flash an error message if the user is not found
             Session::flash('error', 'User not found.');
+
+            // Redirect back with error message
+            return redirect()->back();
         }
-
-
-
-        // Redirect back to the previous page or wherever you want
-        return redirect()->back();
     }
+
+
+
+
+
+    //     // Redirect back to the previous page or wherever you want
+    //     return redirect()->back();
+    // }
 
 
     public function audit(Request $request)
     {
+
         // Extract filter values from request
         $action = $request->input('action');
         $section = $request->input('section');
@@ -498,7 +607,14 @@ class AdminController extends Controller
         // Apply pagination
         $auditTrails = $query->paginate(10); // Adjust the number of items per page as needed
 
-        return view('admin.audittrail', ['auditTrails' => $auditTrails]);
+        $user = Auth::user();
+        $adminProfile = $user ? \App\Models\AdminProfile::where('admin_id', $user->id)->first() : null;
+
+
+        return view('admin.audittrail', [
+            'auditTrails' => $auditTrails,
+            'adminProfile' => $adminProfile
+        ]);
     }
 
     public function clearlogs(Request $request)
@@ -592,6 +708,7 @@ class AdminController extends Controller
         if ($user) {
             // Update the verification status
             $user->account_verification_status = 'approved'; // or 1, depending on your column type
+            $user->account_verification_status_plain = 'approved';
             $user->save();
             AuditTrail::create([
                 'user_id' => $adminuser->id,
@@ -775,10 +892,10 @@ class AdminController extends Controller
             'otherdisabilityDetails' => $otherdisabilityDetails,
             'totalotherdisabilityOccurences' => $totalotherdisabilityOccurences,
             'totaldisabilityType' => $totaldisabilityType,
-            'disabilityType'=> $disabilityType,
+            'disabilityType' => $disabilityType,
             'disabilityOccurrences' => $disabilityOccurrences, // Pass disability occurrences to the view
-            'disabilityDetails'=> $disabilityDetails,
-            'totaldisabilityDetails'=>$totaldisabilityDetails,
+            'disabilityDetails' => $disabilityDetails,
+            'totaldisabilityDetails' => $totaldisabilityDetails,
             'skills' => $topSkills, // Pass top skills to the view
             'othersCount' => $othersCount, // Pass others count to the view
             'totalSkillsCount' => $totalSkillsCount, // Pass total skills count to the view

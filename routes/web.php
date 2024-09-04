@@ -67,7 +67,7 @@ Route::post('/logout', function () {
 // User routes
 Route::middleware(['auth', 'userMiddleware', 'checkVerificationStatus'])->group(function () {
     Route::get('dashboard', [UserController::class, 'index'])->name('dashboard');
-    Route::get('/jobs/remarks/{remarks}', [UserController::class, 'remarks'])->name('show.remarks');
+    Route::get('/show-remarks/{remarks}/{company_name}', [UserController::class, 'showRemarks'])->name('show.remarks');
     Route::get('/dashboard/matchedjobs', [UserController::class, 'matchindex'])->name('dashboard.match');
     Route::get('/dashboard/resumeupload', [UserController::class, 'resumeupload'])->name('dashboard.resumeupload');
     Route::post('/resume-matched-jobs', [UserController::class, 'fetchResumeMatchedJobs'])->name('resume.uploadresults');
@@ -109,7 +109,9 @@ Route::middleware(['auth', 'adminMiddleware'])->group(function () {
     Route::post('/admin/replies', [AdminController::class, 'storeReply'])->name('admin.replies.store');
     Route::get('/admin/messages/{id}/replies', [AdminController::class, 'getReplies'])->name('admin.replies.retrieve');
 
-    Route::get('/admin/decline/{id}', [AdminController::class, 'declineUser'])->name('admin.decline');
+    Route::get('/admin/reset/{id}', [AdminController::class, 'resetUser'])->name('admin.reset');
+
+
     Route::get('/admin/managevideos', [AdminController::class, 'manageVideo'])->name('admin.managevideos');
     Route::post('/video/store/{location}', [AdminController::class, 'videoStore'])->name('admin.video.store');
 
@@ -139,6 +141,8 @@ Route::middleware(['auth', 'adminMiddleware'])->group(function () {
     Route::get('/admin/userpwdapplication/applicant/{id}', [AdminController::class, 'userpwdapplication'])->name('admin.pwdapplicantinfo');
     Route::get('/admin/employerapplication/employer/{id}', [AdminController::class, 'employerapplication'])->name('admin.employerapplicantinfo');
 
+    Route::post('/admin/profile/update', [ProfileController::class, 'updateadmin'])
+        ->name('admin.profileupdate');
 
     Route::post('/admin/approveuser/{id}', [AdminController::class, 'approveuser'])->name('admin.approveuser');
 });

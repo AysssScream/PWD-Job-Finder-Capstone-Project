@@ -85,7 +85,8 @@
                                       <div>
                                           <div class="mt-6">
                                               <label for="educationLevel"
-                                                  class="block mb-1">{{ __('messages.education.highest_educational_attainment') }}</label>
+                                                  class="block mb-1">{{ __('messages.education.highest_educational_attainment') }}
+                                                  <i class="fas fa-asterisk text-red-500 text-xs"></i></label>
                                               <select id="educationLevel" name="educationLevel"
                                                   class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                   autocomplete="on"

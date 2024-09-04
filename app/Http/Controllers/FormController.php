@@ -19,6 +19,7 @@ use App\Models\Skill; // Import the Skills model at the top of your file
 use App\Helpers\ProfileHelper;
 use Carbon\Carbon;
 
+use App\Rules\LanguageProficiencies;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -290,6 +291,7 @@ class FormController extends Controller
         $personalInfo->ofw_country = $validatedData2['countryLocation'];
         $personalInfo->ofw_return = $validatedData2['ofw-return'] ?? null;
         $personalInfo->user_id = Auth::id();
+
         Session::put('formData2', $request->except('_token'));
         Session::put('step2_completed', true);
         return redirect()->route('workexp');
@@ -407,7 +409,6 @@ class FormController extends Controller
         $jobPreference->local_location = $validatedData4['localLocation'];
         $jobPreference->overseas_location = $validatedData4['overseasLocation'];
         $jobPreference->user_id = Auth::id();
-        $jobPreference->save();
         Session::put('formData4', $request->except('_token'));
         Session::put('step4_completed', true);
         return redirect()->route('dialect');
@@ -416,19 +417,33 @@ class FormController extends Controller
     public function postStep5(Request $request)
     {
         $validatedData5 = $request->validate([
-            'language-input' => 'required|array',
-            'language-input.*' => 'string|max:255',
-            'proficiency' => 'required|array',
-            'proficiency.*' => 'array',
+            'language-input' => 'required|array|min:2', // Ensures there are at least 2 languages
+            'language-input.*' => 'required|string|max:255|in:English,Filipino', // Ensures valid languages
+
+            'proficiency' => [
+                'required',
+                'array',
+                new LanguageProficiencies(
+                    $request->input('language-input'),
+                    $request->input('proficiency')
+                ),
+            ],
+            'proficiency.*' => 'array|min:1', // Each language's proficiency should be an array with at least one item
+            'proficiency.*.*' => 'required|string|in:Read,Write,Speak,Understand', // Ensure each proficiency is valid
+
             'selectedProficiencies' => 'nullable|string',
-            'proficiency.*.*' => 'string|in:Read,Write,Speak,Understand',
             'skills' => 'array',
             'otherSkills' => in_array('OTHER_SKILLS', $request->input('skills', [])) ? 'required|regex:/^[A-Za-z\s,-.]+$/i|max:300' : '', // Conditionally require input for "otherSkills"
             'selectedSkills' => 'nullable|string',
             'otherSkillsInput' => in_array('OTHER_SKILLS', $request->input('skills', [])) ? 'required|regex:/^[A-Za-z\s,-.]+$/i|max:300' : '',
         ], [
-            'selected-languages.required' => 'The language input field is required.',
-            'selected-languages.regex' => 'The language input must contain only only letters and spaces.',
+            'language-input.required' => 'At least two languages are required.',
+            'language-input.*.in' => 'The language must be either English or Filipino.',
+            'proficiency.required' => 'Proficiencies are required for each language.',
+            'proficiency.*.array' => 'Each proficiency field must be an array.',
+            'proficiency.*.min' => 'At least one proficiency must be selected for each language.',
+            'proficiency.*.*.required' => 'Each proficiency must be specified.',
+            'proficiency.*.*.in' => 'The proficiency must be one of the following: Read, Write, Speak, Understand.',
             'otherSkills.required' => 'The other skills field is required when "Other" is selected.',
             'otherSkills.string' => 'The other skills field must contain  letters,   spaces, hypens, commas, and periods.',
             'otherSkills.max' => 'The other skills field may not be greater than 300 characters.',
@@ -440,12 +455,20 @@ class FormController extends Controller
         $proficiencies = $validatedData5['proficiency'];
         $selectedProficiencies = json_decode($validatedData['selectedProficiencies'] ?? '[]', true);
 
+
+        // Iterate through each language
         foreach ($languages as $index => $language) {
+            // Check if proficiency data exists for this index
+            $languageProficiencies = $proficiencies[$index] ?? [];
+            if (empty($languageProficiencies)) {
+                throw new \Exception('Proficiencies are required for each language.');
+            }
+
             $languageModel = new LanguageInput();
             $languageModel->user_id = $userId;
             $languageModel->language_input = $language;
-            $languageModel->proficiencies = json_encode($proficiencies[$index]);
-            $languageModel->save();
+            $languageModel->proficiencies = json_encode($languageProficiencies);
+
         }
 
         $Skills = new Skill();
@@ -466,11 +489,11 @@ class FormController extends Controller
 
         $validatedData6 = $request->validate([
             'educationLevel' => ['required', 'max:100'],
-            'school' => ['required_if:educationLevel,Doctoral Degree,Master\'s Degree,College Graduate,Bachelor\'s Degree,Vocational Graduate,Associate\'s Degree,Some College Level,Vocational Undergraduate,Technical-Vocational Education and Training', 'max:100', 'regex:/^[a-zA-Z ,.\-\/]+$/'],
+            'school' => ['required_if:educationLevel,Doctoral Degree,Master\'s Degree,College Graduate,Bachelor\'s Degree,Vocational Graduate,Associate\'s Degree,Vocational Undergraduate,Technical-Vocational Education and Training', 'max:100', 'regex:/^[a-zA-Z ,.\-\/]+$/'],
             'course' => ['required_if:educationLevel,Doctoral Degree,Master\'s Degree,College Graduate,Bachelor\'s Degree,Vocational Graduate,Associate\'s Degree,Some College Level,Vocational Undergraduate,Technical-Vocational Education and Training', 'max:100', 'regex:/^[a-zA-Z ,.\-\/]+$/'],
 
             'yearGraduated' => [
-                'required_if:educationLevel,Doctoral Degree,Master\'s Degree,College Graduate,Bachelor\'s Degree,Vocational Graduate,Associate\'s Degree,Some College Level,Vocational Undergraduate,Technical-Vocational Education and Training',
+                'required_if:educationLevel,Doctoral Degree,Master\'s Degree,College Graduate,Bachelor\'s Degree,Vocational Graduate,Associate\'s Degree,Vocational Undergraduate,Technical-Vocational Education and Training',
                 'nullable', // Make sure it's nullable when not required
                 'integer',
                 'digits:4',
@@ -591,7 +614,6 @@ class FormController extends Controller
             Session::get('startData', []),
             Session::get('formData', []),
             Session::get('formData2', []),
-            Session::get('formData3', []),
             Session::get('formData3', []),
             Session::get('formData4', []),
             Session::get('formData5', []),
@@ -729,7 +751,7 @@ class FormController extends Controller
             }
         }
 
-     
+
 
 
     }
@@ -778,20 +800,20 @@ class FormController extends Controller
         $educationalAttainment->save();
     }
 
-    /*private function savePWDInformation($data)
-    {
-        $pwdInformation = new PwdInformation();
-        $pwdInformation->disability = $data['disability'] ?? null;
-        $pwdInformation->disabilityDetails = $data['disabilityDetails'] ?? null;
-        ;
-        $pwdInformation->disabilityOccurrence = $data['disabilityOccurrence'] ?? null;
-        ;
-        $pwdInformation->otherDisabilityDetails = $data['otherDisabilityDetails'] ?? null;
-        ;
-        $pwdInformation->pwdIdPicture = $data['fileUploadName'] ?? null;
-        ;
-        $pwdInformation->profilePicture = $data['profilePictureName'] ?? null;
-        $pwdInformation->user_id = Auth::id();
-        $pwdInformation->save();
-    }*/
+    // private function savePWDInformation($data)
+    // {
+    //     $pwdInformation = new PwdInformation();
+    //     $pwdInformation->disability = $data['disability'] ?? null;
+    //     $pwdInformation->disabilityDetails = $data['disabilityDetails'] ?? null;
+    //     ;
+    //     $pwdInformation->disabilityOccurrence = $data['disabilityOccurrence'] ?? null;
+    //     ;
+    //     $pwdInformation->otherDisabilityDetails = $data['otherDisabilityDetails'] ?? null;
+    //     ;
+    //     $pwdInformation->pwdIdPicture = $data['fileUploadName'] ?? null;
+    //     ;
+    //     $pwdInformation->profilePicture = $data['profilePictureName'] ?? null;
+    //     $pwdInformation->user_id = Auth::id();
+    //     $pwdInformation->save();
+    // }
 }

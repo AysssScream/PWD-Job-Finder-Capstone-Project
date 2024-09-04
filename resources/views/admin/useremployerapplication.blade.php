@@ -11,7 +11,7 @@
     </head>
 
 
-    <body class="flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900 overflow-hidden">
+    <body class="flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900 overflow-auto">
         <div class="flex flex-col md:flex-row h-full ">
             <!-- Sidebar -->
             <div id="sidebar"
@@ -60,13 +60,53 @@
                             class="w-full mt-6 bg-blue-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow-lg">
                             <i class="fas fa-user-plus mr-2"></i> Approve Employer?
                         </button>
+
+                        <div x-data="{ showModal: false }">
+                            <!-- Reset Button -->
+                            <a href="javascript:void(0);" @click="showModal = true"
+                                class=" w-full text-center mt-5 inline-block px-3 py-2 text-md font-medium text-white bg-red-600 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
+                                Reset Application
+                            </a>
+                            <!-- Modal -->
+                            <template x-if="showModal" class="modal-wrapper">
+                                <div x-show="showModal" class="fixed inset-0 flex items-center justify-center ">
+                                    <div class="bg-gray-100 dark:bg-gray-800  p-6 rounded-lg shadow-lg w-96 z-50 mb-10">
+                                        <h2 class="text-lg text-gray-800 dark:text-gray-100 font-semibold  mb-4">
+                                            Are you sure?
+                                        </h2>
+                                        <p class="text-gray-600 dark:text-gray-100 mb-6">
+                                            Do you really want to reset the application?
+                                            This
+                                            action cannot be undone.
+                                        </p>
+                                        <div class="flex justify-end space-x-4">
+                                            <!-- Cancel Button -->
+                                            <button @click="showModal = false"
+                                                class="px-4 py-2 text-gray-700 bg-gray-200 rounded hover:bg-gray-300">
+                                                Cancel
+                                            </button>
+                                            <!-- Proceed Button -->
+                                            <a href="{{ route('admin.reset', ['id' => $employer->user_id]) }}"
+                                                class="px-4 py-2 text-white bg-red-600 rounded hover:bg-red-700">
+                                                Proceed
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <!-- Background overlay -->
+                                    <div @click="showModal = false"
+                                        class="fixed inset-0 bg-gray-900 bg-opacity-50 z-40">
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
                     @endif
 
                 </div>
             </div>
 
             <!-- Main Content -->
-            <div id="mainContent" class="flex-1 p-6 bg-white dark:bg-gray-900 mb-6">
+            <div id="mainContent" class="flex-1 h-screen p-6 bg-white dark:bg-gray-900 mb-6">
                 <h2 class="text-2xl font-bold text-gray-900 dark:text-white mt-4">
                     {{ $employer->businessname }}</h2>
                 <h4 class="text-lg font-regular text-gray-800 dark:text-gray-200 mt-2">
@@ -132,26 +172,23 @@
                 </button>
             </div>
 
-            <div>
+            <div class="flex justify-end mt-4 space-x-2">
                 <form id="hire-form" action="{{ route('admin.approveuser', ['id' => $employer->user_id]) }}"
                     method="POST">
                     @csrf
-                    <!-- Additional form controls/buttons if needed -->
-                    <div class="flex justify-end mt-4">
-                        <button id="confirmHireBtn"
-                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg mr-2"
-                            onclick="confirmHire(event)">
-                            Confirm
-                        </button>
-                        <button id="cancelHireBtn"
-                            class="bg-red-500 text-gray-200 hover:bg-red-700 text-gray-300 font-bold py-2 px-4 rounded shadow-lg"
-                            onclick="cancelHire()">
-                            Cancel
-                        </button>
-                    </div>
+                    <button id="confirmHireBtn"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg"
+                        onclick="confirmHire(event)">
+                        Confirm
+                    </button>
                 </form>
-
+                <button id="cancelHireBtn"
+                    class="bg-red-500 text-gray-200 hover:bg-red-700 text-gray-300 font-bold py-2 px-4 rounded shadow-lg"
+                    onclick="cancelHire()">
+                    Cancel
+                </button>
             </div>
+
         </div>
     </div>
 

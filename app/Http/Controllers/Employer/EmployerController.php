@@ -125,7 +125,7 @@ class EmployerController extends Controller
 
         // Apply status filter
         if ($request->has('anotherFilter') && $request->anotherFilter != 'All') {
-            $query->where('status', $request->anotherFilter);
+            $query->where('status_plain', $request->anotherFilter);
         }
 
         // Get filtered applications
@@ -208,6 +208,7 @@ class EmployerController extends Controller
         $applicant->read_at = null;
         $applicant->remarks = $remarks;
         $applicant->status = $status;
+        $applicant->status_plain = $status;
         $applicant->save();
 
         Session::flash('hireapplicant', 'Applicant hired successfully!');

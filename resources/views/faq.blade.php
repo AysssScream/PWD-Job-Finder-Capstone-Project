@@ -365,13 +365,12 @@
                                     <p></p>
                                     <p><i class="fas fa-life-ring" style="margin-right: 8px;"></i> Ask For Support</p>
                                     <p><a href="https://www.facebook.com/PDADMandaluyong" target="_blank"
-                                            class="text-gray-200 dark:text-gray-200" style="text-decoration: none;">
+                                            class="text-white" style="text-decoration: none;">
                                             <i class="fab fa-facebook" style="margin-right: 8px;"></i> Facebook
                                         </a></p>
 
                                     {{-- <p><i class="fab fa-instagram" style="margin-right: 8px;"></i> Instagram</p> --}}
-                                    <p><a href="https://x.com/MandaluyongPIO" target="_blank"
-                                            class="text-gray-200 dark:text-gray-200 no-underline"
+                                    <p><a href="https://x.com/MandaluyongPIO" target="_blank" class="text-white"
                                             style="text-decoration: none;">
                                             <i class="fab fa-twitter" style="margin-right: 8px;"></i> Twitter
                                         </a></p>

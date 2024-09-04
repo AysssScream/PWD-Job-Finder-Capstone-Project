@@ -57,10 +57,12 @@
                    class="mt-2 max-w-full border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm"
                    tabindex="0" aria-label="Image Preview of PWD ID">
                    <!-- The selected image or alternate image will be displayed here -->
-                   <img id="previewImage" src="{{ asset('storage/' . $pwdinfo->pwdIdPicture) }}" alt="Preview Image"
-                       class="w-full h-auto block border border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 rounded-md shadow-sm focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-400">
+                   <img id="previewImage" src="{{ asset('storage/' . $pwdinfo->pwdIdPicture) }}"
+                       onerror="this.onerror=null; this.src='{{ asset('/images/avatar.png') }}';"
+                       class="w-full h-auto block border border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 rounded-md shadow-sm focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-400 object-contain">
                    <img id="alternateImage" src="{{ asset('/images/preview.jpg') }}" alt="Alternate Image"
-                       class="w-full h-auto hidden">
+                       class="w-full h-auto hidden object-contain"
+                       onerror="this.onerror=null; this.src='{{ asset('/images/avatar.png') }}';">
                </div>
 
 

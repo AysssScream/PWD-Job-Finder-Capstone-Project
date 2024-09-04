@@ -35,7 +35,9 @@
 
                     <div class="flex flex-col items-center mb-5 ">
                         <img src="{{ asset('storage/' . $pwdinfo->profilePicture) }} " alt="Applicant Image"
-                            class="w-44 h-44 object-contain rounded-full mb-4 border-4 custom-shadow border-gray-600">
+                            class="w-44 h-44 object-contain rounded-full mb-4 border-4 custom-shadow border-gray-600"
+                            onerror="this.onerror=null; this.src='{{ asset('/images/avatar.png') }}';">
+
                     </div>
 
                     <!-- Sidebar content here -->

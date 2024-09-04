@@ -11,8 +11,6 @@
 
     </head>
     @if (Session::has('addjobs'))
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <script>
             $(document).ready(function() {
                 toastr.options = {
@@ -284,7 +282,37 @@
                                 @enderror
                             </div>
 
-                            <!-- Location -->
+
+                            <div class="mt-6 relative p-2">
+                                <label for="local-location" class="block mb-1">
+                                    Work Location
+                                </label>
+                                <div class="flex items-center space-x-2">
+                                    <!-- Dropdown (Select) for Local Location -->
+                                    <select id="local-location" name="local-location" aria-label="Work Location"
+                                        class="flex-1 p-2 border rounded shadow-sm bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+
+                                    </select>
+
+                                    <!-- Clear Button -->
+                                    <button id="clearLocationButton" type="button" aria-label="Clear"
+                                        class="ml-2   px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-400">
+                                        Clear
+                                    </button>
+                                </div>
+
+                                <div id="local-location-error" class="text-red-600 mt-1 hidden">Error
+                                    fetching location data</div>
+                                <input type="text" id="localLocationHidden" name="localLocation"
+                                    value="{{ old('local-location') }}" hidden />
+                                @error('localLocation')
+                                    <div class="text-red-600 mt-1">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            {{-- <!-- Location -->
+
+                            
                             <div class="mt-4 p-2 ">
                                 <label for="local-location"
                                     class="block text-md font-medium  text-gray-700 dark:text-gray-200">Work
@@ -310,7 +338,7 @@
                                 @error('local-location')
                                     <div class="text-red-600 mt-1">{{ $message }}</div>
                                 @enderror
-                            </div>
+                            </div> --}}
 
                             <!-- Description -->
                             <div class="mb-4 p-2">
@@ -621,15 +649,16 @@
 
 
     //CITIES
+
     document.addEventListener('DOMContentLoaded', function() {
-        const localLocationInput = document.getElementById('local-location');
+        const locationSelect = document.getElementById('local-location');
+        const clearButton = document.getElementById('clearLocationButton');
         const localLocationHidden = document.getElementById('localLocationHidden');
-        const suggestionsContainer = document.getElementById('local-location-suggestions');
-        const editLocationButton = document.getElementById('editLocationButton');
         const errorDiv = document.getElementById('local-location-error');
 
         let citiesData = []; // Array to store cities data fetched from API
 
+        // Fetch cities data from the API
         fetch('/locations/cities.json')
             .then(response => {
                 if (!response.ok) {
@@ -638,77 +667,143 @@
                 return response.json();
             })
             .then(data => {
-                citiesData = data;
+                citiesData = data.filter(city => city.province === 'MM' && city.city);
 
-                // Event listener for input changes
-                localLocationInput.addEventListener('input', function() {
-                    const query = this.value.trim().toLowerCase();
-                    const filteredCities = citiesData.filter(city =>
-                        city.name.toLowerCase().includes(query)
-                    ).slice(0, 6); // Limit to 10 results
-
-                    renderSuggestions(filteredCities, query);
-                });
+                // Populate the dropdown with filtered cities data
+                populateLocationDropdown(citiesData);
             })
             .catch(error => {
                 console.error('Error fetching city data:', error);
                 errorDiv.classList.remove('hidden');
             });
 
-        editLocationButton.addEventListener('click', function() {
-            localLocationInput.value = ''; // Clear input value
-            localLocationInput.focus(); // Set focus on input field
-            localLocationInput.removeAttribute('readonly');
-            suggestionsContainer.style.display = 'none'; // Hide suggestions
-            editLocationButton.style.display = 'none'; // Show edit button
-            localLocationHidden.value = ``
 
-        });
-
-
-
-        function renderSuggestions(cities, query) {
-            suggestionsContainer.innerHTML = ''; // Clear previous suggestions
-            suggestionsContainer.style.display = cities.length && query ? 'block' : 'none';
+        // Populate the dropdown with location options
+        function populateLocationDropdown(cities) {
+            locationSelect.innerHTML =
+                '<option value="" disabled selected>Select a Location</option>'; // Default option
 
             cities.forEach(city => {
-                const suggestionElement = document.createElement('div');
-                suggestionElement.classList.add('suggestion', 'dark:bg-gray-800',
-                    'dark:text-white'); // Example dark mode classes
+                const option = document.createElement('option');
+                option.value = `${city.name}, ${city.province}`;
+                option.textContent = `${city.name}, ${city.province}`;
+                locationSelect.appendChild(option);
+            });
 
-                const suggestionText = document.createElement('div');
-                suggestionText.classList.add('suggestion-text');
-                suggestionText.textContent =
-                    `${city.name}, ${city.province}`; // Display city name and province
+            // Set selected value to the saved location if available
+            if (localLocationHidden.value) {
+                locationSelect.value = localLocationHidden.value;
+            }
 
-                const plusContainer = document.createElement('div');
-                plusContainer.classList.add('plus-container', 'dark:bg-gray-600',
-                    'dark:text-gray-200'); // Example dark mode classes
-                plusContainer.innerHTML = '+';
-
-                suggestionElement.appendChild(suggestionText);
-                suggestionElement.appendChild(plusContainer);
-
-                suggestionElement.addEventListener('click', function() {
-                    localLocationInput.value =
-                        `${city.name}, ${city.province}`; // Set input value to city name
-                    suggestionsContainer.style.display =
-                        'none'; // Hide suggestions after selection
-                    editLocationButton.style.display = 'inline-block'; // Show edit button
-                    localLocationHidden.value = `${city.name}, ${city.province}`
-                    localLocationInput.readOnly = true;
-                });
-                suggestionsContainer.appendChild(suggestionElement);
+            // Update hidden input value on selection change
+            locationSelect.addEventListener('change', function() {
+                localLocationHidden.value = this.value;
             });
         }
 
-        /* Handle outside click to hide suggestions
-        document.addEventListener('click', function(event) {
-            if (!document.getElementById('local-location-container').contains(event.target)) {
-                suggestionsContainer.style.display = 'none';
-            }
-        });*/
+        // Clear button functionality
+        clearButton.addEventListener('click', function() {
+            locationSelect.value = ''; // Clear the dropdown selection
+            localLocationHidden.value = ''; // Clear the hidden input field
+        });
+
+        // Edit button functionality (optional if you want to include it)
+        const editLocationButton = document.getElementById('editLocationButton');
+        if (editLocationButton) {
+            editLocationButton.addEventListener('click', function() {
+                locationSelect.removeAttribute('disabled'); // Enable dropdown for editing
+                locationSelect.focus(); // Focus on the select field
+            });
+        }
     });
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     const localLocationInput = document.getElementById('local-location');
+    //     const localLocationHidden = document.getElementById('localLocationHidden');
+    //     const suggestionsContainer = document.getElementById('local-location-suggestions');
+    //     const editLocationButton = document.getElementById('editLocationButton');
+    //     const errorDiv = document.getElementById('local-location-error');
+
+    //     let citiesData = []; // Array to store cities data fetched from API
+
+    //     fetch('/locations/cities.json')
+    //         .then(response => {
+    //             if (!response.ok) {
+    //                 throw new Error('Network response was not ok');
+    //             }
+    //             return response.json();
+    //         })
+    //         .then(data => {
+    //             citiesData = data;
+
+    //             // Event listener for input changes
+    //             localLocationInput.addEventListener('input', function() {
+    //                 const query = this.value.trim().toLowerCase();
+    //                 const filteredCities = citiesData.filter(city =>
+    //                     city.name.toLowerCase().includes(query)
+    //                 ).slice(0, 6); // Limit to 10 results
+
+    //                 renderSuggestions(filteredCities, query);
+    //             });
+    //         })
+    //         .catch(error => {
+    //             console.error('Error fetching city data:', error);
+    //             errorDiv.classList.remove('hidden');
+    //         });
+
+    //     editLocationButton.addEventListener('click', function() {
+    //         localLocationInput.value = ''; // Clear input value
+    //         localLocationInput.focus(); // Set focus on input field
+    //         localLocationInput.removeAttribute('readonly');
+    //         suggestionsContainer.style.display = 'none'; // Hide suggestions
+    //         editLocationButton.style.display = 'none'; // Show edit button
+    //         localLocationHidden.value = ``
+
+    //     });
+
+
+
+    //     function renderSuggestions(cities, query) {
+    //         suggestionsContainer.innerHTML = ''; // Clear previous suggestions
+    //         suggestionsContainer.style.display = cities.length && query ? 'block' : 'none';
+
+    //         cities.forEach(city => {
+    //             const suggestionElement = document.createElement('div');
+    //             suggestionElement.classList.add('suggestion', 'dark:bg-gray-800',
+    //                 'dark:text-white'); // Example dark mode classes
+
+    //             const suggestionText = document.createElement('div');
+    //             suggestionText.classList.add('suggestion-text');
+    //             suggestionText.textContent =
+    //                 `${city.name}, ${city.province}`; // Display city name and province
+
+    //             const plusContainer = document.createElement('div');
+    //             plusContainer.classList.add('plus-container', 'dark:bg-gray-600',
+    //                 'dark:text-gray-200'); // Example dark mode classes
+    //             plusContainer.innerHTML = '+';
+
+    //             suggestionElement.appendChild(suggestionText);
+    //             suggestionElement.appendChild(plusContainer);
+
+    //             suggestionElement.addEventListener('click', function() {
+    //                 localLocationInput.value =
+    //                     `${city.name}, ${city.province}`; // Set input value to city name
+    //                 suggestionsContainer.style.display =
+    //                     'none'; // Hide suggestions after selection
+    //                 editLocationButton.style.display = 'inline-block'; // Show edit button
+    //                 localLocationHidden.value = `${city.name}, ${city.province}`
+    //                 localLocationInput.readOnly = true;
+    //             });
+    //             suggestionsContainer.appendChild(suggestionElement);
+    //         });
+    //     }
+
+    //     /* Handle outside click to hide suggestions
+    //     document.addEventListener('click', function(event) {
+    //         if (!document.getElementById('local-location-container').contains(event.target)) {
+    //             suggestionsContainer.style.display = 'none';
+    //         }
+    //     });*/
+    // });
 
 
 

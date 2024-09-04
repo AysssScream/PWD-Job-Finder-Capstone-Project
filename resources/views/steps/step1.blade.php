@@ -102,7 +102,9 @@
                                     <div>
                                         <div class="mt-6">
                                             <label for="lastname"
-                                                class="block mb-1">{{ __('messages.applicant.lastname') }}</label>
+                                                class="block mb-1">{{ __('messages.applicant.lastname') }} <i
+                                                    class="fas fa-asterisk text-red-500 text-xs"></i>
+                                            </label>
                                             <input type="text" id="lastname" name="lastname"
                                                 aria-label="{{ __('messages.applicant.lastname') }}"
                                                 class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
@@ -115,7 +117,9 @@
                                         </div>
                                         <div class="mt-6">
                                             <label for="firstname"
-                                                class="block mb-1">{{ __('messages.applicant.firstname') }}</label>
+                                                class="block mb-1">{{ __('messages.applicant.firstname') }} <i
+                                                    class="fas fa-asterisk text-red-500 text-xs"></i>
+                                            </label>
                                             <input type="text" id="firstname" name="firstname"
                                                 aria-label="{{ __('messages.applicant.firstname') }}"
                                                 class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
@@ -146,8 +150,11 @@
                                     <div>
 
                                         <div class="mt-6">
-                                            <label for="birthdate"
-                                                class="block mb-1">{{ __('messages.applicant.birthdate') }}</label>
+                                            <label for="birthdate" class="block mb-1">
+                                                {{ __('messages.applicant.birthdate') }}
+                                                <i class="fas fa-asterisk text-red-500 text-xs"></i>
+                                            </label>
+
                                             <input type="date" id="birthdate" name="birthdate"
                                                 aria-label="{{ __('messages.applicant.birthdate') }}"
                                                 class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"

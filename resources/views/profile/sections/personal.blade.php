@@ -342,7 +342,8 @@
                 const countries = data.map(countryObj => countryObj.country);
 
                 // Populate the dropdown with country options
-                countrySelect.innerHTML = '<option value="" disabled>Select a Country</option>';
+                countrySelect.innerHTML =
+                    '<option value="" disabled selected>{{ $personal->ofw_country }}</option>';
                 countries.forEach(country => {
                     const option = document.createElement('option');
                     option.value = country;

@@ -1,0 +1,950 @@
+        <!DOCTYPE html>
+        <html lang="en">
+
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+            <link rel="stylesheet" href="/css/steps.css">
+
+        </head>
+        <div class="py-12">
+            <div class="container mx-auto  ">
+                <div class="flex justify-center">
+                    <div class="w-full">
+                        <form id="workExperienceForm" onsubmit="myfunc(event)" enctype="multipart/form-data">
+                            <?php echo csrf_field(); ?>
+                            <?php if($errors->any()): ?>
+                                <div class="bg-red-100 border border-red-400 text-red-700 dark:bg-red-700 dark:text-gray-100 dark:border-red-600 dark:text-red-200 px-4 py-3 rounded relative"
+                                    role="alert">
+                                    <strong class="font-bold">Oops!</strong>
+                                    <span class="block sm:inline">There were some errors with your submission:</span>
+                                    <ul class="mt-3 list-disc list-inside text-sm">
+                                        <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <li><?php echo e($error); ?></li>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    </ul>
+                                </div>
+                                <br>
+                            <?php endif; ?>
+
+                            <div
+                                class=" container-wrapper bg-white text-black dark:bg-gray-800 dark:text-gray-200 shadow-md rounded-lg">
+                                <div class="p-6">
+                                    <h3 class="text-2xl font-bold mb-2 inline-flex items-center justify-between w-full focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                        tabindex="0">
+                                        Employment History and Work Experience
+                                        <?php
+                                            $currentStep = 3; // Set this dynamically based on your current step
+                                            $totalSteps = 7; // Total number of steps (adjusted to 8)
+                                            $percentage = round((($currentStep - 1) / ($totalSteps - 1)) * 100);
+                                        ?>
+                                        <div class="ml-4 flex flex-col sm:flex-row sm:items-center sm:space-x-2">
+                                            <div
+                                                class="relative w-full sm:w-36 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                                <div class="absolute top-0 left-0 h-2 bg-blue-600 rounded-full transition-all ease-in-out duration-500"
+                                                    style="width: <?php echo e($percentage); ?>%;"></div>
+                                            </div>
+                                            <div
+                                                class="text-md text-black font-semibold dark:text-gray-400 mt-2 sm:mt-0">
+                                                Step <?php echo e($currentStep); ?>/<?php echo e($totalSteps); ?> : <span
+                                                    class="text-green-600"><?php echo e($percentage); ?>%</span>
+                                            </div>
+                                        </div>
+                                    </h3>
+                                    <div>
+                                        <nav class="text-sm" aria-label="Breadcrumb">
+                                            <ol class="list-none p-0 inline-flex">
+                                                <li class="flex items-center">
+                                                    <i class="fas fa-arrow-left mr-2 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                        tabindex="0"></i>
+                                                    <a href="<?php echo e(route('personal')); ?>"
+                                                        class="text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">Personal
+                                                        Information</a>
+                                                    <span class="mx-2 text-gray-500">/</span>
+                                                </li>
+                                                <li class="flex items-center">
+                                                    <span
+                                                        class="text-blue-500 font-semibold focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                        tabindex="0">Employment
+                                                        History and
+                                                        Work Experience</span>
+                                                </li>
+                                            </ol>
+                                        </nav>
+                                    </div>
+                                    <hr class="border-t-2 border-gray-400 rounded-full my-4">
+                                    <div class="focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                        tabindex="0" aria-label="<?php echo __('messages.employment.instruction'); ?>">
+                                        <span class="text-md font-regular" style="text-align: justify;">
+                                            <?php echo __('messages.employment.instruction'); ?>
+
+                                        </span>
+                                    </div>
+
+                                    <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        <div>
+                                            <?php echo $__env->make('layouts.dropdown', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
+                                        </div>
+                                        <div>
+                                            <div class="mt-6">
+                                                <label for="employerName" class="block mb-1"> <?php echo __('messages.workexperience.employer_name'); ?>
+
+                                                </label>
+                                                <input type="text" id="employerName" name="employerName"
+                                                    class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                    placeholder="Ex. XYZ Tech Solutions"
+                                                    aria-label=" <?php echo __('messages.workexperience.employer_name'); ?>"
+                                                    value="<?php echo e(old('employerName', $formData3['employerName'] ?? '')); ?>" />
+                                                <?php $__errorArgs = ['employerName'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                    <div class="text-red-600 mt-1"><?php echo e($message); ?></div>
+                                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                            </div>
+
+                                            <div class="mt-6">
+                                                <label for="employerAddress"
+                                                    class="block mb-1"><?php echo __('messages.workexperience.employer_address'); ?></label>
+                                                <input type="text" id="employerAddress" name="employerAddress"
+                                                    class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                    placeholder="Ex. Street Name, Building, House. No"
+                                                    aria-label="<?php echo __('messages.workexperience.employer_address'); ?>"
+                                                    value="<?php echo e(old('employerAddress', $formData3['employerAddress'] ?? '')); ?>"
+                                                    placeholder="Ex. 17 San Miguel Ave, San Antonio, Pasig, 1605 Metro Manila
+" />
+                                                <?php $__errorArgs = ['employerAddress'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                    <div class="text-red-600 mt-1"><?php echo e($message); ?></div>
+                                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                            </div>
+
+                                            <div class="mt-6">
+                                                <label for="positionHeld"
+                                                    class="block mb-1"><?php echo __('messages.workexperience.position_held'); ?></label>
+                                                <input type="text" id="positionHeld" name="positionHeld"
+                                                    class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                    pattern="[A-Za-z\s]+" aria-label="<?php echo __('messages.workexperience.position_held'); ?>"
+                                                    title="Please enter alphabetic characters only"
+                                                    placeholder=" Ex. Web Developer"
+                                                    value="<?php echo e(old('positionHeld', $formData3['positionHeld'] ?? '')); ?>" />
+                                                <?php $__errorArgs = ['positionHeld'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                    <div class="text-red-600 mt-1"><?php echo e($message); ?></div>
+                                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                            </div>
+
+                                            <div class="mt-6">
+                                                <label for="skillSearch" class="block mb-1"><?php echo __('messages.workexperience.skills_gained'); ?>
+
+                                                    (Skills)</label>
+                                                <input type="text" id="skillSearch" name="skillSearch[]"
+                                                    class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                    list="skillSuggestions" aria-label="<?php echo __('messages.workexperience.skills_gained'); ?>"
+                                                    placeholder="Ex. Soft Skills, Bilingual Communication">
+                                                <div id="skillSuggestions" class="mt-2 grid grid-cols-3 gap-2"></div>
+
+                                                </datalist>
+                                                <?php $__errorArgs = ['skillSearch'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                    <div class="text-red-600 mt-1"><?php echo e($message); ?></div>
+                                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                            </div>
+
+
+                                        </div>
+
+                                        <div>
+
+
+                                            <div class="mt-6">
+                                                <label for="fromDate"
+                                                    class="block mb-1"><?php echo __('messages.workexperience.from'); ?></label>
+                                                <input type="date" id="fromDate" name="fromDate"
+                                                    aria-label="<?php echo __('messages.workexperience.from'); ?>"
+                                                    class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                    value="<?php echo e(old('fromDate', $formData3['fromDate'] ?? '')); ?>" />
+                                                <?php $__errorArgs = ['fromDate'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                    <div class="text-red-600 mt-1"><?php echo e($message); ?></div>
+                                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                            </div>
+
+                                            <div class="mt-6">
+                                                <label for="toDate"
+                                                    class="block mb-1"><?php echo __('messages.workexperience.to'); ?></label>
+                                                <input type="date" id="toDate" name="toDate"
+                                                    aria-label="<?php echo __('messages.workexperience.to'); ?>"
+                                                    class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                    value="<?php echo e(old('toDate', $formData3['toDate'] ?? '')); ?>" />
+                                                <?php $__errorArgs = ['toDate'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                    <div class="text-red-600 mt-1"><?php echo e($message); ?></div>
+                                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                            </div>
+
+                                            <div class="mt-6">
+                                                <label for="employmentStatus"
+                                                    class="block mb-1"><?php echo __('messages.workexperience.employment_status'); ?></label>
+                                                <select id="employmentStatus" name="employmentStatus"
+                                                    aria-label="<?php echo __('messages.workexperience.employment_status'); ?>"
+                                                    class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                    <option value="" selected disabled>Select status...</option>
+                                                    <option value="Permanent"
+                                                        <?php echo e(old('employmentStatus', $formData3['employmentStatus'] ?? '') == 'Permanent' ? 'selected' : ''); ?>>
+                                                        Permanent</option>
+                                                    <option value="Contractual"
+                                                        <?php echo e(old('employmentStatus', $formData3['employmentStatus'] ?? '') == 'Contractual' ? 'selected' : ''); ?>>
+                                                        Contractual</option>
+                                                    <option value="Probationary"
+                                                        <?php echo e(old('employmentStatus', $formData3['employmentStatus'] ?? '') == 'Probationary' ? 'selected' : ''); ?>>
+                                                        Probationary</option>
+                                                    <option value="Part-Time"
+                                                        <?php echo e(old('employmentStatus', $formData3['employmentStatus'] ?? '') == 'Parti-Time' ? 'selected' : ''); ?>>
+                                                        Part-Time</option>
+                                                </select>
+                                                <?php $__errorArgs = ['employmentStatus'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                    <div class="text-red-600 mt-1"><?php echo e($message); ?></div>
+                                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                            </div>
+
+                                            <div class="mt-6">
+                                                <table id="skillTable"
+                                                    class="w-full border-collapse border border-gray-200 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 ">
+                                                    <thead>
+                                                        <tr class="bg-gray-100">
+                                                            <th
+                                                                class="p-2 border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-900 dark:text-gray-200">
+                                                                Skills</th>
+                                                            <th
+                                                                class="p-2 border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-900 dark:text-gray-200">
+                                                                Actions</th>
+                                                        </tr>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="skillTableBody">
+                                                        <!-- Skills rows will be dynamically added here -->
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+
+                                            <div class="mb-4">
+                                                <label for="hiddenInput"
+                                                    class="block text-sm font-medium text-black-700">
+                                                    <?php echo __('messages.workexperience.selected_skills'); ?> :
+                                                </label>
+                                                <textarea id="hiddenInput" name="hiddenInput" aria-label="<?php echo __('messages.workexperience.selected_skills'); ?>"
+                                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 sm:text-sm"
+                                                    readonly><?php echo e(old('hiddenInput', $formData3['hiddenInput'] ?? '')); ?></textarea>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="mt-4 text-right">
+                                        <a id="clearFormDataButton" tabindex="0"
+                                            aria-label="<?php echo __('messages.workexperience.clear_records'); ?>"
+                                            class="inline-block py-2 px-4 bg-black text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 mr-2"><?php echo __('messages.workexperience.clear_records'); ?></a>
+                                        <button type="submit"aria-label=" <?php echo __('messages.workexperience.add_work_experience'); ?>" tabindex="0"
+                                            class="inline-block py-2 px-4 bg-green-600 text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                            id="submitButton"> <?php echo __('messages.workexperience.add_work_experience'); ?></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="mt-14">
+                            <div class="container mx-auto">
+                                <div class="flex justify-center">
+                                    <div class="w-full">
+                                        <form action="<?php echo e(route('workexp')); ?>" method="POST"
+                                            enctype="multipart/form-data">
+                                            <?php echo csrf_field(); ?>
+                                            <div
+                                                class="container-wrapper bg-white text-black dark:bg-gray-800 dark:text-gray-200 shadow-md rounded-lg">
+                                                <div class="p-6">
+                                                    <h3 class="text-2xl font-bold mb-2">Submitted Work Experience and
+                                                        Skills</h3>
+                                                    <div class="mt-4 grid grid-cols-1 md:grid-cols-1 gap-4">
+                                                        <div>
+                                                            <table
+                                                                class="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
+                                                                <thead class="bg-gray-100 dark:bg-gray-700">
+                                                                    <tr>
+                                                                        <th scope="col" tabindex="0"
+                                                                            aria-label=" <?php echo __('messages.workexperience.actions'); ?> "
+                                                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 dark:text-gray-200 uppercase tracking-wider focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                                            <?php echo __('messages.workexperience.actions'); ?> </th>
+                                                                        <th scope="col" tabindex="0"
+                                                                            aria-label=" <?php echo __('messages.workexperience.employer_name'); ?> "
+                                                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 dark:text-gray-200 uppercase tracking-wider focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                                            <?php echo __('messages.workexperience.employer_name'); ?> </th>
+                                                                        </th>
+                                                                        <th scope="col" tabindex="0"
+                                                                            aria-label=" <?php echo __('messages.workexperience.employer_address'); ?> "
+                                                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 dark:text-gray-200 uppercase tracking-wider focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                                            <?php echo __('messages.workexperience.employer_address'); ?> </th>
+                                                                        </th>
+                                                                        <th scope="col" tabindex="0"
+                                                                            aria-label=" <?php echo __('messages.workexperience.position_held'); ?> "
+                                                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 dark:text-gray-200 uppercase tracking-wider focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                                            <?php echo __('messages.workexperience.position_held'); ?> </th>
+                                                                        </th>
+                                                                        <th scope="col" tabindex="0"
+                                                                            aria-label=" <?php echo __('messages.workexperience.skills_gained'); ?> "
+                                                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 dark:text-gray-200 uppercase tracking-wider focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                                            <?php echo __('messages.workexperience.skills_gained'); ?> </th>
+                                                                        </th>
+                                                                        <th scope="col" tabindex="0"
+                                                                            aria-label=" <?php echo __('messages.workexperience.from'); ?> "
+                                                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 dark:text-gray-200 uppercase tracking-wider focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                                            <?php echo __('messages.workexperience.from'); ?> </th>
+                                                                        </th>
+                                                                        <th scope="col" tabindex="0"
+                                                                            aria-label=" <?php echo __('messages.workexperience.to'); ?> "
+                                                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 dark:text-gray-200 uppercase tracking-wider focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                                            <?php echo __('messages.workexperience.to'); ?> </th>
+                                                                        </th>
+                                                                        <th scope="col" tabindex="0"
+                                                                            aria-label=" <?php echo __('messages.workexperience.employment_status'); ?> "
+                                                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 dark:text-gray-200 uppercase tracking-wider focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                                            <?php echo __('messages.workexperience.employment_status'); ?> </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody
+                                                                    class="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200 divide-y divide-gray-200 dark:divide-gray-600"
+                                                                    id="submittedDataBody">
+                                                                    <!-- Submitted data rows will be dynamically added here -->
+                                                                </tbody>
+                                                            </table>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                    <br>
+                                                    <input type="text" id="hiddenemployerName"
+                                                        name="hiddenemployerName" value="" hidden>
+                                                    <input type="text" id="hiddenemployerAddress"
+                                                        name="hiddenemployerAddress" value="" hidden>
+                                                    <input type="text" id="hiddenpositionHeld"
+                                                        name="hiddenpositionHeld" value="" hidden>
+                                                    <input type="text" id="hiddenlistskills"
+                                                        name="hiddenlistskills" value="" hidden>
+                                                    <input type="text" id="hiddenfromDate" name="hiddenfromDate"
+                                                        value="" hidden>
+                                                    <input type="text" id="hiddentoDate" name="hiddentoDate"
+                                                        value="" hidden>
+                                                    <input type="text" id="hiddenemploymentStatus"
+                                                        name="hiddenemploymentStatus" value="" hidden>
+
+
+
+                                                    <div>
+                                                        <div id="employment-type-options" class="mt-6">
+                                                            <label for="employment-type" class="block mb-1">
+                                                                <?php echo __('messages.workexperience.current_employment'); ?>
+
+                                                            </label>
+                                                            <select id="employment-type" name="employment-type"
+                                                                class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                                tabindex="0" aria-label=" <?php echo __('messages.workexperience.current_employment'); ?>">
+                                                                <option value="" selected disabled>Please select
+                                                                    your employment
+                                                                    status...
+                                                                </option>
+                                                                <optgroup label="Employed">
+                                                                    <option value="Wage Employment"
+                                                                        <?php echo e(old('employment-type', $formData3['employment-type'] ?? '') == 'Wage Employment' ? 'selected' : ''); ?>>
+                                                                        <?php echo e(__('messages.employment.wage_employment')); ?>
+
+                                                                    </option>
+                                                                    <option value="Self Employed"
+                                                                        <?php echo e(old('employment-type', $formData3['employment-type'] ?? '') == 'Self Employed' ? 'selected' : ''); ?>>
+                                                                        <?php echo e(__('messages.employment.self_employed')); ?>
+
+                                                                    </option>
+                                                                    <option value="Others"
+                                                                        <?php echo e(old('employment-type', $formData3['employment-type'] ?? '') == 'Others' ? 'selected' : ''); ?>>
+                                                                        <?php echo e(__('messages.employment.others')); ?>
+
+                                                                    </option>
+                                                                </optgroup>
+                                                                <!-- Unemployed Options -->
+                                                                <optgroup label="Unemployed">
+                                                                    <option value="Entrant/Fresh Graduate"
+                                                                        <?php echo e(old('employment-type', $formData3['employment-type'] ?? '') == 'Entrant/Fresh Graduate' ? 'selected' : ''); ?>>
+                                                                        <?php echo e(__('messages.employment.entrant_fresh_graduate')); ?>
+
+                                                                    </option>
+                                                                    <option value="Finished Contract"
+                                                                        <?php echo e(old('employment-type', $formData3['employment-type'] ?? '') == 'Finished Contract' ? 'selected' : ''); ?>>
+                                                                        <?php echo e(__('messages.employment.finished_contract')); ?>
+
+                                                                    </option>
+                                                                    <option value="Resigned"
+                                                                        <?php echo e(old('employment-type', $formData3['employment-type'] ?? '') == 'Resigned' ? 'selected' : ''); ?>>
+                                                                        <?php echo e(__('messages.employment.resigned')); ?>
+
+                                                                    </option>
+                                                                    <option value="Retired"
+                                                                        <?php echo e(old('employment-type', $formData3['employment-type'] ?? '') == 'Retired' ? 'selected' : ''); ?>>
+                                                                        <?php echo e(__('messages.employment.retired')); ?>
+
+                                                                    </option>
+                                                                    <option value="Terminated Due to Calamity"
+                                                                        <?php echo e(old('employment-type', $formData3['employment-type'] ?? '') == 'Terminated Due to Calamity' ? 'selected' : ''); ?>>
+                                                                        <?php echo e(__('messages.employment.terminated_due_to_calamity')); ?>
+
+                                                                    </option>
+                                                                    <option value="Teminated Local"
+                                                                        <?php echo e(old('employment-type', $formData3['employment-type'] ?? '') == 'Teminated Local' ? 'selected' : ''); ?>>
+                                                                        <?php echo e(__('messages.employment.terminated_local')); ?>
+
+                                                                    </option>
+                                                                    <option value="Terminated Abroad"
+                                                                        <?php echo e(old('employment-type', $formData3['employment-type'] ?? '') == 'Terminated Abroad' ? 'selected' : ''); ?>>
+                                                                        <?php echo e(__('messages.employment.terminated_abroad')); ?>
+
+                                                                    </option>
+                                                                    <option value="Other"
+                                                                        <?php echo e(old('employment-type', $formData3['employment-type'] ?? '') == 'Other' ? 'selected' : ''); ?>>
+                                                                        <?php echo e(__('messages.employment.unemployed_others')); ?>
+
+                                                                    </option>
+
+                                                                </optgroup>
+                                                            </select>
+                                                            <?php $__errorArgs = ['employment-type'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                                <div class="text-red-600 mt-1"><?php echo e($message); ?></div>
+                                                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                                        </div>
+
+                                                        <div id="job-search-duration " class="mt-6">
+                                                            <label for="job-search-duration" class="block mb-1">
+                                                                <?php echo __('messages.workexperience.job_search_duration'); ?>
+
+                                                            </label>
+                                                            <div class="flex">
+                                                                <input type="number" id="job-search-duration"
+                                                                    placeholder="Specify " name="job-search-duration"
+                                                                    aria-label="<?php echo __('messages.workexperience.job_search_duration'); ?>"
+                                                                    class="w-5/6 p-2 border rounded mr-2 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                                    value="<?php echo e(old('job-search-duration', $formData3['job-search-duration'] ?? '')); ?>">
+                                                                <select id="duration-category"
+                                                                    name="duration-category"
+                                                                    class="p-2 w-1/2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                                    <option value="Days"
+                                                                        <?php echo e(old('duration-category', $employment->duration_category ?? '') === 'Days' ? 'selected' : ''); ?>>
+                                                                        <?php echo e(__('messages.employment.days')); ?></option>
+                                                                    <option value="Weeks"
+                                                                        <?php echo e(old('duration-category', $employment->duration_category ?? '') === 'Weeks' ? 'selected' : ''); ?>>
+                                                                        <?php echo e(__('messages.employment.weeks')); ?></option>
+                                                                    <option value="Months"
+                                                                        <?php echo e(old('duration-category', $employment->duration_category ?? '') === 'Months' ? 'selected' : ''); ?>>
+                                                                        <?php echo e(__('messages.employment.months')); ?></option>
+                                                                    <option value="Years"
+                                                                        <?php echo e(old('duration-category', $employment->duration_category ?? '') === 'Years' ? 'selected' : ''); ?>>
+                                                                        <?php echo e(__('messages.employment.years')); ?></option>
+                                                                </select>
+                                                            </div>
+                                                            <?php $__errorArgs = ['job-search-duration'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                                <div class="text-red-600 mt-1"><?php echo e($message); ?></div>
+                                                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                                        </div>
+                                                        <div class="mt-4 text-right">
+                                                            <a href="<?php echo e(route('personal')); ?>"
+                                                                aria-label=" <?php echo e(__('messages.previous')); ?>"
+                                                                class="inline-block py-2 px-4 bg-black text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 mr-2">
+                                                                <?php echo e(__('messages.previous')); ?>
+
+                                                            </a>
+                                                            <button type="submit"
+                                                                aria-label=" <?php echo e(__('messages.save')); ?>"
+                                                                class="inline-block py-2 px-4 bg-green-600 text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                                <?php echo e(__('messages.save')); ?>
+
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+
+                        <!-- Overlay for modal -->
+                        <div id="modalOverlay"
+                            class="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-50 hidden"></div>
+
+                        <!-- Modal -->
+                        <div id="validationModal"
+                            class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-200 dark:bg-gray-800 text-black dark:text-white shadow-lg rounded-lg p-8 z-50 hidden">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h2 id="formMessage" class="text-xl font-bold mb-4">Form Submission Error</h2>
+                                    <script>
+                                        const message = "Form Submission Error"; // Replace this with your actual message
+                                        const formMessageElement = document.getElementById('formMessage');
+                                        formMessageElement.textContent = message;
+                                        if (message === "Form Submission Error") {
+                                            formMessageElement.classList.remove('text-green-500');
+                                            formMessageElement.classList.add('text-red-500');
+                                        } else if (message === "Form Data Saved Successfully!") {
+                                            formMessageElement.classList.remove('text-red-500');
+                                            formMessageElement.classList.add('text-green-500');
+                                        }
+                                    </script>
+                                    <button id="modalCloseButton"
+                                        class="absolute top-0 right-0 mt-4 mr-4 text-gray-500 hover:text-gray-700 focus:outline-none"
+                                        aria-label="Close">
+                                        <svg class="h-6 w-6" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d=" M6 18L18 6M6 6l12 12">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p id="modalMessage"></p>
+                                </div>
+                                <div class="modal-footer mt-4 text-right">
+                                    <button id="modalClose"
+                                        class="px-4 py-2 bg-gray-200 text-gray-800 dark:bg-red-700 dark:text-gray-200 rounded-md focus:outline-none">Close</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <script>
+                        function isValidInput(input, regex) {
+                            return regex.test(input);
+                        }
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const submitButton = document.getElementById('submitButton');
+                            const modalOverlay = document.getElementById('modalOverlay');
+                            const validationModal = document.getElementById('validationModal');
+                            const modalMessage = document.getElementById('modalMessage');
+                            const modalCloseButton = document.getElementById('modalCloseButton');
+                            const modalClose = document.getElementById('modalClose');
+
+                            submitButton.addEventListener('click', function(event) {
+
+                                event.preventDefault();
+
+                                // Retrieve existing data from localStorage or initialize an empty array
+                                let formDataArray = JSON.parse(localStorage.getItem('formData')) || [];
+
+                                // Get form data
+                                const employerName = document.getElementById('employerName').value;
+                                const employerAddress = document.getElementById('employerAddress').value;
+                                const positionHeld = document.getElementById('positionHeld').value;
+                                const skills = document.getElementById('hiddenInput').value;
+                                const fromDate = document.getElementById('fromDate').value;
+                                const toDate = document.getElementById('toDate').value;
+                                const employmentStatus = document.getElementById('employmentStatus').value;
+                                const hiddenInput = document.getElementById('hiddenInput').value;
+
+                                const nameRegex = /^[a-zA-Z\s]+$/;
+                                const addressRegex = /^[a-zA-Z0-9\s,.-]+$/;
+                                const positionRegex = /^[a-zA-Z\s]+$/;
+
+                                // Simple validation: Check if required fields are filled out
+                                if (!employerName || !employerAddress || !positionHeld || !skills || !fromDate || !toDate ||
+                                    !employmentStatus) {
+                                    displayModal('Please fill out all required fields.');
+                                    return;
+                                }
+
+                                if (!isValidInput(employerName, nameRegex)) {
+                                    displayModal('Employer name can only contain letters and spaces.');
+                                    return;
+                                }
+
+                                if (!isValidInput(employerAddress, addressRegex)) {
+                                    displayModal('Employer address contains invalid characters.');
+                                    return;
+                                }
+
+                                if (!isValidInput(positionHeld, positionRegex)) {
+                                    displayModal('Position held can only contain letters and spaces.');
+                                    return;
+                                }
+
+                                if (new Date(toDate) < new Date(fromDate)) {
+                                    displayModal('To Date must be after or equal to From Date.');
+                                    return;
+                                }
+                                // Create an object to hold the data
+                                const formData = {
+                                    employerName: employerName,
+                                    employerAddress: employerAddress,
+                                    positionHeld: positionHeld,
+                                    skillSearch: skills,
+                                    fromDate: fromDate,
+                                    toDate: toDate,
+                                    employmentStatus: employmentStatus,
+                                    hiddenInput: hiddenInput
+                                };
+
+                                formDataArray.push(formData);
+
+                                localStorage.setItem('formData', JSON.stringify(formDataArray));
+
+                                console.log('Form data saved to local storage:', formDataArray);
+
+
+
+                                document.getElementById('workExperienceForm').reset();
+                                displayModal('Form Data Saved Successfully!');
+                                loadData();
+                            });
+
+                            function displayModal(message) {
+                                // Set modal message content
+                                modalMessage.textContent = message;
+
+                                // Show the modal and overlay
+                                modalOverlay.classList.remove('hidden');
+                                validationModal.classList.remove('hidden');
+
+                                // Close modal functionality
+                                modalCloseButton.addEventListener('click', closeModal);
+                                modalClose.addEventListener('click', closeModal);
+
+                                // Prevent focus from moving to modal button on Enter key press
+                                modalCloseButton.addEventListener('keydown', function(event) {
+                                    if (event.key === 'Enter') {
+                                        event.preventDefault();
+                                    }
+                                });
+                            }
+
+                            function closeModal() {
+                                // Hide the modal and overlay
+                                modalOverlay.classList.add('hidden');
+                                validationModal.classList.add('hidden');
+
+                                // Remove event listeners to prevent memory leaks
+                                modalCloseButton.removeEventListener('click', closeModal);
+                                modalClose.removeEventListener('click', closeModal);
+                            }
+                        });
+
+                        const clearFormDataButton = document.getElementById('clearFormDataButton');
+
+                        clearFormDataButton.addEventListener('click', function() {
+                            localStorage.removeItem('formData');
+                            alert('Item "formData" has been cleared from local storage.');
+                            loadData();
+                            location.reload();
+                        });
+
+
+                        function loadData() {
+                            const formDataJSON = localStorage.getItem('formData');
+
+                            // Check if there's any data to display
+                            if (formDataJSON) {
+                                const formDataArray = JSON.parse(formDataJSON);
+
+                                const tableBody = document.getElementById('submittedDataBody');
+
+                                tableBody.innerHTML = '';
+
+                                let concatenatedEmployerName = [];
+                                let concatenatedEmployerAddress = [];
+                                let concatenatedPositionHeld = [];
+                                let concatenatedSkills = [];
+                                let concatenatedFromDate = [];
+                                let concatenatedToDate = [];
+                                let concatenatedEmploymentStatus = [];
+
+                                formDataArray.forEach(formData => {
+                                    const row = document.createElement('tr');
+
+                                    row.innerHTML = `
+                                    <td class="px-6 py-4 whitespace-nowrap ">
+                                        <button onclick="deleteRow(event, this)"
+                                                class="bg-red-500 hover:bg-red-600 text-white font-regular py-2 px-4 rounded focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400" tabindex="0" 
+                                                aria-label="<?php echo e(__('messages.workexperience.delete')); ?>">
+                                        <?php echo e(__('messages.workexperience.delete')); ?>                                       
+                                        </button>
+                                    </td>
+                                  <td class="px-6 py-4 whitespace-nowrap border border-gray-200 dark:border-gray-600" >
+                                        <div class="font-medium text-gray-900 dark:text-gray-200 focus:ring-4 focus:outline-none focus:ring-orange-400 focus:border-orange-400" tabindex="0" >${formData.employerName}</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap border border-gray-200 dark:border-gray-600">
+                                        <div class="text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400" tabindex="0">${formData.employerAddress}</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap border border-gray-200 dark:border-gray-600">
+                                        <div class="text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400" tabindex="0">${formData.positionHeld}</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap border border-gray-200 dark:border-gray-600">
+                                        <div class="text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400" tabindex="0">${formData.skillSearch}</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap border border-gray-200 dark:border-gray-600">
+                                        <div class="text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400" tabindex="0">${formData.fromDate}</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap border border-gray-200 dark:border-gray-600">
+                                        <div class="text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400" tabindex="0">${formData.toDate}</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap border border-gray-200 dark:border-gray-600">
+                                        <div class="text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400" tabindex="0">${formData.employmentStatus}</div>
+                                    </td>
+                                `;
+                                    // Append the row to the table body
+                                    tableBody.appendChild(row);
+                                    concatenatedEmployerName.push([formData.employerName]);
+                                    concatenatedEmployerAddress.push([formData.employerAddress]);
+                                    concatenatedPositionHeld.push([formData.positionHeld]);
+                                    concatenatedSkills.push([formData.skillSearch]);
+                                    concatenatedFromDate.push([formData.fromDate]);
+                                    concatenatedToDate.push([formData.toDate]);
+                                    concatenatedEmploymentStatus.push([formData.employmentStatus]);
+                                });
+
+                                document.getElementById('hiddenemployerName').value = JSON.stringify(concatenatedEmployerName);
+                                document.getElementById('hiddenemployerAddress').value = JSON.stringify(concatenatedEmployerAddress);
+                                document.getElementById('hiddenpositionHeld').value = JSON.stringify(concatenatedPositionHeld);
+                                document.getElementById('hiddenlistskills').value = JSON.stringify(concatenatedSkills);
+                                document.getElementById('hiddenfromDate').value = JSON.stringify(concatenatedFromDate);
+                                document.getElementById('hiddentoDate').value = JSON.stringify(concatenatedToDate);
+                                document.getElementById('hiddenemploymentStatus').value = JSON.stringify(concatenatedEmploymentStatus);
+                            } else {
+                                // Handle case where no data is found (optional)
+                                console.log('No form data found in local storage.');
+                            }
+
+                        }
+                        window.onload = loadData;
+
+                        function deleteRow(event, button) {
+                            event.preventDefault();
+
+                            const row = button.closest('tr');
+                            const rowIndex = row.rowIndex - 1; // Adjust for header row
+
+                            // Remove row from the table
+                            row.remove();
+
+                            // Remove corresponding data from local storage
+                            let data = JSON.parse(localStorage.getItem('formData')) || [];
+                            data.splice(rowIndex, 1); // Remove 1 element at rowIndex
+                            localStorage.setItem('formData', JSON.stringify(data));
+                            location.reload()
+
+                        }
+                    </script>
+
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                let allSkills = []; // Store all skills
+
+                fetch("/userskills/listofskills.txt")
+                    .then((response) => response.text())
+                    .then((data) => {
+                        console.log("Fetched data:", data);
+                        allSkills = data
+                            .split("\n")
+                            .map((skill) => skill.trim().replace(/,/g, ''))
+                            .filter((skill) => skill !== "");
+                        console.log("All skills:", allSkills);
+                    })
+                    .catch((error) => console.error("Error fetching skills:", error));
+
+                const skillSuggestions = document.getElementById("skillSuggestions");
+                const skillSearchInput = document.getElementById("skillSearch");
+
+                skillSearchInput.addEventListener("input", function() {
+                    const keyword = this.value.trim().toLowerCase();
+                    const matchingSkills = allSkills.filter(skill =>
+                        skill.toLowerCase().includes(keyword) && skill.toLowerCase() !==
+                        keyword // Exclude the currently typed skill
+                    );
+
+                    // Clear previous suggestions
+                    skillSuggestions.innerHTML = '';
+
+                    // Add matching suggestions to the div
+                    matchingSkills.slice(0, 9).forEach((skill) => {
+                        const suggestionItem = document.createElement("div");
+                        suggestionItem.textContent = skill;
+                        suggestionItem.classList.add("p-2", "bg-gray-200", "text-gray-900",
+                            "dark:bg-gray-900", "dark:text-gray-200", "rounded", "cursor-pointer",
+                            "hover:bg-blue-300");
+                        suggestionItem.addEventListener("click", function() {
+                            skillSearchInput.value =
+                                skill; // Set the input value to the clicked skill
+                        });
+                        skillSuggestions.appendChild(suggestionItem);
+                    });
+                });
+            });
+
+
+            document.addEventListener('DOMContentLoaded', function() {
+                var skillSearch = document.getElementById('skillSearch');
+                var skillTableBody = document.getElementById('skillTableBody');
+                var hiddenInput = document.getElementById('hiddenInput');
+
+                skillSearch.addEventListener('keydown', function(event) {
+                    if (event.key === 'Enter') {
+                        event.preventDefault(); // Prevent form submission
+
+                        var skills = skillSearch.value.split(',').map(function(skill) {
+                            return skill.trim();
+                        });
+
+                        // Clear the input field
+                        skillSearch.value = '';
+
+                        // Add each skill as a new row in the table
+                        skills.forEach(function(skill) {
+                            if (skill && !isSkillDuplicate(skill)) {
+                                var row = skillTableBody.insertRow();
+                                var cell = row.insertCell();
+                                cell.textContent = skill;
+                                var actionCell = row.insertCell();
+                                var
+                                    removeButton = document.createElement('button');
+                                removeButton.textContent = 'Remove';
+                                removeButton.type = 'button';
+                                removeButton.classList.add('px-2', 'py-1', 'bg-red-500', 'text-white',
+                                    'rounded');
+                                removeButton.addEventListener('click', function() {
+                                    skillTableBody.deleteRow(row.rowIndex -
+                                        1);
+                                    updateHiddenInput();
+                                });
+                                actionCell.appendChild(removeButton);
+                            } else if (isSkillDuplicate(skill)) { //
+                                alert('Skill "' + skill + '" is already added.');
+                            }
+                        }); // Update hidden
+                        updateHiddenInput();
+                    }
+                }); // Function to check if a skill already
+
+                function isSkillDuplicate(skill) {
+                    var rows = skillTableBody.rows;
+                    for (var i = 0; i <
+                        rows.length; i++) {
+                        var cellValue = rows[i].cells[0].textContent.trim();
+                        if (cellValue.toLowerCase() === skill.toLowerCase()) {
+                            return true;
+                        }
+                    }
+                    return false;
+                } // Function to update
+
+                function updateHiddenInput() {
+                    var
+                        skills = Array.from(skillTableBody.rows).map(function(row) {
+                            return row.cells[0].textContent.trim();
+                        }).join(', ');
+                    hiddenInput.value = skills;
+                }
+            });
+        </script>
+
+        <style>
+            .remove-button {
+                background-color: #f44336;
+                /* Red */
+                color: white;
+                border: none;
+                padding: 5px 10px;
+                cursor: pointer;
+                border-radius: 5px;
+                margin-left: 10px;
+                /* Adjust as needed */
+            }
+
+
+            .remove-button:hover {
+                background-color: #d32f2f;
+            }
+
+
+
+            #skillSuggestions {
+                margin-bottom: px;
+                /* Add bottom margin to create space */
+            }
+        </style>
+<?php /**PATH C:\xampp\htdocs\finalproj\resources\views\steps\step3.blade.php ENDPATH**/ ?>

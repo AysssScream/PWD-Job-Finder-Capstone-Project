@@ -19,7 +19,9 @@
                 <div class="p-4">
                     <div class="flex flex-col items-center mb-5 ">
                         <img src="{{ asset('storage/' . $pwdinfo->profilePicture) }} " alt="Applicant Image"
-                            class="w-44 h-44 object-contain rounded-full mb-4 border-4 custom-shadow border-gray-600">
+                            class="w-44 h-44 object-contain rounded-full mb-4 border-4 custom-shadow border-gray-600"
+                            onerror="this.onerror=null; this.src='{{ asset('/images/avatar.png') }}';">
+
                     </div>
                     <h2 class="text-2xl mb-5 font-bold text-gray-800 dark:text-gray-200">Applicant:</h2>
                     <ul class="mt-2 space-y-2">
@@ -71,7 +73,8 @@
                     <div class="flex items-start mt-3 mb-5">
                         <div class="flex flex-col items-center">
                             <img src="{{ asset('storage/' . $pwdinfo->pwdIdPicture) }}" alt="Applicant Image"
-                                class="w-80 h-80 object-contain mb-4 border custom-shadow border-gray-600">
+                                class="w-80 h-80 object-contain mb-4 border custom-shadow border-gray-600"
+                                onerror="this.onerror=null; this.src='{{ asset('/images/avatar.png') }}';">
                         </div>
                         <!-- Optional: Add additional content or styling for the right side -->
                     </div>

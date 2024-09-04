@@ -4,8 +4,6 @@
 
 
     @if (Session::has('clearlogs'))
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <script>
             $(document).ready(function() {
                 toastr.options = {
@@ -46,7 +44,6 @@
                             <option value="Logged In">Logged In</option>
                             <option value="Logged Out">Logged Out</option>
                             <option value="Approve User">Approved User</option>
-                            <option value="Decline User">Declined User</option>
                             <option value="Composed">Composed</option>
                             <option value="Replied">Replied</option>
                         </select>
@@ -116,8 +113,8 @@
                                 <div class="flex items-center gap-3">
                                     <div class="h-10 w-10 flex-shrink-0">
                                         <img class="h-full w-full rounded-full object-cover object-center"
-                                            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                            alt="" />
+                                            src="{{ $adminProfile && $adminProfile->profile_picture ? asset('storage/' . $adminProfile->profile_picture) : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80' }}"
+                                            alt="Profile Picture" />
                                     </div>
                                     <div class="text-sm">
                                         <div class="font-medium text-gray-700 dark:text-gray-200">

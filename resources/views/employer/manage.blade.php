@@ -12,8 +12,6 @@
     </head>
 
     @if (Session::has('editjobs'))
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <script>
             $(document).ready(function() {
                 toastr.options = {
@@ -31,9 +29,9 @@
     <div class="py-12" style="padding-top: 30px; padding-bottom: 5px;">
         <div class="container mx-auto max-w-8xl px-4 pt-2 mb-2">
             <div
-                class="flex flex-col md:flex-row md:justify-between items-start md:items-center space-y-4 md:space-y-0 md:space-x-4">
+                class="flex flex-col md:flex-row md:justify-between items-start md:items-center space-y-4 md:space-y-0 md:space-x-4 bg-white dark:bg-gray-800 p-4 rounded-lg">
                 <!-- Breadcrumb Navigation -->
-                <nav aria-label="breadcrumb" class="rounded-lg text-gray-800 dark:text-gray-300">
+                <nav aria-label="breadcrumb" class="rounded-lg text-gray-800  dark:text-gray-300 ">
                     <ol class="breadcrumb mb-0 flex items-center flex-wrap">
                         <li class="breadcrumb-item w-full md:w-auto">
                             <a href="{{ route('employer.dashboard') }}"
@@ -43,8 +41,8 @@
                             </a>
                         </li>
                     </ol>
-                </nav>
 
+                </nav>
 
                 <!-- Date Range Filter Dropdown and Add Job Button -->
                 <div

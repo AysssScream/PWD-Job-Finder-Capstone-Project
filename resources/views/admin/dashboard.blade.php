@@ -447,6 +447,13 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($skills as $skill => $count)
+                                        @php
+                                            $totalSkillsCount = $totalSkillsCount ?? 1; // Ensure $totalSkillsCount is not zero to avoid division by zero
+                                            $percentage =
+                                                $totalSkillsCount > 0
+                                                    ? number_format(($count / $totalSkillsCount) * 100, 1)
+                                                    : '0.0';
+                                        @endphp
                                         <tr class="text-gray-700 dark:text-gray-100">
                                             <td
                                                 class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
@@ -459,12 +466,11 @@
                                             <td
                                                 class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                                                 <div class="flex items-center">
-                                                    <span
-                                                        class="mr-2">{{ number_format(($count / $totalSkillsCount) * 100, 1) }}%</span>
+                                                    <span class="mr-2">{{ $percentage }}%</span>
                                                     <div class="relative w-full">
                                                         <div
                                                             class="overflow-hidden h-2 text-xs flex rounded bg-blue-200">
-                                                            <div style="width: {{ number_format(($count / $totalSkillsCount) * 100, 1) }}%"
+                                                            <div style="width: {{ $percentage }}%"
                                                                 class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-600">
                                                             </div>
                                                         </div>
@@ -473,6 +479,7 @@
                                             </td>
                                         </tr>
                                     @endforeach
+
                                     <tr class="text-gray-700 dark:text-gray-100">
                                         <td
                                             class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
@@ -485,18 +492,32 @@
                                         <td
                                             class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                                             <div class="flex items-center">
-                                                <span
-                                                    class="mr-2">{{ number_format(($othersCount / $totalSkillsCount) * 100, 1) }}%</span>
-                                                <div class="relative w-full">
-                                                    <div class="overflow-hidden h-2 text-xs flex rounded bg-blue-200">
-                                                        <div style="width: {{ number_format(($othersCount / $totalSkillsCount) * 100, 1) }}%"
-                                                            class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-600">
+                                                @if ($totalSkillsCount > 0)
+                                                    <span
+                                                        class="mr-2">{{ number_format(($othersCount / $totalSkillsCount) * 100, 1) }}%</span>
+                                                    <div class="relative w-full">
+                                                        <div
+                                                            class="overflow-hidden h-2 text-xs flex rounded bg-blue-200">
+                                                            <div style="width: {{ number_format(($othersCount / $totalSkillsCount) * 100, 1) }}%"
+                                                                class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-600">
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                @else
+                                                    <span class="mr-2">0%</span>
+                                                    <div class="relative w-full">
+                                                        <div
+                                                            class="overflow-hidden h-2 text-xs flex rounded bg-blue-200">
+                                                            <div style="width: 0%"
+                                                                class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-600">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endif
                                             </div>
                                         </td>
                                     </tr>
+
                                 </tbody>
                             </table>
                             <div class="text-center mt-4">
@@ -568,6 +589,11 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($leastEmployableSkills as $skill => $count)
+                                        @php
+                                            // Ensure $totalSkillsCount is not zero to avoid division by zero
+                                            $totalSkillsCount = $totalSkillsCount > 0 ? $totalSkillsCount : 1;
+                                            $percentage = number_format(($count / $totalSkillsCount) * 100, 1);
+                                        @endphp
                                         <tr class="text-gray-700 dark:text-gray-100">
                                             <td
                                                 class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
@@ -580,12 +606,11 @@
                                             <td
                                                 class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                                                 <div class="flex items-center">
-                                                    <span
-                                                        class="mr-2">{{ number_format(($count / $totalSkillsCount) * 100, 1) }}%</span>
+                                                    <span class="mr-2">{{ $percentage }}%</span>
                                                     <div class="relative w-full">
                                                         <div
                                                             class="overflow-hidden h-2 text-xs flex rounded bg-blue-200">
-                                                            <div style="width: {{ number_format(($count / $totalSkillsCount) * 100, 1) }}%"
+                                                            <div style="width: {{ $percentage }}%"
                                                                 class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-600">
                                                             </div>
                                                         </div>
@@ -594,6 +619,7 @@
                                             </td>
                                         </tr>
                                     @endforeach
+
                                     <tr class="text-gray-700 dark:text-gray-100">
                                         <td
                                             class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
@@ -606,18 +632,32 @@
                                         <td
                                             class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                                             <div class="flex items-center">
-                                                <span
-                                                    class="mr-2">{{ number_format(($leastEmployableOthersCount / $totalSkillsCount) * 100, 1) }}%</span>
-                                                <div class="relative w-full">
-                                                    <div class="overflow-hidden h-2 text-xs flex rounded bg-blue-200">
-                                                        <div style="width: {{ number_format(($leastEmployableOthersCount / $totalSkillsCount) * 100, 1) }}%"
-                                                            class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-600">
+                                                @if ($totalSkillsCount > 0)
+                                                    <span
+                                                        class="mr-2">{{ number_format(($leastEmployableOthersCount / $totalSkillsCount) * 100, 1) }}%</span>
+                                                    <div class="relative w-full">
+                                                        <div
+                                                            class="overflow-hidden h-2 text-xs flex rounded bg-blue-200">
+                                                            <div style="width: {{ number_format(($leastEmployableOthersCount / $totalSkillsCount) * 100, 1) }}%"
+                                                                class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-600">
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                @else
+                                                    <span class="mr-2">0%</span>
+                                                    <div class="relative w-full">
+                                                        <div
+                                                            class="overflow-hidden h-2 text-xs flex rounded bg-blue-200">
+                                                            <div style="width: 0%"
+                                                                class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-600">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endif
                                             </div>
                                         </td>
                                     </tr>
+
                                 </tbody>
                             </table>
                         </div>
@@ -939,12 +979,13 @@
                                                 <td
                                                     class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                                                     <div class="flex items-center">
-                                                        <span
-                                                            class="mr-2">{{ number_format(($count / $mostEmployableEducationLevels->sum()) * 100, 1) }}%</span>
+                                                        <span class="mr-2">
+                                                            {{ number_format(($count / ($mostEmployableEducationLevels->sum() ?: 1)) * 100, 1) }}%
+                                                        </span>
                                                         <div class="relative w-full">
                                                             <div
                                                                 class="overflow-hidden h-2 text-xs flex rounded bg-blue-200">
-                                                                <div style="width: {{ number_format(($count / $mostEmployableEducationLevels->sum()) * 100, 1) }}%"
+                                                                <div style="width:  {{ $mostEmployableEducationLevels->sum() > 0 ? number_format(($count / $mostEmployableEducationLevels->sum()) * 100, 1) : 0 }}%;"
                                                                     class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-600">
                                                                 </div>
                                                             </div>
@@ -1014,11 +1055,13 @@
                                                     class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                                                     <div class="flex items-center">
                                                         <span
-                                                            class="mr-2">{{ number_format(($count / $leastEmployableEducationLevels->sum()) * 100, 1) }}%</span>
+                                                            class="mr-2">{{ $leastEmployableEducationLevels->sum() > 0 ? number_format(($count / $leastEmployableEducationLevels->sum()) * 100, 1) : '0.0' }}%</span>
                                                         <div class="relative w-full">
                                                             <div
                                                                 class="overflow-hidden h-2 text-xs flex rounded bg-blue-200">
-                                                                <div style="width: {{ number_format(($count / $mostEmployableEducationLevels->sum()) * 100, 1) }}%"
+                                                                <div style="width: {{ $mostEmployableEducationLevels->sum() > 0
+                                                                    ? number_format(($count / $mostEmployableEducationLevels->sum()) * 100, 1)
+                                                                    : '0' }}%;"
                                                                     class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-600">
                                                                 </div>
                                                             </div>
@@ -1308,11 +1351,15 @@
                                                     class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                                                     <div class="flex items-center">
                                                         <span
-                                                            class="mr-2">{{ number_format(($count / $mostEmployableEmploymentTypes->sum()) * 100, 1) }}%</span>
+                                                            class="mr-2">{{ $mostEmployableEmploymentTypes->sum() > 0
+                                                                ? number_format(($count / $mostEmployableEmploymentTypes->sum()) * 100, 1)
+                                                                : '0.0' }}%</span>
                                                         <div class="relative w-full">
                                                             <div
                                                                 class="overflow-hidden h-2 text-xs flex rounded bg-blue-200">
-                                                                <div style="width: {{ number_format(($count / $mostEmployableEmploymentTypes->sum()) * 100, 1) }}%"
+                                                                <div style="width: {{ $mostEmployableEmploymentTypes->sum() > 0
+                                                                    ? number_format(($count / $mostEmployableEmploymentTypes->sum()) * 100, 1)
+                                                                    : '0.0' }}%"
                                                                     class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-600">
                                                                 </div>
                                                             </div>
@@ -1378,11 +1425,15 @@
                                                     class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                                                     <div class="flex items-center">
                                                         <span
-                                                            class="mr-2">{{ number_format(($count / $leastEmployableEmploymentTypes->sum()) * 100, 1) }}%</span>
+                                                            class="mr-2">{{ $leastEmployableEmploymentTypes->sum() > 0
+                                                                ? number_format(($count / $leastEmployableEmploymentTypes->sum()) * 100, 1)
+                                                                : '0.0' }}%</span>
                                                         <div class="relative w-full">
                                                             <div
                                                                 class="overflow-hidden h-2 text-xs flex rounded bg-blue-200">
-                                                                <div style="width: {{ number_format(($count / $leastEmployableEmploymentTypes->sum()) * 100, 1) }}%"
+                                                                <div style="width:{{ $leastEmployableEmploymentTypes->sum() > 0
+                                                                    ? number_format(($count / $leastEmployableEmploymentTypes->sum()) * 100, 1)
+                                                                    : '0.0' }}%"
                                                                     class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-600">
                                                                 </div>
                                                             </div>
@@ -1602,15 +1653,20 @@
                                     @php
                                         $totalMostFrequent = $mostFrequentEmployers->sum();
                                     @endphp
+
                                     @foreach ($mostFrequentEmployers as $employer_name => $count)
                                         @php
-                                            $percentage = ($count / $totalMostFrequent) * 100;
+                                            // Default percentage value to avoid division by zero
+                                            $percentage =
+                                                $totalMostFrequent > 0 ? ($count / $totalMostFrequent) * 100 : 0;
                                         @endphp
                                         <tr class="bg-gray-100 dark:bg-gray-800">
                                             <td class="px-4 py-2 text-sm text-black dark:text-white">
-                                                {{ $employer_name }}</td>
+                                                {{ $employer_name }}
+                                            </td>
                                             <td class="px-4 py-2 text-sm text-black dark:text-white">
-                                                {{ $count }}</td>
+                                                {{ $count }}
+                                            </td>
                                             <td
                                                 class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                                                 <div class="flex items-center">
@@ -1629,6 +1685,7 @@
                                         </tr>
                                     @endforeach
 
+
                                     <!-- Least Frequent Employers -->
                                     <tr class="bg-gray-200 text-black dark:bg-gray-700 dark:text-white">
                                         <td class="px-4 py-2 text-sm" colspan="3">Least Frequent Number of
@@ -1637,15 +1694,20 @@
                                     @php
                                         $totalLeastFrequent = $leastFrequentEmployers->sum();
                                     @endphp
+
                                     @foreach ($leastFrequentEmployers as $employer_name => $count)
                                         @php
-                                            $percentage = ($count / $totalLeastFrequent) * 100;
+                                            // Default percentage value to avoid division by zero
+                                            $percentage =
+                                                $totalLeastFrequent > 0 ? ($count / $totalLeastFrequent) * 100 : 0;
                                         @endphp
                                         <tr class="bg-gray-100 dark:bg-gray-800">
                                             <td class="px-4 py-2 text-sm text-black dark:text-white">
-                                                {{ $employer_name }}</td>
+                                                {{ $employer_name }}
+                                            </td>
                                             <td class="px-4 py-2 text-sm text-black dark:text-white">
-                                                {{ $count }}</td>
+                                                {{ $count }}
+                                            </td>
                                             <td
                                                 class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                                                 <div class="flex items-center">
@@ -1663,6 +1725,7 @@
                                             </td>
                                         </tr>
                                     @endforeach
+
                                 </tbody>
                             </table>
                         </div>
@@ -1904,51 +1967,52 @@
                         }
                     }
                 });
-
-                // Create pie chart for Least Frequent Employers by Years
-                const ctxLeastFrequent = document.getElementById('leastFrequentEmployersYearsChart').getContext('2d');
-                new Chart(ctxLeastFrequent, {
-                    type: 'pie',
-                    data: {
-                        labels: leastFrequentEmployersByYearsLabels,
-                        datasets: [{
-                            label: 'Least Frequent Employers by Years',
-                            data: leastFrequentEmployersByYearsCounts,
-                            backgroundColor: backgroundColor,
-                            borderColor: borderColor,
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: {
-                            legend: {
-                                position: 'top',
-                                labels: {
-                                    color: labelColor,
-                                    font: {
-                                        family: 'Poppins',
-                                        size: 14
-                                    }
-                                }
-                            },
-                            tooltip: {
-                                backgroundColor: tooltipBackgroundColor,
-                                titleColor: tooltipTitleColor,
-                                bodyColor: tooltipBodyColor,
-                                callbacks: {
-                                    label: function(tooltipItem) {
-                                        const total = leastFrequentEmployersByYearsCounts.reduce((a, b) =>
-                                            a + b, 0);
-                                        const percentage = ((tooltipItem.raw / total) * 100).toFixed(1);
-                                        return `${tooltipItem.label}: ${tooltipItem.raw} years (${percentage}%)`;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
             });
+
+            // Create pie chart for Least Frequent Employers by Years
+            // const ctxLeastFrequent = document.getElementById('leastFrequentEmployersYearsChart').getContext('2d');
+            //     new Chart(ctxLeastFrequent, {
+            //         type: 'pie',
+            //         data: {
+            //             labels: leastFrequentEmployersByYearsLabels,
+            //             datasets: [{
+            //                 label: 'Least Frequent Employers by Years',
+            //                 data: leastFrequentEmployersByYearsCounts,
+            //                 backgroundColor: backgroundColor,
+            //                 borderColor: borderColor,
+            //                 borderWidth: 1
+            //             }]
+            //         },
+            //         options: {
+            //             responsive: true,
+            //             plugins: {
+            //                 legend: {
+            //                     position: 'top',
+            //                     labels: {
+            //                         color: labelColor,
+            //                         font: {
+            //                             family: 'Poppins',
+            //                             size: 14
+            //                         }
+            //                     }
+            //                 },
+            //                 tooltip: {
+            //                     backgroundColor: tooltipBackgroundColor,
+            //                     titleColor: tooltipTitleColor,
+            //                     bodyColor: tooltipBodyColor,
+            //                     callbacks: {
+            //                         label: function(tooltipItem) {
+            //                             const total = leastFrequentEmployersByYearsCounts.reduce((a, b) =>
+            //                                 a + b, 0);
+            //                             const percentage = ((tooltipItem.raw / total) * 100).toFixed(1);
+            //                             return `${tooltipItem.label}: ${tooltipItem.raw} years (${percentage}%)`;
+            //                         }
+            //                     }
+            //                 }
+            //             }
+            //         }
+            //     });
+            // });
         </script>
 
         <script>
@@ -2328,7 +2392,7 @@
                 const tooltipBackgroundColor = darkMode ? 'rgba(0, 0, 0, 0.7)' : 'rgba(255, 255, 255, 0.7)';
                 const tooltipTitleColor = darkMode ? '#ffffff' : '#000000';
                 const tooltipBodyColor = darkMode ? '#ffffff' : '#000000';
-
+                const gridColor = darkMode ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)'; // Grid color
                 // Get the canvas elements
                 const ctxMostEmployable = document.getElementById('employmentTypePieChartMostEmployable').getContext(
                     '2d');
@@ -2379,6 +2443,7 @@
                                 titleFont: {
                                     family: 'Poppins' // Apply Poppins font
                                 }
+
                             }
                         }
                     }

@@ -157,8 +157,11 @@ border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 f
 
         // Function to populate dropdown with cities
         function populateDropdown(cities) {
+            const jobPreferenceLocation =
+                "{{ $jobpreference->local_location ?? '' }}"; // Use PHP to pass the value to JS
+
             localLocationSelect.innerHTML =
-                '<option value="" disabled selected>{{ $jobpreference->local_location }}</option>';
+                `<option value="" disabled selected>${jobPreferenceLocation}</option>`;
 
             cities.forEach(city => {
                 if (city.name && city.province) { // Check if city has required properties
@@ -171,6 +174,7 @@ border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 f
                 }
             });
         }
+
     });
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -220,8 +224,12 @@ border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 f
 
         // Function to populate dropdown with countries
         function populateDropdown(countries) {
+            const overseasLocation =
+                "{{ $jobpreference->overseas_location ?? '' }}"; // Pass the PHP variable to JavaScript
+
             overseasLocationSelect.innerHTML =
-                '<option value="" disabled selected>{{ $jobpreference->overseas_location }}</option>';
+                `<option value="" disabled selected>${overseasLocation}</option>`;
+
             countries.forEach(country => {
                 if (country.country) { // Check if country has the required property
                     const option = document.createElement('option');
@@ -233,6 +241,7 @@ border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 f
                 }
             });
         }
+
     });
 
 

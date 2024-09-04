@@ -335,7 +335,8 @@
                                                     <div>
                                                         <div id="employment-type-options" class="mt-6">
                                                             <label for="employment-type" class="block mb-1">
-                                                                {!! __('messages.workexperience.current_employment') !!}
+                                                                {!! __('messages.workexperience.current_employment') !!} <i
+                                                                    class="fas fa-asterisk text-red-500 text-xs"></i>
                                                             </label>
                                                             <select id="employment-type" name="employment-type"
                                                                 class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
@@ -402,7 +403,8 @@
 
                                                         <div id="job-search-duration " class="mt-6">
                                                             <label for="job-search-duration" class="block mb-1">
-                                                                {!! __('messages.workexperience.job_search_duration') !!}
+                                                                {!! __('messages.workexperience.job_search_duration') !!} <i
+                                                                    class="fas fa-asterisk text-red-500 text-xs"></i>
                                                             </label>
                                                             <div class="flex">
                                                                 <input type="number" id="job-search-duration"
@@ -496,7 +498,7 @@
                                 </div>
                                 <div class="modal-footer mt-4 text-right">
                                     <button id="modalClose"
-                                        class="px-4 py-2 bg-gray-200 text-gray-800 dark:bg-red-700 dark:text-gray-200 rounded-md focus:outline-none">Close</button>
+                                        class="px-4 py-2 bg-blue-600 text-white dark:bg-red-700 dark:text-gray-200 rounded-md focus:outline-none">Close</button>
                                 </div>
                             </div>
                         </div>

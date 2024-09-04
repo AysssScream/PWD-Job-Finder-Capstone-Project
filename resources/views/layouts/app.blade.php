@@ -8,7 +8,8 @@
     <link href="{{ asset('/css/layouts.css') }}" rel="stylesheet">
     <!-- Fonts -->
     <link rel="icon" href="{{ asset('/images/first17.png') }}" type="image/png">
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.bunny.net/css?family=Poppins:400,500,600&display=swap" rel="stylesheet">
@@ -16,6 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/alpine.min.js" defer></script>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
@@ -118,9 +120,18 @@
             class="overflow-y-auto overflow-x-hidden flex flex-col justify-between flex-grow h-full bg-gray-200 text-black dark:bg-gray-800 dark:text-gray-200 custom-scrollbar">
             <ul class="flex flex-col py-4 space-y-1">
                 <li class="px-5 hidden md:flex md:flex-col md:justify-center md:items-center text-center">
-                    <img class="rounded-full object-contain h-32 w-32 border-2 border-gray-300 mb-4"
-                        alt="placeholder-avatar" aria-label="Empty Profile Picture"
-                        src="{{ asset('/images/avatar.png') }}">
+                    @php
+                        $userId = Auth::user()->id; // Get the ID of the current user
+                        $adminProfile = \App\Models\AdminProfile::where('admin_id', $userId)->first(); // Retrieve profile by user ID
+                    @endphp
+
+                    <div
+                        class="w-48 h-48 md:w-40 md:h-40 sm:w-36 sm:h-36 bg-white rounded-full overflow-hidden mx-auto mb-4 border border-gray-700 shadow-lg">
+                        <img id="avatarPreview"
+                            src="{{ $adminProfile && $adminProfile->profile_picture ? asset('storage/' . $adminProfile->profile_picture) : asset('/images/avatar.png') }}"
+                            alt="Profile Picture" class="w-full h-full object-cover"
+                            onerror="this.onerror=null; this.src='{{ asset('/images/avatar.png') }}';">
+                    </div>
                     @if (Auth::check())
                         <div class="text-lg font-semibold text-gray-700 dark:text-gray-200 mb-3">
                             {{ Auth::user()->firstname }} {{ Auth::user()->middlename }} {{ Auth::user()->lastname }}
@@ -220,6 +231,7 @@
 
                     </a>
                 </li>
+
                 <li>
                     <a href="{{ route('admin.managevideos') }}"
                         class="relative flex flex-row items-center h-11 focus:outline-none border-l-4 border-transparent hover:border-gray-500 pr-6">
@@ -238,6 +250,213 @@
                         <div class="text-sm font-light tracking-wide text-gray-400 uppercase">Settings</div>
                     </div>
                 </li>
+
+                <div x-data="{ showModal: false }">
+                    <!-- Button to Open Modal -->
+                    <button @click="showModal = true"
+                        class="relative flex flex-row items-center h-11 focus:outline-none border-l-4 border-transparent hover:border-gray-500 pr-6 bg-transparent text-gray-700 dark:text-gray-200">
+                        <span class="inline-flex justify-center items-center ml-4">
+                            <i class="fas fa-user w-5 h-5"></i>
+                        </span>
+                        <span class="ml-2 text-sm tracking-wide truncate">Edit Profile</span>
+                    </button>
+
+                    <!-- Modal -->
+                    <template x-if="showModal">
+                        <div x-show="showModal" @keydown.window.escape="showModal = false"
+                            class="fixed inset-0 flex items-center justify-center z-50 ">
+
+                            <!-- Background overlay -->
+                            <div @click="showModal = false" class="fixed inset-0 bg-gray-900 bg-opacity-50 z-40">
+                            </div>
+
+                            <!-- Modal Content -->
+                            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-1/2 z-50 overflow-auto">
+                                <div class="flex justify-between items-center mb-4">
+                                    <h2 class="text-lg font-semibold"> <i class="fas fa-user-edit mr-2"></i> Edit Your
+                                        Profile Picture</h2>
+                                    <div x-data="{ open: false }">
+                                        <button @click="open = true"
+                                            class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+                                            <i class="fas fa-lock mr-2"></i>Change Password
+                                        </button>
+
+                                        <div x-show="open"
+                                            class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50"
+                                            x-cloak>
+
+
+                                            <div
+                                                class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg  w-1/5  relative">
+                                                <div class="flex items-center">
+                                                    <!-- New div on the left -->
+                                                    <div class="flex-1">
+                                                    </div>
+                                                    <!-- Close button -->
+                                                    <button @click="open = false"
+                                                        class="w-10 h-10 p-2 mb-5 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </div>
+                                                <div
+                                                    class="p-4 sm:p-8 bg-gray-50 dark:bg-gray-800 shadow sm:rounded-lg">
+                                                    <div class="max-w-8xl">
+                                                        @include('profile.partials.update-password-form')
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <hr class="border-gray-300 dark:border-gray-600 w-full mb-4">
+
+                                <form id="profileForm" action="{{ route('admin.profileupdate') }}" method="POST"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <!-- Avatar and Edit Button -->
+                                    <div class="flex flex-col items-center mb-4">
+                                        <!-- Image Preview -->
+
+
+                                        @php
+                                            $userId = Auth::user()->id; // Get the ID of the current user
+                                            $adminProfile = \App\Models\AdminProfile::where(
+                                                'admin_id',
+                                                $userId,
+                                            )->first(); // Retrieve profile by user ID
+                                        @endphp
+
+                                        <div
+                                            class="w-48 h-48 md:w-40 md:h-40 sm:w-36 sm:h-36 bg-white rounded-full overflow-hidden mx-auto mb-4 border border-gray-700 shadow-lg">
+                                            <img id="avatarPreview2"
+                                                src="{{ $adminProfile && $adminProfile->profile_picture ? asset('storage/' . $adminProfile->profile_picture) : asset('/images/avatar.png') }}"
+                                                alt="Profile Picture" class="w-full h-full object-cover"
+                                                onerror="this.onerror=null; this.src='{{ asset('/images/avatar.png') }}';">
+                                        </div>
+
+
+                                        <!-- File Name Display -->
+                                        <div id="fileNameDisplay" class="text-sm text-gray-600 mb-2"></div>
+
+                                        <!-- Hidden File Input -->
+                                        <input type="file" id="avatarInput" name="profile_picture"
+                                            accept="image/*" class="hidden">
+
+                                        <!-- Edit and Save Buttons -->
+                                        <div class="flex justify-end space-x-4">
+                                            <!-- Edit Button -->
+                                            <button type="button" id="editButton"
+                                                class="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700">
+                                                Edit Profile Picture
+                                            </button>
+
+                                        </div>
+                                    </div>
+
+
+                                    <script>
+                                        // Event listener for the Edit button to trigger the file picker
+                                        document.getElementById('editButton').addEventListener('click', function() {
+                                            document.getElementById('avatarInput').click();
+                                        });
+
+                                        // Event listener to handle file selection and preview the image
+                                        document.getElementById('avatarInput').addEventListener('change', function(event) {
+                                            const file = event.target.files[0]; // Get the selected file
+
+                                            if (file) {
+                                                const reader = new FileReader(); // Create a FileReader instance
+
+                                                reader.onload = function(e) {
+                                                    // Update the image preview
+                                                    document.getElementById('avatarPreview2').src = e.target.result;
+                                                };
+
+                                                reader.onerror = function(error) {
+                                                    console.error("Error reading file: ", error);
+                                                };
+
+                                                reader.readAsDataURL(file); // Read the file as a data URL
+
+                                                // Display the file name
+                                                document.getElementById('fileNameDisplay').textContent = `Selected file: ${file.name}`;
+                                            } else {
+                                                console.log("No file selected.");
+                                                document.getElementById('fileNameDisplay').textContent =
+                                                    ""; // Clear file name if no file is selected
+                                            }
+                                        });
+                                    </script>
+
+                                    <h2 class="text-lg font-semibold mb-4">Edit Your Personal Details</h2>
+                                    <hr class="border-gray-300 dark:border-gray-600 w-full mb-4">
+
+                                    <div class="mb-4">
+                                        <label for="username"
+                                            class="block text-gray-700 dark:text-gray-300 mb-1"></label>
+                                        <input type="text" id="username" name="username"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-200"
+                                            placeholder="Enter your username" value="{{ Auth::user()->name }}"
+                                            disabled>
+
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="email"
+                                            class="block text-gray-700 dark:text-gray-300 mb-1"></label>
+                                        <input type="email" id="email" name="email"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-200"
+                                            placeholder="Enter your email" value="{{ Auth::user()->email }}"
+                                            disabled>
+                                    </div>
+
+
+                                    {{-- <h2 class="text-lg font-semibold mb-4">Edit Password Details</h2>
+                                    <hr class="border-gray-300 dark:border-gray-600 w-full mb-4"> --}}
+
+                                    {{-- <div class="mb-4">
+                                        <label for="old_password"
+                                            class="block text-gray-700 dark:text-gray-300 mb-1">Old Password</label>
+                                        <input type="password" id="old_password" name="old_password"
+                                            class="w-full px-3 py-2 border border-gray-600 rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-200"
+                                            placeholder="Enter your old password">
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label for="new_password"
+                                            class="block text-gray-700 dark:text-gray-300 mb-1">New Password</label>
+                                        <input type="password" id="new_password" name="new_password"
+                                            class="w-full px-3 py-2 border border-gray-600 rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-200"
+                                            placeholder="Enter your new password">
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label for="confirm_password"
+                                            class="block text-gray-700 dark:text-gray-300 mb-1">Confirm
+                                            Password</label>
+                                        <input type="password" id="confirm_password" name="confirm_password"
+                                            class="w-full px-3 py-2 border border-gray-600 rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-200"
+                                            placeholder="Confirm your new password">
+                                    </div> --}}
+
+                                    <div class="flex justify-end space-x-4 mt-10">
+                                        <!-- Cancel Button -->
+                                        <button type="button" @click="showModal = false"
+                                            class="px-4 py-2 text-gray-700 bg-gray-200 rounded hover:bg-gray-300">
+                                            Cancel
+                                        </button>
+                                        <button type="submit"
+                                            class="px-4 py-2 text-white bg-green-600 rounded hover:bg-green-700">
+                                            Save
+                                        </button>
+                                    </div>
+                            </div>
+                            </form>
+                        </div>
+                    </template>
+                </div>
+
+
                 {{-- <li>
                     <a href="{{ route('profile.edit') }}"
                         class="relative flex flex-row items-center h-11 focus:outline-none border-l-4 border-transparent hover:border-gray-500 pr-6">
@@ -534,17 +753,46 @@
 
             function toggleAccessibility() {
                 var accessibilityIcon = document.getElementById('accessibilityIcon');
-                var isOpen = accessibilityIcon.classList.toggle('fa-universal-access');
-                accessibilityIcon.classList.toggle('fa-times');
+                if (accessibilityIcon) {
+                    accessibilityIcon.classList.toggle('fa-universal-access');
+                    accessibilityIcon.classList.toggle('fa-times');
+                }
+
                 var toggleLanguage = document.getElementById('toggleLanguage');
+                if (toggleLanguage) {
+                    toggleLanguage.classList.toggle('hidden');
+                }
+
                 var toggleTextSize = document.getElementById('toggletextsize');
+                if (toggleTextSize) {
+                    toggleTextSize.classList.toggle('hidden');
+                }
+
                 var toggleScreenReader = document.getElementById('toggleScreenReader');
-                var togglePreRecord = document.getElementById('toggleVideo')
-                toggleLanguage.classList.toggle('hidden');
-                toggleTextSize.classList.toggle('hidden');
-                toggleScreenReader.classList.toggle('hidden');
-                togglePreRecord.classList.toggle('hidden');
+                if (toggleScreenReader) {
+                    toggleScreenReader.classList.toggle('hidden');
+                }
+
+                var togglePreRecord = document.getElementById('toggleVideo');
+                if (togglePreRecord) {
+                    togglePreRecord.classList.toggle('hidden');
+                }
             }
+
+
+            // function toggleAccessibility() {
+            //     var accessibilityIcon = document.getElementById('accessibilityIcon');
+            //     var isOpen = accessibilityIcon.classList.toggle('fa-universal-access');
+            //     accessibilityIcon.classList.toggle('fa-times');
+            //     var toggleLanguage = document.getElementById('toggleLanguage');
+            //     var toggleTextSize = document.getElementById('toggletextsize');
+            //     var toggleScreenReader = document.getElementById('toggleScreenReader');
+            //     var togglePreRecord = document.getElementById('toggleVideo')
+            //     toggleLanguage.classList.toggle('hidden');
+            //     toggleTextSize.classList.toggle('hidden');
+            //     toggleScreenReader.classList.toggle('hidden');
+            //     togglePreRecord.classList.toggle('hidden');
+            // }
 
             function toggleTextSize() {
                 var textSizeIndicator = document.getElementById('textSizeIndicator');
@@ -635,6 +883,35 @@
             }
 
             // Initialize screen reader state based on localStorage
+            // window.addEventListener('load', function() {
+            //     const screenReaderIcon = document.getElementById('screenReaderIcon');
+            //     const screenMenuReaderIcon = document.getElementById('screenMenuReaderIcon');
+            //     const screenModalReaderIcon = document.getElementById('screenModalReaderIcon');
+
+            //     if (screenReaderEnabled) {
+            //         startScreenReader();
+
+            //         screenReaderIcon.classList.add('fa-volume-up');
+            //         screenReaderIcon.classList.remove('fa-volume-mute');
+
+            //         screenMenuReaderIcon.classList.add('fa-volume-up');
+            //         screenMenuReaderIcon.classList.remove('fa-volume-mute');
+
+            //         screenModalReaderIcon.classList.add('fa-volume-up');
+            //         screenModalReaderIcon.classList.remove('fa-volume-mute');
+            //     } else {
+            //         screenReaderIcon.classList.add('fa-volume-mute');
+            //         screenReaderIcon.classList.remove('fa-volume-up');
+
+            //         screenMenuReaderIcon.classList.add('fa-volume-mute');
+            //         screenMenuReaderIcon.classList.remove('fa-volume-up');
+
+            //         screenModalReaderIcon.classList.add('fa-volume-mute');
+            //         screenModalReaderIcon.classList.remove('fa-volume-up');
+            //     }
+            // });
+
+
             window.addEventListener('load', function() {
                 const screenReaderIcon = document.getElementById('screenReaderIcon');
                 const screenMenuReaderIcon = document.getElementById('screenMenuReaderIcon');
@@ -642,26 +919,24 @@
 
                 if (screenReaderEnabled) {
                     startScreenReader();
+                }
 
-                    screenReaderIcon.classList.add('fa-volume-up');
-                    screenReaderIcon.classList.remove('fa-volume-mute');
+                if (screenReaderIcon) {
+                    screenReaderIcon.classList.toggle('fa-volume-up', screenReaderEnabled);
+                    screenReaderIcon.classList.toggle('fa-volume-mute', !screenReaderEnabled);
+                }
 
-                    screenMenuReaderIcon.classList.add('fa-volume-up');
-                    screenMenuReaderIcon.classList.remove('fa-volume-mute');
+                if (screenMenuReaderIcon) {
+                    screenMenuReaderIcon.classList.toggle('fa-volume-up', screenReaderEnabled);
+                    screenMenuReaderIcon.classList.toggle('fa-volume-mute', !screenReaderEnabled);
+                }
 
-                    screenModalReaderIcon.classList.add('fa-volume-up');
-                    screenModalReaderIcon.classList.remove('fa-volume-mute');
-                } else {
-                    screenReaderIcon.classList.add('fa-volume-mute');
-                    screenReaderIcon.classList.remove('fa-volume-up');
-
-                    screenMenuReaderIcon.classList.add('fa-volume-mute');
-                    screenMenuReaderIcon.classList.remove('fa-volume-up');
-
-                    screenModalReaderIcon.classList.add('fa-volume-mute');
-                    screenModalReaderIcon.classList.remove('fa-volume-up');
+                if (screenModalReaderIcon) {
+                    screenModalReaderIcon.classList.toggle('fa-volume-up', screenReaderEnabled);
+                    screenModalReaderIcon.classList.toggle('fa-volume-mute', !screenReaderEnabled);
                 }
             });
+
 
             // Handle page unload to stop ongoing speech
             window.addEventListener('beforeunload', function() {
@@ -753,25 +1028,28 @@
             }
         });
 
-        // Update text size indicator in the button
         var textSizeIndicator = document.getElementById('textSizeIndicator');
-        switch (textSize) {
-            case 1:
-                textSizeIndicator.textContent = 'x1';
-                break;
-            case 2:
-                textSizeIndicator.textContent = 'x2';
-                break;
-            case 3:
-                textSizeIndicator.textContent = 'x3';
-                break;
-            case 4:
-                textSizeIndicator.textContent = 'lg';
-                break;
-            default:
-                textSizeIndicator.textContent = 'x2'; // Default to x3
-                break;
+
+        if (textSizeIndicator) {
+            switch (textSize) {
+                case 1:
+                    textSizeIndicator.textContent = 'x1';
+                    break;
+                case 2:
+                    textSizeIndicator.textContent = 'x2';
+                    break;
+                case 3:
+                    textSizeIndicator.textContent = 'x3';
+                    break;
+                case 4:
+                    textSizeIndicator.textContent = 'lg';
+                    break;
+                default:
+                    textSizeIndicator.textContent = 'x2'; // Default to x2
+                    break;
+            }
         }
+
     }
 
     function toggleTextSize() {

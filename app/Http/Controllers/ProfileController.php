@@ -14,7 +14,7 @@ use App\Models\PwdInformation;
 use App\Models\Skill;
 use App\Models\WorkExperience;
 use Carbon\Carbon;
-
+use App\Models\AdminProfile;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -275,11 +275,11 @@ class ProfileController extends Controller
         // Education Info Validation
         $request->validate([
             'educationLevel' => ['required', 'max:100'],
-            'school' => ['required_if:educationLevel,Doctoral Degree,Master\'s Degree,College Graduate,Bachelor\'s Degree,Vocational Graduate,Associate\'s Degree,Some College Level,Vocational Undergraduate,Technical-Vocational Education and Training', 'max:100', 'regex:/^[a-zA-Z ,.\-\/]+$/'],
+            'school' => ['required_if:educationLevel,Doctoral Degree,Master\'s Degree,College Graduate,Bachelor\'s Degree,Vocational Graduate,Associate\'s Degree, Vocational Undergraduate,Technical-Vocational Education and Training', 'max:100', 'regex:/^[a-zA-Z ,.\-\/]+$/'],
             'course' => ['required_if:educationLevel,Doctoral Degree,Master\'s Degree,College Graduate,Bachelor\'s Degree,Vocational Graduate,Associate\'s Degree,Some College Level,Vocational Undergraduate,Technical-Vocational Education and Training', 'max:100', 'regex:/^[a-zA-Z ,.\-\/]+$/'],
 
             'yearGraduated' => [
-                'required_if:educationLevel,Doctoral Degree,Master\'s Degree,College Graduate,Bachelor\'s Degree,Vocational Graduate,Associate\'s Degree,Some College Level,Vocational Undergraduate,Technical-Vocational Education and Training',
+                'required_if:educationLevel,Doctoral Degree,Master\'s Degree,College Graduate,Bachelor\'s Degree,Vocational Graduate,Associate\'s Degree,Vocational Undergraduate,Technical-Vocational Education and Training',
                 'nullable', // Make sure it's nullable when not required
                 'integer',
                 'digits:4',
@@ -633,6 +633,35 @@ class ProfileController extends Controller
 
     //     return Redirect::route('profile.edit')->with('status', 'profile-updated');
     // }
+
+    // Method to handle the profile picture upload
+    public function updateadmin(Request $request)
+    {
+        // Validate the incoming request
+        $request->validate([
+            'profile_picture' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $userId = auth()->user()->id; // Get the authenticated user's ID
+
+        // Handle the file upload
+        if ($request->hasFile('profile_picture')) {
+            $file = $request->file('profile_picture');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $filePath = $file->storeAs('profile_pictures', $fileName, 'public');
+
+            // Save the file path in the database
+            $adminProfile = AdminProfile::updateOrCreate(
+                ['admin_id' => $userId],
+                ['profile_picture' => $filePath]
+            );
+
+            return back()->with('success', 'Profile picture updated successfully.');
+        }
+
+        return back()->with('error', 'No file was uploaded.');
+    }
+
 
     public function updatepic(Request $request)
     {

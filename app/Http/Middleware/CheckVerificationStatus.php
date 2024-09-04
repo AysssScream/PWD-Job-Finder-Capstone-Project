@@ -18,7 +18,7 @@ class CheckVerificationStatus
     public function handle(Request $request, Closure $next)
     {
 
-        if (Auth::check() && Auth::user()->account_verification_status === 'pending' || Auth::user()->account_verification_status === 'waiting for approval' || Auth::user()->account_verification_status === 'declined') {
+        if (Auth::check() && Auth::user()->account_verification_status === 'pending' || Auth::user()->account_verification_status === 'waiting for approval') {
             return redirect()->route('pendingapproval');
         }
 

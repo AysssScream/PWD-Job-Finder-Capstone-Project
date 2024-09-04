@@ -282,7 +282,7 @@ return [
     ],
 
     'language' => [
-        'instruction' => 'Hakbang 5: Upang i-update ang iyong profile, i-click ang “Magdagdag ng Wika” para magdagdag ng bagong mga wika at itakda ang proficiency ng bawat isa. Gamitin ang mga checkboxes para pumili ng mga kasanayang walang pormal na pagsasanay (Iba pang Skills). I-edit o tanggalin ang mga entry ayon sa pangangailangan upang wastong maipakita ang iyong mga kakayahan.',
+        'instruction' => 'Hakbang 5: Upang i-update ang iyong profile, i-click ang mga checkboxes sa ibaba ng "Kasanayan ng Wika" ukol sa lengwahe ng Filipino at Ingles. Gamitin ang mga checkboxes para pumili ng mga kasanayang walang pormal na pagsasanay (Iba pang Skills). I-edit o tanggalin ang mga entry ayon sa pangangailangan upang wastong maipakita ang iyong mga kakayahan.',
         'updatelang' => 'Upang ma-update ang iyong kasanayan sa wika:',
         'list-unstyled' => [
             '1' => 'Itakda ang kasanayan sa wika gamit ang checkbox.',

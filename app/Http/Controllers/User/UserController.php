@@ -22,6 +22,8 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Http;
+use Exception;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -128,10 +130,11 @@ class UserController extends Controller
 
 
 
-    public function remarks($remarks)
+    public function showRemarks($remarks, $company_name)
     {
         return view('layouts.remarks', [
             'remarks' => $remarks,
+            'company_name' => $company_name,
         ]);
 
     }
@@ -304,13 +307,26 @@ class UserController extends Controller
         } catch (\Illuminate\Validation\ValidationException $e) {
             return redirect()->back()->withErrors($e->errors())->withInput();
         }
-
-        // Get the uploaded file
         try {
             $file = $request->file('resume');
             $filePath = $file->getPathname();
             $fileName = $file->getClientOriginalName();
             $fileType = $file->getClientMimeType();
+
+            $userId = Auth::id();
+
+            // Find the existing resume record for the user
+            $resume = Resume::where('user_id', $userId)->first();
+
+            if ($resume) {
+                // Delete the old file if it exists
+                if ($resume->file_path && Storage::exists($resume->file_path)) {
+                    Storage::delete($resume->file_path);
+                }
+            }
+
+            // Store the new file in the 'resume' folder within 'storage/app'
+            $storedFilePath = $file->storeAs('resume', $fileName, 'public'); // 'public' disk
 
             // Send the file to the Flask server
             $response = Http::attach('file', file_get_contents($filePath), $fileName)
@@ -318,7 +334,6 @@ class UserController extends Controller
 
             if ($response->successful()) {
                 $data = $response->json();
-                $userId = Auth::id();
 
                 // Update or create the resume record in the database
                 Resume::updateOrCreate(
@@ -326,6 +341,7 @@ class UserController extends Controller
                     [
                         'file_name' => $fileName,
                         'file_type' => $fileType,
+                        'file_path' => $storedFilePath, // Store the path of the uploaded file
                         'text_content' => json_encode($data), // Assuming `text_content` will store JSON data
                         'age' => $data['age'] ?? null, // Use null coalescing operator to handle undefined keys
                         'skills' => $data['skills'] ?? null,
@@ -339,18 +355,68 @@ class UserController extends Controller
                 $errorMessage = $response->json('error', 'Unknown error occurred');
                 return redirect()->back()->withErrors(['api' => 'Failed to upload to Flask server: ' . $errorMessage]);
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             // Handle general exceptions (e.g., file handling or HTTP request issues)
             return redirect()->back()->withErrors(['error' => 'An error occurred while processing the file: ' . $e->getMessage()]);
         }
     }
 
 
+    // public function matchindex(Request $request)
+    // {
+    //     Session::flash('match', 'You may change your job preferences.');
+
+
+    //     $topJobOpenings = JobInfo::select('title', DB::raw('SUM(vacancy) as count'))
+    //         ->where('vacancy', '>', 0)
+    //         ->groupBy('title')
+    //         ->having(DB::raw('SUM(vacancy)'), '>', 0)
+    //         ->orderByDesc('count')
+    //         ->limit(10)
+    //         ->get();
+
+
+    //     // Fetch jobs ordered by date posted
+
+    //     $user = auth()->user();
+    //     $jobPreference = JobPreference::where('user_id', $user->id)->first();
+
+    //     if (!$jobPreference) {
+
+    //     }
+    //     $title = $request->query('title', null);
+    //     $jobsQuery = JobInfo::where('vacancy', '>', 0); // Apply condition where vacancy is greater than 0
+
+
+    //     if ($title) {
+    //         $jobsQuery->where('title', 'like', "%$title%"); // Use LIKE for partial matches
+    //     }
+
+    //     $jobs = $jobsQuery->orderBy('date_posted', 'desc')->paginate(10);
+    //     $preferredOccupation = $jobPreference->preferred_occupation;
+    //     $matchedJobTitles = JobInfo::where('title', 'like', '%' . $preferredOccupation . '%')
+    //         ->pluck('title');
+
+    //     $matchedJobs = $jobs->filter(function ($job) use ($matchedJobTitles) {
+    //         return $matchedJobTitles->contains($job->title);
+    //     });
+
+    //     $jobpreference = JobPreference::where('user_id', $user->id)->firstOrFail();
+
+    //     return view('matchedjobs', [
+    //         'topJobOpenings' => $topJobOpenings,
+    //         'jobs' => $jobs,
+    //         'matchedJobs' => $matchedJobs,
+    //         'jobpreference' => $jobpreference,
+
+    //     ]);
+    // }
+
     public function matchindex(Request $request)
     {
         Session::flash('match', 'You may change your job preferences.');
 
-
+        // Fetch the top job openings
         $topJobOpenings = JobInfo::select('title', DB::raw('SUM(vacancy) as count'))
             ->where('vacancy', '>', 0)
             ->groupBy('title')
@@ -359,42 +425,57 @@ class UserController extends Controller
             ->limit(10)
             ->get();
 
-
-        // Fetch jobs ordered by date posted
-
+        // Get the current user and their job preferences
         $user = auth()->user();
-        $jobPreference = JobPreference::where('user_id', $user->id)->first();
+        $jobpreference = JobPreference::where('user_id', $user->id)->first();
 
-        if (!$jobPreference) {
-
+        if (!$jobpreference) {
+            // Handle case where job preference is not found
+            // Example: Redirect to preferences page or show a default message
+            // return redirect()->route('preferences.page')->with('error', 'Please set your job preferences.');
+            $jobpreference = (object) [
+                'preferred_occupation' => '',
+                'local_location' => ''
+            ]; // Default values to avoid errors
         }
+
+        // Get the title from the query string
         $title = $request->query('title', null);
-        $jobsQuery = JobInfo::where('vacancy', '>', 0); // Apply condition where vacancy is greater than 0
+        $location = $request->query('location', null);
+        // Start building the query for jobs
+        $jobsQuery = JobInfo::where('vacancy', '>', 0);
 
-
+        // Apply filters if present
         if ($title) {
-            $jobsQuery->where('title', 'like', "%$title%"); // Use LIKE for partial matches
+            $jobsQuery->where('title', 'like', "%$title%");
+        }
+        if ($location) {
+            $jobsQuery->where('location', 'like', "%$location%");
         }
 
+        $preferredOccupation = $jobpreference->preferred_occupation;
+        $localLocation = $jobpreference->local_location;
+
+        if ($preferredOccupation) {
+            $jobsQuery->where('title', 'like', '%' . $preferredOccupation . '%');
+        }
+
+        if ($localLocation) {
+            $jobsQuery->where('location', 'like', '%' . $localLocation . '%');
+        }
+
+        // Get the paginated list of jobs
         $jobs = $jobsQuery->orderBy('date_posted', 'desc')->paginate(10);
-        $preferredOccupation = $jobPreference->preferred_occupation;
-        $matchedJobTitles = JobInfo::where('title', 'like', '%' . $preferredOccupation . '%')
-            ->pluck('title');
 
-        $matchedJobs = $jobs->filter(function ($job) use ($matchedJobTitles) {
-            return $matchedJobTitles->contains($job->title);
-        });
-
-        $jobpreference = JobPreference::where('user_id', $user->id)->firstOrFail();
-
+        // Return the view with the required data
         return view('matchedjobs', [
             'topJobOpenings' => $topJobOpenings,
             'jobs' => $jobs,
-            'matchedJobs' => $matchedJobs,
             'jobpreference' => $jobpreference,
-
         ]);
     }
+
+
 
 
 
@@ -456,15 +537,19 @@ class UserController extends Controller
     public function search(Request $request)
     {
 
+        $user = auth()->user();
+        $jobpreference = JobPreference::where('user_id', $user->id)->first();
+
         Session::flash('jobsno', 'Search companies, positions, and skills');
 
         $title = $request->input('title');
         $query = $request->input('query'); // Search query string
         $recencyFilter = $request->input('custom_recency_filter'); // Updated name attribute, defaulting to 'All'
-        $location = $request->input('location'); // Location input
-        $minSalary = $request->input('min_salary'); // Minimum salary input
-        $maxSalary = $request->input('max_salary'); // Maximum salary input
-        $jobType = $request->input('job_type'); // Job type filter
+        $location = $request->input('location', null); // Location input
+        $minSalary = $request->input('min_salary', null); // Minimum salary input
+        $maxSalary = $request->input('max_salary', null); // Maximum salary input
+        $jobType = $request->input('job_type', null); // Job type filter
+        $maxAge = $request->input('max-age', null);
         $jobsQuery = JobInfo::query();
         // Fetch top job openings based on count
         $topJobOpenings = JobInfo::select('title', DB::raw('SUM(vacancy) as count'))
@@ -476,8 +561,6 @@ class UserController extends Controller
             ->get();
 
 
-
-
         if ($query) {
             $jobsQuery->where(function ($queryBuilder) use ($query) {
                 $queryBuilder->where('title', 'like', '%' . $query . '%')
@@ -486,6 +569,11 @@ class UserController extends Controller
                     ->orWhere('location', 'like', '%' . $query . '%')
                     ->orWhere('educational_level', 'like', '%' . $query . '%');
             });
+        }
+
+
+        if ($maxAge) {
+            $jobsQuery->where('max_age', '<=', $maxAge);
         }
 
         if ($location) {
@@ -533,7 +621,7 @@ class UserController extends Controller
         $applicant = ApplicantProfile::where('user_id', $user->id)->firstOrFail();
         $jobs = $jobsQuery->orderBy('date_posted', 'desc')->paginate(8);
 
-        return view('dashboard', ['topJobOpenings' => $topJobOpenings, 'jobs' => $jobs, 'applicant' => $applicant, 'applications' => $applications]);
+        return view('dashboard', ['topJobOpenings' => $topJobOpenings, 'jobs' => $jobs, 'applicant' => $applicant, 'applications' => $applications, 'jobpreference' => $jobpreference]);
     }
 
 

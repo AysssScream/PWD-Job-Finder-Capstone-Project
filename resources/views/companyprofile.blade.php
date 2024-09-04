@@ -6,10 +6,10 @@
                  <div class="container mx-auto max-w-8xl px-4 pt-5">
                      <div class="grid grid-cols-1 gap-6 ">
                          @if ($employer->company_logo && Storage::exists('public/' . $employer->company_logo))
-                             <div
-                                 class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 mt-20 ">
+                             <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 mt-20">
                                  <img src="{{ asset('storage/' . $employer->company_logo) }}" alt="Company Logo"
-                                     class="w-48 h-48 object-contain rounded-full border-4 border-gray-400 dark:border-gray-700 bg-white dark:bg-gray-800 ">
+                                     class="w-48 h-48 object-contain rounded-full border-4 border-gray-400 dark:border-gray-700 bg-white dark:bg-gray-800"
+                                     onerror="this.onerror=null; this.src='{{ asset('/images/avatar.png') }}';">
                              </div>
                          @else
                              <div

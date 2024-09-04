@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Crypt;
+
 
 class SavedJob extends Model
 {
@@ -20,5 +22,42 @@ class SavedJob extends Model
 
 
 
+    protected $casts = [
+        'company_name' => 'encrypted',
+        'title' => 'encrypted',
+        'location' => 'encrypted',
+    ];
 
+    // Encrypt attributes before saving
+
+    public function setCompanyNameAttribute($value)
+    {
+        $this->attributes['company_name'] = $value ? Crypt::encryptString($value) : null;
+    }
+
+    public function setTitleAttribute($value)
+    {
+        $this->attributes['title'] = $value ? Crypt::encryptString($value) : null;
+    }
+
+    public function setLocationAttribute($value)
+    {
+        $this->attributes['location'] = $value ? Crypt::encryptString($value) : null;
+    }
+
+    // Decrypt attributes when retrieving
+    public function getCompanyNameAttribute($value)
+    {
+        return $value ? Crypt::decryptString($value) : null;
+    }
+
+    public function getTitleAttribute($value)
+    {
+        return $value ? Crypt::decryptString($value) : null;
+    }
+
+    public function getLocationAttribute($value)
+    {
+        return $value ? Crypt::decryptString($value) : null;
+    }
 }

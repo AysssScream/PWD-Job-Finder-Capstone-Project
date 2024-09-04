@@ -124,8 +124,6 @@
 
 
                             @if (Session::has('message'))
-                                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-                                <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
                                 <script>
                                     $(document).ready(function() {
                                         toastr.options = {
@@ -207,7 +205,7 @@
                                                 Approved Applications
                                             </h3>
                                             <ul
-                                                class="mt-4 h-52 overflow-y-auto bg-white p-4 dark:bg-gray-700 rounded-lg shadow-md">
+                                                class="mt-4 h-96 overflow-y-auto bg-white p-4 dark:bg-gray-700 rounded-lg shadow-md">
                                                 @foreach (Auth::user()->applications->where('status', 'hired') as $application)
                                                     <li
                                                         class="flex items-start justify-between py-2 border-b border-gray-200 dark:border-gray-600">
@@ -220,9 +218,12 @@
                                                                 <span>as a {{ $application->title }}</span>
                                                             </div>
                                                         </div>
-                                                        <div class="mt-2">
+                                                        <div>
                                                             <form
-                                                                action="{{ route('show.remarks', ['remarks' => $application->remarks]) }}"
+                                                                action="{{ route('show.remarks', [
+                                                                    'remarks' => $application->remarks,
+                                                                    'company_name' => $application->company_name,
+                                                                ]) }}"
                                                                 method="GET">
                                                                 @csrf
                                                                 <button type="submit"
@@ -258,7 +259,6 @@
                                     <div
                                         class="flex-shrink-0 h-9 w-9 sm:h-11 sm:w-11 rounded-full overflow-hidden border-2 border-blue-400 bg-white">
                                         @if (Auth::user()->usertype === 'user')
-
                                             @if (Auth::user()->pwdInformation)
                                                 <img class="h-full w-full object-contain" aria-label="Profile"
                                                     src="{{ asset('storage/' . Auth::user()->pwdInformation->profilePicture) }}"
@@ -269,7 +269,7 @@
                                                     src="{{ asset('/images/avatar.png') }}" alt="Avatar">
                                             @endif
                                         @elseif (Auth::user()->usertype === 'employer')
-                                            @if (Auth::user()->employer->company_logo)
+                                            @if (Auth::user()->employer && Auth::user()->employer->company_logo)
                                                 <img class="h-full w-full object-contain" aria-label="Profile"
                                                     src="{{ asset('storage/' . Auth::user()->employer->company_logo) }}"
                                                     alt="Avatar"
@@ -279,6 +279,7 @@
                                                     src="{{ asset('/images/avatar.png') }}" alt="Avatar">
                                             @endif
                                         @endif
+
                                     </div>
                                     <!-- User Name -->
                                     <div class="ml-2" aria-label="Profile">
@@ -316,7 +317,7 @@
                                                     src="{{ asset('/images/avatar.png') }}" alt="Avatar">
                                             @endif
                                         @elseif (Auth::user()->usertype === 'employer')
-                                            @if (Auth::user()->employer->company_logo)
+                                            @if (Auth::user()->employer && Auth::user()->employer->company_logo)
                                                 <img class="h-full w-full object-contain" aria-label="Company Logo"
                                                     src="{{ asset('storage/' . Auth::user()->employer->company_logo) }}"
                                                     alt="Company Logo"
@@ -326,6 +327,7 @@
                                                     src="{{ asset('/images/avatar.png') }}" alt="Company Logo">
                                             @endif
                                         @endif
+
                                     </div>
 
 
