@@ -176,14 +176,14 @@
         @if (Route::is('register'))
             <div class="container flex justify-center mx-auto">
                 <div class="max-w-full px-6 py-4 bg-white dark:bg-gray-800 shadow-md sm:rounded-lg text-black"
-                    style="margin-top:100px; margin-bottom: 100px;">
+                    style="margin-top:50px; margin-bottom: 100px;">
                     {{ $slot }}
                 </div>
             </div>
         @else
             <div class="container flex justify-center mx-auto">
                 <div class="max-w-full px-6 py-4 bg-white dark:bg-gray-800 shadow-md sm:rounded-lg text-black"
-                    style="margin-top:0px; margin-bottom: 100px;">
+                    style="margin-top:50px; margin-bottom: 100px;">
                     {{ $slot }}
                 </div>
             </div>

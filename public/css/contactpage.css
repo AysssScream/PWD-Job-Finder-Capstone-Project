@@ -156,8 +156,8 @@ body {
 }
 
 .dark .form-control {
-    background-color: rgb(22, 22, 22) !important;
-    border: 1px solid #ffffff; /* Changed border color for dark mode */
+    background-color: rgb(33 37 41) !important;
+    border: 1px solid #ffffff28; /* Changed border color for dark mode */
     color: white; /* Ensure text is readable in dark mode */
 }
 

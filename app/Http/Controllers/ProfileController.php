@@ -203,7 +203,7 @@ class ProfileController extends Controller
             'proficiency-Filipino.*' => ['nullable', 'string', 'in:Read,Write,Speak,Understand'],
             'proficiency-English.*' => ['nullable', 'string', 'in:Read,Write,Speak,Understand'],
             'skills' => 'array',
-            'otherSkills' => in_array('OTHER_SKILLS', $request->input('skills', [])) ? 'required|regex:/^[A-Za-z\s,-.]+$/i|max:300' : '', // Conditionally require input for "otherSkills"
+            'otherSkills' => in_array('OTHER_SKILLS', $request->input('skills', [])) ? 'required|regex:/^[A-Za-z\s,-.]+$/i|max:300' : '',
             'selectedSkills' => 'nullable|string',
             'otherSkillsInput' => in_array('OTHER_SKILLS', $request->input('skills', [])) ? 'required|regex:/^[A-Za-z\s,-.]+$/i|max:300' : '',
         ], [
@@ -212,9 +212,6 @@ class ProfileController extends Controller
             'otherSkills.regex' => 'The other skills field must contain letters, spaces, hyphens, commas, and periods.',
             'otherSkills.max' => 'The other skills field may not be greater than 300 characters.',
         ]);
-
-
-        $user = $request->user();
 
         // Retrieve language inputs and proficiencies
         $languages = $request->input('language-input', []);
@@ -229,7 +226,7 @@ class ProfileController extends Controller
                 // Add the data to the array if proficiencies are selected or empty
                 $languageData[] = [
                     'user_id' => $user->id,
-                    'language_input' => $languageInput,
+                    'language_input' => $language,
                     'proficiencies' => json_encode($proficiencies),
                 ];
             }
@@ -240,22 +237,11 @@ class ProfileController extends Controller
 
         // Insert new records
         foreach ($languageData as $data) {
-            $user->languageInputs()->updateOrCreate(
-                ['language_input' => $data['language_input'], 'user_id' => $data['user_id']],
-                ['proficiencies' => $data['proficiencies']]
-            );
-        }
-
-        // Update or create language inputs
-        foreach ($languageData as $data) {
-            $user->languageInputs()->updateOrCreate(
-                ['language_input' => $data['language_input'], 'user_id' => $data['user_id']],
-                ['proficiencies' => $data['proficiencies']]
-            );
+            $user->languageInputs()->create($data);
         }
 
         // Update Skills Info
-        $skill = Skill::where('user_id', $user->id)->firstOrFail();
+        $skill = Skill::firstOrNew(['user_id' => $user->id]); // Use firstOrNew to create if not found
         $skill->skills = $request->input('selectedSkills');
         $skill->otherSkills = $request->input('otherSkillsInput');
         $skill->save();
@@ -263,6 +249,7 @@ class ProfileController extends Controller
         Session::flash('saveprofile', 'Language and Skills Information updated successfully');
         return Redirect::route('profile.edit')->with('status', 'language-info-updated');
     }
+
 
 
     public function updateEducationInfo(Request $request): RedirectResponse

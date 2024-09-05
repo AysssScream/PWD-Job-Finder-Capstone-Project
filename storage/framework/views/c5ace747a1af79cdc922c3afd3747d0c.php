@@ -18,6 +18,11 @@
     <link href="<?php echo e(asset('fontawesome-free-6.5.2-web/css/all.min.css')); ?>" rel="stylesheet">
     <link rel="preload" href="images/lightnavbarlogo.png" as="image">
     <link rel="preload" href="images/darknavbarlogo.png" as="image">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 </head>
 
 <body>
@@ -201,6 +206,19 @@
                         </div>
                     </div>
                     <div class="lc-block mb-lg-0 mb-4">
+                        <?php if(Session::has('contactus')): ?>
+                            <script>
+                                $(document).ready(function() {
+                                    toastr.options = {
+                                        "progressBar": true,
+                                        "closeButton": true,
+                                    }
+                                    toastr.success("<?php echo e(Session::get('contactus')); ?>", 'Message Saved', {
+                                        timeOut: 5000
+                                    });
+                                });
+                            </script>
+                        <?php endif; ?>
                         <form action="<?php echo e(route('contact.messages.store')); ?>" method="POST">
                             <?php echo csrf_field(); ?>
                             <div class="row">
@@ -233,7 +251,10 @@
                             <div class="d-grid gap-2">
                                 <button type="submit" class="btn btn-dark btn-lg">Send Message</button>
                             </div>
+
+
                         </form>
+
                     </div>
                 </div>
 
@@ -411,6 +432,8 @@
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
     </script>
+
+
 
 </body>
 

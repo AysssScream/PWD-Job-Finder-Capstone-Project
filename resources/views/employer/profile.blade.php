@@ -135,12 +135,67 @@
                             <br>
                         @endif
                         <div class="max-w-8xl mx-auto sm:px-6 lg:px-8 mt-4 p-4">
+                            <label for="account" class="block text-xl mb-1 text-black dark:text-gray-200">
+                                Account Settings
+                            </label>
+                            <hr class="border-gray-300 dark:border-gray-600 my-2">
+
+
+                            <label for="firstname" class="block mb-1 mt-2 text-black dark:text-gray-200">
+                                Full Name
+                                <input type="text" id="account" name="account" placeholder="Full Name"
+                                    value="{{ Auth::user()->name }}" disabled
+                                    class="w-full p-2 mt-2 mb-5 border-gray-500 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50
+        bg-gray-100 text-gray-800 placeholder-gray-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 dark:placeholder-gray-400">
+                            </label>
+
+                            <div x-data="{ open: false }">
+                                <!-- Change Password Button -->
+                                <button type="button"
+                                    class="bg-blue-500 text-white px-4 py-2 rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+                                    @click="open = true">
+                                    Change Password
+                                </button>
+                                <template x-if="open">
+                                    <!-- Modal -->
+                                    <div x-show="open"
+                                        class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50"
+                                        x-cloak>
+                                        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-1/2 relative">
+                                            <div class="flex items-center">
+                                                <!-- New div on the left -->
+                                                <div class="flex-1"></div>
+
+                                                <!-- Close button -->
+                                                <button @click="open = false"
+                                                    class="w-10 h-10 p-2 mb-5 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                            <div class="p-4 sm:p-8 bg-gray-50 dark:bg-gray-800 shadow sm:rounded-lg">
+                                                <div class="max-w-8xl">
+                                                    @include('profile.partials.update-password-form')
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+
+
+
+
+                            <label for="account" class="block text-xl mb-4 mt-10 text-black dark:text-gray-200">
+                                Company Details
+                            </label>
+                            <hr class="border-gray-300 dark:border-gray-600 my-2">
+
                             <label for="businessname" class="block mb-1 text-black dark:text-gray-200">
                                 Company Description
                                 <span class="text-black">
                                     <textarea id="exampleTextarea" name="companydescription" rows="4" maxlength="300"
                                         class="w-full p-2 mt-2 border-gray-500 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50
-                 bg-gray-1  00 text-gray-800 placeholder-gray-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 dark:placeholder-gray-400"
+                                        bg-gray-100 text-gray-800 placeholder-gray-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 dark:placeholder-gray-400"
                                         placeholder="Enter your text here...">{{ $profile->company_description }}</textarea>
 
                                     <div id="charCount" class="text-right text-black dark:text-gray-200"></div>
