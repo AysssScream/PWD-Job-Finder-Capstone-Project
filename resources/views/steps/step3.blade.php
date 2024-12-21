@@ -9,78 +9,100 @@
 
         </head>
         <div class="py-12">
-            <div class="container mx-auto  ">
+            <div class="container max-w-full pr-6 pl-6 mx-auto">
                 <div class="flex justify-center">
-                    <div class="w-full">
+                    <div class="w-full p-6">
                         <form id="workExperienceForm" onsubmit="myfunc(event)" enctype="multipart/form-data">
                             @csrf
                             @if ($errors->any())
                                 <div class="bg-red-100 border border-red-400 text-red-700 dark:bg-red-700 dark:text-gray-100 dark:border-red-600 dark:text-red-200 px-4 py-3 rounded relative"
                                     role="alert">
-                                    <strong class="font-bold">Oops!</strong>
-                                    <span class="block sm:inline">There were some errors with your submission:</span>
+                                    <strong class="font-bold dark:text-white">Oops!</strong>
+                                    <span class="block sm:inline dark:text-white">There were some errors with your
+                                        submission:</span>
                                     <ul class="mt-3 list-disc list-inside text-sm">
                                         @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
+                                            <li class="dark:text-white">{{ $error }}</li>
                                         @endforeach
                                     </ul>
                                 </div>
                                 <br>
                             @endif
 
-                            <div
-                                class=" container-wrapper bg-white text-black dark:bg-gray-800 dark:text-gray-200 shadow-md rounded-lg">
-                                <div class="p-6">
-                                    <h3 class="text-2xl font-bold mb-2 inline-flex items-center justify-between w-full focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                            <div class="bg-white text-black dark:bg-gray-800 dark:text-gray-200 shadow-3d rounded-lg mb-4"
+                                id="step3">
+                                @php
+                                    $currentStep = 3; // Set this dynamically based on your current step
+                                    $totalSteps = 7; // Total number of steps (adjusted to 8)
+                                    $percentage = round((($currentStep - 1) / ($totalSteps - 1)) * 100);
+                                @endphp
+
+                                <!-- Gradient background for the header section -->
+                                <div class="bg-gradient-to-r from-blue-600 to-blue-400 p-6 rounded-t-lg shadow-lg">
+                                    <h3 class="text-2xl text-white font-bold mb-4 inline-flex items-center justify-between w-full 
+                                    focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                        aria-label="{{ __('messages.steps.step_3') }}  {{ $percentage }}%;"
                                         tabindex="0">
-                                        Employment History and Work Experience
-                                        @php
-                                            $currentStep = 3; // Set this dynamically based on your current step
-                                            $totalSteps = 7; // Total number of steps (adjusted to 8)
-                                            $percentage = round((($currentStep - 1) / ($totalSteps - 1)) * 100);
-                                        @endphp
-                                        <div class="ml-4 flex flex-col sm:flex-row sm:items-center sm:space-x-2">
+
+                                        {{ __('messages.steps.step_3') }}
+
+                                        <!-- Progress bar -->
+                                        <div
+                                            class="ml-4 flex flex-col sm:flex-row sm:items-center sm:space-x-4 w-full sm:w-auto">
                                             <div
                                                 class="relative w-full sm:w-36 h-2 bg-gray-200 rounded-full overflow-hidden">
-                                                <div class="absolute top-0 left-0 h-2 bg-blue-600 rounded-full transition-all ease-in-out duration-500"
+                                                <div class="absolute top-0 left-0 h-2 bg-gradient-to-r from-green-400 to-green-600 rounded-full transition-all ease-in-out duration-500"
                                                     style="width: {{ $percentage }}%;"></div>
                                             </div>
-                                            <div
-                                                class="text-md text-black font-semibold dark:text-gray-400 mt-2 sm:mt-0">
-                                                Step {{ $currentStep }}/{{ $totalSteps }} : <span
-                                                    class="text-green-600">{{ $percentage }}%</span>
+
+                                            <!-- Step progress information -->
+                                            <div class="text-md text-white font-semibold mt-2 sm:mt-0">
+                                                Step {{ $currentStep }}/{{ $totalSteps }} :
+                                                <span class="text-white">{{ $percentage }}%</span>
                                             </div>
                                         </div>
                                     </h3>
+
+                                    <!-- Breadcrumb navigation -->
                                     <div>
                                         <nav class="text-sm" aria-label="Breadcrumb">
                                             <ol class="list-none p-0 inline-flex">
                                                 <li class="flex items-center">
-                                                    <i class="fas fa-arrow-left mr-2 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                    <!-- Back arrow icon -->
+                                                    <i class="fas fa-arrow-left mr-2 text-white 
+                                                    focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                        aria-label="Go Back to {{ __('messages.steps.step_2') }}"
                                                         tabindex="0"></i>
+
+                                                    <!-- "Personal Information" link -->
                                                     <a href="{{ route('personal') }}"
-                                                        class="text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">Personal
-                                                        Information</a>
-                                                    <span class="mx-2 text-gray-500">/</span>
+                                                        aria-label="{{ __('messages.steps.step_2') }}"
+                                                        class="text-white focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                        {{ __('messages.steps.step_2') }}
+                                                    </a>
+                                                    <span class="mx-2 text-white">/</span>
                                                 </li>
-                                                <li class="flex items-center">
+                                                <li class="flex items-center focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                    aria-label="{{ __('messages.steps.step_3') }}" tabindex="0">
                                                     <span
-                                                        class="text-blue-500 font-semibold focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
-                                                        tabindex="0">Employment
-                                                        History and
-                                                        Work Experience</span>
+                                                        class="text-white font-semibold">{{ __('messages.steps.step_3') }}</span>
                                                 </li>
                                             </ol>
                                         </nav>
                                     </div>
-                                    <hr class="border-t-2 border-gray-400 rounded-full my-4">
-                                    <div class="focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
-                                        tabindex="0" aria-label="{!! __('messages.employment.instruction') !!}">
-                                        <span class="text-md font-regular" style="text-align: justify;">
-                                            {!! __('messages.employment.instruction') !!}
-                                        </span>
-                                    </div>
 
+                                    <!-- Horizontal rule for separation -->
+                                    <hr class="border-t-2 border-white rounded-full my-4">
+                                </div>
+
+
+                                <div class="p-3 shadow-lg rounded-b-lg border-4 border-blue-500 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                    tabindex="0" aria-label="{!! __('messages.employment.instruction') !!}">
+                                    <span class="text-md font-regular" style="text-align: justify;">
+                                        {!! __('messages.employment.instruction') !!}
+                                    </span>
+                                </div>
+                                <div class="p-6 pt-0">
                                     <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
                                         <div>
                                             @include('layouts.dropdown')
@@ -88,30 +110,32 @@
                                         </div>
                                         <div>
                                             <div class="mt-6">
-                                                <label for="employerName" class="block mb-1"> {!! __('messages.workexperience.employer_name') !!}
+                                                <label for="employerName" class="block mb-1"> {!! __('messages.workexperience.company_name') !!}
                                                 </label>
                                                 <input type="text" id="employerName" name="employerName"
-                                                    class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                    class="w-full p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md  rounded-lg  focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                     placeholder="Ex. XYZ Tech Solutions"
-                                                    aria-label=" {!! __('messages.workexperience.employer_name') !!}"
+                                                    aria-label=" {!! __('messages.workexperience.company_name') !!} {{ old('employerName', $formData3['employerName'] ?? '') }}"
                                                     value="{{ old('employerName', $formData3['employerName'] ?? '') }}" />
                                                 @error('employerName')
-                                                    <div class="text-red-600 mt-1">{{ $message }}</div>
+                                                    <div class="text-red-600 dark:text-red-400 mt-1">{{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
 
                                             <div class="mt-6">
                                                 <label for="employerAddress"
-                                                    class="block mb-1">{!! __('messages.workexperience.employer_address') !!}</label>
+                                                    class="block mb-1">{!! __('messages.workexperience.company_address') !!}</label>
                                                 <input type="text" id="employerAddress" name="employerAddress"
-                                                    class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                    class="w-full p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md  rounded-lg  focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                     placeholder="Ex. Street Name, Building, House. No"
-                                                    aria-label="{!! __('messages.workexperience.employer_address') !!}"
+                                                    aria-label="{!! __('messages.workexperience.company_address') !!} {{ old('employerAddress', $formData3['employerAddress'] ?? '') }}"
                                                     value="{{ old('employerAddress', $formData3['employerAddress'] ?? '') }}"
                                                     placeholder="Ex. 17 San Miguel Ave, San Antonio, Pasig, 1605 Metro Manila
 " />
                                                 @error('employerAddress')
-                                                    <div class="text-red-600 mt-1">{{ $message }}</div>
+                                                    <div class="text-red-600 dark:text-red-400 mt-1">{{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
 
@@ -119,28 +143,37 @@
                                                 <label for="positionHeld"
                                                     class="block mb-1">{!! __('messages.workexperience.position_held') !!}</label>
                                                 <input type="text" id="positionHeld" name="positionHeld"
-                                                    class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
-                                                    pattern="[A-Za-z\s]+" aria-label="{!! __('messages.workexperience.position_held') !!}"
+                                                    class="w-full p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md  rounded-lg  focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                    pattern="[A-Za-z\s]+"
+                                                    aria-label="{!! __('messages.workexperience.position_held') !!} {{ old('positionHeld', $formData3['positionHeld'] ?? '') }}"
                                                     title="Please enter alphabetic characters only"
                                                     placeholder=" Ex. Web Developer"
                                                     value="{{ old('positionHeld', $formData3['positionHeld'] ?? '') }}" />
                                                 @error('positionHeld')
-                                                    <div class="text-red-600 mt-1">{{ $message }}</div>
+                                                    <div class="text-red-600 dark:text-red-400 mt-1">{{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
 
                                             <div class="mt-6">
                                                 <label for="skillSearch" class="block mb-1">{!! __('messages.workexperience.skills_gained') !!}
-                                                    (Skills)</label>
+                                                </label>
                                                 <input type="text" id="skillSearch" name="skillSearch[]"
-                                                    class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                    class="w-full p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md  rounded-lg  focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                     list="skillSuggestions" aria-label="{!! __('messages.workexperience.skills_gained') !!}"
                                                     placeholder="Ex. Soft Skills, Bilingual Communication">
+
+                                                <!-- Instructional Text -->
+                                                <p class="text-xs text-gray-400 dark:text-gray-500 italic mt-1">
+                                                    Press Enter, and the skill will appear on the right side of the
+                                                    screen in the skills textbox.
+                                                </p>
                                                 <div id="skillSuggestions" class="mt-2 grid grid-cols-3 gap-2"></div>
 
                                                 </datalist>
                                                 @error('skillSearch')
-                                                    <div class="text-red-600 mt-1">{{ $message }}</div>
+                                                    <div class="text-red-600 dark:text-red-400 mt-1">{{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
 
@@ -148,17 +181,17 @@
                                         </div>
 
                                         <div>
-
-
                                             <div class="mt-6">
                                                 <label for="fromDate"
                                                     class="block mb-1">{!! __('messages.workexperience.from') !!}</label>
                                                 <input type="date" id="fromDate" name="fromDate"
-                                                    aria-label="{!! __('messages.workexperience.from') !!}"
-                                                    class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
-                                                    value="{{ old('fromDate', $formData3['fromDate'] ?? '') }}" />
+                                                    aria-label="{!! __('messages.workexperience.from') !!} {{ old('fromDate', $formData3['fromDate'] ?? '') }}"
+                                                    class="w-full p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md  rounded-lg  focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                    value="{{ old('fromDate', $formData3['fromDate'] ?? '') }}"
+                                                    onkeydown="return disableKeys(event)" />
                                                 @error('fromDate')
-                                                    <div class="text-red-600 mt-1">{{ $message }}</div>
+                                                    <div class="text-red-600 dark:text-red-400 mt-1">{{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
 
@@ -166,11 +199,13 @@
                                                 <label for="toDate"
                                                     class="block mb-1">{!! __('messages.workexperience.to') !!}</label>
                                                 <input type="date" id="toDate" name="toDate"
-                                                    aria-label="{!! __('messages.workexperience.to') !!}"
-                                                    class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
-                                                    value="{{ old('toDate', $formData3['toDate'] ?? '') }}" />
+                                                    aria-label="{!! __('messages.workexperience.to') !!} {{ old('toDate', $formData3['toDate'] ?? '') }}"
+                                                    class="w-full p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md  rounded-lg  focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                    value="{{ old('toDate', $formData3['toDate'] ?? '') }}"
+                                                    onkeydown="return disableKeys(event)" />
                                                 @error('toDate')
-                                                    <div class="text-red-600 mt-1">{{ $message }}</div>
+                                                    <div class="text-red-600 dark:text-red-400 mt-1">{{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
 
@@ -178,37 +213,47 @@
                                                 <label for="employmentStatus"
                                                     class="block mb-1">{!! __('messages.workexperience.employment_status') !!}</label>
                                                 <select id="employmentStatus" name="employmentStatus"
-                                                    aria-label="{!! __('messages.workexperience.employment_status') !!}"
-                                                    class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                    aria-label="{!! __('messages.workexperience.employment_status') !!}  {{ old('employmentStatus', $formData3['employmentStatus'] ?? '') }}"
+                                                    class="w-full p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md  rounded-lg  focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
                                                     <option value="" selected disabled>Select status...</option>
-                                                    <option value="Permanent"
-                                                        {{ old('employmentStatus', $formData3['employmentStatus'] ?? '') == 'Permanent' ? 'selected' : '' }}>
-                                                        Permanent</option>
-                                                    <option value="Contractual"
-                                                        {{ old('employmentStatus', $formData3['employmentStatus'] ?? '') == 'Contractual' ? 'selected' : '' }}>
-                                                        Contractual</option>
-                                                    <option value="Probationary"
-                                                        {{ old('employmentStatus', $formData3['employmentStatus'] ?? '') == 'Probationary' ? 'selected' : '' }}>
-                                                        Probationary</option>
-                                                    <option value="Part-Time"
-                                                        {{ old('employmentStatus', $formData3['employmentStatus'] ?? '') == 'Parti-Time' ? 'selected' : '' }}>
-                                                        Part-Time</option>
+                                                    <option value="Employed"
+                                                        {{ old('employmentStatus', $formData3['employmentStatus'] ?? '') == 'Employed' ? 'selected' : '' }}>
+                                                        Employed</option>
+                                                    <option value="Unemployed"
+                                                        {{ old('employmentStatus', $formData3['employmentStatus'] ?? '') == 'Unemployed' ? 'selected' : '' }}>
+                                                        Unemployed</option>
+                                                    <option value="Self Employed"
+                                                        {{ old('employmentStatus', $formData3['employmentStatus'] ?? '') == 'Self Employed' ? 'selected' : '' }}>
+                                                        Self Employed</option>
+                                                    <option value="Retired"
+                                                        {{ old('employmentStatus', $formData3['employmentStatus'] ?? '') == 'Retired' ? 'selected' : '' }}>
+                                                        Retired</option>
+                                                    <option value="Resign"
+                                                        {{ old('employmentStatus', $formData3['employmentStatus'] ?? '') == 'Resign' ? 'selected' : '' }}>
+                                                        Resign</option>
+                                                    <option value="Returning OFW"
+                                                        {{ old('employmentStatus', $formData3['employmentStatus'] ?? '') == 'Returning OFW' ? 'selected' : '' }}>
+                                                        Returning OFW</option>
+                                                    <option value="Displaced Worker"
+                                                        {{ old('employmentStatus', $formData3['employmentStatus'] ?? '') == 'Displaced Worker' ? 'selected' : '' }}>
+                                                        Displaced Worker</option>
                                                 </select>
                                                 @error('employmentStatus')
-                                                    <div class="text-red-600 mt-1">{{ $message }}</div>
+                                                    <div class="text-red-600 dark:text-red-400 mt-1">{{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
 
                                             <div class="mt-6">
                                                 <table id="skillTable"
-                                                    class="w-full border-collapse border border-gray-200 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 ">
+                                                    class="w-full border-collapse  border border-gray-400 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 ">
                                                     <thead>
                                                         <tr class="bg-gray-100">
                                                             <th
-                                                                class="p-2 border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-900 dark:text-gray-200">
+                                                                class="p-2 border border-gray-400 dark:border-gray-600 bg-white dark:bg-gray-900 dark:text-gray-200">
                                                                 Skills</th>
                                                             <th
-                                                                class="p-2 border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-900 dark:text-gray-200">
+                                                                class="p-2 border border-gray-400 dark:border-gray-600 bg-white dark:bg-gray-900 dark:text-gray-200">
                                                                 Actions</th>
                                                         </tr>
                                                         </tr>
@@ -222,43 +267,58 @@
 
                                             <div class="mb-4">
                                                 <label for="hiddenInput"
-                                                    class="block text-sm font-medium text-black-700">
+                                                    class="block mt-4 font-medium text-black-700">
                                                     {!! __('messages.workexperience.selected_skills') !!} :
                                                 </label>
-                                                <textarea id="hiddenInput" name="hiddenInput" aria-label="{!! __('messages.workexperience.selected_skills') !!}"
-                                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 sm:text-sm"
+                                                <textarea id="hiddenInput" name="hiddenInput"
+                                                    aria-label="{!! __('messages.workexperience.selected_skills') !!} {{ old('hiddenInput', $formData3['hiddenInput'] ?? '') }}"
+                                                    class="mt-1 block w-full p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md  rounded-lg  rounded-md shadow-sm focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 sm:text-sm"
                                                     readonly>{{ old('hiddenInput', $formData3['hiddenInput'] ?? '') }}</textarea>
 
                                             </div>
                                         </div>
 
                                     </div>
-                                    <div class="mt-4 text-right">
+                                    <div
+                                        class="mt-4 text-right flex flex-col sm:flex-row sm:justify-end sm:space-x-2 space-y-2 sm:space-y-0">
                                         <a id="clearFormDataButton" tabindex="0"
                                             aria-label="{!! __('messages.workexperience.clear_records') !!}"
-                                            class="inline-block py-2 px-4 bg-black text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 mr-2">{!! __('messages.workexperience.clear_records') !!}</a>
-                                        <button type="submit"aria-label=" {!! __('messages.workexperience.add_work_experience') !!}" tabindex="0"
-                                            class="inline-block py-2 px-4 bg-green-600 text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
-                                            id="submitButton"> {!! __('messages.workexperience.add_work_experience') !!}</button>
+                                            class="inline-block py-2 text-center px-4 bg-black text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                            {!! __('messages.workexperience.clear_records') !!}
+                                        </a>
+
+                                        <button type="submit" aria-label=" {!! __('messages.workexperience.add_work_experience') !!}" tabindex="0"
+                                            class="inline-block py-2 px-4 bg-green-700 text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                            id="submitButton">
+                                            {!! __('messages.workexperience.add_work_experience') !!}
+                                        </button>
                                     </div>
+
                                 </div>
                             </div>
                         </form>
 
                         <div class="mt-14">
-                            <div class="container mx-auto">
+                            <div class="container max-w-full  mx-auto">
                                 <div class="flex justify-center">
                                     <div class="w-full">
                                         <form action="{{ route('workexp') }}" method="POST"
                                             enctype="multipart/form-data">
                                             @csrf
                                             <div
-                                                class="container-wrapper bg-white text-black dark:bg-gray-800 dark:text-gray-200 shadow-md rounded-lg">
+                                                class="container-wrapper bg-white text-black dark:bg-gray-800 dark:text-gray-200 shadow-3d rounded-lg">
+                                                <div
+                                                    class="bg-gradient-to-r text-white from-blue-500 to-blue-700 p-4 rounded-t-lg mb-4">
+                                                    <h3 class="text-2xl font-bold mb-2 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                        aria-label="{!! __('messages.workexperience.new_submitted_work_experience') !!}" tabindex="0">
+                                                        <i class="fas fa-briefcase mr-2"></i>
+                                                        {!! __('messages.workexperience.new_submitted_work_experience') !!}
+                                                    </h3>
+
+                                                </div>
                                                 <div class="p-6">
-                                                    <h3 class="text-2xl font-bold mb-2">Submitted Work Experience and
-                                                        Skills</h3>
                                                     <div class="mt-4 grid grid-cols-1 md:grid-cols-1 gap-4">
-                                                        <div>
+                                                        <div class="overflow-x-auto">
                                                             <table
                                                                 class="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
                                                                 <thead class="bg-gray-100 dark:bg-gray-700">
@@ -268,14 +328,14 @@
                                                                             class="px-6 py-3 text-left text-xs font-medium text-gray-900 dark:text-gray-200 uppercase tracking-wider focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
                                                                             {!! __('messages.workexperience.actions') !!} </th>
                                                                         <th scope="col" tabindex="0"
-                                                                            aria-label=" {!! __('messages.workexperience.employer_name') !!} "
+                                                                            aria-label=" {!! __('messages.workexperience.company_name') !!} "
                                                                             class="px-6 py-3 text-left text-xs font-medium text-gray-900 dark:text-gray-200 uppercase tracking-wider focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
-                                                                            {!! __('messages.workexperience.employer_name') !!} </th>
+                                                                            {!! __('messages.workexperience.company_name') !!} </th>
                                                                         </th>
                                                                         <th scope="col" tabindex="0"
-                                                                            aria-label=" {!! __('messages.workexperience.employer_address') !!} "
+                                                                            aria-label=" {!! __('messages.workexperience.company_address') !!} "
                                                                             class="px-6 py-3 text-left text-xs font-medium text-gray-900 dark:text-gray-200 uppercase tracking-wider focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
-                                                                            {!! __('messages.workexperience.employer_address') !!} </th>
+                                                                            {!! __('messages.workexperience.company_address') !!} </th>
                                                                         </th>
                                                                         <th scope="col" tabindex="0"
                                                                             aria-label=" {!! __('messages.workexperience.position_held') !!} "
@@ -316,19 +376,24 @@
 
                                                     <br>
                                                     <input type="text" id="hiddenemployerName"
-                                                        name="hiddenemployerName" value="" hidden>
+                                                        name="hiddenemployerName" value="" hidden
+                                                        aria-label="Employer Name">
                                                     <input type="text" id="hiddenemployerAddress"
-                                                        name="hiddenemployerAddress" value="" hidden>
+                                                        name="hiddenemployerAddress" value="" hidden
+                                                        aria-label="Employer Address">
                                                     <input type="text" id="hiddenpositionHeld"
-                                                        name="hiddenpositionHeld" value="" hidden>
+                                                        name="hiddenpositionHeld" value="" hidden
+                                                        aria-label="Position Held">
                                                     <input type="text" id="hiddenlistskills"
-                                                        name="hiddenlistskills" value="" hidden>
+                                                        name="hiddenlistskills" value="" hidden
+                                                        aria-label="Skills">
                                                     <input type="text" id="hiddenfromDate" name="hiddenfromDate"
-                                                        value="" hidden>
+                                                        value="" hidden aria-label="From Date">
                                                     <input type="text" id="hiddentoDate" name="hiddentoDate"
-                                                        value="" hidden>
+                                                        value="" hidden aria-label="To Date">
                                                     <input type="text" id="hiddenemploymentStatus"
-                                                        name="hiddenemploymentStatus" value="" hidden>
+                                                        name="hiddenemploymentStatus" value="" hidden
+                                                        aria-label="Employment Status">
 
 
 
@@ -339,65 +404,45 @@
                                                                     class="fas fa-asterisk text-red-500 text-xs"></i>
                                                             </label>
                                                             <select id="employment-type" name="employment-type"
-                                                                class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
-                                                                tabindex="0" aria-label=" {!! __('messages.workexperience.current_employment') !!}">
+                                                                class="w-full p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md  rounded-lg  focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                                tabindex="0"
+                                                                aria-label=" {!! __('messages.workexperience.current_employment') !!} {{ old('employment-type', $formData3['employment-type'] ?? '') }} ">
                                                                 <option value="" selected disabled>Please select
                                                                     your employment
                                                                     status...
                                                                 </option>
-                                                                <optgroup label="Employed">
-                                                                    <option value="Wage Employment"
-                                                                        {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Wage Employment' ? 'selected' : '' }}>
-                                                                        {{ __('messages.employment.wage_employment') }}
-                                                                    </option>
-                                                                    <option value="Self Employed"
-                                                                        {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Self Employed' ? 'selected' : '' }}>
-                                                                        {{ __('messages.employment.self_employed') }}
-                                                                    </option>
-                                                                    <option value="Others"
-                                                                        {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Others' ? 'selected' : '' }}>
-                                                                        {{ __('messages.employment.others') }}
-                                                                    </option>
-                                                                </optgroup>
-                                                                <!-- Unemployed Options -->
-                                                                <optgroup label="Unemployed">
-                                                                    <option value="Entrant/Fresh Graduate"
-                                                                        {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Entrant/Fresh Graduate' ? 'selected' : '' }}>
-                                                                        {{ __('messages.employment.entrant_fresh_graduate') }}
-                                                                    </option>
-                                                                    <option value="Finished Contract"
-                                                                        {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Finished Contract' ? 'selected' : '' }}>
-                                                                        {{ __('messages.employment.finished_contract') }}
-                                                                    </option>
-                                                                    <option value="Resigned"
-                                                                        {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Resigned' ? 'selected' : '' }}>
-                                                                        {{ __('messages.employment.resigned') }}
-                                                                    </option>
-                                                                    <option value="Retired"
-                                                                        {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Retired' ? 'selected' : '' }}>
-                                                                        {{ __('messages.employment.retired') }}
-                                                                    </option>
-                                                                    <option value="Terminated Due to Calamity"
-                                                                        {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Terminated Due to Calamity' ? 'selected' : '' }}>
-                                                                        {{ __('messages.employment.terminated_due_to_calamity') }}
-                                                                    </option>
-                                                                    <option value="Teminated Local"
-                                                                        {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Teminated Local' ? 'selected' : '' }}>
-                                                                        {{ __('messages.employment.terminated_local') }}
-                                                                    </option>
-                                                                    <option value="Terminated Abroad"
-                                                                        {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Terminated Abroad' ? 'selected' : '' }}>
-                                                                        {{ __('messages.employment.terminated_abroad') }}
-                                                                    </option>
-                                                                    <option value="Other"
-                                                                        {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Other' ? 'selected' : '' }}>
-                                                                        {{ __('messages.employment.unemployed_others') }}
-                                                                    </option>
-
-                                                                </optgroup>
+                                                                <option value="Employed"
+                                                                    {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Employed' ? 'selected' : '' }}>
+                                                                    Employed
+                                                                </option>
+                                                                <option value="Unemployed"
+                                                                    {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Unemployed' ? 'selected' : '' }}>
+                                                                    Unemployed
+                                                                </option>
+                                                                <option value="Self Employed"
+                                                                    {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Self Employed' ? 'selected' : '' }}>
+                                                                    Self Employed
+                                                                </option>
+                                                                <option value="Retired"
+                                                                    {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Retired' ? 'selected' : '' }}>
+                                                                    Retired
+                                                                </option>
+                                                                <option value="Resign"
+                                                                    {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Resign' ? 'selected' : '' }}>
+                                                                    Resign
+                                                                </option>
+                                                                <option value="Returning OFW"
+                                                                    {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Returning OFW' ? 'selected' : '' }}>
+                                                                    Returning OFW
+                                                                </option>
+                                                                <option value="Displaced Worker"
+                                                                    {{ old('employment-type', $formData3['employment-type'] ?? '') == 'Displaced Worker' ? 'selected' : '' }}>
+                                                                    Displaced Worker
+                                                                </option>
                                                             </select>
                                                             @error('employment-type')
-                                                                <div class="text-red-600 mt-1">{{ $message }}</div>
+                                                                <div class="text-red-600 dark:text-red-400 mt-1">
+                                                                    {{ $message }}</div>
                                                             @enderror
                                                         </div>
 
@@ -409,42 +454,47 @@
                                                             <div class="flex">
                                                                 <input type="number" id="job-search-duration"
                                                                     placeholder="Specify " name="job-search-duration"
-                                                                    aria-label="{!! __('messages.workexperience.job_search_duration') !!}"
-                                                                    class="w-5/6 p-2 border rounded mr-2 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                                    aria-label="{!! __('messages.workexperience.job_search_duration') !!} {{ old('job-search-duration', $formData3['job-search-duration'] ?? '') }}"
+                                                                    class="w-5/6 p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md rounded-lg focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                                                     value="{{ old('job-search-duration', $formData3['job-search-duration'] ?? '') }}">
                                                                 <select id="duration-category"
                                                                     name="duration-category"
-                                                                    class="p-2 w-1/2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                                    aria-label="{!! __('messages.workexperience.duration-category') !!} {{ old('duration-category', $formData3['duration-category'] ?? '') }}"
+                                                                    class="p-2 w-1/2 p-3 ml-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md  rounded-lg  focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
                                                                     <option value="Days"
-                                                                        {{ old('duration-category', $employment->duration_category ?? '') === 'Days' ? 'selected' : '' }}>
+                                                                        {{ old('duration-category', $formData3['duration-category'] ?? '') === 'Days' ? 'selected' : '' }}>
                                                                         {{ __('messages.employment.days') }}</option>
                                                                     <option value="Weeks"
-                                                                        {{ old('duration-category', $employment->duration_category ?? '') === 'Weeks' ? 'selected' : '' }}>
+                                                                        {{ old('duration-category', $formData3['duration-category'] ?? '') === 'Weeks' ? 'selected' : '' }}>
                                                                         {{ __('messages.employment.weeks') }}</option>
                                                                     <option value="Months"
-                                                                        {{ old('duration-category', $employment->duration_category ?? '') === 'Months' ? 'selected' : '' }}>
+                                                                        {{ old('duration-category', $formData3['duration-category'] ?? '') === 'Months' ? 'selected' : '' }}>
                                                                         {{ __('messages.employment.months') }}</option>
                                                                     <option value="Years"
-                                                                        {{ old('duration-category', $employment->duration_category ?? '') === 'Years' ? 'selected' : '' }}>
+                                                                        {{ old('duration-category', $formData3['duration-category'] ?? '') === 'Years' ? 'selected' : '' }}>
                                                                         {{ __('messages.employment.years') }}</option>
                                                                 </select>
                                                             </div>
                                                             @error('job-search-duration')
-                                                                <div class="text-red-600 mt-1">{{ $message }}</div>
+                                                                <div class="text-red-600 dark:text-red-400 mt-1">
+                                                                    {{ $message }}</div>
                                                             @enderror
                                                         </div>
-                                                        <div class="mt-4 text-right">
+                                                        <div
+                                                            class="mt-4 text-right flex flex-col sm:flex-row sm:justify-end sm:space-x-2 space-y-2 sm:space-y-0">
                                                             <a href="{{ route('personal') }}"
-                                                                aria-label=" {{ __('messages.previous') }}"
-                                                                class="inline-block py-2 px-4 bg-black text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 mr-2">
+                                                                aria-label="{{ __('messages.previous') }}"
+                                                                class="inline-block py-2 px-4 text-center bg-black text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
                                                                 {{ __('messages.previous') }}
                                                             </a>
+
                                                             <button type="submit"
-                                                                aria-label=" {{ __('messages.save') }}"
-                                                                class="inline-block py-2 px-4 bg-green-600 text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
-                                                                {{ __('messages.save') }}
+                                                                aria-label="{{ __('messages.next') }}"
+                                                                class="inline-block py-2 px-4 bg-green-700 text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                                {{ __('messages.next') }}
                                                             </button>
                                                         </div>
+
                                                     </div>
                                                 </div>
 
@@ -464,44 +514,39 @@
                         <div id="modalOverlay"
                             class="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-50 hidden"></div>
 
-                        <!-- Modal -->
+                        <!-- Validation Modal -->
                         <div id="validationModal"
-                            class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-200 dark:bg-gray-800 text-black dark:text-white shadow-lg rounded-lg p-8 z-50 hidden">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h2 id="formMessage" class="text-xl font-bold mb-4">Form Submission Error</h2>
-                                    <script>
-                                        const message = "Form Submission Error"; // Replace this with your actual message
-                                        const formMessageElement = document.getElementById('formMessage');
-                                        formMessageElement.textContent = message;
-                                        if (message === "Form Submission Error") {
-                                            formMessageElement.classList.remove('text-green-500');
-                                            formMessageElement.classList.add('text-red-500');
-                                        } else if (message === "Form Data Saved Successfully!") {
-                                            formMessageElement.classList.remove('text-red-500');
-                                            formMessageElement.classList.add('text-green-500');
-                                        }
-                                    </script>
+                            class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 p-4 hidden">
+                            <div
+                                class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md max-h-full overflow-y-auto sm:max-h-[90vh]">
+                                <div class="flex justify-between items-center mb-4">
+                                    <h2 id="formMessage" class="text-2xl font-bold text-gray-800 dark:text-white">
+                                        <i class="fas fa-briefcase mr-2"></i> Add Work Experience
+                                    </h2>
                                     <button id="modalCloseButton"
-                                        class="absolute top-0 right-0 mt-4 mr-4 text-gray-500 hover:text-gray-700 focus:outline-none"
-                                        aria-label="Close">
-                                        <svg class="h-6 w-6" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d=" M6 18L18 6M6 6l12 12">
-                                            </path>
-                                        </svg>
+                                        class="text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-500">
+                                        X
                                     </button>
                                 </div>
-                                <div class="modal-body">
-                                    <p id="modalMessage"></p>
+                                <hr class="border-t-1 border-gray-400 dark:border-gray-600 mb-6">
+
+                                <!-- Modal Body -->
+                                <div class="modal-body mt-4">
+                                    <p id="modalMessage" class="text-black dark:text-white mb-6">
+                                    </p>
                                 </div>
-                                <div class="modal-footer mt-4 text-right">
+
+                                <!-- Modal Footer -->
+                                <div class="flex justify-end mt-6">
                                     <button id="modalClose"
-                                        class="px-4 py-2 bg-blue-600 text-white dark:bg-red-700 dark:text-gray-200 rounded-md focus:outline-none">Close</button>
+                                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full shadow-lg">
+                                        Close
+                                    </button>
                                 </div>
                             </div>
                         </div>
+
+
 
                     </div>
                     <script>
@@ -517,12 +562,8 @@
                             const modalClose = document.getElementById('modalClose');
 
                             submitButton.addEventListener('click', function(event) {
-
                                 event.preventDefault();
-
-                                // Retrieve existing data from localStorage or initialize an empty array
                                 let formDataArray = JSON.parse(localStorage.getItem('formData')) || [];
-
                                 // Get form data
                                 const employerName = document.getElementById('employerName').value;
                                 const employerAddress = document.getElementById('employerAddress').value;
@@ -532,25 +573,34 @@
                                 const toDate = document.getElementById('toDate').value;
                                 const employmentStatus = document.getElementById('employmentStatus').value;
                                 const hiddenInput = document.getElementById('hiddenInput').value;
-
                                 const nameRegex = /^[a-zA-Z\s]+$/;
                                 const addressRegex = /^[a-zA-Z0-9\s,.-]+$/;
                                 const positionRegex = /^[a-zA-Z\s]+$/;
 
-                                // Simple validation: Check if required fields are filled out
-                                if (!employerName || !employerAddress || !positionHeld || !skills || !fromDate || !toDate ||
-                                    !employmentStatus) {
-                                    displayModal('Please fill out all required fields.');
+                                let missingFields = [];
+
+                                if (!employerName) missingFields.push('Employer Name');
+                                if (!employerAddress) missingFields.push('Employer Address');
+                                if (!positionHeld) missingFields.push('Position Held');
+                                if (!fromDate) missingFields.push('Start Date');
+                                if (!toDate) missingFields.push('End Date');
+                                if (!employmentStatus) missingFields.push('Employment Status');
+
+                                if (missingFields.length > 0) {
+                                    let message = 'Please fill out the following required fields: ' + missingFields.join(
+                                        ', ') + '.';
+                                    displayModal(message);
                                     return;
                                 }
 
+
                                 if (!isValidInput(employerName, nameRegex)) {
-                                    displayModal('Employer name can only contain letters and spaces.');
+                                    displayModal('Company name can only contain letters and spaces.');
                                     return;
                                 }
 
                                 if (!isValidInput(employerAddress, addressRegex)) {
-                                    displayModal('Employer address contains invalid characters.');
+                                    displayModal('Company address contains invalid characters.');
                                     return;
                                 }
 
@@ -563,7 +613,7 @@
                                     displayModal('To Date must be after or equal to From Date.');
                                     return;
                                 }
-                                // Create an object to hold the data
+
                                 const formData = {
                                     employerName: employerName,
                                     employerAddress: employerAddress,
@@ -581,26 +631,30 @@
 
                                 console.log('Form data saved to local storage:', formDataArray);
 
-
-
                                 document.getElementById('workExperienceForm').reset();
+
                                 displayModal('Form Data Saved Successfully!');
+
                                 loadData();
                             });
 
                             function displayModal(message) {
-                                // Set modal message content
-                                modalMessage.textContent = message;
+                                if (message === 'Form Data Saved Successfully!') {
+                                    modalMessage.innerHTML = '<i class="fas fa-check-circle text-green-500 mr-2"></i>' + message;
+                                } else {
+                                    modalMessage.innerHTML = '<i class="fas fa-info-circle text-yellow-500 mr-2"></i>' +
+                                        message; // Info sign for other messages
+                                }
 
-                                // Show the modal and overlay
+                                // Show modal and overlay
                                 modalOverlay.classList.remove('hidden');
                                 validationModal.classList.remove('hidden');
 
-                                // Close modal functionality
+                                // Add event listeners for closing the modal
                                 modalCloseButton.addEventListener('click', closeModal);
                                 modalClose.addEventListener('click', closeModal);
 
-                                // Prevent focus from moving to modal button on Enter key press
+                                // Prevent the default action when pressing "Enter" on the close button
                                 modalCloseButton.addEventListener('keydown', function(event) {
                                     if (event.key === 'Enter') {
                                         event.preventDefault();
@@ -608,12 +662,12 @@
                                 });
                             }
 
+
+
                             function closeModal() {
-                                // Hide the modal and overlay
                                 modalOverlay.classList.add('hidden');
                                 validationModal.classList.add('hidden');
 
-                                // Remove event listeners to prevent memory leaks
                                 modalCloseButton.removeEventListener('click', closeModal);
                                 modalClose.removeEventListener('click', closeModal);
                             }
@@ -652,32 +706,32 @@
                                     const row = document.createElement('tr');
 
                                     row.innerHTML = `
-                                    <td class="px-6 py-4 whitespace-nowrap ">
+                                    <td class="px-6 py-4 whitespace-nowrap border border-gray-400 ">
                                         <button onclick="deleteRow(event, this)"
-                                                class="bg-red-500 hover:bg-red-600 text-white font-regular py-2 px-4 rounded focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400" tabindex="0" 
+                                                class="bg-red-500  hover:bg-red-600 text-white font-regular py-2 px-4 rounded focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400" tabindex="0" 
                                                 aria-label="{{ __('messages.workexperience.delete') }}">
                                         {{ __('messages.workexperience.delete') }}                                       
                                         </button>
                                     </td>
-                                  <td class="px-6 py-4 whitespace-nowrap border border-gray-200 dark:border-gray-600" >
+                                  <td class="px-6 py-4 whitespace-nowrap border border-gray-400 dark:border-gray-600" >
                                         <div class="font-medium text-gray-900 dark:text-gray-200 focus:ring-4 focus:outline-none focus:ring-orange-400 focus:border-orange-400" tabindex="0" >${formData.employerName}</div>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap border border-gray-200 dark:border-gray-600">
+                                    <td class="px-6 py-4 whitespace-nowrap border border-gray-400 dark:border-gray-600">
                                         <div class="text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400" tabindex="0">${formData.employerAddress}</div>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap border border-gray-200 dark:border-gray-600">
+                                    <td class="px-6 py-4 whitespace-nowrap border border-gray-400 dark:border-gray-600">
                                         <div class="text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400" tabindex="0">${formData.positionHeld}</div>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap border border-gray-200 dark:border-gray-600">
+                                    <td class="px-6 py-4 whitespace-nowrap border border-gray-400 dark:border-gray-600">
                                         <div class="text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400" tabindex="0">${formData.skillSearch}</div>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap border border-gray-200 dark:border-gray-600">
+                                    <td class="px-6 py-4 whitespace-nowrap border border-gray-400 dark:border-gray-600">
                                         <div class="text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400" tabindex="0">${formData.fromDate}</div>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap border border-gray-200 dark:border-gray-600">
+                                    <td class="px-6 py-4 whitespace-nowrap border border-gray-400 dark:border-gray-600">
                                         <div class="text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400" tabindex="0">${formData.toDate}</div>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap border border-gray-200 dark:border-gray-600">
+                                    <td class="px-6 py-4 whitespace-nowrap border border-gray-400 dark:border-gray-600">
                                         <div class="text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400" tabindex="0">${formData.employmentStatus}</div>
                                     </td>
                                 `;
@@ -736,7 +790,7 @@
             document.addEventListener("DOMContentLoaded", function() {
                 let allSkills = []; // Store all skills
 
-                fetch("/userskills/listofskills.txt")
+                fetch("/userskills/registlistofskills.txt")
                     .then((response) => response.text())
                     .then((data) => {
                         console.log("Fetched data:", data);
@@ -767,7 +821,7 @@
                         suggestionItem.textContent = skill;
                         suggestionItem.classList.add("p-2", "bg-gray-200", "text-gray-900",
                             "dark:bg-gray-900", "dark:text-gray-200", "rounded", "cursor-pointer",
-                            "hover:bg-blue-300");
+                            "hover:bg-blue-600");
                         suggestionItem.addEventListener("click", function() {
                             skillSearchInput.value =
                                 skill; // Set the input value to the clicked skill
@@ -798,25 +852,29 @@
                         skills.forEach(function(skill) {
                             if (skill && !isSkillDuplicate(skill)) {
                                 var row = skillTableBody.insertRow();
+                                row.classList.add('border',
+                                    'border-gray-300', 'dark:border-gray-700'
+                                ); // Add border class to each row
+
                                 var cell = row.insertCell();
                                 cell.textContent = skill;
+
                                 var actionCell = row.insertCell();
-                                var
-                                    removeButton = document.createElement('button');
+                                var removeButton = document.createElement('button');
                                 removeButton.textContent = 'Remove';
                                 removeButton.type = 'button';
                                 removeButton.classList.add('px-2', 'py-1', 'bg-red-500', 'text-white',
                                     'rounded');
                                 removeButton.addEventListener('click', function() {
-                                    skillTableBody.deleteRow(row.rowIndex -
-                                        1);
+                                    skillTableBody.deleteRow(row.rowIndex - 1);
                                     updateHiddenInput();
                                 });
                                 actionCell.appendChild(removeButton);
-                            } else if (isSkillDuplicate(skill)) { //
+                            } else if (isSkillDuplicate(skill)) {
                                 alert('Skill "' + skill + '" is already added.');
                             }
-                        }); // Update hidden
+                        });
+
                         updateHiddenInput();
                     }
                 }); // Function to check if a skill already
@@ -840,6 +898,33 @@
                         }).join(', ');
                     hiddenInput.value = skills;
                 }
+            });
+
+            // Function to check if an input field is empty
+            function checkInput(inputField) {
+                if (inputField.value === '') {
+                    inputField.classList.add('border-red-500');
+                } else {
+                    inputField.classList.remove('border-red-500');
+                }
+            }
+
+            // Add event listeners to required inputs
+            document.addEventListener('DOMContentLoaded', () => {
+                const employmentTypeSelect = document.getElementById('employment-type');
+                const jobSearchDurationInput = document.getElementById('job-search-duration');
+
+                // Initial check for employment type and job search duration fields
+                checkInput(employmentTypeSelect);
+                checkInput(jobSearchDurationInput);
+
+                // Event listeners to remove red border on input or selection
+                employmentTypeSelect.addEventListener('change', () => checkInput(employmentTypeSelect));
+                jobSearchDurationInput.addEventListener('input', () => checkInput(jobSearchDurationInput));
+
+                // Blur events
+                employmentTypeSelect.addEventListener('blur', () => checkInput(employmentTypeSelect));
+                jobSearchDurationInput.addEventListener('blur', () => checkInput(jobSearchDurationInput));
             });
         </script>
 
@@ -866,5 +951,10 @@
             #skillSuggestions {
                 margin-bottom: px;
                 /* Add bottom margin to create space */
+            }
+
+            .border-red-500 {
+                border-color: #dc2626 !important;
+                border-width: 2px !important;
             }
         </style>

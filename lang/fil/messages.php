@@ -5,14 +5,15 @@ return [
     'previous' => 'Bumalik',
     'save' => 'I-save',
     'edit' => 'Ibahin',
-
+    'next' => 'Susunod',
+    'submit' => 'I-sumite',
     'verify_email' => 'Salamat sa pag-sign up! Bago magsimula, maaari mo bang i-verify ang iyong email address sa pamamagitan ng pag-click sa link na ipinadala namin sa iyong email? Kung hindi mo natanggap ang email, ikalulugod naming magpadala ng isa pang email.',
     'new_verification_link' => "Isang bagong link sa pag-verify ang ipinadala sa email address na iyong ibinigay sa panahon ng pagpaparehistro.",
 
     'auth' => [
         'Email' => 'Email',
         'Password' => 'Password',
-        'login_instructions' => 'Maglagay ng email at password para makapag-login. Kung may problema,<br> kontakin ang suporta para sa tulong.',
+        'login_instructions' => 'Maglagay ng email at password para makapag-login. Kung may problema, kontakin ang suporta para sa tulong.',
         'forgot_password' => 'Nakalimutan mo ba ang iyong password?',
         'remember_me' => 'Tandaan ako',
         'login' => 'Mag-login',
@@ -28,7 +29,14 @@ return [
         'Inbox' => 'Inbox',
         'Profile' => 'Profile',
         'Log Out' => 'Log Out',
-        'Saved Jobs' => 'Mga Trabaho'
+        'Saved Jobs' => 'Mga Trabaho',
+
+        'close' => 'Isara',
+        'applied_jobs' => 'Na-apply na Trabaho',
+        'interview_schedules' => 'Mga Takdang Panayam',
+        'approved_applications' => 'Naaprubahan na mga Aplikasyon',
+        'view' => 'Tingnan',
+        'mark_all_as_read' => 'Markahan lahat bilang Na-basa',
     ],
 
     // Registration
@@ -37,7 +45,7 @@ return [
         'register' => 'Magrehistro',
         'NOT YET REGISTERED?' => 'HINDI PA REHISTRADO?',
         'ALREADY REGISTERED?' => 'NAKAREHISTRO NA BA?',
-        'login_message' => 'Ilagay ang iyong email address at password ng account para makapag-login. <br> Kung may problema, mangyaring kontakin ang aming support team para sa tulong.',
+        'login_message' => 'Ilagay ang iyong email address at password ng account para makapag-login. Kung may problema, mangyaring kontakin ang aming support team para sa tulong.',
         'looking_forward' => 'Naghahanap ka ba ng maging isang:',
         'job_applicant' => 'Naghahanap ng Trabaho',
         'employer' => 'Employer',
@@ -45,6 +53,8 @@ return [
         'Middle Name' => 'Gitnang Pangalan',
         'Last Name' => 'Apelyido',
         'Already registered?' => 'Nakarehistro na?',
+
+
     ],
 
     'account_approved' => 'Ang iyong account ay naaprubahan na ng Persons with Disabilities Affairs Division (PDAD). Maaari ka nang mag-browse ng mga trabaho at i-customize ang iyong profile sa settings page.',
@@ -52,7 +62,8 @@ return [
     'userdashboard' => [
         'Dashboard' => 'Mga Trabaho',
         'Saved Jobs' => 'Naka-save na Trabaho',
-        'search_placeholder' => 'Maghanap ng Trabaho, Kumpanya, Paglalarawan, Lokasyon, at Edukasyonal na Attainment.',
+        'Trainings' => 'Mga Pagsasanay', // Add this line for Trainings
+        'search_placeholder' => 'Maghanap ng Trabaho, Kumpanya, Paglalarawan, Lokasyon, at  Edukasyonal na Attainment.',
         'All' => 'Lahat',
         'last_24_hours' => 'Huling 24 Oras',
         'last_7_days' => 'Huling 7 Araw',
@@ -78,14 +89,60 @@ return [
         'educational_level' => 'Antas ng Edukasyon:',
         'job_type' => 'Uri ng Trabaho:',
         'salary' => 'Sweldo:',
+
+        'available_jobs' => 'Mga Available na Trabaho',
+        'total_jobs' => 'Kabuuang Trabaho',
+        'current_opportunities' => 'Kasalukuyang mga oportunidad sa trabaho',
+        'active_applications' => 'Aktibong Aplikasyon',
+        'applied_jobs' => 'Mga Na-apply-an na Trabaho',
+        'ongoing_applications' => 'Iyong kasalukuyang mga aplikasyon sa trabaho',
+        'saved_jobs' => 'Mga Naitabing Trabaho',
+        'bookmarked' => 'Mga Naka-bookmark',
+        'saved_for_later' => 'Mga trabahong itinabi mo para sa ibang pagkakataon',
+        'upcoming_interviews' => 'Mga Darating na Panayam',
+        'scheduled' => 'Naka-schedule',
+        'upcoming_interviews_description' => 'Ang iyong mga darating na panayam sa trabaho',
+        'search_and_filter' => 'Maghanap at Mag-filter',
         'upload_resume' => 'Mag-upload ng Resume',
+        'dashboard_overview' => 'Pangkalahatang-ideya ng Dashboard',
+        'filter_by_date' => 'I-filter ayon sa Petsa',
+        'close' => 'Isara',
+        'save_changes' => 'I-save ang mga pagbabago',
+        'my_job_applications' => 'Aking mga Aplikasyon sa Trabaho',
+        'no_job_applications_found' => 'Walang mga aplikasyon sa trabaho.',
+        'view_details' => 'Tumingin ng mga Detalye',
+        'menu_items' => 'Mga Item ng Menu',
+
+        'no_matched_jobs' => 'Walang Nahanap na Tugmang Trabaho',
+        'no_jobs_found_message' => 'Hindi kami nakahanap ng anumang trabaho na tumutugma sa iyong mga pamantayan. Subukan ang pagpapalawak ng iyong paghahanap!',
+        'back_to_all_matched_jobs' => 'Bumalik sa Lahat ng Nahanap na Trabaho',
 
     ],
 
     'job' => [
         'Page Number' => 'Numero ng Pahina',
         'Previous' => 'Nakaraan',
-        'Next' => 'Susunod'
+        'Next' => 'Susunod',
+        'view_details' => 'Tumingin ng mga Detalye',
+    ],
+
+    'resume' => [
+        'choose_resume' => 'Pumili ng Ipapasang Resume',
+        'submit_file' => 'I-pasa ang File',
+        'resume_template' => 'Template ng Resume',
+        'no_jobs_matched' => 'Walang trabaho na akma sa iyong mga kasanayan at kwalipikasyon sa iyong CV/Resume. Maaari kang maghanap ng trabaho batay sa iyong mga kagustuhan.',
+        'view_details' => 'Tingnan ang Detalye',
+        'resume_format_instructions' => 'Para sa pinakamainam na resulta, paki-format ang iyong resume gaya ng sumusunod:',
+        'click_to_upload' => 'I-click upang mag-upload o i-drag at i-drop',
+        'file_requirements' => 'PDF, DOCX (Max: 2MB)',
+        'suggested_resume_format' => 'Inirekomendang Format ng Resume (A4 Size)',
+
+        'resume_information' => 'Impormasyon ng Resume',
+        'education' => 'Edukasyon',
+        'certification' => 'Mga Sertipikasyon',
+        'age' => 'Edad',
+        'skills' => 'Mga Kasanayan',
+        'file_name' => 'Pangalan ng File',
     ],
 
 
@@ -95,6 +152,7 @@ return [
         'upload_appropriate_pictures' => 'Siguraduhing mag-upload ng tamang mga larawan ng profile at mas maliit na mga sukat na aabot sa (2MB)',
         'profile_picture' => 'Baguhin ang Larawan',
         'save_changes' => 'I-save ang mga Pagbabago',
+        'requirement' => 'Ang password ay dapat magkaroon ng hindi bababa sa 1 malaking titik, 1 espesyal na karakter, 1 numero , at dapat ay 8 karakter o higit pa.',
 
 
         //MENU LIST
@@ -121,6 +179,16 @@ return [
         "Change Language" => "Palitan ang Wika"
     ],
 
+    'trainings' => [
+        'back_to_dashboard' => 'Bumalik sa Dashboard',
+        'location' => 'Lokasyon',
+        'name' => 'Pangalan ng Pagsasanay',
+        'address' => 'Address',
+        'contactno' => 'Numero ng Contact',
+        'actions' => 'Mga Aksyon',
+        'description' => 'Paglalarawan',
+        'close' => 'Isara',
+    ],
 
     'applicant' => [
         'instruction' => 'Hakbang 1: Upang tapusin ang iyong profile bilang aplikante, ilagay ang iyong petsa ng kapanganakan, tiyakin na hindi ka mas bata sa 16 taong gulang, dahil ito ang minimum na edad na kinakailangan. Pumili ng isang suffix kung kinakailangan, at piliin ang iyong kasarian mula sa mga dropdown menu na ibinigay. Pagkatapos, kung mayroon kang suffix tulad ng Jr., Sr., o III, pumili ng angkop na opsyon mula sa “Suffix” dropdown menu; kung wala, iwanan itong nakatakda sa ‘None.’ Sa huli, kumpirmahin ang iyong kasarian sa pamamagitan ng pagpili ng tamang opsyon mula sa “Gender” dropdown menu. Sa mga hakbang na ito, mapupunan mo ang lahat ng kinakailangang personal na impormasyon sa iyong profile bilang aplikante.',
@@ -153,7 +221,7 @@ return [
         'suffix_x' => 'X',
         'male' => 'Lalaki',
         'female' => 'Babae',
-        'other' => 'Iba',
+        'other' => 'Mas gustong hindi sabihin',
         'saved' => 'Na-save.'
     ],
 
@@ -241,18 +309,27 @@ return [
         'instruction' => 'Hakbang 6: Upang makumpleto ang form ng aplikasyon, simulan sa pag-access sa online system at paghanap sa seksyon na nakatuon sa background sa edukasyon. Dito, ilagay ang iyong pinakamataas na natapos na edukasyon, mga natanggap na parangal (kung mayroon), pangalan ng iyong paaralan, iyong tiyak na kurso o major, at taon ng iyong pagtatapos. Sa ngayon, maaari mong itype ang N/A para sa mga fields ng School Graduated at Course.',
         'highest_educational_attainment' => 'Pinakamataas na Natamong Edukasyon',
         'select_education_level' => 'Pumili ng Antas ng Edukasyon...',
-        'doctoral_degree' => 'Antas ng Doktorado',
+        'certifications' => 'Mga Pambansang Sertipiko o Mga Sertipikasyon',
+        'doctoral_degree' => 'Antas ng Doktorado (Ph.D. o katumbas nito)',
+        'professional_degree' => 'Antas ng Propesyonal (hal. MD, JD)',
         'masters_degree' => 'Antas ng Masterado',
-        'college_graduate' => 'Nagtapos ng Kolehiyo',
         'bachelors_degree' => 'Antas ng Batsilyer',
-        'vocational_graduate' => 'Nagtapos ng Bokasyonal',
+        'college_graduate' => 'Nagtapos ng Kolehiyo',
         'associates_degree' => 'Antas ng Associate',
-        'some_college_level' => 'Ilang Taon sa Kolehiyo',
+        'vocational_graduate' => 'Nagtapos ng Bokasyonal',
+        'some_college_level' => 'Di-nagtapos ng Kolehiyo',
         'vocational_undergraduate' => 'Di-nagtapos ng Bokasyonal',
-        'technical_vocational_training' => 'Teknikal-Bokasyonal na Edukasyon at Pagsasanay',
-        'senior_high_school' => 'Senior High School',
-        'junior_high_school' => 'Junior High School',
-        'elementary_school' => 'Paaralang Elementarya',
+        'technical_vocational_training' => 'Teknikal-Bokasyonal na Edukasyon at Pagsasanay (TVET)',
+        'senior_high_school_graduate' => 'Nagtapos ng Senior High School',
+        'senior_high_school_level' => 'Antas ng Senior High School',
+        'junior_high_school_graduate' => 'Nagtapos ng Junior High School',
+        'junior_high_school_level' => 'Antas ng Junior High School',
+        'elementary_level' => 'Antas ng Elementarya',
+        'elementary_graduate' => 'Nagtapos ng Elementarya',
+        'high_school_level' => 'Antas ng Mataas na Paaralan',
+        'high_school_graduate' => 'Nagtapos ng Mataas na Paaralan',
+        'college_level' => 'Antas ng Kolehiyo',
+
         'school_graduated' => 'Nagtapos na Paaralan (Ilagay ang N/A kung hindi naaangkop)',
         'type_na_if_not_applicable' => 'Ilagay ang N/A kung hindi naaangkop',
         'school' => 'Paaralan',
@@ -286,7 +363,7 @@ return [
         'updatelang' => 'Upang ma-update ang iyong kasanayan sa wika:',
         'list-unstyled' => [
             '1' => 'Itakda ang kasanayan sa wika gamit ang checkbox.',
-            '2' => 'Pumili ng wika at tukuyin ang inyong kasanayan sa wika.',
+            '2' => 'Pumili ng wika at tukuyin ang inyong kasanayan sa wika ukol sa kakayahan ng iyong pananalita at pangrinig sa loob ng wikang filipino at ingles.',
             '3' => 'Piliin ang mga kasanayang walang pormal na pagsasanay (Iba pang mga Kasanayan) gamit ang mga checkbox.',
             '4' => 'I-edit o alisin ang mga entries ayon sa kailangan upang tamang maipakita ang inyong mga kakayahan.',
         ],
@@ -318,6 +395,9 @@ return [
 
         'checkboxes' => [
         ],
+        'can_read' => 'Maaaring Magbasa',
+        'can_speak' => 'Maaaring Magsalita',
+
 
 
 
@@ -332,19 +412,21 @@ return [
         'disability_physical' => 'Pang-akit sa Katawan',
         'disability_hearing' => 'Pang-akit sa Pandinig',
         'disability_others' => 'Iba pang Pang-aantig',
+        'pwd_id_number' => 'Numero ng PWD ID',
 
 
         'disability_occurrence' => [
             'label' => 'Kaganapang Kapansanan:',
             'placeholder' => 'Tukuyin ang Kaganapang Kapansanan...',
             'options' => [
-                'birth' => 'Simula sa Kapanganakan',
-                'before_employment' => 'Bago ang Pagtatrabaho',
-                'after_employment' => 'Pagkatapos ng Pagtatrabaho',
+                'congenital_born' => 'Ipinanganak na may Kapansanan',
+                'chronic_illness' => 'Talamak na Sakit',
+                'accident' => 'Aksidente',
+                'injury' => 'Pinsala',
                 'other' => 'Iba pa',
             ],
-
         ],
+
 
 
         'others_specify' => 'Kung papa-piliin ang Iba, pakilagay ang mga sumusunod:',
@@ -361,6 +443,7 @@ return [
         'job_description' => 'Paglalarawan ng Trabaho',
         'responsibilities' => 'Mga Tungkulin',
         'qualifications' => 'Mga Kwalipikasyon',
+        'training_qualifications' => 'Kwalipikasyon sa Pagsasanay',
         'benefits' => 'Mga Benepisyo',
         'job_summary' => 'Buod ng Trabaho',
         'age_requirement' => 'Kinakailangang Edad:',
@@ -378,10 +461,35 @@ return [
         'back_to_jobs' => 'Bumalik sa Mga Trabaho',
         'similar_jobs' => 'Katulad na Trabaho',
         'no_similar_jobs' => 'Walang katulad na trabaho na natagpuan.',
+        'educational_attainment' => 'Antas ng Edukasyon', // Filipino translation
+        'view' => 'Tingnan'
+
+    ],
+
+    'job_application' => [
+        'job_application' => 'Aplikasyon ng Trabaho',
+        'already_applied' => 'Nakapag-aplay na',
+        'cancel_application' => 'Ikansela ang Aplikasyon',
+        'cancel_job_application' => 'Ikansela ang Aplikasyon sa Trabaho?',
+        'confirm_cancellation' => 'Kumpirmahin ang Pagkansela?',
+        'cancel_confirmation_message' => 'Sigurado ka bang nais mong ikansela ang iyong aplikasyon para sa posisyon?',
+        'no_keep_my_application' => 'Hindi, Panatilihin ang Aking Aplikasyon',
+        'yes_cancel_application' => 'Oo, Ikansela ang Aplikasyon',
+        'find_more_part_time_jobs' => 'Maghanap ng Higit Pang Part-Time na Trabaho',
+        'already_hired_full_time' => 'Ikaw ay naka-hire na para sa isang full-time na trabaho at nakapag-aplay na para sa pinakamataas na pinapayagang part-time na trabaho.',
+        'no_more_applications_allowed' => 'Walang Higit Pang Aplikasyon na Pinapayagan',
+        'already_hired_full_time_notice' => 'Ikaw ay naka-hire na para sa isang full-time na trabaho.',
+        'max_part_time_applications_reached' => 'Naabot mo na ang maximum na 3 part-time na aplikasyon.',
+        'apply_for_this_job' => 'Mag-aplay para sa Trabahong Ito?',
+        'no_vacancy' => 'Walang Bakante',
+
+        'you_are_already_hired' => 'You are already hired by this company',
+        'apply_now' => 'Apply Now',
     ],
 
 
     'savedjobs' => [
+        'saved_jobs' => 'Nai-save na Trabaho',
         'back_to_dashboard' => 'Bumalik sa Dashboard',
         'view_job' => 'Buksan',
         'delete_job' => 'Burahin',
@@ -397,10 +505,10 @@ return [
     ],
 
     'workexperience' => [
-        'employer_name' => 'Pangalan ng Empleyado',
-        'employer_address' => 'Tirahan ng Empleyado',
+        'company_name' => 'Pangalan ng Kompanya',
+        'company_address' => 'Tirahan ng Kompanya',
         'position_held' => 'Posisyong Hinawakan',
-        'skills_gained' => 'Mga Kakayahang Natutunan',
+        'skills_gained' => 'Mga Kakayahang Natutunan (Pindotin ang Enter upang makadagdag)',
         'employment_status' => 'Katayuan sa Trabaho',
         'from' => 'Mula sa',
         'to' => 'Hanggang sa',
@@ -409,12 +517,14 @@ return [
         'add_work_experience' => 'Magdagdag ng Karanasan sa Trabaho',
         'actions' => 'Mga Aksyon',
         'delete' => 'Burahin',
+        'duration-category' => "Kategorya ng Tagal",
         'current_employment' => 'Ilarawan ang Iyong Kasalukuyang Trabaho:',
         'job_search_duration' => 'Gaano katagal ka nang naghahanap ng trabaho?',
         'update_employment_history' => 'I-update ang Kasaysayan ng Trabaho at Karanasan sa Trabaho',
         'go_back_to_profile' => 'Bumalik sa Profile',
         'new_submitted_work_experience' => 'Bagong Isinumiteng Karanasan sa Trabaho at Kasanayan',
-
+        'Previous' => 'Nakaraan',
+        'Next' => 'Susunod'
     ]
 
 ];

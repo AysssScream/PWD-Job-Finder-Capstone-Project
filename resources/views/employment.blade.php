@@ -19,11 +19,9 @@
                     Progress: {{ $percentage }}%
                 </div>
             </div>
-
         </div>
     </x-slot>
     <!-- Link to your CSS file -->
     <link rel="stylesheet" href="css/styles.css">
-
     @include('steps.step3')
 </x-app-layout>

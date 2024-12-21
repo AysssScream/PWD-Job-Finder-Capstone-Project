@@ -5,15 +5,18 @@
      @csrf
      @method('PATCH')
      <div class="mt-4 grid grid-cols-1 md:grid-cols-1 gap-4">
-         <div class="overflow-x-auto">
+         <div class="mb-4 mt-4">
              <div style="text-align: left;">
                  <a href="{{ route('editemployment') }}"
-                     class="btn btn-primary 
-                    border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm"
+                     class="bg-blue-700 text-white p-2 
+                    p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md rounded-lg 
+                    focus:border-4 focus:border-orange-500 dark:focus:border-orange-500 
+                    focus:ring-4 focus:ring-orange-400 dark:focus:ring-orange-400"
                      onclick="clearLocalStorage()" aria-label="{{ __('messages.employment.modify_work_experience') }}"
                      tabindex="0">
                      <i class="fas fa-edit mr-2"></i> {{ __('messages.employment.modify_work_experience') }}
                  </a>
+
              </div>
 
              <script>
@@ -30,54 +33,38 @@
          <select id="employment-type" name="employment-type"
              aria-label="The employment type is {{ old('employment-type', $employment->employment_type ?? '') }}"
              class="w-full 
-                border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm">
+               p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md  rounded-lg  focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400">
              <option value="" selected disabled>{{ __('messages.employment.please_select_employment_status') }}
              </option>
-             <optgroup label="Employed">
-                 <option value="Wage Employment"
-                     {{ old('employment-type', $employment->employment_type ?? '') == 'Wage Employment' ? 'selected' : '' }}>
-                     {{ __('messages.employment.wage_employment') }}
-                 </option>
-                 <option value="Self Employed"
-                     {{ old('employment-type', $employment->employment_type ?? '') == 'Self Employed' ? 'selected' : '' }}>
-                     {{ __('messages.employment.self_employed') }}</option>
-                 <option value="Others"
-                     {{ old('employment-type', $employment->employment_type ?? '') == 'Others' ? 'selected' : '' }}>
-                     {{ __('messages.employment.others') }}
-                 </option>
-             </optgroup>
-             <!-- Unemployed Options -->
-             <optgroup label="Unemployed">
-                 <option value="Entrant/Fresh Graduate"
-                     {{ old('employment-type', $employment->employment_type ?? '') == 'Entrant/Fresh Graduate' ? 'selected' : '' }}>
-                     {{ __('messages.employment.entrant_fresh_graduate') }}
-                 </option>
-                 <option value="Finished Contract"
-                     {{ old('employment-type', $employment->employment_type ?? '') == 'Finished Contract' ? 'selected' : '' }}>
-                     {{ __('messages.employment.finished_contract') }}</option>
-                 <option value="Resigned"
-                     {{ old('employment-type', $employment->employment_type ?? '') == 'Resigned' ? 'selected' : '' }}>
-                     {{ __('messages.employment.resigned') }}</option>
-                 <option value="Retired"
-                     {{ old('employment-type', $employment->employment_type ?? '') == 'Retired' ? 'selected' : '' }}>
-                     {{ __('messages.employment.retired') }}
-                 </option>
-                 <option value="Terminated Due to Calamity"
-                     {{ old('employment-type', $employment->employment_type ?? '') == 'Terminated Due to Calamity' ? 'selected' : '' }}>
-                     {{ __('messages.employment.terminated_due_to_calamity') }}
-                 </option>
-                 <option value="Teminated Local"
-                     {{ old('employment-type', $employment->employment_type ?? '') == 'Teminated Local' ? 'selected' : '' }}>
-                     {{ __('messages.employment.terminated_local') }}
-                 </option>
-                 <option value="Terminated Abroad"
-                     {{ old('employment-type', $employment->employment_type ?? '') == 'Terminated Abroad' ? 'selected' : '' }}>
-                     {{ __('messages.employment.terminated_abroad') }}
-                 </option>
-                 <option value="Other"
-                     {{ old('employment-type', $employment->employment_type ?? '') == 'Other' ? 'selected' : '' }}>
-                     {{ __('messages.employment.unemployed_others') }} </option>
-             </optgroup>
+             <option value="Employed"
+                 {{ old('employment-type', $employment->employment_type ?? '') == 'Employed' ? 'selected' : '' }}>
+                 Employed
+             </option>
+             <option value="Unemployed"
+                 {{ old('employment-type', $employment->employment_type ?? '') == 'Unemployed' ? 'selected' : '' }}>
+                 Unemployed
+             </option>
+             <option value="Self Employed"
+                 {{ old('employment-type', $employment->employment_type ?? '') == 'Self Employed' ? 'selected' : '' }}>
+                 Self Employed
+             </option>
+             <option value="Retired"
+                 {{ old('employment-type', $employment->employment_type ?? '') == 'Retired' ? 'selected' : '' }}>
+                 Retired
+             </option>
+             <option value="Resign"
+                 {{ old('employment-type', $employment->employment_type ?? '') == 'Resign' ? 'selected' : '' }}>
+                 Resign
+             </option>
+             <option value="Returning OFW"
+                 {{ old('employment-type', $employment->employment_type ?? '') == 'Returning OFW' ? 'selected' : '' }}>
+                 Returning OFW
+             </option>
+             <option value="Displaced Worker"
+                 {{ old('employment-type', $employment->employment_type ?? '') == 'Displaced Worker' ? 'selected' : '' }}>
+                 Displaced Worker
+             </option>
+
          </select>
          @error('employment-type')
              <div class="text-red-600 mt-1">{{ $message }}</div>
@@ -91,12 +78,12 @@
              <input type="number" id="job-search-duration"
                  placeholder="{{ __('messages.employment.specify_duration') }}" name="job-search-duration"
                  aria-label=" The user is looking for a job in {{ old('job-search-duration', $employment->job_search_duration ?? '') }}   {{ old('duration-category', $employment->duration_category ?? '') }} "
-                 class="w-full mb-2 border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm"
+                 class="w-full mb-2 p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md  rounded-lg  focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 "
                  value="{{ old('job-search-duration', $employment->job_search_duration ?? '') }}">
              <select id="duration-category" name="duration-category"
                  aria-label="The duration was set to {{ old('duration-category', $employment->duration_category ?? '') }}"
                  class="w-full 
-                border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm">
+                p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md  rounded-lg  focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 ">
                  <option value="Days"
                      {{ old('duration-category', $employment->duration_category ?? '') === 'Days' ? 'selected' : '' }}>
                      {{ __('messages.employment.days') }}</option>
@@ -116,8 +103,8 @@
          @enderror
      </div>
      <div class="flex items-center gap-4 ">
-         <x-primary-button class="mt-6 " aria-label="Save Changes">{{ __('Save Changes') }}</x-primary-button>
-
+         <x-primary-button class="mt-6 focus:outline-none "
+             aria-label="{{ __('messages.userdashboard.save_changes') }}">{{ __('messages.userdashboard.save_changes') }}</x-primary-button>
          @if (session('status') === 'profile-updated')
              <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
                  class="text-md font-semibold text-green-400 dark:text-gray-400">

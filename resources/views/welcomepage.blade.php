@@ -4,10 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AccessiJobs | Welcome</title>
-    <link rel="icon" href="{{ asset('/images/first17.png') }}" type="image/png">
+    <link rel="icon" href="{{ asset('/images/first17.png') }}" type="image/png" loading="lazy">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
     <link href="https://fonts.bunny.net/css?family=Poppins:400,500,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/livecanvas-team/ninjabootstrap/dist/css/bootstrap.min.css"
         media="all">
@@ -16,14 +15,31 @@
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
     </script>
-    <link rel="preload" href="images/lightnavbarlogo.png" as="image">
-    <link rel="preload" href="images/darknavbarlogo.png" as="image">
-    <link rel="preload" href="images/team.png" as="image">
-
-
+    <link rel="preload" href="images/team.webp" as="image" loading="lazy">
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script defer="" src="https://unpkg.com/vanilla-counter" onload="initializeCounterRANDOMID()"></script>
-</head>
+    <style>
+        #scrollUpBtn {
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+            opacity: 0;
+            /* Start as invisible */
+            visibility: hidden;
+            /* Hidden by default */
+            pointer-events: none;
+            /* Prevent interaction when hidden */
+        }
 
+        #scrollUpBtn.visible {
+            opacity: 1;
+            /* Fully visible */
+            visibility: visible;
+            /* Make it visible */
+            pointer-events: auto;
+            /* Allow interaction when visible */
+        }
+    </style>
+
+</head>
 
 <body>
     <header class="hero-section">
@@ -31,10 +47,11 @@
             <nav class="navbar navbar-expand-lg py-2 navbar-light">
                 <div class="container">
                     <a class="navbar-brand" href="">
-                        <img id="logoImage" src="images/lightnavbarlogo.png" data-light="images/lightnavbarlogo.png"
-                            data-dark="images/darknavbarlogo.png" width="200" height="200"
-                            class="align-middle me-1 img-fluid" alt="My Website">
+                        <img id="logoImage" src="images/lightnavbarlogo.webp" data-light="images/lightnavbarlogo.webp"
+                            data-dark="images/darknavbarlogo.webp" width="200" height="200"
+                            class="align-middle me-1 img-fluid" alt="My Website" loading="lazy">
                     </a>
+
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#myNavbar3"
                         aria-controls="myNavbar3" aria-expanded="false" aria-label="Toggle navigation"
                         id="navbartoggler">
@@ -114,16 +131,25 @@
                                 @endauth
                             @endif
 
+                            <!-- Theme Switch -->
                             <label class="ui-switch position-fixed bg-light p-3 rounded-circle shadow"
-                                style="bottom: 20px; right: 20px;">
+                                style="bottom: 100px; right: 20px;">
                                 <input type="checkbox" id="themeSwitch">
                                 <div class="slider">
                                     <i class="fas fa-adjust"></i>
                                 </div>
                             </label>
 
+
+                            <label id="scrollUpBtn" class="ui-switch position-fixed p-3 rounded-circle shadow"
+                                style="background-color: #007bff; bottom: 20px; right: 20px;">
+                                <div class="slider text-white">
+                                    <i class="fas fa-arrow-up"></i>
+                                </div>
+                            </label>
+
+
                             <script>
-                                // Function to toggle dark mode
                                 function toggleDarkMode() {
                                     const themeSwitch = document.getElementById('themeSwitch');
                                     const darkMode = themeSwitch.checked;
@@ -131,14 +157,11 @@
                                     applyTheme(darkMode);
                                 }
 
-                                // Function to apply the theme
                                 function applyTheme(darkMode) {
                                     if (darkMode) {
                                         document.body.classList.add('dark-mode');
-                                        // Add your dark mode styles here
                                     } else {
                                         document.body.classList.remove('dark-mode');
-                                        // Remove your dark mode styles here
                                     }
                                 }
 
@@ -159,72 +182,6 @@
                 </div>
             </nav>
         </div>
-        {{-- <div class="container-fluid pt-5">
-            <div class="row justify-content-center">
-                <div class="lc-block text-center col-md-8">
-                    <div editable="rich">
-                        <h1 class="rfs-25 fw-bold">WELCOME TO ACCESSIJOBS</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="lc-block text-center col-xxl-6 col-md-8">
-                    <div editable="rich">
-                        <p class="lead" style="line-height: 1.9;">ACCESSIJOBS makes job searching easy for people with
-                            disabilities. Our platform helps you find jobs that are just right for you. We have tools
-                            that understand your needs and connect you with employers who are excited to meet you. Join
-                            us and start finding great job opportunities today!</p>
-                    </div>
-                </div><!-- /lc-block -->
-                <div class="lc-block d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
-                    @if (Route::has('login'))
-                        @auth
-                            @if (Auth::user()->usertype == 'admin')
-                                <a href="{{ route('admin.dashboard') }}" class="btn btn-black btn-lg px-4 gap-3"
-                                    role="button" aria-label="Admin Dashboard">Get Started</a>
-                            @elseif (Auth::user()->usertype == 'employer')
-                                <a href="{{ route('employer.dashboard') }}" class="btn btn-black btn-lg px-4 gap-3"
-                                    role="button" aria-label="Employer Dashboard">Get Started</a>
-                            @else
-                                <a href="{{ url('/dashboard') }}" class="btn btn-black btn-lg px-4 gap-3" role="button"
-                                    aria-label="Dashboard">Get Started</a>
-                            @endif
-                        @else
-                            <a href="{{ route('login') }}" class="btn btn-black btn-lg px-4 gap-3" role="button"
-                                aria-label="Login">Get Started</a>
-                        @endauth
-                    @endif <a class="btn btn-white btn-lg px-4" href="#how-it-works"
-                        role="button">How it Works?</a>
-                </div>
-
-            </div>
-        </div> --}}
-
-        {{--  <div class="position-relative overflow-hidden">
-            <div class="d-flex min-vh-100">
-                <video class="position-absolute w-100 h-100" style="object-fit: cover; object-position: 50% 50%;"
-                    autoplay muted loop playsinline>
-                    <source src="/images/12345.mp4" type="video/mp4">
-                </video>
-                <div class="container position-absolute top-50 start-50 translate-middle text-center text-light">
-                    <div class="row">
-                        <div class="col-md-8 offset-md-2">
-                            <h1 class="display-1 fw-bolder">WELCOME TO ACCESSIJOBS</h1>
-                            <p class="lead" style="line-height: 1.9;">ACCESSIJOBS makes job searching easy for people
-                                with disabilities. Our platform helps you find jobs that are just right for you. We have
-                                tools that understand your needs and connect you with employers who are excited to meet
-                                you. Join us and start finding great job opportunities today!</p>
-                            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
-                                <a class="btn btn-custom btn-lg px-4 gap-3" href="#" role="button">Get
-                                    Started</a>
-                                <a class="btn btn-custom btn-lg px-4" href="#" role="button">How it Works?</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-
 
         <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
@@ -238,51 +195,52 @@
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <div class="full-screen-container">
-                        <img class="full-screen-img" src="images/governance.jpg" alt="Governance Image">
+                        <img class="full-screen-img" src="images/governance.webp" alt="Governance Image"
+                            loading="lazy">
                         <div class="overlay"></div>
                     </div>
                     <div class="container">
                         <div class="carousel-caption text-start">
-                            <h1 class="underlined-heading">Empowering Job Seekers with Disabilities</h1>
-
-                            <p style="line-height: 1.9; ">Discover our innovative job search platform designed
+                            <h1 class="underlined-heading"><span class="typed-text"></span></h1>
+                            <p style="line-height: 1.9;" class="sliderparagraph1">Discover our innovative job search
+                                platform designed
                                 specifically for persons with <br>
                                 disabilities in Mandaluyong City, featuring advanced resume parsing and descriptive <br>
                                 analytics to enhance job accessibility and inclusivity.</p>
-                            <p><a class="btn btn-lg btn-primary" href="#how-it-works">How it
-                                    Works?</a></p>
+                            <p><a class="btn btn-lg btn-primary" href="#how-it-works">How it Works?</a></p>
                         </div>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="full-screen-img" src="images/governance2.jpg" alt="Governance Image">
+                    <img class="full-screen-img" src="images/governance2.webp" alt="Governance Image"
+                        loading="lazy">
                     <div class="overlay"></div>
                     <div class="container">
                         <div class="carousel-caption">
-                            <h1 class="underlined-heading">Accessible and Inclusive Job Search</h1>
-                            <p style="line-height: 1.9;">Our platform offers secure login, accessibility options, a
+                            <h1 class="underlined-heading"><span class="typed-text"></span></h1>
+                            <p style="line-height: 1.9;" class="sliderparagraph2">Our platform offers secure login,
+                                accessibility options, a
                                 resume parser subsystem, <br>
                                 a PWD-friendly dashboard, employer functionalities, and real-time notifications, <br>
                                 all tailored to meet the unique needs of job seekers with disabilities.</p>
-                            <p><a class="btn btn-lg btn-primary " href={{ route('aboutus') }}>Learn
-                                    more</a></p>
+                            <p><a class="btn btn-lg btn-primary " href="{{ route('aboutus') }}">Learn more</a></p>
                         </div>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="full-screen-img" src="images/governance3.png" alt="Governance Image">
+                    <img class="full-screen-img" src="images/governance3.webp" alt="Governance Image"
+                        loading="lazy">
                     <div class="overlay"></div>
-                    </video>
                     <div class="container">
                         <div class="carousel-caption text-end">
-                            <h1 class="underlined-heading">Transforming Employment Opportunities</h1>
-                            <p style="line-height: 1.9;">By addressing the employment barriers faced by persons with
+                            <h1 class="underlined-heading"><span class="typed-text"></span></h1>
+                            <p style="line-height: 1.9;" class="sliderparagraph3">By addressing the employment
+                                barriers faced by persons with
                                 disabilities and <br>
                                 implementing comprehensive accessibility features, our platform aims to significantly
                                 <br>improve job matching success rates and overall user satisfaction.
                             </p>
-                            <p><a class="btn btn-lg btn-primary" href={{ route('login') }}>Get
-                                    Started</a></p>
+                            <p><a class="btn btn-lg btn-primary" href="{{ route('login') }}">Get Started</a></p>
                         </div>
                     </div>
                 </div>
@@ -297,11 +255,11 @@
             </button>
         </div>
 
-        <section class="section-1 py-5 " id="popularbg">
+        <section class="section-1 py-1 " id="popularbg">
             <div class="container">
                 <h2 class=" fw-bold" id="designedheader">Find Jobs</h2>
                 <br>
-                <div class="card border-0 shadow p-5">
+                <div class="searchcard border-0 shadow p-5">
                     <div class="row pt-2">
 
                         <div class="row">
@@ -363,7 +321,6 @@
                             </div>
                         </div>
 
-
                     </div>
                 </div>
         </section>
@@ -373,28 +330,29 @@
                 <h2 class=" fw-bold" id="designedheader">Featured Companies</h2>
                 <div class="row pt-4">
                     <br>
-                    <div class="container ">
+                    <div class="container">
                         <div class="row">
-                            @foreach ($jobs as $job)
-                                <div class="col-lg-4 col-xl-3 col-md-6 d-flex align-items-stretch">
-                                    <div class="single_catagory shadow rounded flex-grow-1 d-flex flex-column ">
-                                        <a href="{{ route('jobs.info', ['company_name' => Str::slug($job->company_name), 'id' => $job->id]) }}"
-                                            class="text-decoration-none">
-                                            <h4 class="pb-2">{{ $job->company_name }}</h4>
-                                        </a>
-                                        <p class="mb-0"><span>{{ $job->location }}</span></p>
-                                        <p class="mb-0">
-                                            <span>{{ $totalVacanciesPerCompany[$job->company_name] ?? 'N/A' }}
-                                                job positions given</span>
-                                        </p>
+                                 @foreach ($jobs as $job)
+                                    <div class="col-lg-4 col-xl-3 col-md-6 d-flex align-items-stretch">
+                                        <div class="single_catagory shadow rounded flex-grow-1 d-flex flex-column">
+                                            <a href="{{ route('jobs.info', ['company_name' => Str::slug($job->company_name), 'id' => $job->id]) }}" class="text-decoration-none">
+                                                <!-- Company Logo inside a rounded avatar with blue border and fallback to avatar.png -->
+                                                <div class="d-flex justify-content-center mb-2">
+                                                    <img src="{{ asset('storage/' . $job->company_logo) }}" alt="{{ $job->company_name }} Logo"
+                                                        class="rounded-circle" style="width: 170px; height: 170px; object-fit: fit; border: 2px solid #007BFF;  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); 
+                                                        onerror="this.onerror=null; this.src='{{ asset('/images/avatar.png') }}';">
+                                                </div>
+                                                <h4 class="pb-2">{{ $job->company_name }}</h4>
+                                            </a>
+                                            <p class="mb-0"><span>{{ $job->location }}</span></p>
+                                            <p class="mb-0">
+                                                <span>{{ $totalVacanciesPerCompany[$job->company_name] ?? 'N/A' }} job positions available</span>
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                            @endforeach
-
+                                @endforeach
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </section>
@@ -407,7 +365,7 @@
                         <div class="col-md-6 gx-5 mb-4">
                             <div class="bg-image hover-overlay shadow-2-strong" data-mdb-ripple-init
                                 data-mdb-ripple-color="light">
-                                <img src="/images/First2.png" class="img-fluid" />
+                                <img src="/images/First2.webp" class="img-fluid" loading="lazy" />
                                 <a href="#!">
                                     <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                                 </a>
@@ -458,7 +416,7 @@
                                     <div class="row">
                                         @foreach ($featuredjobs as $job)
                                             <div class="col-md-4">
-                                                <div class="card border-0 p-3 shadow mb-4 ">
+                                                <div class="featuredcard border-0 p-3 shadow mb-4 ">
                                                     <div class="card-body">
                                                         <h3 class="border-0 fs-5 pb-2 mb-0">{{ $job->title }}</h3>
                                                         <p>We are in need of a {{ $job->title }} for our company.</p>
@@ -466,18 +424,18 @@
                                                             <p class="mb-0">
                                                                 <span class="fw-bolder"><i
                                                                         class="fa fa-map-marker"></i></span>
-                                                                <span class="ps-1">{{ $job->location }}</span>
+                                                                <span class="ps-1">{{ $job->location ?? 'No details found' }}</span>
                                                             </p>
                                                             <p class="mb-0">
                                                                 <span class="fw-bolder"><i
                                                                         class="fa fa-clock"></i></span>
-                                                                <span class="ps-1">{{ $job->job_type }}</span>
+                                                                <span class="ps-1">{{ $job->job_type ?? 'No details found' }}</span>
                                                             </p>
                                                             <p class="mb-0">
                                                                 <span class="fw-bolder"><i
-                                                                        class="fa fa-usd"></i></span>
+                                                                        class="fa fa-graduation-cap"></i></span>
                                                                 <span
-                                                                    class="ps-1">{{ $job->educational_level }}</span>
+                                                                    class="ps-1">{{ $job->educational_level ?? 'No details found' }}</span>
                                                             </p>
                                                         </div>
 
@@ -495,6 +453,352 @@
                         </div>
                     </div>
                 </section>
+                
+                <section class="py-5 bg-light">
+                    <div class="container">
+                        <!-- Header -->
+                        <div class="row justify-content-center mb-5">
+                            <div class="col-12 text-center">
+                                <h2 class="fw-bold text-primary">Understanding Our Resume Parser</h2>
+                                <p class="lead text-muted">See how our system analyzes and extracts key information from your resume</p>
+                            </div>
+                        </div>
+                
+                        <!-- Resume Analysis Visualization -->
+                        <div class="row g-4 mb-5">
+                            <div class="col-md-6">
+                                <div class="card border-0 shadow-sm h-100">
+                                    <div class="card-header bg-primary text-white">
+                                        <h5 class="mb-0"><i class="fas fa-file-alt me-2"></i>Original Resume Format</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <pre class="bg-light p-3 rounded">
+                👤 Full Name
+                🎂 Birthdate: MM/DD/YYYY
+                🔢 Age: XX
+                💼 Work Experience
+                📚 Education
+                🎯 Skills
+                📜 Certifications
+                                        </pre>
+                                    </div>
+                                </div>
+                            </div>
+                
+                            <div class="col-md-6">
+                                <div class="card border-0 shadow-sm h-100">
+                                    <div class="card-header bg-success text-white">
+                                        <h5 class="mb-0"><i class="fas fa-robot me-2"></i>Extracted Information</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="extracted-data">
+                                            <div class="mb-3">
+                                                <h6 class="text-primary"><i class="fas fa-user-graduate me-2"></i>Education Level</h6>
+                                                <p class="ms-4 text-muted">• College Graduate<br>• Bachelor's Degree<br>• Vocational Graduate</p>
+                                            </div>
+                                            
+                                            <div class="mb-3">
+                                                <h6 class="text-primary"><i class="fas fa-code me-2"></i>Program/Course</h6>
+                                                <p class="ms-4 text-muted">Bachelor of Science in Computer Science</p>
+                                            </div>
+                
+                                            <div class="mb-3">
+                                                <h6 class="text-primary"><i class="fas fa-briefcase me-2"></i>Work Experience</h6>
+                                                <div class="ms-4 text-muted">
+                                                    <p>• Software Developer (3.1 years)<br>• Senior Full-Stack Developer (3.3 years)</p>
+                                                    <small class="text-success">Total: 6.4 years of experience</small>
+                                                </div>
+                                            </div>
+                
+                                            <div class="mb-3">
+                                                <h6 class="text-primary"><i class="fas fa-certificate me-2"></i>Certifications</h6>
+                                                <p class="ms-4 text-muted">• PRC License - Registered Software Engineer<br>• TESDA Certificate in Web Development</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <!-- Process Steps -->
+                        <div class="row mt-5">
+                            <div class="col-12">
+                                <h3 class="text-center mb-4">How Our Parser Works</h3>
+                                <div class="row g-4">
+                                    <!-- Step 1 -->
+                                    <div class="col-md-3">
+                                        <div class="card border-0 shadow-sm h-100">
+                                            <div class="card-body text-center">
+                                                <div class="rounded-circle bg-primary bg-opacity-10 p-3 d-inline-block mb-3">
+                                                    <i class="fas fa-file-upload fa-2x text-primary"></i>
+                                                </div>
+                                                <h5>Document Upload</h5>
+                                                <p class="text-muted">System accepts PDF or DOCX format resumes</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                
+                                    <!-- Step 2 -->
+                                    <div class="col-md-3">
+                                        <div class="card border-0 shadow-sm h-100">
+                                            <div class="card-body text-center">
+                                                <div class="rounded-circle bg-success bg-opacity-10 p-3 d-inline-block mb-3">
+                                                    <i class="fas fa-search fa-2x text-success"></i>
+                                                </div>
+                                                <h5>Text Extraction</h5>
+                                                <p class="text-muted">Converts document content into analyzable text</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                
+                                    <!-- Step 3 -->
+                                    <div class="col-md-3">
+                                        <div class="card border-0 shadow-sm h-100">
+                                            <div class="card-body text-center">
+                                                <div class="rounded-circle bg-info bg-opacity-10 p-3 d-inline-block mb-3">
+                                                    <i class="fas fa-brain fa-2x text-info"></i>
+                                                </div>
+                                                <h5>Data Analysis</h5>
+                                                <p class="text-muted">Identifies and categorizes key information</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                
+                                    <!-- Step 4 -->
+                                    <div class="col-md-3">
+                                        <div class="card border-0 shadow-sm h-100">
+                                            <div class="card-body text-center">
+                                                <div class="rounded-circle bg-warning bg-opacity-10 p-3 d-inline-block mb-3">
+                                                    <i class="fas fa-check-circle fa-2x text-warning"></i>
+                                                </div>
+                                                <h5>Job Matching</h5>
+                                                <p class="text-muted">Matches extracted data with job requirements</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <!-- Sample Extraction Result -->
+                        <div class="row mt-5">
+                            <div class="col-12">
+                                <div class="card border-0 shadow-sm">
+                                    <div class="card-header bg-primary text-white">
+                                        <h5 class="mb-0"><i class="fas fa-code me-2"></i>Sample Extraction Result</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <pre class="bg-light p-4 rounded" style="overflow-x: auto;">
+                {
+                    "age": 21,
+                    "certification": {
+                        "PRC": "PRC License - Registered Software Engineer",
+                        "TESDA": "TESDA Certificate in Web Development"
+                    },
+                    "education": "College Graduate, Bachelor's Degree",
+                    "program": "Bachelor of Science in Computer Science",
+                    "skills": [
+                        "Programming",
+                        "Web Development",
+                        "Database",
+                        "Mobile Apps",
+                        "UI/UX Design",
+                        "Cloud Services"
+                    ],
+                    "work_experience": [
+                        {
+                            "company": "Tech Innovators Inc.",
+                            "duration_years": 3.1,
+                            "title": "Software Developer"
+                        },
+                        {
+                            "company": "NextGen Solutions",
+                            "duration_years": 3.3,
+                            "title": "Senior Full-Stack Developer"
+                        }
+                    ],
+                    "total_experience_years": 6.4
+                }</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </section>
+                
+                <style>
+                .card {
+                    transition: transform 0.3s ease-in-out;
+                }
+                
+                .card:hover {
+                    transform: translateY(-5px);
+                }
+                
+                pre {
+                    white-space: pre-wrap;
+                    word-wrap: break-word;
+                }
+                
+                .matching-criteria, .matching-process {
+                    background-color: rgba(248, 249, 250, 0.9);
+                }
+                
+                .extracted-data h6 {
+                    font-weight: 600;
+                }
+                
+                .bg-opacity-10 {
+                    --bs-bg-opacity: 0.1;
+                }
+                
+                @media (max-width: 768px) {
+                    pre {
+                        font-size: 0.8rem;
+                    }
+                    
+                    .card-body {
+                        padding: 1rem;
+                    }
+                }
+                </style>
+                
+                <section class="py-5 bg-light">
+                    <div class="container">
+                        <!-- Header -->
+                        <div class="row justify-content-center mb-5">
+                            <div class="col-12 text-center">
+                                <h2 class="fw-bold text-primary">Recommended Resume Format</h2>
+                                <p class="lead text-muted">Our AI-optimized resume structure for better job matching</p>
+                            </div>
+                        </div>
+                
+                        <!-- Template Preview Card -->
+                        <div class="row justify-content-center mb-5">
+                            <div class="col-lg-8">
+                                <div class="card border-0 shadow-sm">
+                                    <div class="card-header bg-primary text-white py-3">
+                                        <h5 class="mb-0"><i class="fas fa-file-alt me-2"></i>Resume Structure Example</h5>
+                                    </div>
+                                    <div class="card-body p-4">
+                                        <!-- Personal Information Section -->
+                                        <div class="mb-4">
+                                            <h3 class="h4 mb-3">👤 FULL NAME</h3>
+                                            <div class="ms-4">
+                                                <p class="mb-2">🎂 Birthdate: MM/DD/YYYY</p>
+                                                <p class="mb-2">🔢 Age: XX</p>
+                                                <p class="mb-2">💑 Civil Status: Single/Married</p>
+                                                <p class="mb-2">📏 Height: XXX cm</p>
+                                                <p class="mb-2">🗣 Language: English, Filipino</p>
+                                                <p class="mb-2">✉ Email: example@email.com</p>
+                                                <p class="mb-2">☎ Phone: 09XXXXXXXXX</p>
+                                                <p class="mb-2">🏠 Address: City, Province</p>
+                                            </div>
+                                        </div>
+                
+                                        <!-- Education Section -->
+                                        <div class="mb-4">
+                                            <h4 class="border-bottom pb-2">EDUCATIONAL ATTAINMENT</h4>
+                                            <div class="ms-4">
+                                                <div class="mb-3">
+                                                    <p class="fw-bold mb-1">COLLEGE</p>
+                                                    <p class="mb-1">University/School: [School Name]</p>
+                                                    <p class="mb-1">Program: [Course Name]</p>
+                                                    <p>Year: YYYY - YYYY</p>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <p class="fw-bold mb-1">SENIOR HIGH SCHOOL</p>
+                                                    <p class="mb-1">School: [School Name]</p>
+                                                    <p>Year: YYYY - YYYY</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                
+                                        <!-- Skills Section -->
+                                        <div class="mb-4">
+                                            <h4 class="border-bottom pb-2">SKILLS</h4>
+                                            <div class="row ms-3">
+                                                <div class="col-md-6">
+                                                    <p class="fw-bold mb-2">Hard Skills</p>
+                                                    <ul class="list-unstyled">
+                                                        <li>• Programming</li>
+                                                        <li>• Web Development</li>
+                                                        <li>• Database Management</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p class="fw-bold mb-2">Soft Skills</p>
+                                                    <ul class="list-unstyled">
+                                                        <li>• Communication</li>
+                                                        <li>• Leadership</li>
+                                                        <li>• Problem Solving</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                
+                                        <!-- Work Experience Section -->
+                                        <div class="mb-4">
+                                            <h4 class="border-bottom pb-2">WORK EXPERIENCE</h4>
+                                            <div class="ms-4">
+                                                <p class="fw-bold mb-1">Job Title, Company Name</p>
+                                                <p class="text-muted">MM/YYYY - MM/YYYY</p>
+                                                <ul class="list-unstyled">
+                                                    <li>• Key responsibility or achievement 1</li>
+                                                    <li>• Key responsibility or achievement 2</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                
+                                        <!-- Certifications Section -->
+                                        <div class="mb-4">
+                                            <h4 class="border-bottom pb-2">CERTIFICATIONS</h4>
+                                            <div class="ms-4">
+                                                <ul class="list-unstyled">
+                                                    <li>• Certification Name, Issuing Organization (YYYY)</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                                <!-- Call to Action -->
+                        <div class="row mt-5">
+                            <div class="col-12 text-center">
+                                <div class="p-5 bg-primary bg-opacity-10 rounded-3">
+                                    <h3 class="text-primary mb-4">Ready to Try Our Resume Parser?</h3>
+                                    <p class="lead mb-4">Upload your resume and let our intelligent system match you with the perfect job opportunities.</p>
+                                    <a href="{{ route('dashboard.resumeupload') }}" class="btn btn-primary btn-lg px-5 py-3">
+                                        <i class="fas fa-upload me-2"></i>Upload Your Resume Now
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <style>
+                .card {
+                    transition: transform 0.3s ease;
+                }
+                
+                .card:hover {
+                    transform: translateY(-5px);
+                }
+                
+                .bg-opacity-10 {
+                    --bs-bg-opacity: 0.1;
+                }
+                
+                @media (max-width: 768px) {
+                    .ms-4 {
+                        margin-left: 1rem !important;
+                    }
+                }
+                </style>
+
+                
                 <div class="second-section mt-4">
                     <section class="bg-light ">
                         <div class="container py-6 ">
@@ -532,7 +836,7 @@
                                     </div><!-- /col -->
                                     <div class="col-md-6">
                                         <div class="lc-block">
-                                            <img class="img-fluid" src="images/First4.png">
+                                            <img class="img-fluid" src="images/First4.webp" loading="lazy">
                                         </div><!-- /lc-block -->
                                     </div><!-- /col -->
                                 </div>
@@ -561,7 +865,7 @@
                                     </div><!-- /col -->
                                     <div class="col-md-6">
                                         <div class="lc-block">
-                                            <img class="img-fluid" src="images/First8.png">
+                                            <img class="img-fluid" src="images/First8.webp" loading="lazy">
                                         </div><!-- /lc-block -->
                                     </div><!-- /col -->
                                 </div>
@@ -645,53 +949,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {{-- <div class="col-md-7 col-lg-3 me-lg-4 rounded my-4 p-3 card-enhanced">
-                                        <div class="lc-block text-center">
-                                            <img class="img-fluid"
-                                                src="https://cdn.livecanvas.com/media/svg/undraw-sample/undraw_steps_ngvm.svg"
-                                                style="height:100px;">
-                                        </div>
-                                        <div style="padding:30px" class="lc-block rounded text-center">
-                                            <div editable="rich">
-                                                <h5><strong>Employer Interface</strong></h5>
-                                                <p>Provides tools for employers to post job vacancies, manage
-                                                    applications, and connect with PWD candidates, including access to
-                                                    job post analytics.&nbsp;</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-7 col-lg-3 me-lg-4 rounded my-4 p-3 card-enhanced">
-                                        <div class="lc-block text-center">
-                                            <img class="img-fluid"
-                                                src="https://cdn.livecanvas.com/media/svg/undraw-sample/undraw_video_influencer_9oyy.svg"
-                                                style="height:100px;">
-                                        </div>
-                                        <div style="padding:30px" class="lc-block rounded text-center">
-                                            <div editable="rich">
-                                                <h5><strong>Government Interface</strong></h5>
-                                                <p>Allows government agencies to access job market trends and assess the
-                                                    effectiveness of employment policies for PWDs, managing resources to
-                                                    improve job prospects.&nbsp;</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-7 col-lg-3 me-lg-4 rounded my-4 p-3 card-enhanced">
-                                        <div class="lc-block text-center">
-                                            <img class="img-fluid"
-                                                src="https://cdn.livecanvas.com/media/svg/undraw-sample/undraw_Mobile_application_mr4r.svg"
-                                                style="height:100px;">
-                                        </div>
-                                        <div style="padding:30px" class="lc-block rounded text-center">
-                                            <div editable="rich">
-                                                <h5><strong>Feedback Mechanism</strong></h5>
-                                                <p>The feedback mechanism in AccessiJobs is designed for employers to
-                                                    provide updates on the hiring status of applicants, such as
-                                                    indicating if an employee is hired or under review. This helps keep
-                                                    the communication transparent and efficient between employers and
-                                                    job seekers.&nbsp;</p>
-                                            </div>
-                                        </div>
-                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -699,10 +956,6 @@
                 </div>
             </div>
         </section>
-    </div>
-
-
-
 
     <section class="bg-light" style="background-color:#f7fbfe">
         <div class="container py-6">
@@ -724,7 +977,7 @@
                                 <div class="lc-block position-absolute top-0 end-0 w-100 h-100 bg-dark mt-4 me-4">
                                 </div>
 
-                                <img class="position-relative img-fluid" src="images/first10.png" width="1080"
+                                <img class="position-relative img-fluid" src="images/first10.webp" width="1080"
                                     height="1080" alt="Photo by Spacejoy" loading="lazy">
                             </div>
                         </div>
@@ -809,7 +1062,7 @@
                                 <div class="lc-block position-absolute top-0 start-0 w-100 h-100 bg-dark mt-4 ms-4">
                                 </div>
 
-                                <img class="position-relative img-fluid" src="images/first11.png" width="1080"
+                                <img class="position-relative img-fluid" src="images/first11.webp" width="1080"
                                     height="1080" alt="Photo by Spacejoy" loading="lazy">
                             </div>
                         </div>
@@ -894,7 +1147,7 @@
                                 <div class="lc-block position-absolute top-0 end-0 w-100 h-100 bg-dark mt-4 me-4">
                                 </div>
 
-                                <img class="position-relative img-fluid" src="images/first12.png" width="1080"
+                                <img class="position-relative img-fluid" src="images/first12.webp" width="1080"
                                     height="1080" alt="Photo by Spacejoy" loading="lazy">
                             </div>
                         </div>
@@ -991,7 +1244,7 @@
                             <div class="col-8 col-lg-3 order-lg-2 offset-lg-1 mb-4 mb-lg-0">
                                 <div class="lc-block">
                                     <img style="transform:scale(1.2)" class="img-fluid py-4 wp-image-1949"
-                                        src="images/first13.png" alt="">
+                                        src="images/first13.webp" alt="" loading="lazy">
                                 </div>
                             </div>
                             <div class="col-12 col-lg-2 order-lg-1 position-relative py-lg-5 my-4">
@@ -1023,7 +1276,7 @@
                             <div class="col-8 col-lg-3 order-lg-2 offset-lg-1 mb-4 mb-lg-0">
                                 <div class="lc-block">
                                     <img style="transform:scale(1.2)" class="img-fluid py-4 wp-image-1948"
-                                        src="images/first14.png" alt="">
+                                        src="images/first14.webp" alt="" loading="lazy">
                                 </div>
                             </div>
                             <div class="col-12 col-lg-2 order-lg-1 position-relative py-lg-5 my-4">
@@ -1055,7 +1308,7 @@
                             <div class="col-8 col-lg-3 order-lg-2 offset-lg-1 mb-4 mb-lg-0">
                                 <div class="lc-block">
                                     <img style="transform:scale(1.2)" class="img-fluid py-4 wp-image-1958"
-                                        src="images/first15.png" alt="">
+                                        src="images/first15.webp" alt="" loading="lazy">
                                 </div>
                             </div>
                             <div class="col-12 col-lg-2 order-lg-1 position-relative py-lg-5 my-4">
@@ -1089,7 +1342,7 @@
                             <div class="col-8 col-lg-3 order-lg-2 offset-lg-1 mb-4 mb-lg-0">
                                 <div class="lc-block">
                                     <img style="transform:scale(1.2)" class="img-fluid py-4 wp-image-1961"
-                                        src="images/first16.png" alt="">
+                                        src="images/first16.webp" alt="" loading="lazy">
                                 </div>
                             </div>
                             <div class="col-12 col-lg-2 order-lg-1 position-relative py-lg-5 my-4">
@@ -1292,22 +1545,17 @@
                 </div>
                 <div class="row mb-3 text-center row-cols-1 row-cols-sm-3">
                     <div class="col mb-3">
-                        <div class="card border-0">
+                        <div class="card border-0  shadow-lg">
                             <div class="card-body">
                                 <div class="lc-block mb-5">
-
                                     <div class="bg-light rounded p-3 text-success"
                                         style="justify-content: center; align-items: center;">
                                         <i class="fas fa-briefcase fa-3x"></i>
                                     </div>
-
                                 </div>
                                 <div class="lc-block mb-3">
                                     <div editable="rich">
-
                                         <h2 class="h4">Tailored Job Matching</h2>
-
-
                                     </div>
                                 </div>
                                 <div class="lc-block mb-5">
@@ -1322,7 +1570,7 @@
                         </div>
                     </div><!-- /col -->
                     <div class="col mb-3">
-                        <div class="card border-0 ">
+                        <div class="card border-0  shadow-lg ">
                             <div class="card-body">
                                 <div class="lc-block mb-5">
 
@@ -1353,10 +1601,9 @@
                         </div>
                     </div><!-- /col -->
                     <div class="col mb-3">
-                        <div class="card border-0">
+                        <div class="card border-0  shadow-lg">
                             <div class="card-body">
                                 <div class="lc-block mb-5">
-
                                     <div class="bg-light rounded p-3 text-success"
                                         style="justify-content: center; align-items: center;">
                                         <i class="fas fa-users fa-3x"></i>
@@ -1365,9 +1612,7 @@
                                 </div>
                                 <div class="lc-block mb-3">
                                     <div editable="rich">
-
                                         <h2 class="h4">Community and Networking</h2>
-
 
                                     </div>
                                 </div>
@@ -1392,8 +1637,8 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="lc-block mb-4">
-                            <img class="img-fluid" alt="logo" src="/images/darknavbarlogo.png"
-                                style="max-height:10vh">
+                            <img class="img-fluid" alt="logo" src="/images/darknavbarlogo.webp"
+                                style="max-height:10vh" loading="lazy">
                         </div>
                         <div class="lc-block small">
                             <div editable="rich">
@@ -1401,54 +1646,11 @@
                                     persons
                                     with disabilities. Our platform connects talented individuals with employers who
                                     value diversity and inclusion. Stay updated with our latest news and join our
-                                    community on social media to be a part of the change. Follow us on Facebook,
-                                    Twitter, Instagram, and LinkedIn.</p>
+                                    community on social media to be a part of the change. Follow us on Facebook and
+                                    Twitter.</p>
                             </div>
                         </div>
                         <!-- /lc-block -->
-                        <div class="lc-block py-2">
-                            <a class="text-decoration-none" href="">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="1em"
-                                    height="1em" lc-helper="svg-icon" fill="var(--bs-light)">
-                                    <path
-                                        d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z">
-                                    </path>
-                                </svg>
-                            </a>
-                            <a class="text-decoration-none" href="">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="1em"
-                                    height="1em" lc-helper="svg-icon" fill="var(--bs-light)">
-                                    <path
-                                        d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z">
-                                    </path>
-                                </svg>
-                            </a>
-                            <a class="text-decoration-none" href="">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="1em"
-                                    height="1em" lc-helper="svg-icon" fill="var(--bs-light)">
-                                    <path
-                                        d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z">
-                                    </path>
-                                </svg>
-                            </a>
-                            <a class="text-decoration-none" href="">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="1em"
-                                    height="1em" lc-helper="svg-icon" fill="var(--bs-light)">
-                                    <path
-                                        d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z">
-                                    </path>
-                                </svg>
-                            </a>
-                            <a class="text-decoration-none" href="">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="1em"
-                                    height="1em" lc-helper="svg-icon" fill="var(--bs-light)">
-                                    <path
-                                        d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z">
-                                    </path>
-                                </svg>
-                            </a>
-                        </div>
-
                     </div>
                     <div class="col-lg-2 offset-lg-1">
                         <div class="lc-block mb-4">
@@ -1459,11 +1661,19 @@
                         <!-- /lc-block -->
                         <div class="lc-block small">
                             <div editable="rich">
-                                <p><i class="fas fa-home" style="margin-right: 8px;"></i> Home</p>
-                                <p><i class="fas fa-briefcase" style="margin-right: 8px;"></i> Find Jobs</p>
-                                <p><i class="fas fa-info-circle" style="margin-right: 8px;"></i> About Us</p>
-                                <p><i class="fas fa-question-circle" style="margin-right: 8px;"></i> FAQ</p>
-
+                                <a href="{{ route('welcome') }}" class="text-white" style="text-decoration: none;">
+                                    <p><i class="fas fa-home" style="margin-right: 8px;"></i>
+                                        Home</p>
+                                </a>
+                                <a href="{{ route('findjobs') }}" class="text-white" style="text-decoration: none;">
+                                    <p><i class="fas fa-briefcase" style="margin-right: 8px; "></i> Find Jobs</p>
+                                </a>
+                                <a href="{{ route('aboutus') }}" class="text-white" style="text-decoration: none;">
+                                    <p><i class="fas fa-info-circle" style="margin-right: 8px;"></i> About Us</p>
+                                </a>
+                                <a href="{{ route('faq') }}" class="text-white" style="text-decoration: none;">
+                                    <p><i class="fas fa-question-circle" style="margin-right: 8px; "></i> FAQ</p>
+                                </a>
                             </div>
                         </div>
                         <!-- /lc-block -->
@@ -1478,7 +1688,9 @@
                         <div class="lc-block small">
                             <div editable="rich">
                                 <p></p>
-                                <p><i class="fas fa-life-ring" style="margin-right: 8px;"></i> Ask For Support</p>
+                                <a href="{{ route('contact') }}" class="text-white" style="text-decoration: none;">
+                                    <p><i class="fas fa-phone" style="margin-right: 8px;"></i> Ask For Support</p>
+                                </a>
                                 <p><a href="https://www.facebook.com/PDADMandaluyong" target="_blank"
                                         class="text-white" style="text-decoration: none;">
                                         <i class="fab fa-facebook" style="margin-right: 8px;"></i> Facebook
@@ -1500,12 +1712,12 @@
                             </div>
                         </div>
                         <!-- /lc-block -->
-                        <div class="lc-block small">
+                        <div class="lc-block small mt-6">
                             <div editable="rich">
-                                <p><i class="fas fa-map-marker-alt"></i> Mandaluyong City Hall, Maysilo Circle,
-                                    Mandaluyong, Metro Manila, Philippines</p>
-                                <p><i class="fas fa-phone-alt"></i> (02) 8532 5001</p>
-                                <p><i class="fas fa-clock"></i> Open Hours of Government: Mon-Fri: 7:00 am - 5:00pm
+                                <p><i class="fas fa-map-marker-alt"></i> Second Floor of Senior Citizen Center (Acacia
+                                    Lane Extension, NAG Bldg., Brgy. Addition Hills)</p>
+                                <p><i class="fas fa-phone-alt"></i> (+63)9667714365</p>
+                                <p><i class="fas fa-clock"></i> Open Hours of Government: Mon-Fri: 7:00 am - 4:00pm
                                 </p>
                                 <p><i class="fas fa-envelope"></i> info@mandaluyong.gov.ph</p>
                             </div>
@@ -1582,7 +1794,6 @@
             document.body.classList.add(currentTheme);
             console.log('Current theme on load:', currentTheme);
 
-            // Set the state of the theme switch and logo image based on the current theme
             if (currentTheme === 'dark') {
                 themeSwitch.checked = true;
                 logoImage.src = logoImage.getAttribute('data-dark');
@@ -1593,7 +1804,6 @@
                 console.log('Switching to light theme on load');
             }
 
-            // Event listener for theme switch toggle
             themeSwitch.addEventListener('change', () => {
                 if (themeSwitch.checked) {
                     document.body.classList.remove('light');
@@ -1610,9 +1820,87 @@
                 }
             });
         });
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.getElementById('myCarousel');
+            const typedTexts = [
+                'Empowering Job Seekers with Disabilities',
+                'Accessible and Inclusive Job Search',
+                'Transforming Employment Opportunities'
+            ];
+            let currentTyped;
+
+            function initTyped(index) {
+                const options = {
+                    strings: [typedTexts[index]],
+                    typeSpeed: 50,
+                    backSpeed: 25,
+                    loop: false,
+                    showCursor: true,
+                    cursorChar: '|',
+                    onComplete: (self) => {
+                        self.cursor.remove();
+                    }
+                };
+
+                const typedElement = carousel.querySelectorAll('.typed-text')[index];
+                currentTyped = new Typed(typedElement, options);
+            }
+
+            // Initialize the first slide
+            initTyped(0);
+
+            // Handle slide change
+            carousel.addEventListener('slide.bs.carousel', function(e) {
+                if (currentTyped) {
+                    currentTyped.destroy();
+                }
+                initTyped(e.to);
+            });
+        });
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Define the callback function for when the element intersects
+            const fadeInOnScroll = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            };
+
+            const observer = new IntersectionObserver(fadeInOnScroll, {
+                threshold: 0.1
+            });
+
+            // Target elements for observation
+            document.querySelectorAll('p, li, h2, h1, button, a,.logoimage,label,input, select, span, i').forEach(
+                element => {
+                    observer.observe(element);
+                });
+        });
+
+        const scrollUpBtn = document.getElementById('scrollUpBtn');
+        window.onscroll = function() {
+            // Show button when scrolled down more than 100px
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                scrollUpBtn.classList.add('visible'); // Add class to show
+            } else {
+                scrollUpBtn.classList.remove('visible'); // Remove class to hide
+            }
+        };
+
+        // Smooth scroll to top when button is clicked
+        scrollUpBtn.onclick = function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        };
     </script>
-
-
 </body>
 
 </html>

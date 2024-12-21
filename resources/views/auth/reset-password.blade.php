@@ -21,9 +21,6 @@
             <!-- Password -->
             <div class="mt-4">
                 <x-input-label for="password" :value="__('Password')" />
-                {{-- <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required
-                    autocomplete="new-password" /> --}}
-
                 <x-password-text id="password" type="password" name="password" placeholder="Enter your New Password."
                     required autocomplete="new-password" />
 

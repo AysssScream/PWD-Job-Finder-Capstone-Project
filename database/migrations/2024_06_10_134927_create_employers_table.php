@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->string('tinnumber', 15)->unique(); // Make tinnumber unique
             $table->string('tradename')->nullable();
             $table->enum('locationtype', ['Main', 'Branch']);
-            $table->enum('employertype', ['Public', 'Private']);
+            $table->enum('employertype', ['Government', 'Private']);
             $table->enum('totalworkforce', ['1-10', '11-50', '51-100', '101-500', '501-1000', '1001+']);
             $table->string('address', 100);
             $table->string('city', 50);

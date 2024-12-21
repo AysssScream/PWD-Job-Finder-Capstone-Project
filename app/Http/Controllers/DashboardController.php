@@ -10,24 +10,21 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // Subquery to get the latest job id for each company
         $subQuery = JobInfo::query()
-            ->selectRaw('MAX(id) as id') // Assuming 'id' is the primary key and the latest job has the highest id
-            ->groupBy('company_name'); // Group by company name
+            ->selectRaw('MAX(id) as id')
+            ->groupBy('company_name');
 
-        // Main query to get job details based on the latest job id per company
         $jobs = JobInfo::query()
-            ->whereIn('id', $subQuery) // Filter by the latest job ids
-            ->orderBy('vacancy', 'desc') // Sort by vacancies, highest to lowest
-            ->orderBy('date_posted', 'desc') // Then sort by date posted, newest to oldest
-            ->paginate(8); // Fetch 8 jobs per page
+            ->whereIn('id', $subQuery)
+            ->orderBy('vacancy', 'desc')
+            ->orderBy('date_posted', 'desc')
+            ->paginate(8);
 
         $featuredjobs = JobInfo::query()
             ->orderBy('vacancy', 'desc')
             ->orderBy('date_posted', 'desc')
             ->paginate(6);
 
-        // Calculate the total vacancy
         $totalVacanciesPerCompany = JobInfo::query()
             ->select('company_name')
             ->selectRaw('SUM(vacancy) as total_vacancy')
@@ -36,7 +33,7 @@ class DashboardController extends Controller
 
         return view('welcomepage', [
             'jobs' => $jobs,
-            'totalVacanciesPerCompany' => $totalVacanciesPerCompany, // Pass the total vacancies per company to the view
+            'totalVacanciesPerCompany' => $totalVacanciesPerCompany,
             'featuredjobs' => $featuredjobs
         ]);
     }
@@ -51,12 +48,12 @@ class DashboardController extends Controller
     }
     public function searchjobs(Request $request)
     {
-        $query = $request->input('query'); // Search query string
-        $recencyFilter = $request->input('custom_recency_filter'); // Updated name attribute, defaulting to 'All'
-        $location = $request->input('location'); // Location input
-        $minSalary = $request->input('min_salary'); // Minimum salary input
-        $maxSalary = $request->input('max_salary'); // Maximum salary input
-        $jobType = $request->input('job_type'); // Job type filter
+        $query = $request->input('query');
+        $recencyFilter = $request->input('custom_recency_filter');
+        $location = $request->input('location');
+        $minSalary = $request->input('min_salary');
+        $maxSalary = $request->input('max_salary');
+        $jobType = $request->input('job_type');
         $jobsQuery = JobInfo::query();
 
         if ($query) {

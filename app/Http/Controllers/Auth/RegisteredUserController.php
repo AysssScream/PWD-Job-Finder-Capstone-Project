@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\Rule;
 
 class RegisteredUserController extends Controller
 {
@@ -37,7 +38,17 @@ class RegisteredUserController extends Controller
             'firstname' => 'required|string|regex:/^[a-zA-Z\s.]+$/|max:50',
             'middlename' => 'nullable|string|max:50|regex:/^[a-zA-Z\s.]+$/',
             'lastname' => 'required|string|regex:/^[a-zA-Z\s.]+$/|max:50',
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:100', 'unique:' . User::class, new EmailDomain],
+            'email' => [
+                'required',
+                'string',
+                'lowercase',
+                'email',
+                'max:100',
+                'unique:' . User::class,
+                Rule::when($request->usertype === 'user', function ($input) {
+                    return [new EmailDomain];
+                }),
+            ],
             'password' => ['required', 'confirmed', Rules\Password::defaults(), 'regex:/^(?=.*[A-Z])(?=.*[!@#$%^&*()+\-={}[\]:;,<.>])(?=.*\d).*$/'],
             'account_verification_status' => ['nullable', 'string'],
             'usertype' => ['required', 'string'],

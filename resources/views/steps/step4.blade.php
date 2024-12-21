@@ -9,76 +9,100 @@
 
     </head>
     <div class="py-12">
-        <div class="container mx-auto">
+        <div class="container max-w-full pr-6 pl-6 mx-auto">
             <div class="flex justify-center">
-                <div class="w-full">
+                <div class="w-full p-6">
                     <form action="{{ route('jobpreferences') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @if ($errors->any())
                             <div class="bg-red-100 border border-red-400 text-red-700 dark:bg-red-700 dark:text-gray-100 dark:border-red-600 dark:text-red-200 px-4 py-3 rounded relative"
                                 role="alert">
-                                <strong class="font-bold">Oops!</strong>
-                                <span class="block sm:inline">There were some errors with your submission:</span>
+                                <strong class="font-bold dark:text-white">Oops!</strong>
+                                <span class="block sm:inline dark:text-white">There were some errors with your
+                                    submission:</span>
                                 <ul class="mt-3 list-disc list-inside text-sm">
                                     @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
+                                        <li class="dark:text-white">{{ $error }}</li>
                                     @endforeach
                                 </ul>
                             </div>
                             <br>
                         @endif
 
-                        <div class="bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-200 shadow-md rounded-lg">
-                            <div class="p-6">
-                                <h3 class="text-2xl font-bold mb-2 inline-flex items-center justify-between w-full focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
-                                    tabindex="0">
-                                    Job Preferences
-                                    @php
-                                        $currentStep = 4; // Set this dynamically based on your current step
-                                        $totalSteps = 7; // Total number of steps (adjusted to 8)
-                                        $percentage = round((($currentStep - 1) / ($totalSteps - 1)) * 100);
-                                    @endphp
-                                    <div class="ml-4 flex flex-col sm:flex-row sm:items-center sm:space-x-2">
+                        <div class="bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-200 shadow-3d rounded-lg mb-4"
+                            id="step4">
+                            @php
+                                $currentStep = 4; // Set this dynamically based on your current step
+                                $totalSteps = 7; // Total number of steps (adjusted to 8)
+                                $percentage = round((($currentStep - 1) / ($totalSteps - 1)) * 100);
+                            @endphp
+
+                            <!-- Gradient background for the header section -->
+                            <div class="bg-gradient-to-r from-blue-600 to-blue-400 p-6 rounded-t-lg shadow-lg">
+                                <h3 class="text-2xl text-white font-bold mb-4 inline-flex items-center justify-between w-full 
+                                            focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                    aria-label="{{ __('messages.steps.step_4') }} {{ $percentage }}%;" tabindex="0">
+
+                                    {{ __('messages.steps.step_4') }}
+
+                                    <!-- Progress bar -->
+                                    <div
+                                        class="ml-4 flex flex-col sm:flex-row sm:items-center sm:space-x-4 w-full sm:w-auto">
                                         <div
                                             class="relative w-full sm:w-36 h-2 bg-gray-200 rounded-full overflow-hidden">
-                                            <div class="absolute top-0 left-0 h-2 bg-blue-600 rounded-full transition-all ease-in-out duration-500"
+                                            <div class="absolute top-0 left-0 h-2 bg-gradient-to-r from-green-400 to-green-600 rounded-full transition-all ease-in-out duration-500"
                                                 style="width: {{ $percentage }}%;"></div>
                                         </div>
-                                        <div class="text-md text-black font-semibold dark:text-gray-400 mt-2 sm:mt-0">
-                                            Step {{ $currentStep }}/{{ $totalSteps }} : <span
-                                                class="text-green-600">{{ $percentage }}%</span>
+
+                                        <!-- Step progress information -->
+                                        <div class="text-md text-white font-semibold mt-2 sm:mt-0">
+                                            Step {{ $currentStep }}/{{ $totalSteps }} :
+                                            <span class="text-white">{{ $percentage }}%</span>
                                         </div>
                                     </div>
                                 </h3>
+
+                                <!-- Breadcrumb navigation -->
                                 <div>
                                     <nav class="text-sm" aria-label="Breadcrumb">
                                         <ol class="list-none p-0 inline-flex">
                                             <li class="flex items-center">
-                                                <i class="fas fa-arrow-left mr-2 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                <!-- Back arrow icon -->
+                                                <i class="fas fa-arrow-left mr-2 text-white 
+                                                            focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                    aria-label="Go Back to  {{ __('messages.steps.step_3') }}"
                                                     tabindex="0"></i>
+
+                                                <!-- "Employment History and Work Experience" link -->
                                                 <a href="{{ route('workexp') }}"
-                                                    class="text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">Employment
-                                                    History
-                                                    and Work Experience</a>
-                                                <span class="mx-2 text-gray-500">/</span>
+                                                    aria-label=" {{ __('messages.steps.step_3') }}"
+                                                    class="text-white focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                    {{ __('messages.steps.step_3') }}
+                                                </a>
+                                                <span class="mx-2 text-white">/</span>
                                             </li>
-                                            <li class="flex items-center">
+                                            <li class="flex items-center focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                aria-label="{{ __('messages.steps.step_4') }}" tabindex="0">
                                                 <span
-                                                    class="text-blue-500 font-semibold focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
-                                                    tabindex="0">Job
-                                                    Preferences</span>
+                                                    class="text-white font-semibold">{{ __('messages.steps.step_4') }}</span>
                                             </li>
                                         </ol>
                                     </nav>
                                 </div>
-                                <hr class="border-t-2 border-gray-400 rounded-full my-4">
-                                <div class="focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
-                                    tabindex="0" aria-label=" {!! __('messages.jobpreferences.instruction') !!}">
-                                    {!! __('messages.jobpreferences.instruction') !!}
-                                </div>
+
+                                <!-- Horizontal rule for separation -->
+                                <hr class="border-t-2 border-white rounded-full my-4">
+                            </div>
 
 
-                                <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+
+                            <div class="p-3 shadow-lg rounded-b-lg border-4 border-blue-500 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                tabindex="0" aria-label=" {!! __('messages.jobpreferences.instruction') !!}">
+                                {!! __('messages.jobpreferences.instruction') !!}
+                            </div>
+
+                            <div class="p-6 pt-0">
+                                <div class="mt-4 grid grid-cols-1 lg:grid-cols-3 gap-4">
                                     <div>
                                         @include('layouts.dropdown')
 
@@ -89,63 +113,36 @@
                                                 class="block mb-1">{{ __('messages.jobpreferences.preferred_occupation') }}
                                                 <i class="fas fa-asterisk text-red-500 text-xs"></i></label>
                                             <input type="text" id="preferredOccupation" name="preferredOccupation"
-                                                aria-label="{{ __('messages.jobpreferences.preferred_occupation') }}"
-                                                class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 "
+                                                aria-label="{{ __('messages.jobpreferences.preferred_occupation') }} {{ old('preferredOccupation', $formData4['preferredOccupation'] ?? '') }}"
+                                                class="w-full p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md  rounded-lg  focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 "
                                                 pattern="[A-Za-z\s]+" title="Please enter alphabetic characters only"
                                                 placeholder="Ex. Domestic Helper"
                                                 value="{{ old('preferredOccupation', $formData4['preferredOccupation'] ?? '') }}" />
-
-
                                             @error('preferredOccupation')
-                                                <div class="text-red-600 mt-1">{{ $message }}</div>
+                                                <div class="text-red-600 dark:text-red-400 mt-1">{{ $message }}</div>
                                             @enderror
 
                                         </div>
 
 
-                                        {{-- 
-                                        <div class="mt-6 relative">
-                                            <label for="local-location"
-                                                class="block mb-1">{{ __('messages.jobpreferences.preferred_work_location_local') }}</label>
-                                            <div class="flex">
-                                                <input type="text" id="local-location" name="local-location"
-                                                    aria-label="{{ __('messages.jobpreferences.preferred_work_location_local') }}"
-                                                    class="flex-1 p-2 border rounded shadow-sm bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
-                                                    pattern="[A-Za-z\sñ]+"
-                                                    title="Please enter alphabetic characters only"
-                                                    placeholder="Ex. Makati, MM"
-                                                    value="{{ old('local-location', $formData4['local-location'] ?? '') }}"readonly />
-                                                <button id="editLocationButton" type="button"
-                                                    aria-label="{{ __('messages.edit') }}"
-                                                    class="ml-2 px-3 py-1 bg-blue-500 text-white rounded focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">{{ __('messages.edit') }}</button>
-                                            </div>
-                                            <div id="local-location-suggestions"
-                                                class="absolute z-10 mt-1 w-full max-h-90 overflow-y-auto bg-gray-200 text-black dark:bg-gray-900 dark:text-gray-200 border rounded shadow-md hidden">
-                                            </div>
-                                            <div id="local-location-error" class="text-red-600 mt-1 hidden">Error
-                                                fetching location data</div>
-
-                                            <input type="text" id="localLocationHidden" name="localLocation"
-                                                value="{{ old('local-location', $formData4['local-location'] ?? '') }}"
-                                                hidden />
-                                        </div> --}}
 
                                         <div class="mt-6 relative">
                                             <label for="local-location" class="block mb-1">
                                                 {{ __('messages.jobpreferences.preferred_work_location_local') }} <i
                                                     class="fas fa-asterisk text-red-500 text-xs"></i>
                                             </label>
-                                            <div class="flex items-center space-x-2">
+                                            <div
+                                                class="flex flex-col sm:flex-row items-center sm:space-x-2 space-y-2 sm:space-y-0 w-full">
                                                 <!-- Dropdown (Select) for Local Location -->
                                                 <select id="local-location" name="local-location"
-                                                    aria-label="{{ __('messages.jobpreferences.preferred_work_location_local') }}"
-                                                    class="flex-1 p-2 border rounded shadow-sm bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                    aria-label="{{ __('messages.jobpreferences.preferred_work_location_local') }} {{ old('local-location', $formData4['local-location'] ?? '') }}"
+                                                    class="w-full p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md  rounded-lg  focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
 
                                                 </select>
 
                                                 <!-- Clear Button -->
                                                 <button id="clearLocationButton" type="button" aria-label="Clear"
-                                                    class="ml-2   px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-400">
+                                                    class="mt-2 sm:mt-0 sm:ml-2 w-full sm:w-auto px-3 py-2 bg-red-600 text-white rounded hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-400">
                                                     Clear
                                                 </button>
                                             </div>
@@ -153,10 +150,11 @@
                                             <div id="local-location-error" class="text-red-600 mt-1 hidden">Error
                                                 fetching location data</div>
                                             <input type="text" id="localLocationHidden" name="localLocation"
+                                                aria-label="Local Location"
                                                 value="{{ old('local-location', $formData4['local-location'] ?? '') }}"
                                                 hidden />
                                             @error('localLocation')
-                                                <div class="text-red-600 mt-1">{{ $message }}</div>
+                                                <div class="text-red-600 dark:text-red-400 mt-1">{{ $message }}</div>
                                             @enderror
                                         </div>
 
@@ -165,168 +163,55 @@
                                         <div class="mt-6 relative">
                                             <label for="overseas-location"
                                                 class="block mb-1">{{ __('messages.jobpreferences.preferred_work_location_overseas') }}</label>
-                                            <div class="flex items-center space-x-2">
-                                                <!-- Dropdown (Select) for Overseas Location -->
+                                            <div
+                                                class="flex flex-col sm:flex-row items-center sm:space-x-2 space-y-2 sm:space-y-0 w-full">
                                                 <select id="overseas-location" name="overseas-location"
-                                                    aria-label="{{ __('messages.jobpreferences.preferred_work_location_overseas') }}"
-                                                    class="flex-1 p-2 border rounded shadow-sm bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                    aria-label="{{ __('messages.jobpreferences.preferred_work_location_overseas') }} {{ old('overseas-location', $formData4['overseas-location'] ?? '') }}"
+                                                    class="w-full p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md  rounded-lg  focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
                                                 </select>
 
                                                 <!-- Clear Button -->
                                                 <button id="clearOverseasLocationButton" type="button"
                                                     aria-label="Clear"
-                                                    class="ml-2 px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-400">
+                                                    class="mt-2 sm:mt-0 sm:ml-2 w-full sm:w-auto px-3 py-2 bg-red-600 text-white rounded hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-400">
                                                     Clear
                                                 </button>
                                             </div>
+
+
 
                                             <!-- Error Message -->
                                             <div id="overseas-location-error" class="text-red-600 mt-1 hidden">Error
                                                 fetching location data</div>
 
                                             <input type="text" id="overseaslocationHidden" name="overseasLocation"
+                                                aria-label="Overseas Location"
                                                 value="{{ old('overseas-location', $formData4['overseas-location'] ?? '') }}"
                                                 hidden />
                                         </div>
-
-
-
                                     </div>
 
 
 
                                 </div>
-                                <div class="mt-4 text-right">
-                                    <a href="{{ route('workexp') }}" aria-label=" {{ __('messages.previous') }}"
-                                        class="inline-block py-2 px-4 bg-black text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 mr-2">{{ __('messages.previous') }}</a>
+                                <div
+                                    class="mt-4 text-right flex flex-col sm:flex-row sm:justify-end sm:space-x-2 space-y-2 sm:space-y-0">
+                                    <a href="{{ route('workexp') }}" aria-label="{{ __('messages.previous') }}"
+                                        class="inline-block py-2 px-4 bg-black text-center text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 mr-2 sm:mr-0">
+                                        {{ __('messages.previous') }}
+                                    </a>
 
-                                    <button type="submit" aria-label=" {{ __('messages.save') }}"
-                                        class="inline-block py-2 px-4 bg-green-600 text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">{{ __('messages.save') }}</button>
+                                    <button type="submit" aria-label="{{ __('messages.save') }}"
+                                        class="inline-block py-2 px-4 bg-green-700 text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                        {{ __('messages.save') }}
+                                    </button>
                                 </div>
+
                             </div>
                         </div>
 
 
                         <script>
-                            // document.addEventListener('DOMContentLoaded', function() {
-                            //     const localLocationInput = document.getElementById('local-location');
-                            //     const localLocationHidden = document.getElementById('localLocationHidden');
-                            //     const suggestionsContainer = document.getElementById('local-location-suggestions');
-                            //     const editLocationButton = document.getElementById('editLocationButton');
-                            //     const errorDiv = document.getElementById('local-location-error');
-
-                            //     let citiesData = []; // Array to store cities data fetched from API
-
-                            //     // Fetch cities data from the API
-                            //     fetch('/locations/cities.json')
-                            //         .then(response => {
-                            //             if (!response.ok) {
-                            //                 throw new Error('Network response was not ok');
-                            //             }
-                            //             return response.json();
-                            //         })
-                            //         .then(data => {
-                            //             citiesData = data;
-
-                            //             // Event listener for input changes
-                            //             localLocationInput.addEventListener('input', function() {
-                            //                 const query = this.value.trim().toLowerCase();
-                            //                 const filteredCities = citiesData.filter(city =>
-                            //                     city.name.toLowerCase().includes(query)
-                            //                 ).slice(0, 6); // Limit to 10 results
-
-                            //                 renderSuggestions(filteredCities, query);
-                            //             });
-                            //         })
-                            //         .catch(error => {
-                            //             console.error('Error fetching city data:', error);
-                            //             errorDiv.classList.remove('hidden');
-                            //         });
-
-                            //     // Event listener for edit button
-                            //     editLocationButton.addEventListener('click', function() {
-                            //         localLocationInput.value = ''; // Clear input value
-                            //         localLocationInput.focus(); // Set focus on input field
-                            //         localLocationInput.removeAttribute('readonly');
-                            //         suggestionsContainer.style.display = 'none'; // Hide suggestions
-                            //         editLocationButton.style.display = 'none'; // Show edit button
-                            //         localLocationHidden.value = ``
-
-                            //     });
-
-
-
-                            //     // Function to render suggestions in the suggestions container
-                            //     function renderSuggestions(cities, query) {
-                            //         suggestionsContainer.innerHTML = ''; // Clear previous suggestions
-                            //         suggestionsContainer.style.display = cities.length && query ? 'block' : 'none';
-
-                            //         cities.forEach(city => {
-                            //             const suggestionElement = document.createElement('div');
-                            //             suggestionElement.classList.add(
-                            //                 'flex', // Flexbox layout
-                            //                 'justify-between', // Space between items
-                            //                 'items-center', // Center items vertically
-                            //                 'p-2', // Padding
-                            //                 'cursor-pointer', // Pointer cursor on hover
-                            //                 'rounded', // Rounded corners
-                            //                 'mb-1', // Margin bottom
-                            //                 'bg-gray-200',
-                            //                 'text-black',
-                            //                 'dark:bg-gray-900',
-                            //                 'dark:text-gray-200',
-                            //             );
-
-
-                            //             const suggestionText = document.createElement('div');
-                            //             suggestionText.classList.add('suggestion-text');
-                            //             suggestionText.textContent =
-                            //                 `${city.name}, ${city.province}`; // Display city name and province
-
-                            //             const plusContainer = document.createElement('div');
-                            //             plusContainer.classList.add('plus-container');
-                            //             plusContainer.innerHTML = '+';
-
-                            //             suggestionElement.appendChild(suggestionText);
-                            //             suggestionElement.appendChild(plusContainer);
-
-                            //             suggestionElement.addEventListener('click', function() {
-                            //                 localLocationInput.value =
-                            //                     `${city.name}, ${city.province}`; // Set input value to city name
-                            //                 suggestionsContainer.style.display =
-                            //                     'none'; // Hide suggestions after selection
-                            //                 editLocationButton.style.display = 'inline-block'; // Show edit button
-                            //                 localLocationHidden.value = `${city.name}, ${city.province}`
-                            //                 localLocationInput.readOnly = true;
-                            //             });
-                            //             suggestionsContainer.appendChild(suggestionElement);
-                            //         });
-                            //     }
-
-                            //     /* Handle outside click to hide suggestions
-                            //     document.addEventListener('click', function(event) {
-                            //         if (!document.getElementById('local-location-container').contains(event.target)) {
-                            //             suggestionsContainer.style.display = 'none';
-                            //         }
-                            //     });*/
-                            //     document.addEventListener('DOMContentLoaded', function() {
-                            //         document.addEventListener('click', function(event) {
-                            //             const localLocationContainer = document.getElementById(
-                            //                 'local-location-container');
-                            //             const suggestionsContainer = document.getElementById('suggestionsContainer');
-
-                            //             if (localLocationContainer && suggestionsContainer) {
-                            //                 if (!localLocationContainer.contains(event.target)) {
-                            //                     suggestionsContainer.style.display = 'none';
-                            //                 }
-                            //             } else {
-                            //                 console.error(
-                            //                     'Local location container or suggestions container not found.');
-                            //             }
-                            //         });
-                            //     });
-                            // });
-
                             document.addEventListener('DOMContentLoaded', function() {
                                 const locationSelect = document.getElementById('local-location');
                                 const clearButton = document.getElementById('clearLocationButton');
@@ -442,116 +327,48 @@
                                     overseasLocationHidden.value = ''; // Clear the hidden input field
                                 });
                             });
-
-
-
-
-
-                            // document.addEventListener('DOMContentLoaded', function() {
-                            //     const overseasLocationInput = document.getElementById('overseas-location');
-                            //     const overseasLocationHidden = document.getElementById('overseaslocationHidden');
-
-                            //     const suggestionsContainer = document.getElementById('overseas-location-suggestions');
-                            //     const errorDiv = document.getElementById('overseas-location-error');
-                            //     const editOverseasButton = document.getElementById('editButton');
-
-                            //     let countries = [];
-
-                            //     // Replace 'countries.json' with your actual JSON file path or URL
-                            //     const jsonUrl = '/locations/countries.json';
-
-                            //     // Fetch countries data
-                            //     fetch(jsonUrl)
-                            //         .then(response => {
-                            //             if (!response.ok) {
-                            //                 throw new Error('Network response was not ok');
-                            //             }
-                            //             return response.json();
-                            //         })
-                            //         .then(data => {
-                            //             countries = data;
-
-                            //             overseasLocationInput.addEventListener('input', function() {
-                            //                 const query = this.value.trim().toLowerCase();
-                            //                 const filteredCountries = countries.filter(country =>
-                            //                     country.country.toLowerCase().includes(query)
-                            //                 ).slice(0, 4); // Limit suggestions to 10 results
-
-                            //                 renderSuggestions(filteredCountries, query);
-                            //             });
-                            //         })
-                            //         .catch(error => {
-                            //             console.error('Error fetching countries data:', error);
-                            //             errorDiv.classList.remove('hidden');
-                            //         });
-
-                            //     function renderSuggestions(countries, query) {
-                            //         suggestionsContainer.innerHTML = ''; // Clear previous suggestions
-                            //         suggestionsContainer.style.display = countries.length && query ? 'block' : 'none';
-
-                            //         countries.forEach(country => {
-                            //             const suggestionElement = document.createElement('div');
-                            //             suggestionElement.classList.add(
-                            //                 'flex', // Flexbox layout
-                            //                 'justify-between', // Space between items
-                            //                 'items-center', // Center items vertically
-                            //                 'p-2', // Padding
-                            //                 'cursor-pointer', // Pointer cursor on hover
-                            //                 'rounded', // Rounded corners
-                            //                 'mb-1', // Margin bottom
-                            //                 'bg-gray-200',
-                            //                 'text-black',
-                            //                 'dark:bg-gray-900',
-                            //                 'dark:text-gray-200',
-                            //             );
-
-                            //             const suggestionText = document.createElement('div');
-                            //             suggestionText.classList.add('suggestion-text');
-                            //             suggestionText.textContent = country.country;
-
-
-                            //             const plusContainer = document.createElement('div');
-                            //             plusContainer.classList.add('plus-container');
-                            //             plusContainer.innerHTML = '+';
-
-                            //             suggestionElement.appendChild(suggestionText);
-                            //             suggestionElement.appendChild(plusContainer);
-
-                            //             suggestionElement.addEventListener('click', function() {
-                            //                 overseasLocationInput.value = country.country;
-                            //                 overseasLocationInput.readOnly = true; // Make input readonly
-                            //                 editOverseasButton.style.display =
-                            //                     'inline-block'; // Show edit button
-                            //                 suggestionsContainer.style.display = 'none';
-                            //                 overseasLocationHidden.value = country.country;
-                            //             });
-
-                            //             suggestionsContainer.appendChild(suggestionElement);
-                            //         });
-                            //     }
-
-                            //     // Edit button functionality
-                            //     editOverseasButton.addEventListener('click', function(event) {
-                            //         event.preventDefault();
-                            //         overseasLocationInput.readOnly = !overseasLocationInput.readOnly;
-                            //         overseasLocationInput.value = ''; // Hide edit button after clicking
-                            //         overseasLocationHidden.value = '';
-
-                            //         if (overseasLocationInput.readOnly) {
-                            //             editOverseasButton.textContent = 'Edit';
-                            //         } else {
-                            //             editOverseasButton.style.display = 'none';
-                            //         }
-                            //     });
-
-                            //     document.addEventListener('click', function(event) {
-                            //         if (!suggestionsContainer.contains(event.target) && event.target !==
-                            //             overseasLocationInput) {
-                            //             suggestionsContainer.style.display = 'none';
-                            //         }
-                            //     });
-                            // });
+                            
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const preferredOccupationInput = document.getElementById('preferredOccupation');
+                                const localLocationSelect = document.getElementById('local-location');
+                                const localLocationHidden = document.getElementById('localLocationHidden');
+                        
+                                // Check if input is empty and apply red border if needed
+                                function checkInput(inputField) {
+                                    if (!inputField.value.trim()) {
+                                        inputField.classList.add('border-red-500');
+                                    } else {
+                                        inputField.classList.remove('border-red-500');
+                                    }
+                                }
+                        
+                                // Initial check only after all values have been restored
+                                function initialCheck() {
+                                    checkInput(preferredOccupationInput);
+                                    if (!localLocationHidden.value) {
+                                        checkInput(localLocationSelect);
+                                    }
+                                }
+                        
+                                // Event listeners to validate fields in real-time
+                                preferredOccupationInput.addEventListener('input', () => checkInput(preferredOccupationInput));
+                                localLocationSelect.addEventListener('change', () => {
+                                    checkInput(localLocationSelect);
+                                    localLocationHidden.value = localLocationSelect.value;
+                                });
+                        
+                                // Clear button functionality for dropdowns
+                                document.getElementById('clearLocationButton').addEventListener('click', () => {
+                                    localLocationSelect.value = '';
+                                    localLocationHidden.value = '';
+                                    checkInput(localLocationSelect);
+                                });
+                        
+                                // Perform the initial check after a slight delay to ensure values are fully restored
+                                setTimeout(initialCheck, 10);
+                            });
                         </script>
+
 
 
                         <style>
@@ -581,4 +398,9 @@
                             .plus-container:hover {
                                 background-color: #4cae4c;
                             }
+                            .border-red-500 {
+                                border-color: #dc2626 !important;
+                                border-width: 2px !important;
+                            }
+
                         </style>

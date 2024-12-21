@@ -1,838 +1,908 @@
-3D Animation
-3D Graphics
-3D Modeling
-3D Printing
-A/B Testing
-API Development
-API Integration
-Accountability
-Accounting
-Active Empathy
-Active Engagement
-Active Listening
-Active Participation
-Adaptability
-Adaptability in High Pressure
-Adaptability in Leadership
-Adaptability in Team Environments
-Adaptability in Team Settings
-Adaptability to Change
-Adaptive Problem Solving
-Adobe Animate
-Adobe Illustrator
-Adobe Photoshop
-Adobe Premier
-Adobe XD
-Agile
-Agile Coaching
-Agile Frameworks
-Agile Methodologies
-Agile Methodology
-Agile Project Management
-Agile Scrum
-Agile Thinking
-Algorithm Design
-Algorithm Optimization
-Amazon RDS
-Amazon Web Services (AWS)
-Analytical Communication
-Analytical Problem Solving
-Analytical Thinking
-Analytics
-Analyzing Evidence
-Angular
-Animation
-Apache
-Application Lifecycle Management
-Application Performance Management
-Application Security
-Architecture Design
-Articulation
-Artificial Intelligence
-Assertive Communication
-Assertive Listening
-Assertiveness
-Asset Management
-Asset Tracking
-Attention to Detail
-Attention to detail
-Augmented Reality (AR)
-Authentic Communication
-AutoCAD
-Automated Testing
-Back-End Development
-Backup Solutions
-Behavior Management
-Behavioral Adaptability
-Big Data
-Big Data Analytics
-Big Data Tools
-Blockchain
-Blockchain Development
-Blockchain Technology
-Blogging
-Brainstorming Techniques
-Brand Management
-Branding
-Budget Management
-Budgeting
-Bug Tracking
-Business Analysis
-Business Continuity
-Business Continuity Planning
-Business Intelligence
-Business Process Management (BPM)
-C#
-C++
-CAD Software
-COBOL
-CRM
-CRM Management
-CRM Software
-CSS
-Change Adaptation
-Change Facilitation
-Change Management
-Change Management Techniques
-Cisco Routers
-Cloud Application Security
-Cloud Architecture
-Cloud Computing
-Cloud Data Management
-Cloud Infrastructure
-Cloud Infrastructure Management
-Cloud Migration
-Cloud Networking
-Cloud Security
-Cloud Service Models
-Cloud Solutions
-Cloud Storage
-Cloud-Based Databases
-Cloud-Based Solutions
-Coaching
-Collaboration
-Collaborative Engagement
-Collaborative Leadership
-Collaborative Mindset
-Collaborative Problem-Solving
-Communication
-Communication Clarity
-Communication Effectiveness
-Compassionate Communication
-Compassionate Leadership
-Competitive Analysis
-Compliance
-Computational Analysis
-Configuration Management
-Conflict Handling
-Conflict Management
-Conflict Mediation
-Conflict Negotiation
-Conflict Prevention
-Conflict Resolution
-Conflict Resolution Processes
-Conflict Resolution Strategies
-Conflict Resolution Techniques
-Constructive Feedback
-Constructive Feedback Techniques
-Constructive Problem Solving
-Containerization
-Content Creation
-Content Management Systems
-Content Strategy
-Continuous Deployment
-Continuous Integration
-Continuous Learning
-Cooperative Teamwork
-Copywriting
-Cost Analysis
-Creative Problem Solving
-Creativity
-Creativity in Problem Solving
-Critical Analysis
-Critical Judgement
-Critical Thinking
-Cross-Cultural Communication
-Cross-Platform Development
-Cultural Adaptability
-Cultural Awareness
-Cultural Competency
-Cultural Sensitivity
-Customer Focus
-Customer Relationship Management
-Customer Relationship Management (CRM)
-Customer Service
-Cyber Defense
-Cybersecurity
-Cybersecurity Tools
-Data Analysis
-Data Analytics Platforms
-Data Annotation
-Data Center Management
-Data Cleansing
-Data Collection Methods
-Data Encryption
-Data Engineering
-Data Entry
-Data Governance
-Data Governance Frameworks
-Data Governance Policies
-Data Integration
-Data Migration
-Data Mining
-Data Modeling
-Data Privacy
-Data Quality Assurance
-Data Recovery
-Data Science
-Data Science Techniques
-Data Science Tools
-Data Storage Solutions
-Data Visualization
-Data Warehousing
-Data analysis
-Database Design
-Database Management
-Database Optimization
-Decision Making
-Decision Support Systems
-Decision-Making Processes
-Decision-Making Skills
-Delegation
-Demand Planning
-Dependability
-Deployment Automation
-Design Patterns
-Design Thinking
-DevOps
-DevOps Practices
-DevOps Tools
-Digital Content
-Digital Content Creation
-Digital Forensics
-Digital Marketing
-Digital Media
-Digital Product Management
-Digital Strategy
-Digital Strategy Development
-Digital Transformation
-Diplomacy
-Diplomacy Skills
-Django
-Docker
-Document Automation
-Document Management Systems
-Dynamic Thinking
-E-commerce Development
-E-commerce Platforms
-ERP Implementation
-ERP Solutions
-ERP Systems
-ETL Processes
-Editing
-Effective Collaboration
-Effective Communication
-Effective Feedback
-Effective Feedback Mechanisms
-Effective Relationship Management
-Efficiency
-Email Marketing
-Embedded Firmware
-Embedded Programming
-Embedded System Design
-Embedded Systems
-Emotional Adaptability
-Emotional Influence
-Emotional Intelligence
-Emotional Regulation
-Emotional Resilience
-Emotional Support
-Emotional Understanding
-Empathetic Communication
-Empathetic Decision Making
-Empathetic Leadership
-Empathetic Listening
-Empathetic Problem Solving
-Empathic Leadership
-Empathy
-Employee Engagement
-Employee Motivation
-Employee Relations
-Empowerment
-Encryption
-Enterprise Application Integration
-Enterprise Architecture
-Enterprise Resource Planning (ERP)
-Enterprise Resource Planning (ERP) Systems
-Enterprise Software
-Enterprise Systems
-Enthusiasm
-Ethical Hacking
-Ethical Hacking Techniques
-Ethical Hacking Tools
-Excel
-Feedback Delivery
-Feedback Implementation
-Feedback Reception
-Figma
-Filing
-Filmora
-Financial Modeling
-Firewall
-Firewall Management
-Firewalls
-Firmware Development
-Flash Animation
-Flexibility
-Flexibility in Roles
-Flexible Adaptation
-Flexible Leadership
-Flexible Problem Solving
-Flexible Thinking
-Forecasting
-Front-End Development
-Front-End Frameworks
-Full Stack Development
-Full Stack Frameworks
-Functional Programming
-GIS Software
-Game Design
-Game Development
-Geographic Information Systems (GIS)
-Geospatial Analysis
-Git
-Goal Achievement
-Goal Achievement Strategies
-Goal Orientation
-Goal Setting
-Goal Setting Techniques
-Goal-Oriented Thinking
-Google Analytics
-Google Collaboration
-Google Slides
-Graph Databases
-Graph Theory
-GraphQL
-Graphic Design
-HR Support
-HRIS
-HTML
-Hardware
-Health Informatics
-Help Desk
-High Emotional Quotient
-High-Impact Communication
-IT Asset Management
-IT Compliance
-IT Compliance Management
-IT Governance
-IT Infrastructure
-IT Management
-IT Risk Management
-IT Service Management (ITSM)
-IT Solutions
-IT Strategy
-IT Strategy Planning
-IT Support
-ITIL
-Identity and Access Management (IAM)
-Illustrator
-InDesign
-Influence
-Influence Skills
-Influence and Persuasion
-Information Architecture
-Information Security
-Infrastructure as Code
-Initiative
-Innovation
-Innovation Facilitation
-Innovation Mindset
-Innovative Leadership
-Innovative Problem Solving
-Innovative Thinking
-Integrity
-Internet of Things (IoT)
-Interpersonal Adaptability
-Interpersonal Communication
-Interpersonal Effectiveness
-Interpersonal Relationships
-Inventory Management
-IoT Security
-JIRA
-Java
-Java Development
-Java EE
-JavaScript
-JavaScript ES6+
-JavaScript Frameworks
-JavaScript Frameworks (React, Angular, Vue)
-JavaScript Libraries
-Jira
-Jupyter
-KPI Tracking
-Knowledge Base Management
-Knowledge Management
-Knowledge of accessibility guidelines
-Kubernetes
-Kubernetes Orchestration
-Lead Generation
-Leadership
-Leadership Adaptation
-Leadership Communication
-Leadership Development
-Leadership Insight
-Leadership Skills
-Leadership and Influence
-Learning & Development
-Legacy System Integration
-Linux
-Linux Administration
-Listening Skills
-Listening and Understanding
-Logical Thinking
-Logistics
-Low-Code Development
-Low-Code Platforms
-MATLAB
-MDM Solutions
-Machine Learning
-Machine Learning Algorithms
-Machine Vision
-Market Research
-Mediation
-Mediation Skills
-Microsoft Access
-Microsoft Excel
-Microsoft Office
-Microsoft PowerPoint
-Microsoft Word
-Mobile App Development
-Mobile App Security
-Mobile Development
-Mobile Device Management (MDM)
-Mobile Security
-Mobile UI/UX Design
-MongoDB
-Motivation
-Motivation Techniques
-Motivational Communication
-Motivational Leadership
-Motivational Leadership Techniques
-Motivational Learner
-Motivational Skills
-Motivational Strategies
-Multi-Cloud Environments
-Multimedia Design
-MyPHPAdmin
-MySQL
-Natural Language Processing
-Negotiation
-Negotiation Skills
-Negotiation Skills Development
-Negotiation Techniques
-Negotiation Techniques Development
-Negotiation and Persuasion
-Network Administration
-Network Architecture
-Network Configuration
-Network Design
-Network Design and Implementation
-Network Engineering
-Network Monitoring
-Network Protocols
-Network Security
-Network Security Protocols
-Network Troubleshooting
-Networking
-NoSQL Databases
-Node.js
-Non-Judgmental Listening
-Nonverbal Communication
-Object Detection
-Object-Oriented Design
-Object-Oriented Programming
-Objective-C
-Objective-C Programming
-Office Management
-Onboarding
-Open Communication
-Open Source Software
-Open-Minded Problem Solving
-Open-Mindedness
-Operations Management
-Optical Character Recognition (OCR)
-Oracle
-Organization
-Organizational Adaptability
-Organizational Communication
-Organizational Effectiveness
-Organizational Sensitivity
-Organizational Skills
-PHP
-PHP Development
-PHP Frameworks
-Patience
-Payment Gateway Integration
-Payroll
-Payroll Management
-Penetration Testing
-Performance Analysis
-Performance Enhancement
-Performance Evaluation
-Performance Improvement
-Performance Improvement Strategies
-Performance Management
-Performance Metrics
-Performance Reviews
-Performance Tuning
-Personal Accountability
-Persuasion
-Persuasive Communication
-Photoshop
-Planning
-Platform as a Service (PaaS)
-Positive Attitude
-Positive Reinforcement
-Positive Work Environment
-PostgreSQL
-PowerPoint
-Predictive Analytics
-Predictive Data Analysis
-Predictive Maintenance
-Predictive Modeling
-Presentation Creation
-Presentation Skills
-Prezi
-Prioritization
-Problem Identification
-Problem Solving
-Problem-Solving
-Problem-Solving Mindset
-Problem-Solving Strategies
-Process Automation
-Process Improvement
-Procurement
-Product Development
-Product Management
-Product Strategy
-Professional Development
-Professional Empathy
-Professional Networking
-Professional Relationship Building
-Professionalism
-Programming Languages
-Project Management
-Project Planning
-Project Scheduling
-Proofreading
-Prototyping
-Public Cloud Solutions
-Public Speaking
-Public Speaking Skills
-Python
-QA Processes
-QA Testing
-Quality Assurance (QA)
-Quality Control
-Quantitative Analysis
-R
-RESTful APIs
-RPA Tools
-React
-React Native
-React.js
-Real-Time Data Processing
-Recruitment
-Relationship Building
-Relationship Building Techniques
-Relationship Management
-Relationship Management Skills
-Remote Sensing
-Reporting
-Requirements Gathering
-Resilience
-Resilience in Adversity
-Resilient Communication
-Resilient Communication Techniques
-Resilient Leadership
-Resilient Leadership Techniques
-Resilient Problem Solving
-Resilient Thinking
-Resource Allocation
-Resource Management
-Resourcefulness
-Responsible
-Responsive Design
-Risk Assessment
-Risk Management
-Roadmapping
-Robotic Process Automation (RPA)
-Ruby on Rails
-SAP
-SAP ERP
-SAS
-SEM
-SEO
-SEO Optimization
-SEO knowledge
-SQL
-SaaS
-SaaS Development
-SaaS Implementation
-SaaS Management
-SaaS Solutions
-Sales Reporting
-Sales Strategy
-Sales skills
-Salesforce
-Salesforce Administration
-Scheduling
-Script Writing
-Search Engine Marketing (SEM)
-Security Auditing
-Security Information and Event Management (SIEM)
-Selenium
-Self-Assessment
-Self-Awareness
-Self-Awareness Skills
-Self-Discipline
-Self-Discipline Techniques
-Self-Evaluation
-Self-Improvement
-Self-Management
-Self-Motivation
-Self-Motivation Techniques
-Self-Reflection
-Server Administration
-Server Configuration
-Serverless Architecture
-Service Excellence
-Service-Oriented Architecture (SOA)
-Shell Scripting
-Sketch
-Social Awareness
-Social Intelligence
-Social Media
-Social Media Analytics
-Social Media Management
-Social Media Marketing
-Social Skill Development
-Social Skills
-Social media management
-Software
-Software Architecture
-Software Configuration
-Software Deployment
-Software Development
-Software Development Life Cycle (SDLC)
-Software Development Methodologies
-Software Documentation
-Software Engineering
-Software Maintenance
-Software Prototyping
-Software Testing
-Stakeholder Communication
-Stakeholder Management
-Statistical Analysis
-Statistical Modeling
-Statistical Software
-Statistics
-Storage Solutions
-Strategic Adaptability
-Strategic Communication
-Strategic Communication Techniques
-Strategic Decision Making
-Strategic Empathy
-Strategic Influence
-Strategic Interaction
-Strategic Planning
-Strategic Preparation
-Strategic Thinking
-Stress Management
-Supplier Management
-System Architecture
-System Virtualization
-Systems Analysis
-Systems Automation
-Systems Design
-Systems Integration
-Systems Integration Testing
-Systems Monitoring
-Tableau
-Tactful Communication
-Tactfulness
-Talent Acquisition
-Task Delegation
-Team Building
-Team Cohesion
-Team Collaboration
-Team Collaboration Techniques
-Team Coordination
-Team Dynamics
-Team Dynamics Management
-Team Effectiveness
-Team Effectiveness Strategies
-Team Efficiency
-Team Engagement
-Team Facilitation
-Team Integration
-Team Leadership
-Team Leadership Strategies
-Team Management
-Team Motivation
-Team Success
-Team Support
-Teamwork
-Technical Analysis
-Technical Consulting
-Technical SEO
-Technical Support
-Technical Writing
-Technical knowledge
-Technical writing
-Telecommunications
-TensorFlow
-Test Automation
-Test Automation Frameworks
-Test Planning
-Test-Driven Development (TDD)
-Threat Intelligence
-Time Efficiency
-Time Management
-Time Management Practices
-Time Management Strategies
-Time Management Techniques
-Time Optimization
-Time Optimization Techniques
-Time Prioritization
-Transparency
-Transparent Communication
-Transparent Decision Making
-Transparent Leadership
-Transparent Problem Solving
-Troubleshooting
-Trust Building
-Trustworthiness
-Trustworthy Communication
-Typography
-UI Design
-UX Design
-UX Research
-UX Testing
-UX/UI
-Unbiased Decision Making
-Understanding Team Roles
-Unified Communications
-Unified Threat Management (UTM)
-User Experience (UX) Research
-User Interface (UI) Frameworks
-User Research
-VBA
-VPN
-Vendor Management
-Verbal Clarity
-Verbal Communication
-Verbal Effectiveness
-Verbal and Nonverbal Communication
-Version Control
-Video Conferencing Solutions
-Video Editing
-Virtual Machine Management
-Virtual Reality
-Virtualization
-Virtualization Technologies
-Vision Development
-Visionary Leadership
-Visionary Thinking
-Visionary Thinking Skills
-Visual Basic
-Visual Studio Code
-Voice Recognition
-Vulnerability Assessment
-Web Analytics
-Web Application Development
-Web Application Frameworks
-Web Application Optimization
-Web Application Security
-Web Content Management
-Web Crawling
-Web Design
-Web Development
-Web Development Frameworks
-Web Hosting
-Web Performance Tuning
-Web Programming
-Web Prototyping
-Web Server Management
-Web Service APIs
-Web Services
-Web Services Integration
-Web-Based Analytics
-Web-Based Technologies
-WebSockets
-Windows
-Windows Administration
-Windows Server
-Wireframing
-Wireless Communication
-Wireless Network Security
-Wireless Networking
-Wireless Networks
-Wireless Protocols
-Wireless Security
-Wireless Technologies
-WordPress
-Work Delegation
-Work Efficiency
-Work Ethic
-Work Relationship Management
-Work-Life Balance
-Workflow Automation
-Working Under Pressure
-Workplace Adaptability
-Workplace Collaboration
-Workplace Communication
-Workplace Effectiveness
-Workplace Empathy
-Workplace Flexibility
-Writing skills
-Written Communication
-XML
-XML Parsing
-XML Schema
-XML Technologies
-YAML
-YARN
-Zabbix
-Zsh
+1,2,3, license restriction
+3d animation
+3d graphics
+3d modeling
+3d printing
+a delivery driver is responsible for moving packages from a warehouse or packaging facility to both business and residential locations. their tasks involve loading packages into their vehicle, using navigation tools to plan their route, and ensuring timely delivery to the correct addresses.
+a fashion or image consultant is a professional stylist who guides clients in enhancing or building their personal or professional image through fashion and clothing choices. as style experts, they help clients select outfits and accessories for different occasions and events.
+a merchandiser is a specialist responsible for overseeing inventory levels, arranging product displays in retail stores, and submitting reports to the warehouse for approval.
+a promodiser is responsible for selling products, addressing customer complaints, and promoting product features through demonstrations and explanations. they ensure products are properly displayed and replenished as needed, and they keep promotional items up to date and organized. additionally, they maintain the cleanliness and orderliness of products both in the sales area and the stockroom.
+a sales promoter is a skilled professional focused on raising product awareness by conducting demonstrations, handing out samples, delivering presentations, and generating public interest. they are responsible for fostering a positive brand image and developing creative marketing strategies.
+a welder is a skilled professional who assembles metal pieces or repairs damaged components by using high-heat machinery to melt and shape the metals.
+a/b testing
 ability to simplify complex concepts
+able to work well
+accountability
+accounting
+accounting clerks provide essential services to their clients. discover the roles of accounting clerks, the job requirements, and the skills needed for the position.
+active empathy
+active engagement
+active listening
+active participation
+adaptability
+adaptability in high pressure
+adaptability in leadership
+adaptability in team environments
+adaptability in team settings
+adaptability to change
+adaptive problem solving
+adobe animate
+adobe illustrator
+adobe photoshop
+adobe premier
+adobe xd
+advance computer skills and knowledgeable with ms office (microsoft 365))
+agile
+agile coaching
+agile frameworks
+agile methodologies
+agile methodology
+agile project management
+agile scrum
+agile thinking
+algorithm design
+algorithm optimization
+amazon rds
+amazon web services (aws)
+amendable to work in mandaluyong city
+an auditor is a financial expert who conducts audits on company and organization financial accounts to verify the accuracy and integrity of their financial data. responsibilities include reviewing financial statements for compliance with legal standards, preparing tax returns, and analyzing account books and accounting systems to ensure accuracy and operational efficiency for corporations.
+analytical communication
+analytical problem solving
 analytical skills
+analytical thinking
 analytics
+analyzing evidence
+angular
+animation
+apache
+api development
+api integration
+application lifecycle management
+application performance management
+application security
+architecture design
+articulation
+artificial intelligence
+assertive communication
+assertive listening
+assertiveness
+asset management
+asset tracking
+assist with production line in factories
+at least 1 year(s) of working experience
+at least with government numbers like sss, phil health, pag-ibig, tin
 attention to detail
 attentiveness
+augmented reality (ar)
+authentic communication
+autocad
+automated testing
+average to good communication skills and good sounding voice
+back-end development
+backup solutions
+basic knowledge in python, java, c++, and javascript
+behavior management
+behavioral adaptability
+big data
+big data analytics
+big data tools
+blockchain
+blockchain development
+blockchain technology
+blogging
+brainstorming techniques
+brand management
+branding
+budget management
+budgeting
+bug tracking
+business analysis
+business continuity
+business continuity planning
+business intelligence
+business process management (bpm)
+c#
+c++
+cad software
+change adaptation
+change facilitation
+change management
+change management techniques
+cisco routers
 clarity in writing
+clean product area
+cloud application security
+cloud architecture
+cloud computing
+cloud data management
+cloud infrastructure
+cloud infrastructure management
+cloud migration
+cloud networking
+cloud security
+cloud service models
+cloud solutions
+cloud storage
+cloud-based databases
+cloud-based solutions
+coaching
+cobol
+collaboration
+collaborative engagement
+collaborative leadership
+collaborative mindset
+collaborative problem-solving
 communication
+communication clarity
+communication effectiveness
 community engagement
+compassionate communication
+compassionate leadership
+competitive analysis
+compliance
+computational analysis
+configuration management
+conflict handling
+conflict management
+conflict mediation
+conflict negotiation
+conflict prevention
+conflict resolution
+conflict resolution processes
+conflict resolution strategies
+conflict resolution techniques
+constructive feedback
+constructive feedback techniques
+constructive problem solving
+containerization
 content creation
+content management systems
+content strategy
+continuous deployment
+continuous integration
+continuous learning
+cooperative teamwork
+copywriting
+cost analysis
+creative problem solving
 creativity
+creativity in problem solving
+critical analysis
+critical judgement
 critical thinking
+crm
+crm management
+crm software
+cross-cultural communication
+cross-platform development
+css
+cultural adaptability
+cultural awareness
+cultural competency
+cultural sensitivity
+customer focus
 customer relationship management
+customer relationship management (crm)
+customer service
+customer service representatives assist customers with their concerns, offer details on the company’s products and services, handle returns, and more. their primary responsibilities include addressing customer questions and complaints, processing orders, and directing complex issues to the appropriate teams.
+cyber defense
+cybersecurity
+cybersecurity tools
+dadada
+data analysis
+data analytics platforms
+data annotation
+data center management
+data cleansing
+data collection methods
+data encryption
+data engineering
+data entry
+data governance
+data governance frameworks
+data governance policies
+data integration
+data migration
+data mining
+data modeling
+data privacy
+data quality assurance
+data recovery
+data science
+data science techniques
+data science tools
+data storage solutions
 data visualization
-jQuery
+data warehousing
+database design
+database management
+database optimization
+decision making
+decision support systems
+decision-making processes
+decision-making skills
+delegation
+demand planning
+dependability
+deployment automation
+design patterns
+design thinking
+devops
+devops practices
+devops tools
+digital content
+digital content creation
+digital forensics
+digital marketing
+digital media
+digital product management
+digital strategy
+digital strategy development
+digital transformation
+diplomacy
+diplomacy skills
+django
+docker
+document automation
+document management systems
+driving
+dynamic thinking
+e-commerce development
+e-commerce platforms
+editing
+effective collaboration
+effective communication
+effective feedback
+effective feedback mechanisms
+effective relationship management
+efficiency
+email marketing
+embedded firmware
+embedded programming
+embedded system design
+embedded systems
+emotional adaptability
+emotional influence
+emotional intelligence
+emotional regulation
+emotional resilience
+emotional support
+emotional understanding
+empathetic communication
+empathetic decision making
+empathetic leadership
+empathetic listening
+empathetic problem solving
+empathic leadership
+empathy
+employee engagement
+employee motivation
+employee relations
+empowerment
+encryption
+enterprise application integration
+enterprise architecture
+enterprise resource planning (erp)
+enterprise resource planning (erp) systems
+enterprise software
+enterprise systems
+enthusiasm
+erp implementation
+erp solutions
+erp systems
+ethical hacking
+ethical hacking techniques
+ethical hacking tools
+etl processes
+excel
+familiar with internal controls procedures
+familiar with various audit techniques and procedures
+feedback delivery
+feedback implementation
+feedback reception
+female
+figma
+filing
+filmora
+financial modeling
+firewall
+firewall management
+firewalls
+firmware development
+flash animation
+flexibility
+flexibility in roles
+flexible adaptation
+flexible leadership
+flexible problem solving
+flexible thinking
+forecasting
+front-end development
+front-end frameworks
+full stack development
+full stack frameworks
+fully vaccinated
+functional programming
+game design
+game development
+geographic information systems (gis)
+geospatial analysis
+gis software
+git
+goal achievement
+goal achievement strategies
+goal orientation
+goal setting
+goal setting techniques
+goal-oriented thinking
+google analytics
+google collaboration
+google slides
+graduate of bs accountancy, financial management, or any accounting related course
+graph databases
+graph theory
+graphic design
+graphql
+hardware
+health informatics
+hello there
+help desk
+high emotional quotient
+high-impact communication
+hr support
+hris
+html
+identity and access management (iam)
+if no cce, must have sales background only with the 3 industries (car sales/realty/insurance)
+illustrator
+indesign
+influence
+influence and persuasion
+influence skills
+information architecture
+information security
+infrastructure as code
+initiative
+innovation
+innovation facilitation
+innovation mindset
+innovative leadership
+innovative problem solving
+innovative thinking
+integrity
+internet of things (iot)
+interpersonal adaptability
+interpersonal communication
+interpersonal effectiveness
+interpersonal relationships
+inventory management
+iot security
+it asset management
+it compliance
+it compliance management
+it governance
+it infrastructure
+it management
+it risk management
+it service management (itsm)
+it solutions
+it strategy
+it strategy planning
+it support
+itil
+java
+java development
+java ee
+javascript
+javascript es6+
+javascript frameworks
+javascript frameworks (react, angular, vue)
+javascript libraries
+jira
+jquery
+jupyter
+kitchen helpers handle a range of cleaning, maintenance, preparation, and stocking tasks in kitchens across restaurants, hospitals, schools, and nursing homes. their responsibilities include washing dishes, assisting cooks with meal ingredient preparation, and keeping kitchens clean.
+knowledge base management
+knowledge management
+knowledge of accessibility guidelines
 knowledge of grammar and style
+kpi tracking
+kubernetes
+kubernetes orchestration
+lead generation
+leadership
+leadership adaptation
+leadership and influence
+leadership communication
+leadership development
+leadership insight
+leadership skills
+learning & development
+legacy system integration
+linux
+linux administration
+listening and understanding
+listening skills
+logical thinking
+logistics
+low-code development
+low-code platforms
+machine learning
+machine learning algorithms
+machine vision
+male
+market research
+matlab
+mdm solutions
+mediation
+mediation skills
+merchandiser
+microsoft access
+microsoft excel
+microsoft office
+microsoft powerpoint
+microsoft word
+mobile app development
+mobile app security
+mobile development
+mobile device management (mdm)
+mobile security
+mobile ui/ux design
+mongodb
+mop
+motivation
+motivation techniques
+motivational communication
+motivational leadership
+motivational leadership techniques
+motivational learner
+motivational skills
+motivational strategies
+ms application proficient
+multi-cloud environments
+multimedia design
 multitasking
+myphpadmin
+mysql
+natural language processing
 negotiation
+negotiation and persuasion
+negotiation skills
+negotiation skills development
+negotiation techniques
+negotiation techniques development
+network administration
+network architecture
+network configuration
+network design
+network design and implementation
+network engineering
+network monitoring
+network protocols
+network security
+network security protocols
+network troubleshooting
+networking
+no visible tattoo
+node.js
+non-judgmental listening
+none
+nonverbal communication
+nosql databases
+nothing
+object detection
+object-oriented design
+object-oriented programming
+objective-c
+objective-c programming
+office management
+onboarding
+open communication
+open source software
+open-minded problem solving
+open-mindedness
+operations management
+optical character recognition (ocr)
+oracle
 organization
+organizational adaptability
+organizational communication
+organizational effectiveness
+organizational sensitivity
+organizational skills
 patience
+payment gateway integration
+payroll
+payroll management
+penetration testing
+performance analysis
+performance enhancement
+performance evaluation
+performance improvement
+performance improvement strategies
+performance management
+performance metrics
+performance reviews
+performance tuning
+personal accountability
+persuasion
+persuasive communication
+photoshop
+php
+php development
+php frameworks
 planning
+platform as a service (paas)
+positive attitude
+positive reinforcement
+positive work environment
+postgresql
+powerpoint
+predictive analytics
+predictive data analysis
+predictive maintenance
+predictive modeling
+preferably with call center sales experience
+presentation creation
+presentation skills
+prezi
+prioritization
+problem identification
+problem solving
 problem-solving
-proficiency in Excel or similar tools
+problem-solving mindset
+problem-solving strategies
+process automation
+process improvement
+procurement
+product development
+product management
+product strategy
+production helpers support the production process in factories by moving carts and dollies with materials, unloading trucks and boxes, and placing items onto conveyor belts. they also assist with cleanup tasks.
+professional development
+professional empathy
+professional networking
+professional relationship building
+professionalism
 proficiency in design software
+proficiency in excel or similar tools
 proficiency with spreadsheets
+proficient in microsoft office application
+programming languages
+project management
+project planning
+project scheduling
+promodiser
+proofreading
+prototyping
+public cloud solutions
+public speaking
+public speaking skills
+python
+qa processes
+qa testing
+quality assurance (qa)
+quality control
+quantitative analysis
+r
+react
+react native
+react.js
+real-time data processing
+recruitment
+relationship building
+relationship building techniques
+relationship management
+relationship management skills
+remote sensing
 report writing
+reporting
+requirements gathering
 research ability
 research skills
+resilience
+resilience in adversity
+resilient communication
+resilient communication techniques
+resilient leadership
+resilient leadership techniques
+resilient problem solving
+resilient thinking
+resource allocation
+resource management
+resourcefulness
+responsible
+responsive design
+restful apis
+risk assessment
+risk management
+roadmapping
+robotic process automation (rpa)
+rpa tools
+ruby on rails
+saas
+saas development
+saas implementation
+saas management
+saas solutions
+sales promoter
+sales reporting
+sales skills
+sales strategy
+salesforce
+salesforce administration
+sap
+sap erp
+sas
+scheduling
+script writing
+search engine marketing (sem)
+security auditing
+security information and event management (siem)
+selenium
+self-assessment
+self-awareness
+self-awareness skills
+self-discipline
+self-discipline techniques
+self-evaluation
+self-improvement
+self-management
+self-motivation
+self-motivation techniques
+self-reflection
+sem
+seo
+seo knowledge
+seo optimization
+server administration
+server configuration
+serverless architecture
+service excellence
+service-oriented architecture (soa)
+shell scripting
+sketch
+social awareness
+social intelligence
+social media
+social media analytics
+social media management
+social media marketing
+social skill development
+social skills
+software
+software architecture
+software configuration
+software deployment
+software development
+software development life cycle (sdlc)
+software development methodologies
+software documentation
+software engineering
+software maintenance
+software prototyping
+software testing
+sql
+stakeholder communication
+stakeholder management
+start up and stop equipment
+statistical analysis
+statistical modeling
+statistical software
+statistics
+storage solutions
+strategic adaptability
+strategic communication
+strategic communication techniques
+strategic decision making
+strategic empathy
+strategic influence
+strategic interaction
+strategic planning
+strategic preparation
+strategic thinking
+stress management
+student
+supplier management
+sweep
+system architecture
+system virtualization
+systems analysis
+systems automation
+systems design
+systems integration
+systems integration testing
+systems monitoring
+tableau
+tactful communication
+tactfulness
+talent acquisition
+task delegation
+team building
+team cohesion
+team collaboration
+team collaboration techniques
+team coordination
+team dynamics
+team dynamics management
+team effectiveness
+team effectiveness strategies
+team efficiency
+team engagement
+team facilitation
+team integration
+team leadership
+team leadership strategies
+team management
+team motivation
+team success
+team support
+teamwork
+technical analysis
+technical consulting
+technical knowledge
+technical seo
+technical support
+technical writing
+telecommunications
+tensorflow
+test automation
+test automation frameworks
+test planning
+test-driven development (tdd)
+threat intelligence
+time efficiency
 time management
+time management practices
+time management strategies
+time management techniques
+time optimization
+time optimization techniques
+time prioritization
+transparency
+transparent communication
+transparent decision making
+transparent leadership
+transparent problem solving
+troubleshooting
+trust building
+trustworthiness
+trustworthy communication
 typing speed
+typography
+ui design
+unbiased decision making
+understanding team roles
+unified communications
+unified threat management (utm)
+user experience (ux) research
+user interface (ui) frameworks
+user research
+ux design
+ux research
+ux testing
+ux/ui
+vba
+vendor management
+verbal and nonverbal communication
+verbal clarity
+verbal communication
+verbal effectiveness
+version control
+video conferencing solutions
+video editing
+virtual machine management
+virtual reality
+virtualization
+virtualization technologies
+vision development
+visionary leadership
+visionary thinking
+visionary thinking skills
+visual basic
+visual studio code
+voice recognition
+vpn
+vulnerability assessment
+web analytics
+web application development
+web application frameworks
+web application optimization
+web application security
+web content management
+web crawling
+web design
+web development
+web development frameworks
+web hosting
+web performance tuning
+web programming
+web prototyping
+web server management
+web service apis
+web services
+web services integration
+web-based analytics
+web-based technologies
+websockets
+windows
+windows administration
+windows server
+wireframing
+wireless communication
+wireless network security
+wireless networking
+wireless networks
+wireless protocols
+wireless security
+wireless technologies
+with any sales experience
+with experience as sales promoter or sales associate
+with knowledge in accounting system
+with or without experience
+with tin, sss, philhealth, pag-ibig & updated nbi
+wordpress
+work delegation
+work efficiency
+work ethic
+work relationship management
+work-life balance
+workflow automation
+working under pressure
+workplace adaptability
+workplace collaboration
+workplace communication
+workplace effectiveness
+workplace empathy
+workplace flexibility
 writing skills
+written communication
+xml
+xml parsing
+xml schema
+xml technologies
+yaml
+yarn
+zabbix
+zsh
+
+A Java Developer is a programmer who designs, develops, and manages Java-based applications and software. With most large organizations using Java to implement software systems and backend services, a Java developer is one of the most sought-after jobs today.
+A Computer Programmer, or Systems Programmer, writes code to help software applications operate more efficiently
+A Teacher is a professional who teaches students based on national curriculum guidelines within their specialist subject areas. Their duties include assigning homework, grading tests, documenting progress and keeping up with parent communication. They communicate and evaluate needs to ensure every student feels challenged but not overwhelmed by the material being covered.
+swimming
+dancing
+A Merchandiser is a specialist responsible for overseeing inventory levels, arranging product displays in retail stores, and submitting reports to the warehouse for approval.
+Male
+With or without experience
+With TIN, SSS, PhilHealth, Pag-ibig & updated NBI
+A Delivery Driver is responsible for moving packages from a warehouse or packaging facility to both business and residential locations. Their tasks involve loading packages into their vehicle, using navigation tools to plan their route, and ensuring timely delivery to the correct addresses.
+1,2,3, license restriction
+With TIN, SSS, PhilHealth, Pag-ibig & updated NBI
+Fully Vaccinated
+1414142
+1313131
+dada
+
+edi wow
+dada
+
+edi wow
+tafa
+3435353
+fafaf22
+2424242
+dsds
+4242424
+Software Development
+Adaptability
+Programming
+2fsfsfs
+They design, develop, and deploy AI models and applications that can analyze large volumes of data and generate actionable insights or automate decision-making processes.
+Software Development
+Project Management
+Web Development
+Artificial Intelligence
+A Computer Programmer, or Systems Programmer, writes code to help software applications operate more efficiently
+Project Management
+Web Development
+Artificial Intelligence

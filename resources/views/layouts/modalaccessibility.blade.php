@@ -1,41 +1,55 @@
 <div class="py-7 grid grid-cols-1 gap-6 max-w-7xl mx-auto sm:px-6 lg:px-8">
-    <h2 class="text-xl px-4 mt-4 md:px-4 font-semibold text-gray-900 dark:text-white focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
-        aria-label=" {{ __('messages.profile.Accessibility Settings') }}" tabindex="0">
-        {{ __('messages.profile.Accessibility Settings') }}</h2>
-    <p class="text-sm px-4 text-gray-600 dark:text-gray-300 md:px-4 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
-        aria-label=" {{ __('messages.profile.description') }}" tabindex="0">
-        {{ __('messages.profile.description') }}
-    </p>
-
-    </p>
+    
     <div class="p-4 sm:p-8 bg-gray-100 dark:bg-gray-800 shadow sm:rounded-lg">
-        <div class="grid grid-cols-2 gap-4">
+            <h2 class="text-xl px-4 mb-2 mt-4 md:px-4 font-semibold text-gray-900 dark:text-white focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                aria-label="{{ __('messages.profile.Accessibility Settings') }}" tabindex="0">
+                {{ __('messages.profile.Accessibility Settings') }}
+            </h2>
+            <p class="text-sm px-4 mb-4 text-gray-600 dark:text-gray-300 md:px-4 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                aria-label="{{ __('messages.profile.description') }}" tabindex="0">
+                {{ __('messages.profile.description') }}
+            </p>
+        <div class="grid grid-cols-2 mb gap-4">
             <div class="relative inline-block text-left w-full">
                 <button onclick="toggleDropdown()" aria-label="{{ __('messages.profile.Adjust Text Size') }}"
                     class="w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 flex items-center">
                     <i class="fas fa-font mr-2"></i> <!-- Font Awesome icon for text size adjustment -->
-                    {{ __('messages.profile.Adjust Text Size') }}
+                    <span class="truncate block sm:w-auto w-32">
+                        {{ __('messages.profile.Adjust Text Size') }}
+                    </span>
                     <i id="dropdownIndicator" class="fas fa-caret-down ml-2"></i> <!-- Dropdown indicator -->
                 </button>
                 <div id="textSizeDropdown"
                     class="origin-top-right absolute right-0 mt-2 w-full rounded-md shadow-lg bg-gray-100 text-gray-700 dark:bg-gray-700 ring-1 ring-black ring-opacity-5 hidden z-10">
-                    <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                    <div class="py-1">
                         <a href="#" onclick="setTextSize(1); event.preventDefault();"
-                            class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-blue-600 hover:text-gray-200">x1</a>
+                            class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-blue-600 hover:text-gray-200">
+                            x1
+                        </a>
                         <a href="#" onclick="setTextSize(2); event.preventDefault();"
-                            class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-blue-600 hover:text-gray-200">x2</a>
+                            class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-blue-600 hover:text-gray-200">
+                            x2
+                        </a>
                         <a href="#" onclick="setTextSize(3); event.preventDefault();"
-                            class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-blue-600 hover:text-gray-200">x3</a>
+                            class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-blue-600 hover:text-gray-200">
+                            x3
+                        </a>
                         <a href="#" onclick="setTextSize(4); event.preventDefault();"
-                            class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-blue-600 hover:text-gray-200">lg</a>
+                            class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-blue-600 hover:text-gray-200">
+                            lg
+                        </a>
                     </div>
+
                 </div>
             </div>
             <div class="relative inline-block text-left">
                 <button id="toggleCustomDarkMode" aria-label="{{ __('messages.profile.Toggle Theme') }}"
                     class="w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 flex items-center">
                     <i id="iconMenuToggle" class="fas fa-moon mr-2"></i>
-                    {{ __('messages.profile.Toggle Theme') }}
+
+                    <span class="truncate block sm:w-auto w-32">
+                        {{ __('messages.profile.Toggle Theme') }}
+                    </span>
                 </button>
             </div>
 
@@ -44,9 +58,12 @@
                 <button onclick="toggleScreenReader()" aria-label="{{ __('messages.profile.Toggle Screen Reader') }}"
                     class="w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 flex items-center">
                     <i id="screenModalReaderIcon" class="fas fa-volume-up mr-2"></i>
-                    {{ __('messages.profile.Toggle Screen Reader') }}
+                    <span class="truncate block sm:w-auto w-32">
+                        {{ __('messages.profile.Toggle Screen Reader') }}
+                    </span>
                 </button>
             </div>
+
 
             <div class="relative inline-block text-left w-full">
                 <!-- Language Toggle Buttons with icon -->
@@ -56,8 +73,10 @@
                         aria-label="{{ __('messages.profile.Change Language') }}"
                         class="w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 flex items-center">
                         <i class="fas fa-language mr-2"></i>
-                        <span id="languageText"> {{ __('messages.profile.Change Language') }}
+                        <span class="truncate block sm:w-auto w-32">
+                            {{ __('messages.profile.Change Language') }}
                         </span>
+
                     </button>
                 </form>
 
@@ -170,10 +189,10 @@
 
         if (darkModeEnabled) {
             if (navbarLogoElement) {
-                navbarLogoElement.src = '/images/dark-navbar-logo.png';
+                navbarLogoElement.src = '/images/darknavbarlogo.png';
             }
             if (mainNavbarLogoElement) {
-                mainNavbarLogoElement.src = '/images/dark-navbar-logo.png';
+                mainNavbarLogoElement.src = '/images/darknavbarlogo.png';
             }
 
             if (mainNavElement) {
@@ -181,10 +200,10 @@
             }
         } else {
             if (navbarLogoElement) {
-                navbarLogoElement.src = '/images/light-navbar-logo.png';
+                navbarLogoElement.src = '/images/lightnavbarlogo.png';
             }
             if (mainNavbarLogoElement) {
-                mainNavbarLogoElement.src = '/images/light-navbar-logo.png';
+                mainNavbarLogoElement.src = '/images/lightnavbarlogo.png';
             }
 
             if (mainNavElement) {
@@ -193,7 +212,6 @@
         }
     }
 
-    // Initial call to update UI based on stored dark mode preference
     updateDarkModeUI();
 
     // Event listener for custom dark mode toggle button
@@ -208,7 +226,6 @@
         });
     }
 
-    // Event listener for floating toggle button
     const floatingToggleButton = document.getElementById('floatingToggleCustomDarkMode');
     if (floatingToggleButton) {
         floatingToggleButton.addEventListener('click', function() {

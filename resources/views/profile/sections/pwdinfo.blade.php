@@ -9,28 +9,36 @@
                    <label for="disabilityOccurrence"
                        class="block mb-1">{{ __('messages.pwdinfo.disability_occurrence.label') }}</label>
                    <select id="disabilityOccurrence" name="disabilityOccurrence"
-                       class="w-full p-2 border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm"
+                       class="w-full p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md  rounded-lg  focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400"
                        onchange="toggleOtherDisabilityField()"
-                       aria-label="{{ __('messages.pwdinfo.disability_occurrence.label') }}">
+                       aria-label="{{ __('messages.pwdinfo.disability_occurrence.label') }} {{ old('disabilityOccurrence', $pwdinfo->disabilityOccurrence ?? '') }}">
                        <option value="" selected disabled>
                            {{ __('messages.pwdinfo.disability_occurrence.placeholder') }}
                        </option>
-                       <option value="Birth"
-                           {{ old('disabilityOccurrence', $pwdinfo->disabilityOccurrence ?? '') == 'Birth' ? 'selected' : '' }}>
-                           {{ __('messages.pwdinfo.disability_occurrence.options.birth') }}
-                       </option>
-                       <option value="Before Employment"
-                           {{ old('disabilityOccurrence', $pwdinfo->disabilityOccurrence ?? '') == 'Before Employment' ? 'selected' : '' }}>
-                           {{ __('messages.pwdinfo.disability_occurrence.options.before_employment') }}
-                       </option>
-                       <option value="After Employment"
-                           {{ old('disabilityOccurrence', $pwdinfo->disabilityOccurrence ?? '') == 'After Employment' ? 'selected' : '' }}>
-                           {{ __('messages.pwdinfo.disability_occurrence.options.after_employment') }}
-                       </option>
-                       <option value="Other"
-                           {{ old('disabilityOccurrence', $pwdinfo->disabilityOccurrence ?? '') == 'Other' ? 'selected' : '' }}>
-                           {{ __('messages.pwdinfo.disability_occurrence.options.other') }}
-                       </option>
+                       <optgroup label="Congenital">
+                           <option value="Congenital/Born"
+                               {{ old('disabilityOccurrence', $pwdinfo->disabilityOccurrence ?? '') == 'Congenital/Born' ? 'selected' : '' }}>
+                               {{ __('messages.pwdinfo.disability_occurrence.options.congenital_born') }}
+                           </option>
+                       </optgroup>
+                       <optgroup label="Acquired">
+                           <option value="Chronic Illness"
+                               {{ old('disabilityOccurrence', $pwdinfo->disabilityOccurrence ?? '') == 'Chronic Illness' ? 'selected' : '' }}>
+                               {{ __('messages.pwdinfo.disability_occurrence.options.chronic_illness') }}
+                           </option>
+                           <option value="Accident"
+                               {{ old('disabilityOccurrence', $pwdinfo->disabilityOccurrence ?? '') == 'Accident' ? 'selected' : '' }}>
+                               {{ __('messages.pwdinfo.disability_occurrence.options.accident') }}
+                           </option>
+                           <option value="Injury"
+                               {{ old('disabilityOccurrence', $pwdinfo->disabilityOccurrence ?? '') == 'Injury' ? 'selected' : '' }}>
+                               {{ __('messages.pwdinfo.disability_occurrence.options.injury') }}
+                           </option>
+                           <option value="Other"
+                               {{ old('disabilityOccurrence', $pwdinfo->disabilityOccurrence ?? '') == 'Other' ? 'selected' : '' }}>
+                               {{ __('messages.pwdinfo.disability_occurrence.options.other') }}
+                           </option>
+                       </optgroup>
                    </select>
                    @error('disabilityOccurrence')
                        <div class="text-red-600 mt-1">{{ $message }}</div>
@@ -41,7 +49,7 @@
                    {{ __('messages.pwdinfo.others_specify') }}</label>
                <div class="flex items-center mt-2" id="otherDisabilityField">
                    <input type="text" id="otherDisabilityDetails" name="otherDisabilityDetails"
-                       class="w-full p-2 border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm"
+                       class="w-full p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md  rounded-lg  focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400"
                        value="{{ old('otherDisabilityDetails', $pwdinfo->otherDisabilityDetails ?? '') }}"
                        placeholder="Specify Other Disability Occurrence..."
                        aria-label="{{ __('messages.pwdinfo.others_specify') }} {{ old('otherDisabilityDetails', $pwdinfo->otherDisabilityDetails ?? '') }}" />
@@ -50,31 +58,18 @@
                    <div class="text-red-600 mt-1">{{ $message }}</div>
                @enderror
 
-
-               <label for="fileUpload" class="block mb-1 mt-6">Verified PWD ID:</label>
-
-               <div id="imagePreview"
-                   class="mt-2 max-w-full border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm"
-                   tabindex="0" aria-label="Image Preview of PWD ID">
-                   <!-- The selected image or alternate image will be displayed here -->
-                   <img id="previewImage" src="{{ asset('storage/' . $pwdinfo->pwdIdPicture) }}"
-                       onerror="this.onerror=null; this.src='{{ asset('/images/avatar.png') }}';"
-                       class="w-full h-auto block border border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 rounded-md shadow-sm focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-400 object-contain">
-                   <img id="alternateImage" src="{{ asset('/images/preview.jpg') }}" alt="Alternate Image"
-                       class="w-full h-auto hidden object-contain"
-                       onerror="this.onerror=null; this.src='{{ asset('/images/avatar.png') }}';">
+               <label for="pwdId" class="block mb-1 mt-6 ">Verified PWD ID:</label>
+               <div class="flex items-center">
+                   <span class="mr-2 font-bold">13-7401-000-</span>
+                   @if (!empty($pwdinfo->pwdIdNo))
+                       {{ $pwdinfo->pwdIdNo }}<i class="fas fa-id-card mr-2 ml-2"></i>
+                   @else
+                       <h2 class="p-2 rounded-lg font-bold bg-gray-200 dark:bg-gray-700 text-red-600 dark:text-red-200">
+                           PWD ID not found
+                       </h2>
+                   @endif
                </div>
-
-
-
-               <small class="block mt-2 text-black dark:text-gray-200">File size limit:
-                   2MB</small>
-
-               @error('fileUpload')
-                   <div class="text-red-600 mt-1">{{ $message }}</div>
-               @enderror
            </div>
-
 
        </div>
        <div class="mt-6">
@@ -83,7 +78,7 @@
                tabindex="0" aria-label="Disability Status">
                <div class="radio-group">
                    <input type="radio" id="disability_visual" name="disability" value="Visual" class="mr-2"
-                       onchange="showTextBox()" aria-label="{{ __('messages.pwdinfo.disability_visual') }}"
+                       onchange="showTextBox()" aria-label="{{ __('messages.pwdinfo.disability_visual') }} "
                        {{ old('disability', $pwdinfo->disability ?? '') == 'Visual' ? 'checked' : '' }}>
                    <label for="disability_visual" class="mr-4"><i class="fas fa-eye mr-1"></i>
                        {{ __('messages.pwdinfo.disability_visual') }}</label>
@@ -127,7 +122,7 @@
                <input type="text" id="disabilityDetails" name="disabilityDetails"
                    aria-label=" {{ __('messages.pwdinfo.specify_disability') }}{{ old('disabilityDetails', $pwdinfo->disabilityDetails ?? '') }}"
                    tabindex=0
-                   class="w-full border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm"
+                   class="w-full p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md  rounded-lg  focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 "
                    value="{{ old('disabilityDetails', $pwdinfo->disabilityDetails ?? '') }}"
                    placeholder="Ex. Cataract" />
                <div>
@@ -138,7 +133,8 @@
            </div>
 
            <div class="flex items-center gap-4 ">
-               <x-primary-button class="mt-6" aria-label="Save Changes">{{ __('Save Changes') }}</x-primary-button>
+               <x-primary-button class="mt-6 focus:outline-none "
+                   aria-label="{{ __('messages.userdashboard.save_changes') }}">{{ __('messages.userdashboard.save_changes') }}</x-primary-button>
 
                @if (session('status') === 'profile-updated')
                    <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
@@ -167,9 +163,9 @@
                </div>
 
                <div id="imagePreview2" class="mt-2">
-                   <img id="previewImage" src="{{ asset('/images/preview.jpg') }}" alt="Preview Image"
+                   <img id="previewImage" src="{{ asset('/images/preview.webp') }}" alt="Preview Image"
                        style="max-width: 50%; max-height: 100%; display: block;">
-                   <img id="alternateImage" src="{{ asset('/images/preview.jpg') }}" alt="Alternate Image"
+                   <img id="alternateImage" src="{{ asset('/images/preview.webp') }}" alt="Alternate Image"
                        style="max-width: 50%; max-height: 100%; display: none;">
                </div>
                <small class="block mt-2 text-gray-500">File size limit: 2MB</small>

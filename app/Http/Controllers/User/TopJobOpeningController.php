@@ -1,11 +1,9 @@
 <?php
 
-// app/Http/Controllers/TopJobOpeningController.php
-
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\JobInfo; // Replace with your actual JobInfo model namespace
+use App\Models\JobInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -13,7 +11,6 @@ class TopJobOpeningController extends Controller
 {
     public function index()
     {
-        // Fetch top job openings based on count
         $topJobOpenings = JobInfo::select('title', DB::raw('COUNT(*) as count'))
             ->groupBy('title')
             ->orderByDesc('count')

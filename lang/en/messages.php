@@ -4,6 +4,8 @@ return [
     'previous' => 'Previous',
     'save' => 'Save',
     'edit' => 'Edit',
+    'next' => 'Next',
+    'submit' => 'Submit',
 
     'verify_email' => "Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.",
     'new_verification_link' => "A new verification link has been sent to the email address you provided during registration.",
@@ -12,7 +14,7 @@ return [
     'auth' => [
         'Email' => 'Email',
         'Password' => 'Password',
-        'login_instructions' => 'Enter your email and password to log in. If you have any problems, <br> contact support for assistance.',
+        'login_instructions' => 'Enter your email and password to log in. If you have any problems, contact support for assistance.',
         'forgot_password' => 'Forgot your password?',
         'remember_me' => 'Remember me',
         'login' => 'Login',
@@ -27,7 +29,14 @@ return [
         'Inbox' => 'Inbox',
         'Profile' => 'Profile',
         'Log Out' => 'Log-Out',
-        'Saved Jobs' => 'Saved Jobs'
+        'Saved Jobs' => 'Saved Jobs',
+
+        'close' => 'Close',
+        'applied_jobs' => 'Applied Jobs',
+        'interview_schedules' => 'Interview Schedules',
+        'approved_applications' => 'Approved Applications',
+        'view' => 'View',
+        'mark_all_as_read' => 'Mark all as Read',
     ],
 
     // Registration
@@ -36,7 +45,7 @@ return [
         'register' => 'Register',
         'NOT YET REGISTERED?' => 'NOT YET REGISTERED?',
         'ALREADY REGISTERED?' => 'ALREADY REGISTERED?',
-        'login_message' => 'Enter your account email address and password to login. If you encounter any issues.<br> please contact our support team for assistance.',
+        'login_message' => 'Enter your account email address and password to login. If you encounter any issues, please contact our support team for assistance.',
         'looking_forward' => 'Are you looking forward to be a:',
         'job_applicant' => 'Job Applicant',
         'employer' => 'Employer',
@@ -52,13 +61,14 @@ return [
     'userdashboard' => [
         'Dashboard' => 'Dashboard',
         'Saved Jobs' => 'Saved Jobs',
+        'Trainings' => 'Trainings',
         'search_placeholder' => 'Search Jobs, Company, Description, Location, and Educational Attainment.',
         'All' => 'All',
         'last_24_hours' => 'Last 24 Hours',
         'last_7_days' => 'Last 7 Days',
         'last_30_days' => 'Last 30 Days',
         'available_pwd_jobs' => 'Available PWD Jobs',
-        'available_matched_jobs' => 'Available PWD Jobs',
+        'available_matched_jobs' => 'Available Matched PWD Jobs',
         'results_found' => 'Results found',
         'no_results_found' => 'No Results found',
         'change_jobpreferences' => 'Change Job Preferences',
@@ -78,22 +88,71 @@ return [
         'educational_level' => 'Educational Level:',
         'job_type' => 'Job Type:',
         'salary' => 'Salary:',
-        'upload_resume' => 'Upload Resume',
+        'menu_items' => 'Menu Items',
 
+
+        'available_jobs' => 'Available Jobs',
+        'total_jobs' => 'Total Jobs',
+        'current_opportunities' => 'Current job opportunities',
+        'active_applications' => 'Active Applications',
+        'applied_jobs' => 'Applied Jobs',
+        'ongoing_applications' => 'Your ongoing job applications',
+        'saved_jobs' => 'Saved Jobs',
+        'bookmarked' => 'Bookmarked',
+        'saved_for_later' => 'Jobs you\'ve saved for later',
+        'upcoming_interviews' => 'Upcoming Interviews',
+        'scheduled' => 'Scheduled',
+        'upcoming_interviews_description' => 'Your upcoming job interviews',
+        'search_and_filter' => 'Search and Filter',
+        'upload_resume' => 'Upload Resume',
+        'dashboard_overview' => 'Dashboard Overview',
+        'filter_by_date' => 'Filter by Date',
+        'close' => 'Close',
+        'save_changes' => 'Save Changes',
+        'my_job_applications' => 'My Job Applications',
+        'no_job_applications_found' => 'No job applications found.',
+        'view_details' => 'View Details',
+
+        'no_matched_jobs' => 'No Matched Jobs Found',
+        'no_jobs_found_message' => "We couldn't find any jobs matching your criteria. Try broadening your search!",
+        'back_to_all_matched_jobs' => 'Back to All Matched Jobs',
     ],
 
     'job' => [
         'Page Number' => 'Page Number',
         'Previous' => 'Previous',
-        'Next' => 'Next'
+        'Next' => 'Next',
+        'view_details' => 'View Details',
+
     ],
+
+    'resume' => [
+        'choose_resume' => 'Choose A Resume',
+        'submit_file' => 'Submit File',
+        'resume_template' => 'Resume Template',
+        'no_jobs_matched' => 'No jobs matched your skills and qualifications in your CV/Resume. You may search jobs based on your preferences.',
+        'view_details' => 'View Details',
+        'resume_format_instructions' => 'For best results, please format your resume as follows:',
+        'click_to_upload' => 'Click to upload or drag and drop',
+        'file_requirements' => 'PDF, DOCX (Max: 2MB)',
+        'suggested_resume_format' => 'Suggested Resume Format (A4 Size)',
+
+        'resume_information' => 'Resume Information',
+        'education' => 'Education',
+        'age' => 'Age',
+        'certification' => 'Certifications',
+        'skills' => 'Skills',
+        'file_name' => 'File Name',
+    ],
+
 
     'profile' => [
         'go_back_to_dashboard' => 'Go Back to Dashboard',
         'update_profile_picture' => 'Update Profile Picture',
-        'upload_appropriate_pictures' => 'Ensure you upload appropriate profile pictures and smaller sizes. ',
+        'upload_appropriate_pictures' => 'Ensure you upload appropriate profile pictures and smaller sizes, Not greater than 2MB. ',
         'profile_picture' => 'Update Profile Picture',
         'save_changes' => 'Save Changes',
+
 
         //MENU LIST
         'applicant_profile' => 'Applicant Profile',
@@ -110,6 +169,7 @@ return [
         'current_password' => 'Enter your current password',
         'new_password' => 'Enter your new password',
         'confirm_password' => 'Confirm your new password',
+        'requirement' => 'Password must contain at least 1 uppercase letter, 1 special character, 1 number, and be 8 characters or more.',
 
         'Accessibility Settings' => 'Accessibility Settings',
         'description' => 'Enhance accessibility with features like text size adjustment, theme toggling, screen reader activation, and language switching.',
@@ -118,6 +178,20 @@ return [
         "Toggle Screen Reader" => "Toggle Screen Reader",
         "Change Language" => "Change Language"
     ],
+
+
+    'trainings' => [
+        'back_to_dashboard' => 'Back to Dashboard',
+        'location' => 'Location',
+        'name' => 'Training Title',
+        'address' => 'Address',
+        'contactno' => 'Contact Number',
+        'actions' => 'Actions',
+        'description' => 'Description',
+        'close' => 'Close',
+    ],
+
+
 
     'applicant' => [
         'instruction' => 'Step 1: To finalize your applicant profile, input your birthdate, ensure that you are at least 16 years old, as this is the minimum age requirement. Select a suffix if needed, and choose your gender from the dropdown menus provided. Next, if you have a suffix such as Jr., Sr., or III, choose the appropriate option from the “Suffix” dropdown menu; if none, simply leave it set to ‘None.’ Finally, confirm your gender by selecting the correct option from the “Gender” dropdown menu. With these steps, you’ll have filled out all necessary personal information on your applicant profile.',
@@ -150,7 +224,7 @@ return [
         'suffix_x' => 'X',
         'male' => 'Male',
         'female' => 'Female',
-        'other' => 'Other',
+        'other' => 'Prefer not to say',
         'saved' => 'Saved.'
     ],
 
@@ -239,18 +313,27 @@ return [
         'instruction' => 'Step 6: To complete the application form, begin by accessing the online system and locating the section dedicated to educational background. Here, provide your highest level of education attained, any awards received (if applicable), the name of your school, your specific course or major, and the year of your graduation. Currently, you may type N/A for the School Graduated and Course fields.',
         'highest_educational_attainment' => 'Highest Educational Attainment',
         'select_education_level' => 'Select Education Level...',
-        'doctoral_degree' => 'Doctoral Degree',
+        'certifications' => 'National Certificates or Certifications',
+        'doctoral_degree' => 'Doctoral Degree (Ph.D. or equivalent)',
+        'professional_degree' => 'Professional Degree (e.g., MD, JD)',
         'masters_degree' => "Master's Degree",
-        'college_graduate' => 'College Graduate',
         'bachelors_degree' => "Bachelor's Degree",
+        'college_graduate' => 'College Graduate',
+        'associates_degree' => "Associate's Degree",
         'vocational_graduate' => 'Vocational Graduate',
-        "associates_degree" => "Associate's Degree",
         'some_college_level' => 'Some College Level',
         'vocational_undergraduate' => 'Vocational Undergraduate',
-        'technical_vocational_training' => 'Technical-Vocational Education and Training',
-        'senior_high_school' => 'Senior High School',
-        'junior_high_school' => 'Junior High School',
-        'elementary_school' => 'Elementary School',
+        'technical_vocational_training' => 'Technical-Vocational Education and Training (TVET)',
+        'senior_high_school_graduate' => 'Senior High School Graduate',
+        'senior_high_school_level' => 'Senior High School Level',
+        'junior_high_school_graduate' => 'Junior High School Graduate',
+        'junior_high_school_level' => 'Junior High School Level',
+        'elementary_level' => 'Elementary Level',
+        'elementary_graduate' => 'Elementary Graduate',
+        'high_school_level' => 'High School Level',
+        'high_school_graduate' => 'High School Graduate',
+        'college_level' => 'College Level',
+
         'school_graduated' => 'School Graduated (Type N/A if not applicable)',
         'type_na_if_not_applicable' => 'Type N/A if not applicable',
         'school' => 'School',
@@ -283,7 +366,7 @@ return [
         'updatelang' => 'To update your language proficiency:',
         'list-unstyled' => [
             '1' => 'Set the language proficiency using the checkbox.',
-            '2' => 'Choose your language and determine your language proficiency.',
+            '2' => 'Choose your language and determine your language proficiency whether if you can read or speak on both languages such as filipino and english.',
             '3' => 'Use the checkboxes to select skills without formal training (Other Skills).',
             '4' => 'Edit or remove entries as needed to accurately reflect your abilities.',
         ],
@@ -312,7 +395,8 @@ return [
             'other_skills_heading' => 'Other Skills (Without Formal Training)',
             'other_skills_description' => 'In this section, choosing your skills without formal training are important as they demonstrate a person’s ability to learn independently and adapt to new challenges.',
         ],
-
+        'can_read' => 'Can Read',
+        'can_speak' => 'Can Speak',
 
 
 
@@ -334,17 +418,20 @@ return [
         'disability_physical' => 'Physical',
         'disability_hearing' => 'Hearing',
         'disability_others' => 'Others',
+        'pwd_id_number' => 'PWD ID Number',
 
         'disability_occurrence' => [
             'label' => 'Disability Occurrence:',
             'placeholder' => 'Specify Disability Occurrence...',
             'options' => [
-                'birth' => 'From Birth',
-                'before_employment' => 'Before Employment',
-                'after_employment' => 'After Employment',
-                'other' => 'Other',
+                'congenital_born' => 'Congenital/Born',
+                'chronic_illness' => 'Chronic Illness',
+                'accident' => 'Accident',
+                'injury' => 'Injury',
+                'other' => 'Others',
             ],
         ],
+
 
         'others_specify' => 'If you choose Others, please provide the following:',
         'specify_disability' => 'Specify Disability:',
@@ -359,6 +446,7 @@ return [
         'job_description' => 'Job Description',
         'responsibilities' => 'Responsibilities',
         'qualifications' => 'Qualifications',
+        'training_qualifications' => 'Training Qualifications',
         'benefits' => 'Benefits',
         'job_summary' => 'Job Summary',
         'published_on' => 'Published On:',
@@ -376,9 +464,34 @@ return [
         'back_to_jobs' => 'Back to Jobs',
         'similar_jobs' => 'Similar Jobs',
         'no_similar_jobs' => 'No similar jobs found.',
+        'educational_attainment' => 'Educational Attainment',
+        'view' => 'View'
+
+    ],
+
+    'job_application' => [
+        'job_application' => 'Job Application',
+        'already_applied' => 'Already Applied',
+        'cancel_application' => 'Cancel Application',
+        'cancel_job_application' => 'Cancel Job Application?',
+        'confirm_cancellation' => 'Confirm Cancellation?',
+        'cancel_confirmation_message' => 'Are you sure you want to cancel your application for the position?',
+        'no_keep_my_application' => 'No, Keep My Application',
+        'yes_cancel_application' => 'Yes, Cancel Application',
+        'find_more_part_time_jobs' => 'Find More Part-Time Jobs',
+        'already_hired_full_time' => 'You are already hired for a full-time job and have applied for the maximum allowed part-time job.',
+        'no_more_applications_allowed' => 'No More Applications Allowed',
+        'already_hired_full_time_notice' => 'You are already hired for a full-time job.',
+        'max_part_time_applications_reached' => 'You have reached the maximum of 3 part-time applications.',
+        'apply_for_this_job' => 'Apply for This Job?',
+        'no_vacancy' => 'No Vacancy',
+
+        'you_are_already_hired' => 'You are already hired by this company',
+        'apply_now' => 'Apply Now',
     ],
 
     'savedjobs' => [
+        'saved_jobs' => 'Saved Jobs',
         'back_to_dashboard' => 'Back to Dashboard',
         'view_job' => 'View Job',
         'delete_job' => 'Delete ',
@@ -394,10 +507,10 @@ return [
     ],
 
     'workexperience' => [
-        'employer_name' => 'Employer Name',
-        'employer_address' => 'Employer Address',
+        'company_name' => 'Company Name',
+        'company_address' => 'Company Address',
         'position_held' => 'Position Held',
-        'skills_gained' => 'Skills Gained',
+        'skills_gained' => 'Skills Gained (Press Enter to add Skills)',
         'employment_status' => 'Employment Status',
         'from' => 'From',
         'to' => 'To',
@@ -408,6 +521,7 @@ return [
         'delete' => 'Delete',
         'current_employment' => 'Specify your Current Employment:',
         'job_search_duration' => 'How long have you been looking for a job?',
+        'duration-category' => "Duration Category",
         'update_employment_history' => 'Update Employment History and Work Experience',
         'go_back_to_profile' => 'Go Back to Profile',
         'new_submitted_work_experience' => 'New Submitted Work Experience and Skills',

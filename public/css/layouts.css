@@ -4,15 +4,15 @@
 }
 
 .bg-image {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    /*min-height: 100vh;*/
+    /*display: flex;*/
+    /*flex-direction: column;*/
     justify-content: center;
     align-items: center;
     padding-top: 6rem; /* Adjust as needed */
     padding-bottom: 0;
     background-color: #f3f4f6; /* Fallback color if image fails to load */
-    background-image: url("/images/team.png");
+    background-image: url("/images/team.webp");
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
@@ -43,6 +43,8 @@ body {
     font-weight: 500;
     justify-content: space-between; /* This will push the last two links to the end */
     align-items: left; /* Vertically center items */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds shadow */
+
 }
 
 #custom-navbar.dark {

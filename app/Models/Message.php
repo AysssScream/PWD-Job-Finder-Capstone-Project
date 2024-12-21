@@ -19,6 +19,7 @@ class Message extends Model
         'from',
         'to',
         'message',
+        
     ];
 
     public function replies()

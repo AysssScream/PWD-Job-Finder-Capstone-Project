@@ -17,13 +17,26 @@
           @method('put')
 
 
+          @if ($errors->updatePassword->any())
+              <ul class="list-disc list-inside mt-2 text-red-600">
+                  @if ($errors->updatePassword->get('current_password'))
+                      <li>{{ $errors->updatePassword->first('current_password') }}</li>
+                  @endif
+                  @if ($errors->updatePassword->get('password_confirmation'))
+                      <li>{{ $errors->updatePassword->first('password_confirmation') }}</li>
+                  @endif
+                  @if ($errors->updatePassword->get('password'))
+                      <li>{{ $errors->updatePassword->first('password') }}</li>
+                  @endif
+              </ul>
+          @endif
+
 
           <div>
               <x-input-label for="update_password_current_password" :value="__('Current Password')" />
               <x-password-text id="update_password_current_password" type="password" name="current_password"
                   placeholder="{{ __('messages.profile.current_password') }}" required autocomplete="current-password"
                   aria-label="{{ __('messages.profile.current_password') }}" />
-              <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
 
           </div>
 
@@ -34,7 +47,6 @@
                   placeholder="{{ __('messages.profile.new_password') }}" autocomplete="new-password"
                   aria-label="{{ __('messages.profile.new_password') }}" />
 
-              <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
               <div id="password-requirements" class="text-md mt-1 text-gray-700 dark:text-gray-200">
               </div>
           </div>
@@ -45,16 +57,18 @@
               <x-password-text id="update_password_password_confirmation" type="password" name="password_confirmation"
                   placeholder="{{ __('messages.profile.confirm_password') }}" autocomplete="new-password"
                   aria-label="{{ __('messages.profile.confirm_password') }}" />
+              <p class="mt-2 text-sm text-gray-600 dark:text-gray-400 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                  aria-label="{{ __('messages.profile.requirement') }}" tabindex=0>
+                  {{ __('messages.profile.requirement') }}
+              </p>
 
-              <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
           </div>
 
           <div class="flex items-center gap-4 mb-5">
-              <x-primary-button aria-label="Save" tabindex="0">{{ __('Save') }}</x-primary-button>
-
+              <x-primary-button class="mt-6 focus:outline-none "
+                  aria-label="{{ __('messages.userdashboard.save_changes') }}">{{ __('messages.userdashboard.save_changes') }}</x-primary-button>
               {{-- Debugging: Output session status --}}
               <p>{{ session('status') }}</p>
-
               @if (session('status') === 'password-updated')
                   <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
                       class="text-sm text-green-600 dark:text-green-400"> {{-- Adjusted class to make it green --}}

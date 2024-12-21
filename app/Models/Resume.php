@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
+
 class Resume extends Model
 {
     use HasFactory;
@@ -15,12 +16,16 @@ class Resume extends Model
     protected $fillable = [
         'file_name',
         'file_type',
+        'file_path',
         'user_id',
         'upload_date',
         'text_content',
         'age',
         'skills',
+        'certifications',
         'education',
+        'work_experience',
+        'program',
     ];
 
     // Encrypt data before saving it
@@ -48,6 +53,39 @@ class Resume extends Model
     {
         $this->attributes['skills'] = Crypt::encryptString($value);
     }
+    
+    public function setWorkExpAttribute($value)
+    {
+        $this->attributes['work_experience'] = Crypt::encryptString($value);
+    }
+
+    public function setProgramAttribute($value)
+    {
+        $this->attributes['program'] = Crypt::encryptString($value);
+    }
+
+
+    public function setCertificationsAttribute($value)
+    {
+        if (is_array($value)) {
+            $value = implode(', ', $value);
+        }
+
+        // Encrypt the string value
+        $this->attributes['certifications'] = Crypt::encryptString($value);
+    }
+    
+    public function setUnmatchedCertsAttribute($value)
+    {
+        if (is_array($value)) {
+            $value = implode(', ', $value);
+        }
+
+        // Encrypt the string value
+        $this->attributes['unmatched_certs'] = Crypt::encryptString($value);
+    }
+
+
 
     public function setEducationAttribute($value)
     {
@@ -81,6 +119,26 @@ class Resume extends Model
     }
 
     public function getEducationAttribute($value)
+    {
+        return $this->decryptAttribute($value);
+    }
+
+    public function getCertificationsAttribute($value)
+    {
+        return $this->decryptAttribute($value);
+    }
+    
+    public function getProgramAttribute($value)
+    {
+        return $this->decryptAttribute($value);
+    }
+
+    public function getWorkExpAttribute($value)
+    {
+        return $this->decryptAttribute($value);
+    }
+    
+    public function getUnmatchedCertsAttribute($value)
     {
         return $this->decryptAttribute($value);
     }

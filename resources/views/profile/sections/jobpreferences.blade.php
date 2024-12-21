@@ -9,7 +9,7 @@
             class="block mb-1">{{ __('messages.jobpreferences.preferred_occupation') }}</label>
         <input type="text" id="preferredOccupation" name="preferredOccupation"
             class="w-full 
-border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm"
+            p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md  rounded-lg  focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400"
             pattern="[A-Za-z\s]+" title="{{ __('messages.jobpreferences.alphabetic_characters_only') }}"
             placeholder="Ex. Domestic Helper"
             aria-label="{{ __('messages.jobpreferences.preferred_occupation') }}  {{ old('preferredOccupation', $jobpreference->preferred_occupation ?? '') }}"
@@ -27,13 +27,16 @@ border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 f
             class="block mb-1">{{ __('messages.jobpreferences.preferred_work_location_local') }}</label>
         <div class="flex">
             <select id="local-location" name="local-location"
-                class="w-full p-2 border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm"
+                class="w-full p-2 p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md  rounded-lg  focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400"
                 aria-label="{{ __('messages.jobpreferences.preferred_work_location_local') }}"
                 value="{{ old('local-location', $jobpreference->local_location ?? '') }}" disabled>
             </select>
-            <button id="editLocationButton" type="button" class="btn btn-primary ml-2" aria-label="Edit">Edit</button>
+            <button id="editLocationButton" type="button"
+                class="text-white bg-blue-700  rounded-xl p-2 ml-2 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 focus:ring-opacity-90"
+                aria-label="{{ __('messages.edit') }} {{ __('messages.jobpreferences.preferred_work_location_local') }}">{{ __('messages.edit') }}</button>
         </div>
         <div id="local-location-error" class="text-red-600 mt-1 hidden">Error fetching location data</div>
+        <label for="localLocationHidden" class="sr-only" hidden>Local Location</label>
         <input type="text" id="localLocationHidden" name="localLocation"
             value="{{ old('local-location', $jobpreference->local_location ?? '') }}" hidden />
     </div>
@@ -44,67 +47,25 @@ border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 f
             class="block mb-1">{{ __('messages.jobpreferences.preferred_work_location_overseas') }}</label>
         <div class="flex">
             <select id="overseas-location" name="overseas-location"
-                class="w-full p-2 border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm"
+                class="w-full p-2 p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md  rounded-lg  focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400"
                 aria-label="{{ __('messages.jobpreferences.preferred_work_location_overseas') }}"
                 value="{{ old('overseas-location', $jobpreference->overseas_location ?? '') }}" disabled>
             </select>
-            <button id="editOverseasButton" class="btn btn-primary ml-2" type="button" aria-label="Edit">Edit</button>
+            <button id="editOverseasButton"
+                class="btn bg-blue-700 text-white ml-2 rounded-xl p-2 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 focus:ring-opacity-90"
+                type="button"
+                aria-label="{{ __('messages.edit') }} {{ __('messages.jobpreferences.preferred_work_location_overseas') }}">{{ __('messages.edit') }}</button>
         </div>
+        <label for="overseaslocationHidden" class="sr-only" hidden>Local Location</label>
         <div id="overseas-location-error" class="text-red-600 mt-1 hidden">Error fetching location data</div>
         <input type="text" id="overseaslocationHidden" name="overseasLocation"
             value="{{ old('overseas-location', $jobpreference->overseas_location ?? '') }}" hidden />
     </div>
 
 
-    {{-- <div class="mt-6 relative">
-        <label for="local-location"
-            class="block mb-1">{{ __('messages.jobpreferences.preferred_work_location_local') }}</label>
-        <div class="flex">
-            <input type="text" id="local-location" name="local-location"
-                class="w-full 
-border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm"
-                pattern="[A-Za-z\sñ]+" title="{{ __('messages.jobpreferences.alphabetic_characters_only') }}"
-                placeholder="Ex. Makati, MM"
-                aria-label="T{{ __('messages.jobpreferences.preferred_work_location_local') }} {{ old('local-location', $jobpreference->local_location ?? '') }}"
-                value="{{ old('local-location', $jobpreference->local_location ?? '') }}"readonly />
-            <button id="editLocationButton" type="button" class="btn btn-primary ml-2" aria-label="Edit">Edit</button>
-        </div>
-        <div id="local-location-suggestions"
-            class="absolute z-10 mt-1 w-full max-h-90 overflow-y-auto bg-gray-200 text-black dark:bg-gray-900 dark:text-gray-200 border rounded shadow-md hidden">
-        </div>
-        <div id="local-location-error" class="text-red-600 mt-1 hidden">Error
-            fetching location data</div>
-
-        <input type="text" id="localLocationHidden" name="localLocation"
-            value="{{ old('local-location', $jobpreference->local_location ?? '') }}" hidden />
-    </div> --}}
-
-
-    {{-- <div class="mt-6 relative">
-        <label for="overseas-location"
-            class="block mb-1">{{ __('messages.jobpreferences.preferred_work_location_overseas') }}</label>
-        <div class="flex">
-            <input type="text" id="overseas-location" name="overseas-location"
-                class="w-full 
-border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm"
-                pattern="[A-Za-z\s]+" title="Please enter alphabetic characters only" placeholder="Ex. Japan"
-                aria-label="{{ __('messages.jobpreferences.preferred_work_location_overseas') }}  {{ old('overseas-location', $jobpreference->overseas_location ?? '') }}"
-                value="{{ old('overseas-location', $jobpreference->overseas_location ?? '') }}" readonly />
-            <button id="editOverseasButton" class="btn btn-primary ml-2" type="button" aria-label="Edit">Edit</button>
-
-        </div>
-        <div id="overseas-location-suggestions"
-            class="absolute z-10 mt-1 w-full max-h-90 overflow-y-auto bg-gray-200 text-black dark:bg-gray-900 dark:text-gray-200  border rounded shadow-md hidden">
-        </div>
-        <div id="overseas-location-error" class="text-red-600 mt-1 hidden">Error
-            fetching location data</div>
-
-        <input type="text" id="overseaslocationHidden" name="overseasLocation"
-            value="{{ old('overseas-location', $jobpreference->overseas_location ?? '') }}" hidden /> --}}
-
-
     <div class="flex items-center gap-4 ">
-        <x-primary-button class="mt-6" aria-label="Save Changes">{{ __('Save Changes') }}</x-primary-button>
+        <x-primary-button class="mt-6 focus:outline-none "
+            aria-label="{{ __('messages.userdashboard.save_changes') }}">{{ __('messages.userdashboard.save_changes') }}</x-primary-button>
 
         @if (session('status') === 'profile-updated')
             <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"

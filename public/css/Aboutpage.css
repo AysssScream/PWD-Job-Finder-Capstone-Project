@@ -95,6 +95,10 @@ body {
     transition: color 0.4s;
 }
 
+.dark .ui-switch .slider {
+    color: white;
+}
+
 input:checked + .slider {
     color: #2196f3;
 }
@@ -115,16 +119,21 @@ input:checked + .slider {
 }
 
 .dark .nav-link {
-    color: lightgray;
+    color: white;
 }
-.dark #navbartoggler {
-    background-color: white;
+
+/*.dark #navbartoggler {
+    background-color: rgb(107 114 128);
     color: #343a40;
-}
+}*/
 
 .dark .nav-link:hover,
 .dark .nav-link.active {
-    color: white;
+    color: #007bff;
+}
+
+.dark .navbar-nav .nav-link:hover i {
+    color: #007bff !important; /* This is the blue color you want */
 }
 
 .btn-custom-login,
@@ -145,15 +154,20 @@ input:checked + .slider {
 .dark .btn-custom-login,
 .dark .btn-custom-signup {
     background-color: white;
-    color: black;
+    color: rgb(31, 41, 55);
+    /*border: rgb(31, 41, 55);*/
+}
+
+.dark .btn-custom-login:hover,
+.dark .btn-custom-signup:hover {
+    background-color: rgb(31, 41, 55);
+    color: white;
     border: 1px solid white;
 }
 
-.dark .btn-custom-login,
-.dark .btn-custom-signup {
-    background-color: black;
-    color: white;
-    border: 1px solid black;
+.dark .btn-custom-login i,
+.dark .btn-custom-signup i {
+    color: inherit !important; /* Inherit text color from button */
 }
 
 .dark .navbar-brand {
@@ -167,3 +181,21 @@ input:checked + .slider {
 .dark .col-sm-8 img {
     filter: invert(100%) !important;
 }
+
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 0.7s ease-in forwards;
+    animation-delay: 0.3s; /* Adjust delay to suit the animation timing */
+}
+
+
+/* Define the fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+

@@ -47,6 +47,7 @@ class AuditTrail extends Model
     // Optionally, you can set up relationships if needed
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
 }

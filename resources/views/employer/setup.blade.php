@@ -1,26 +1,41 @@
+<title>Employer Setup</title>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
 <x-app-layout>
     @if (Auth::check() && Auth::user()->account_verification_status === 'pending')
         <x-slot name="header">
             <div class="flex items-center">
-                <h2 class="font-semibold text-xl text-black dark:text-gray-200 leading-tight">
-                    {{ __('Encode Employer Profile') }}
-                </h2>
+                <h3 class="font-semibold text-xl text-blue-600 dark:text-gray-200 leading-tight">
+                    <i class="fas fa-clock mr-2"></i> {{ __('Encode Employer Profile') }}
+                </h3>
             </div>
-
         </x-slot>
     @elseif (Auth::check() && Auth::user()->account_verification_status === 'waiting for approval')
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-black dark:text-gray-200 leading-tight">
-                {{ __('Waiting for Approval ') }}
-            </h2>
+            <div class="flex items-center">
+                <h3 class="font-semibold text-xl text-blue-600 dark:text-gray-200 leading-tight">
+                    <i class="fas fa-hourglass mr-2"></i> {{ __('Waiting for Approval') }}
+                </h3>
+            </div>
+        </x-slot>
+    @elseif (Auth::check() && Auth::user()->account_verification_status === 'declined')
+        <x-slot name="header">
+            <div class="flex items-center">
+                <h3 class="font-semibold text-xl text-blue-600 dark:text-gray-200 leading-tight">
+                    <i class="fas fa-times-circle mr-2"></i> {{ __('Declined') }}
+                </h3>
+            </div>
         </x-slot>
     @else
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-black dark:text-gray-200 leading-tight">
-                {{ __('Account Activated') }}
-            </h2>
+            <div class="flex items-center">
+                <h3 class="font-semibold text-xl text-blue-600 dark:text-gray-200 leading-tight">
+                    <i class="fas fa-check-circle mr-2"></i> {{ __('Account Activated') }}
+                </h3>
+            </div>
         </x-slot>
     @endif
+
     <!DOCTYPE html>
     <html lang="en">
 
@@ -33,29 +48,43 @@
     </head>
 
     @if (Auth::check() && is_null(Auth::user()->email_verified_at))
-        <div class="landscape-container mt-20">
+        <div class="landscape-container mt-18">
             <div class="container w-3/4 mx-auto landscape-content">
-                <div
-                    class="bg-white text-black dark:bg-gray-700 dark:text-gray-200  p-6 rounded-lg shadow-md text-center">
-                    <div class="text-6xl text-red-500">&#9888;</div> <!-- Updated icon to warning sign -->
-                    <h2 class="text-2xl font-bold mb-4">Email Verification Required</h2>
-                    <p class="text-lg text-black-700 mb-8">
-                        Your personal information has been approved by our system. However, you need to verify
-                        your email to access your account.
-                    </p>
-                    <br>
-                    <p class="text-lg text-black-700 mb-8">
-                        Thank you for registering your account with us. At <b>ACCESSIJOBS</b>, we are committed to
-                        creating an inclusive and accessible environment for all users, including Persons With
-                        Disabilities (PWDs). As part of our commitment to diversity and equality, we strive to ensure
-                        that our platform is accessible to individuals of all abilities. Please verify your email to
-                        proceed to your user dashboard.
-                    </p>
-                    <form action="{{ route('profile.edit') }}" method="GET">
-                        @csrf
-                        <button type="submit" class="py-2 px-4 bg-black text-white rounded inline-block">GO TO
-                            PROFILE</button>
-                    </form>
+                <div class="bg-white text-black dark:bg-gray-700 dark:text-gray-200 rounded-lg shadow-md text-center">
+                    <div
+                        class="bg-gradient-to-r from-blue-400 to-blue-700 p-3 rounded-t-lg text-white border-b-4 border-blue-400">
+                        <div
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-red-200 to-yellow-300 text-7xl mb-4">
+                            <i class="fas fa-warning"></i>
+                        </div>
+                        <h2
+                            class="font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-200 to-yellow-300 text-3xl mb-4">
+                            Email Verification Required
+                        </h2>
+
+                        <p class="text-white mb-2">
+                            Your personal information has been approved by our system. However, you need to verify
+                            your email to access your account.
+                        </p>
+                    </div>
+                    <div class="p-6">
+                        <p class=" text-black-700 mb-8">
+                            Thank you for registering your account with us. At <b>ACCESSIJOBS</b>, we are committed
+                            to
+                            creating an inclusive and accessible environment for all users, including Persons With
+                            Disabilities (PWDs). As part of our commitment to diversity and equality, we strive to
+                            ensure
+                            that our platform is accessible to individuals of all abilities. Please verify your
+                            email to
+                            proceed to your user dashboard.
+                        </p>
+                        <form action="{{ route('profile.edit') }}" method="GET">
+                            @csrf
+                            <button type="submit" class="py-2 px-4 bg-black text-white rounded inline-block">
+                                <i class="fas fa-user mr-2"></i> GO TO PROFILE
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -72,7 +101,7 @@
                                     @csrf
                                     @if ($errors->any())
                                         <div class="bg-red-100 border dark:bg-red-700 dark:text-gray-100 border-red-400 text-red-700 px-4 py-3 rounded relative"
-                                            role="alert">
+                                            role="alert" style="margin-right: 20px;margin-left: 20px;">
                                             <strong class="font-bold">Oops!</strong>
                                             <span class="block sm:inline">There were some errors with your
                                                 submission:</span>
@@ -86,31 +115,30 @@
                                     @endif
 
                                     <!-- Step 1: Applicant Profile -->
-                                    <div class="bg-white text-black dark:bg-gray-800 dark:text-gray-200 shadow-md rounded-lg mb-4"
-                                        id="step1">
-                                        <div class="p-6">
-                                            <div class="flex items-center justify-between mb-4">
-                                                <h3 class="text-2xl font-bold mb-2">Employer Profile</h3>
-                                                <span class="text-md font-medium text-black-500"> STEP 1 OUT OF 2</span>
-                                            </div>
-                                            <span class="text-md font-regular" style="text-align: justify;">
-                                                <b>Step 1:</b> For your employer
-                                                Profile,
-                                                fill
-                                                up the business name, TIN, and trade name if applicable. Select
-                                                "Main"
-                                                or "Branch" for location type, provide contact details, choose
-                                                your
-                                                employer type from the dropdown, and enter the total workforce
-                                                number.
-                                                Add your business address and zip code, then review for accuracy
-                                                before
-                                                proceeding. <b> Only select the city locations in the dropdown
-                                                    box. </b>
+                                    <div class="bg-white text-black dark:bg-gray-800 dark:text-gray-200 shadow-lg rounded-lg mb-4"
+                                        id="step1" style="margin-left: 20px; margin-right: 20px;">
+                                        <div
+                                            class="flex items-center text-blue-500 justify-between  bg-white dark:bg-gray-800 p-4 rounded-t-lg border-4 border-blue-500">
+                                            <h3 class="text-2xl font-bold mb-2">
+                                                <i class="fas fa-building mr-2"></i> Employer Profile
+                                            </h3>
 
+                                            <span class="text-md font-medium ">STEP 1 OUT OF 2</span>
+                                        </div>
+                                        <div class="bg-gradient-to-r from-blue-700 to-blue-500 p-6 rounded-b-lg ">
+                                            <span class="text-md font-regular text-white" style="text-align: justify;">
+                                                <b>Step 1:</b> For your employer profile, fill up the business name,
+                                                TIN, and trade name if applicable.
+                                                Select "Main" or "Branch" for location type, provide contact details,
+                                                choose your employer type from the dropdown,
+                                                and enter the total workforce number. Add your business address and zip
+                                                code, then review for accuracy before proceeding.
+                                                <b> Only select the city locations in the dropdown box. </b>
                                             </span>
+                                        </div>
+                                        <div class="p-6">
                                             <br>
-                                            <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div class=" grid grid-cols-1 md:grid-cols-2 gap-4">
                                                 <div>
                                                     <label for="businessname" class="block mb-1">
                                                         Business Name
@@ -123,102 +151,21 @@
                                                         value="{{ old('businessname', $employerData['businessname'] ?? '') }}"
                                                         maxlength="50" placeholder="Ex. Concentrix">
                                                     @error('businessname')
-                                                        <div class="text-red-600 mt-1">{{ $message }}</div>
+                                                        <div class="text-red-600 dark:text-red-400 mt-1">{{ $message }}
+                                                        </div>
                                                     @enderror
                                                 </div>
 
                                                 <div class="mt-0">
                                                     <label for="tin" class="block mb-1">
-                                                        Taxpayer Identification Number
+                                                        Employer Identification Number (EIN)
                                                         <span class="text-red-500">*</span>
                                                     </label>
                                                     <input type="text" id="tinno" name="tinno"
                                                         value="{{ old('tinno', $employerData['tinno'] ?? '') }}"
                                                         maxlength="12"
                                                         class="w-full px-4 py-2 rounded-md border-gray-500 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                                        placeholder="(12 Digits Max)">
-                                                    {{-- <div class="flex flex-wrap gap-1">
-                                                        <!-- Group 1 -->
-                                                        <input type="text" id="tin1" name="tin[]"
-                                                            class="w-12 sm:w-10 md:w-12 lg:w-10 xl:w-12 h-12 sm:h-10 text-center border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 mb-1 sm:mb-0"
-                                                            pattern="\d" title="Enter a single digit" maxlength="1"
-                                                            value="{{ old('tin.0', $employerData['tin.0'] ?? '') }}" />
-                                                        <input type="text" id="tin2" name="tin[]"
-                                                            class="w-12 sm:w-10 md:w-12 lg:w-10 xl:w-12 h-12 sm:h-10 text-center border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 mb-1 sm:mb-0"
-                                                            pattern="\d" title="Enter a single digit" maxlength="1"
-                                                            value="{{ old('tin.1', $employerData['tin.1'] ?? '') }}" />
-                                                        <input type="text" id="tin3" name="tin[]"
-                                                            class="w-12 sm:w-10 md:w-12 lg:w-10 xl:w-12 h-12 sm:h-10 text-center border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 mb-1 sm:mb-0"
-                                                            pattern="\d" title="Enter a single digit" maxlength="1"
-                                                            value="{{ old('tin.2', $employerData['tin.2'] ?? '') }}" />
-
-                                                        <!-- Hyphen -->
-                                                        <span
-                                                            class="flex items-center justify-center font-semibold w-5 sm:w-auto md:w-5 lg:w-auto xl:w-5 text-center">-</span>
-
-                                                        <!-- Group 2 -->
-                                                        <input type="text" id="tin4" name="tin[]"
-                                                            class="w-12 sm:w-10 md:w-12 lg:w-10 xl:w-12 h-12 sm:h-10 text-center border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 mb-1 sm:mb-0"
-                                                            pattern="\d" title="Enter a single digit" maxlength="1"
-                                                            value="{{ old('tin.3', $employerData['tin.3'] ?? '') }}" />
-                                                        <input type="text" id="tin5" name="tin[]"
-                                                            class="w-12 sm:w-10 md:w-12 lg:w-10 xl:w-12 h-12 sm:h-10 text-center border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 mb-1 sm:mb-0"
-                                                            pattern="\d" title="Enter a single digit"
-                                                            maxlength="1"
-                                                            value="{{ old('tin.4', $employerData['tin.4'] ?? '') }}" />
-                                                        <input type="text" id="tin6" name="tin[]"
-                                                            class="w-12 sm:w-10 md:w-12 lg:w-10 xl:w-12 h-12 sm:h-10 text-center border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 mb-1 sm:mb-0"
-                                                            pattern="\d" title="Enter a single digit"
-                                                            maxlength="1"
-                                                            value="{{ old('tin.5', $employerData['tin.5'] ?? '') }}" />
-
-                                                        <!-- Hyphen -->
-                                                        <span
-                                                            class="flex items-center justify-center font-semibold w-5 sm:w-auto md:w-5 lg:w-auto xl:w-5 text-center">-</span>
-
-                                                        <!-- Group 3 -->
-                                                        <input type="text" id="tin7" name="tin[]"
-                                                            class="w-12 sm:w-10 md:w-12 lg:w-10 xl:w-12 h-12 sm:h-10 text-center border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 mb-1 sm:mb-0"
-                                                            pattern="\d" title="Enter a single digit"
-                                                            maxlength="1"
-                                                            value="{{ old('tin.6', $employerData['tin.6'] ?? '') }}" />
-                                                        <input type="text" id="tin8" name="tin[]"
-                                                            class="w-12 sm:w-10 md:w-12 lg:w-10 xl:w-12 h-12 sm:h-10 text-center border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 mb-1 sm:mb-0"
-                                                            pattern="\d" title="Enter a single digit"
-                                                            maxlength="1"
-                                                            value="{{ old('tin.7', $employerData['tin.7'] ?? '') }}" />
-                                                        <input type="text" id="tin9" name="tin[]"
-                                                            class="w-12 sm:w-10 md:w-12 lg:w-10 xl:w-12 h-12 sm:h-10 text-center border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 mb-1 sm:mb-0"
-                                                            pattern="\d" title="Enter a single digit"
-                                                            maxlength="1"
-                                                            value="{{ old('tin.8', $employerData['tin.8'] ?? '') }}" />
-
-                                                        <!-- Hyphen -->
-                                                        <span
-                                                            class="flex items-center justify-center font-semibold w-5 sm:w-auto md:w-5 lg:w-auto xl:w-5 text-center">-</span>
-
-                                                        <!-- Group 4 (new inputs) -->
-                                                        <input type="text" id="tin10" name="tin[]"
-                                                            class="w-12 sm:w-10 md:w-12 lg:w-10 xl:w-12 h-12 sm:h-10 text-center border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 mb-1 sm:mb-0"
-                                                            pattern="\d" title="Enter a single digit"
-                                                            maxlength="1"
-                                                            value="{{ old('tin.9', $employerData['tin.9'] ?? '') }}" />
-                                                        <input type="text" id="tin11" name="tin[]"
-                                                            class="w-12 sm:w-10 md:w-12 lg:w-10 xl:w-12 h-12 sm:h-10 text-center border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 mb-1 sm:mb-0"
-                                                            pattern="\d" title="Enter a single digit"
-                                                            maxlength="1"
-                                                            value="{{ old('tin.10', $employerData['tin.10'] ?? '') }}" />
-                                                        <input type="text" id="tin12" name="tin[]"
-                                                            class="w-12 sm:w-10 md:w-12 lg:w-10 xl:w-12 h-12 sm:h-10 text-center border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
-                                                            pattern="\d" title="Enter a single digit"
-                                                            maxlength="1"
-                                                            value="{{ old('tin.11', $employerData['tin.11'] ?? '') }}" />
-                                                    </div> --}}
-                                                    {{-- <div class="mt-6">
-
-                                                    </div> --}}
-
-
+                                                        placeholder="(12 Digits is Required)">
                                                 </div>
 
 
@@ -230,29 +177,29 @@
                                                         pattern="[A-Za-z\s.,-]+ " maxlength="50"
                                                         placeholder="Ex. Concentrix Webhelp">
                                                     @error('tradename')
-                                                        <div class="text-red-600 mt-1">{{ $message }}</div>
+                                                        <div class="text-red-600 dark:text-red-400 mt-1">
+                                                            {{ $message }}</div>
                                                     @enderror
                                                 </div>
 
-                                                <div>
+                                                <div id="locationTypeContainer">
                                                     <label for="location-type" class="block mb-1">
-                                                        Location Type
-                                                        <span class="text-red-500">*</span>
+                                                        Location Type <span class="text-red-500">*</span>
                                                     </label>
                                                     <div class="flex items-center mb-2">
-                                                        <input type="radio" id="locationtype1" name="locationtype"
-                                                            value="Main" class="mr-2"
+                                                        <input type="radio" id="locationtype1" name="locationtype" value="Main" class="radio-border-red mr-2"
                                                             {{ old('locationtype', $employerData['locationtype'] ?? '') == 'Main' ? 'checked' : '' }}>
                                                         <label for="locationtype1">Main</label>
                                                     </div>
                                                     <div class="flex items-center">
-                                                        <input type="radio" id="locationtype2" name="locationtype"
-                                                            value="Branch" class="mr-2"
+                                                        <input type="radio" id="locationtype2" name="locationtype" value="Branch" class="radio-border-red mr-2"
                                                             {{ old('locationtype', $employerData['locationtype'] ?? '') == 'Branch' ? 'checked' : '' }}>
                                                         <label for="locationtype2">Branch</label>
                                                     </div>
                                                     @error('locationtype')
-                                                        <div class="text-red-600 mt-1">{{ $message }}</div>
+                                                        <div class="text-red-600 dark:text-red-400 mt-1">
+                                                            {{ $message }}
+                                                        </div>
                                                     @enderror
                                                 </div>
 
@@ -265,15 +212,16 @@
                                                         class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200">
                                                         <option value="" disabled selected>Select employer type
                                                         </option>
-                                                        <option value="Public"
-                                                            {{ old('employertype', $employerData['employertype'] ?? '') == 'Public' ? 'selected' : '' }}>
-                                                            Public</option>
+                                                        <option value="Government"
+                                                            {{ old('employertype', $employerData['employertype'] ?? '') == 'Government' ? 'selected' : '' }}>
+                                                            Government</option>
                                                         <option value="Private"
                                                             {{ old('employertype', $employerData['employertype'] ?? '') == 'Private' ? 'selected' : '' }}>
                                                             Private</option>
                                                     </select>
                                                     @error('employertype')
-                                                        <div class="text-red-600 mt-1">{{ $message }}</div>
+                                                        <div class="text-red-600 dark:text-red-400 mt-1">
+                                                            {{ $message }}</div>
                                                     @enderror
                                                 </div>
 
@@ -307,7 +255,8 @@
                                                             1001+</option>
                                                     </select>
                                                     @error('totalworkforce')
-                                                        <div class="text-red-600 mt-1">{{ $message }}</div>
+                                                        <div class="text-red-600 dark:text-red-400 mt-1">
+                                                            {{ $message }}</div>
                                                     @enderror
                                                 </div>
 
@@ -321,309 +270,424 @@
                                                         pattern="[A-Za-z\s.,-]+ " maxlength="100"
                                                         placeholder="Ex. House No., Street, Village">
                                                     @error('address')
-                                                        <div class="text-red-600 mt-1">{{ $message }}</div>
+                                                        <div class="text-red-600 dark:text-red-400 mt-1">
+                                                            {{ $message }}</div>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="w-full">
+                                                    <label for="website_link" class="block mb-1">Official Website Link
+                                                        <span class="text-red-500">*</span></label>
+                                                    <input type="url" id="website_link" name="website_link"
+                                                        value="{{ old('website_link', $employerData['website_link'] ?? '') }}"
+                                                        class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                        placeholder="https://www.concentrix.com/" required>
+                                                    @error('website_link')
+                                                        <div class="text-red-600 dark:text-red-400 mt-1">
+                                                            {{ $message }}</div>
                                                     @enderror
                                                 </div>
 
 
 
-                                                <div id="municipality-container" class="relative">
-                                                    <label for="city" class="block mb-1">
+                                                <div id="municipality-container" class="relative mt-[-10px]">
+                                                    <label for="city"
+                                                        class="block mb-1 text-gray-700 dark:text-gray-300">
                                                         City
                                                         <span class="text-red-500">*</span>
                                                     </label>
                                                     <div class="relative">
                                                         <select id="municipality-dropdown" name="municipality"
-                                                            class="w-full p-2 border rounded shadow-sm bg-transparent text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                            class="w-full p-2 mb-5 border rounded shadow-sm bg-transparent text-gray-900 dark:bg-gray-900 dark:text-gray-200"
                                                             aria-placeholder="Select a Municipality or City">
-                                                            <option value="" disabled selected>Select a
-                                                                Municipality or City
-                                                            </option>
-                                                            <!-- Options will be dynamically populated here -->
+                                                            <option
+                                                                value="{{ old('municipality', $employerData['municipality-dropdown'] ?? '') }}"
+                                                                disabled selected>Select a Municipality or City</option>
                                                         </select>
                                                     </div>
-                                                    <!-- Hidden input to store the selected barangay data -->
-                                                    <input type="text" id="selected-municipality"
-                                                        name="selected-municipality"
-                                                        value="{{ old('municipality', $employerData['municipality'] ?? '') }}"
-                                                        hidden>
-                                                </div>
 
+                                                    <div class="flex flex-col md:flex-row items-center mb-5">
+                                                        <div class="w-full md:w-1/2 pr-2">
+                                                            <label for="selected-municipality"
+                                                                class="block mb-1 text-gray-700 dark:text-gray-300">
+                                                                Selected City:
+                                                            </label>
+                                                            <input type="text" id="selected-municipality"
+                                                                name="selected-municipality"
+                                                                value="{{ old('municipality', $employerData['selected-municipality'] ?? '') }}"
+                                                                class="w-full p-2 border border-gray-300 rounded-md shadow-sm bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-150 ease-in-out"
+                                                                placeholder="Selected Municipality" readonly>
+                                                        </div>
 
-                                                <div class="mt">
-                                                    <label for="zipcode" class="block mb-1">
-                                                        Zip Code
-                                                        <span class="text-red-500">*</span>
-                                                    </label>
-                                                    <div class="flex items-center mt-2">
-                                                        <input type="text" id="zipcode" name="zipcode"
-                                                            class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
-                                                            value="{{ old('zipcode', $employerData['zipcode'] ?? '') }}"
-                                                            placeholder="Enter Zip Code" readonly />
-                                                        <!-- Add disabled attribute here -->
+                                                        <div class="w-full md:w-1/2 pl-2">
+                                                            <label for="zipcode"
+                                                                class="block mb-1 text-gray-700 dark:text-gray-300">
+                                                                Zip Code
+                                                                <span class="text-red-500">*</span>
+                                                            </label>
+                                                            <input type="text" id="zipcode" name="zipcode"
+                                                                class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                                value="{{ old('zipcode', $employerData['zipcode'] ?? '') }}"
+                                                                placeholder="Enter Zip Code" readonly />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="flex flex-col mt-2">
+                                                        @error('municipality')
+                                                            <div class="text-red-600">
+                                                                • {{ $message }}
+                                                            </div>
+                                                        @enderror
+
                                                         @error('zipcode')
-                                                            <div class="text-red-600 mt-1">{{ $message }}</div>
+                                                            <div class="text-red-600">
+                                                                • {{ $message }}
+                                                            </div>
                                                         @enderror
                                                     </div>
+
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>
                                     <br>
                                     <br>
-                                    <!-- Step 1: Applicant Profile -->
+                                    <!-- Step 2: Contact Profile -->
                                     <div class="bg-white text-black dark:bg-gray-800 dark:text-gray-200 shadow-md rounded-lg mb-4"
-                                        id="step1">
-                                        <div class="p-6">
-                                            <div class="flex items-center justify-between mb-4">
-                                                <h3 class="text-2xl font-bold mb-2">Contact Details</h3>
-                                                <span class="text-md font-medium text-black-500"> STEP 2 OUT OF
-                                                    2</span>
-                                            </div>
-                                            <span class="text-md font-regular" style="text-align: justify;"><b>
-                                                    Step 2: </b>For</b>
-                                                the “Contact Details” form, input your name, position, telephone and
-                                                mobile numbers, fax number if applicable, and email address. Once
-                                                all fields are filled accurately, click the "Submit Form" button to
-                                                proceed.
-                                                <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                    <div>
-                                                        <label for="contactperson" class="block mb-1">
-                                                            Contact Person
-                                                            <span class="text-red-500">*</span>
-                                                        </label>
-                                                        <input type="text" id="contact_person"
-                                                            name="contact_person"
-                                                            class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
-                                                            value="{{ old('contact_person', $employerData['contact_person'] ?? '') }}"
-                                                            pattern="[A-Za-z\s.,-]+ " maxlength="50"
-                                                            placeholder="Ex. Juan Dela Cruz">
-                                                        @error('contact_person')
-                                                            <div class="text-red-600 mt-1">{{ $message }}</div>
-                                                        @enderror
-                                                    </div>
+                                        id="step2" style="margin-left: 20px; margin-right: 20px;">
 
-                                                    <div>
-                                                        <label for="position" class="block mb-1">
-                                                            Position
-                                                            <span class="text-red-500">*</span>
-                                                        </label> <input type="text" id="position" name="position"
-                                                            class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
-                                                            value="{{ old('position', $employerData['position'] ?? '') }}"
-                                                            pattern="[A-Za-z\s.,-]+ " maxlength="50"
-                                                            placeholder="Ex. Manager">
-                                                        @error('position')
-                                                            <div class="text-red-600 mt-1">{{ $message }}</div>
-                                                        @enderror
-                                                    </div>
-
-                                                    <div>
-                                                        <label for="telephone_no" class="block mb-1">Telephone
-                                                            No.</label>
-                                                        <input type="text" id="telephone_no" name="telephone_no"
-                                                            class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
-                                                            value="{{ old('telephone_no', $employerData['telephone_no'] ?? '') }}"
-                                                            pattern="[0-9]+" title="Please enter numbers only"
-                                                            maxlength="8" placeholder="Ex. 89839463">
-                                                        @error('telephone_no')
-                                                            <div class="text-red-600 mt-1">{{ $message }}</div>
-                                                        @enderror
-                                                    </div>
-
-                                                    <div>
-                                                        <label for="mobile_no" class="block mb-1">
-                                                            Mobile No.
-                                                            <span class="text-red-500">*</span>
-                                                        </label>
-                                                        <input type="text" id="mobile_no" name="mobile_no"
-                                                            class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
-                                                            value="{{ old('mobile_no', $employerData['mobile_no'] ?? '') }}"
-                                                            pattern="[0-9]+" maxlength="11"
-                                                            placeholder="Ex. 09673411152">
-                                                        @error('mobile_no')
-                                                            <div class="text-red-600 mt-1">{{ $message }}</div>
-                                                        @enderror
-                                                    </div>
-
-                                                    <div class="flex flex-wrap gap-1">
-                                                        <label for="fax_no" class="block mb-1">Fax No.</label>
-
-                                                        <input type="text" id="faxAreaCode" name="fax[]"
-                                                            class="w-20 sm:w-20 md:w-24 lg:w-28 xl:w-32 h-12 sm:h-10 text-center border rounded  bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 mb-1 sm:mb-0"
-                                                            pattern="\d*" title="Enter numeric digits"
-                                                            maxlength="2" placeholder="(02)"
-                                                            value="{{ old('fax.0', $employerData['fax.0'] ?? '') }}" />
-
-                                                        <!-- Separator (e.g., hyphen) -->
-                                                        <span class="flex-center dash">-</span>
-
-                                                        <!-- Prefix -->
-                                                        <input type="text" id="faxPrefix" name="fax[]"
-                                                            class="w-20 sm:w-20 md:w-24 lg:w-28 xl:w-32 h-12 sm:h-10 text-center border rounded  bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 mb-1 sm:mb-0"
-                                                            pattern="\d*" title="Enter numeric digits"
-                                                            maxlength="3" placeholder="631"
-                                                            value="{{ old('fax.1', $employerData['fax.1'] ?? '') }}" />
-
-                                                        <!-- Separator (e.g., hyphen) -->
-                                                        <span class="flex-center dash">-</span>
-
-
-                                                        <!-- Fax Number -->
-                                                        <input type="text" id="faxNumber" name="fax[]"
-                                                            class="w-24 sm:w-24 md:w-28 lg:w-32 xl:w-36 h-12 sm:h-10 text-center border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
-                                                            pattern="\d*" title="Enter numeric digits"
-                                                            maxlength="4" placeholder="4631"
-                                                            value="{{ old('fax.2', $employerData['fax.2'] ?? '') }}" />
-
-                                                        <input type="text" id="hiddenFaxNumber"
-                                                            name="hiddenFaxNumber"
-                                                            class="w-24 sm:w-24 md:w-28 lg:w-32 xl:w-36 h-12 sm:h-10 text-center border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
-                                                            pattern="\d*" title="Enter numeric digits"
-                                                            maxlength="9" placeholder="4631"
-                                                            value="{{ old('hiddenFaxNumber', $employerData['hiddenFaxNumber'] ?? '') }}"
-                                                            hidden>
-                                                        @error('hiddenFaxNumber')
-                                                            <div class="text-red-600 mt-1">{{ $message }}</div>
-                                                        @enderror
-                                                    </div>
-
-
-
-
-                                                    <div>
-                                                        <label for="busines_email" class="block mb-1">
-                                                            Business Email
-                                                            <span class="text-red-500">*</span>
-                                                        </label>
-                                                        <input type="email" id="email_address" name="email_address"
-                                                            class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
-                                                            value="{{ old('email_address', $employerData['email_address'] ?? '') }}"
-                                                            placeholder="Ex. juandelacruz@gmail.com">
-                                                        @error('email_address')
-                                                            <div class="text-red-600 mt-1">{{ $message }}</div>
-                                                        @enderror
-                                                    </div>
-
-                                                </div>
-                                                <br>
-                                                <div class="text-right">
-                                                    <!-- Container div with text alignment set to right -->
-                                                    <button type="submit"
-                                                        class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600">Submit
-                                                        Form</button>
-                                                </div>
-
+                                        <div
+                                            class="flex items-center text-blue-500 justify-between  border-4 border-blue-500 rounded-t-lg p-4">
+                                            <h3 class="text-2xl font-bold mb-2">
+                                                <i class="fas fa-address-book mr-2"></i> Contact Details
+                                            </h3>
+                                            <span class="text-md font-medium">STEP 2 OUT OF 2</span>
                                         </div>
 
+                                        <div class="bg-gradient-to-r from-blue-700 to-blue-500 p-6 rounded-b-lg ">
+                                            <span class="text-md font-regular text-white"
+                                                style="text-align: justify;">
+                                                <b>Step 2:</b> For the “Contact Details” form, input your name,
+                                                position, telephone and mobile numbers,
+                                                fax number if applicable, and email address. Once all fields are filled
+                                                accurately, click the "Submit Form" button to proceed.
+                                            </span>
+                                        </div>
+
+                                        <div class="p-6">
+                                            <div class=" grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                <div>
+                                                    <label for="contactperson" class="block mb-1">
+                                                        Contact Person
+                                                        <span class="text-red-500">*</span>
+                                                    </label>
+                                                    <input type="text" id="contact_person" name="contact_person"
+                                                        class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                        value="{{ old('contact_person', $employerData['contact_person'] ?? '') }}"
+                                                        pattern="[A-Za-z\s.,-]+ " maxlength="50"
+                                                        placeholder="Ex. Juan Dela Cruz">
+                                                    @error('contact_person')
+                                                        <div class="text-red-600 dark:text-red-400 mt-1">
+                                                            {{ $message }}</div>
+                                                    @enderror
+                                                </div>
+
+                                                <div>
+                                                    <label for="position" class="block mb-1">
+                                                        Position
+                                                        <span class="text-red-500">*</span>
+                                                    </label> <input type="text" id="position" name="position"
+                                                        class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                        value="{{ old('position', $employerData['position'] ?? '') }}"
+                                                        pattern="[A-Za-z\s.,-]+ " maxlength="50"
+                                                        placeholder="Ex. Manager">
+                                                    @error('position')
+                                                        <div class="text-red-600 dark:text-red-400 mt-1">
+                                                            {{ $message }}</div>
+                                                    @enderror
+                                                </div>
+
+                                                <div>
+                                                    <label for="telephone_no" class="block mb-1">Telephone
+                                                        No.</label>
+                                                    <input type="text" id="telephone_no" name="telephone_no"
+                                                        class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                        value="{{ old('telephone_no', $employerData['telephone_no'] ?? '') }}"
+                                                        pattern="[0-9]+" title="Please enter numbers only"
+                                                        maxlength="8" placeholder="Ex. 89839463">
+                                                    @error('telephone_no')
+                                                        <div class="text-red-600 dark:text-red-400 mt-1">
+                                                            {{ $message }}</div>
+                                                    @enderror
+                                                </div>
+
+                                                <div>
+                                                    <label for="mobile_no" class="block mb-1">
+                                                        Mobile No.
+                                                        <span class="text-red-500">*</span>
+                                                    </label>
+                                                    <input type="text" id="mobile_no" name="mobile_no"
+                                                        class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                        value="{{ old('mobile_no', $employerData['mobile_no'] ?? '') }}"
+                                                        pattern="[0-9]+" maxlength="11"
+                                                        placeholder="Ex. 09673411152">
+                                                    @error('mobile_no')
+                                                        <div class="text-red-600 dark:text-red-400 mt-1">
+                                                            {{ $message }}</div>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="flex flex-wrap gap-1">
+                                                    <label for="fax_no" class="block mb-1">Fax No.</label>
+
+                                                    <input type="text" id="faxAreaCode" name="fax[]"
+                                                        class="w-20 sm:w-20 md:w-24 lg:w-28 xl:w-32 h-12 sm:h-10 text-center border rounded  bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 mb-1 sm:mb-0"
+                                                        pattern="\d*" title="Enter numeric digits" maxlength="2"
+                                                        placeholder="(02)"
+                                                        value="{{ old('fax.0', $employerData['fax.0'] ?? '') }}" />
+
+                                                    <!-- Separator (e.g., hyphen) -->
+                                                    <span class="flex-center dash">-</span>
+
+                                                    <!-- Prefix -->
+                                                    <input type="text" id="faxPrefix" name="fax[]"
+                                                        class="w-20 sm:w-20 md:w-24 lg:w-28 xl:w-32 h-12 sm:h-10 text-center border rounded  bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 mb-1 sm:mb-0"
+                                                        pattern="\d*" title="Enter numeric digits" maxlength="4"
+                                                        placeholder="8532"
+                                                        value="{{ old('fax.1', $employerData['fax.1'] ?? '') }}" />
+
+                                                    <!-- Separator (e.g., hyphen) -->
+                                                    <span class="flex-center dash">-</span>
+
+
+                                                    <!-- Fax Number -->
+                                                    <input type="text" id="faxNumber" name="fax[]"
+                                                        class="w-24 sm:w-24 md:w-28 lg:w-32 xl:w-36 h-12 sm:h-10 text-center border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                        pattern="\d*" title="Enter numeric digits" maxlength="4"
+                                                        placeholder="5001"
+                                                        value="{{ old('fax.2', $employerData['fax.2'] ?? '') }}" />
+
+                                                    <input type="text" id="hiddenFaxNumber" name="hiddenFaxNumber"
+                                                        class="w-24 sm:w-24 md:w-28 lg:w-32 xl:w-36 h-12 sm:h-10 text-center border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                        pattern="\d*" title="Enter numeric digits" maxlength="10"
+                                                        placeholder="5001"
+                                                        value="{{ old('hiddenFaxNumber', $employerData['hiddenFaxNumber'] ?? '') }}"
+                                                        hidden>
+                                                    @error('hiddenFaxNumber')
+                                                        <div class="text-red-600 dark:text-red-400 mt-1">
+                                                            {{ $message }}</div>
+                                                    @enderror
+                                                </div>
+
+
+
+
+                                                <div>
+                                                    <label for="busines_email" class="block mb-1">
+                                                        Business Email
+                                                        <span class="text-red-500">*</span>
+                                                    </label>
+                                                    <input type="email" id="email_address" name="email_address"
+                                                        class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+                                                        value="{{ old('email_address', $employerData['email_address'] ?? '') }}"
+                                                        placeholder="Ex. juandelacruz@gmail.com">
+                                                    @error('email_address')
+                                                        <div class="text-red-600 dark:text-red-400 mt-1">
+                                                            {{ $message }}</div>
+                                                    @enderror
+                                                </div>
+
+                                            </div>
+                                            <br>
+                                            <div class="text-right">
+                                                <button type="submit"
+                                                    class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600">
+                                                    <i class="fas fa-paper-plane mr-2"></i> Submit Form
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                             </div>
                         </div>
                     </div>
                     </form>
-                    {{-- @elseif(Auth::check() && Auth::user()->account_verification_status === 'declined')
-                    <div class="landscape-container mt-20">
-                        <div class="container w-3/4 mx-auto landscape-content">
-                            <div
-                                class="bg-white text-black dark:bg-gray-700 dark:text-gray-200 p-6 rounded-lg shadow-md text-center">
-                                <div class="text-red-500 text-7xl mb-5">
-                                    <i class="fa-solid fa-exclamation-triangle"></i>
-                                    <!-- Changed icon to indicate an issue -->
-                                </div>
-                                <h2 class="font-bold mb-4 text-3xl">Account Declined</h2> <!-- Updated title -->
-                                <h2 class="text-black-700 mb-4">We're sorry, but your account has been declined.</h2>
-                                <!-- Updated message -->
-                                <br>
-                                <p class="text-black-700 mb-8">
-                                    Unfortunately, your account did not meet the criteria required to join our platform.
-                                    If you believe this is a mistake or have any questions, please contact our support
-                                    team for further assistance.
-                                </p>
-                                <form action="{{ route('employer.messages') }}" method="GET">
-                                    <!-- Updated form action to a support route -->
-                                    @csrf
-                                    <button type="submit"
-                                        class="py-2 px-4 bg-red-500 text-white rounded inline-block">CONTACT
-                                        SUPPORT</button> <!-- Updated button text and color -->
-                                </form>
-                            </div>
-                        </div>
-                    </div> --}}
                 @elseif (Auth::check() && Auth::user()->account_verification_status === 'waiting for approval')
-                    <div class="landscape-container mt-20"> <!-- Add mt-5 class for margin-top -->
-                        <div class="container w-3/4 mx-auto landscape-content">
-                            <div
-                                class="bg-white text-black dark:bg-gray-700 dark:text-gray-200 p-6 rounded-lg shadow-md text-center">
-                                <div class="text-6xl text-green-500 ">&#10004;</div>
-                                <h2 class="text-2xl font-bold mb-4">Waiting for Administrator Approval</h2>
-                                <p class="text-lg text-black-700 mb-8 ">Your employer information has been
-                                    submitted.
-                                    Please
-                                    wait
-                                    for administrator approval.</p> <br>
-                                <p class="text-lg text-black-700 mb-8 ">Thank you for registering your account with
-                                    us.
-                                    At
-                                    <b>ACCESSIJOBS</b>, we are committed to creating an inclusive and accessible
-                                    environment
-                                    for
-                                    all users, including Persons With Disabilities (PWDs). As part of our commitment
-                                    to
-                                    diversity
-                                    and equality, we strive to ensure that our platform is accessible to individuals
-                                    of
-                                    all
-                                    abilities. Please note that account verification may take <b> 1-2 business days
-                                    </b>.
-                                </p>
+                <!-- Waiting for Approval Section -->
+                <div class="landscape-container mt-28"> <!-- Add mt-5 class for margin-top -->
+                    <div class="container w-3/4 mx-auto landscape-content">
+                        <div class="bg-white text-black dark:bg-gray-700 dark:text-gray-200  rounded-lg shadow-md text-center">
+                            <div class="bg-gradient-to-r from-blue-400 to-blue-700 p-9 rounded-t-lg text-white border-b-4 border-blue-400">
+                                <div class="flex justify-center mb-4">
+                                    <div class="text-6xl bg-gradient-to-r from-yellow-400 to-yellow-500 bg-clip-text text-transparent">
+                                        <i class="fas fa-hourglass-half"></i> <!-- Using hourglass icon -->
+                                    </div>
+                                </div>
+                                <h2 class="font-bold mt-3 mb-4 text-3xl bg-gradient-to-r from-yellow-300 to-yellow-400 bg-clip-text text-transparent">
+                                    Waiting for Approval
+                                </h2>
+                                <p class="text-white mb-4">Your personal information has been submitted. Please wait for administrator approval.</p>
+                            </div>
+                            <div class="p-6">
+                                <h2 class="text-black-700 mb-4">Thank you for registering your account with us. At
+                                    <b>ACCESSIJOBS</b>, we are committed to creating an inclusive and accessible environment for legitimate employers or companies. Please note that account verification may take <b>1-2 business days</b>.
+                                </h2>
                                 <form action="{{ route('logout') }}" method="POST">
                                     @csrf
-                                    <button type="submit"
-                                        class="py-2 px-4 bg-black text-white rounded inline-block">LOGOUT</button>
+                                    <button type="submit" class="py-2 px-4 bg-black text-white rounded inline-block mt-5">
+                                        <i class="fas fa-sign-out-alt mr-2"></i> LOGOUT
+                                    </button>
                                 </form>
                             </div>
                         </div>
                     </div>
-                @else
-                    <div class="landscape-container mt-20"> <!-- Add mt-5 class for margin-top -->
+                </div>
+                @elseif (Auth::check() && Auth::user()->account_verification_status === 'declined')
+                    <div class="landscape-container mt-28"> <!-- Add mt-5 class for margin-top -->
                         <div class="container w-3/4 mx-auto landscape-content">
                             <div
-                                class="  text-black dark:bg-gray-700 dark:text-gray-200  p-6 rounded-lg shadow-md text-center">
-                                <div class="text-6xl text-green-500 ">&#10004;</div>
-                                <h2 class="text-2xl font-bold mb-4">Account Approved!</h2>
-                                <p class="text-lg text-black-700 mb-8 ">Your employer information has been approved
-                                    by
-                                    the
-                                    administrator.
-                                    You can now access your account.</p> <br>
-                                <p class="text-lg text-black-700 mb-8 ">Thank you for registering your account with
-                                    us.
-                                    At
-                                    <b>ACCESSIJOBS</b>, we are committed to creating an inclusive and accessible
-                                    environment
-                                    for
-                                    all users, including Persons With Disabilities (PWDs). As part of our commitment
-                                    to
-                                    diversity
-                                    and equality, we strive to ensure that our platform is accessible to individuals
-                                    of
-                                    all
-                                    abilities. You may return to your employer dashboard accordingly.
-                                </p>
-                                <form action="{{ route('employer.dashboard') }}" method="GET">
-                                    @csrf
-                                    <button type="submit"
-                                        class="py-2 px-4 bg-black text-white rounded inline-block">RETURN
-                                        TO DASHBOARD</button>
-                                </form>
+                                class="bg-white text-black dark:bg-gray-700 dark:text-gray-200 rounded-lg shadow-md text-center">
+                                <div
+                                    class="bg-gradient-to-r from-blue-400 to-blue-700 p-3 rounded-t-lg text-white border-b-4 border-blue-400">
+                                    <div class="text-red-300 text-7xl mb-4 mt-8">
+                                        <div class="flex justify-center mb-4">
+                                            <div
+                                                class="text-6xl bg-gradient-to-r from-red-300 to-red-400 bg-clip-text text-transparent">
+                                                <i class="fas fa-times-circle"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h2
+                                        class="font-bold mt-3 mb-4 text-3xl bg-gradient-to-r from-red-200 to-red-300 bg-clip-text text-transparent">
+                                        Registration Declined
+                                    </h2>
+                                    <p class="text-white mb-4">
+                                        Unfortunately, your registration has been declined. Please contact support for
+                                        more
+                                        information on your application status.
+                                    </p>
+                                </div>
+
+                                <div class="p-6">
+                                    <h2 class="text-black-700 mb-4">
+                                        Thank you for your interest in joining <b>ACCESSIJOBS</b>. We are committed to
+                                        creating an inclusive and accessible environment for all users, including
+                                        employers or organizations. While we strive to ensure that our platform is
+                                        accessible
+                                        to individuals of all abilities, we regret to inform you that your account could
+                                        not
+                                        be approved at this time.
+                                    </h2>
+                                    <p class="text-black-700 mb-4">
+                                        <a href="{{ route('employer.messages') }}"
+                                            class="py-1 px-2 bg-blue-500 hover:bg-blue-700 text-white rounded inline-block mt-5">
+                                            <i class="fas fa-inbox mr-2"></i> INBOX
+                                        </a>
+                                        <b>Please check your inbox for further details regarding your application
+                                            status.</b> For any questions or further assistance, please reach out to our
+                                        support team. We appreciate your understanding.
+                                    </p>
+
+                                    <form action="{{ route('logout') }}" method="POST" class="flex justify-center">
+                                        @csrf
+                                        <div class="flex flex-col sm:flex-row space-x-0 sm:space-x-4">
+                                            <button type="submit"
+                                                class="py-2 px-4 bg-black text-white rounded inline-block mt-5">
+                                                <i class="fas fa-sign-out-alt mr-2"></i> LOGOUT
+                                            </button>
+                                            <a href="{{ route('employer.messages') }}"
+                                                class="py-2 px-4 bg-blue-500 hover:bg-blue-700 text-white rounded inline-block mt-5">
+                                                <i class="fas fa-inbox mr-2"></i> INBOX
+                                            </a>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-        @endif
-    @endif
+                @elseif (Auth::check() && Auth::user()->account_verification_status === 'approved')
+                    <div class="landscape-container mt-28">
+                        <div class="container w-3/4 mx-auto landscape-content">
+                            <div
+                                class="bg-white text-black dark:bg-gray-700 dark:text-gray-200  rounded-lg shadow-md text-center">
+                                <div
+                                    class="bg-gradient-to-r from-blue-400 to-blue-700 p-3 rounded-t-lg text-white border-b-4 border-blue-400">
+                                    <div class="text-green-300 text-7xl mb-4 mt-8">
+                                        <div class="flex justify-center mb-4">
+                                            <div
+                                                class="text-6xl bg-gradient-to-r from-green-300 to-green-400 bg-clip-text text-transparent">
+                                                <div>&#10004;</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h2
+                                        class="font-bold mt-3 mb-4 text-3xl bg-gradient-to-r from-green-200 to-green-300 bg-clip-text text-transparent">
+                                        User Account Approved
+                                    </h2>
+                                    <p class="text-white text-lg mb-8">
+                                        Your personal information has been approved by the administrator. You can now
+                                        access
+                                        your account.
+                                    </p>
+                                </div>
+                                <div class="p-6">
+                                    <p class="text-lg text-black-700 mb-8 ">Thank you for registering your account with
+                                        us.
+                                        At
+                                        <b>ACCESSIJOBS</b>, we are committed to creating an inclusive and accessible
+                                        environment
+                                        for
+                                        all users, including Persons With Disabilities (PWDs). As part of our commitment
+                                        to
+                                        diversity
+                                        and equality, we strive to ensure that our platform is accessible to individuals
+                                        of
+                                        all
+                                        abilities. You may return to your user dashboard accordingly. </b>.
+                                    </p>
+                                    <form action="{{ route('employer.dashboard') }}" method="GET">
+                                        @csrf
+                                        <button type="submit"
+                                            class="py-2 px-4 bg-black text-white rounded inline-block">
+                                            <i class="fas fa-tachometer-alt mr-2"></i> GO TO DASHBOARD
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+            @endif
 </x-app-layout>
 
-
 <script>
+     document.addEventListener('DOMContentLoaded', function () {
+        const accountVerificationStatus = "{{ Auth::user()->account_verification_status }}"; 
+    
+        if (accountVerificationStatus === 'waiting for approval') {
+            fireConfetti();
+        }
+    });
+
+
+    function fireConfetti() {
+        const duration = 5 * 1000; // 5 seconds
+        const animationEnd = Date.now() + duration;
+        const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+        function randomInRange(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        const interval = setInterval(() => {
+            const timeLeft = animationEnd - Date.now();
+            if (timeLeft <= 0) return clearInterval(interval);
+
+            const particleCount = 50 * (timeLeft / duration);
+            confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+            confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+        }, 250);
+    }
     document.addEventListener('DOMContentLoaded', function() {
         const cityDropdown = document.getElementById('municipality-dropdown');
         const errorDiv = document.getElementById('municipality-error');
@@ -684,9 +748,6 @@
             }
         });
 
-
-
-        // Edit button functionality
         editButton.addEventListener('click', function(event) {
             event.preventDefault();
             editButton.style.display = 'none'; // Hide edit button
@@ -894,4 +955,135 @@
     .plus-container:hover {
         background-color: #4cae4c;
     }
+
+    .border-red-500 {
+        border-color: #dc2626 !important;
+        border-width: 2px !important;
+    }
+    .radio-border-red {
+    border: 2px solid #dc2626; 
+    border-radius: 50%; 
+    appearance: none; 
+    width: 20px;
+    height: 20px;
+    outline: none;
+    position: relative;
+    }
+    
+    .radio-border-red:checked {
+        border: 2px solid transparent; 
+        appearance: radio; 
+    }
+
 </style>
+
+<script>
+    // Function to check if an input field or select is empty and apply red border
+    function checkInput(inputField) {
+        if (inputField.value === '' || inputField.value === null) {
+            inputField.classList.add('border-red-500');
+        } else {
+            inputField.classList.remove('border-red-500');
+        }
+    }
+
+    // Add event listeners to required inputs for Business Name, EIN, Business Address, Official Website Link, Employer Type, Total Work Force, City, Zip Code, Contact Person, Position, Mobile No., and Business Email
+    document.addEventListener('DOMContentLoaded', () => {
+        const businessNameInput = document.getElementById('businessname');
+        const einInput = document.getElementById('tinno');
+        const businessAddressInput = document.getElementById('address');
+        const websiteLinkInput = document.getElementById('website_link');
+        const employerTypeSelect = document.getElementById('employertype');
+        const totalWorkforceSelect = document.getElementById('totalworkforce');
+        const citySelect = document.getElementById('municipality-dropdown');
+        const zipCodeInput = document.getElementById('zipcode');
+        const contactPersonInput = document.getElementById('contact_person');
+        const positionInput = document.getElementById('position');
+        const mobileNoInput = document.getElementById('mobile_no');
+        const businessEmailInput = document.getElementById('email_address');
+
+        // Initial check for all required fields
+        [
+            businessNameInput,
+            einInput,
+            businessAddressInput,
+            websiteLinkInput,
+            employerTypeSelect,
+            totalWorkforceSelect,
+            citySelect,
+            zipCodeInput,
+            contactPersonInput,
+            positionInput,
+            mobileNoInput,
+            businessEmailInput
+        ].forEach(checkInput);
+
+        // Event listeners to check and update the red border on input or change
+        businessNameInput.addEventListener('input', () => checkInput(businessNameInput));
+        einInput.addEventListener('input', () => checkInput(einInput));
+        businessAddressInput.addEventListener('input', () => checkInput(businessAddressInput));
+        websiteLinkInput.addEventListener('input', () => checkInput(websiteLinkInput));
+        employerTypeSelect.addEventListener('change', () => checkInput(employerTypeSelect));
+        totalWorkforceSelect.addEventListener('change', () => checkInput(totalWorkforceSelect));
+        citySelect.addEventListener('change', handleCitySelection); // Custom handler for city selection
+        zipCodeInput.addEventListener('input', () => checkInput(zipCodeInput));
+        contactPersonInput.addEventListener('input', () => checkInput(contactPersonInput));
+        positionInput.addEventListener('input', () => checkInput(positionInput));
+        mobileNoInput.addEventListener('input', () => checkInput(mobileNoInput));
+        businessEmailInput.addEventListener('input', () => checkInput(businessEmailInput));
+
+        // Check on blur or change to ensure border updates when focus leaves the field
+        businessNameInput.addEventListener('blur', () => checkInput(businessNameInput));
+        einInput.addEventListener('blur', () => checkInput(einInput));
+        businessAddressInput.addEventListener('blur', () => checkInput(businessAddressInput));
+        websiteLinkInput.addEventListener('blur', () => checkInput(websiteLinkInput));
+        employerTypeSelect.addEventListener('blur', () => checkInput(employerTypeSelect));
+        totalWorkforceSelect.addEventListener('blur', () => checkInput(totalWorkforceSelect));
+        citySelect.addEventListener('blur', handleCitySelection);
+        zipCodeInput.addEventListener('blur', () => checkInput(zipCodeInput));
+        contactPersonInput.addEventListener('blur', () => checkInput(contactPersonInput));
+        positionInput.addEventListener('blur', () => checkInput(positionInput));
+        mobileNoInput.addEventListener('blur', () => checkInput(mobileNoInput));
+        businessEmailInput.addEventListener('blur', () => checkInput(businessEmailInput));
+
+        // Function to handle city selection and auto-populate zip code
+        function handleCitySelection() {
+            checkInput(citySelect);
+            if (citySelect.value) {
+                // Delay to allow zip code population, then check zip code
+                setTimeout(() => {
+                    checkInput(zipCodeInput);
+                }, 100);
+            }
+        }
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        const radioButtons = document.querySelectorAll('input[name="locationtype"]');
+    
+        function validateRadioButtons() {
+            const isSelected = Array.from(radioButtons).some(radio => radio.checked);
+            radioButtons.forEach(radio => {
+                if (isSelected) {
+                    radio.classList.remove('radio-border-red'); // Remove red border if selected
+                } else {
+                    radio.classList.add('radio-border-red'); // Add red border if none selected
+                }
+            });
+        }
+    
+        radioButtons.forEach(radio => {
+            radio.addEventListener('change', validateRadioButtons);
+        });
+    
+        // Initial validation
+        validateRadioButtons();
+    });
+</script>
+
+
+
+
+    
+
+
+

@@ -213,11 +213,19 @@ class User extends Authenticatable implements MustVerifyEmail
     public function pwdInformation()
     {
         return $this->hasOne(PwdInformation::class);
+        
     }
+    
     public function applications(): HasMany
     {
         return $this->hasMany(JobApplication::class);
     }
+
+    public function interviews()
+    {
+    return $this->hasMany(Interview::class);
+    }
+
 
     public function savedJobs()
     {
@@ -239,6 +247,8 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(LanguageInput::class);
     }
+    
+
 
     public function workExperiences(): HasMany
     {
@@ -249,6 +259,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne(AdminProfile::class);
     }
-
+    
+  
 
 }

@@ -15,6 +15,8 @@ class JobInfo extends Model
         'title',
         'description',
         'educational_level',
+        'program',
+        'work_experience',
         'location',
         'job_type',
         'salary',
@@ -22,8 +24,11 @@ class JobInfo extends Model
         'company_name',
         'benefits',
         'responsibilities',
+        'training_qualifications',
         'qualifications',
         'vacancy',
+        'from_date',
+        'to_date'
     ];
 
     // Define the employer relationship

@@ -9,13 +9,15 @@ class AdminProfile extends Model
 {
     use HasFactory;
 
-     public $timestamps = false;
+    public $timestamps = false;
 
     protected $table = 'admin_profile';
 
     protected $fillable = [
         'admin_id',
         'profile_picture',
+        'gender',
+        'address',
     ];
 
 

@@ -5,11 +5,11 @@ use Illuminate\Support\Facades\Cookie;
 
 use App\Models\AuditTrail;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\LoginRequest; // Not needed in the destroy method
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\View\View;
+use Illuminate\View\View; // Not needed in the destroy method
 
 class AuthenticatedSessionController extends Controller
 {
@@ -30,7 +30,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        if (Auth::user()->usertype == 'admin') {
+        if (Auth::user()->usertype == 'admin' || Auth::user()->usertype == 'user') {
 
             $user = Auth::user();
             AuditTrail::create([
@@ -43,7 +43,7 @@ class AuthenticatedSessionController extends Controller
         }
 
 
-        if (Auth::user()->account_verification_status == 'waiting for approval' || Auth::user()->account_verification_status == 'pending') {
+        if (Auth::user()->account_verification_status == 'waiting for approval' || Auth::user()->account_verification_status == 'pending' || Auth::user()->account_verification_status == 'declined') {
             // Check if the user is an employer
             if (Auth::user()->usertype === 'employer') {
                 return redirect()->route('employer.setup');
@@ -65,14 +65,14 @@ class AuthenticatedSessionController extends Controller
     /**
      * Destroy an authenticated session.
      */
-    public function destroy(Request $request): RedirectResponse
+    public function destroy(Request $request)
     {
         // Check if the user is authenticated
         if (Auth::check()) {
             $user = Auth::user();
 
             // Check if the authenticated user is an admin
-            if ($user->usertype === 'admin') { // Adjust this check based on how you identify admins
+            if ($user->usertype === 'admin' || $user->usertype === 'user' || $user->usertype === 'employer') {
                 // Record the audit trail entry
                 AuditTrail::create([
                     'user_id' => $user->id,
@@ -80,24 +80,23 @@ class AuthenticatedSessionController extends Controller
                     'action' => 'Logged Out',
                     'section' => 'Authentication',
                 ]);
-                Auth::guard('web')->logout();
-
-                // Invalidate the session
-                $request->session()->invalidate();
-
-                // Regenerate the CSRF token
-                $request->session()->regenerateToken();
-
-
-                \Log::info('Session data after logout: ', $request->session()->all());
-
             }
+
+            // Log session data before invalidating it
+            \Log::info('Session data before logout: ', $request->session()->all());
+
+            // Perform logout
+            Auth::guard('web')->logout();
+
+            // Invalidate the session after logging out
+            $request->session()->invalidate();
+
+            // Regenerate the CSRF token
+            $request->session()->regenerateToken();
         }
 
-        // Perform logout
-        // Redirect to home page
-        return redirect('/');
-
-
+        // Return the logout view
+        return view('logout'); // Change this line to return the logout view
     }
+
 }

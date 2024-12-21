@@ -121,7 +121,8 @@
 
         <div class="mt-6">
             <label for="gender" class="block mb-1">Gender</label>
-            <select id="gender" name="gender" class="w-full p-2  border-gray-500 rounded shadow-sm">
+            <select id="gender" name="gender" tabindex="0"
+                class="w-full p-2 border-gray-500 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400">
                 <option value="Male" {{ old('gender', $applicant->gender ?? '') == 'Male' ? 'selected' : '' }}>Male
                 </option>
                 <option value="Female" {{ old('gender', $applicant->gender ?? '') == 'Female' ? 'selected' : '' }}>

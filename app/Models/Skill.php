@@ -32,10 +32,9 @@ class Skill extends Model
         $this->attributes['otherSkillsInput'] = $value ? Crypt::encryptString($value) : null;
     }
 
-    // Decrypt attributes when retrieving
     public function getSkillsAttribute($value)
     {
-        return $this->decryptValue($value);
+        return $value ? json_decode(Crypt::decryptString($value), true) : null;
     }
 
     public function getOtherSkillsAttribute($value)
@@ -66,6 +65,11 @@ class Skill extends Model
             // Handle the error, log it if necessary
             return null; // Return null or some default value if decryption fails
         }
+    }
+    
+     public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
 }

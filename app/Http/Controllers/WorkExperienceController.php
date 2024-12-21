@@ -13,7 +13,6 @@ class WorkExperienceController extends Controller
 {
     public function create()
     {
-        // Get the authenticated user's work experiences
         $workExperiences = Auth::user()->workExperiences()->get();
         return view('profile.editemployment', compact('workExperiences'));
     }
@@ -30,11 +29,6 @@ class WorkExperienceController extends Controller
             return redirect()->route('editemployment')->with('error', 'Failed to delete employment record.');
         }
     }
-
-
-
-
-
 
     public function store(Request $request)
     {

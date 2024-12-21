@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Crypt;
+
 class PwdInformation extends Model
 {
     use HasFactory;
@@ -19,6 +20,7 @@ class PwdInformation extends Model
         'disabilityOccurrence',
         'otherDisabilityDetails',
         'disabilityDetails',
+        'pwdIdNo'
     ];
 
     // Encrypt attributes before saving
@@ -51,6 +53,11 @@ class PwdInformation extends Model
     {
         $this->attributes['disabilityDetails'] = $value ? Crypt::encryptString($value) : null;
     }
+    
+    public function setPwdIDNoAttribute($value)
+    {
+        $this->attributes['pwdIdNo'] = $value ? Crypt::encryptString($value) : null;
+    }
 
     // Decrypt attributes when retrieving
     public function getPwdIdPictureAttribute($value)
@@ -79,6 +86,11 @@ class PwdInformation extends Model
     }
 
     public function getDisabilityDetailsAttribute($value)
+    {
+        return $this->decryptValue($value);
+    }
+    
+    public function getPwdIDNoAttribute($value)
     {
         return $this->decryptValue($value);
     }

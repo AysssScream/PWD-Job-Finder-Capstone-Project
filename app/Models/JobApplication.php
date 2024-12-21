@@ -9,8 +9,11 @@ use Illuminate\Support\Facades\Crypt;
 class JobApplication extends Model
 {
     use HasFactory;
+    
+    protected $table = 'job_applications';
 
-    protected $fillable = ['job_id', 'user_id', 'employer_id', 'description', 'status', 'remarks', 'company_name', 'title', 'status_plain'];
+
+    protected $fillable = ['job_id', 'user_id', 'employer_id', 'description', 'status','job_type', 'remarks', 'company_name', 'title', 'status_plain'];
 
     // Encrypt attributes before saving
     public function setDescriptionAttribute($value)
@@ -32,6 +35,7 @@ class JobApplication extends Model
     {
         $this->attributes['remarks'] = Crypt::encryptString($value);
     }
+    
 
     public function setStatusAttribute($value)
     {
@@ -66,13 +70,11 @@ class JobApplication extends Model
 
 
 
-
-
-
     public function job()
     {
         return $this->belongsTo(JobInfo::class, 'job_id');
     }
+    
 
     public function user()
     {

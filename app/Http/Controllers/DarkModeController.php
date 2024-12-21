@@ -16,9 +16,7 @@ class DarkModeController extends Controller
         // Store dark mode preference in session (optional)
         session(['dark_mode' => $isDarkMode]);
 
-        // You can also store the preference in the database if needed
 
-        // Respond with a JSON response indicating success
         return response()->json(['message' => 'Dark mode toggled successfully']);
     }
 }

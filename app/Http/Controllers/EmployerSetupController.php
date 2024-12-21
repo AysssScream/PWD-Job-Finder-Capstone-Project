@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Rules\EmailDomain;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -12,7 +11,6 @@ use Illuminate\Support\Facades\Session;
 
 class EmployerSetupController extends Controller
 {
-    // Display the form
     public function create()
     {
         $employerData = [
@@ -59,10 +57,10 @@ class EmployerSetupController extends Controller
         // Validate the form data
         $validatedData = $request->validate([
             'businessname' => 'required|string|max:300|regex:/^[A-Za-z0-9\s.,-]+$/',
-            'tinno' => 'required|regex:/^[0-9-]+$/|unique:employers,tinno',
+            'tinno' => 'required|regex:/^[0-9-]+$/|min:9|max:12|unique:employers,tinno',
             'tradename' => 'nullable|max:300',
             'locationtype' => 'required|in:Main,Branch',
-            'employertype' => 'required|in:Public,Private',
+            'employertype' => 'required|in:Government,Private',
             'totalworkforce' => 'required|in:1-10,11-50,51-100,101-500,501-1000,1001+',
             'address' => 'required|string|max:300',
             'municipality' => 'required|string|regex:/^[A-Za-z0-9\s.,-]+$/|max:200',
@@ -71,10 +69,13 @@ class EmployerSetupController extends Controller
             'position' => 'required|string|regex:/^[A-Za-z0-9\s.,-]+$/|max:250',
             'telephone_no' => 'nullable|digits:8|regex:/^[0-9-]+$/|unique:employers,telephone_no',
             'mobile_no' => 'required|digits:11|regex:/^[0-9-]+$/|unique:employers,mobile_no',
-            'hiddenFaxNumber' => 'nullable|digits:9|regex:/^[0-9]+$/',
-            'email_address' => ['required', 'email', 'max:50', new EmailDomain, 'lowercase', 'unique:employers,email_address'],
+            'hiddenFaxNumber' => 'nullable|digits:10|regex:/^[0-9]+$/',
+            'email_address' => ['required', 'email', 'max:50', 'lowercase', 'unique:employers,email_address'],
+            'website_link' => [
+                'required',
+                'regex:/^https:\/\//'
+            ],
         ], [
-            
             'businessname.regex' => 'Business name may only contain alphabetic characters, numbers, spaces, periods, commas, and hyphens.',
             'businessname.required' => 'Business name is required.',
             'businessname.string' => 'Business name must be a string.',
@@ -135,6 +136,9 @@ class EmployerSetupController extends Controller
             'email_address.required' => 'Email address is required.',
             'email_address.email' => 'Email address must be a valid email address.',
             'email_address.max' => 'Email address must not exceed 50 characters.',
+
+            'website_link.regex' => 'The website link must start with https.',
+
         ]);
 
         $employer = new Employer();
@@ -153,12 +157,14 @@ class EmployerSetupController extends Controller
         $employer->telephone_no = $validatedData['telephone_no'];
         $employer->mobile_no = $validatedData['mobile_no'];
         $employer->fax_no = $validatedData['hiddenFaxNumber'];
+        $employer->website_link = $validatedData['website_link'];
         $employer->email_address = $validatedData['email_address'];
         $employer->save();
 
 
         $user = Auth::user();
         $user->account_verification_status = 'waiting for approval';
+        $user->account_verification_status_plain = 'waiting for approval';
         $user->save();
 
         Session::put('employerData', $validatedData);

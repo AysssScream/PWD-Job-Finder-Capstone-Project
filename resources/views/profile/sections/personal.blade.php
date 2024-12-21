@@ -6,8 +6,9 @@
     @method('PATCH')
     <div class="mt-6">
         <label for="civilStatus" class="block mb-1">{{ __('messages.personal.civil_status') }}</label>
-        <select id="civilStatus" name="civilStatus" aria-label="{{ __('messages.personal.civil_status') }}"
-            class="w-full border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm">
+        <select id="civilStatus" name="civilStatus"
+            aria-label="{{ __('messages.personal.civil_status') }} {{ old('civilStatus', $personal->civilStatus ?? '') }}"
+            class="w-full p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-lg">
             <option value="Single" {{ old('civilStatus', $personal->civilStatus ?? '') == 'Single' ? 'selected' : '' }}>
                 {{ __('messages.personal.single') }}</option>
             <option value="Married"
@@ -26,14 +27,19 @@
         <label for="barangay" class="block mb-1">{{ __('messages.personal.barangay') }}</label>
         <div class="flex items-center">
             <!-- Dropdown (Select) for Barangay -->
-            <select id="barangay" name="barangay" aria-label="{{ __('messages.personal.barangay') }}"
-                class="w-full border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm"
-                value="{{ old('barangay', $personal->barangay ?? '') }}">
+            <select id="barangay" name="barangay"
+                aria-label="{{ __('messages.personal.barangay') }} {{ old('barangay', $personal->barangay ?? '') }}"
+                class="w-full p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-lg">
+                <!-- Options will be populated by JavaScript -->
             </select>
+            <!-- Hidden input to store the selected barangay value -->
+            <input type="hidden" id="selected-barangay" name="selected-barangay"
+                value="{{ old('barangay', $personal->barangay ?? '') }}">
         </div>
         <!-- Error Message -->
         <div id="barangay-error" class="text-red-600 mt-1 hidden">Error fetching barangay data</div>
     </div>
+
 
     <!-- Assuming you also have a ZIP code input somewhere -->
     <div id="zipcode-container" class="mt-4">
@@ -41,12 +47,13 @@
         <input id="zipcode" type="text" name="zipcode" value="{{ old('zipcode', $personal->zipCode ?? '') }}"
             placeholder="Enter Zip Code" readonly
             aria-label="{{ __('messages.personal.zipcode') }}{{ old('zipcode', $personal->zipCode ?? '') }}"
-            class="w-full border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 rounded-md shadow-sm"
+            class="w-full p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400"
             readonly>
         @error('zipcode')
             <div class="text-red-600 mt-1">{{ $message }}</div>
         @enderror
     </div>
+
 
     {{-- <div id="barangay-container" class="mt-6 relative">
         <label for="barangay" class="block mb-1">{{ __('messages.personal.barangay') }}</label>
@@ -80,11 +87,12 @@
         </div>
     </div> --}}
 
+
     <div class="mt-6">
         <label for="presentAddress" class="block mb-1">{{ __('messages.personal.present_address') }}</label>
         <input type="text" id="presentAddress" name="presentAddress"
             aria-label="{{ __('messages.personal.present_address') }} {{ old('presentAddress', $personal->presentAddress ?? '') }}"
-            class="w-full border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm"
+            class="w-full p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md  rounded-lg  dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400"
             placeholder="Ex. Street Name, Building, House. No"
             value="{{ old('presentAddress', $personal->presentAddress ?? '') }}" placeholder="" />
         @error('presentAddress')
@@ -99,11 +107,13 @@
             <label for="tin"
                 class="block mb-1 font-medium text-black dark:text-gray-200">{{ __('messages.personal.saved_tin') }}</label>
             <input type="text" id="tin" name="tin" value="{{ old('tin', $personal->tin ?? '') }}"
-                maxlength="9" aria-label="{{ __('messages.personal.saved_tin') }}"
-                class="w-full  py-2 rounded-md border-dark shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-black dark:bg-gray-900 dark:text-gray-200 cursor-not-allowed"
+                maxlength="9"
+                aria-label="{{ __('messages.personal.saved_tin') }} {{ old('tin', $personal->tin ?? '') }}"
+                class="w-full py-2 p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 text-black dark:bg-gray-900 dark:text-gray-200 cursor-not-allowed"
                 placeholder="(9 Digits)" readonly>
         </div>
     </div>
+
 
 
 
@@ -111,7 +121,7 @@
         <label for="religion" class="block mb-1">{{ __('messages.personal.religion') }}</label>
         <select id="religion" name="religion"
             aria-label="{{ __('messages.personal.religion') }}  {{ old('religion', $personal->religion ?? '') }}"
-            class="w-full border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm">
+            class="w-full p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md  rounded-lg  focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400">
             <option value="" disabled>{{ __('messages.personal.please_select') }}</option>
             <option value="Roman Catholic"
                 {{ old('religion', $personal->religion ?? '') == 'Roman Catholic' ? 'selected' : '' }}>
@@ -144,8 +154,9 @@
     <div>
         <div class="mt-6">
             <label for="landlineNo" class="block mb-1">Landline No.</label>
-            <input type="tel" id="landlineNo" name="landlineNo" aria-label="Landline Number "
-                class="w-full border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm"
+            <input type="tel" id="landlineNo" name="landlineNo"
+                aria-label="Landline Number {{ old('landlineNo', $personal->landlineNo ?? '') }}"
+                class="w-full p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md  rounded-lg  focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400"
                 pattern="[0-9]+"
                 title="Please enter numerical characters only"value="{{ old('landlineNo', $personal->landlineNo ?? '') }}"
                 placeholder="89839463" maxlength="8" readonly />
@@ -156,8 +167,9 @@
 
         <div class="mt-6">
             <label for="cellphoneNo" class="block mb-1">Cellphone No.</label>
-            <input type="tel" id="cellphoneNo" name="cellphoneNo" aria-label="Cellphone Number"
-                class="w-full border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm"
+            <input type="tel" id="cellphoneNo" name="cellphoneNo"
+                aria-label="Cellphone Number {{ old('cellphoneNo', $personal->cellphoneNo ?? '') }}"
+                class="w-full p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md  rounded-lg  focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 "
                 pattern="[0-9]+" title="Please enter numerical characters only" placeholder="09673411171"
                 maxlength="11" value="{{ old('cellphoneNo', $personal->cellphoneNo ?? '') }}" readonly />
             @error('cellphoneNo')
@@ -216,15 +228,20 @@
             <div class="flex items-center relative">
                 <!-- Dropdown (Select) for Country -->
                 <select id="ofw-country" name="ofw-country"
-                    class="w-full border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm">
+                    aria-label="{{ __('messages.personal.latest_country_of_deployment') }}{{ old('ofw-country', $personal->ofw_country ?? '') }}"
+                    class="w-full p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md  rounded-lg  focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400">
                     <option value="{{ old('ofw-country', $personal->ofw_country ?? '') }}">
                         {{ old('ofw-country', $personal->ofw_country ?? 'Select a Country') }}
                     </option>
                 </select>
-                <button id="editCountryButton" type="button" class="btn btn-primary ml-2"
-                    aria-label="Edit">Edit</button>
+                <button id="editCountryButton" type="button"
+                    class="bg-blue-700 ml-2 text-white text-lg p-3 rounded-lg flex items-center" aria-label="Edit">
+                    <i class="fas fa-edit mr-2"></i> <!-- Font Awesome icon -->
+                    Edit
+                </button>
+
             </div>
-            <input type="text" id="countryLocation" name="countryLocation"
+            <input type="text" id="countryLocation" name="countryLocation" aria-label="Country Location"
                 value="{{ old('countryLocation', $personal->ofw_country ?? '') }}" hidden />
             @error('ofw-country')
                 <div class="text-red-600 mt-1">{{ $message }}</div>
@@ -242,8 +259,8 @@
             <!-- Month-Year Picker Input -->
             <input type="month" id="ofw-return" name="ofw-return"
                 aria-label="{{ __('messages.personal.month_year_return') }} is {{ old('ofw-return', $formattedDate ?? '') }}"
-                class="w-full border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm"
-                value="{{ old('ofw-return', $personal->ofw_return ?? '') }}" />
+                class="w-full p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md  rounded-lg  focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400"
+                value="{{ old('ofw-return', $personal->ofw_return ?? '') }}" onkeydown="return disableKeys(event)" />
 
             @error('ofw-return')
                 <div class="text-red-600 mt-1">{{ $message }}</div>
@@ -254,8 +271,8 @@
     </div>
 
     <div class="flex items-center gap-4 ">
-        <x-primary-button class="mt-6" aria-label="Save Changes">{{ __('Save Changes') }}</x-primary-button>
-
+        <x-primary-button class="mt-6 focus:outline-none "
+            aria-label="{{ __('messages.userdashboard.save_changes') }}">{{ __('messages.userdashboard.save_changes') }}</x-primary-button>
         @if (session('status') === 'profile-updated')
             <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
                 class="text-md font-semibold text-green-400 dark:text-gray-400">
@@ -271,7 +288,7 @@
         const errorDiv = document.getElementById('barangay-error');
         const zipCodeInput = document.getElementById('zipcode');
         const editButton = document.getElementById('editButton');
-
+        const selectedBarangayInput = document.getElementById('selected-barangay'); // Hidden input
 
         const savedBarangay = "{{ old('barangay', $personal->barangay ?? '') }}";
 
@@ -296,16 +313,21 @@
                 errorDiv.classList.remove('hidden');
             });
 
-
         function populateBarangayDropdown(barangays, savedBarangay) {
-            barangaySelect.innerHTML = '<option value="" disabled>Select A Barangay</option>'; // Default option
-
+            barangaySelect.innerHTML =
+                '<option value="" disabled>Select A Barangay</option>'; // Default option
 
             barangays.forEach(barangay => {
                 const option = document.createElement('option');
                 option.value = barangay.location;
                 option.textContent = barangay.location;
                 option.setAttribute('data-zip', barangay.zip); // Store zip code in a data attribute
+
+                // Mark the saved barangay as selected
+                if (barangay.location === savedBarangay) {
+                    option.setAttribute('selected', 'selected');
+                }
+
                 barangaySelect.appendChild(option);
             });
 
@@ -313,19 +335,23 @@
                 const selectedOption = this.options[this.selectedIndex];
                 const zip = selectedOption.getAttribute('data-zip');
                 zipCodeInput.value = zip ? zip : ''; // Set the zip code
+                selectedBarangayInput.value = selectedOption.value; // Update hidden input
                 editButton.style.display = 'inline-block'; // Show edit button
                 barangaySelect.disabled = true; // Disable dropdown after selection
             });
         }
 
         // Edit button functionality
-        editButton.addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent default button behavior
-            barangaySelect.disabled = false; // Enable the dropdown for editing
-            barangaySelect.focus(); // Focus on the select field
-            barangaySelect.value = ''; // Clear the selected value
-            zipCodeInput.value = ''; // Clear the zip code input value
-        });
+        if (editButton && barangaySelect && zipCodeInput) {
+            editButton.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default button behavior
+                barangaySelect.disabled = false; // Enable the dropdown for editing
+                barangaySelect.focus(); // Focus on the select field
+                barangaySelect.value = ''; // Clear the selected value
+                zipCodeInput.value = ''; // Clear the zip code input value
+                selectedBarangayInput.value = ''; // Clear the hidden input value
+            });
+        }
     });
 </script>
 

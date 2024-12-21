@@ -200,6 +200,7 @@
                     @error('ofw-country')
                         <div class="text-red-600 mt-1">{{ $message }}</div>
                     @enderror
+                    <label for="countryLocation" class="sr-only" hidden>Country Location</label>
                     <input type="text" id="countryLocation" name="countryLocation"
                         value="{{ old('countryLocation', $personal->ofw_country ?? '') }}" hidden />
                 </div>

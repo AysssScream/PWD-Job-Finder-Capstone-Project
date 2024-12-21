@@ -8,7 +8,6 @@ class DocxController extends Controller
 {
     public function download()
     {
-        // Define the path to the file
         $filePath = 'public/docx_template/resume_template.docx';
 
         // Check if the file exists

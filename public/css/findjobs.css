@@ -1,6 +1,6 @@
 body {
     font-family: "Poppins", sans-serif;
-    background-image: url("/images/team.png");
+    background-image: url("/images/team.webp");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -26,8 +26,9 @@ body {
     line-height: 1.2;
     padding: 0px 0 20px;
 }
+
 #popularbg {
-    background-image: url("/images/bg.png");
+    background-image: url("/images/bg.webp");
     background-blend-mode: lighten;
     background-size: cover;
     background-position: center;
@@ -36,10 +37,20 @@ body {
     padding-top: 70px;
 }
 
-#faqpage {
-    background-image: url("/images/bg.png");
-    background-color: #fcfbfb70;
+.dark #faqpage {
+    background-image: url("/images/bg.webp");
+    background-color: #fcfbfb00;
     background-blend-mode: exclusion;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    padding-top: 70px;
+}
+#faqpage {
+    background-image: url("/images/bg.webp");
+    background-color: #f7fbfec5;
+    background-blend-mode: lighten;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -63,14 +74,9 @@ body {
         255,
         255,
         255,
-        0.9
-    ); /* Adjust the alpha value to control the fading effect */
+        0.8
+    ); 
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Reduce the box shadow to make it less pronounced */
-}
-
-.dark #navbartoggler {
-    background-color: white;
-    color: #343a40;
 }
 
 .dark .head-section .navbar.scrolled {
@@ -79,7 +85,7 @@ body {
         41,
         55,
         0.9
-    ); /* Adjust the alpha value to control the fading effect */
+    );
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Reduce the box shadow to make it less pronounced */
 }
 
@@ -98,13 +104,13 @@ body {
 }
 
 .navbar-nav .nav-link:hover {
-    color: #007bff; /* Change this to your desired hover color */
-    border-bottom: 2px solid #007bff; /* Add underline on hover */
+    color: #007bff; 
+    border-bottom: 2px solid #007bff; 
 }
 
 .navbar-nav .nav-item.active .nav-link {
-    color: #fff; /* Change this to your desired active link color */
-    background-color: #007bff; /* Change this to your desired active link background color */
+    color: #fff; 
+    background-color: #007bff; 
 }
 
 .btn-custom-login {
@@ -218,7 +224,7 @@ body {
 }
 
 .dark #navbartoggler {
-    background-color: white;
+    background-color: rgb(107 114 128);
     color: #343a40;
 }
 
@@ -232,17 +238,27 @@ body {
     color: white !important;
 }
 
+
+
+.icon-padding {
+    padding-right: 10px; /* Adjust the value as needed */
+}
+
 .dark .me-2 .bg-light {
     background-color: white !important;
 }
 
 .dark .nav-link {
-    color: lightgray;
+    color: white;
 }
 
 .dark .nav-link:hover,
 .dark .nav-link.active {
-    color: white;
+    color: #007bff;
+}
+
+.dark .navbar-nav .nav-link:hover i {
+    color: #007bff !important; /* This is the blue color you want */
 }
 
 .hero-section,
@@ -304,14 +320,12 @@ body {
 #containerbg {
     background-color: white !important;
     color: white;
-    padding: 2rem; /* Adds padding inside the container */
-    margin-top: 2.5rem; /* Adds margin at the top */
-    margin-bottom: 2.5rem; /* Adds margin at the bottom */
-    border-radius: 0.5rem; /* Rounds the corners of the container */
+    padding: 0rem; /* Adds padding inside the container */
+  
+    border-radius: 1rem; /* Rounds the corners of the container */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
     max-width: 90%; /* Limits the maximum width of the container */
     margin-left: auto; /* Centers the container horizontally */
-    margin-right: auto; /* Centers the container horizontally */
 }
 
 .dark {
@@ -330,16 +344,21 @@ body {
 
 .dark .btn-custom-login,
 .dark .btn-custom-signup {
-    background-color: black;
-    color: white;
-    border: 1px solid black;
+    background-color: white;
+    color: rgb(31, 41, 55);
+    /*border: rgb(31, 41, 55);*/
 }
 
 .dark .btn-custom-login:hover,
 .dark .btn-custom-signup:hover {
-    background-color: #343a40;
+    background-color: rgb(31, 41, 55);
     color: white;
-    border-color: rgb(255, 255, 255);
+    border: 1px solid white;
+}
+
+.dark .btn-custom-login i,
+.dark .btn-custom-signup i {
+    color: inherit !important; /* Inherit text color from button */
 }
 
 .dark .col .card {
@@ -362,11 +381,12 @@ body {
 
 .dark .faq-section .card {
     background-color: rgba(255, 255, 255, 0.1);
-    /* Adjust as needed */
     color: white;
     box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1),
         0 6px 6px rgba(255, 255, 255, 0.15);
     transition: all 0.3s ease-in-out;
+    border-style: none;
+    border-radius: 10px;
 }
 
 .dark .step-section p,
@@ -515,3 +535,21 @@ input:checked + .slider {
         0.5
     ); /* Lighter shade of white for placeholder text */
 }
+
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 0.7s ease-in forwards;
+    animation-delay: 0.3s; /* Adjust delay to suit the animation timing */
+}
+
+
+/* Define the fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+

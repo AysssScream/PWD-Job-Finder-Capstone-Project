@@ -29,6 +29,7 @@ class Employer extends Model
         'mobile_no',
         'fax_no',
         'company_logo',
+        'website_link',
         'email_address',
     ];
 
@@ -96,6 +97,11 @@ class Employer extends Model
     public function setMobileNoAttribute($value)
     {
         $this->attributes['mobile_no'] = $value ? Crypt::encryptString($value) : null;
+    }
+
+    public function setWebsiteLinkAttribute($value)
+    {
+        $this->attributes['website_link'] = $value ? Crypt::encryptString($value) : null;
     }
 
     public function setFaxNoAttribute($value)
@@ -180,6 +186,11 @@ class Employer extends Model
     }
 
     public function getFaxNoAttribute($value)
+    {
+        return $this->decryptValue($value);
+    }
+
+    public function getWebsiteLinkAttribute($value)
     {
         return $this->decryptValue($value);
     }

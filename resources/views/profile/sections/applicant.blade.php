@@ -11,7 +11,7 @@
     @csrf
     @method('PATCH')
     <div class="mt-6 ">
-        <label for="gender" class="block mb-1 text-gray-800 dark:text-gray-100">{{ __('Email') }}</label>
+        <label for="email" class="block mb-1 text-gray-800 dark:text-gray-100">{{ __('Email') }}</label>
         <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required
             autocomplete="username" aria-label="{{ __('Email') }} {{ old('email', $user->email) }} " />
         <x-input-error class="mt-2" :messages="$errors->get('email')" />
@@ -39,17 +39,16 @@
     @if (Auth::user()->usertype === 'user')
 
         <div class="mt-6">
-            <label for="gender"
+            <label for="firstname"
                 class="block mb-1 text-gray-800 dark:text-gray-100">{{ __('messages.applicant.firstname') }}</label>
             <x-text-input id="firstname" name="firstname" type="text" class="mt-1 block w-full" :value="old('firstname', $applicant->firstname ?? '')"
                 required autofocus autocomplete="firstname"
                 aria-label="{{ __('messages.applicant.firstname') }} {{ old('firstname', $applicant->firstname ?? '') }} " />
-
             <x-input-error class="mt-2" :messages="$errors->get('firstname')" />
         </div>
 
         <div class="mt-6">
-            <label for="gender"
+            <label for="middlename"
                 class="block mb-1 text-gray-800 dark:text-gray-100">{{ __('messages.applicant.middlename') }}</label>
             <x-text-input id="middlename" name="middlename" type="text" class="mt-1 block w-full" :value="old('middlename', $applicant->middlename ?? '')"
                 autocomplete="middlename"
@@ -58,7 +57,7 @@
         </div>
 
         <div class="mt-6">
-            <label for="gender"
+            <label for="lastname"
                 class="block mb-1 text-gray-800 dark:text-gray-100">{{ __('messages.applicant.lastname') }}</label>
             <x-text-input id="lastname" name="lastname" type="text" class="mt-1 block w-full" :value="old('lastname', $applicant->lastname ?? '')"
                 required autocomplete="lastname"
@@ -85,7 +84,7 @@
                     class="block mb-1 text-gray-800 dark:text-gray-100">{{ __('messages.applicant.suffix') }}</label>
                 <select id="suffix" name="suffix"
                     aria-label="{{ __('messages.applicant.suffix') }} {{ old('suffix', $applicant->suffix ?? '') }}"
-                    class="w-full border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm">
+                    class="w-full p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 rounded-lg shadow-md  focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 ">
                     <option value="None" {{ old('suffix', $applicant->suffix ?? '') == 'None' ? 'selected' : '' }}>
                         {{ __('messages.applicant.suffix_none') }}</option>
                     <option value="Sr." {{ old('suffix', $applicant->suffix ?? '') == 'Sr.' ? 'selected' : '' }}>
@@ -123,15 +122,17 @@
                     {{ __('messages.applicant.gender') }}
                 </label>
                 <select id="gender" name="gender"
-                    aria-label="{{ __('messages.applicant.gender', ['value' => old('gender', $applicant->gender ?? '')]) }}"
-                    class="w-full border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm">
+                    aria-label="{{ __('messages.applicant.gender') }}{{ old('gender', $applicant->gender ?? '') }}"
+                    tabindex="0"
+                    class="w-full p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400">
                     <option value="Male" {{ old('gender', $applicant->gender ?? '') == 'Male' ? 'selected' : '' }}>
                         {{ __('messages.applicant.male') }}
                     </option>
                     <option value="Female" {{ old('gender', $applicant->gender ?? '') == 'Female' ? 'selected' : '' }}>
                         {{ __('messages.applicant.female') }}
                     </option>
-                    <option value="Other" {{ old('gender', $applicant->gender ?? '') == 'Other' ? 'selected' : '' }}>
+                    <option value="Prefer not to say"
+                        {{ old('gender', $applicant->gender ?? '') == 'Prefer not to say' ? 'selected' : '' }}>
                         {{ __('messages.applicant.other') }}
                     </option>
                 </select>
@@ -142,9 +143,10 @@
 
 
 
-            <div class="flex items-center gap-4 ">
-                <x-primary-button class="mt-6 " aria-label="Save Changes">{{ __('Save Changes') }}</x-primary-button>
 
+            <div class="flex items-center gap-4 ">
+                <x-primary-button class="mt-6 focus:outline-none "
+                    aria-label="{{ __('messages.userdashboard.save_changes') }}">{{ __('messages.userdashboard.save_changes') }}</x-primary-button>
                 @if (session('status') === 'profile-updated')
                     <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
                         class="text-md font-semibold text-green-400 dark:text-gray-400">

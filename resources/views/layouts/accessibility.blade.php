@@ -13,7 +13,7 @@
         <div class="grid grid-cols-2 gap-4">
             <div class="relative inline-block text-left w-full">
                 <button onclick="toggleMenuDropdown()"
-                    class="w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400S flex items-center"
+                    class="w-full px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400S flex items-center"
                     aria-label="{{ __('messages.profile.Adjust Text Size') }}">
                     <i class="fas fa-font mr-2"></i> <!-- Font Awesome icon for text size adjustment -->
                     <span id="textSizeIndicator" class="ml-2"></span> <!-- Span to display text size indicator -->
@@ -22,7 +22,7 @@
                 </button>
                 <div id="textSizeMenuDropdown"
                     class="origin-top-right absolute right-0 mt-2 w-full rounded-md shadow-lg bg-gray-100 text-gray-700 dark:bg-gray-700 ring-1 ring-black ring-opacity-5 hidden z-10">
-                    <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                    <div class="py-1">
                         <a href="#" onclick="setMenuTextSize(1); event.preventDefault();"
                             class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-blue-600 hover:text-gray-200">x1</a>
                         <a href="#" onclick="setMenuTextSize(2); event.preventDefault();"
@@ -36,7 +36,7 @@
             </div>
             <div class="relative inline-block text-left">
                 <button id="toggleCustomDarkMode" aria-label="{{ __('messages.profile.Toggle Theme') }}"
-                    class="w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 flex items-center"
+                    class="w-full px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 flex items-center"
                     onclick="toggleDropdownMenu()">
                     <i id="iconToggle" class="fas fa-moon mr-2" aria-label="Toggle Theme"></i>
                     {{ __('messages.profile.Toggle Theme') }}
@@ -44,13 +44,13 @@
                 </button>
                 <div id="themeDropdown"
                     class="origin-top-right absolute right-0 mt-2 w-full rounded-md shadow-lg bg-gray-100 text-gray-700 dark:bg-gray-700 ring-1 ring-black ring-opacity-5 hidden z-10">
-                    <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                    <div class="py-1">
                         <a href="#" id="setLightTheme"
                             onclick="applyTheme('false'); closeDropdownMenu(); event.preventDefault();"
-                            class="block px-4 py-2 text-sm text-gray-900 dark:text-gray-200 hover:bg-blue-600 hover:text-gray-200">Light</a>
+                            class="block px-4 py-2 text-sm text-gray-900 dark:text-gray-200 hover:bg-blue-700 hover:text-gray-200">Light</a>
                         <a href="#" id="setDarkTheme"
                             onclick="applyTheme('true'); closeDropdownMenu(); event.preventDefault();"
-                            class="block px-4 py-2 text-sm text-gray-900 dark:text-gray-200 hover:bg-blue-600 hover:text-gray-200">Dark</a>
+                            class="block px-4 py-2 text-sm text-gray-900 dark:text-gray-200 hover:bg-blue-700 hover:text-gray-200">Dark</a>
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@
 
             <div class="relative inline-block text-left w-full">
                 <button onclick="toggleScreenReader()" aria-label="{{ __('messages.profile.Toggle Screen Reader') }}"
-                    class="w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 flex items-center">
+                    class="w-full px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 flex items-center">
                     <i id="screenMenuReaderIcon" class="fas fa-volume-up mr-2"></i>
                     {{ __('messages.profile.Toggle Screen Reader') }}
                 </button>
@@ -70,7 +70,7 @@
                     method="GET" class="w-full">
                     <button type="submit" id="languageMenuToggle"
                         aria-label="   {{ __('messages.profile.Change Language') }}"
-                        class="w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 flex items-center">
+                        class="w-full px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 flex items-center">
                         <i class="fas fa-language mr-2"></i>
                         <span id="languageMenuText">
                             {{ __('messages.profile.Change Language') }}
@@ -172,82 +172,7 @@
     </div>
 </div>
 
-<script>
-    // Retrieve dark mode preference from local storage or default to false (light mode)
-    let isDarkMode = localStorage.getItem('darkMode') === 'true';
 
-    const toggleButton = document.getElementById('toggleCustomDarkMode');
-    const icon = document.getElementById('iconToggle');
-
-    // Function to update UI based on dark mode state
-    function updateDarkModeUI() {
-        if (isDarkMode) {
-            document.documentElement.classList.add('dark');
-            icon.classList.remove('fa-sun');
-            icon.classList.add('fa-moon');
-        } else {
-            document.documentElement.classList.remove('dark');
-            icon.classList.remove('fa-moon');
-            icon.classList.add('fa-sun');
-        }
-        updateLogos();
-    }
-
-    // Update logos function (assuming these elements exist in your DOM)
-    function updateLogos() {
-        const navbarLogo = document.getElementById('navbarLogo');
-        const mainnavbarLogo = document.getElementById('mainnavbarLogo');
-        const main_nav = document.getElementById('main-nav');
-
-        if (isDarkMode) {
-            if (navbarLogo) {
-                navbarLogo.src = '/images/darknavbarlogo.png';
-            }
-            if (mainnavbarLogo) {
-                mainnavbarLogo.src = '/images/darknavbarlogo.png';
-            }
-
-            if (main_nav) {
-                main_nav.classList.add('dark');
-            }
-        } else {
-            if (navbarLogo) {
-                navbarLogo.src = '/images/lightnavbarlogo.png';
-            }
-            if (mainnavbarLogo) {
-                mainnavbarLogo.src = '/images/lightnavbarlogo.png';
-            }
-
-            if (main_nav) {
-                main_nav.classList.remove('dark');
-            }
-        }
-    }
-
-    // Initial call to update UI based on stored dark mode preference
-    updateDarkModeUI();
-
-    // Event listener for floating toggle button
-    const floatingToggleButton = document.getElementById('toggleDarkMode');
-    if (floatingToggleButton) {
-        floatingToggleButton.addEventListener('click', function() {
-            isDarkMode = !isDarkMode;
-            localStorage.setItem('darkMode', isDarkMode
-                .toString()); // Store dark mode preference in local storage
-            updateDarkModeUI();
-        });
-    }
-
-    // Event listener for custom dark mode toggle button
-    if (toggleButton) {
-        toggleButton.addEventListener('click', function() {
-            isDarkMode = !isDarkMode;
-            localStorage.setItem('darkMode', isDarkMode
-                .toString()); // Store dark mode preference in local storage
-            updateDarkModeUI();
-        });
-    }
-</script>
 <script>
     var textSize = 2; // Default text size
 
@@ -264,7 +189,7 @@
 
     function applyMenuTextSize() {
         var elements = document.querySelectorAll(
-            'body, h1, h2, p, select, input, th, li, nav, input[type="text"], input[type="number"], button');
+            'body, h1, h2, p,span, select, input, th, li, nav, input[type="text"], input[type="number"], button');
         elements.forEach(function(el) {
             if (el.tagName === 'INPUT' && (el.type === 'text' || el.type === 'number')) {
                 switch (textSize) {
@@ -285,13 +210,13 @@
                         break;
                 }
             } else {
-                el.classList.remove('text-sm', 'text-base', 'text-lg', 'text-xl');
+                el.classList.remove('text-sm', 'text-md', 'text-lg', 'text-xl');
                 switch (textSize) {
                     case 1:
                         el.classList.add('text-sm'); // x1
                         break;
                     case 2:
-                        el.classList.add('text-base'); // x2
+                        el.classList.add('text-md'); // x2
                         break;
                     case 3:
                         el.classList.add('text-lg'); // x3
@@ -300,7 +225,7 @@
                         el.classList.add('text-xl'); // lg
                         break;
                     default:
-                        el.classList.add('text-base'); // Default to x2
+                        el.classList.add('text-lg'); // Default to x2
                         break;
                 }
             }

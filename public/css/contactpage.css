@@ -49,7 +49,7 @@ body {
 }
 
 .contact-section {
-    background-image: url("/images/contactbg.png");
+    background-image: url("/images/contactbg.webp");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -141,7 +141,7 @@ body {
 }
 
 .dark #navbartoggler {
-    background-color: white;
+    background-color: rgb(107 114 128);
     color: #343a40;
 }
 
@@ -180,12 +180,16 @@ body {
 }
 
 .dark .nav-link {
-    color: lightgray;
+    color: white;
 }
 
 .dark .nav-link:hover,
 .dark .nav-link.active {
-    color: white;
+    color: #007bff;
+}
+
+.dark .navbar-nav .nav-link:hover i {
+    color: #007bff !important; /* This is the blue color you want */
 }
 
 .dark {
@@ -196,44 +200,28 @@ body {
 .dark .bg-light {
     background-color: rgb(22, 22, 22) !important;
 }
-.dark .btn-custom-login,
-.dark .btn-custom-signup {
-    background-color: white;
-    color: black;
-    border: 1px solid white;
-}
-
-.dark .btn-custom-login,
-.dark .btn-custom-signup {
-    background-color: black;
-    color: white;
-    border: 1px solid black;
-}
 
 .dark .navbar-brand {
     color: white;
 }
+
 .dark .btn-custom-login,
 .dark .btn-custom-signup {
-    background-color: black;
-    color: white;
-    border: 1px solid black;
-}
-
-.dark #navbartoggler {
     background-color: white;
-    color: #343a40;
+    color: rgb(31, 41, 55);
+    /*border: rgb(31, 41, 55);*/
 }
 
 .dark .btn-custom-login:hover,
 .dark .btn-custom-signup:hover {
-    background-color: #343a40;
+    background-color: rgb(31, 41, 55);
     color: white;
-    border-color: rgb(255, 255, 255);
+    border: 1px solid white;
 }
 
-.dark .navbar-brand {
-    color: white;
+.dark .btn-custom-login i,
+.dark .btn-custom-signup i {
+    color: inherit !important; /* Inherit text color from button */
 }
 
 .dark .col-lg-4 img {
@@ -267,6 +255,28 @@ body {
     transition: color 0.4s;
 }
 
+.dark .ui-switch .slider {
+    color: white; 
+}
+
 input:checked + .slider {
     color: #2196f3;
 }
+
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 0.7s ease-in forwards;
+    animation-delay: 0.3s; /* Adjust delay to suit the animation timing */
+}
+
+
+/* Define the fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+

@@ -8,19 +8,3 @@ body {
 .btn {
     border-radius: 8px;
 }
-
-/* Style the scrollbar track */
-::-webkit-scrollbar-track {
-    background-color: #1a1212; /* Set the background color to white */
-}
-
-/* Style the scrollbar handle */
-::-webkit-scrollbar-thumb {
-    background-color: #413030; /* Set the color of the scrollbar handle */
-    border-radius: 10px; /* Add rounded corners to the handle */
-}
-
-/* Style the scrollbar when the handle is being hovered over */
-::-webkit-scrollbar-thumb:hover {
-    background-color: #382121; /* Change the color of the handle on hover */
-}

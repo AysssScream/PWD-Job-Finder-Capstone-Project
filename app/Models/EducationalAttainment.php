@@ -17,6 +17,7 @@ class EducationalAttainment extends Model
         'educationLevel',
         'school',
         'course',
+        'certifications',
         'yearGraduated',
         'awards',
     ];
@@ -42,6 +43,11 @@ class EducationalAttainment extends Model
         $this->attributes['yearGraduated'] = $value ? Crypt::encryptString($value) : null;
     }
 
+    public function setCertificationsAttribute($value)
+    {
+        $this->attributes['certifications'] = $value ? Crypt::encryptString($value) : null;
+    }
+
     public function setAwardsAttribute($value)
     {
         $this->attributes['awards'] = $value ? Crypt::encryptString($value) : null;
@@ -59,6 +65,11 @@ class EducationalAttainment extends Model
     }
 
     public function getCourseAttribute($value)
+    {
+        return $this->decryptValue($value);
+    }
+
+    public function getCertificationsAttribute($value)
     {
         return $this->decryptValue($value);
     }

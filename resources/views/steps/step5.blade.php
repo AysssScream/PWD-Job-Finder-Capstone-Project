@@ -9,277 +9,250 @@
 
      </head>
      <div class="py-12">
-         <div class="container mx-auto">
+        <div class="container max-w-full pr-6 pl-6 mx-auto">
              <div class="flex justify-center">
-                 <div class="w-full">
+                 <div class="w-full p-6">
                      <form action="{{ route('dialect') }}" method="POST" enctype="multipart/form-data">
                          @csrf
                          @if ($errors->any())
                              <div class="bg-red-100 border border-red-400 text-red-700 dark:bg-red-700 dark:text-gray-100 dark:border-red-600 dark:text-red-200 px-4 py-3 rounded relative"
                                  role="alert">
-                                 <strong class="font-bold">Oops!</strong>
-                                 <span class="block sm:inline">There were some errors with your submission:</span>
+                                 <strong class="font-bold dark:text-white">Oops!</strong>
+                                 <span class="block sm:inline dark:text-white">There were some errors with your
+                                     submission:</span>
                                  <ul class="mt-3 list-disc list-inside text-sm">
                                      @foreach ($errors->all() as $error)
-                                         <li>{{ $error }}</li>
+                                         <li class="dark:text-white">{{ $error }}</li>
                                      @endforeach
                                  </ul>
                              </div>
                              <br>
                          @endif
 
-                         <div class="bg-white text-black dark:bg-gray-800 dark:text-gray-200 shadow-md rounded-lg">
-                             <div class="p-6">
-                                 <h3 class="text-2xl font-bold mb-2 inline-flex items-center justify-between w-full focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                         <div class="bg-white text-black dark:bg-gray-800 dark:text-gray-200 shadow-3d rounded-lg mb-4"
+                             id="step5">
+                             @php
+                                 $currentStep = 5; // Set this dynamically based on your current step
+                                 $totalSteps = 7; // Total number of steps (adjusted to 8)
+                                 $percentage = round((($currentStep - 1) / ($totalSteps - 1)) * 100);
+                             @endphp
+
+                             <!-- Gradient background for the header section -->
+                             <div class="bg-gradient-to-r from-blue-600 to-blue-400 p-6 rounded-t-lg shadow-lg">
+                                 <h3 class="text-2xl text-white font-bold mb-4 inline-flex items-center justify-between w-full 
+                                    focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                     aria-label="{{ __('messages.steps.step_5') }} {{ $percentage }}%;"
                                      tabindex="0">
-                                     Language and Other Skills
-                                     @php
-                                         $currentStep = 5; // Set this dynamically based on your current step
-                                         $totalSteps = 7; // Total number of steps (adjusted to 8)
-                                         $percentage = round((($currentStep - 1) / ($totalSteps - 1)) * 100);
-                                     @endphp
-                                     <div class="ml-4 flex flex-col sm:flex-row sm:items-center sm:space-x-2">
+
+                                     {{ __('messages.steps.step_5') }}
+
+                                     <!-- Progress bar -->
+                                     <div
+                                         class="ml-4 flex flex-col sm:flex-row sm:items-center sm:space-x-4 w-full sm:w-auto">
                                          <div
                                              class="relative w-full sm:w-36 h-2 bg-gray-200 rounded-full overflow-hidden">
-                                             <div class="absolute top-0 left-0 h-2 bg-blue-600 rounded-full transition-all ease-in-out duration-500"
+                                             <div class="absolute top-0 left-0 h-2 bg-gradient-to-r from-green-400 to-green-600 rounded-full transition-all ease-in-out duration-500"
                                                  style="width: {{ $percentage }}%;"></div>
                                          </div>
-                                         <div class="text-md text-black font-semibold dark:text-gray-400 mt-2 sm:mt-0">
-                                             Step {{ $currentStep }}/{{ $totalSteps }} : <span
-                                                 class="text-green-600">{{ $percentage }}%</span>
+
+                                         <!-- Step progress information -->
+                                         <div class="text-md text-white font-semibold mt-2 sm:mt-0">
+                                             Step {{ $currentStep }}/{{ $totalSteps }} :
+                                             <span class="text-white">{{ $percentage }}%</span>
                                          </div>
                                      </div>
                                  </h3>
+
+                                 <!-- Breadcrumb navigation -->
                                  <div>
                                      <nav class="text-sm" aria-label="Breadcrumb">
                                          <ol class="list-none p-0 inline-flex">
                                              <li class="flex items-center">
-                                                 <i tabindex="0"
-                                                     class="fas fa-arrow-left mr-2 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"></i>
+                                                 <!-- Back arrow icon -->
+                                                 <i class="fas fa-arrow-left mr-2 text-white 
+                                                    focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                     aria-label="Go Back to {{ __('messages.steps.step_4') }}"
+                                                     tabindex="0"></i>
+
+                                                 <!-- "Job Preferences" link -->
                                                  <a href="{{ route('jobpreferences') }}"
-                                                     class="text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">Job
-                                                     Preferences</a>
-                                                 <span class="mx-2 text-gray-500">/</span>
+                                                     aria-label="{{ __('messages.steps.step_4') }}"
+                                                     class="text-white focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                                     {{ __('messages.steps.step_4') }}
+                                                 </a>
+                                                 <span class="mx-2 text-white">/</span>
                                              </li>
-                                             <li class="flex items-center">
+                                             <li class="flex items-center focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                 aria-label="{{ __('messages.steps.step_5') }}" tabindex="0">
                                                  <span
-                                                     class="text-blue-500 font-semibold focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
-                                                     tabindex="0">Language Proficiency and
-                                                     Other Skills</span>
+                                                     class="text-white font-semibold">{{ __('messages.steps.step_5') }}</span>
                                              </li>
                                          </ol>
                                      </nav>
                                  </div>
-                                 <hr class="border-t-2 border-gray-400 rounded-full my-4">
-                                 <div class="focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
-                                     tabindex="0" aria-label="{!! __('messages.language.instruction') !!}">
-                                     <span class="text-md font-regular">
-                                         {!! __('messages.language.instruction') !!}
-                                     </span>
-                                 </div>
+
+                                 <!-- Horizontal rule for separation -->
+                                 <hr class="border-t-2 border-white rounded-full my-4">
+                             </div>
+                             <div class="p-3 shadow-lg rounded-b-lg border-4 border-blue-500 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                 tabindex="0" aria-label="{!! __('messages.language.instruction') !!}">
+                                 <span class="text-md font-regular">
+                                     {!! __('messages.language.instruction') !!}
+                                 </span>
+                             </div>
+
+                             <div class="p-6 pt-0">
 
                                  <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
                                      <div class="col-span-1 md:col-span-1">
                                          @include('layouts.dropdown')
                                      </div>
                                      <div class="col-span-1 md:col-span-2">
+                                         <div class="overflow-x-auto">
 
-                                         <table id="language-table"
-                                             class="min-w-full mt-6 divide-y divide-gray-200 dark:divide-gray-700">
-                                             <thead>
-                                                 <tr>
-                                                     <th
-                                                         class="px-4 py-2 border-b bg-gray-300 text-black dark:bg-gray-900 dark:text-gray-200">
-                                                         {{ __('messages.language.table_headers.language_dialect') }}
-                                                     </th>
-                                                     <th
-                                                         class="px-4 py-2 text-center border-b bg-gray-300 text-black dark:bg-gray-900 dark:text-gray-200">
-                                                         {{ __('messages.language.table_headers.language_proficiency') }}
-                                                         <i class="fas fa-asterisk text-red-500 text-xs"></i>
-                                                     </th>
-                                                 </tr>
-                                             </thead>
-                                             <tbody id="language-table-body">
-                                                 @php
-                                                     $languages = ['English', 'Filipino'];
-                                                 @endphp
-
-                                                 @foreach ($languages as $index => $language)
+                                             <h3 class="text-2xl font-bold mb-2 mt-9 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                 aria-label="{{ __('messages.language.can_speak') }}" tabindex="0">
+                                                 {{ __('messages.language.can_speak') }}?
+                                             </h3>
+                                             <table id="language-table"
+                                                 class="min-w-full mt-6 divide-y divide-gray-200 dark:divide-gray-700">
+                                                 <thead>
                                                      <tr>
-                                                         <td class="px-4 py-2 border-b">
-                                                             <div class="flex items-center">
-                                                                 <input type="text" name="language-input[]"
-                                                                     class="w-full p-2 border-1 border-black dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm language-input"
-                                                                     value="{{ $language }}" readonly />
-                                                             </div>
-                                                         </td>
-                                                         <td class="px-4 py-2 border-b text-right">
-                                                             <div class="flex items-center">
-                                                                 @foreach (['Read', 'Write', 'Speak', 'Understand'] as $skill)
-                                                                     <label class="inline-flex items-center mr-4">
-                                                                         <input type="checkbox"
-                                                                             name="proficiency[{{ $index }}][]"
-                                                                             value="{{ $skill }}"
-                                                                             class="form-checkbox text-blue-500 focus:ring-orange-400 dark:focus:ring-orange-400"
-                                                                             {{ isset($formData5['proficiency'][$index]) && in_array($skill, $formData5['proficiency'][$index]) ? 'checked' : '' }} />
-                                                                         <span
-                                                                             class="ml-2 text-gray-700 dark:text-gray-200">Can
-                                                                             {{ $skill }}?</span>
-                                                                     </label>
-                                                                 @endforeach
-                                                             </div>
-                                                         </td>
+                                                         <th class="px-4 py-2 border-b bg-gray-300 text-black dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-400"
+                                                             aria-label="{{ __('messages.language.table_headers.language_dialect') }}"
+                                                             tabindex="0"> <!-- Make th focusable -->
+                                                             {{ __('messages.language.table_headers.language_dialect') }}
+                                                         </th>
+                                                         <th class="px-4 py-2 text-center border-b bg-gray-300 text-black dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-400"
+                                                             aria-label="{{ __('messages.language.table_headers.language_proficiency') }}"
+                                                             tabindex="0"> <!-- Make th focusable -->
+                                                             {{ __('messages.language.table_headers.language_proficiency') }}
+                                                             <i class="fas fa-asterisk text-red-500 text-xs"></i>
+                                                         </th>
                                                      </tr>
-                                                 @endforeach
-
-                                         </table>
-
-                                         {{-- <table class="min-w-full border border-gray-200" id="languages-table">
-                                             <thead>
-                                                 <tr>
-                                                     <div class="mt-6">
-                                                         <p class="focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
-                                                             tabindex="0"
-                                                             aria-label="{{ __('messages.language.updatelang') }}">
-                                                             <strong>{{ __('messages.language.updatelang') }}</strong>
-                                                         </p>
-                                                         <ul class="list-unstyled">
-                                                             <li aria-label="{{ __('messages.language.list-unstyled.1') }}"
-                                                                 tabindex="0"
-                                                                 class="bi bi-arrow-right-short focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
-                                                                 <i></i>•
-                                                                 {{ __('messages.language.list-unstyled.1') }}
-                                                             </li>
-                                                             <li aria-label="{{ __('messages.language.list-unstyled.2') }}"
-                                                                 class="bi bi-arrow-right-short focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
-                                                                 tabindex="0">
-                                                                 <i class="bi bi-arrow-right-short"></i>•
-                                                                 {{ __('messages.language.list-unstyled.2') }}
-                                                             </li>
-                                                             <li aria-label="{{ __('messages.language.list-unstyled.3') }}"
-                                                                 tabindex="0"
-                                                                 class="bi bi-arrow-right-short focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
-                                                                 <i class="bi bi-arrow-right-short"></i>•
-                                                                 {{ __('messages.language.list-unstyled.3') }}
-                                                             </li>
-                                                             <li aria-label="{{ __('messages.language.list-unstyled.4') }}"
-                                                                 tabindex="0"
-                                                                 class="bi bi-arrow-right-short focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
-                                                                 <i class="bi bi-arrow-right-short"></i>•
-                                                                 {{ __('messages.language.list-unstyled.4') }}
-                                                             </li>
-                                                             <li aria-label="{{ __('messages.language.list-unstyled.5') }}"
-                                                                 tabindex="0"
-                                                                 class="bi bi-arrow-right-short focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
-                                                                 <i class="bi bi-arrow-right-short"></i>•
-                                                                 {{ __('messages.language.list-unstyled.5') }}
-                                                             </li>
-                                                         </ul>
-                                                     </div>
-                                                     <br>
-                                                     <td colspan="4" class="text-left p-4">
-                                                         <button type="button"
-                                                             class="bg-blue-600 text-white px-10 py-2 rounded add-row  focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
-                                                             tabindex="0"
-                                                             aria-label="{{ __('messages.language.buttons.add_language') }}">{{ __('messages.language.buttons.add_language') }}</button>
-                                                         <button type="button"
-                                                             class="bg-red-500 text-white px-4 py-2 rounded  focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
-                                                             tabindex="0"
-                                                             aria-label="{{ __('messages.language.buttons.clear_selected_languages') }}"
-                                                             onclick="clearSelectedLanguages()">{{ __('messages.language.buttons.clear_selected_languages') }}</button>
-
-                                                         <script>
-                                                             function clearSelectedLanguages() {
-                                                                 document.getElementById('selected-languages').value = '';
-                                                                 localStorage.removeItem('selectedLanguages');
-
-                                                                 var table = document.getElementById('language-table-body');
-
-                                                                 // Remove all rows from the table
-                                                                 while (table.rows.length > 0) {
-                                                                     table.deleteRow(0);
-                                                                 }
-                                                             }
-                                                         </script>
-                                                     </td>
-                                                 </tr>
-                                             </thead>
 
 
-                                             <thead>
-                                                 <tr>
-                                                     <th class="px-4 py-2 border-b bg-gray-300 text-black dark:bg-gray-900 dark:text-gray-200"
-                                                         aria-label="{{ __('messages.language.table_headers.language_dialect') }}">
-                                                         {{ __('messages.language.table_headers.language_dialect') }}
-                                                     </th>
-                                                     <th class="px-4 py-2 border-b bg-gray-300 text-black dark:bg-gray-900 dark:text-gray-200"
-                                                         aria-label="{{ __('messages.language.table_headers.language_proficiency') }}">
-                                                         {{ __('messages.language.table_headers.language_proficiency') }}
-                                                     </th>
-                                                     <th class="px-4 py-2 border-b bg-gray-300 text-black dark:bg-gray-900 dark:text-gray-200"
-                                                         aria-label="{{ __('messages.language.table_headers.action') }}">
-                                                         {{ __('messages.language.table_headers.action') }}
-                                                     </th>
+                                                 </thead>
+                                                 <tbody id="language-table-body">
+                                                     @php
+                                                         $languages = ['English', 'Filipino'];
+                                                     @endphp
 
-                                                 </tr>
-                                             </thead>
-                                             <tbody id="language-table-body">
-                                                 <tr>
-                                                     <td class="px-4 py-2 border-b">
-                                                         <div class="flex items-center">
-                                                             <input type="text" name="language-input[]"
-                                                                 class="flex-1 p-2 border rounded language-input bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 "
-                                                                 pattern="[A-Za-z\s]+" placeholder="Ex. Filipino"
-                                                                 value="{{ old('language-input.0', $formData5['language-input.0'] ?? '') }}"
-                                                                 readonly
-                                                                 aria-label="{{ __('messages.language.table_headers.language_dialect') }}" />
-                                                         </div>
-                                                         <div class="suggestions-container ">
-                                                             <ul class="suggestions-list"></ul>
-                                                         </div>
+                                                     @foreach ($languages as $index => $language)
+                                                         <tr>
+                                                             <td class="px-4 py-2 border-b">
+                                                                 <div class="flex items-center">
+                                                                     <input type="text" name="languageSpeak[]"
+                                                                         class="w-full p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md rounded-lg focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm language-input"
+                                                                         value="{{ $language }}" readonly
+                                                                         aria-label="Speaking proficiency input for {{ $language }}"
+                                                                         aria-readonly="true" />
+                                                                 </div>
+                                                             </td>
+                                                             <td class="px-4 py-2 border-b text-right">
+                                                                 <div class="flex items-center">
+                                                                     @foreach (['Excellent', 'Good', 'Fair', 'Poor'] as $skill)
+                                                                         <label
+                                                                             class="inline-flex items-center mr-4 focus:outline-none focus:ring-2 focus:ring-orange-400"
+                                                                             aria-label="Proficiency in {{ $skill }}"
+                                                                             tabindex="0">
+                                                                             <input type="checkbox"
+                                                                                 name="proficiencySpeak[{{ $index }}][]"
+                                                                                 value="{{ $skill }}"
+                                                                                 class="form-checkbox rounded-lg"
+                                                                                 {{ isset($formData5['proficiencySpeak'][$index]) && in_array($skill, $formData5['proficiencySpeak'][$index]) ? 'checked' : '' }}
+                                                                                 aria-checked="{{ isset($formData5['proficiencySpeak'][$index]) && in_array($skill, $formData5['proficiencySpeak'][$index]) ? 'true' : 'false' }}"
+                                                                                 role="checkbox"
+                                                                                 onclick="toggleCheckbox(this, '{{ $index }}', 'proficiencySpeak')" />
+                                                                             <span
+                                                                                 class="ml-2 text-gray-700 dark:text-gray-200">{{ $skill }}?</span>
+                                                                         </label>
+                                                                     @endforeach
+                                                                 </div>
+                                                             </td>
+                                                         </tr>
+                                                     @endforeach
+                                                 </tbody>
+                                             </table>
 
-                                                     </td>
 
-                                                     <td class="px-4 py-2 border-b text-center ">
-                                                         <div class="inline-block relative">
-                                                             <select
-                                                                 aria-label="{{ __('messages.language.table_headers.language_proficiency') }}"
-                                                                 class="block appearance-none w-full bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 border border-gray rounded-md py-2 px-10 leading-tightfocus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
-                                                                 id="langprof">
-                                                                 <option value="Beginner">Beginner</option>
-                                                                 <option value="Intermediate">Intermediate</option>
-                                                                 <option value="Advanced">Advanced</option>
-                                                                 <option value="Fluent">Fluent</option>
-                                                                 <option value="Native">Native</option>
-                                                             </select>
 
-                                                         </div>
-                                                     </td>
+                                             <h3 class="text-2xl font-bold mb-2 mt-9 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                 aria-label="{{ __('messages.language.can_read') }}" tabindex="0">
+                                                 {{ __('messages.language.can_read') }}?
+                                             </h3>
+                                             <table id="language-table"
+                                                 class="min-w-full mt-6 divide-y divide-gray-200 dark:divide-gray-700">
+                                                 <thead>
+                                                     <tr>
+                                                         <th class="px-4 py-2 border-b bg-gray-300 text-black dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-400"
+                                                             aria-label="{{ __('messages.language.table_headers.language_dialect') }}"
+                                                             tabindex="0"> <!-- Make th focusable -->
+                                                             {{ __('messages.language.table_headers.language_dialect') }}
+                                                         </th>
+                                                         <th class="px-4 py-2 text-center border-b bg-gray-300 text-black dark:bg-gray-900 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-400"
+                                                             aria-label="{{ __('messages.language.table_headers.language_proficiency') }}"
+                                                             tabindex="0"> <!-- Make th focusable -->
+                                                             {{ __('messages.language.table_headers.language_proficiency') }}
+                                                             <i class="fas fa-asterisk text-red-500 text-xs"></i>
+                                                         </th>
+                                                     </tr>
 
-                                                     <td class="px-4 py-2 border-b text-center">
-                                                         <button type="button"
-                                                             aria-label="{{ __('messages.language.actions.edit') }}"
-                                                             class="bg-blue-600 text-white px-7 py-1 rounded edit-row focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
-                                                             {{ __('messages.language.actions.edit') }}</button>
-                                                         <button type="button"
-                                                             aria-label="{{ __('messages.language.actions.remove') }}"
-                                                             class="bg-red-500 text-white px-2 py-1 rounded remove-row focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">{{ __('messages.language.actions.remove') }}</button>
-                                                     </td>
-                                                 </tr>
-                                             </tbody>
-                                         </table> --}}
+                                                 </thead>
+
+
+                                                 <tbody id="language-table-body-read">
+                                                     @foreach ($languages as $index => $language)
+                                                         <tr>
+                                                             <td class="px-4 py-2 border-b">
+                                                                 <div class="flex items-center">
+                                                                     <input type="text" name="languageRead[]"
+                                                                         class="w-full p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md rounded-lg focus:border-4 focus:border-orange-400 dark:focus:border-orange-400 focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-400 rounded-md shadow-sm language-input"
+                                                                         value="{{ $language }}" readonly
+                                                                         aria-label="Reading proficiency input for {{ $language }}"
+                                                                         aria-readonly="true" />
+                                                                 </div>
+                                                             </td>
+                                                             <td class="px-4 py-2 border-b text-right">
+                                                                 <div class="flex items-center">
+                                                                     @foreach (['Excellent', 'Good', 'Fair', 'Poor'] as $skill)
+                                                                         <label
+                                                                             class="inline-flex items-center mr-4 focus:outline-none focus:ring-2 focus:ring-orange-400"
+                                                                             aria-label="Proficiency in {{ $skill }}"
+                                                                             tabindex="0">
+                                                                             <input type="checkbox"
+                                                                                 name="proficiencyRead[{{ $index }}][]"
+                                                                                 value="{{ $skill }}"
+                                                                                 class="form-checkbox rounded-lg"
+                                                                                 {{ isset($formData5['proficiencyRead'][$index]) && in_array($skill, $formData5['proficiencyRead'][$index]) ? 'checked' : '' }}
+                                                                                 aria-checked="{{ isset($formData5['proficiencyRead'][$index]) && in_array($skill, $formData5['proficiencyRead'][$index]) ? 'true' : 'false' }}"
+                                                                                 role="checkbox"
+                                                                                 onclick="toggleCheckbox(this, '{{ $index }}', 'proficiencyRead')" />
+                                                                             <span
+                                                                                 class="ml-2 text-gray-700 dark:text-gray-200">{{ $skill }}?</span>
+                                                                         </label>
+                                                                     @endforeach
+                                                                 </div>
+                                                             </td>
+                                                         </tr>
+                                                     @endforeach
+                                                 </tbody>
+                                             </table>
+
+
+                                             <script>
+                                                 function toggleCheckbox(selectedCheckbox, index, type) {
+                                                     const checkboxes = document.querySelectorAll(`input[name="${type}[${index}][]"]`);
+                                                     checkboxes.forEach(checkbox => {
+                                                         if (checkbox !== selectedCheckbox) {
+                                                             checkbox.checked = false; // Uncheck others if one is checked
+                                                         }
+                                                     });
+                                                 }
+                                             </script>
+
+                                         </div>
                                          <br>
-                                         {{-- <label for="selected-languages"
-                                             class="block text-sm font-medium text-black-700">{{ __('messages.language.labels.selected_languages') }}</label>
-                                         <textarea id="selected-languages" name="selected-languages"
-                                             aria-label="{{ __('messages.language.labels.selected_languages') }}"
-                                             class="w-full bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 text-gray-800 border border-gray-300 rounded py-2 px-4 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
-                                             placeholder="Enter selected languages..." readonly>{{ old('selected-languages', $formData5['selected-languages'] ?? '') }}</textarea>
-
-
-                                         <div id="row-limit-message" class="text-red-600 mt-2 hidden">
-                                             {{ __('messages.language.messages.row_limit_message') }}</div> --}}
-
                                          <h3 class="text-2xl font-bold mb-2 mt-9 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
                                              aria-label="                                             {{ __('messages.language.messages.other_skills_heading') }}"
                                              tabindex="0">
@@ -461,12 +434,14 @@
                                                      <br>
                                                  </div>
                                                  @error('skills')
-                                                     <div class="text-red-600 mt-1">{{ $message }}</div>
+                                                     <div class="text-red-600 dark:text-red-400 mt-1">{{ $message }}
+                                                     </div>
                                                  @enderror
                                                  <textarea type="text" id="otherSkills" name="otherSkills" tabindex="0" aria-label="Others textarea"
-                                                     class="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200  focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
-                                                     {{ in_array('OTHER_SKILLS', old('skills', $formData8['skills'] ?? [])) ? '' : 'disabled' }}>{{ old('otherSkills', $formData8['otherSkills'] ?? '') }}</textarea>
+                                                     class="w-full p-3 border border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 shadow-md  rounded-lg  focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400"
+                                                     {{ in_array('OTHER_SKILLS', old('skills', $formData5['skills'] ?? [])) ? '' : 'disabled' }}>{{ old('otherSkills', $formData5['otherSkills'] ?? '') }}</textarea>
                                                  <br>
+
                                                  <input type="hidden" id="selectedSkills" name="selectedSkills"
                                                      value="">
                                                  <input type="hidden" id="otherSkillsInput" name="otherSkillsInput"
@@ -482,7 +457,7 @@
                                          class="inline-block py-2 px-4 bg-black text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400 mr-2">
                                          {{ __('messages.previous') }}</a>
                                      <button type="submit" aria-label=" {{ __('messages.save') }}"
-                                         class="inline-block py-2 px-4 bg-green-600 text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
+                                         class="inline-block py-2 px-4 bg-green-700 text-white rounded-md shadow-md hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-orange-400 focus:border-orange-400">
                                          {{ __('messages.save') }}</button>
                                  </div>
                              </div>
@@ -828,5 +803,56 @@
      </div>
      </div>
      </div>
+     
+     <script>
+    // Function to check if at least one checkbox in a group is selected
+    function checkCheckboxGroup(checkboxes) {
+        const isChecked = Array.from(checkboxes).some((checkbox) => checkbox.checked);
+
+        checkboxes.forEach((checkbox) => {
+            if (!isChecked) {
+                checkbox.classList.add('border-red-500'); // Add red border if none are selected
+            } else {
+                checkbox.classList.remove('border-red-500'); // Remove red border if one is selected
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Select all checkboxes in the "Can Speak" section
+        const canSpeakCheckboxGroups = document.querySelectorAll('#language-table-body tr');
+        
+        canSpeakCheckboxGroups.forEach((row, index) => {
+            const checkboxes = row.querySelectorAll(`input[name="proficiencySpeak[${index}][]"]`);
+            checkCheckboxGroup(checkboxes); // Initial check
+
+            // Add event listeners for each checkbox in the group
+            checkboxes.forEach((checkbox) => {
+                checkbox.addEventListener('change', () => checkCheckboxGroup(checkboxes));
+            });
+        });
+
+        // Select all checkboxes in the "Can Read" section
+        const canReadCheckboxGroups = document.querySelectorAll('#language-table-body-read tr');
+        
+        canReadCheckboxGroups.forEach((row, index) => {
+            const checkboxes = row.querySelectorAll(`input[name="proficiencyRead[${index}][]"]`);
+            checkCheckboxGroup(checkboxes); // Initial check
+
+            // Add event listeners for each checkbox in the group
+            checkboxes.forEach((checkbox) => {
+                checkbox.addEventListener('change', () => checkCheckboxGroup(checkboxes));
+            });
+        });
+    });
+</script>
+
+<style>
+    .border-red-500 {
+        border-color: #dc2626 !important;
+        border-width: 2px !important;
+    }
+</style>
+
 
      </html>

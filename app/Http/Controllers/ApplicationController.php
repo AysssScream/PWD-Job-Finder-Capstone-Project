@@ -14,18 +14,31 @@ class ApplicationController extends Controller
         $user = Auth::user();
         $applications = $user->applications()
             ->where(function ($query) {
-                $query->where('status', 'pending')
-                    ->orWhere('status', 'hired');
+                $query->where('status_plain', 'pending')
+                    ->orWhere('status_plain', 'hired');
             })
             ->whereNull('read_at')
             ->get();
+         
+             \Log::info('Applications to be marked as read: ', ['applications' => $applications]);
+            foreach ($applications as $application) {
+               $application->read_at = now();
+               $application->save();
+              \Log::info('Marked application as read', ['application_id' => $application->id, 'read_at' => $application->read_at]);
+            }
+                    
 
-        foreach ($applications as $application) {
-            $application->read_at = now();
-            $application->save();
+        $interviews = $user->interviews()
+            ->whereNull('read_at')
+            ->get();
+            
+        \Log::info('Interviews to be marked as read: ', ['interviews' => $interviews]);
+
+        foreach ($interviews as $interview) {
+            $interview->read_at = now();
+            $interview->save();
         }
 
-        return redirect()->back()->with('status', 'All applications marked as read');
+        return redirect()->back()->with('status', 'All applications and interviews marked as read');
     }
-
 }

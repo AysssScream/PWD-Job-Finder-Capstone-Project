@@ -9,7 +9,7 @@ class LanguageInput extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'language_input', 'proficiencies'];
+    protected $fillable = ['user_id', 'language_input', 'proficiencies_speak','proficiencies_read'];
 
     protected $casts = [
         'proficiencies' => 'array', // Automatically decode JSON to array
@@ -21,21 +21,34 @@ class LanguageInput extends Model
         $this->attributes['language_input'] = $value ? Crypt::encryptString($value) : null;
     }
 
-    public function setProficienciesAttribute($value)
+    public function setProficienciesSpeakAttribute($value)
     {
         // Ensure $value is an array before encrypting
-        $this->attributes['proficiencies'] = $value ? Crypt::encryptString(json_encode($value)) : null;
+        $this->attributes['proficiencies_speak'] = $value ? Crypt::encryptString(json_encode($value)) : null;
     }
+    
+    public function setProficienciesReadAttribute($value)
+    {
+        // Ensure $value is an array before encrypting
+        $this->attributes['proficiencies_read'] = $value ? Crypt::encryptString(json_encode($value)) : null;
+    }
+
 
     // Decrypt attributes when retrieving
     public function getLanguageInputAttribute($value)
     {
         return $value ? Crypt::decryptString($value) : null;
     }
-
-    public function getProficienciesAttribute($value)
+    
+    public function getProficienciesSpeakAttribute($value)
     {
-        // Decrypt and decode JSON string
+        // Decrypt and decode the JSON string into an array
+        return $value ? json_decode(Crypt::decryptString($value), true) : null;
+    }
+    
+    public function getProficienciesReadAttribute($value)
+    {
+        // Decrypt and decode the JSON string into an array
         return $value ? json_decode(Crypt::decryptString($value), true) : null;
     }
     public function user()
