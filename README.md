@@ -32,35 +32,52 @@ AccesiJobs is a specialized job search platform designed for Persons with Disabi
 ## 🛠️ Technology Stack
 
 <div align="center">
-  <table>
+  <table width="100%">
     <tr>
-      <td>
+      <td align="center" width="33%">
         <h3>🎨 Frontend</h3>
-        • HTML5 & CSS3<br>
-        • JavaScript<br>
-        • Bootstrap<br>
-        • Tailwind CSS
+        <p align="center">
+          HTML5 & CSS3<br>
+          JavaScript<br>
+          Bootstrap<br>
+          Tailwind CSS
+        </p>
       </td>
-      <td>
+      <td align="center" width="33%">
         <h3>⚙️ Backend</h3>
-        • PHP<br>
-        • Laravel Framework<br>
-        • Python<br>
-        • Flask<br>
-        • PythonAnywhere
+        <p align="center">
+          PHP<br>
+          Laravel Framework<br>
+          Python<br>
+          Flask<br>
+          PythonAnywhere
+        </p>
       </td>
-      <td>
-        <h3>🗄️ Database</h3>
-        • MySQL
+      <td align="center" width="33%">
+        <h3>🗄️ Database & Tools</h3>
+        <p align="center">
+          MySQL<br>
+          Resume Parser<br>
+          Analytics Engine<br>
+          Job Matcher
+        </p>
       </td>
     </tr>
   </table>
 </div>
 
-### 🔧 Tools & APIs
-• Resume Parsing Algorithm<br>
-• Descriptive Analytics<br>
-• Job Recommendation System
+<div align="center">
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"/>
+  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white"/>
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"/>
+  <img src="https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white"/>
+  <br><br>
+  <img src="https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
+  <img src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white"/>
+</div>
+
 
 ## 🖥️ System Screenshots
 
