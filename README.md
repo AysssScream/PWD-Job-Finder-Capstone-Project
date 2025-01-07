@@ -54,40 +54,46 @@ AccesiJobs is a specialized job search platform designed for Persons with Disabi
 
 ## 🖥️ System Screenshots
 
-## 🖥️ System Screenshots
-
 <div align="center">
-  <h4>🖼️ Platform Interface & Features</h4>
   <br>
   
-  <kbd>
-    <img src="https://github.com/user-attachments/assets/bdc0ea5a-e535-446a-a8ad-75ed1f0c9881" width="600" alt="Landing Page"/>
-  </kbd>
-  <br>
-  
-  <kbd>
-    <img src="https://github.com/user-attachments/assets/5fba90e6-498b-4fc4-848d-00539a82526f" width="600" alt="Job Search"/>
-  </kbd>
-  <br>
-  
-  <kbd>
-    <img src="https://github.com/user-attachments/assets/abf963c9-e1ae-45a9-bd8d-43c3878df184" width="600" alt="Resume Parser"/>
-  </kbd>
-  <br>
-  
-  <kbd>
-    <img src="https://github.com/user-attachments/assets/ef70c746-c670-425e-9e22-5c392cf28416" width="600" alt="Job Matching"/>
-  </kbd>
-  <br>
-  
-  <kbd>
-    <img src="https://github.com/user-attachments/assets/4f874815-a3dc-4040-8613-330c55db33a6" width="600" alt="Analytics"/>
-  </kbd>
-  <br>
-  
-  <kbd>
-    <img src="https://github.com/user-attachments/assets/ed9ac51a-52ee-4086-bb84-eabd002e57f3" width="600" alt="Profile"/>
-  </kbd>
+  <table>
+    <tr>
+      <td align="center">
+        <kbd><img src="https://github.com/user-attachments/assets/bdc0ea5a-e535-446a-a8ad-75ed1f0c9881" width="800"/></kbd>
+      </td>
+    </tr>
+    <tr><td><br></td></tr>
+    <tr>
+      <td align="center">
+        <kbd><img src="https://github.com/user-attachments/assets/5fba90e6-498b-4fc4-848d-00539a82526f" width="800"/></kbd>
+      </td>
+    </tr>
+    <tr><td><br></td></tr>
+    <tr>
+      <td align="center">
+        <kbd><img src="https://github.com/user-attachments/assets/abf963c9-e1ae-45a9-bd8d-43c3878df184" width="800"/></kbd>
+      </td>
+    </tr>
+    <tr><td><br></td></tr>
+    <tr>
+      <td align="center">
+        <kbd><img src="https://github.com/user-attachments/assets/ef70c746-c670-425e-9e22-5c392cf28416" width="800"/></kbd>
+      </td>
+    </tr>
+    <tr><td><br></td></tr>
+    <tr>
+      <td align="center">
+        <kbd><img src="https://github.com/user-attachments/assets/4f874815-a3dc-4040-8613-330c55db33a6" width="800"/></kbd>
+      </td>
+    </tr>
+    <tr><td><br></td></tr>
+    <tr>
+      <td align="center">
+        <kbd><img src="https://github.com/user-attachments/assets/ed9ac51a-52ee-4086-bb84-eabd002e57f3" width="800"/></kbd>
+      </td>
+    </tr>
+  </table>
 </div>
 
 
