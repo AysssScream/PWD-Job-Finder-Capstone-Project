@@ -55,28 +55,72 @@ AccesiJobs is a specialized job search platform designed for Persons with Disabi
 ## 🖥️ System Screenshots
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/bdc0ea5a-e535-446a-a8ad-75ed1f0c9881" width="800">
+  <details>
+    <summary>📸 Click to view screenshots</summary>
+    <br>
+    
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; padding: 20px;">
+      <div style="animation: fadeIn 1s ease-in;">
+        <img src="https://github.com/user-attachments/assets/bdc0ea5a-e535-446a-a8ad-75ed1f0c9881" width="400" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+      </div>
+      
+      <div style="animation: fadeIn 1.2s ease-in;">
+        <img src="https://github.com/user-attachments/assets/5fba90e6-498b-4fc4-848d-00539a82526f" width="400" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+      </div>
+      
+      <div style="animation: fadeIn 1.4s ease-in;">
+        <img src="https://github.com/user-attachments/assets/abf963c9-e1ae-45a9-bd8d-43c3878df184" width="400" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+      </div>
+      
+      <div style="animation: fadeIn 1.6s ease-in;">
+        <img src="https://github.com/user-attachments/assets/ef70c746-c670-425e-9e22-5c392cf28416" width="400" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+      </div>
+      
+      <div style="animation: fadeIn 1.8s ease-in;">
+        <img src="https://github.com/user-attachments/assets/4f874815-a3dc-4040-8613-330c55db33a6" width="400" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+      </div>
+      
+      <div style="animation: fadeIn 2s ease-in;">
+        <img src="https://github.com/user-attachments/assets/ed9ac51a-52ee-4086-bb84-eabd002e57f3" width="400" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+      </div>
+    </div>
+  </details>
 </div>
 
-<div align="center">
-  <img src="https://github.com/user-attachments/assets/5fba90e6-498b-4fc4-848d-00539a82526f" width="800">
-</div>
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  img {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  }
+  
+  details summary {
+    cursor: pointer;
+    padding: 10px 20px;
+    background: #f8f9fa;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    transition: background 0.3s ease;
+  }
+  
+  details summary:hover {
+    background: #e9ecef;
+  }
+  
+  details[open] summary {
+    margin-bottom: 20px;
+    border-bottom: 2px solid #dee2e6;
+  }
+</style>
 
-<div align="center">
-  <img src="https://github.com/user-attachments/assets/abf963c9-e1ae-45a9-bd8d-43c3878df184" width="800">
-</div>
-
-<div align="center">
-  <img src="https://github.com/user-attachments/assets/ef70c746-c670-425e-9e22-5c392cf28416" width="800">
-</div>
-
-<div align="center">
-  <img src="https://github.com/user-attachments/assets/4f874815-a3dc-4040-8613-330c55db33a6" width="800">
-</div>
-
-<div align="center">
-  <img src="https://github.com/user-attachments/assets/ed9ac51a-52ee-4086-bb84-eabd002e57f3" width="800">
-</div>
 
 ## 🌐 Live Demo
 Check out our live website: [AccesiJobs](https://acjobsph.com/)
@@ -129,12 +173,6 @@ Check out our live website: [AccesiJobs](https://acjobsph.com/)
 
 <div align="center">
   <p>Developed with ❤️ by Team DeGalama</p>
-  <p>BSIT 4-1 | Jose Rizal University</p>
-  
-  <a href="[github-link]">Source</a>
-  ·
-  <a href="[demo-link]">Live Demo</a>
-  ·
-  <a href="[documentation-link]">Documentation</a>
+  <p>BSIT-402I | Jose Rizal University</p>
 </div>
 
