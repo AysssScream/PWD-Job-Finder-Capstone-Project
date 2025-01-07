@@ -31,26 +31,81 @@ AccesiJobs is a specialized job search platform designed for Persons with Disabi
 
 ## 🛠️ Technology Stack
 
-### Frontend
-- HTML5 & CSS3
-- JavaScript
-- Bootstrap
-- Tailwind CSS
+<div align="center">
+  <table>
+    <tr>
+      <td align="center" width="300px">
+        <img width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5"/><br>
+        <img width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3"/><br>
+        <img width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript"/><br>
+        <img width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap"/><br>
+        <img width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" alt="TailwindCSS"/><br>
+        <b>Frontend</b>
+      </td>
+      <td align="center" width="300px">
+        <img width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP"/><br>
+        <img width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-plain.svg" alt="Laravel"/><br>
+        <img width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"/><br>
+        <img width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" alt="Flask"/><br>
+        <b>Backend</b>
+      </td>
+      <td align="center" width="300px">
+        <img width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL"/><br>
+        <b>Database</b>
+      </td>
+    </tr>
+  </table>
+</div>
 
-### Backend
-- PHP
-- Laravel Framework
-- Python
-- Flask
-- PythonAnywhere
+## 🔧 Tools & Technologies
 
-### Database
-- MySQL
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <kbd>📄 Resume Parser</kbd>
+        <br>
+        Intelligent document processing
+      </td>
+      <td align="center">
+        <kbd>📊 Analytics Engine</kbd>
+        <br>
+        Descriptive data analysis
+      </td>
+      <td align="center">
+        <kbd>🎯 Job Matcher</kbd>
+        <br>
+        AI-powered recommendations
+      </td>
+    </tr>
+  </table>
+</div>
 
-### Tools & APIs
-- Resume Parsing Algorithm
-- Descriptive Analytics
-- Job Recommendation System
+## 📈 Performance & Scale
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <h3>⚡️</h3>
+        Fast Processing
+      </td>
+      <td align="center">
+        <h3>🔒</h3>
+        Secure System
+      </td>
+      <td align="center">
+        <h3>📱</h3>
+        Responsive Design
+      </td>
+      <td align="center">
+        <h3>🔄</h3>
+        Real-time Updates
+      </td>
+    </tr>
+  </table>
+</div>
+
 
 ## 🖥️ System Screenshots
 
