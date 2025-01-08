@@ -1,24 +1,29 @@
 <div align="center">
-  <img src="https://capsule-render.vercel.app/api?type=cylinder&color=0E2954&height=120&section=header&text=🌟%20AccesiJobs&fontSize=40&fontColor=ffffff&animation=fadeIn&fontAlignY=55" width="100%"/>
+  <img src="https://capsule-render.vercel.app/api?type=cylinder&color=1E90FF&height=120&section=header&text=🌟%20AccesiJobs&fontSize=40&fontColor=ffffff&animation=fadeIn&fontAlignY=55" width="100%"/>
   
   <div style="margin: 15px 0 10px 0;">
-    <img src="https://readme-typing-svg.herokuapp.com?font=Poppins&weight=600&size=25&pause=1000&color=0E2954&center=true&vCenter=true&width=600&lines=Job+Finder+Platform;Resume+Parser;Smart+Job+Matching;PWD-Friendly+Interface;Employment+Analytics&repeat=true&duration=3000" alt="Typing SVG" />
+    <img src="https://readme-typing-svg.herokuapp.com?font=Poppins&weight=600&size=25&pause=1000&color=1E90FF&center=true&vCenter=true&width=600&lines=Empowering+PWDs;Breaking+Barriers;Creating+Opportunities;Inclusive+Employment;Accessible+Future&repeat=true&duration=3000" alt="Typing SVG" />
+  </div>
+
+  <div style="margin: 10px 0;">
+    <img src="https://readme-typing-svg.herokuapp.com?font=Poppins&weight=600&size=25&pause=1000&color=1E90FF&center=true&vCenter=true&width=600&lines=Smart+Resume+Parsing;AI-Powered+Job+Matching;PWD-Friendly+Interface;Employment+Analytics;Accessible+Technology&repeat=true&duration=3000" alt="Typing SVG" />
   </div>
 
   <div style="margin: 20px 0;">
-    <img src="https://user-images.githubusercontent.com/74038190/212284158-e840e285-664b-44d7-b79b-e264b5e54825.gif" width="350">
+    <img src="https://user-images.githubusercontent.com/74038190/216120981-b9507c36-0e04-4469-8e27-c99271b45ba5.png" width="350">
   </div>
 
   <div style="margin: 15px 0 20px 0;">
-    <img src="https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white"/>&nbsp;
-    <img src="https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white"/>&nbsp;
-    <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"/>&nbsp;
-    <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"/>&nbsp;
-    <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white"/>
+    <img src="https://img.shields.io/badge/PHP-1E90FF?style=for-the-badge&logo=php&logoColor=white"/>&nbsp;
+    <img src="https://img.shields.io/badge/Laravel-1E90FF?style=for-the-badge&logo=laravel&logoColor=white"/>&nbsp;
+    <img src="https://img.shields.io/badge/Python-1E90FF?style=for-the-badge&logo=python&logoColor=white"/>&nbsp;
+    <img src="https://img.shields.io/badge/JavaScript-1E90FF?style=for-the-badge&logo=javascript&logoColor=white"/>&nbsp;
+    <img src="https://img.shields.io/badge/MySQL-1E90FF?style=for-the-badge&logo=mysql&logoColor=white"/>
   </div>
 
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0E2954&height=120&section=footer&animation=fadeIn" width="100%"/>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=1E90FF&height=120&section=footer&animation=fadeIn" width="100%"/>
 </div>
+
 
 
 <div align="center">
@@ -204,11 +209,15 @@ Check out our live website: [AccesiJobs](https://acjobsph.com/)
 <div align="center">
   <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0E2954&height=120&section=header&animation=fadeIn" width="100%"/>
-  <img src="https://readme-typing-svg.herokuapp.com?font=Poppins&weight=600&size=25&pause=1000&color=0E2954&center=true&vCenter=true&width=600&lines=Developed+with+%E2%9D%A4%EF%B8%8F+by+Team+DeGalama" alt="Footer Text"/>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=1E90FF&height=120&section=header&animation=fadeIn" width="100%"/>
+  <img src="https://readme-typing-svg.herokuapp.com?font=Poppins&weight=600&size=25&pause=1000&color=1E90FF&center=true&vCenter=true&width=600&lines=Empowering+PWDs+Through+Technology" alt="Footer Text"/>
   <br>
-  <img src="https://readme-typing-svg.herokuapp.com?font=Poppins&weight=500&size=16&pause=1000&color=0E2954&center=true&vCenter=true&width=400&lines=©+2024+AccesiJobs.+All+Rights+Reserved." alt="Copyright Text"/>
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0E2954&height=120&section=footer&animation=fadeIn" width="100%"/>
+  <img src="https://readme-typing-svg.herokuapp.com?font=Poppins&weight=600&size=25&pause=1000&color=1E90FF&center=true&vCenter=true&width=600&lines=Developed+with+❤️+by+Team+DeGalama" alt="Team Text"/>
+  <br>
+  <img src="https://readme-typing-svg.herokuapp.com?font=Poppins&weight=500&size=16&pause=1000&color=1E90FF&center=true&vCenter=true&width=400&lines=BSIT-402I+|+Jose+Rizal+University" alt="Course Text"/>
+  <br>
+  <img src="https://readme-typing-svg.herokuapp.com?font=Poppins&weight=500&size=16&pause=1000&color=1E90FF&center=true&vCenter=true&width=400&lines=©+2024+AccesiJobs.+All+Rights+Reserved." alt="Copyright Text"/>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=1E90FF&height=120&section=footer&animation=fadeIn" width="100%"/>
 </div>
 
 <div align="center">
