@@ -217,6 +217,64 @@ AccesiJobs is a specialized job search platform designed for Persons with Disabi
   </table>
 </div>
 
+## 💫 Core Functionalities
+
+<div align="center">
+  <table width="100%">
+    <tr>
+      <td width="50%">
+        <h3 align="center">👤 Job Seeker Features</h3>
+        <div align="center">
+          <img src="https://user-images.githubusercontent.com/74038190/212748842-9fcbad5b-6173-4175-8a61-521f3dbb7514.gif" width="200">
+        </div>
+        <br>
+        <table align="center">
+          <tr>
+            <td>📄</td>
+            <td><b>Resume Upload</b><br>Smart parsing of resume content with AI technology</td>
+          </tr>
+          <tr>
+            <td>🔍</td>
+            <td><b>Job Search</b><br>Intuitive and accessible search interface</td>
+          </tr>
+          <tr>
+            <td>💼</td>
+            <td><b>Job Matching</b><br>AI-powered personalized job recommendations</td>
+          </tr>
+          <tr>
+            <td>📱</td>
+            <td><b>Profile Management</b><br>PWD-friendly customizable profiles</td>
+          </tr>
+        </table>
+      </td>
+      <td width="50%">
+        <h3 align="center">👔 Employer Features</h3>
+        <div align="center">
+          <img src="https://user-images.githubusercontent.com/74038190/212749447-bfb7e725-6987-49d9-ae85-2015e3e7cc41.gif" width="200">
+        </div>
+        <br>
+        <table align="center">
+          <tr>
+            <td>📊</td>
+            <td><b>Analytics</b><br>Comprehensive employment insights dashboard</td>
+          </tr>
+          <tr>
+            <td>🎯</td>
+            <td><b>Job Posting</b><br>Streamlined job listing creation process</td>
+          </tr>
+          <tr>
+            <td>👥</td>
+            <td><b>Candidate Search</b><br>Advanced candidate matching system</td>
+          </tr>
+          <tr>
+            <td>📈</td>
+            <td><b>Reports</b><br>Detailed employment statistics and insights</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
 
 
 ## 🚀 Implementation Highlights
