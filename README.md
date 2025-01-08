@@ -219,67 +219,62 @@ AccesiJobs is a specialized job search platform designed for Persons with Disabi
 ## 💫 Core Functionalities
 
 <div align="center">
-  <table width="90%">
+  <table>
     <tr>
-      <td width="45%">
+      <td>
         <h3 align="center">👤 Job Seeker Features</h3>
         <div align="center">
-          <img src="https://user-images.githubusercontent.com/74038190/212748842-9fcbad5b-6173-4175-8a61-521f3dbb7514.gif" width="200">
+          <img src="https://user-images.githubusercontent.com/74038190/212748842-9fcbad5b-6173-4175-8a61-521f3dbb7514.gif" width="180">
         </div>
         <br>
-        <table align="center" width="90%">
+        <table align="center">
           <tr>
-            <td width="40px">📄</td>
-            <td><b>Resume Upload</b><br><small>Smart parsing of resume content with AI technology</small></td>
+            <td>📄</td>
+            <td><b>Resume Upload</b><br>Smart parsing with AI</td>
           </tr>
-          <tr><td colspan="2"><br></td></tr>
           <tr>
             <td>🔍</td>
-            <td><b>Job Search</b><br><small>Intuitive and accessible search interface</small></td>
+            <td><b>Job Search</b><br>Accessible interface</td>
           </tr>
-          <tr><td colspan="2"><br></td></tr>
           <tr>
             <td>💼</td>
-            <td><b>Job Matching</b><br><small>AI-powered personalized job recommendations</small></td>
+            <td><b>Job Matching</b><br>AI-powered recommendations</td>
           </tr>
-          <tr><td colspan="2"><br></td></tr>
           <tr>
             <td>📱</td>
-            <td><b>Profile Management</b><br><small>PWD-friendly customizable profiles</small></td>
+            <td><b>Profile Management</b><br>PWD-friendly profiles</td>
           </tr>
         </table>
       </td>
-      <td width="45%">
+      <td>
         <h3 align="center">👔 Employer Features</h3>
         <div align="center">
-          <img src="https://user-images.githubusercontent.com/74038190/212749447-bfb7e725-6987-49d9-ae85-2015e3e7cc41.gif" width="200">
+          <img src="https://user-images.githubusercontent.com/74038190/212749447-bfb7e725-6987-49d9-ae85-2015e3e7cc41.gif" width="180">
         </div>
         <br>
-        <table align="center" width="90%">
+        <table align="center">
           <tr>
-            <td width="40px">📊</td>
-            <td><b>Analytics</b><br><small>Comprehensive employment insights dashboard</small></td>
+            <td>📊</td>
+            <td><b>Analytics</b><br>Employment insights</td>
           </tr>
-          <tr><td colspan="2"><br></td></tr>
           <tr>
             <td>🎯</td>
-            <td><b>Job Posting</b><br><small>Streamlined job listing creation process</small></td>
+            <td><b>Job Posting</b><br>Easy listing creation</td>
           </tr>
-          <tr><td colspan="2"><br></td></tr>
           <tr>
             <td>👥</td>
-            <td><b>Candidate Search</b><br><small>Advanced candidate matching system</small></td>
+            <td><b>Candidate Search</b><br>Smart matching system</td>
           </tr>
-          <tr><td colspan="2"><br></td></tr>
           <tr>
             <td>📈</td>
-            <td><b>Reports</b><br><small>Detailed employment statistics and insights</small></td>
+            <td><b>Reports</b><br>Statistics and insights</td>
           </tr>
         </table>
       </td>
     </tr>
   </table>
 </div>
+
 
 
 ## 🚀 Implementation Highlights
