@@ -161,21 +161,61 @@ AccesiJobs is a specialized job search platform designed for Persons with Disabi
 
 ## 💫 Core Functionalities
 
-### 👤 Job Seeker Features
-| Feature | Description |
-|---------|------------|
-| 📄 Resume Upload | Smart parsing of resume content |
-| 🔍 Job Search | Accessible search interface |
-| 💼 Job Matching | AI-powered job recommendations |
-| 📱 Profile Management | PWD-friendly user profiles |
+<div align="center">
+  <table width="100%">
+    <tr>
+      <td width="50%">
+        <h3 align="center">👤 Job Seeker Features</h3>
+        <div align="center">
+          <img src="https://user-images.githubusercontent.com/74038190/235224431-e8c8c12e-6826-47f1-89fb-2ddad83b3abf.gif" width="200">
+        </div>
+        <table align="center">
+          <tr>
+            <td>📄</td>
+            <td><b>Resume Upload</b><br>Smart parsing of resume content with AI technology</td>
+          </tr>
+          <tr>
+            <td>🔍</td>
+            <td><b>Job Search</b><br>Intuitive and accessible search interface</td>
+          </tr>
+          <tr>
+            <td>💼</td>
+            <td><b>Job Matching</b><br>AI-powered personalized job recommendations</td>
+          </tr>
+          <tr>
+            <td>📱</td>
+            <td><b>Profile Management</b><br>PWD-friendly customizable profiles</td>
+          </tr>
+        </table>
+      </td>
+      <td width="50%">
+        <h3 align="center">👔 Employer Features</h3>
+        <div align="center">
+          <img src="https://user-images.githubusercontent.com/74038190/235224207-56d6ff5b-ed3b-4820-aa90-c2b0e07a2767.gif" width="200">
+        </div>
+        <table align="center">
+          <tr>
+            <td>📊</td>
+            <td><b>Analytics</b><br>Comprehensive employment insights dashboard</td>
+          </tr>
+          <tr>
+            <td>🎯</td>
+            <td><b>Job Posting</b><br>Streamlined job listing creation process</td>
+          </tr>
+          <tr>
+            <td>👥</td>
+            <td><b>Candidate Search</b><br>Advanced candidate matching system</td>
+          </tr>
+          <tr>
+            <td>📈</td>
+            <td><b>Reports</b><br>Detailed employment statistics and insights</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
 
-### 👔 Employer Features
-| Feature | Description |
-|---------|------------|
-| 📊 Analytics | Employment insights dashboard |
-| 🎯 Job Posting | Accessible job listing creation |
-| 👥 Candidate Search | Smart candidate matching |
-| 📈 Reports | Employment statistics |
 
 ## 🚀 Implementation Highlights
 
