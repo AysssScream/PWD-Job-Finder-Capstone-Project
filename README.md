@@ -166,8 +166,8 @@ AccesiJobs is a specialized job search platform designed for Persons with Disabi
       <td width="50%">
         <h3 align="center">👤 Job Seeker Features</h3>
         <div align="center">
-          <!-- Changed to a verified working GIF -->
-          <img src="https://user-images.githubusercontent.com/74038190/219923809-b86dc415-a0c2-4a38-bc88-ad6cf06395a8.gif" width="200">
+          <!-- Job seeker/resume-focused GIF -->
+          <img src="https://user-images.githubusercontent.com/74038190/212897707-026174ef-f09d-4d41-a4bb-c7366e7dd9d7.gif" width="240" height="180">
         </div>
         <table align="center">
           <tr>
@@ -191,8 +191,8 @@ AccesiJobs is a specialized job search platform designed for Persons with Disabi
       <td width="50%">
         <h3 align="center">👔 Employer Features</h3>
         <div align="center">
-          <!-- Changed to a verified working GIF -->
-          <img src="https://user-images.githubusercontent.com/74038190/212750147-854a394f-fee9-4080-9770-78a4b7ece53f.gif" width="200">
+          <!-- Analytics/business-focused GIF -->
+          <img src="https://user-images.githubusercontent.com/74038190/212897673-62dd31d9-e1df-4edc-9234-d2097a45f96b.gif" width="240" height="180">
         </div>
         <table align="center">
           <tr>
