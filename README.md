@@ -125,7 +125,38 @@ AccesiJobs is a specialized job search platform designed for Persons with Disabi
 
 
 ## 🌐 Live Demo
-Check out our live website: [AccesiJobs](https://acjobsph.com/)
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <img src="https://user-images.githubusercontent.com/74038190/216122041-518ac897-8d92-4c6b-9b3f-ca01dcaf38ee.png" width="100" alt="Live Demo">
+        <br><br>
+        <h3>Experience AccesiJobs Live</h3>
+        <br>
+        <a href="https://acjobsph.com/" target="_blank">
+          <img src="https://img.shields.io/badge/Visit_Website-1E90FF?style=for-the-badge&logo=globe&logoColor=white"/>
+        </a>
+        <br><br>
+        <details>
+          <summary>💡 Quick Access Features</summary>
+          <br>
+          <p>✨ PWD-Friendly Interface</p>
+          <p>🔍 Smart Job Search</p>
+          <p>📄 Resume Upload & Parsing</p>
+          <p>💼 Job Matching System</p>
+        </details>
+      </td>
+    </tr>
+  </table>
+
+  <br>
+  
+  <img src="https://img.shields.io/website?url=https://acjobsph.com/&style=for-the-badge&label=Website%20Status&color=1E90FF"/>
+  <img src="https://img.shields.io/badge/Version-1.0.0-1E90FF?style=for-the-badge&logo=v&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Updated-2024-1E90FF?style=for-the-badge&logo=clockify&logoColor=white"/>
+</div>
+
 
 
 ## 💫 Core Functionalities
