@@ -158,7 +158,6 @@ AccesiJobs is a specialized job search platform designed for Persons with Disabi
 </div>
 
 
-
 ## 💫 Core Functionalities
 
 <div align="center">
@@ -171,19 +170,19 @@ AccesiJobs is a specialized job search platform designed for Persons with Disabi
         </div>
         <table align="center">
           <tr>
-            <td>📄</td>
+            <td><img src="https://user-images.githubusercontent.com/74038190/235294012-0a55e343-37ad-4b0f-924f-c8431d9d2483.gif" width="30"></td>
             <td><b>Resume Upload</b><br>Smart parsing of resume content with AI technology</td>
           </tr>
           <tr>
-            <td>🔍</td>
+            <td><img src="https://user-images.githubusercontent.com/74038190/235294019-40007353-6219-4ec5-b661-b3c35136dd0b.gif" width="30"></td>
             <td><b>Job Search</b><br>Intuitive and accessible search interface</td>
           </tr>
           <tr>
-            <td>💼</td>
+            <td><img src="https://user-images.githubusercontent.com/74038190/235294007-de441046-823e-4eff-89bf-d4df52858b65.gif" width="30"></td>
             <td><b>Job Matching</b><br>AI-powered personalized job recommendations</td>
           </tr>
           <tr>
-            <td>📱</td>
+            <td><img src="https://user-images.githubusercontent.com/74038190/235294010-ec412ef5-e3da-4efa-b1d4-0ab4d4638755.gif" width="30"></td>
             <td><b>Profile Management</b><br>PWD-friendly customizable profiles</td>
           </tr>
         </table>
@@ -195,19 +194,19 @@ AccesiJobs is a specialized job search platform designed for Persons with Disabi
         </div>
         <table align="center">
           <tr>
-            <td>📊</td>
+            <td><img src="https://user-images.githubusercontent.com/74038190/235294015-47144047-25ab-417c-af1b-6746820a20ff.gif" width="30"></td>
             <td><b>Analytics</b><br>Comprehensive employment insights dashboard</td>
           </tr>
           <tr>
-            <td>🎯</td>
+            <td><img src="https://user-images.githubusercontent.com/74038190/235294013-a33e5c43-a01c-43f6-b44d-a406d8b4ab75.gif" width="30"></td>
             <td><b>Job Posting</b><br>Streamlined job listing creation process</td>
           </tr>
           <tr>
-            <td>👥</td>
+            <td><img src="https://user-images.githubusercontent.com/74038190/235294008-ed8de58b-d4d0-4790-aa81-a39fdc8a1e50.gif" width="30"></td>
             <td><b>Candidate Search</b><br>Advanced candidate matching system</td>
           </tr>
           <tr>
-            <td>📈</td>
+            <td><img src="https://user-images.githubusercontent.com/74038190/235294006-08fbb28f-b5c3-4834-9297-9d05a71efccf.gif" width="30"></td>
             <td><b>Reports</b><br>Detailed employment statistics and insights</td>
           </tr>
         </table>
