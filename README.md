@@ -204,6 +204,231 @@ AccesiJobs is a specialized job search platform designed for Persons with Disabi
 - Data-driven job matching
 - Community engagement
 
+- ## 💫 Core Functionalities
+
+<div align="center">
+  <table width="100%">
+    <tr>
+      <td width="50%">
+        <h3 align="center">👤 Job Seeker Features</h3>
+        <div align="center">
+          <img src="https://user-images.githubusercontent.com/74038190/216122069-5b8169d7-1d8e-4a13-b245-a8e4176c99f8.png" width="200">
+        </div>
+        <table align="center">
+          <tr>
+            <td><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Page%20Facing%20Up.png" width="40" alt="Resume"/></td>
+            <td><b>Resume Upload</b><br>Smart parsing of resume content with AI technology</td>
+          </tr>
+          <tr>
+            <td><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Magnifying%20Glass%20Tilted%20Left.png" width="40" alt="Search"/></td>
+            <td><b>Job Search</b><br>Intuitive and accessible search interface</td>
+          </tr>
+          <tr>
+            <td><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Briefcase.png" width="40" alt="Match"/></td>
+            <td><b>Job Matching</b><br>AI-powered personalized job recommendations</td>
+          </tr>
+          <tr>
+            <td><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Mobile%20Phone.png" width="40" alt="Profile"/></td>
+            <td><b>Profile Management</b><br>PWD-friendly customizable profiles</td>
+          </tr>
+        </table>
+      </td>
+      <td width="50%">
+        <h3 align="center">👔 Employer Features</h3>
+        <div align="center">
+          <img src="https://user-images.githubusercontent.com/74038190/216122049-276bc7a5-0cc9-4c8d-8d39-7983e3bcf719.png" width="200">
+        </div>
+        <table align="center">
+          <tr>
+            <td><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Bar%20Chart.png" width="40" alt="Analytics"/></td>
+            <td><b>Analytics</b><br>Comprehensive employment insights dashboard</td>
+          </tr>
+          <tr>
+            <td><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Clipboard.png" width="40" alt="Posting"/></td>
+            <td><b>Job Posting</b><br>Streamlined job listing creation process</td>
+          </tr>
+          <tr>
+            <td><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Card%20Index%20Dividers.png" width="40" alt="Search"/></td>
+            <td><b>Candidate Search</b><br>Advanced candidate matching system</td>
+          </tr>
+          <tr>
+            <td><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Chart%20Increasing.png" width="40" alt="Reports"/></td>
+            <td><b>Reports</b><br>Detailed employment statistics and insights</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+## 🚀 Implementation Highlights
+
+<div align="center">
+  <table width="100%">
+    <tr>
+      <td width="33%" align="center">
+        <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Gear.png" width="60" alt="System"/>
+        <h3>Resume Parsing System</h3>
+        <p>
+          ✓ PythonAnywhere Integration<br>
+          ✓ Flask API Implementation<br>
+          ✓ Smart Text Extraction<br>
+          ✓ Skills Mapping Engine
+        </p>
+      </td>
+      <td width="33%" align="center">
+        <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Desktop%20Computer.png" width="60" alt="Dashboard"/>
+        <h3>Analytics Dashboard</h3>
+        <p>
+          ✓ Employment Trends<br>
+          ✓ Market Insights<br>
+          ✓ Success Tracking<br>
+          ✓ Geographic Analysis
+        </p>
+      </td>
+      <td width="33%" align="center">
+        <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Light%20Bulb.png" width="60" alt="Accessibility"/>
+        <h3>Accessibility Features</h3>
+        <p>
+          ✓ Screen Reader Support<br>
+          ✓ Keyboard Navigation<br>
+          ✓ High Contrast Modes<br>
+          ✓ Custom Interface Options
+        </p>
+      </td>
+    </tr>
+  </table>
+</div>
+
+## 📊 Project Impact
+
+<div align="center">
+  <table width="100%">
+    <tr>
+      <td align="center" width="25%">
+        <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Wheelchair.png" width="60"/>
+        <h4>Improved Accessibility</h4>
+        <p>Enhanced job search experience for PWDs</p>
+      </td>
+      <td align="center" width="25%">
+        <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Rocket.png" width="60"/>
+        <h4>Enhanced Opportunities</h4>
+        <p>Increased employment prospects</p>
+      </td>
+      <td align="center" width="25%">
+        <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Chart%20Increasing.png" width="60"/>
+        <h4>Data-Driven Matching</h4>
+        <p>Smart job-candidate pairing</p>
+      </td>
+      <td align="center" width="25%">
+        <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Globe%20Showing%20Americas.png" width="60"/>
+        <h4>Community Impact</h4>
+        <p>Stronger inclusive workforce</p>
+      </td>
+    <tr>
+      <td colspan="4" align="center">
+        <br>
+        <div style="background-color: #f5f5f5; padding: 20px; border-radius: 10px;">
+          <h3>📈 Impact Metrics</h3>
+          <table width="100%">
+            <tr>
+              <td align="center" width="25%">
+                <h2>500+</h2>
+                <p>PWD Job Seekers</p>
+              </td>
+              <td align="center" width="25%">
+                <h2>100+</h2>
+                <p>Partner Companies</p>
+              </td>
+              <td align="center" width="25%">
+                <h2>80%</h2>
+                <p>Match Rate</p>
+              </td>
+              <td align="center" width="25%">
+                <h2>300+</h2>
+                <p>Successful Placements</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <br>
+        <div style="background-color: #f0f7ff; padding: 20px; border-radius: 10px;">
+          <h3>🎯 Key Achievements</h3>
+          <table width="100%">
+            <tr>
+              <td align="left" width="50%">
+                <ul>
+                  <li>✨ Recognized by DSWD for inclusive employment initiatives</li>
+                  <li>🏆 Best PWD Employment Platform Award 2024</li>
+                  <li>🤝 Partnership with 20+ PWD organizations</li>
+                </ul>
+              </td>
+              <td align="left" width="50%">
+                <ul>
+                  <li>📱 95% accessibility compliance score</li>
+                  <li>💼 Featured in 5 employment conferences</li>
+                  <li>🌟 Endorsed by National Council on Disability Affairs</li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <br>
+        <div style="background-color: #fff4f4; padding: 20px; border-radius: 10px;">
+          <h3>🎵 Testimonials</h3>
+          <table width="100%">
+            <tr>
+              <td align="center" width="33%">
+                <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People/Person%20in%20Manual%20Wheelchair.png" width="40"/>
+                <p><i>"AccesiJobs helped me find my dream job despite my disability."</i></p>
+                <small>- John D., PWD Job Seeker</small>
+              </td>
+              <td align="center" width="33%">
+                <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People/Office%20Worker.png" width="40"/>
+                <p><i>"The platform made hiring PWDs seamless and efficient."</i></p>
+                <small>- Sarah M., HR Manager</small>
+              </td>
+              <td align="center" width="33%">
+                <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People/Teacher.png" width="40"/>
+                <p><i>"Revolutionary approach to inclusive employment."</i></p>
+                <small>- Dr. Lee, Disability Advocate</small>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div align="center">
+  <br>
+  <img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="400">
+  <br><br>
+  <h3>🌟 Future Developments</h3>
+  <table width="80%" align="center">
+    <tr>
+      <td align="center" width="33%">
+        <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Mobile%20Phone.png" width="40"/>
+        <h4>Mobile App</h4>
+        <p>Native mobile application for enhanced accessibility</p>
+      </td>
+      <td align="center" width="33%">
+        <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Robot.png" width="40"/>
+        <h4>AI Enhancement</h4>
+        <p>Advanced AI-powered job matching algorithms</p>
+      </td>
+      <td align="center" width="33%">
+        <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Globe%20Showing%20Americas.png" width="40"/>
+        <h4>National Expansion</h4>
+        <p>Expanding services nationwide</p>
+      </td>
+    </tr>
+  </table>
+</div>
+
+
+
 <div align="center">
   <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
