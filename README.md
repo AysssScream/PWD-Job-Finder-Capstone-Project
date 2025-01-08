@@ -166,23 +166,24 @@ AccesiJobs is a specialized job search platform designed for Persons with Disabi
       <td width="50%">
         <h3 align="center">👤 Job Seeker Features</h3>
         <div align="center">
-          <img src="https://user-images.githubusercontent.com/74038190/235224431-e8c8c12e-6826-47f1-89fb-2ddad83b3abf.gif" width="200">
+          <!-- Changed to a verified working GIF -->
+          <img src="https://user-images.githubusercontent.com/74038190/219923809-b86dc415-a0c2-4a38-bc88-ad6cf06395a8.gif" width="200">
         </div>
         <table align="center">
           <tr>
-            <td><img src="https://user-images.githubusercontent.com/74038190/235294012-0a55e343-37ad-4b0f-924f-c8431d9d2483.gif" width="30"></td>
+            <td>📄</td>
             <td><b>Resume Upload</b><br>Smart parsing of resume content with AI technology</td>
           </tr>
           <tr>
-            <td><img src="https://user-images.githubusercontent.com/74038190/235294019-40007353-6219-4ec5-b661-b3c35136dd0b.gif" width="30"></td>
+            <td>🔍</td>
             <td><b>Job Search</b><br>Intuitive and accessible search interface</td>
           </tr>
           <tr>
-            <td><img src="https://user-images.githubusercontent.com/74038190/235294007-de441046-823e-4eff-89bf-d4df52858b65.gif" width="30"></td>
+            <td>💼</td>
             <td><b>Job Matching</b><br>AI-powered personalized job recommendations</td>
           </tr>
           <tr>
-            <td><img src="https://user-images.githubusercontent.com/74038190/235294010-ec412ef5-e3da-4efa-b1d4-0ab4d4638755.gif" width="30"></td>
+            <td>📱</td>
             <td><b>Profile Management</b><br>PWD-friendly customizable profiles</td>
           </tr>
         </table>
@@ -190,23 +191,24 @@ AccesiJobs is a specialized job search platform designed for Persons with Disabi
       <td width="50%">
         <h3 align="center">👔 Employer Features</h3>
         <div align="center">
-          <img src="https://user-images.githubusercontent.com/74038190/235224207-56d6ff5b-ed3b-4820-aa90-c2b0e07a2767.gif" width="200">
+          <!-- Changed to a verified working GIF -->
+          <img src="https://user-images.githubusercontent.com/74038190/212750147-854a394f-fee9-4080-9770-78a4b7ece53f.gif" width="200">
         </div>
         <table align="center">
           <tr>
-            <td><img src="https://user-images.githubusercontent.com/74038190/235294015-47144047-25ab-417c-af1b-6746820a20ff.gif" width="30"></td>
+            <td>📊</td>
             <td><b>Analytics</b><br>Comprehensive employment insights dashboard</td>
           </tr>
           <tr>
-            <td><img src="https://user-images.githubusercontent.com/74038190/235294013-a33e5c43-a01c-43f6-b44d-a406d8b4ab75.gif" width="30"></td>
+            <td>🎯</td>
             <td><b>Job Posting</b><br>Streamlined job listing creation process</td>
           </tr>
           <tr>
-            <td><img src="https://user-images.githubusercontent.com/74038190/235294008-ed8de58b-d4d0-4790-aa81-a39fdc8a1e50.gif" width="30"></td>
+            <td>👥</td>
             <td><b>Candidate Search</b><br>Advanced candidate matching system</td>
           </tr>
           <tr>
-            <td><img src="https://user-images.githubusercontent.com/74038190/235294006-08fbb28f-b5c3-4834-9297-9d05a71efccf.gif" width="30"></td>
+            <td>📈</td>
             <td><b>Reports</b><br>Detailed employment statistics and insights</td>
           </tr>
         </table>
@@ -214,6 +216,7 @@ AccesiJobs is a specialized job search platform designed for Persons with Disabi
     </tr>
   </table>
 </div>
+
 
 
 ## 🚀 Implementation Highlights
