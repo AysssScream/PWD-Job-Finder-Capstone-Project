@@ -319,7 +319,34 @@ AccesiJobs is a specialized job search platform designed for Persons with Disabi
   </table>
 </div>****
 
+## 📊 Project Impact
 
+<div align="center">
+  <table width="100%">
+    <tr>
+      <td align="center" width="25%">
+        <h3>♿️</h3>
+        <h3>Improved Job Accessibility</h3>
+        <p>for PWDs</p>
+      </td>
+      <td align="center" width="25%">
+        <h3>🚀</h3>
+        <h3>Enhanced Employment</h3>
+        <p>Opportunities</p>
+      </td>
+      <td align="center" width="25%">
+        <h3>🎯</h3>
+        <h3>Data-Driven</h3>
+        <p>Job Matching</p>
+      </td>
+      <td align="center" width="25%">
+        <h3>🤝</h3>
+        <h3>Community</h3>
+        <p>Engagement</p>
+      </td>
+    </tr>
+  </table>
+</div>
 
 <div align="center">
   <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
