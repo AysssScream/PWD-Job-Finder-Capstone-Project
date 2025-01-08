@@ -256,69 +256,6 @@ AccesiJobs is a specialized job search platform designed for Persons with Disabi
   </table>
 </div>
 
-
-## 📊 Project Impact
-
-- Improved job accessibility for PWDs
-- Enhanced employment opportunities
-- Data-driven job matching
-- Community engagement
-
-## 📊 Project Impact
-
-<div align="center">
-  <table width="100%">
-    <tr>
-      <td align="center" width="25%">
-        <img src="https://user-images.githubusercontent.com/74038190/216122041-518ac897-8d92-4c6b-9b3f-ca01dcaf38ee.png" width="60">
-        <h3>Improved Job Accessibility</h3>
-        <p>for PWDs</p>
-      </td>
-      <td align="center" width="25%">
-        <img src="https://user-images.githubusercontent.com/74038190/216125640-2783ebd5-e63e-4ed1-b491-e05e754f18ca.png" width="60">
-        <h3>Enhanced Employment</h3>
-        <p>Opportunities</p>
-      </td>
-      <td align="center" width="25%">
-        <img src="https://user-images.githubusercontent.com/74038190/216124356-9c152f5b-554d-400c-a2f3-84f0f0b9a627.png" width="60">
-        <h3>Data-Driven</h3>
-        <p>Job Matching</p>
-      </td>
-      <td align="center" width="25%">
-        <img src="https://user-images.githubusercontent.com/74038190/216124687-61099c36-1651-4ad3-a99e-fb090c87d83b.png" width="60">
-        <h3>Community</h3>
-        <p>Engagement</p>
-      </td>
-    </tr>
-  </table>
-</div>
-
-<div align="center">
-  <br>
-  <img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="400">
-  <br><br>
-  <h3>🌟 Future Developments</h3>
-  <table width="80%" align="center">
-    <tr>
-      <td align="center" width="33%">
-        <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Mobile%20Phone.png" width="40"/>
-        <h4>Mobile App</h4>
-        <p>Native mobile application for enhanced accessibility</p>
-      </td>
-      <td align="center" width="33%">
-        <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Robot.png" width="40"/>
-        <h4>AI Enhancement</h4>
-        <p>Advanced AI-powered job matching algorithms</p>
-      </td>
-      <td align="center" width="33%">
-        <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Globe%20Showing%20Americas.png" width="40"/>
-        <h4>National Expansion</h4>
-        <p>Expanding services nationwide</p>
-      </td>
-    </tr>
-  </table>
-</div>****
-
 ## 📊 Project Impact
 
 <div align="center">
