@@ -157,66 +157,6 @@ AccesiJobs is a specialized job search platform designed for Persons with Disabi
   <img src="https://img.shields.io/badge/Updated-2024-1E90FF?style=for-the-badge&logo=clockify&logoColor=white"/>
 </div>
 
-
-## 💫 Core Functionalities
-
-<div align="center">
-  <table width="100%">
-    <tr>
-      <td width="50%">
-        <h3 align="center">👤 Job Seeker Features</h3>
-        <div align="center">
-          <!-- Job seeker/resume-focused GIF -->
-          <img src="https://user-images.githubusercontent.com/74038190/212897707-026174ef-f09d-4d41-a4bb-c7366e7dd9d7.gif" width="240" height="180">
-        </div>
-        <table align="center">
-          <tr>
-            <td>📄</td>
-            <td><b>Resume Upload</b><br>Smart parsing of resume content with AI technology</td>
-          </tr>
-          <tr>
-            <td>🔍</td>
-            <td><b>Job Search</b><br>Intuitive and accessible search interface</td>
-          </tr>
-          <tr>
-            <td>💼</td>
-            <td><b>Job Matching</b><br>AI-powered personalized job recommendations</td>
-          </tr>
-          <tr>
-            <td>📱</td>
-            <td><b>Profile Management</b><br>PWD-friendly customizable profiles</td>
-          </tr>
-        </table>
-      </td>
-      <td width="50%">
-        <h3 align="center">👔 Employer Features</h3>
-        <div align="center">
-          <!-- Analytics/business-focused GIF -->
-          <img src="https://user-images.githubusercontent.com/74038190/212897673-62dd31d9-e1df-4edc-9234-d2097a45f96b.gif" width="240" height="180">
-        </div>
-        <table align="center">
-          <tr>
-            <td>📊</td>
-            <td><b>Analytics</b><br>Comprehensive employment insights dashboard</td>
-          </tr>
-          <tr>
-            <td>🎯</td>
-            <td><b>Job Posting</b><br>Streamlined job listing creation process</td>
-          </tr>
-          <tr>
-            <td>👥</td>
-            <td><b>Candidate Search</b><br>Advanced candidate matching system</td>
-          </tr>
-          <tr>
-            <td>📈</td>
-            <td><b>Reports</b><br>Detailed employment statistics and insights</td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
-</div>
-
 ## 💫 Core Functionalities
 
 <div align="center">
@@ -279,90 +219,6 @@ AccesiJobs is a specialized job search platform designed for Persons with Disabi
 
 ## 🚀 Implementation Highlights
 
-### Resume Parsing System
-- Integrated with PythonAnywhere
-- Flask API implementation
-- Smart text extraction
-- Skills and qualification mapping
-
-### Analytics Dashboard
-- Employment trends
-- Job market insights
-- Success rate tracking
-- Geographic distribution
-
-### Accessibility Features
-- Screen reader compatible
-- Keyboard navigation
-- High contrast options
-- Customizable interface
-
-## 📊 Project Impact
-
-- Improved job accessibility for PWDs
-- Enhanced employment opportunities
-- Data-driven job matching
-- Community engagement
-
-- ## 💫 Core Functionalities
-
-<div align="center">
-  <table width="100%">
-    <tr>
-      <td width="50%">
-        <h3 align="center">👤 Job Seeker Features</h3>
-        <div align="center">
-          <img src="https://user-images.githubusercontent.com/74038190/216122069-5b8169d7-1d8e-4a13-b245-a8e4176c99f8.png" width="200">
-        </div>
-        <table align="center">
-          <tr>
-            <td><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Page%20Facing%20Up.png" width="40" alt="Resume"/></td>
-            <td><b>Resume Upload</b><br>Smart parsing of resume content with AI technology</td>
-          </tr>
-          <tr>
-            <td><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Magnifying%20Glass%20Tilted%20Left.png" width="40" alt="Search"/></td>
-            <td><b>Job Search</b><br>Intuitive and accessible search interface</td>
-          </tr>
-          <tr>
-            <td><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Briefcase.png" width="40" alt="Match"/></td>
-            <td><b>Job Matching</b><br>AI-powered personalized job recommendations</td>
-          </tr>
-          <tr>
-            <td><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Mobile%20Phone.png" width="40" alt="Profile"/></td>
-            <td><b>Profile Management</b><br>PWD-friendly customizable profiles</td>
-          </tr>
-        </table>
-      </td>
-      <td width="50%">
-        <h3 align="center">👔 Employer Features</h3>
-        <div align="center">
-          <img src="https://user-images.githubusercontent.com/74038190/216122049-276bc7a5-0cc9-4c8d-8d39-7983e3bcf719.png" width="200">
-        </div>
-        <table align="center">
-          <tr>
-            <td><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Bar%20Chart.png" width="40" alt="Analytics"/></td>
-            <td><b>Analytics</b><br>Comprehensive employment insights dashboard</td>
-          </tr>
-          <tr>
-            <td><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Clipboard.png" width="40" alt="Posting"/></td>
-            <td><b>Job Posting</b><br>Streamlined job listing creation process</td>
-          </tr>
-          <tr>
-            <td><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Card%20Index%20Dividers.png" width="40" alt="Search"/></td>
-            <td><b>Candidate Search</b><br>Advanced candidate matching system</td>
-          </tr>
-          <tr>
-            <td><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Chart%20Increasing.png" width="40" alt="Reports"/></td>
-            <td><b>Reports</b><br>Detailed employment statistics and insights</td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
-</div>
-
-## 🚀 Implementation Highlights
-
 <div align="center">
   <table width="100%">
     <tr>
@@ -400,102 +256,38 @@ AccesiJobs is a specialized job search platform designed for Persons with Disabi
   </table>
 </div>
 
+
+## 📊 Project Impact
+
+- Improved job accessibility for PWDs
+- Enhanced employment opportunities
+- Data-driven job matching
+- Community engagement
+
 ## 📊 Project Impact
 
 <div align="center">
   <table width="100%">
     <tr>
       <td align="center" width="25%">
-        <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Wheelchair.png" width="60"/>
-        <h4>Improved Accessibility</h4>
-        <p>Enhanced job search experience for PWDs</p>
+        <img src="https://user-images.githubusercontent.com/74038190/216122041-518ac897-8d92-4c6b-9b3f-ca01dcaf38ee.png" width="60">
+        <h3>Improved Job Accessibility</h3>
+        <p>for PWDs</p>
       </td>
       <td align="center" width="25%">
-        <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Rocket.png" width="60"/>
-        <h4>Enhanced Opportunities</h4>
-        <p>Increased employment prospects</p>
+        <img src="https://user-images.githubusercontent.com/74038190/216125640-2783ebd5-e63e-4ed1-b491-e05e754f18ca.png" width="60">
+        <h3>Enhanced Employment</h3>
+        <p>Opportunities</p>
       </td>
       <td align="center" width="25%">
-        <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Chart%20Increasing.png" width="60"/>
-        <h4>Data-Driven Matching</h4>
-        <p>Smart job-candidate pairing</p>
+        <img src="https://user-images.githubusercontent.com/74038190/216124356-9c152f5b-554d-400c-a2f3-84f0f0b9a627.png" width="60">
+        <h3>Data-Driven</h3>
+        <p>Job Matching</p>
       </td>
       <td align="center" width="25%">
-        <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Globe%20Showing%20Americas.png" width="60"/>
-        <h4>Community Impact</h4>
-        <p>Stronger inclusive workforce</p>
-      </td>
-    <tr>
-      <td colspan="4" align="center">
-        <br>
-        <div style="background-color: #f5f5f5; padding: 20px; border-radius: 10px;">
-          <h3>📈 Impact Metrics</h3>
-          <table width="100%">
-            <tr>
-              <td align="center" width="25%">
-                <h2>500+</h2>
-                <p>PWD Job Seekers</p>
-              </td>
-              <td align="center" width="25%">
-                <h2>100+</h2>
-                <p>Partner Companies</p>
-              </td>
-              <td align="center" width="25%">
-                <h2>80%</h2>
-                <p>Match Rate</p>
-              </td>
-              <td align="center" width="25%">
-                <h2>300+</h2>
-                <p>Successful Placements</p>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <br>
-        <div style="background-color: #f0f7ff; padding: 20px; border-radius: 10px;">
-          <h3>🎯 Key Achievements</h3>
-          <table width="100%">
-            <tr>
-              <td align="left" width="50%">
-                <ul>
-                  <li>✨ Recognized by DSWD for inclusive employment initiatives</li>
-                  <li>🏆 Best PWD Employment Platform Award 2024</li>
-                  <li>🤝 Partnership with 20+ PWD organizations</li>
-                </ul>
-              </td>
-              <td align="left" width="50%">
-                <ul>
-                  <li>📱 95% accessibility compliance score</li>
-                  <li>💼 Featured in 5 employment conferences</li>
-                  <li>🌟 Endorsed by National Council on Disability Affairs</li>
-                </ul>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <br>
-        <div style="background-color: #fff4f4; padding: 20px; border-radius: 10px;">
-          <h3>🎵 Testimonials</h3>
-          <table width="100%">
-            <tr>
-              <td align="center" width="33%">
-                <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People/Person%20in%20Manual%20Wheelchair.png" width="40"/>
-                <p><i>"AccesiJobs helped me find my dream job despite my disability."</i></p>
-                <small>- John D., PWD Job Seeker</small>
-              </td>
-              <td align="center" width="33%">
-                <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People/Office%20Worker.png" width="40"/>
-                <p><i>"The platform made hiring PWDs seamless and efficient."</i></p>
-                <small>- Sarah M., HR Manager</small>
-              </td>
-              <td align="center" width="33%">
-                <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People/Teacher.png" width="40"/>
-                <p><i>"Revolutionary approach to inclusive employment."</i></p>
-                <small>- Dr. Lee, Disability Advocate</small>
-              </td>
-            </tr>
-          </table>
-        </div>
+        <img src="https://user-images.githubusercontent.com/74038190/216124687-61099c36-1651-4ad3-a99e-fb090c87d83b.png" width="60">
+        <h3>Community</h3>
+        <p>Engagement</p>
       </td>
     </tr>
   </table>
