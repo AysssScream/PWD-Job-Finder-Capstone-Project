@@ -288,13 +288,11 @@ AccesiJobs is a specialized job search platform designed for Persons with Disabi
   <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
   <img src="https://capsule-render.vercel.app/api?type=waving&color=1E90FF&height=120&section=header&animation=fadeIn" width="100%"/>
-  <img src="https://readme-typing-svg.herokuapp.com?font=Poppins&weight=600&size=25&pause=1000&color=1E90FF&center=true&vCenter=true&width=600&lines=Empowering+PWDs+Through+Technology" alt="Footer Text"/>
-  <br>
-  <img src="https://readme-typing-svg.herokuapp.com?font=Poppins&weight=600&size=25&pause=1000&color=1E90FF&center=true&vCenter=true&width=600&lines=Developed+with+❤️+by+Team+DeGalama" alt="Team Text"/>
-  <br>
-  <img src="https://readme-typing-svg.herokuapp.com?font=Poppins&weight=500&size=16&pause=1000&color=1E90FF&center=true&vCenter=true&width=400&lines=BSIT-402I+|+Jose+Rizal+University" alt="Course Text"/>
-  <br>
-  <img src="https://readme-typing-svg.herokuapp.com?font=Poppins&weight=500&size=16&pause=1000&color=1E90FF&center=true&vCenter=true&width=400&lines=©+2024+AccesiJobs.+All+Rights+Reserved." alt="Copyright Text"/>
+  
+  <div class="footer-text">
+    <img src="https://readme-typing-svg.herokuapp.com?font=Poppins&weight=600&size=25&duration=4000&pause=1000&color=1E90FF&center=true&vCenter=true&width=600&lines=Empowering+PWDs+Through+Technology;Developed+with+❤️+by+Team+DeGalama;BSIT-402I+|+Jose+Rizal+University;©+2024+AccesiJobs.+All+Rights+Reserved." alt="Footer Text"/>
+  </div>
+  
   <img src="https://capsule-render.vercel.app/api?type=waving&color=1E90FF&height=120&section=footer&animation=fadeIn" width="100%"/>
 </div>
 
